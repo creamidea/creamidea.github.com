@@ -1,0 +1,28 @@
+---
+layout: default
+title: ICE • CREAM 
+overview: true
+---
+
+<section class="docs">
+  <div class="content">
+    <div class="grid10 first">
+      <article>
+	<h1>The latest articles</h1>
+	<ul class="posts">
+	  {% assign count = 0 %}
+	  {% for post in site.posts %}
+	    {% assign count = count | plus: 1 %}
+            {% if count < 4 %}
+	    <li><a href="{{ post.url }}"{% if post.subtitle %} title="{{ post.subtitle | escape }}"{% endif %}>{{ post.date | date: '%a, %B %d %Y' }} &rarr; <strong>{{ post.title }}</strong></a></li>
+	    {% endif %}
+          {% endfor %}
+	&rarr <a href="archive.html"><strong>Show more >> </strong></a></li>
+        </ul>
+      </article>
+    </div>
+    {% include docs_contents.html %}
+    <div class="clear"></div>
+  </div>
+</section>
+

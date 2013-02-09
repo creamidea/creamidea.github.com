@@ -1,0 +1,232 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta author="icecream">
+  <title>ICE • CREAM</title>
+  <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Arizonia' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/normalize.css" />
+  <link rel="stylesheet" href="/css/grid.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/pygments.css" />
+  <link rel="stylesheet" href="/css/font-awesome.min.css" />
+  <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/modernizr-2.5.3.min.js"></script>
+  
+
+
+  <!-- Google Analytics (http://google.com/analytics) -->
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-38213594-1']);
+    _gaq.push(['_setDomainName', '']); // Multiple sub-domains
+    _gaq.push(['_setAllowLinker', true]); // Multiple TLDs
+    _gaq.push(['_trackPageview']);
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+
+<body>
+  <header style="padding-top: 0px;">
+  <div class="content" style="padding-top: 4px;">
+    <div class="grid3 first" style="position: absolute; z-index: 44;">
+      <div id="logo">
+	<!-- <div id="logoLeft">{</div> -->
+	<p style="font-size: 26px;">
+	  <a href="/" style="color: white;"><i class="icon-home"></i>>>ICE CREAM</a>
+	</p>
+	<p style="font-size: 24px;">
+	  <a href="/public/archive.html" style="color: white;"><i class="icon-list"></i>>>Archive</a>
+	</p>
+	<!-- <div id="logoRight">}</div> -->
+      </div>
+    </div>
+    <script>
+(function() {
+  var cx = '017951989687920165329:kdjpjbs_wac';
+  var gcse = document.createElement('script'); gcse.type = 'text/javascript';
+  gcse.async = true;
+  gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+      '//www.google.com/cse/cse.js?cx=' + cx;
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(gcse, s);
+})();
+</script>
+<script src="/js/jquery.typewatch.js"></script>
+<script>
+    $(function() {    
+        $("#search-input")
+            .focus(function() {
+                $(this).addClass("search-input-active");
+                if ($(this).val() == $(this).attr("title")) {
+                    $(this).val("");
+                }
+            })
+            .blur(function() {
+                var val = $(this).val();
+                var title = $(this).attr("title");
+                if (val == "" || val == title) {
+                    $(this).removeClass("search-input-active");
+                    $(this).val(title);
+                }
+            })
+            .trigger("blur")
+            .typeWatch({
+                highlight: true,
+                wait: 500,
+                captureLength: -1,
+                callback: function(txt) {
+                    var q = $.trim(txt);
+                    var jMessage = $("#search-message");
+                    
+                    if (jMessage.length == 0) {
+                        jMessage = $('<div id="search-message"></div>');
+                        $("#search-bar").append(jMessage);
+                    }
+                    
+                    if (q.length < 3 && q.length > 0) {                        
+                        jMessage.text(3 - q.length + " more character" + (3 - q.length == 1 ? "" : "s") + "...").show();
+                        return;
+                    }
+                    
+                    $("#search-input").addClass("searching");
+                    jMessage.text("searching...").show();                                    
+                    
+                    $(".category-container").load(
+                        "/search/results",
+                        { q: q, returnTitle: "All Proposals", returnUrl: "/" },
+                        function() {
+                            $("#search-input").removeClass("searching");
+                            $("#search-message").hide()
+                        }
+                    );
+                    
+                    document.title = q.length > 0 ? ('Proposals containing "' + q + '" - ICE CREAM - Stack Exchange') : 'Search All Proposals';
+                }
+            });
+
+        // preload image
+        <!-- new Image().src = settings.contentPath + "/img/ajax-loader.gif"; -->
+    });
+</script>
+
+    <div id="search-bar">
+      <input type="text" id="search-input" class="" maxlength="80" value="" title="developing...">
+      <div id="gcse">
+	<gcse:search></gcse:search>
+      </div>
+      <!-- Search Proposals -->
+    </div>
+    <div class="clear"></div>
+  </div>
+</header>
+<!-- <script type="text/javascript"> -->
+<!--   $(".gsc-search-button").remove(); -->
+<!-- </script> -->
+
+
+  <section class="free-hosting">
+  <!-- <div class="content" style="padding: 0px; background: url('img/milky-way-galaxy.jpg') no-repeat scroll center"> -->
+  <div class="content" style="padding: 0px;">
+    <img src="img/icecream.png" alt="Free Jekyll hosting on GitHub Pages" style="padding-top: 30px;">
+    <div class="pane" style="font-size: 23px">
+      <p>Welcome here.</p>
+      <p>I am from ICECREAM Galaxy and now live in <a href="http://en.wikipedia.org/wiki/Milky_Way_Galaxy">Milky Way Galaxy</a>. You don't know me?! It&rsquo;s OK. You can click <a href="/public/about.html"><strong>[About<i class="icon-github-alt"></i>]</strong></a> if you want to know me.</p> 
+      <p>I have lived in this space for <i class="icon-spinner icon-spin"></i><strong id="mySeconds" style="color: white;"></strong> seconds. What have I done that be recorded? Click <a href="/public/archive.html"><strong>[Archive<i class="icon-list"></i>]</strong></a> to know if you want to know.</p>
+      <p>You can also track me just click <a href="/public/atom.xml"><strong>[RSS<i class="icon-rss"></i>]</strong></a> or click <a href="mailto:creamidea@gmail.com"><strong>[E-Mail<i class="icon-envelope"></i>]</strong></a> to connect me.</p>
+      <div class="clear"></div>
+    </div>
+  </div>
+</section>
+<!-- Load calculte the calculate seconds js file-->
+<script type="text/javascript">
+  function getSeconds() {
+      var now = Date.now() / 1000; // Date.now() return the number of milliseconds elapsed since 1 January 1970 00:00:00 UTC.
+      var start = 686577180 	// calculate in http://www.onlineconversion.com/unix_time.htm
+      // you can also use 
+      // function humanToTime()
+      // {
+      // 	  var humDate = new Date(Date.UTC(document.h2u.inYear.value,
+      // 					  (stripLeadingZeroes(document.h2u.inMon.value)-1),
+      // 					  stripLeadingZeroes(document.h2u.inDay.value),
+      // 					  stripLeadingZeroes(document.h2u.inHr.value),
+      // 					  stripLeadingZeroes(document.h2u.inMin.value),
+      // 					  stripLeadingZeroes(document.h2u.inSec.value)));
+      // 	  document.h2u.result.value = (humDate.getTime()/1000.0);
+      // }
+      // to calculate
+      return parseInt(now) - parseInt(start);
+  }
+  (function() {
+      $(".icon-spinner.icon-spin").remove();
+      var seconds = getSeconds();
+      // var seconds = 100000;
+      setInterval(function() {
+          var tempSeconds = seconds++
+            , s = []
+            , sSeconds = "";
+	  while(tempSeconds) {
+	      s.unshift(tempSeconds%1000);
+	      tempSeconds = parseInt(tempSeconds / 1000);
+	  }
+	  // console.log("s:", s);
+	  //////////////////////////////////////////////////
+	  sSeconds += s[0];
+	  for(var i = 1, len = s.length; i < len; i++) {
+	      // avoid display 1, 3, 890
+	      if(s[i] < 10)
+		  s[i] = "00"+s[i];
+	      else if(s[i] < 100)
+		  s[i] = "0"+s[i];
+	      sSeconds += ", " + s[i];
+	  }
+	  // console.log("sSeconds:", sSeconds);
+	  //////////////////////////////////////////////////
+	  $("#mySeconds").html(sSeconds);
+      }, 1000);
+  })();
+</script>
+
+<!-- <img src="img/rss.png" alt="RSS" /> -->
+
+
+  <footer class="footer">
+  <div class="content" style="background: url(/css/img/alian-footer.png) no-repeat center bottom">
+    <div class="grid4 first">
+      <p>Copyright © 2013 <a href="http://creamidea.github.com/">ICECREAM</a>.</p> 
+      <p>Thank <a href="http://tom.preston-werner.com">Tom Preston-Werner</a>, <a href="http://quaran.to/">Nick Quaranto</a>, <a href="http://area51.stackexchange.com/">Area51</a> and many more <a href="https://github.com/mojombo/jekyll/graphs/contributors">awesome contributors</a>.</p>
+    </div>
+    <div class="grid8 align-right">
+      <strong><p>Proudly use <a href="http://jekyllrb.com/">Jekyll</a> and hosted by</p></strong>
+      <a href="https://github.com">
+        <img src="/img/footer-logo.png" alt="GitHub • Social coding">
+      </a>
+    </div>
+    <div class="clear"></div>
+    <div class="copyright">
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/au/" class="license-image">
+    <img alt="Creative Commons License" width="88" height="31"
+	 src="http://i.creativecommons.org/l/by-nc-sa/3.0/au/88x31.png">
+  </a>
+  The content of this blog by
+  <a href="http://creamidea.github.com/">ICE CREAM</a> is licensed under a
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/au/">
+    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Australia License</a>.
+  <!-- <a rel="license" href="/license.html">Full licensing information</a>. -->
+</div>
+
+  </div>
+</footer>
+<div class="clear"></div>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<div class="section-nav">
+  <div class="left align-right">
+    {% if page.previous != null %}
+      <a href="{{ site.url }}{{ page.previous.url }}" class="prev">
+	{% if page.previous.title %}
+	  {{ page.previous.title }}
+	{% else %}
+          Back
+	{% endif %}
+      </a>
+    {% else %}
+      <span class="prev disabled">Back</span>
+    {% endif %}
+  </div>
+  <div class="right align-left">
+    {% if page.next != null %}
+      <a href="{{ site.url }}{{ page.next.url }}" class="next">
+	{% if page.next.title %}
+	  {{ page.next.title }}
+	{% else %}
+          Next
+	{% endif %}
+      </a>
+    {% else %}
+      <span class="next disabled">Next</span>
+    {% endif %}
+  </div>
+  <div class="clear"></div>
+</div>
+

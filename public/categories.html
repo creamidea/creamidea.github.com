@@ -1,0 +1,43 @@
+---
+layout: default
+title: Categories
+overview: true
+---
+
+<section class="docs">
+  <div class="content">
+    <div class="grid10 first">
+      <article>
+	<div class="note info">
+	  <h1>{{ page.title }} <i class="icon-list-ol"></i></h1>
+	</div>
+	<!-- <ul class="archive"> -->
+	<!--   {% for post in site.posts %} -->
+	<!--     <li> -->
+	<!--       <\!-- <span class="date"> -\-> -->
+	<!-- 	<i class="icon-time"></i>{{ post.date | date: '%b %d, %Y' }} -->
+	<!--       <\!-- </span> -\-> -->
+	<!--       >> -->
+	<!--       <a href="{{ post.url }}"{% if post.subtitle %} title="{{ post.subtitle | escape }}"{% endif %}> -->
+	<!-- 	<strong><i class="icon-file-alt"></i>{{ post.title }}</strong> -->
+	<!--       </a> -->
+	<!--     </li> -->
+        <!--   {% endfor %} -->
+	<!-- <\!-- - <a href="archive.html"><strong>显示更多 >> </strong></a></li> -\-> -->
+        <!-- </ul> -->
+
+	<ul class="archive">
+	  {% for c in site.categories %}
+	    <li>
+	      <strong><i class="icon-file-alt"></i>{{ c }}</strong>
+	    </li>
+          {% endfor %}
+	<!-- - <a href="archive.html"><strong>显示更多 >> </strong></a></li> -->
+        </ul>
+
+      </article>
+    </div>
+    {% include docs_contents.html %}
+    <div class="clear"></div>
+  </div>
+</section>

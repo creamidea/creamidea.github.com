@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+   <title>icecream</title>
+   <link href="" rel="self" type="application/atom+xml"/>
+   <link href="" rel="alternate" type="text/html" />
+   <updated>2013-02-09T20:41:37+08:00</updated>
+   <id></id>
+   <author>
+     <name>icecream</name>
+     <email>creamidea@gmail.com</email>
+   </author>
+
+   
+   <entry>
+     <title>Hello, world</title>
+     <link href="http://creamidea.github.com/blog/2013/02/07/hello-world"/>
+     <updated>2013-02-07T00:00:00+08:00</updated>
+     <id>http://creamidea.github.com/blog/2013/02/07/hello-world</id>
+     <content type="html">&lt;p&gt;很高兴你能看我的第一篇文章，虽然以前也写过一些东西，但是始终觉得只是小打小闹，没有任何技术blog的意味，一度让我不知所错。而这次在github上搭建的blog可以说是一个时代的结束，一个全新的开始。虽然我现在还是不知道如何写出一篇高质量的blog，但是我还是想先写一篇: Hello, world.&lt;/p&gt;
+
+&lt;h2 id='id1'&gt;搭建此博客的目的&lt;/h2&gt;
+
+&lt;p&gt;其实我很早以前就想开始写自己的博客，可是却不知道如何写博客，就算写了一些东西，最后给我的感觉是笔记而不是博客，一堆知识的堆叠，没有层次，没有目的。于是对于写blog这件很具有挑战性的活动渐渐失去了兴趣。 然而我看到我的战友&lt;a href='http://forestgump.me'&gt;van9ogh&lt;/a&gt;每月坚持写博客，积累了许多的的知识。很是羡慕，很想自己写。但是每次都是由于种种原因和自身的懒惰，都只能作罢。 但是现在是寒假休假时间，在家“无聊”时开始Jekyll静态网站的搭,建感觉这个真是一个很有意思的事情。&lt;/p&gt;
+
+&lt;h2 id='id2'&gt;此博客的整体设计&lt;/h2&gt;
+
+&lt;h3 id='id3'&gt;设计哲学&lt;/h3&gt;
+
+&lt;p&gt;哲学这个词写出来感觉像是在吓唬人，不过请原谅我这么称呼。设计的总体上是&lt;a href='http://en.wikipedia.org/wiki/KISS_principle'&gt;K.I.S.S&lt;/a&gt;(Keep It Simple, Stupid)原则。如同这些blog站点：&lt;a href='http://au9ustine.github.com/'&gt;au9ustine&lt;/a&gt;, &lt;a href='http://forestgump.me'&gt;van9ogh&lt;/a&gt;, &lt;a href='http://kyle.xlau.org/'&gt;Kylexlau&lt;/a&gt;, &lt;a href='http://pradeepnayak.in/'&gt;Pradeep Nayak&lt;/a&gt;, &lt;a href='http://enrmarc.github.com/index.htm'&gt;Enrmarc&lt;/a&gt;, &lt;a href='http://stevelosh.com/'&gt;Steve Losh&lt;/a&gt;等等。但是我感觉最后的成品给人的感觉是很重的。不过看到那些别人精心设计的CSS样式时又不舍得丢弃，于是最后就变成这个样子了。这个是现阶段的产物，一种玩的心态吧，看到有趣的就想加入，最后显得很臃肿。不过我还是让其能够尽量保持简洁。在这其中我更为注重的是&lt;strong&gt;文章&lt;/strong&gt;这个版面的设计，如果你感觉我这个版面设计的有碍于阅读一定要告诉我。&lt;a href='#comments'&gt;&lt;strong&gt;(Leave Comments&lt;/strong&gt;&lt;/a&gt; &lt;strong&gt;Or&lt;/strong&gt; &lt;a href='mailto:creamidea@gmail.com'&gt;&lt;strong&gt;E-Mail)&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;比如文章背景色，字体的大小、颜色，标题和正文的大小、颜色等等，总之你就是你认为适合阅读的颜色大小和对比度的设计。谢谢。&lt;/p&gt;
+
+&lt;h3 id='id4'&gt;设计的局部细节&lt;/h3&gt;
+
+&lt;h4 id='jekyll'&gt;Jekyll搭建&lt;/h4&gt;
+
+&lt;p&gt;我记得我一年前就开始尝试搭建Jekyll的站点，当时想写blog，但是最终也只是尝试了一下，使用了&lt;a href='http://octopress.org/'&gt;Octopress&lt;/a&gt;来搭建的。不过现在已经被我删除了。全新的站点如同现在所示。 Jekyll的搭建过程，网络上已经有许多的高手写的很详细了，我在这里就不再继续累述了，只是将我搭建过程中参考的网站地址给出：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;h5 id='id5'&gt;中文版&lt;/h5&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href='http://www.soimort.org/posts/101/'&gt;像黑客一样写博客——Jekyll入门&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='http://beiyuu.com/github-pages/'&gt;使用Github Pages建独立博客&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id='english_version'&gt;English Version&lt;/h5&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href='https://github.com/mojombo/jekyll/wiki'&gt;Jekyll Documents&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='http://net.tutsplus.com/tutorials/other/building-static-sites-with-jekyll/'&gt;Building Static Sites with Jekyll&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='https://github.com/mojombo/jekyll/wiki/install'&gt;Jekyll Install&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id='blog'&gt;我的blog目录&lt;/h4&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;~ &lt;span class='nv'&gt;$ &lt;/span&gt;tree -L 2 
+.
+├── 404.html
+├── CNAME
+├── _config.yml
+├── css
+├── font
+├── img
+├── _includes
+├── index.html
+├── js
+├── _layouts
+├── _plugins
+├── _posts
+│   ├── blog      &lt;span class='c'&gt;#Storage the blog&lt;/span&gt;
+│   ├── docs      &lt;span class='c'&gt;#Storage the documents&lt;/span&gt;
+│   └── note      &lt;span class='c'&gt;#Storage the note&lt;/span&gt;
+├── public         &lt;span class='c'&gt;#Storage the html like about.html, archive.html...&lt;/span&gt;
+├── README.md
+├── _site
+└── &lt;span class='nb'&gt;test&lt;/span&gt;           &lt;span class='c'&gt;#Storage the developing or testing file&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;*Linux and Unix &lt;a href='http://www.computerhope.com/unix/tree.htm'&gt;tree&lt;/a&gt; Command&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;*You can use below command to list directory tree listing (from &lt;a href='http://systembash.com/content/one-line-linux-command-to-print-out-directory-tree-listing/'&gt;One Line Linux Command to Print Out Directory Tree Listing&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='bash'&gt;&lt;span class='nv'&gt;$ &lt;/span&gt;ls -R | grep &lt;span class='s2'&gt;&amp;quot;:$&amp;quot;&lt;/span&gt; | sed -e &lt;span class='s1'&gt;&amp;#39;s/:$//&amp;#39;&lt;/span&gt; -e &lt;span class='s1'&gt;&amp;#39;s/[^-][^\/]*\//--/g&amp;#39;&lt;/span&gt; &lt;span class='se'&gt;\&lt;/span&gt;
+-e &lt;span class='s1'&gt;&amp;#39;s/^/ /&amp;#39;&lt;/span&gt; -e &lt;span class='s1'&gt;&amp;#39;s/-/|/&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id='blog'&gt;blog内容(类别)的设计&lt;/h4&gt;
+
+&lt;p&gt;博客在内容上分为3部分，一个是blog，用来存放写的blog，主要是原创或者80%是原创的文章会被定义为blog；一个是note，用来存放写的笔记，如一些练习题目的练习题，翻译的英文文章，有趣的Linux命令使用等等；最后一个是docs，如果有软件开发的话，这里就是存放的该软件的说明文档。&lt;/p&gt;
+
+&lt;p&gt;本来想写一个类别(Categories)的页面，但是赶在农历贰零壹贰年拾贰月廿九日前上传github，所以这个暂时不做了，如果更新了会在本文的末尾写上更新时间。&lt;/p&gt;
+
+&lt;h4 id='blogtagcloud'&gt;blog标签系统(Tag-Cloud)的设计&lt;/h4&gt;
+
+&lt;p&gt;完成了Tag-Cloud(Simple)，在每篇文章的右侧会列出该文章被标记的标签，单击其中一个标签，显示该标签包含的文章。这个标签的来源：&lt;a href='http://enrmarc.github.com/blog/Jekyll-tagcloud/'&gt;Jekyll-tagcloud&lt;/a&gt; 不过我设计的页面有些许寒酸，如果你有什么好的建议或者意见可以告诉我，谢谢。&lt;a href='#comments'&gt;&lt;strong&gt;(Leave Comments&lt;/strong&gt;&lt;/a&gt; &lt;strong&gt;Or&lt;/strong&gt; &lt;a href='mailto:creamidea@gmail.com'&gt;&lt;strong&gt;E-Mail)&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id='blogicons'&gt;blog中使用的Icons&lt;/h4&gt;
+
+&lt;p&gt;我本来是想使用Github的全套图标的&lt;a href='https://github.com/styleguide/css/7.0'&gt;Github Icons&lt;/a&gt;，但是感觉那个字体&lt;a href='https://github.com/blog/1135-the-making-of-octicons'&gt;Octicons-regular&lt;/a&gt;始终无法正常使用，如果你知道如何使用&lt;a href='https://github.com/styleguide/css/7.0'&gt;Github Icons&lt;/a&gt;的话，希望能够告诉我，不胜感激啊。&lt;a href='#comments'&gt;&lt;strong&gt;(Leave Comments&lt;/strong&gt;&lt;/a&gt; &lt;strong&gt;Or&lt;/strong&gt; &lt;a href='mailto:creamidea@gmail.com'&gt;&lt;strong&gt;E-Mail)&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;后来找了一个替代的Icons: &lt;a href='http://fortawesome.github.com/Font-Awesome/'&gt;Awesome Icons&lt;/a&gt;，使用起来相当的简单，而且效果不错。&lt;/p&gt;
+
+&lt;p&gt;当然你也可以使用&lt;a href='http://twitter.github.com/bootstrap/'&gt;Bootstrap&lt;/a&gt;中使用&lt;a href='http://glyphicons.com/'&gt;Glyphicons Icons&lt;/a&gt;，设计的也是相当的不错。&lt;/p&gt;
+
+&lt;h4 id='blog'&gt;blog中搜索引擎&lt;/h4&gt;
+
+&lt;p&gt;此次blog中搜索的设计的想法是使用&lt;a href='https://www.google.com/cse/'&gt;Google Custom Search Engine&lt;/a&gt;，可能受到网络的原因以及其他未知的原因，实际效果可能不是很理想，但是Google搜索是很强大，我还是决定先试用一段时间。还有一个原因就是现在能力有限，实现的搜索引擎也是不尽如人意，所以觉得暂缓搜索引擎的开发，等待时机成熟时再来尝试。&lt;/p&gt;
+
+&lt;p&gt;期间我也看到了一些Jekyll站点使用自己的搜索，比如下面的站点：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href='http://pradeepnayak.in/technology/2012/06/20/search-for-your-jekyll-site/'&gt;Search for your Jekyll Site&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='http://kingauthur.info/2012/12/03/the-things-about-jekyll/'&gt;为Jekyll添加静态搜索&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;有空的时候会自己设计搜索，如果你有什么好的想法或者想和我一起研究的，可以&lt;a href='#comments'&gt;&lt;strong&gt;(Leave Comments&lt;/strong&gt;&lt;/a&gt; &lt;strong&gt;Or&lt;/strong&gt; &lt;a href='mailto:creamidea@gmail.com'&gt;&lt;strong&gt;E-Mail)&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id='blog'&gt;blog中的一些快捷功能&lt;/h4&gt;
+
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;在阅读文章时可以使用左，右键（或J,j,K,k键）来翻看前一篇，后一篇文章。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id='emacser_markdownmode'&gt;致Emacser： Markdown-Mode&lt;/h2&gt;
+
+&lt;p&gt;使用Emacs来写blog真的是一件不错的事情，当使用&lt;a href='http://jblevins.org/'&gt;Jason Blevins&lt;/a&gt;写的&lt;a href='http://jblevins.org/projects/markdown-mode/markdown-mode.el'&gt;markdown-mode.el&lt;/a&gt;来写Markdown时就更加是如虎添翼。其官方文档是&lt;a href='http://jblevins.org/projects/markdown-mode/'&gt;Emacs Markdown Mode&lt;/a&gt;，EmaceWiki中的文档是&lt;a href='http://emacswiki.org/emacs/MarkdownMode'&gt;MarkdownMode&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h5 id='markdonw_'&gt;Markdonw 参考文档&lt;/h5&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;繁文版&lt;/em&gt; &lt;a href='http://markdown.tw/#blockquote'&gt;Markdown: Syntax&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;English Version&lt;/em&gt; &lt;a href='http://daringfireball.net/projects/markdown/syntax'&gt;Markdown: Syntax&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;em&gt;致Vimer, 不好意思，这里暂时不提供vim的markdown-mode， 我相信你们也可以自行搜索到，我现在暂时使用Emacs，虽然Vim也是我喜欢的编辑器。&lt;/em&gt;&lt;/p&gt;
+
+&lt;h1 id='id6'&gt;结尾&lt;/h1&gt;
+
+&lt;p&gt;非常感谢你能够阅读到最后，以上只是我在这次blog设计中考虑到的一些问题，如果还有一些细节我没有考虑到，希望你能指出&lt;a href='#comments'&gt;&lt;strong&gt;(Leave Comments&lt;/strong&gt;&lt;/a&gt; &lt;strong&gt;Or&lt;/strong&gt; &lt;a href='mailto:creamidea@gmail.com'&gt;&lt;strong&gt;E-Mail)&lt;/strong&gt;&lt;/a&gt; ，我将及时修正。&lt;/p&gt;
+
+&lt;p&gt;这里我将记录学习、学术时的文章，主要记录自己在学习人类文化和科技时的部分过程和经历。如果想知道我看过哪些书，电影或者听过哪些音乐，看到我的另一面，可以到我的&lt;a href='http://www.douban.com/people/creamidea/'&gt;豆瓣&lt;/a&gt;。&lt;/p&gt;</content>
+   </entry>
+   
+ 
+</feed>

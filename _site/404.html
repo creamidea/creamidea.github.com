@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta author="icecream">
+  <title>Archive</title>
+  <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Arizonia' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/normalize.css" />
+  <link rel="stylesheet" href="/css/grid.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/pygments.css" />
+  <link rel="stylesheet" href="/css/font-awesome.min.css" />
+  <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/modernizr-2.5.3.min.js"></script>
+  
+
+
+  <!-- Google Analytics (http://google.com/analytics) -->
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-38213594-1']);
+    _gaq.push(['_setDomainName', '']); // Multiple sub-domains
+    _gaq.push(['_setAllowLinker', true]); // Multiple TLDs
+    _gaq.push(['_trackPageview']);
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+
+<body>
+  <header style="padding-top: 0px;">
+  <div class="content" style="padding-top: 4px;">
+    <div class="grid3 first" style="position: absolute; z-index: 44;">
+      <div id="logo">
+	<!-- <div id="logoLeft">{</div> -->
+	<p style="font-size: 26px;">
+	  <a href="/" style="color: white;"><i class="icon-home"></i>>>ICE CREAM</a>
+	</p>
+	<p style="font-size: 24px;">
+	  <a href="/public/archive.html" style="color: white;"><i class="icon-list"></i>>>Archive</a>
+	</p>
+	<!-- <div id="logoRight">}</div> -->
+      </div>
+    </div>
+    <script>
+(function() {
+  var cx = '017951989687920165329:kdjpjbs_wac';
+  var gcse = document.createElement('script'); gcse.type = 'text/javascript';
+  gcse.async = true;
+  gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+      '//www.google.com/cse/cse.js?cx=' + cx;
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(gcse, s);
+})();
+</script>
+<script src="/js/jquery.typewatch.js"></script>
+<script>
+    $(function() {    
+        $("#search-input")
+            .focus(function() {
+                $(this).addClass("search-input-active");
+                if ($(this).val() == $(this).attr("title")) {
+                    $(this).val("");
+                }
+            })
+            .blur(function() {
+                var val = $(this).val();
+                var title = $(this).attr("title");
+                if (val == "" || val == title) {
+                    $(this).removeClass("search-input-active");
+                    $(this).val(title);
+                }
+            })
+            .trigger("blur")
+            .typeWatch({
+                highlight: true,
+                wait: 500,
+                captureLength: -1,
+                callback: function(txt) {
+                    var q = $.trim(txt);
+                    var jMessage = $("#search-message");
+                    
+                    if (jMessage.length == 0) {
+                        jMessage = $('<div id="search-message"></div>');
+                        $("#search-bar").append(jMessage);
+                    }
+                    
+                    if (q.length < 3 && q.length > 0) {                        
+                        jMessage.text(3 - q.length + " more character" + (3 - q.length == 1 ? "" : "s") + "...").show();
+                        return;
+                    }
+                    
+                    $("#search-input").addClass("searching");
+                    jMessage.text("searching...").show();                                    
+                    
+                    $(".category-container").load(
+                        "/search/results",
+                        { q: q, returnTitle: "All Proposals", returnUrl: "/" },
+                        function() {
+                            $("#search-input").removeClass("searching");
+                            $("#search-message").hide()
+                        }
+                    );
+                    
+                    document.title = q.length > 0 ? ('Proposals containing "' + q + '" - ICE CREAM - Stack Exchange') : 'Search All Proposals';
+                }
+            });
+
+        // preload image
+        <!-- new Image().src = settings.contentPath + "/img/ajax-loader.gif"; -->
+    });
+</script>
+
+    <div id="search-bar">
+      <input type="text" id="search-input" class="" maxlength="80" value="" title="developing...">
+      <div id="gcse">
+	<gcse:search></gcse:search>
+      </div>
+      <!-- Search Proposals -->
+    </div>
+    <div class="clear"></div>
+  </div>
+</header>
+<!-- <script type="text/javascript"> -->
+<!--   $(".gsc-search-button").remove(); -->
+<!-- </script> -->
+
+
+  <section class="free-hosting">
+  <div class="content" style="padding: 0px;">
+    <div class="pane">
+      <div style='margin:0 auto;width:640px;'>
+	<iframe scrolling='no' frameborder='0' src='http://yibo.iyiyun.com/js/yibo404/key/2623' width='640' height='462' style='display:block;'></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <footer class="footer">
+  <div class="content" style="background: url(/css/img/alian-footer.png) no-repeat center bottom">
+    <div class="grid4 first">
+      <p>Copyright © 2013 <a href="http://creamidea.github.com/">ICECREAM</a>.</p> 
+      <p>Thank <a href="http://tom.preston-werner.com">Tom Preston-Werner</a>, <a href="http://quaran.to/">Nick Quaranto</a>, <a href="http://area51.stackexchange.com/">Area51</a> and many more <a href="https://github.com/mojombo/jekyll/graphs/contributors">awesome contributors</a>.</p>
+    </div>
+    <div class="grid8 align-right">
+      <strong><p>Proudly use <a href="http://jekyllrb.com/">Jekyll</a> and hosted by</p></strong>
+      <a href="https://github.com">
+        <img src="/img/footer-logo.png" alt="GitHub • Social coding">
+      </a>
+    </div>
+    <div class="clear"></div>
+    <div class="copyright">
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/au/" class="license-image">
+    <img alt="Creative Commons License" width="88" height="31"
+	 src="http://i.creativecommons.org/l/by-nc-sa/3.0/au/88x31.png">
+  </a>
+  The content of this blog by
+  <a href="http://creamidea.github.com/">ICE CREAM</a> is licensed under a
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/au/">
+    Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Australia License</a>.
+  <!-- <a rel="license" href="/license.html">Full licensing information</a>. -->
+</div>
+
+  </div>
+</footer>
+<div class="clear"></div>
+
+</body>
+</html>
