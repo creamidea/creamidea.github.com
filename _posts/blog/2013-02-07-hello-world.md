@@ -51,6 +51,12 @@ Jekyll的搭建过程，网络上已经有许多的高手写的很详细了，�
 ~ $ tree -L 2 
 .
 ├── 404.html
+├── about
+│   └── index.md
+├── archive
+│   └── index.html
+├── categories
+│   └── index.html
 ├── CNAME
 ├── _config.yml
 ├── css
@@ -61,14 +67,18 @@ Jekyll的搭建过程，网络上已经有许多的高手写的很详细了，�
 ├── js
 ├── _layouts
 ├── _plugins
-├── _posts
-│   ├── blog      #Storage the blog
-│   ├── docs      #Storage the documents
-│   └── note      #Storage the note
-├── public         #Storage the html like about.html, archive.html...
+├── _posts             #The three categories: blog, documents and note
+│   ├── blog
+│   ├── docs
+│   └── note
+├── public
 ├── README.md
+├── rss
+│   └── index.html
 ├── _site
-└── test           #Storage the developing or testing file
+├── tags
+│   └── index.html
+└── test                #Store the test files
 {% endhighlight%}
 *\*Linux and Unix [tree](http://www.computerhope.com/unix/tree.htm) Command*
 
