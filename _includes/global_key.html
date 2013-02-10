@@ -1,0 +1,28 @@
+<!-- global keyboard setting -->
+<script type="text/javascript">
+    $(function(){
+	$(document).keydown(function(e) {
+	    if (e.target.nodeName.toUpperCase() != 'BODY') return;
+	    var url = false;
+            switch(e.which) { 
+		case 72:	// H(Home)
+		  url = '{{ site.url }}/';
+		  break;
+		case 65:	// A(About)
+		  url = '{{ site.url }}{{ site.about }}';
+		  break;
+		case 82:	// R(RSS)
+		  url = '{{ site.url }}{{ site.rss }}';
+		  break;
+		case 27:	// Esc(Archive)
+		  url = '{{ site.url }}{{ site.archive }}';
+		  break;
+		default:
+		  break;
+	    }
+	    if (url) {
+		window.location = url;
+	    }
+	});
+    });
+</script>

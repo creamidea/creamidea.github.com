@@ -55,11 +55,11 @@ author:
   name: icecream
   email: creamidea@gmail.com
 
-archive: /public/archive.html
-about: /public/about.html
-rss: /public/atom.xml
-tags_path: /public/tags.html
-categories_path: /public/categories.html
+archive: /archive
+about: /about
+rss: /rss
+tags_path: /tags
+categories_path: /categories
 search: /public/search.html
 
 email_me: <a href="mailto:{{ site.author.email }}"><strong>[E-Mail<i class="icon-envelope"></i>]</strong></a>

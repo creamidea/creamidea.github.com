@@ -7,6 +7,7 @@ layout: default
 
       <div class="grid10 first">
         <article style="font-size: 18px">
+	  <div id="prompt_header" class="note warning prompt hide"> </div>
 	  <div class="note">
 	    <!-- artical title -->
             <h1><i class="icon-file-alt"></i>{{ page.title }}</h1>
@@ -19,6 +20,12 @@ layout: default
 	  <p class="posted-time">
 	    <code><i class="icon-file-alt"></i> Post by{% if page.author %}<a href="mailto:{{ site.author.email }}">{{ site.author.name }}</a>{% else %}<a href="mailto:{{ site.author.email }}"> <i class="icon-envelope"></i> {{ site.author.name }}</a>{% endif %} at <i class="icon-time"></i> {{ page.date | date: '%A, %d %B %Y, %r' }}</code>
 	  </p>
+	  <!-- Update the date of modify -->
+	  {% if page.updated %}
+	    <p class="updated-time">
+	      <code>Last updated: <span class="date">{{ page.updated | date: '%A, %d %B %Y - %H:%M' }}</span></code>
+	    </p>
+	  {% endif %}
 	  <!-- Test page.date format -->
 	  <!-- <p> -->
 	  <!--     {{ page.date | date: '%A %B %C %D %E %F %G %H %I %J %K %L %M %N %O %P %Q %R %S %T %U %V %W %X %Y %Z' }} -->
@@ -28,22 +35,25 @@ layout: default
 	  <!-- </p> -->
 	  <!-- Show the count of the disqus -->
 	  <p><i class="icon-comments-alt"></i> >> <a href="{{ page.url }}#disqus_thread"></a></p>
+	  <!-- Share API -->
+	  {% include share.html %}
 	  <!-- 水平分割虚线(Horizontal dividing dotted line) -->
 	  <hr />
-	  <!-- Update the date of modify -->
-	  {% if page.updated %}
-	    <p class="updated-time">
-	      <code>Last updated: <span class="date">{{ page.updated | date: '%A, %d %B %Y - %H:%M' }}</span></code>
-	    </p>
-	  {% endif %}
+
 	  <!-- the content of the artical -->
           {{ content }}
 
 	  <!-- 水平分割虚线(Horizontal dividing dotted line) -->
 	  <hr />
+	  <!-- Share API -->
+	  {% include share.html %}
 
 	  <!-- the nagivation in the right -->
           {% include section_nav.html %}
+
+	  <!-- Prompt Footer -->
+	  <div id="prompt_footer" class="note warning prompt hide"></div>
+
         </article>
       </div>
 
@@ -54,28 +64,8 @@ layout: default
     </div>
   </section>
 
-  <!-- keyboard && page -->
-  <script type="text/javascript">
-    $(function(){
-      $(document).keydown(function(e) {
-        if (e.target.nodeName.toUpperCase() != 'BODY') return;
-        var url = false;
-	if (e.which == 37 || e.which == 74) {  // Left arrow and J
-	    {% if page.previous %}
-	    url = '{{ site.url }}{{ page.previous.url }}';
-	    {% endif %}
-	}
-	else if (e.which == 39 || e.which == 75) {  // Right arrow and K
-	    {% if page.next %}
-	    url = '{{ site.url }}{{ page.next.url }}';
-	    {% endif %}
-	}
-	if (url) {
-	    window.location = url;
-	}
-      });
-    });
-  </script>
+  <!-- documents keyboard setting -->
+  {% include doc_key.html %}
 
   <div class="backToTop">
     <i class="icon-chevron-up"></i>

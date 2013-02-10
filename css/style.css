@@ -863,3 +863,8 @@ ul.tags {
 .tag-cloud a:hover {
     text-decoration:underline;
 }
+
+/* hide elements */
+.hide {
+    display: none;
+}
