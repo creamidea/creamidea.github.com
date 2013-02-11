@@ -12,6 +12,7 @@ Hi, My True Name is Ni Junjia(倪俊佳 ニッケルハンサムグッド). Nick
 ICE CREAM is my computer's name because her color just like one kind of icecream's color. So I am sometimes called icecream. However, icecream's gmail has been registed! I have to use creamidea.
 
 ### You Can Find Me
+[![Google+](https://www.gstatic.com/images/icons/gplus-64.png)](https://plus.google.com/106145678677607887880/posts)
 [![Github](https://github.com/favicon.ico)](https://github.com/creamidea) 
 
 ### Basic Data

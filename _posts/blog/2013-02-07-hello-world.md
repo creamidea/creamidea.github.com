@@ -121,30 +121,30 @@ Jekyll的搭建过程，网络上已经有许多的高手写的很详细了，�
 
 [Google Custom Search Engine]: https://www.google.com/cse/
 
+#### blog分享 ####
+1. [豆瓣收藏秀](http://www.douban.com/service/badgemakerjs)
+
 #### blog中的一些快捷功能 ####
-> 1. 在阅读文章时可以使用左，右键（或J,j,K,k键）来翻看前一篇，后一篇文章。
+在阅读文章时可以使用左，右键（或J,j,K,k键）来翻看前一篇，后一篇文章。
 
-> 2. 在任何页面的快捷键：
-
->    (H->Home) 
-> 	 (Esc->Archive)
-> 	 (A->About)
-> 	 (R->RSS)
+在任何页面的快捷键:H->Home, A->About, R->RSS, Esc->Archive.
 
 ## 致Emacser： Markdown-Mode ##
 使用Emacs来写blog真的是一件不错的事情，当使用[Jason Blevins](http://jblevins.org/)写的[markdown-mode.el](http://jblevins.org/projects/markdown-mode/markdown-mode.el)来写Markdown时就更加是如虎添翼。其官方文档是[Emacs Markdown Mode](http://jblevins.org/projects/markdown-mode/)，EmaceWiki中的文档是[MarkdownMode](http://emacswiki.org/emacs/MarkdownMode)。
 
 ##### Markdonw 参考文档 #####
 
-> *繁文版*
-> [Markdown: Syntax](http://markdown.tw/#blockquote)
+> *繁文版:*
 >
-> *English Version*
-> [Markdown: Syntax](http://daringfireball.net/projects/markdown/syntax)
+> 1. [Markdown: Syntax](http://markdown.tw/#blockquote)
+> 
+> *English Version:*
+> 1. [Markdown: Syntax](http://daringfireball.net/projects/markdown/syntax)
+> 2. [Improving Wiki Editing with Markdown](http://blog.markdownwiki.com/)
 
 *致Vimer, 不好意思，这里暂时不提供vim的markdown-mode， 我相信你们也可以自行搜索到，我现在暂时使用Emacs，虽然Vim也是我喜欢的编辑器。*
 
-# 结尾 #
+## 结尾 ##
 非常感谢你能够阅读到最后，以上只是我在这次blog设计中考虑到的一些问题，如果还有一些细节我没有考虑到，希望你能指出{% include comments_email.html%}，我将及时修正。
 
-这里我将记录学习、学术时的文章，主要记录自己在学习人类文化和科技时的部分过程和经历。如果想知道我看过哪些书，电影或者听过哪些音乐，看到我的另一面，可以到我的[豆瓣](http://www.douban.com/people/creamidea/)。
+这里我将记录学习、学术时的文章，主要记录自己在学习人类文化和科技时的部分过程和经历。如果想知道我看过哪些书，电影或者听过哪些音乐，看到我的另一面，可以到[我的豆瓣](http://www.douban.com/people/creamidea/)。

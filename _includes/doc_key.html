@@ -1,26 +1,20 @@
 <!-- keyboard && page -->
+
 {% include global_key.html %}
+
 <script type="text/javascript">
     $(function(){
 	$(document).keydown(function(e) {
 	    if (e.target.nodeName.toUpperCase() != 'BODY') return;
 	    var url = false;
 	    var prompt = $(".warning.prompt");
-	    // var prompt_header = $("#prompt_header")
-	    //   , prompt_footer = $("#prompt_footer");
 	    if (e.which == 37 || e.which == 74) {  // Left arrow and J
 		{% if page.previous %}
 		  url = '{{ site.url }}{{ page.previous.url }}';
 		{% else %}
 		  prompt
-		    .removeClass("hide")
+		    .fadeIn()
 		    .html("<p>This is the first article!</p>");
-		  // prompt_header
-		  //   .removeClass("hide")
-		  //   .html("<p>This is the first article!</p>");
-		  // prompt_footer
-		  //   .removeClass("hide")
-		  //   .html("<p>This is the first article!</p>");
 		{% endif %}
 	    }
 	    else if (e.which == 39 || e.which == 75) {  // Right arrow and K
@@ -28,14 +22,8 @@
 		url = '{{ site.url }}{{ page.next.url }}';
 		{% else %}
 		  prompt
-		    .removeClass("hide")
+		    .fadeIn()
 		    .html("<p>This is the last article!</p>");
-		  // prompt_header
-		  //   .removeClass("hide")
-		  //   .html("<p>This is the last article!</p>");
-		  // prompt_footer
-		  //   .removeClass("hide")
-		  //   .html("<p>This is the last article!</p>");
 		{% endif %}
 	    }
 	    if (url) {

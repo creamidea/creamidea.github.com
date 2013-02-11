@@ -10,7 +10,7 @@ layout: default
 	  <div id="prompt_header" class="note warning prompt hide"> </div>
 	  <div class="note">
 	    <!-- artical title -->
-            <h1><i class="icon-file-alt"></i>{{ page.title }}</h1>
+            <h1 id="article_title"><i class="icon-file-alt"></i>{{ page.title }}</h1>
 	    <!-- artical subtitle -->
 	    {% if page.subtitle %}
 	      <h4 style="text-align: right;">{{ page.subtitle }}</h4>
@@ -64,12 +64,31 @@ layout: default
     </div>
   </section>
 
+  <!-- Load Article Contents -->
+  {% include article_contents.html %}
+
   <!-- documents keyboard setting -->
   {% include doc_key.html %}
 
+  <!-- Back To Top -->
   <div class="backToTop">
-    <i class="icon-chevron-up"></i>
+    <a href="#">
+      <i class="icon-chevron-up"></i>
+    </a>
   </div>
+  <script type="text/javascript">
+    var $backToTop = $(".backToTop")
+      , $title = $("#article_title");
+    <!-- $backToTop.click(function() { -->
+    <!-- $backToTop.animate({scrollTop: 30}, 400, 'swing'); -->
+    <!-- }); -->
+    $(window).scroll(function() {
+	if($(this).scrollTop() == 0)
+	    $backToTop.fadeOut();
+	else
+	    $backToTop.fadeIn();
+    });
+  </script>
 
   <!-- Load disqus model -->
   {% include disqus.html %}
