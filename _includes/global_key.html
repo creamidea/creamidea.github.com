@@ -17,6 +17,9 @@
 		case 27:	// Esc(Archive)
 		  url = '{{ site.url }}{{ site.archive }}';
 		  break;
+		case 83:	// S(Search)
+		  $(".gsc-input").focus();
+		  break;
 		default:
 		  break;
 	    }
