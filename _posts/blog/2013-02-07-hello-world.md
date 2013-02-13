@@ -148,3 +148,6 @@ Jekyll的搭建过程，网络上已经有许多的高手写的很详细了，�
 非常感谢你能够阅读到最后，以上只是我在这次blog设计中考虑到的一些问题，如果还有一些细节我没有考虑到，希望你能指出{% include comments_email.html%}，我将及时修正。
 
 这里我将记录学习、学术时的文章，主要记录自己在学习人类文化和科技时的部分过程和经历。如果想知道我看过哪些书，电影或者听过哪些音乐，了解我的另一面，请移步[我的豆瓣](http://www.douban.com/people/creamidea/)。
+
+## 更新的地方 ##
+1. [How to create article contents by js]({% post_url 2013-02-13-How-to-create-article-contents-by-js %})
