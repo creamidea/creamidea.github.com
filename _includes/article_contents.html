@@ -1,7 +1,6 @@
 <script type="text/javascript">
     $(document).ready(function(){
-
-            var isMobile = {
+        var isMobile = {
                 Android: function() {
                     return navigator.userAgent.match(/Android/i);
                 }
@@ -35,7 +34,7 @@
             }
         });
 
-        if($('h2').length > 2 && !isMobile.any()){
+        if($('h3').length > 0 && !isMobile.any()){
             var h2 = [],h3 = [],tmpl = '<ul>',h2index = 0;
 
             var findScrollableElement = function(els) {
@@ -63,7 +62,7 @@
                     h2item.id = 'menuIndex'+index;
                     h2.push(h2item);
                     h2index++;
-                }else{
+                } else {
                     var h3item = {};
                     h3item.name = $(item).text();
                     h3item.id = 'menuIndex'+index;
