@@ -85,13 +85,15 @@ body ::selection {
     margin: 1px;
     list-style: none;
 }
+/* #text-table-of-contents li a:hover { */
+/*     font-size: 16px; */
+/* } */
 a:hover, a:active { 
     text-decoration: underline; 
     color: #FF0000;
 /* color: #537d7b; */
 }
 /* Content end */
-
 
 /* Content */
 body #content {
@@ -198,7 +200,9 @@ ul.tags {
 
 /* Navigation */
 div.navigation {
-    width: 190px;
+    width: 100%;
+    text-align: right;
+    margin-right: 20px;
     padding-top: 40px;
     position:fixed;
     z-index: 9;
@@ -217,6 +221,10 @@ dl, menu, ol, ul {
 .navigation a {
     text-decoration: none;
 }
+.current {
+    font-size: 24px;
+}
+
 /* Navigation end */
 
 /* pane */
