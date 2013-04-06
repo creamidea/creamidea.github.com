@@ -136,6 +136,10 @@ div.gsc-control-cse {
 td.gsc-search-button>input {
     padding: 4px 4px;
 }
+td#gs_tti0>input {
+    background-color: transparent;
+    background-image: none;
+}
 /* Search end */
 
 /* logo */
@@ -200,7 +204,7 @@ ul.tags {
 
 /* Navigation */
 div.navigation {
-    width: 100%;
+    width: 180;
     text-align: right;
     margin-right: 20px;
     padding-top: 40px;
