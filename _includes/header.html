@@ -1,27 +1,24 @@
 <header style="padding-top: 0px;">
-  <div class="content" style="padding-top: 4px;">
-    <div class="grid3 first" style="position: absolute; z-index: 44;">
-      <div id="logo">
-	<!-- <div id="logoLeft">{</div> -->
-	<p style="font-size: 26px;">
-	  <a href="{{ site.url }}/" style="color: white;"><i class="icon-home"></i>>>ICE CREAM</a>
-	</p>
-	<p style="font-size: 24px;">
-	  <a href="{{ site.url }}{{ site.archive }}" style="color: white;"><i class="icon-list"></i>>>Archive</a>
-	</p>
-	<!-- <div id="logoRight">}</div> -->
-      </div>
-    </div>
-    {% include search.html %}
-    <div id="search-bar">
-      <input type="text" id="search-input" class="" maxlength="80" value="" title="developing...">
-      <div id="gcse">
-	<gcse:search></gcse:search>
-      </div>
-      <!-- Search Proposals -->
-    </div>
-    <div class="clear"></div>
+  <div id="logo">
+    <a href="{{ site.url }}/">ICECREAM  氷菓</a> 
   </div>
+  <div id="search-bar">
+    <div id="gcse">
+      <gcse:search></gcse:search>
+    </div>
+  </div>
+  <script>
+    (function() {
+    var cx = '{{ site.google_custom_search_id }}';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+    '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+    })();
+  </script>
+  <div class="clear"></div>
 </header>
 <!-- <script type="text/javascript"> -->
 <!--   $(".gsc-search-button").remove(); -->

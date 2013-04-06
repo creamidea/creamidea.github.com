@@ -1,0 +1,80 @@
+---
+layout: default
+---
+
+  <section class="article">
+    <!-- <div id="content"> -->
+        <article>
+	  <div id="prompt_header" class="note warning prompt hide"> </div>
+	  <div class="article-head">
+	    <!-- artical title -->
+            <h1 id="article_title">{{ page.title }}</h1>
+	    <!-- artical subtitle -->
+	  </div>
+	  <!-- page basic info -->
+	  <p class="posted-time">
+	    <code><i class="icon-time"></i> {{ page.date | date: '%A, %d %B %Y' }}</code>
+	    <!-- <code><i class="icon-file-alt"></i> Posted by{% if page.author %}<a href="mailto:{{ site.author.email }}">{{ site.author.name }}</a>{% else %}<a href="mailto:{{ site.author.email }}"> <i class="icon-envelope"></i> {{ site.author.name }}</a>{% endif %} at <i class="icon-time"></i> {{ page.date | date: '%A, %d %B %Y, %r' }}</code> -->
+	  </p>
+	  <!-- Update the date of modify -->
+	  {% if page.updated %}
+	    <p class="updated-time">
+	      <code>Last updated: <span class="date">{{ page.updated | date: '%A, %d %B %Y - %H:%M' }}</span></code>
+	    </p>
+	  {% endif %}
+	  <!-- <\!-- Show the count of the disqus -\-> -->
+	  <!-- <p><i class="icon-comments-alt"></i> >> <a href="{{ page.url }}#disqus_thread"></a></p> -->
+
+	  <!-- 水平分割虚线(Horizontal dividing dotted line) -->
+	  <!-- <hr /> -->
+
+	  <!-- the content of the artical -->
+          {{ content }}
+
+	  <!-- 水平分割虚线(Horizontal dividing dotted line) -->
+	  <hr />
+
+	  <!-- the nagivation below the article -->
+          {% include section_nav.html %}
+
+	  <!-- Prompt Footer -->
+	  <div id="prompt_footer" class="note warning prompt hide"></div>
+
+        </article>
+      <div class="clear"></div>
+    <!-- </div> -->
+  </section>
+  <!-- documents keyboard setting -->
+  {% include doc_key.html %}
+  <!-- Back To Top -->
+  <div class="backToTop">
+    <a href="#top">
+      <i class="icon-chevron-up"></i>
+    </a>
+  </div>
+  <script type="text/javascript">
+    var $backToTop = $(".backToTop")
+      , $title = $("#article_title");
+    $('a[href=#top]').click(function(){
+        $('html, body').animate({scrollTop:0}, 'slow');
+        return false;
+    });
+    $('#text-table-of-contents').delegate('a', 'click', function() {
+        <!-- console.log($(this)); -->
+        var target = $(this).attr("href");
+        <!-- console.log(target); -->
+        <!-- console.log($(target)); -->
+        var scrollNum = $(target)[0].offsetTop;
+        $('html, body').animate({ scrollTop: scrollNum-24 }, 'slow');
+    })
+    $(window).scroll(function() {
+	if($(this).scrollTop() == 0)
+	    $backToTop.fadeOut();
+	else
+	    $backToTop.fadeIn();
+    });
+  </script>
+
+  <!-- Load disqus model -->
+  <h1 style="color: yellowgreen;"> Comments </h1>
+  {% include disqus.html %}

@@ -1,0 +1,281 @@
+---
+layout: doc
+title: How To Install Autocomplete and Yanisppet
+subtitle: install them in emacs in linux and windows 
+categories: note
+tags: emacs autocomplete yanisppet
+---
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 前言</a></li>
+<li><a href="#sec-2">2 Auto Complete</a>
+<ul>
+<li><a href="#sec-2-1">2.1 Download Auto Complete</a></li>
+<li><a href="#sec-2-2">2.2 Install Auto Complete</a>
+<ul>
+<li><a href="#sec-2-2-1">2.2.1 For Linux</a></li>
+<li><a href="#sec-2-2-2">2.2.2 For Windows</a></li>
+</ul></li>
+</ul>
+</li>
+<li><a href="#sec-3">3 Yanisppet</a>
+<ul>
+<li><a href="#sec-3-1">3.1 Download Yanisppet</a>
+<ul>
+<li><a href="#sec-3-1-1">3.1.1 Screenshot</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-2">3.2 Install Yanisppet</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4 写在最后</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-3">
+<h3 id="sec-1">前言</h3>
+<div class="outline-text-3" id="text-1">
+
+<p>写这篇blog主要是测试一些网络服务，如图片服务和音乐链接服务。
+当然写这个还是因为我敬爱的小杰同学的要求。作为刚刚入门的New Emacser，我感觉是时候给他一些好玩的插件了。
+当然我这些步骤google一下全部会出来，但是作为要求还是写这篇blog吧。
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-3">
+<h3 id="sec-2">Auto Complete</h3>
+<div class="outline-text-3" id="text-2">
+
+<p>过多的介绍我就不在这里陈述了，具体的可以前往
+Auto Complete官网（<a href="http://cx4a.org/software/auto-complete/">http://cx4a.org/software/auto-complete/</a>) 和 
+Auto Complete所在的EmacsWiki (<a href="http://emacswiki.org/emacs/AutoComplete">http://emacswiki.org/emacs/AutoComplete</a>）。 
+这里只是简单到介绍如何安装。
+</p>
+</div>
+
+<div id="outline-container-2-1" class="outline-4">
+<h4 id="sec-2-1">Download Auto Complete</h4>
+<div class="outline-text-4" id="text-2-1">
+
+<ol>
+<li>Lasest Stable(v1.3.1):
+<ul>
+<li><a href="http://cx4a.org/pub/auto-complete/auto-complete-1.3.1.tar.bz2">auto-complete-1.3.1.tar.bz2</a>
+</li>
+<li><a href="http://cx4a.org/pub/auto-complete/auto-complete-1.3.1.zip">auto-complete-1.3.1.zip</a>
+</li>
+</ul>
+
+</li>
+<li>Git repositories:
+<ul>
+<li><a href="http://cx4a.org/repo/auto-complete.git/">http://cx4a.org/repo/auto-complete.git/</a>
+</li>
+<li><a href="https://github.com/m2ym/auto-complete">https://github.com/m2ym/auto-complete</a>(GitHub mirror)
+</li>
+</ul>
+
+</li>
+</ol>
+
+</div>
+
+</div>
+
+<div id="outline-container-2-2" class="outline-4">
+<h4 id="sec-2-2">Install Auto Complete</h4>
+<div class="outline-text-4" id="text-2-2">
+
+
+</div>
+
+<div id="outline-container-2-2-1" class="outline-5">
+<h5 id="sec-2-2-1">For Linux</h5>
+<div class="outline-text-5" id="text-2-2-1">
+
+<p>将下载的文件移动到.emacs.d并将文件解压：(以tar为例)
+</p>
+
+
+<pre class="example">$ mv auto-complete-1.3.1.tar.bz2 ~/.emacs.d
+$ cd ~/.emacs.d
+$ tar -jxvf auto-complete-1.3.1.tar.bz2
+</pre>
+
+<p>
+之后make install安装
+</p>
+
+
+<pre class="example">$ make install
+$ # or with directory specified
+$ make install DIR=$HOME/.emacs.d/
+</pre>
+
+<p>
+然后将这段代码贴到.emacs中：
+</p>
+
+
+<pre class="example">(add-to-list 'load-path "~/.emacs.d")    ; This may not be appeared if you have already added.
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(require 'auto-complete-config)
+(ac-config-default)
+</pre>
+
+<p>
+至此重启Emacs应该就可以正常运行了。
+如果还有问题可以去 <a href="http://cx4a.org/software/auto-complete/manual.html#Installation">这里</a> 查询，也可以写电子邮件给我，我们一起讨论。
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2-2-2" class="outline-5">
+<h5 id="sec-2-2-2">For Windows</h5>
+<div class="outline-text-5" id="text-2-2-2">
+
+<p>首先第一步也是解压，在windows上我们就不用命令了，直接使用你最爱的解压软件解压吧。
+然后使用组合键 <code>win+R</code> 输入 <code>cmd</code> ，在弹出的对话框中输入以下命令：
+</p>
+
+
+<pre class="example">&gt; /path/to/emacs.exe -batch -l /path/to/autocomplete/etc/install.el
+</pre>
+
+<p>
+然后根据提示一步一步往下操作，主要的就是这几步：
+</p><ol>
+<li>选择安装路径：
+</li>
+</ol>
+
+<pre class="example">
+Specify path to install: c:\applications\emacs-24.2\lisp(自行选择)
+...
+</pre>
+
+<p>之后如果提示安装成功，那么就可以将他提示需要粘贴进.emacs中的代码粘贴进去即可。
+</p>
+<p>
+当然如果是第一次安装emacs插件的话，可能会遇到各种问题，这是你可以继续google。
+当然也可以写电子邮件给我，我将尽快回复。
+</p>
+<p>
+最后附上日文教程：<a href="http://ubuntu-note.blog.so-net.ne.jp/2010-11-08-1">Emacs 23 に Auto Complete をインストール　{Emacs 23}</a> 
+</p>
+</div>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-3">
+<h3 id="sec-3">Yanisppet</h3>
+<div class="outline-text-3" id="text-3">
+
+<p>同样的，过多的介绍我就不在这里陈述了，在Yanisppet项目官网有详细介绍：
+</p><ol>
+<li>EmacsWiki:
+<ul>
+<li><a href="http://emacswiki.org/emacs/Yasnippet">http://emacswiki.org/emacs/Yasnippet</a>
+</li>
+</ul>
+
+</li>
+<li>Github: (现在使用)
+<ul>
+<li><a href="http://github.com/capitaomorte/yasnippet">http://github.com/capitaomorte/yasnippet</a>
+</li>
+</ul>
+
+</li>
+</ol>
+
+
+</div>
+
+<div id="outline-container-3-1" class="outline-4">
+<h4 id="sec-3-1">Download Yanisppet</h4>
+<div class="outline-text-4" id="text-3-1">
+
+
+
+
+<pre class="example">$ git clone https://github.com/capitaomorte/yasnippet.git
+</pre>
+
+<p>
+如果没有安装git的话，那么直接单击<a href="https://nodeload.github.com/capitaomorte/yasnippet/zip/master">这里（github上master分支zip包）</a> 进行下载。
+</p>
+
+</div>
+
+<div id="outline-container-3-1-1" class="outline-5">
+<h5 id="sec-3-1-1">Screenshot</h5>
+<div class="outline-text-5" id="text-3-1-1">
+
+
+<a href="http://www.flickr.com/photos/85376793@N04/8622523251/" title="Emacs-autocomplete in windows7 by aprilgalaxy, on Flickr"><img src="http://farm9.staticflickr.com/8112/8622523251_32b176270a.jpg" width="500" height="405" alt="Emacs-autocomplete in windows7"></a>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-4">
+<h4 id="sec-3-2">Install Yanisppet</h4>
+<div class="outline-text-4" id="text-3-2">
+
+<p>安装说白了就是将文件拷贝到相应到位置（当然有些还需要经过编译）
+下载完之后，解压文件并拷贝进.emacs.d,然后将下面代码复制进.emacs中：
+</p>
+
+
+<pre class="example">(add-to-list 'load-path "~/.emacs.d/path/to/yasnippet")
+    (require 'yasnippet) ;; not yasnippet-bundle
+
+    (yas--initialize)
+    (yas/load-directory "~/.emacs.d/path/to/yasnippet/snippets")
+</pre>
+
+<p>
+这些步骤在windows和linux都是使用的。所以我在这里只写一份。
+</p>
+<p>
+如果还有问题你可以继续google或者看官方文档或者写电子邮件给我，我将尽快回复。
+</p>
+<p>
+祝君使用愉快。
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-3">
+<h3 id="sec-4">写在最后</h3>
+<div class="outline-text-3" id="text-4">
+
+<p>这个不过是一个简单的安装介绍而已，具体的使用则是需要看文档之后才能了解，我告诉你的也只能是简单到一些而已。
+如果你有什么问题，当然可以随时联系我，只要写电子邮件，我将尽快回复。没有问题的话也可以写邮件，然后我们就成为朋友啦。
+</p>
+<p>
+最后附上献给小杰的一首歌：あの日見た花の名前を僕達はまだ知らないED(顺便测试一下)
+</p>
+
+
+<embed src="http://www.xiami.com/widget/10429952_1770159571/singlePlayer.swf" type="application/x-shockwave-flash" width="257" height="33" wmode="transparent"></embed>
+
+<p>
+写到这里终于结束了。在ubuntu上使用ibus写中文真是具有挑战性啊。尤其是在Emacs中.
+</p>
+</div>
+</div>

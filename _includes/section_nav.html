@@ -3,28 +3,27 @@
     {% if page.previous != null %}
       <a href="{{ site.url }}{{ page.previous.url }}" class="prev">
 	{% if page.previous.title %}
-	  {{ page.previous.title }}
+	  <i class="icon-chevron-left"></i>{{ page.previous.title }}
 	{% else %}
-          Back
+          <i class="icon-chevron-left"></i> Back
 	{% endif %}
       </a>
     {% else %}
-      <span class="prev disabled">Back</span>
+      <span class="prev disabled"></span>
     {% endif %}
   </div>
   <div class="right align-left">
     {% if page.next != null %}
       <a href="{{ site.url }}{{ page.next.url }}" class="next">
 	{% if page.next.title %}
-	  {{ page.next.title }}
+	  {{ page.next.title }}<i class="icon-chevron-right"></i>
 	{% else %}
-          Next
+          Next<i class="icon-chevron-right"></i>
 	{% endif %}
       </a>
     {% else %}
-      <span class="next disabled">Next</span>
+      <span class="next disabled"></span>
     {% endif %}
   </div>
   <div class="clear"></div>
 </div>
-

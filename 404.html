@@ -4,12 +4,44 @@ title: Archive
 overview: true
 ---
 
-<section class="free-hosting">
-  <div class="content" style="padding: 0px;">
-    <div class="pane" style="background: rgb(226, 250, 226);">
-      <div style='margin:0 auto;width:640px;'>
-	<iframe scrolling='no' frameborder='0' src='http://yibo.iyiyun.com/js/yibo404/key/2623' width='640' height='462' style='display:block;'></iframe>
-      </div>
+<div class="pane">
+  <div style='margin:0 auto;width:640px;'>
+    <div style="text-align: center">
+      <textarea id="sorry_info" style="color: purple; text-align: center; width: 600px; height: 29px; overflow: hidden; font-size: 24px; font-weight: bold; padding-top: 12px;margin-bottom: 12px;"></textarea>
     </div>
+    <iframe scrolling='no' frameborder='0' src='http://yibo.iyiyun.com/js/yibo404/key/2623' width='640' height='462' style='display:block;'></iframe>
   </div>
-</section>
+</div>
+<script>
+    var sorry_info = ["Oop! 404 NOT FOUND.", "Sorry", "对不起", "すみません"]
+      , speed = 60					// 一句话中字母输出速度
+      , index = 0					// 数组中每句话的索引
+      , text_pos = 0				// 表示打字打到哪里了
+      , str_length = sorry_info[0].length	// 一句的长度，初始时是第一句话
+      , contents = ''				// 存放上文
+      , row							// 控制text文本框中实际显示的行数
+      ;
+      function type_text()
+      {
+        contents = '';				// 每次需要将前面的内容清空
+        row = Math.max(0, index-7); // 控制显示的函数为8行（07）
+        while(row < index) {
+          contents += sorry_info[row++] + '   ';
+        }
+        // document.forms[0].elements[0].value = 
+        //   contents + sorry_info[index].substring(0, text_pos) + '_';
+        $("#sorry_info").html(contents + sorry_info[index].substring(0, text_pos) + '_');
+        if(text_pos++ == str_length){ // 表示一句话已经在屏幕上输出完毕
+          text_pos = 0;
+          index++;
+          if(index != sorry_info.length) { // 这里判断是否所有语句全部输出
+            str_length = sorry_info[index].length;
+            setTimeout("type_text()", 800);
+          }
+        } else {
+          setTimeout("type_text()", speed);
+        }
+      }
+      // Start it
+      type_text();
+</script>

@@ -4,17 +4,12 @@ title: Tags
 overview: true
 ---
 
-<section class="docs">
-  <div class="content">
+<section class="article">
     <div class="grid10 first">
       <article>
-	<div class="note info">
-	  <h1>{{ page.title }} <i class="icon-tags"></i></h1>
-	</div>
-
+	<h1 style="font-size: 36px"><i class="icon-tags"></i>{{ page.title }}</h1>
 	<!-- ================================================== -->
 	<!-- tag -->
-
 	<div class="tag-cloud">
 	  {% for tag in site.tags %}
             <a class="__{{ tag[0] }}">{{ tag[0] }}</a>
@@ -26,15 +21,13 @@ overview: true
 	  {% endfor %}
 	</div>
 
-	<h2><i class="icon-file-alt"></i>Articles in this tags</h2>
-	<div class="post-list" style="margin: 50px; font-size: 24px"></div>
+	<h2 style="padding-top: 20px;"><i class="icon-file-alt"></i>Articles in this tags</h2>
+	<div class="post-list" style="margin: 0px 20px; font-size: 24px"></div>
 	<!-- ================================================== -->
 
       </article>
     </div>
-    {% include docs_contents.html %}
     <div class="clear"></div>
-  </div>
 </section>
 
 <script type="text/javascript">
@@ -75,5 +68,4 @@ overview: true
              });
     })();
 </script>
-
 

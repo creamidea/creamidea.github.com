@@ -1,14 +1,12 @@
 {% include top.html %}
-
 <body>
   {% include header.html %}
-
-  {{ content }}
-
+  {% include navigation.html %}
+  <div id="content">
+    {{ content }}
+  </div>
   {% include footer.html %}
-
   <!-- Global keyboard setting -->
   {% include global_key.html %}
-
 </body>
 </html>
