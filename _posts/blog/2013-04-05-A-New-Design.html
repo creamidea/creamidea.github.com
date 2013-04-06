@@ -3,7 +3,7 @@ layout: doc
 title: A New Design
 subtitle: This is my new start
 categories: blog
-tags: jekyll design org-mode
+tags: jekyll org-mode design 
 ---
 
 
@@ -58,7 +58,6 @@ tags: jekyll design org-mode
 </ol>
 
 
-
 </div>
 
 </div>
@@ -100,10 +99,8 @@ tags: jekyll design org-mode
 <div class="outline-text-3" id="text-4">
 
 <p>这个配置文件修改完成之后，就可以开始写blog了。一个简单的blog例子：
-</p>
-
-
-<pre class="example">#+TITLE: A New Design                                                                                                                  
+</p><pre class="example">
+#+TITLE: A New Design                                                                                                                  
 #+AUTHOR:ICECREAM(氷菓)                                                                                                                
 #+EMAIL:creamidea(AT)gmail.com                                                                                             
 #+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t
@@ -118,12 +115,13 @@ subtitle: This is my new start
 categories: blog                                                                                                                       
 tags: helloworld design                                                                                                              
 ---                                                                                                                 
-\#+END_HTML  (注意这里一行第一个字符\，这个是作者我有意加上的，不然这行貌似会被org-mode翻译。)
+#+END_HTML
 ** Header1
 ** Header2
 ...
 ** END
 </pre>
+
 
 <p>
 写配置文件就是让org-mode在生成的时候只是生成body部分，其他的部分不要生成。而.org文件中这么写只是方便以后生成pdf文件，所以有些参数作者我
@@ -146,15 +144,13 @@ tags: helloworld design
 <div class="outline-text-3" id="text-5">
 
 <p>这里的设置也是很简单，只要安装好yasnippet之后，
-如果不知道如何安装Yasnippet的话，可以参考我写的这个简单的教程。
+如果不知道如何安装Yasnippet的话，可以参考我写的这个简单的教程:
 <a href="{{ site.url }}{% post_url 2013-04-06-How-To-Install-Autocomplete-And-Yasnippet %}">How To Install Autocomplete And Yasnippet</a>
-在/path/to/yasnippet/snippets下
+, 在/path/to/yasnippet/snippets下
 新建一个叫做org-mode的文件夹（貌似现在的yasnippet会自己识别了），然后创建一个
 叫做blog的文件，将下面的代码复制即可（当然你可以根据实际情况稍作修改）：
-</p>
-
-
-<pre class="example"># contributor: ice cream &lt;creamidea(AT)gmail.com&gt;
+</p><pre class="example">
+# contributor: ice cream &lt;creamidea(AT)gmail.com&gt;
 # name: generate blog model 
 # key: blog
 # --
@@ -174,11 +170,10 @@ subtitle: $2
 categories: blog
 tags: $3
 ---
-\#+END_HTML (复制的时候记得将\以及这句话去掉)
+#+END_HTML
 </pre>
 
-<p>
-<b>记得重新启动Emacs</b>
+<p><b>记得重新启动Emacs</b>
 </p>
 </div>
 
@@ -256,6 +251,7 @@ tags: $3
 
 <p class="footnote"><sup><a class="footnum" name="fn-.7" href="#fnr-.7">7</a></sup> <a href="http://www.qianduan.net/12-eye-catching-horizontal-website-design-layout.html">http://www.qianduan.net/12-eye-catching-horizontal-website-design-layout.html</a>
 </p>
+
 
 
 </div>

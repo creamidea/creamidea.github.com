@@ -27,6 +27,17 @@ body a:visited {
     color: purple;
 }
 
+/* selection */
+body ::selection {
+	background: #E58994;
+	color: #fff;
+}
+@media all ::selection {
+	background: #E58994;
+	color: #fff;
+}
+/* selection end */
+
 /*Here is content*/
 @media screen
 {
@@ -115,6 +126,10 @@ div#search-bar {
     position:fixed;
     z-index: 10;
     right: 0px;			/*Right*/
+}
+div.gsc-control-cse {
+    border: 0px;
+    background-color: transparent;
 }
 td.gsc-search-button>input {
     padding: 4px 4px;

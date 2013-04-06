@@ -3,9 +3,9 @@
     {% if page.previous != null %}
       <a href="{{ site.url }}{{ page.previous.url }}" class="prev">
 	{% if page.previous.title %}
-	  <i class="icon-chevron-left"></i>{{ page.previous.title }}
+	  <i class="icon-chevron-left"></i><i class="icon-chevron-left"></i>&#32;{{ page.previous.title }}
 	{% else %}
-          <i class="icon-chevron-left"></i> Back
+          <i class="icon-chevron-left"></i><i class="icon-chevron-left"></i>&#32;Back
 	{% endif %}
       </a>
     {% else %}
@@ -16,9 +16,9 @@
     {% if page.next != null %}
       <a href="{{ site.url }}{{ page.next.url }}" class="next">
 	{% if page.next.title %}
-	  {{ page.next.title }}<i class="icon-chevron-right"></i>
+	  {{ page.next.title }}&#32;<i class="icon-chevron-right"></i><i class="icon-chevron-right"></i>
 	{% else %}
-          Next<i class="icon-chevron-right"></i>
+          Next&#32;<i class="icon-chevron-right"></i><i class="icon-chevron-right"></i>
 	{% endif %}
       </a>
     {% else %}
