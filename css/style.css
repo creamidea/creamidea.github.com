@@ -139,6 +139,12 @@ td.gsc-search-button>input {
 }
 /* logo end */
 
+/* archive */
+ul.archive {
+    font-family: 'Libre Baskerville', serif;
+}
+/* archive end */
+
 /* tags */
 ul.tags {
     font-size: 16px;
@@ -197,6 +203,12 @@ dl, menu, ol, ul {
     text-decoration: none;
 }
 /* Navigation end */
+
+/* pane */
+.pane {
+    font-family: 'Libre Baskerville', serif;
+}
+/* pane end */
 
 /* doc/article caption */
 #article_title{
