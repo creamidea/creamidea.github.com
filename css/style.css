@@ -216,6 +216,9 @@ div.navigation {
 .navigation :hover {
     cursor: move;
 }
+.navigation li:hover {
+    cursor: pointer;
+}
 .navigation a:hover {
     color: yellowgreen;
     cursor: pointer;
