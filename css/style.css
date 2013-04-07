@@ -20,9 +20,9 @@ body a {
 body a:hover {
     color: purple;
 }
-body a:active {
-    color: purple;
-}
+/* body a:active { */
+/*     color: purple; */
+/* } */
 body a:visited {
     color: purple;
 }
@@ -85,9 +85,10 @@ body ::selection {
     margin: 1px;
     list-style: none;
 }
-/* #text-table-of-contents li a:hover { */
-/*     font-size: 16px; */
-/* } */
+#text-table-of-contents li a:hover {
+    /* font-size: 16px; */
+    color: yellowgreen;
+}
 a:hover, a:active { 
     text-decoration: underline; 
     color: #FF0000;
@@ -204,13 +205,19 @@ ul.tags {
 
 /* Navigation */
 div.navigation {
-    width: 180;
+    width: 180px;
     text-align: right;
     margin-right: 20px;
     padding-top: 40px;
     position:fixed;
     z-index: 9;
     right: 0px;			/*Right*/
+}
+.navigation :hover {
+    cursor: move;
+}
+.navigation a:hover {
+    color: yellowgreen;
 }
 menu, ol, ul {
     padding: 0 0 0 40px;
@@ -246,24 +253,24 @@ dl, menu, ol, ul {
 .posted-time {
     text-align: center;
 }
-article {
+.outline-3 {
     font-size: 16px;
 }
-article h1 {
+.outline-3 h1 {
     font-size: 36px;
     font-family: 'Montserrat', sans-serif;
 }
-article h3 {
+.outline-3 h3 {
     font-size: 24px;
     font-family: 'Montserrat', sans-serif;
     color: #00A399;
 }
-article h4 {
+.outline-3 h4 {
     font-size: 18px;
     font-family: 'Montserrat', sans-serif;
     color: #00A399;
 }
-article h5 {
+.outline-3 h5 {
     font-size: 16px;
     font-family: 'Montserrat', sans-serif;
     color: #00A399;

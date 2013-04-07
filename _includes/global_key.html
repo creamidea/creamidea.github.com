@@ -8,16 +8,16 @@
 		case 72:	// H(Home)
 		  url = '{{ site.url }}/';
 		  break;
-		case 65:	// A(About)
+		case 27:	// ESC(About(Icecream))
 		  url = '{{ site.url }}{{ site.about }}';
 		  break;
-		case 82:	// R(RSS)
-		  url = '{{ site.url }}{{ site.rss }}';
-		  break;
-		case 27:	// Esc(Archive)
+		<!-- case 82:	// R(RSS) -->
+		<!--   url = '{{ site.url }}{{ site.rss }}'; -->
+		<!--   break; -->
+		case 65:	// A(Archive)
 		  url = '{{ site.url }}{{ site.archive }}';
 		  break;
-		case 83:	// S(Search)
+		case 191:	// /(Search)
 		  $(".gsc-input").focus();
 		  break;
 		default:

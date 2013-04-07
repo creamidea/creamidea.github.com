@@ -1,5 +1,57 @@
 <footer class="footer">
-  <p>Copyright © 2013 <a href="http://creamidea.github.com/">ICECREAM(氷菓)</a>.Licencia Creative Commons</p>
-  <p>Edit by <a href="http://www.gnu.org/software/emacs/">Emacs</a>. Generate by <a href="http://orgmode.org/">Org-mode</a> and <a href="https://github.com/mojombo/jekyll">Jekyll</a>. Hosted by <a href="https://github.com/">Github</a>.</p>
+  <p>Copyright © 2013 
+    <a href="http://creamidea.github.com/">ICECREAM(氷菓)</a>.
+    Licencia Creative Commons
+  </p>
+  <p>
+    Edit by <a href="http://www.gnu.org/software/emacs/">Emacs</a>. 
+    Generate by <a href="http://orgmode.org/">Org-mode</a> 
+    and <a href="https://github.com/mojombo/jekyll">Jekyll</a>.
+    Hosted by <a href="https://github.com/">Github</a>.</p>
 </footer>
 <div class="clear"></div>
+<script>
+  $(function() {
+  <!-- Draggabel -->
+      $("div#search-bar").draggable();
+      $("div#table-of-contents").draggable();
+  <!-- make navigation can move by click -->
+      $("div.navigation").draggable();
+
+  <!-- Back To Top And slide -->
+      var $backToTop = $(".backToTop")
+      , $title = $("#article_title");
+      $('a[href=#top]').click(function(){
+	  $('html, body').animate({scrollTop:0}, 'slow');
+	  return false;
+      });
+      $('#text-table-of-contents').delegate('a', 'click', function() {
+	  var target = $(this).attr("href");
+	  var scrollNum = $(target)[0].offsetTop;
+	  $('html, body').animate({ scrollTop: scrollNum-24 }, 'slow');
+      })
+      $(window).scroll(function() {
+	  if($(this).scrollTop() == 0)
+	      $backToTop.fadeOut();
+	  else
+	      $backToTop.fadeIn();
+      });
+  <!-- Table of Contents -->
+  <!-- If not do this, this will not work. Why? I think it is with org-info.js -->
+      var time1 = setInterval(function() {
+	  $("div#text-table-of-contents").css("display", "none");
+          clearInterval(time1);
+      }, 1000);
+
+  <!-- Google Custom Search -->
+      (function() {
+	  var cx = '{{ site.google_custom_search_id }}';
+	  var gcse = document.createElement('script'); gcse.type = 'text/javascript';
+	  gcse.async = true;
+	  gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+	      '//www.google.com/cse/cse.js?cx=' + cx;
+	  var s = document.getElementsByTagName('script')[0];
+	  s.parentNode.insertBefore(gcse, s);
+      })();
+  });
+</script>

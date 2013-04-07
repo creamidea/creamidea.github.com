@@ -1,3 +1,11 @@
+<!-- Logo(The title of this site), Google Custom Search -->
+<div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
+ <a accesskey="h" href="http://creamidea.github.io"> UP </a>
+ |
+ <a accesskey="H" href="http://creamidea.github.io"> HOME </a>
+</div>
+<div id="preamble">
+</div>
 <header style="padding-top: 0px;">
   <div id="logo">
     <a href="{{ site.url }}/">ICECREAM  氷菓</a> 
@@ -7,22 +15,5 @@
       <gcse:search></gcse:search>
     </div>
   </div>
-  <script>
-    $(function() {
-       $("div#search-bar").draggable();
-    });
-    (function() {
-      var cx = '{{ site.google_custom_search_id }}';
-      var gcse = document.createElement('script'); gcse.type = 'text/javascript';
-      gcse.async = true;
-      gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-      '//www.google.com/cse/cse.js?cx=' + cx;
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(gcse, s);
-    })();
-  </script>
   <div class="clear"></div>
 </header>
-<!-- <script type="text/javascript"> -->
-<!--   $(".gsc-search-button").remove(); -->
-<!-- </script> -->
