@@ -20,7 +20,8 @@
 
   <!-- Back To Top And slide -->
       var $backToTop = $(".backToTop")
-      , $title = $("#article_title");
+      , $title = $("#article_title")
+      , $contents = $("div#text-table-of-contents");
       $('a[href=#top]').click(function(){
 	  $('html, body').animate({scrollTop:0}, 'slow');
 	  return false;
@@ -31,17 +32,13 @@
 	  $('html, body').animate({ scrollTop: scrollNum-24 }, 'slow');
       })
       $(window).scroll(function() {
+          <!-- $contents.css("display", "none"); -->
 	  if($(this).scrollTop() == 0)
 	      $backToTop.fadeOut();
-	  else
+	  else {
 	      $backToTop.fadeIn();
+          } 
       });
-  <!-- Table of Contents -->
-  <!-- If not do this, this will not work. Why? I think it is with org-info.js -->
-      var time1 = setInterval(function() {
-	  $("div#text-table-of-contents").css("display", "none");
-          clearInterval(time1);
-      }, 1000);
 
   <!-- Google Custom Search -->
       (function() {
