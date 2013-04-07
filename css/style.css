@@ -218,6 +218,7 @@ div.navigation {
 }
 .navigation a:hover {
     color: yellowgreen;
+    cursor: pointer;
 }
 menu, ol, ul {
     padding: 0 0 0 40px;
