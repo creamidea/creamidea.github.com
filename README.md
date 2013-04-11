@@ -1,2 +1,2 @@
-ICECREAM(氷菓)
-==============
+creamidea.github.com
+====================
