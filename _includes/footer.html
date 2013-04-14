@@ -18,6 +18,11 @@
   <!-- make navigation can move by click -->
       $("div.right_navigation").draggable();
 
+      $("#logo").tooltip({ 
+	  placement: 'top'
+	  , delay: { show: 500, hide: 100 }
+      });
+
   <!-- Back To Top And slide -->
       var $backToTop = $(".backToTop")
       , $title = $("#article_title")
