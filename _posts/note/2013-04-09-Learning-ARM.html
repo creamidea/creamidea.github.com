@@ -12,7 +12,13 @@ tags: arm
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#sec-1">1 前言</a></li>
-<li><a href="#sec-2">2 </a></li>
+<li><a href="#sec-2">2 2013-4-9 火曜日</a></li>
+<li><a href="#sec-3">3 2013-4-14 日曜日</a>
+<ul>
+<li><a href="#sec-3-1">3.1 1. 汇编控制LED</a></li>
+<li><a href="#sec-3-2">3.2 2. The Linux Kernel Module Programming : Hello World</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -21,15 +27,17 @@ tags: arm
 <h2 id="sec-1">前言</h2>
 <div class="outline-text-2" id="text-1">
 
-<p>开始记录学习ARM的过程
+<p>这个学期中间的企业实训是学习ARM。感觉这个学期学习了很多的嵌入式啊。
 </p>
-
+<p>
+那么我们就开始记录学习ARM的过程吧。
+</p>
 </div>
 
 </div>
 
 <div id="outline-container-2" class="outline-2">
-<h2 id="sec-2"><span class="timestamp-wrapper"> <span class="timestamp">2013-04-09 Tue 火曜日</span></span></h2>
+<h2 id="sec-2">2013-4-9 火曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-09 Tue</span></span></h2>
 <div class="outline-text-2" id="text-2">
 
 <p>数据稍候处理：
@@ -96,5 +104,77 @@ LSL
 <p>
 BNE
 </p>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">2013-4-14 日曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-14 Sun</span></span></h2>
+<div class="outline-text-2" id="text-3">
+
+<p>  今天是周日，现在终于有时间。现在稍微写一些东西。
+</p>
+<p>  
+  本来有好几个实验的，但是只记得两个了。
+</p>
+
+</div>
+
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1">1. 汇编控制LED</h3>
+<div class="outline-text-3" id="text-3-1">
+
+<p>     这个是需要参考文档手册来写的。
+     MCU具体型号我忘记了。貌似是ARMXX。
+     反正需要看手册查到LED对应的管脚，然后置相应的电平。
+     然后过程中貌似让WatchDog休眠了，就是没有让其工作。代码中有说明。
+     <script src="https://gist.github.com/creamidea/fddb89ea273e7166d001.js"></script>
+
+</p></div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2">2. The Linux Kernel Module Programming : Hello World</h3>
+<div class="outline-text-3" id="text-3-2">
+
+<p>     模块源代码：
+     <script src="https://gist.github.com/creamidea/5381888.js"></script>
+</p>
+<p>     
+     Makefile文件：
+     <script src="https://gist.github.com/creamidea/5381898.js"></script>
+
+     执行过程，及其运行结果：
+</p>
+
+
+<pre class="example">$ make
+make -C /usr/src/linux-headers-3.5.0-23-generic M=/home/icecream/Desktop/hello-module modules
+make[1]: Entering directory `/usr/src/linux-headers-3.5.0-23-generic'
+  Building modules, stage 2.
+  MODPOST 1 modules
+make[1]: Leaving directory `/usr/src/linux-headers-3.5.0-23-generic'
+$ sudo insmod ./hello.ko
+$ dmesg | tail -n 3
+[21284.503186] sd 6:0:0:0: [sdb] Assuming drive cache: write through
+[21284.503192] sd 6:0:0:0: [sdb] Attached SCSI removable disk
+[22175.061237] Hello, icecream!
+$ sudo rmmod ./hello.ko
+$ dmesg | tail -n 3
+[21284.503192] sd 6:0:0:0: [sdb] Attached SCSI removable disk
+[22175.061237] Hello, icecream!
+[22362.563031] Exit the driver module!
+$ modinfo ./hello.ko
+filename:       ./hello.ko
+description:    A sample driver
+author:         icecream &lt;creamidea@gmail.com&gt;
+license:        Dual BSD/GPL
+srcversion:     599D2E058D4F2272D19DE0C
+depends:        
+vermagic:       3.5.0-23-generic SMP mod_unload modversions 
+</pre>
+
+</div>
 </div>
 </div>

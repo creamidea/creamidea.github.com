@@ -12,6 +12,8 @@ tags: python
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#sec-1">1 前言</a></li>
+<li><a href="#sec-2">2 2013-04-13 土曜日</a></li>
+<li><a href="#sec-3">3 2013-04-14 日曜日</a></li>
 </ul>
 </div>
 </div>
@@ -41,6 +43,347 @@ tags: python
 <p>
 等待学习记录中&hellip;
 </p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">2013-04-13 土曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-13 Sat</span></span></h2>
+<div class="outline-text-2" id="text-2">
+
+<ol>
+<li>Tips:
+     <b>How to run Python in Emacs org-mode? Below is the answer</b>
+     Just input below into .emacs:
+
+
+
+<pre class="example">(org-babel-do-load-languages
+  'org-babel-load-languages '((python . t) (R . t)))
+</pre>
+
+<p>
+     From:
+     <a href="http://www.johndcook.com/blog/2012/02/09/python-org-mode/">Running Python and R inside Emacs</a>
+</p>
+</li>
+<li>python的一个切片操作：将字符串倒序输出
+
+
+
+<pre class="example">s = 'abcdefgh'
+a = s[::-1]
+print a  #a : hgfedcba
+</pre>
+
+
+</li>
+<li>每次把最后的一个字符砍掉
+
+
+
+<pre class="example">s = 'abcde'
+i = -1
+for i in [None]+range(-1, -len(s), -1):
+  print s[:i]
+</pre>
+
+
+</li>
+<li>浅拷贝： 只拷贝了对对象的索引，而不是重新建立了一个对象。P162
+
+</li>
+<li>basestring() 抽象工厂函数，作用仅仅是为str和unicode函数提过父类。
+     所有不能被实例化，也不能被调用。
+
+</li>
+<li>在一个对象上使用dir()来查看它所有的方法和属性
+</li>
+</ol>
+
+
+
+<p>
+  おやすみなさい
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">2013-04-14 日曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-14 Sun</span></span></h2>
+<div class="outline-text-2" id="text-3">
+
+<ol>
+<li>Write a test code to test
+
+
+
+<pre class="example">#!/usr/bin/env python                                                          
+import string                                                                  
+
+alphas = string.letters + '_'                                                  
+nums = string.digits                                                           
+
+print 'Welcome to the Idetifier Checket v1.0'                                  
+print 'Testees must be at least 2 chars long'                                  
+
+# 我知道为何这里不行了，在org-mode中无法从标准输入读取数据
+# myInput = raw_input("Identifier to test?")                                   
+myInput = "abcdefgh"
+
+if len(myInput) &gt; 1:               
+    if myInput[0] not in alphas:    
+        print '''invalid: first symbol must be                                 
+        alphabetic'''                                                          
+    else:                                         
+        for otherChar in myInput[1:]:                                          
+            if otherChar not in alphas + nums:   
+                print '''invalid: remaining      
+                symbols must be alphanumeric'''  
+                break                            
+            else:                                
+                print "Okay as an identifier"
+else:
+    print "Here is 404"
+</pre>
+
+
+</li>
+<li>Operational:
+
+
+
+
+<pre class="example"># 接收一个可迭代的对象，返回一个有序列表
+sorted(iter, func=None, key=None, reverse=False)
+
+# 返回一个列表,
+# 其第一个元素是 it0,it1,...
+# 这些元素的第一个元素组成的一个元组,第二个...,类推.
+zip([it0, it1,...,itN])
+</pre>
+
+
+
+
+
+<pre class="example">s, t = 'foa', 'obr'
+print zip(s, t)
+</pre>
+
+
+</li>
+<li>字符串格式化符号：
+     P175
+
+</li>
+<li>格式化操作符辅助指令  :
+     P176
+
+</li>
+<li>Template and substitute
+
+</li>
+<li>string 
+
+<p>     
+     From:
+     <a href="http://docs.python.org/2/library/string.html?highlight=string#deprecated-string-functions">7.1.6. Deprecated string functions</a>
+</p>
+</li>
+<li>三引号
+
+
+
+<pre class="example">hi = '''hi there'''
+hi # 'hi\nhere' 
+print hi
+</pre>
+
+
+</li>
+<li>Codecs
+
+<p>
+     COder/DECoder
+</p>
+<p>     
+     UTF-16: 单独的一个16位字，两个字节。
+     BOM(Byte Order Mark)
+</p>
+</li>
+<li>把Unicode应用到实际应用中：
+<ul>
+<li>程序中出现字符串时一定要加个前缀*u*.
+</li>
+<li>不要用str()函数,用unicode()代替.
+</li>
+<li>不要用过时的 string 模块 &ndash; 如果传给它的是非 ASCII 字符,它会把一切搞砸。
+</li>
+<li>不到必须时不要在你的程序里面编解码*Unicod*字符.
+       只在你要写入文件或数据库或者网络时,才调用 encode()函数;相应地,
+       只在你需要把数据读回来的时候才调用decode()函数.
+
+</li>
+</ul>
+
+</li>
+<li>pickle
+
+</li>
+<li>从现实中得来的教训
+
+<ul>
+<li>失误 #1: 你必须在一个极有限的时间内写出一个大型的应用,
+        而且需要其他语言的支持,
+        但是产品经理并没有明确定义这一点。
+        你并没有考虑 Unicode 的兼容,
+        直到项目快要结束&hellip; ,
+        这时候再添加 Unicode 的支持几乎不太可能,不是吗?
+
+<p>      
+        结果 #1: 没能预测到最终用户对其他语言界面的需求,
+        在集成他们用的面向其他语种的应
+        用时又没有使用 Unicode 支持.更新整个系统既让让人觉得枯燥和更是浪费时间。
+</p>
+</li>
+<li>失误 #2:在源码中到处使用 string 模块或者 str()和 chr()函数.
+
+<p>      
+        结果 #2:通过全局的查找替换把 str()和 chr()替换成 unicode()和 unichr(),
+        但是这样一来很可能就不能再用 pickle 模块,
+        要用只能把所有要 pickle 处理的数据存成二进制形式,这
+        样一来就必须修改数据库的结构,而修改数据库结构就意味着全部推倒重来.
+</p>
+</li>
+<li>失误 #3: 不能确定所有的辅助系统都完全地支持 Unicode.
+
+<p>      
+        结果 #3: 不得不去为那些系统打补丁,而其中有些系统可能你根本就没有源码.修复对
+        Unicode 支持的 bug 可能会降低代码的可靠性,而且非常有可能引入新的 bug.
+</p>
+</li>
+<li>总结: 使应用程序完全支持 Unicode,兼容其他的语言本身就是一个工程.
+        它需要详细的考虑、计划.所有涉及到的软件、系统都需要检查,包括 Python 的标准库和其 
+        他将要用到的第三方扩展模块.你甚至有可能需要组建一个经验丰富的团队来专门负责国际化
+        (I18N)问题.
+
+</li>
+</ul>
+
+</li>
+<li>列表：切片: ([] and [:])
+
+<p>
+      还有一点要注意,如果你想以子列表的形式
+      得到一个列表中的一个切片,那需要确保在
+      赋值时等号的左边也是一个列表而不是一个列表的
+      元素.
+</p>
+</li>
+<li>列表：连接接操作符( + )
+
+<ul>
+<li>运算符两边必须是列表
+
+</li>
+<li>比 extend() 低效
+
+</li>
+</ul>
+
+</li>
+<li>在使用可变对象的方法如 sort(),extend()和 reverse()的时候要注意,
+      这些操作会在列表
+      中原地执行操作,也就是说现有的列表内容会被改变,
+      但是没有返回值!是的,与之相反,字符串
+      方法确实有返回值
+
+<p>
+      温习一下,字符串是不可变的 &ndash; 不可变对象的方法是不能改变它们的值的,
+      所以它们必须
+      返回一个新的对象.如果你确实需要返回一个对象,
+      那么我们建议你看一下 Python2.4 以后加入
+      的 reversed()和 sorted()内建函数.
+      它们像列表的方法一样工作,不同的是它们可以用做表达式,因为它们返回一个对象.同时
+      原来的那个列表还是那个列表,没有改变,而你得到的是一个新的对象.
+</p>
+</li>
+<li>sort() -&gt; 归并排序的衍生算法
+
+</li>
+<li>工厂方法
+
+</li>
+<li>元组可以使用 + 运算， 两边都是元组即可。
+
+</li>
+<li>元组本身不可以修改，但是她包含的元组可以修改。
+
+</li>
+<li>由圆括号包裹的一个单一元素首
+      先被作为分组操作,而不是作为元组的分界符。
+      一个变通的方法是在第一个元素后面添一个逗
+      号(,)来表明这是一个元组而不是在做分组操作.
+
+</li>
+<li>list() and tuple()
+
+</li>
+<li>浅拷贝和深拷贝
+
+
+
+<pre class="example">浅拷贝：内容是原来对象元素的引用
+可以以下几种方式实施:
+  (1)完全切片操作[:],
+  (2)利用工厂函数,比如 list(),dict()等,
+  (3)使用 copy 模块的 copy 函数.
+注意：当进行浅拷贝时,字符串被显式的拷贝,并新创建了一个字符串对象,而列
+表元素只是把它的引用复制了一下,并不是它的成员.      
+</pre>
+
+
+
+<pre class="example">深拷贝：
+copy.deepcopy()函数
+#+BEGIN_SRC python
+  import copy
+  wifey = copy.deepcopy(person)
+#+END_SRC
+</pre>
+
+
+</li>
+<li>以下有几点关于拷贝操作的警告:
+
+<p>
+      第一,非容器类型(比如数字,字符串和其他"原子"类型的
+      对象,像代码,类型和 xrange 对象等)没有被拷贝一说,
+      浅拷贝是用完全切片操作来完成的.
+</p>
+<p>
+      第二,如果元组变量只包含原子类型对象,
+      对它的深拷贝将不会进行.如果我们把账户信息改成元组类 
+      型,那么即便按我们的要求使用深拷贝操作也只能得到一个浅拷贝:
+</p>
+</li>
+<li>核心模块: copy
+
+<p>      
+      我们刚才描述的浅拷贝和深拷贝操作都可以在 copy 模块中找到.
+      其实 copy 模块中只有两个函数可用:
+</p>
+<p>      
+      copy()进行浅拷贝操作,
+</p>
+<p>      
+      deepcopy()进行深拷贝操作.
+</p></li>
+</ol>
+
+
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
@@ -50,6 +393,7 @@ tags: python
 
 <p class="footnote"><sup><a class="footnum" name="fn-.2" href="#fnr-.2">2</a></sup> <a href="http://www.tornadoweb.org/en/stable/">http://www.tornadoweb.org/en/stable/</a>
 </p>
+
 
 
 </div>

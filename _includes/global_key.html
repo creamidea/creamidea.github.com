@@ -1,6 +1,7 @@
 <!-- global keyboard setting -->
 <script type="text/javascript">
     $(function(){
+	$search_bar = $("div#search-bar");
 	$(document).keydown(function(e) {
 	    if (e.target.nodeName.toUpperCase() != 'BODY') return;
 	    var url = false;
