@@ -1,0 +1,147 @@
+---
+layout: doc
+title: Learning Django
+subtitle: 学习Python框架Django 
+categories: note
+tags: python django
+---
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 前言</a></li>
+<li><a href="#sec-2">2 Install Django</a></li>
+<li><a href="#sec-3">3 2013-04-14 日曜日　</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">前言</h2>
+<div class="outline-text-2" id="text-1">
+
+<p>上面分配的新的学习内容，学习这个框架，然后使用的参考书籍是Django_book_2_中文版。
+下载地址是：<a href="http://vdisk.weibo.com/s/xy74T">http://vdisk.weibo.com/s/xy74T</a>
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">Install Django</h2>
+<div class="outline-text-2" id="text-2">
+
+<p>  因为安装过程理论上不是很难，我在这里只是写一条命令。（默认已经安装了python）
+</p><ol>
+<li>Windows:
+     以管理员的身份，打开cmd。之后到django文件夹下输入：
+
+
+
+<pre class="example">python setup.py install
+</pre>
+
+</li>
+<li>Linux/Mac OS X:
+     前往django所在文件目录，之后输入：
+
+
+
+<pre class="example">sudo python setup.py install
+</pre>
+
+</li>
+</ol>
+
+
+<p>
+  <b>参考网站:</b>
+</p><ol>
+<li><a href="https://docs.djangoproject.com/en/1.5/topics/install/#installing-official-release">https://docs.djangoproject.com/en/1.5/topics/install/#installing-official-release</a>
+</li>
+<li><a href="https://docs.djangoproject.com/en/1.5/topics/install/">https://docs.djangoproject.com/en/1.5/topics/install/</a>
+</li>
+<li><a href="https://docs.djangoproject.com/en/1.5/intro/install/">https://docs.djangoproject.com/en/1.5/intro/install/</a>
+</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">2013-04-14 日曜日　 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-14 Sun</span></span></h2>
+<div class="outline-text-2" id="text-3">
+
+<p>  只是稍微看了一下，然后写了一个Hello(呵呵，真是经典啊)
+</p><ol>
+<li>使用 <code>django-admin.py startproject mysite</code>
+     (笔者我在Windows7上尝试，估计路径没有加入，所以我直接将Scripts/django-admin.py
+      放入了工程文件夹才解决)。
+
+<p>     
+     创建完成之后的目录：
+</p>
+
+
+<pre class="example">icecream/
+    manage.py
+    icecream/
+        __init__.py   
+        settings.py   
+        urls.py   
+        wsgi.py
+        __init__.pyc  
+        settings.pyc  
+        urls.pyc  
+        wsgi.pyc
+</pre>
+
+
+</li>
+<li>创建views.py (注意这个要放在icecream这个目录下，同urls.py在同一目录)
+
+
+
+<pre class="example">from django.http import HttpResponse
+
+def hello(request):
+    return HttpResponse("Hello, icecream")
+</pre>
+
+
+</li>
+<li>修改urls.py
+
+
+
+<pre class="example">from django.conf.urls import patterns, include, url
+from icecream.views import hello
+
+urlpatterns = patterns('',
+    ('^hello/$', hello),        # 增加这句映射
+)
+</pre>
+
+
+</li>
+<li>运行
+
+
+
+<pre class="example">python manage.py runserver 8080
+</pre>
+
+
+</li>
+<li>在浏览器中输入：
+     <a href="http://127.0.0.1:8080/hello">http://127.0.0.1:8080/hello</a>
+</li>
+</ol>
+
+
+</div>
+</div>

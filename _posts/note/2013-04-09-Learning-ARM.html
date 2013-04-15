@@ -19,6 +19,11 @@ tags: arm
 <li><a href="#sec-3-2">3.2 2. The Linux Kernel Module Programming : Hello World</a></li>
 </ul>
 </li>
+<li><a href="#sec-4">4 2013-04-15 月曜日</a>
+<ul>
+<li><a href="#sec-4-1">4.1 声明全局变量数组和函数</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -125,7 +130,7 @@ BNE
 <div class="outline-text-3" id="text-3-1">
 
 <p>     这个是需要参考文档手册来写的。
-     MCU具体型号我忘记了。貌似是ARMXX。
+     MCU具体型号我忘记了。貌似是ARMXX。 S3C2440 TQ2440
      反正需要看手册查到LED对应的管脚，然后置相应的电平。
      然后过程中貌似让WatchDog休眠了，就是没有让其工作。代码中有说明。
      <script src="https://gist.github.com/creamidea/fddb89ea273e7166d001.js"></script>
@@ -155,16 +160,21 @@ make[1]: Entering directory `/usr/src/linux-headers-3.5.0-23-generic'
   Building modules, stage 2.
   MODPOST 1 modules
 make[1]: Leaving directory `/usr/src/linux-headers-3.5.0-23-generic'
+
 $ sudo insmod ./hello.ko
+
 $ dmesg | tail -n 3
 [21284.503186] sd 6:0:0:0: [sdb] Assuming drive cache: write through
 [21284.503192] sd 6:0:0:0: [sdb] Attached SCSI removable disk
 [22175.061237] Hello, icecream!
+
 $ sudo rmmod ./hello.ko
+
 $ dmesg | tail -n 3
 [21284.503192] sd 6:0:0:0: [sdb] Attached SCSI removable disk
 [22175.061237] Hello, icecream!
 [22362.563031] Exit the driver module!
+
 $ modinfo ./hello.ko
 filename:       ./hello.ko
 description:    A sample driver
@@ -174,6 +184,95 @@ srcversion:     599D2E058D4F2272D19DE0C
 depends:        
 vermagic:       3.5.0-23-generic SMP mod_unload modversions 
 </pre>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">2013-04-15 月曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-15 Mon</span></span></h2>
+<div class="outline-text-2" id="text-4">
+
+
+</div>
+
+<div id="outline-container-4-1" class="outline-3">
+<h3 id="sec-4-1">声明全局变量数组和函数</h3>
+<div class="outline-text-3" id="text-4-1">
+
+<ol>
+<li>这个是声明全局（外部可以使用，修改的）变量，
+     数组和函数的实例程序代码。 linux内核模块编程。
+     代码中有详细注释.
+     <script src="https://gist.github.com/creamidea/5387156.js"></script>
+</li>
+<li>运行测试
+
+
+
+<pre class="example">$ make
+make -C /usr/src/linux-headers-3.5.0-23-generic M=/home/icecream/Desktop/drive/export modules
+make[1]: Entering directory `/usr/src/linux-headers-3.5.0-23-generic'
+  CC [M]  /home/icecream/Desktop/drive/export/export.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/icecream/Desktop/drive/export/export.mod.o
+  LD [M]  /home/icecream/Desktop/drive/export/export.ko
+make[1]: Leaving directory `/usr/src/linux-headers-3.5.0-23-generic'
+
+$ sudo insmod export.ko
+
+$ dmesg | tail -12
+[ 1738.701615] a + b = 22
+[ 1738.701617] count = 0
+[ 1738.701618] name = Hello, icecream
+[ 1738.701619] Array[0]: 1
+[ 1738.701620] Array[1]: 9
+[ 1738.701621] Array[2]: 9
+[ 1738.701621] Array[3]: 1
+[ 1738.701622] Array[4]: 1
+[ 1738.701623] Array[5]: 0
+[ 1738.701623] Array[6]: 0
+[ 1738.701624] Array[7]: 4
+[ 1738.701625] my fun is invoked!
+
+$ sudo rmmod export.ko
+
+$ dmesg | tail -12
+[ 1738.701618] name = Hello, icecream
+[ 1738.701619] Array[0]: 1
+[ 1738.701620] Array[1]: 9
+[ 1738.701621] Array[2]: 9
+[ 1738.701621] Array[3]: 1
+[ 1738.701622] Array[4]: 1
+[ 1738.701623] Array[5]: 0
+[ 1738.701623] Array[6]: 0
+[ 1738.701624] Array[7]: 4
+[ 1738.701625] my fun is invoked!
+[ 1788.664571] The sum of the array is 25 # 求和在退出时执行
+[ 1788.664574] Exit the driver module!
+
+#外界修改的方法:
+
+$ sudo insmod export.ko count=100 name="qooni"
+
+$ sudo insmod export.ko array=1,2,3,4,5 #(注意不要越界)
+</pre>
+
+</li>
+<li>A small order:
+
+
+
+<pre class="example">$ export PS1="icecream$"
+# The bash will be icecream$
+</pre>
+
+<p>
+     From: <a href="http://www.thegeekstuff.com/2008/09/bash-shell-ps1-10-examples-to-make-your-linux-prompt-like-angelina-jolie/">http://www.thegeekstuff.com/2008/09/bash-shell-ps1-10-examples-to-make-your-linux-prompt-like-angelina-jolie/</a>
+</p></li>
+</ol>
 
 </div>
 </div>
