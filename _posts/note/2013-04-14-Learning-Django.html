@@ -14,6 +14,9 @@ tags: python django
 <li><a href="#sec-1">1 前言</a></li>
 <li><a href="#sec-2">2 Install Django</a></li>
 <li><a href="#sec-3">3 2013-04-14 日曜日　</a></li>
+<li><a href="#sec-4">4 2013-04-16 火曜日　</a></li>
+<li><a href="#sec-5">5 2013-04-17 水曜日　</a></li>
+<li><a href="#sec-6">6 2013-04-18 木曜日</a></li>
 </ul>
 </div>
 </div>
@@ -45,7 +48,7 @@ tags: python django
 
 </li>
 <li>Linux/Mac OS X:
-     前往django所在文件目录，之后输入：
+         前往django所在文件目录，之后输入：
 
 
 
@@ -79,10 +82,10 @@ tags: python django
 <p>  只是稍微看了一下，然后写了一个Hello(呵呵，真是经典啊)
 </p><ol>
 <li>使用 <code>django-admin.py startproject mysite</code>
-     (笔者我在Windows7上尝试，估计路径没有加入，所以我直接将Scripts/django-admin.py
+         (笔者我在Windows7上尝试，估计路径没有加入，所以我直接将Scripts/django-admin.py
       放入了工程文件夹才解决)。
 
-<p>     
+<p>         
      创建完成之后的目录：
 </p>
 
@@ -138,10 +141,194 @@ urlpatterns = patterns('',
 
 </li>
 <li>在浏览器中输入：
-     <a href="http://127.0.0.1:8080/hello">http://127.0.0.1:8080/hello</a>
+         <a href="http://127.0.0.1:8080/hello">http://127.0.0.1:8080/hello</a>
 </li>
 </ol>
 
+
+
+
+<p>
+P30
+</p></div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">2013-04-16 火曜日　 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-16 Tue</span></span></h2>
+<div class="outline-text-2" id="text-4">
+
+<ol>
+<li>Template System
+
+
+
+<pre class="example">from django import template
+t = template.Template('My name is {{ name }}.')
+c = template.Context({'name': 'Alice'})
+print t.render(c)
+</pre>
+
+</li>
+<li>给标签增加一个reversed使得该列表被反向迭代：
+
+
+
+<pre class="example">{% for athlete in athlete_list reversed %}
+...
+{% endfor %}
+</pre>
+
+</li>
+</ol>
+
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">2013-04-17 水曜日　 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-17 Wed</span></span></h2>
+<div class="outline-text-2" id="text-5">
+
+<ol>
+<li>安装python-mysql：
+
+<p>
+     在Windows7 64bit上貌似安装不了，它说是64bit的原因。
+     (python version:2.7.3 64bit.)
+     我想也是。
+</p>
+<p>     
+     我下载的包是：
+     <a href="http://nchc.dl.sourceforge.net/project/mysql-python/mysql-python-test/1.2.4b4/MySQL-python-1.2.4b4.win32-py2.7.exe">http://nchc.dl.sourceforge.net/project/mysql-python/mysql-python-test/1.2.4b4/MySQL-python-1.2.4b4.win32-py2.7.exe</a>
+</p>
+<p>         
+     然后我跟着：
+     <a href="http://stackoverflow.com/questions/3652625/installing-setuptools-on-64-bit-windows">http://stackoverflow.com/questions/3652625/installing-setuptools-on-64-bit-windows</a>
+     修改注册表还是失败了。以后再试吧。
+</p>
+<p>
+     在Linux上安装的话就下载源码安装呗。
+     我以为直接下载源码，然后：
+</p>
+
+
+<pre class="example">python setup.py install
+</pre>
+
+<p>
+     就可以了，但是我在ubuntu12.04上貌似失败了，貌似提示没有setuptool。我
+     安装了python-setuptool也没有用。有谁会记得告诉我。
+     Referencs:
+</p><ol>
+<li><a href="http://stackoverflow.com/questions/5178292/pip-install-mysql-python-fails-with-environmenterror-mysql-config-not-found">http://stackoverflow.com/questions/5178292/pip-install-mysql-python-fails-with-environmenterror-mysql-config-not-found</a>
+</li>
+<li><a href="http://stackoverflow.com/questions/14426491/python-3-importerror-no-module-named-setuptools">http://stackoverflow.com/questions/14426491/python-3-importerror-no-module-named-setuptools</a>
+</li>
+<li><a href="http://stackoverflow.com/questions/2211335/python-setuptools-import-error-using-netbeans">http://stackoverflow.com/questions/2211335/python-setuptools-import-error-using-netbeans</a>
+
+</li>
+</ol>
+
+<p>     于是我改用 <code>pip</code> 安装。一开始我不是这个步骤，不是权限问题，就是没有
+     distribute。现在我将步骤整理如下：
+     From: <a href="http://codeinthehole.com/writing/how-to-set-up-mysql-for-python-on-ubuntu/">http://codeinthehole.com/writing/how-to-set-up-mysql-for-python-on-ubuntu/</a>
+</p>
+
+
+<pre class="example">$ sudo apt-get install python-pip
+$ sudo apt-get install python-dev libmysqlclient-dev
+$ sudo easy_install -U distribute 
+$ sudo pip install MySQL-python
+</pre>
+
+
+<p>
+     之后我尝试了一下(一定要保证能够连接到数据库哦，如果真想写进数据库，记得
+     别忘了syncdb)：
+</p>
+
+
+<pre class="example">$ python manage.py validate     # 验证数据正确性
+$ python manage.py sqlall books 
+$ python manage.py syncdb
+</pre>
+
+
+<p>     
+     RESULTS:
+</p>
+
+
+<pre class="example">BEGIN;
+CREATE TABLE `books_publisher` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `name` varchar(30) NOT NULL,
+    `address` varchar(50) NOT NULL,
+    `city` varchar(60) NOT NULL,
+    `state_province` varchar(30) NOT NULL,
+    `country` varchar(50) NOT NULL,
+    `website` varchar(200) NOT NULL
+)
+;
+CREATE TABLE `books_author` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `first_name` varchar(30) NOT NULL,
+    `last_name` varchar(40) NOT NULL,
+    `email` varchar(75) NOT NULL
+)
+;
+CREATE TABLE `books_book_authors` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `book_id` integer NOT NULL,
+    `author_id` integer NOT NULL,
+    UNIQUE (`book_id`, `author_id`)
+)
+;
+ALTER TABLE `books_book_authors` ADD CONSTRAINT `author_id_refs_id_1a0a2829` FOREIGN KEY (`author_id`) REFERENCES `books_author` (`id`);
+CREATE TABLE `books_book` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `title` varchar(100) NOT NULL,
+    `publisher_id` integer NOT NULL,
+    `publisher_date` date NOT NULL
+)
+;
+ALTER TABLE `books_book` ADD CONSTRAINT `publisher_id_refs_id_974c2a46` FOREIGN KEY (`publisher_id`) REFERENCES `books_publisher` (`id`);
+ALTER TABLE `books_book_authors` ADD CONSTRAINT `book_id_refs_id_0a3634f3` FOREIGN KEY (`book_id`) REFERENCES `books_book` (`id`);
+CREATE INDEX `books_book_81b79144` ON `books_book` (`publisher_id`);
+
+COMMIT;
+</pre>
+
+
+</li>
+<li>如果使用Django的数据层，必须创建Django app.
+
+
+
+<pre class="example">$ python manage.py startapp books(app name)
+</pre>
+
+
+</li>
+<li>使用get()方法处理“可能不存在的键”
+
+
+
+<pre class="example">request.META.get('HTTP_USER_AGENT', 'unknow')
+</pre>
+
+</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6">2013-04-18 木曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-18 Thu</span></span></h2>
+<div class="outline-text-2" id="text-6">
 
 </div>
 </div>

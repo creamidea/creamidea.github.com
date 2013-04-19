@@ -15,6 +15,8 @@ tags: python
 <li><a href="#sec-2">2 2013-04-13 土曜日</a></li>
 <li><a href="#sec-3">3 2013-04-14 日曜日</a></li>
 <li><a href="#sec-4">4 2013-04-15 月曜日</a></li>
+<li><a href="#sec-5">5 2013-04-16 火曜日</a></li>
+<li><a href="#sec-6">6 2013-04-18 木曜日</a></li>
 </ul>
 </div>
 </div>
@@ -415,6 +417,174 @@ print s
 </pre>
 
 </li>
+<li>statck.py P222
+
+<p>         
+         queue.py P227
+</p></li>
+<li>
+</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">2013-04-16 火曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-16 Tue</span></span></h2>
+<div class="outline-text-2" id="text-5">
+
+<ol>
+<li>使用映射对象（比如字典）搜索比类似的if-elif-else或者for快
+</li>
+<li>疑问：msgs.get(user.cmd, default) P290
+
+
+
+<pre class="example">解答：  
+dict.get(key, default=None)
+</pre>
+
+<p>
+         <b>From:</b> <a href="http://www.tutorialspoint.com/python/dictionary_get.htm">http://www.tutorialspoint.com/python/dictionary_get.htm</a>
+</p></li>
+<li>一个hack的做法：
+
+
+
+<pre class="example">smaller = (x &lt; y and [x] or [y])[0]
+</pre>
+
+</li>
+<li>与序列相关的内建函数
+
+
+
+<pre class="example">sorted()
+reversed()
+enumerate()
+for i, album in enumerate(albums):
+    pirnt i, album
+zip()
+</pre>
+
+</li>
+<li>break 语句：
+
+<p>
+         结束当前循环，然后跳转到下一个语句
+</p></li>
+<li>itet()创建它的迭代器
+
+
+
+<pre class="example">iter(obj)
+iter(func, sentinel)            # 反复调用func，直到迭代器的下一个值为sentinel
+</pre>
+
+</li>
+<li>[expr for iter<sub>var</sub> in iterable if cond<sub>expr]</sub>
+</li>
+<li>我敬爱的矩阵：
+
+
+
+<pre class="example">list = [(x+1, y+1) for x in range(3) for y in range(5)]
+print list
+</pre>
+
+</li>
+<li>计算一个段落中有多少个空格：
+
+
+
+<pre class="example">f = open('hhga.txt', 'r')
+len([word for line in f for word in line.split()])
+</pre>
+
+</li>
+<li>列表解析：[expr for iter_var in iterable if cond_expr]  
+          PEP 202 
+          From: <a href="http://www.python.org/dev/peps/pep-0202/">http://www.python.org/dev/peps/pep-0202/</a>
+
+<p>  
+          生成器表达式：(expr for iter_var in iterable if cond_expr)
+          PEP 289
+          From: <a href="http://www.python.org/dev/peps/pep-0289/">http://www.python.org/dev/peps/pep-0289/</a>
+</p>
+<p>
+          惰性求值：lazy evaluation
+</p></li>
+<li>交叉配对的例子：
+
+
+
+<pre class="example">rows = [1, 2, 3, 17]
+def cols():
+    yield 56
+    yield 2
+    yield 1
+x_product_pairs = ((i, j) for i in rows for j in cols())
+for pair in x_product_pairs:
+    print pair
+</pre>
+
+
+<p>
+      RESULTS:
+</p>
+
+
+<pre class="example">(1, 56)
+(1, 2)
+(1, 1)
+(2, 56)
+(2, 2)
+(2, 1)
+(3, 56)
+(3, 2)
+(3, 1)
+(17, 56)
+(17, 2)
+(17, 1)
+</pre>
+
+</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6">2013-04-18 木曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-18 Thu</span></span></h2>
+<div class="outline-text-2" id="text-6">
+
+<ol>
+<li>try-except-else-finally P367
+</li>
+<li>with语句
+
+<p>         
+         with context_expr [as var]:
+             with_suite
+</p></li>
+<li>先搁置with中 上下文管理协议 P369
+</li>
+<li>raise
+
+<p>
+         raise [SomeException [, args, [, traceback]]]
+</p></li>
+<li>assert expression[, arguments]
+
+<p>         
+         AsserionError
+</p></li>
+<li>标准异常 P375
+</li>
 </ol>
 
 
@@ -427,7 +597,6 @@ print s
 
 <p class="footnote"><sup><a class="footnum" name="fn-.2" href="#fnr-.2">2</a></sup> <a href="http://www.tornadoweb.org/en/stable/">http://www.tornadoweb.org/en/stable/</a>
 </p>
-
 
 
 
