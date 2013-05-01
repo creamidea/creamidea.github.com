@@ -137,6 +137,7 @@ a:hover, a:active {
 
 /* Content */
 body #content {
+	font-size: 16px;
     padding-top: 0px;
     max-width: 80%;
     min-width: 700px;
@@ -156,7 +157,8 @@ blockquote p{
 
 /* example */
 .example{
-    font-family: "Droid Serif", "Microsoft YaHei", "宋体", "Lucida Grande", "Lucida Sans Unicode", "DejaVu Sans", Verdana, sans-serif;
+    font-family: "Monaco", "Droid Serif", "Microsoft YaHei", "宋体", "Lucida Grande", "Lucida Sans Unicode", "DejaVu Sans", Verdana, sans-serif;
+	font-size:16px;
 }	  
 
 

@@ -25,7 +25,18 @@ tags: linux windows config
 <li><a href="#sec-3">3 Linux</a>
 <ul>
 <li><a href="#sec-3-1">3.1 Install Emacs and config it</a></li>
-<li><a href="#sec-3-2">3.2 Return to classic gnome for ubuntu12.04</a></li>
+<li><a href="#sec-3-2">3.2 Install Google Chrome</a></li>
+<li><a href="#sec-3-3">3.3 Return to classic gnome for ubuntu12.04+</a></li>
+<li><a href="#sec-3-4">3.4 Install Git (You can find the books. Just click here)</a></li>
+<li><a href="#sec-3-5">3.5 Add the picture when ubuntu boot up</a></li>
+<li><a href="#sec-3-6">3.6 Install Adobe Flash Player</a></li>
+<li><a href="#sec-3-7">3.7 Install Lua and Luarocks</a>
+<ul>
+<li><a href="#sec-3-7-1">3.7.1 lua</a></li>
+<li><a href="#sec-3-7-2">3.7.2 Luarocks</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-8">3.8 MySQL</a></li>
 </ul>
 </li>
 <li><a href="#sec-4">4 Mac</a></li>
@@ -134,14 +145,260 @@ tags: linux windows config
 <h3 id="sec-3-1">Install Emacs and config it</h3>
 <div class="outline-text-3" id="text-3-1">
 
+<ol>
+<li>Go to <a href="http://ftp.gnu.org/gnu/emacs/">here(main GNU ftp)</a> to download the lastest .xz
+</li>
+<li>Install the depends below:
+
+
+
+<pre class="example">$ sudo apt-get install texinfo build-essential
+$ sudo aptitude install libdbus-1-dev libgconf2-dev libgif-dev libgpm-dev \
+  libgtk2.0-dev libjpeg62-dev libm17n-dev libncurses5-dev \
+  libotf-dev librsvg2-dev libtiff4-dev libXpm-dev
+
+$ ./configure
+$ make bootstrap
+$ make
+$ src/emacs -q ;; This checks that it built properly
+$ sudo make install
+$ mv /usr/local/bin/emacs-24.0.50 /usr/local/bin/emacs24
+;; Change the number to whatever the version is, I moved it to a more convienent name
+$ emacs24 -q
+</pre>
+
+</li>
+<li>Download this config files!
+</li>
+</ol>
+
 </div>
 
 </div>
 
 <div id="outline-container-3-2" class="outline-3">
-<h3 id="sec-3-2">Return to classic gnome for ubuntu12.04</h3>
+<h3 id="sec-3-2">Install Google Chrome</h3>
 <div class="outline-text-3" id="text-3-2">
 
+<ol>
+<li>Go to <a href="https://www.google.com/intl/en/chrome/browser/">here</a> to download the leaset google-chrome
+</li>
+<li>Who can tell me why hwo to solve it:
+      <code>Dependency is not satisfiable: libudev0(&gt;=147)</code>
+      (I was in Ubuntu13.04 amd64)
+</li>
+</ol>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-3" class="outline-3">
+<h3 id="sec-3-3">Return to classic gnome for ubuntu12.04+</h3>
+<div class="outline-text-3" id="text-3-3">
+
+
+
+
+<pre class="example">$ sudo apt-get install gnome-session-fallback
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-4" class="outline-3">
+<h3 id="sec-3-4">Install Git (You can find the books. Just click <a href="https://github.s3.amazonaws.com/media/progit.en.pdf">here</a>)</h3>
+<div class="outline-text-3" id="text-3-4">
+
+<ol>
+<li>Go to <a href="https://github.com/git/git">here</a> download the lastest git.
+</li>
+<li>Follow the <a href="http://git-scm.com/book/en/Getting-Started-Installing-Git">1.4 Getting Started - Installing Git</a>.
+      The main steps are:
+
+
+
+<pre class="example">$ apt-get install libcurl4-gnutls-dev libexpat1-dev gettext \
+  libz-dev libssl-dev
+$ tar -zxf git-1.7.2.2.tar.gz
+$ cd git-1.7.2.2
+$ make prefix=/usr/local all
+$ sudo make prefix=/usr/local install
+# Below is options:
+$ git clone git://git.kernel.org/pub/scm/git/git.git
+</pre>
+
+</li>
+<li>Follow the <a href="http://git-scm.com/book/en/Getting-Started-First-Time-Git-Setup">1.5 Getting Started - First-Time Git Setup</a>.
+      The main steps are:
+
+
+
+<pre class="example">$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
+</pre>
+
+</li>
+<li>Now, you can <a href="https://help.github.com/articles/generating-ssh-keys">Generating SSH Keys</a>.
+      The main steps are:
+
+
+
+<pre class="example">$ ssh-keygen -t rsa -C "your_email@example.com"
+$ sudo apt-get install xclip
+$ xclip -sel clip &lt; ~/.ssh/id_rsa.pub
+</pre>
+
+</li>
+</ol>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-5" class="outline-3">
+<h3 id="sec-3-5">Add the picture when ubuntu boot up</h3>
+<div class="outline-text-3" id="text-3-5">
+
+<p>   <b>Please pay more attenttion to modify this file</b>
+</p><ol>
+<li>Move the picture to the <code>/usr/share/backgrounds</code>
+</li>
+<li>Replace:
+
+
+
+<pre class="example">### BEGIN /etc/grub.d/05_debian_theme ###
+set menu_color_normal=white/black
+set menu_color_highlight=black/light-gray
+if background_color 44,0,30; then
+  clear
+fi
+### END /etc/grub.d/05_debian_theme ###
+</pre>
+
+
+<p>
+      With:
+</p>
+
+
+<pre class="example">### BEGIN /etc/grub.d/05_debian_theme ###
+insmod part_msdos
+insmod ext4
+# Here you should use (sudo fdisk -l) to see /dev/sda?? 
+set root='(hd0,msdos10)'
+search --no-floppy --fs-uuid --set e3a8ca35-417d-4da2-9380-91f08a9e4fb2
+insmod png
+if background_image /usr/share/backgrounds/spacefun-grub-widescreen.png; 
+then
+  set color_normal=light-gray/black
+  set color_highlight=white/black
+else
+  set menu_color_normal=cyan/blue
+  set menu_color_highlight=white/blue
+fi
+### END /etc/grub.d/05_debian_theme ###
+</pre>
+
+</li>
+<li>Reboot
+</li>
+</ol>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-6" class="outline-3">
+<h3 id="sec-3-6">Install Adobe Flash Player</h3>
+<div class="outline-text-3" id="text-3-6">
+
+<ol>
+<li>Go to <a href="http://get.adobe.com/flashplayer/?no_redirect">here</a> to download it.
+</li>
+<li>Extract it.
+</li>
+<li>Follow below:
+
+
+
+<pre class="example"># Make sure libflashplayer.so with +x
+$ sudo cp libflashplayer.so /usr/lib/firefox/plugins/
+$ sudo cp -r usr/* /usr
+</pre>
+
+</li>
+<li>Open your browser to test!
+</li>
+</ol>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-7" class="outline-3">
+<h3 id="sec-3-7">Install Lua and Luarocks</h3>
+<div class="outline-text-3" id="text-3-7">
+
+
+</div>
+
+<div id="outline-container-3-7-1" class="outline-4">
+<h4 id="sec-3-7-1">lua</h4>
+<div class="outline-text-4" id="text-3-7-1">
+
+<ol>
+<li>Go to <a href="http://www.lua.org/download.html">here</a> to download
+</li>
+<li>Extra it
+</li>
+<li><code>make linux</code> 
+       (if error: no readline.h. <code>sudo apt-get install libreadline-dev</code>)
+</li>
+<li><code>sudo make install</code>
+</li>
+<li>Over~
+</li>
+</ol>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-7-2" class="outline-4">
+<h4 id="sec-3-7-2">Luarocks</h4>
+<div class="outline-text-4" id="text-3-7-2">
+
+<ol>
+<li>Go to <a href="http://luarocks.org/releases/">here</a> to doanload and the extra it
+</li>
+<li><code>./configure</code>
+</li>
+<li><code>make</code>
+</li>
+<li><code>sudo make install</code>
+</li>
+<li>Over~
+</li>
+</ol>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3-8" class="outline-3">
+<h3 id="sec-3-8">MySQL</h3>
+<div class="outline-text-3" id="text-3-8">
+
+
+
+
+<pre class="example"># start on runlevel [2345]
+stop on starting rc RUNLEVEL=[016]
+</pre>
 
 </div>
 </div>

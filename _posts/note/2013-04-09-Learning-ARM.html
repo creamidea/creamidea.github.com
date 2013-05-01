@@ -12,8 +12,8 @@ tags: arm
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#sec-1">1 前言</a></li>
-<li><a href="#sec-2">2 2013-4-9 火曜日</a></li>
-<li><a href="#sec-3">3 2013-4-14 日曜日</a>
+<li><a href="#sec-2">2 2013-04-09 火曜日</a></li>
+<li><a href="#sec-3">3 2013-04-14 日曜日</a>
 <ul>
 <li><a href="#sec-3-1">3.1 1. 汇编控制LED</a></li>
 <li><a href="#sec-3-2">3.2 2. The Linux Kernel Module Programming : Hello World</a></li>
@@ -37,6 +37,23 @@ tags: arm
 <li><a href="#sec-6-3">6.3 总结到目前为止编写此类代码步骤：</a></li>
 </ul>
 </li>
+<li><a href="#sec-7">7 2013-04-19 金曜日</a>
+<ul>
+<li><a href="#sec-7-1">7.1 代码的准备</a></li>
+<li><a href="#sec-7-2">7.2 烧写环境的配置</a>
+<ul>
+<li><a href="#sec-7-2-1">7.2.1 交叉编译环境的搭建</a></li>
+</ul>
+</li>
+<li><a href="#sec-7-3">7.3 编译：</a></li>
+<li><a href="#sec-7-4">7.4 程序下载</a>
+<ul>
+<li><a href="#sec-7-4-1">7.4.1 下载</a></li>
+<li><a href="#sec-7-4-2">7.4.2 ARM系统中设置</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -55,7 +72,7 @@ tags: arm
 </div>
 
 <div id="outline-container-2" class="outline-2">
-<h2 id="sec-2">2013-4-9 火曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-09 Tue</span></span></h2>
+<h2 id="sec-2">2013-04-09 火曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-09 Tue</span></span></h2>
 <div class="outline-text-2" id="text-2">
 
 <p>数据稍候处理：
@@ -127,7 +144,7 @@ BNE
 </div>
 
 <div id="outline-container-3" class="outline-2">
-<h2 id="sec-3">2013-4-14 日曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-14 Sun</span></span></h2>
+<h2 id="sec-3">2013-04-14 日曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-14 Sun</span></span></h2>
 <div class="outline-text-2" id="text-3">
 
 <p>  今天是周日，现在终于有时间。现在稍微写一些东西。
@@ -967,6 +984,183 @@ clean:
 </li>
 </ol>
 
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7">2013-04-19 金曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-19 Fri</span></span></h2>
+<div class="outline-text-2" id="text-7">
+
+<p>  今天这堂课上得有些吃力。环境完全搭建不起来。貌似最后排查下来是因为
+  我是64位的ubuntu12.04，和那个编译工具不匹配了。后来想安装32位的库文件。
+  最后，由于依赖太多了，只能暂时先搁置了。如果以后有机会的继续。
+</p>
+<p>
+  那么我们开始记录今天上课的笔记吧。
+</p>
+
+</div>
+
+<div id="outline-container-7-1" class="outline-3">
+<h3 id="sec-7-1">代码的准备</h3>
+<div class="outline-text-3" id="text-7-1">
+
+<p>   代码的话就是2013-04-19那三个文件(led.h, led.c, Makefile),
+   在这里就不再贴出了。
+   这里只补充一个测试代码：
+</p>
+
+
+<pre class="example">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;string.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;fcntl.h&gt;
+#include "led.h"
+
+int main(void)
+{
+  int fd;
+  if((fd=open("/dev/myled", O_RDWR, 0644)) &lt; 0){
+    fprintf(stderr, "open error:%s\n",strerror(errno));
+    exit(0);
+  }
+  int i = 0;
+  while(1){
+    ioctl(fd, LED_OFF, 1);
+    ioctl(fd, LED_OFF, 2);
+    ioctl(fd, LED_OFF, 3);
+    ioctl(fd, LED_OFF, 4);
+    sleep(1); i++;
+    ioctl(fd, LED_ON, 1);
+    ioctl(fd, LED_ON, 2);
+    ioctl(fd, LED_ON, 3);
+    ioctl(fd, LED_ON, 4);
+    sleep(1); i++;
+    if(i &gt; 100) break;
+  }
+  close(fd);
+  return 0;
+}
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-7-2" class="outline-3">
+<h3 id="sec-7-2">烧写环境的配置</h3>
+<div class="outline-text-3" id="text-7-2">
+
+
+</div>
+
+<div id="outline-container-7-2-1" class="outline-4">
+<h4 id="sec-7-2-1">交叉编译环境的搭建</h4>
+<div class="outline-text-4" id="text-7-2-1">
+
+<ul>
+<li>下载：<a href="http://filesresidence.com/File/c890jgedo09pg">EABI_4.3.3_EmbedSky_20090812.tar.bz2</a> 
+</li>
+<li>解压： <code>$ sudo tar -jxvf EABI_4.3.3_EmbedSky_20090812.tar.bz2 -C /</code>
+</li>
+<li>修改系统路径：
+
+
+
+<pre class="example">$ sudo vim /etc/bash.bashrc
+在文件最后加入：
+export PATH=$PATH:/opt/EmbedSky/4.3.3/bin
+
+$ vim ~/.bashrc
+在文件最后加入：
+export PATH=$PATH:/opt/EmbedSky/4.3.3/bin
+
+生效环境变量
+$. ~/.bashrc
+
+测试
+$ arm-linux-gcc-v
+</pre>
+
+</li>
+</ul>
+
+
+<p>    
+    我省略了一些不必要的步骤，详细的可以看这个：
+</p>
+<p>
+    <a href="http://blog.csdn.net/ymsunshine/article/details/8037315">http://blog.csdn.net/ymsunshine/article/details/8037315</a>
+</p>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-7-3" class="outline-3">
+<h3 id="sec-7-3">编译：</h3>
+<div class="outline-text-3" id="text-7-3">
+
+
+
+
+<pre class="example">$ arm-linux-gcc ./test.c -o arm_test
+$ make
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-7-4" class="outline-3">
+<h3 id="sec-7-4">程序下载</h3>
+<div class="outline-text-3" id="text-7-4">
+
+
+</div>
+
+<div id="outline-container-7-4-1" class="outline-4">
+<h4 id="sec-7-4-1">下载</h4>
+<div class="outline-text-4" id="text-7-4-1">
+
+<p>    去SecureCRT官网<a href="http://www.vandyke.com/products/securecrt/">http://www.vandyke.com/products/securecrt/</a>
+    下载符合你版本的。
+</p>
+<p>
+    使用的话，装上驱动，连上ARM，然后将SecureCRT调至COM3（视情况而定）
+    选择7下载（貌似，记不清了。）
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-7-4-2" class="outline-4">
+<h4 id="sec-7-4-2">ARM系统中设置</h4>
+<div class="outline-text-4" id="text-7-4-2">
+
+<p>    使用上述工具SecureCRT连接ARM，之后如下：(具体的不知道了，只能下次做实验
+    时候的继续补充了。)
+</p>
+
+
+<pre class="example">挂载U盘
+/usb/
+# mount /dev/sda1 /usb
+cp /usb/tst/ar
+insmod led.ko
+mknod /dev/myled c 252 0
+./arm_test /dev/myled
+ led open
+ open successfully!
+</pre>
+
+</div>
 </div>
 </div>
 </div>
