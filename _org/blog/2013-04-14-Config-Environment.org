@@ -1,0 +1,265 @@
+#+TITLE:Config Environment For Me
+#+AUTHOR:ICECREAM(氷菓)
+#+EMAIL:creamidea(AT)gmail.com
+#+DESCRIPTION:ICECREAM(氷菓)
+#+KEYWORDS:linux windows config
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t
+#+LINK_HOME: https://creamidea.github.io
+#+STYLE:<link rel="stylesheet" type="text/css" href="../css/style.css">
+#+INFOJS_OPT: view: showall toc: nil
+
+#+BEGIN_HTML
+---
+layout: doc
+title: Config Environment For Me
+subtitle: 这是我的配置环境，方便以后安装系统
+categories: blog
+tags: linux windows config
+---
+#+END_HTML
+
+* 前言
+这个是我的一个配置环境的blog，主要记录我这些年安装的软件和配置的一些服务。
+主要是在Windows7上和Linux(现在主要是Ubuntu)上。
+详细记录一些配置过程和安装的软件。方便以后重新安装系统。
+
+当然如果以后买了Mac的话会继续记录这里。
+
+* Windows
+** Install Windows7 Ultimate
+   1. From Home basic to Ultimate FOR LenoveY470:
+      #+BEGIN_EXAMPLE
+      6K2KY-BFH24-PJW6W-9GK29-TMPWP
+      22TKD-F8XX6-YG69F-9M66D-PMJBM
+      #+END_EXAMPLE
+   2. Install Windows7 Ultimate by DVD/USB:
+      
+      waiting...
+** Install Emacs and config her
+*** Change the Home Directory:
+		1. Ctrl + R
+    2. Input "regedit"
+    3. HKEY_CURRENT_USER/Software/GNU/Emacs/HOME=%The Home of Emacs%
+    (New a string value)
+*** Swap the CapsLk && Ctrl_L
+		1. Modify the regedit
+		   #+BEGIN_EXAMPLE
+		     REGEDIT4
+
+         [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout]
+         "Scancode Map"=hex:00,00,00,00,00,00,00,00,
+                            03,00,00,00,1d,00,3a,00,
+                            3a,00,1d,00,00,00,00,00
+		     (New a binary Values)
+		     #+END_EXAMPLE
+		2. Download Software:
+			 + The script: http://www.cs.umb.edu/~wimiller/stuff/caps2ctrl.exe
+       +The source: http://www.cs.umb.edu/~wimiller/stuff/caps2ctrl.ahk
+		3. AutoHotKey:
+			 #+BEGIN_EXAMPLE
+			   Capslock::Ctrl
+			 #+END_EXAMPLE
+		4. *Reference:*
+		     + http://www.emacswiki.org/emacs/MovingTheCtrlKey
+*** Reference:
+		+ http://www.emacswiki.org/emacs/JonathanArnoldDotEmacs
+** Install Jekyll
+*** Download:
+		[[http://rubyinstaller.org/downloads/][RubyInstaller && DEVELOPMENT KIT]]
+*** Install:
+		Next -> Next -> ... -> Finish
+
+		*Attention:*
+		The path of the installer cannot have space!!!
+*** Run:
+		#+BEGIN_SRC sh
+      > jekyll serve
+		#+END_SRC
+*** Q&A:
+		1. Liquid Exception: incompatible character encodings: IBM437 and UTF-8
+			 #+BEGIN_SRC sh
+         # windows:
+         > chcp 65001
+         
+         # Linux
+         $ export LC_ALL=en_US.UTF-8
+         $ export LANG=en_US.UTF-8
+         $ jekyll --server --auto
+         
+			 #+END_SRC
+		   Reference:
+			 + http://chxt6896.github.io/blog/2012/02/13/blog-jekyll-native.html
+
+		2. Python Django:
+			   {&#37; autoescape off &#37;}
+         Hello {&#123; name &#123;}
+         {&#37; endautoescape &#37;}       
+			 Reference:
+			 + http://www.ascii.cl/htmlcodes.htm
+** Install Foobar and config her
+** Install Win7Code
+** Install mit-scheme and fix some issue
+** Install Java Development
+
+** Install Qt Development
+*** Download:
+		1. Download Address:  http://qt-project.org/downloads
+		2. 我下载的是：[[http://mirrors.ustc.edu.cn/qtproject/official_releases/qt/4.8/4.8.4/qt-win-opensource-4.8.4-vs2010.exe][Qt libraries 4.8.4 for Windows (VS 2010, 234 MB) (Info)]]
+*** Install:
+		1. Next->Next->...->Finish
+*** Configure:
+		1. use it in terminal (vs2010):
+			 Please use the : Qt 4.8.4 Command Prompt
+*** Emacs:
+		+ http://www.emacswiki.org/emacs/QtMode
+		+ http://www.emacswiki.org/emacs/CcMode
+		+ http://alexott.blogspot.it/2009/02/cedet-qt.html
+*** Q && A:
+		1. Makefile.Debug:59: *** missing separator.  Stop.:
+			 #+BEGIN_SRC sh
+         # Qt 4.8.4 Command Prompt
+         > qmake -project
+         > qmake
+         > nmake
+			 #+END_SRC
+			 Reference:
+			 + http://stackoverflow.com/questions/12339099/what-does-the-missing-separator-make-error-mean-when-using-qt/16714236#16714236
+			 + http://www.verydemo.com/demo_c92_i131633.html
+			 + http://www.qtforum.org/article/23450/qt4-and-mysql-driver-problem.html
+			 + http://superuser.com/questions/375029/make-interrupt-exception-caught
+* Linux
+** Install Emacs and config it
+   1. Go to [[http://ftp.gnu.org/gnu/emacs/][here(main GNU ftp)]] to download the lastest .xz
+   2. Install the depends below:
+      #+BEGIN_SRC sh
+        $ sudo apt-get install texinfo build-essential
+        $ sudo aptitude install libdbus-1-dev libgconf2-dev libgif-dev libgpm-dev \
+          libgtk2.0-dev libjpeg62-dev libm17n-dev libncurses5-dev \
+          libotf-dev librsvg2-dev libtiff4-dev libXpm-dev
+        
+        $ ./configure
+        $ make bootstrap
+        $ make
+        $ src/emacs -q ;; This checks that it built properly
+        $ sudo make install
+        $ mv /usr/local/bin/emacs-24.0.50 /usr/local/bin/emacs24
+        ;; Change the number to whatever the version is, I moved it to a more convienent name
+        $ emacs24 -q
+      #+END_SRC
+   3. Download this config files!
+** Install Google Chrome
+   1. Go to [[https://www.google.com/intl/en/chrome/browser/][here]] to download the leaset google-chrome
+   2. Who can tell me why hwo to solve it:
+      =Dependency is not satisfiable: libudev0(>=147)=
+      (I was in Ubuntu13.04 amd64)
+** Return to classic gnome for ubuntu12.04+
+   #+BEGIN_SRC sh
+     $ sudo apt-get install gnome-session-fallback
+   #+END_SRC
+** Install Git (You can find the books. Just click [[https://github.s3.amazonaws.com/media/progit.en.pdf][here]])
+   1. Go to [[https://github.com/git/git][here]] download the lastest git.
+   2. Follow the [[http://git-scm.com/book/en/Getting-Started-Installing-Git][1.4 Getting Started - Installing Git]].
+      The main steps are:
+      #+BEGIN_SRC sh
+        $ apt-get install libcurl4-gnutls-dev libexpat1-dev gettext \
+          libz-dev libssl-dev
+        $ tar -zxf git-1.7.2.2.tar.gz
+        $ cd git-1.7.2.2
+        $ make prefix=/usr/local all
+        $ sudo make prefix=/usr/local install
+        # Below is options:
+        $ git clone git://git.kernel.org/pub/scm/git/git.git
+      #+END_SRC
+   3. Follow the [[http://git-scm.com/book/en/Getting-Started-First-Time-Git-Setup][1.5 Getting Started - First-Time Git Setup]].
+      The main steps are:
+      #+BEGIN_SRC sh
+        $ git config --global user.name "John Doe"
+        $ git config --global user.email johndoe@example.com
+      #+END_SRC
+   4. Now, you can [[https://help.github.com/articles/generating-ssh-keys][Generating SSH Keys]].
+      The main steps are:
+      #+BEGIN_SRC sh
+        $ ssh-keygen -t rsa -C "your_email@example.com"
+        $ sudo apt-get install xclip
+        $ xclip -sel clip < ~/.ssh/id_rsa.pub
+      #+END_SRC
+** Add the picture when ubuntu boot up
+   *Please pay more attenttion to modify this file*
+   1. Move the picture to the =/usr/share/backgrounds=
+   2. Replace:
+      #+BEGIN_SRC sh
+        ### BEGIN /etc/grub.d/05_debian_theme ###
+        set menu_color_normal=white/black
+        set menu_color_highlight=black/light-gray
+        if background_color 44,0,30; then
+          clear
+        fi
+        ### END /etc/grub.d/05_debian_theme ###
+      #+END_SRC
+
+      With:
+      #+BEGIN_SRC sh
+        ### BEGIN /etc/grub.d/05_debian_theme ###
+        insmod part_msdos
+        insmod ext4
+        # Here you should use (sudo fdisk -l) to see /dev/sda?? 
+        set root='(hd0,msdos10)'
+        search --no-floppy --fs-uuid --set e3a8ca35-417d-4da2-9380-91f08a9e4fb2
+        insmod png
+        if background_image /usr/share/backgrounds/spacefun-grub-widescreen.png; 
+        then
+          set color_normal=light-gray/black
+          set color_highlight=white/black
+        else
+          set menu_color_normal=cyan/blue
+          set menu_color_highlight=white/blue
+        fi
+        ### END /etc/grub.d/05_debian_theme ###
+      #+END_SRC
+   3. Reboot
+** Install Adobe Flash Player
+   1. Go to [[http://get.adobe.com/flashplayer/?no_redirect][here]] to download it.
+   2. Extract it.
+   3. Follow below:
+      #+BEGIN_SRC sh
+        # Make sure libflashplayer.so with +x
+        $ sudo cp libflashplayer.so /usr/lib/firefox/plugins/
+        $ sudo cp -r usr/* /usr
+      #+END_SRC
+   4. Open your browser to test!
+** Install Lua and Luarocks
+*** lua
+    1. Go to [[http://www.lua.org/download.html][here]] to download
+    2. Extra it
+    3. =make linux= 
+       (if error: no readline.h. =sudo apt-get install libreadline-dev=)
+    4. =sudo make install=
+    5. Over~
+*** Luarocks
+    1. Go to [[http://luarocks.org/releases/][here]] to doanload and the extra it
+    2. =./configure=
+    3. =make=
+    4. =sudo make install=
+    5. Over~
+** MySQL
+   #+BEGIN_SRC sh
+     # start on runlevel [2345]
+     stop on starting rc RUNLEVEL=[016]
+   #+END_SRC
+* Mac
+
+
+* Emacs
+待阅读：
+[[http://stackoverflow.com/questions/4352367/is-it-possible-to-start-emacs-using-a-remote-configuration-file][
+Is it possible to start emacs using a remote configuration file?]]
+[[http://www.ibm.com/developerworks/cn/linux/l-cn-emacs-shell/][
+当 Shell 遇见 Emacs -- 大话 Emacs Shell Mode]]
+[[http://lifegoo.pluskid.org/wiki/EmacsAsFileManger.html][
+Emacs -- 强大的文件管理器]]
+[[http://cx4a.org/software/gccsense/manual.html#Installation][
+GCCSense User Manual]]
+[[http://emacser.com/emacs-gccsense.htm][
+Emacs补全利器：auto-complete+gccsense]]
+[[http://blog.csdn.net/astropeak/article/details/6666527][
+《Emacs——你不能不用的神级利器》——补全（下）]]

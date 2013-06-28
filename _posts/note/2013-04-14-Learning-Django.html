@@ -13,21 +13,13 @@ tags: python django
 <ul>
 <li><a href="#sec-1">1 前言</a></li>
 <li><a href="#sec-2">2 Install Django</a></li>
-<li><a href="#sec-3">3 2013-04-14 日曜日</a></li>
-<li><a href="#sec-4">4 2013-04-16 火曜日</a></li>
-<li><a href="#sec-5">5 2013-04-17 水曜日</a></li>
-<li><a href="#sec-6">6 2013-04-18 木曜日</a></li>
-<li><a href="#sec-7">7 第六章 Django站点管理 火曜日</a>
-<ul>
-<li><a href="#sec-7-1">7.1 搭建步骤</a></li>
-<li><a href="#sec-7-2">7.2 Some config</a>
-<ul>
-<li><a href="#sec-7-2-1">7.2.1 Setting.py</a></li>
-</ul></li>
-</ul>
-</li>
-<li><a href="#sec-8">8 第七章 表单 木曜日</a></li>
-<li><a href="#sec-9">9 第八章 高级视图和URL配置 木曜日</a></li>
+<li><a href="#sec-3">3 第二章 入门 &amp;&amp; 第三章 视图和URL配置 日曜日</a></li>
+<li><a href="#sec-4">4 第四章 模板 火曜日</a></li>
+<li><a href="#sec-5">5 第五章 模型 水曜日</a></li>
+<li><a href="#sec-6">6 第六章 Django站点管理 火曜日</a></li>
+<li><a href="#sec-7">7 第八章 高级视图和URL配置 木曜日</a></li>
+<li><a href="#sec-8">8 第九章 模板高级进阶 木曜日</a></li>
+<li><a href="#sec-9">9 第十章 数据模型高级进阶 土曜日</a></li>
 </ul>
 </div>
 </div>
@@ -38,6 +30,9 @@ tags: python django
 
 <p>上面分配的新的学习内容，学习这个框架，然后使用的参考书籍是Django_book_2_中文版。
 下载地址是：<a href="http://vdisk.weibo.com/s/xy74T">http://vdisk.weibo.com/s/xy74T</a>
+</p>
+<p>
+无论有任何想法或者我文章中有任何错误，欢迎在下面留言或者通过电子邮件联系我：）
 </p>
 </div>
 
@@ -59,7 +54,7 @@ tags: python django
 
 </li>
 <li>Linux/Mac OS X:
-         前往django所在文件目录，之后输入：
+   前往django所在文件目录，之后输入：
 
 
 
@@ -87,31 +82,31 @@ tags: python django
 </div>
 
 <div id="outline-container-3" class="outline-2">
-<h2 id="sec-3">2013-04-14 日曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-14 Sun</span></span></h2>
+<h2 id="sec-3">第二章 入门 &amp;&amp; 第三章 视图和URL配置 日曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-14 Sun</span></span></h2>
 <div class="outline-text-2" id="text-3">
 
 <p>  只是稍微看了一下，然后写了一个Hello(呵呵，真是经典啊)
 </p><ol>
 <li>使用 <code>django-admin.py startproject mysite</code>
-     (笔者我在Windows7上尝试，估计路径没有加入，所以我直接将Scripts/django-admin.py
-     放入了工程文件夹才解决)。
+   (笔者我在Windows7上尝试，估计路径没有加入，所以我直接将Scripts/django-admin.py
+   放入了工程文件夹才解决)。
 
-<p>     
-     创建完成之后的目录：
+<p>   
+   创建完成之后的目录：
 </p>
 
 
 <pre class="example">icecream/
-    manage.py
-    icecream/
-        __init__.py   
-        settings.py   
-        urls.py   
-        wsgi.py
-        __init__.pyc  
-        settings.pyc  
-        urls.pyc  
-        wsgi.pyc
+  manage.py
+  icecream/
+    __init__.py   
+    settings.py   
+    urls.py   
+    wsgi.py
+    __init__.pyc  
+    settings.pyc  
+    urls.pyc  
+    wsgi.pyc
 </pre>
 
 
@@ -123,7 +118,7 @@ tags: python django
 <pre class="example">from django.http import HttpResponse
 
 def hello(request):
-    return HttpResponse("Hello, icecream")
+  return HttpResponse("Hello, icecream")
 </pre>
 
 
@@ -136,7 +131,7 @@ def hello(request):
 from icecream.views import hello
 
 urlpatterns = patterns('',
-    ('^hello/$', hello),        # 增加这句映射
+  ('^hello/$', hello),        # 增加这句映射
 )
 </pre>
 
@@ -146,13 +141,14 @@ urlpatterns = patterns('',
 
 
 
-<pre class="example">python manage.py runserver 8080
+<pre class="example">python manage.py runserver [0.0.0.0] 8080
+# 加入 0.0.0.0 可以使得“外网”访问，不仅限于127.0.0.1
 </pre>
 
 
 </li>
 <li>在浏览器中输入：
-     <a href="http://127.0.0.1:8080/hello">http://127.0.0.1:8080/hello</a>
+   <a href="http://127.0.0.1:8080/hello">http://127.0.0.1:8080/hello</a>
 </li>
 </ol>
 
@@ -164,7 +160,7 @@ urlpatterns = patterns('',
 </div>
 
 <div id="outline-container-4" class="outline-2">
-<h2 id="sec-4">2013-04-16 火曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-16 Tue</span></span></h2>
+<h2 id="sec-4">第四章 模板 火曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-16 Tue</span></span></h2>
 <div class="outline-text-2" id="text-4">
 
 <ol>
@@ -196,7 +192,7 @@ print t.render(c)
 </div>
 
 <div id="outline-container-5" class="outline-2">
-<h2 id="sec-5">2013-04-17 水曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-17 Wed</span></span></h2>
+<h2 id="sec-5">第五章 模型 水曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-17 Wed</span></span></h2>
 <div class="outline-text-2" id="text-5">
 
 <ol>
@@ -211,7 +207,7 @@ print t.render(c)
      我下载的包是：
      <a href="http://nchc.dl.sourceforge.net/project/mysql-python/mysql-python-test/1.2.4b4/MySQL-python-1.2.4b4.win32-py2.7.exe">http://nchc.dl.sourceforge.net/project/mysql-python/mysql-python-test/1.2.4b4/MySQL-python-1.2.4b4.win32-py2.7.exe</a>
 </p>
-<p>         
+<p>   
      然后我跟着：
      <a href="http://stackoverflow.com/questions/3652625/installing-setuptools-on-64-bit-windows">http://stackoverflow.com/questions/3652625/installing-setuptools-on-64-bit-windows</a>
      修改注册表还是失败了。以后再试吧。
@@ -329,6 +325,35 @@ COMMIT;
 <pre class="example">request.META.get('HTTP_USER_AGENT', 'unknow')
 </pre>
 
+
+</li>
+<li>使用Sqlite3 （因为笔者最近在Windows7上开发，又不想安装中大型数据库，于是。。。）:
+
+<p>
+   For Windows7:
+</p>
+<ol>
+<li>下载源代码：sqlite-amalgamation-xxxxxxx.zip,点击这里进入下载页面。
+
+</li>
+<li>输入编译代码，前提是安装了 <a href="http://www.mingw.org/">MinGW</a> :
+
+
+
+<pre class="example">gcc -o sqlite3 shell.c sqlite3.c -lpthread
+# 这里需要去掉-ldl，不然会保错。不知道你们安装的时候会不会遇到此类问题.
+</pre>
+
+<p>
+    Reference:
+</p><ul>
+<li><a href="http://www.sqlite.org/howtocompile.html">http://www.sqlite.org/howtocompile.html</a>
+</li>
+</ul>
+
+</li>
+</ol>
+
 </li>
 </ol>
 
@@ -338,24 +363,11 @@ COMMIT;
 </div>
 
 <div id="outline-container-6" class="outline-2">
-<h2 id="sec-6">2013-04-18 木曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-18 Thu</span></span></h2>
+<h2 id="sec-6">第六章 Django站点管理 火曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-23 Tue</span></span></h2>
 <div class="outline-text-2" id="text-6">
 
-</div>
-
-</div>
-
-<div id="outline-container-7" class="outline-2">
-<h2 id="sec-7">第六章 Django站点管理 火曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-23 Tue</span></span></h2>
-<div class="outline-text-2" id="text-7">
-
-
-</div>
-
-<div id="outline-container-7-1" class="outline-3">
-<h3 id="sec-7-1">搭建步骤</h3>
-<div class="outline-text-3" id="text-7-1">
-
+<ol>
+<li>搭建步骤
 
 
 
@@ -371,22 +383,10 @@ COMMIT;
 3. django.contrib.auth.middleware.AuthenticationMiddleware
 </pre>
 
-</div>
-
-</div>
-
-<div id="outline-container-7-2" class="outline-3">
-<h3 id="sec-7-2">Some config</h3>
-<div class="outline-text-3" id="text-7-2">
-
-
-</div>
-
-<div id="outline-container-7-2-1" class="outline-4">
-<h4 id="sec-7-2-1">Setting.py</h4>
-<div class="outline-text-4" id="text-7-2-1">
-
-<ol>
+</li>
+<li>Some config
+   1)Setting.py
+<ul>
 <li>Template paht:
 
 
@@ -400,7 +400,7 @@ COMMIT;
 </pre>
 
 </li>
-<li>static path
+<li>Static path
 
 
 
@@ -414,54 +414,24 @@ STATICFILES_DIRS = (
 </pre>
 
 </li>
+</ul>
+
+<p>   2)一些注意点
+</p><ol>
+<li>在管理界面显示自己创建的应用程序：
+      这点我也是我自己要记住的，记住写的模型需要在当前应用程序下的admin.py中注册，
+      代码类似这样：
+
+
+
+<pre class="example">from django.contrib import admin
+from icecream.register.models import User
+
+admin.site.register(User)
+</pre>
+
+</li>
 </ol>
-
-</div>
-</div>
-</div>
-
-</div>
-
-<div id="outline-container-8" class="outline-2">
-<h2 id="sec-8">第七章 表单 木曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-25 Thu</span></span></h2>
-<div class="outline-text-2" id="text-8">
-
-<ol>
-<li>在创建contact的时候，我没有使用 <code>python manage.py startapp books</code> 
-     导致在写urls.py的时候老是提示找不到 <code>contact</code>
-</li>
-<li>自定义校验规则
-
-
-
-<pre class="example">Django的form系统自动寻找匹配的函数方法,
-该方法名称以clean_开头,并以字段名称结束。 
-如果有这样的方法,它将在校验时被调用。
-
-特别地,clean_message()方法将在指定字段的默认校验逻辑执行* 之后* 被调用。
-(本例中,在必填CharField这个校验逻辑之后。)
-因为字段数据已经被部分处理,所以它被从self.cleaned_data中提取出来
-了。同样,我们不必担心数据是否为空,因为它已经被校验过了。
-
-我们简单地使用了len()和split()的组合来计算单词的数量。 
-如果用户输入字数不足,我们抛出一个forms.ValidationError型异常。
-这个异常的描述会被作为错误列表中的一项显示给用户。
-
-在函数的末尾显式地返回字段的值非常重要。 
-我们可以在我们自定义的校验方法中修改它的值(或者把它转换
-成另一种Python类型)。 如果我们忘记了这一步,None值就会返回,
-原始的数据就丢失掉了。     
-</pre>
-
-
-</li>
-<li>定义Form样式
-
-
-
-<pre class="example">每一个字段部件(&lt;input type=”text”&gt;, &lt;select&gt;, &lt;textarea&gt;, 或者类似
-)都可以通过访问{{form.字段名}}进行单独的渲染。
-</pre>
 
 </li>
 </ol>
@@ -471,13 +441,13 @@ STATICFILES_DIRS = (
 
 </div>
 
-<div id="outline-container-9" class="outline-2">
-<h2 id="sec-9">第八章 高级视图和URL配置 木曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-25 Thu</span></span></h2>
-<div class="outline-text-2" id="text-9">
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7">第八章 高级视图和URL配置 木曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-25 Thu</span></span></h2>
+<div class="outline-text-2" id="text-7">
 
 <ol>
 <li>在 Python 正则表达式中,命名的正则表达式组的语法是 <code>(?P&lt;name&gt;pattern)</code> ,
-     这里 <code>name</code> 是组的名字,而pattern 是匹配的某个模式。
+     这里 <code>name</code> 是组的名字,而 <code>pattern</code> 是匹配的某个模式。
 
 <p>     
      下面使用无名组的URLconf例子：
@@ -571,13 +541,151 @@ def foobar_view(request, template_name):
 
 <p> 
      在这里最帅的地方莫过于你根本不用改变你的视图函数。 
-     视图函数只会关心它 获得了参数,
+     视图函数只会关心它获得了参数,
      它不会去管这些参数到底是捕捉回来的还是被额外提供的。
      month和day
 </p></li>
 </ol>
 
 
+</div>
+
+</div>
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="sec-8">第九章 模板高级进阶 木曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-05-07 Tue</span></span></h2>
+<div class="outline-text-2" id="text-8">
+
+
+<ol>
+<li>关闭html自动转义
+<ul>
+<li>对于单独的变量
+
+<p>
+       用safe过滤器为单独的变量关闭自动转意：
+</p>
+
+
+<pre class="example">This will be escaped: {{ data }}
+This will not be escaped: {{ data|safe }}
+</pre>
+
+
+<p>
+       你可以把safe当做safe from further escaping的简写，或者当做可以被直接译成HTML的内容。在这个例子
+       里，如果数据包含''，那么输出会变成：
+</p>
+
+
+<pre class="example">This will be escaped: &amp;lt;b&amp;gt;
+This will not be escaped: &lt;b&gt;
+</pre>
+
+
+</li>
+<li>对于模板块
+
+<p>
+     为了控制模板的自动转意,用标签 <code>autoescape</code> 来包装整个模板(或者模板中常用的部分),就像这样：
+</p>
+
+
+<pre class="example">{&amp;#37; autoescape off &amp;#37;}
+Hello {&amp;#123; name &amp;#123;}
+{&amp;#37; endautoescape &amp;#37;}       
+</pre>
+
+
+<p>       
+       auto-escaping 标签的作用域不仅可以影响到当前模板还可以通过
+       include标签作用到其他标签,就像block标签一样。
+</p>
+</li>
+</ul>
+
+</li>
+<li>Django有两种方法加载模板
+<ul>
+<li>django.template.loader.get_template(template_name) ： 
+       get_template 根据给定的模板名称返回一个
+       已编译的模板（一个 Template 对象）。 
+       如果模板不存在，就触发 TemplateDoesNotExist 的异常。
+</li>
+<li>django.template.loader.select_template(template_name_list) ： 
+       select_template 很像get_template ，不过它是以模板名称的列表作为参数的。 
+       它会返回列表中存在的第一个模板。 如果模板都不存在，
+       将会触发TemplateDoesNotExist异常。
+</li>
+</ul>
+
+</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-9" class="outline-2">
+<h2 id="sec-9">第十章 数据模型高级进阶 土曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-05-11 Sat</span></span></h2>
+<div class="outline-text-2" id="text-9">
+
+
+<ol>
+<li>打开Session功能：
+
+
+
+<pre class="example">'django.contrib.sessions.middleware.SessionMiddleware'
+
+INSTALLED_APPS 中有 'django.contrib.sessions'
+
+(别忘了运行manage.py syncdb)
+
+</pre>
+
+</li>
+<li>在视图中使用Session
+<ul>
+<li>SessionMiddleware 激活后，每个传给视图(view)函数的第一个参数``HttpRequest`` 
+       对象都有一个 session 属性，这是一个字典型的对象。
+</li>
+</ul>
+
+</li>
+<li>会话密钥(session key)
+</li>
+<li>设置Cookies:
+   <code>request.session.set_test_cookie()</code>
+   后续view中：
+   <code>request.seesion.test_cookie_worked()</code>
+</li>
+<li>认证(authentication)框架
+</li>
+<li>注意点：
+<ul>
+<li><code>session</code> 是在 <code>request</code> 中的， <code>set_cookie</code> 是在 <code>response=HttpResponse</code>
+
+</li>
+<li>被设置的 <code>session</code> 并不会在调试工具中的cookie出现
+
+</li>
+</ul>
+
+</li>
+<li>疑问点：
+<ul>
+<li>关于这些session属性怎么设置，直接写入setting.py文件么？
+     参考地址：<a href="https://docs.djangoproject.com/en/dev/ref/settings/#sessions">https://docs.djangoproject.com/en/dev/ref/settings/#sessions</a>
+
+</li>
+<li>在设计登录表单时，如何判断输入的是合法字符，使得提交按钮生效？
+</li>
+</ul>
+
+</li>
+</ol>
 
 </div>
 </div>

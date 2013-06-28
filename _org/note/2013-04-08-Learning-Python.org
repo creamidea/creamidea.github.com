@@ -1,0 +1,906 @@
+#+TITLE:Learning Python
+#+AUTHOR:ICECREAM(氷菓)
+#+EMAIL:creamidea(AT)gmail.com
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t
+#+LINK_HOME: https://creamidea.github.io
+#+STYLE:<link href="../css/style.css" rel="stylesheet" type="text/css">
+#+STYLE:<link href='../font/Libre_Baskerville' rel='stylesheet' type='text/css'>
+#+STYLE:<link href='../font/Great_Vibes' rel='stylesheet' type='text/css'>
+#+STYLE:<link href='../font/Montserrat' rel='stylesheet' type='text/css'>
+#+INFOJS_OPT:
+
+#+BEGIN_HTML
+---
+layout: doc
+title: Learning Python
+subtitle: 学习Python的小型笔记 
+categories: note
+tags: python
+---
+#+END_HTML
+
+* 前言
+这个仅仅是一个开始。是的，这个仅仅是一个开始。
+
+为何学习python？因为
+#+BEGIN_QUOTE
+life is short - you need Python!
+#+END_QUOTE
+*From* http://love-python.blogspot.com/
+
+还有就是下面一个项目需要使用python[fn:1]和tornado[fn:2]来开发项目，一个上位机吧。
+我们小组主要负责数据展示这个部分。硬件部分，也就是实际数据采集那个部分由企业来负责。
+
+等待学习记录中...
+
+file://D:/Org/org-mode-unicorn-logo.ico
+
+* 2013-04-13 土曜日<2013-04-13 Sat>
+  1. Tips:
+     *How to run Python in Emacs org-mode? Below is the answer*
+     Just input below into .emacs:
+     #+BEGIN_SRC emacs-lisp
+     (org-babel-do-load-languages
+       'org-babel-load-languages '((python . t) (R . t)))
+     #+END_SRC
+     From:
+     [[http://www.johndcook.com/blog/2012/02/09/python-org-mode/][Running Python and R inside Emacs]]
+  
+  2. python的一个切片操作：将字符串倒序输出
+     #+BEGIN_SRC python :results output
+       s = 'abcdefgh'
+       a = s[::-1]
+       print a  #a : hgfedcba
+     #+END_SRC
+
+     #+RESULTS:
+     : hgfedcba
+
+  3. 每次把最后的一个字符砍掉
+     #+BEGIN_SRC python :results output
+       s = 'abcde'
+       i = -1
+       for i in [None]+range(-1, -len(s), -1):
+         print s[:i]
+     #+END_SRC
+
+     #+RESULTS:
+     : abcde
+     : abcd
+     : abc
+     : ab
+     : a
+	 
+  4. 浅拷贝： 只拷贝了对对象的索引，而不是重新建立了一个对象。P162
+
+  5. basestring() 抽象工厂函数，作用仅仅是为str和unicode函数提过父类。
+     所有不能被实例化，也不能被调用。
+
+  6. 在一个对象上使用dir()来查看它所有的方法和属性
+     
+
+  おやすみなさい
+
+* 2013-04-14 日曜日<2013-04-14 Sun>
+  1. Write a test code to test
+     #+BEGIN_SRC python :results output
+       #!/usr/bin/env python                                                          
+       import string                                                                  
+       
+       alphas = string.letters + '_'                                                  
+       nums = string.digits                                                           
+                                                         
+       print 'Welcome to the Idetifier Checket v1.0'                                  
+       print 'Testees must be at least 2 chars long'                                  
+       
+       # 我知道为何这里不行了，在org-mode中无法从标准输入读取数据
+       # myInput = raw_input("Identifier to test?")                                   
+       myInput = "abcdefgh"
+                                                        
+       if len(myInput) > 1:               
+           if myInput[0] not in alphas:    
+               print '''invalid: first symbol must be                                 
+               alphabetic'''                                                          
+           else:                                         
+               for otherChar in myInput[1:]:                                          
+                   if otherChar not in alphas + nums:   
+                       print '''invalid: remaining      
+                       symbols must be alphanumeric'''  
+                       break                            
+                   else:                                
+                       print "Okay as an identifier"
+       else:
+           print "Here is 404"
+     #+END_SRC
+
+     #+RESULTS:
+     : Welcome to the Idetifier Checket v1.0
+     : Testees must be at least 2 chars long
+     : Okay as an identifier
+     : Okay as an identifier
+     : Okay as an identifier
+     : Okay as an identifier
+     : Okay as an identifier
+     : Okay as an identifier
+     : Okay as an identifier
+
+  2. Operational:
+
+     #+BEGIN_Example
+       # 接收一个可迭代的对象，返回一个有序列表
+       sorted(iter, func=None, key=None, reverse=False)
+       
+       # 返回一个列表,
+       # 其第一个元素是 it0,it1,...
+       # 这些元素的第一个元素组成的一个元组,第二个...,类推.
+       zip([it0, it1,...,itN])
+     #+END_Example
+     
+     #+BEGIN_SRC python :results output
+       s, t = 'foa', 'obr'
+       print zip(s, t)
+     #+END_SRC
+
+     #+RESULTS:
+     : [('f', 'o'), ('o', 'b'), ('a', 'r')]
+
+  3. 字符串格式化符号：
+     P175
+  
+  4. 格式化操作符辅助指令  :
+     P176
+
+  5. Template and substitute
+
+  6. string 
+     
+     From:
+     [[http://docs.python.org/2/library/string.html?highlight%3Dstring#deprecated-string-functions][7.1.6. Deprecated string functions]]
+  
+  7. 三引号
+     #+BEGIN_SRC python :results output
+       hi = '''hi there'''
+       hi # 'hi\nhere' 
+       print hi
+     #+END_SRC
+
+     #+RESULTS:
+     : hi there
+
+  8. Codecs
+
+     COder/DECoder
+     
+     UTF-16: 单独的一个16位字，两个字节。
+     BOM(Byte Order Mark)
+
+  9. 把Unicode应用到实际应用中：
+     - 程序中出现字符串时一定要加个前缀*u*.
+     - 不要用str()函数,用unicode()代替.
+     - 不要用过时的 string 模块 -- 如果传给它的是非 ASCII 字符,它会把一切搞砸。
+     - 不到必须时不要在你的程序里面编解码*Unicod*字符.
+       只在你要写入文件或数据库或者网络时,才调用 encode()函数;相应地,
+       只在你需要把数据读回来的时候才调用decode()函数.
+
+  10. pickle
+
+  11. 从现实中得来的教训
+
+      - 失误 #1: 你必须在一个极有限的时间内写出一个大型的应用,
+        而且需要其他语言的支持,
+        但是产品经理并没有明确定义这一点。
+        你并没有考虑 Unicode 的兼容,
+        直到项目快要结束... ,
+        这时候再添加 Unicode 的支持几乎不太可能,不是吗?
+      
+        结果 #1: 没能预测到最终用户对其他语言界面的需求,
+        在集成他们用的面向其他语种的应
+        用时又没有使用 Unicode 支持.更新整个系统既让让人觉得枯燥和更是浪费时间。
+      
+      - 失误 #2:在源码中到处使用 string 模块或者 str()和 chr()函数.
+      
+        结果 #2:通过全局的查找替换把 str()和 chr()替换成 unicode()和 unichr(),
+        但是这样一来很可能就不能再用 pickle 模块,
+        要用只能把所有要 pickle 处理的数据存成二进制形式,这
+        样一来就必须修改数据库的结构,而修改数据库结构就意味着全部推倒重来.
+      
+      - 失误 #3: 不能确定所有的辅助系统都完全地支持 Unicode.
+      
+        结果 #3: 不得不去为那些系统打补丁,而其中有些系统可能你根本就没有源码.修复对
+        Unicode 支持的 bug 可能会降低代码的可靠性,而且非常有可能引入新的 bug.
+      
+      - 总结: 使应用程序完全支持 Unicode,兼容其他的语言本身就是一个工程.
+        它需要详细的考虑、计划.所有涉及到的软件、系统都需要检查,包括 Python 的标准库和其 
+        他将要用到的第三方扩展模块.你甚至有可能需要组建一个经验丰富的团队来专门负责国际化
+        (I18N)问题.
+
+  12. 列表：切片: ([] and [:])
+
+      还有一点要注意,如果你想以子列表的形式
+      得到一个列表中的一个切片,那需要确保在
+      赋值时等号的左边也是一个列表而不是一个列表的
+      元素.
+
+  13. 列表：连接接操作符( + )
+      
+      - 运算符两边必须是列表
+
+      - 比 extend() 低效
+
+  14. 在使用可变对象的方法如 sort(),extend()和 reverse()的时候要注意,
+      这些操作会在列表
+      中原地执行操作,也就是说现有的列表内容会被改变,
+      但是没有返回值!是的,与之相反,字符串
+      方法确实有返回值
+
+      温习一下,字符串是不可变的 -- 不可变对象的方法是不能改变它们的值的,
+      所以它们必须
+      返回一个新的对象.如果你确实需要返回一个对象,
+      那么我们建议你看一下 Python2.4 以后加入
+      的 reversed()和 sorted()内建函数.
+      它们像列表的方法一样工作,不同的是它们可以用做表达式,因为它们返回一个对象.同时
+      原来的那个列表还是那个列表,没有改变,而你得到的是一个新的对象.
+ 
+  15. sort() -> 归并排序的衍生算法
+
+  16. 工厂方法
+
+  17. 元组可以使用 + 运算， 两边都是元组即可。
+
+  18. 元组本身不可以修改，但是她包含的元组可以修改。
+
+  19. 由圆括号包裹的一个单一元素首
+      先被作为分组操作,而不是作为元组的分界符。
+      一个变通的方法是在第一个元素后面添一个逗
+      号(,)来表明这是一个元组而不是在做分组操作.
+
+  20. list() and tuple()
+
+  21. 浅拷贝和深拷贝
+      #+BEGIN_EXAMPLE
+      浅拷贝：内容是原来对象元素的引用
+      可以以下几种方式实施:
+        (1)完全切片操作[:],
+        (2)利用工厂函数,比如 list(),dict()等,
+        (3)使用 copy 模块的 copy 函数.
+      注意：当进行浅拷贝时,字符串被显式的拷贝,并新创建了一个字符串对象,而列
+      表元素只是把它的引用复制了一下,并不是它的成员.      
+      #+END_EXAMPLE
+
+      #+BEGIN_EXAMPLE
+      深拷贝：
+      copy.deepcopy()函数
+      #+BEGIN_SRC python
+        import copy
+        wifey = copy.deepcopy(person)
+      #+END_SRC
+      #+END_EXAMPLE
+      
+  22. 以下有几点关于拷贝操作的警告:
+
+      第一,非容器类型(比如数字,字符串和其他"原子"类型的
+      对象,像代码,类型和 xrange 对象等)没有被拷贝一说,
+      浅拷贝是用完全切片操作来完成的.
+
+      第二,如果元组变量只包含原子类型对象,
+      对它的深拷贝将不会进行.如果我们把账户信息改成元组类 
+      型,那么即便按我们的要求使用深拷贝操作也只能得到一个浅拷贝:
+
+  23. 核心模块: copy
+      
+      我们刚才描述的浅拷贝和深拷贝操作都可以在 copy 模块中找到.
+      其实 copy 模块中只有两个函数可用:
+      
+      copy()进行浅拷贝操作,
+      
+      deepcopy()进行深拷贝操作.
+
+* 2013-04-15 月曜日<2013-04-15 Mon>
+  1. 字典 dict() fromkeys()
+  2. 所有不可变的类型都是可哈希的
+
+     解释器调用哈希函数,根据字典中键的值来计算存储你的数据的位置。
+  3. 集合
+     可变集合：   set()
+     不可变集合： frozenset()
+     #+BEGIN_SRC python :results output
+       s = set('cheeseshop')
+       print s
+       # below fun will delete 'p'
+       s -= set('pypi')
+       print s
+     #+END_SRC
+
+     #+RESULTS:
+     : set(['c', 'e', 'h', 'o', 'p', 's'])
+     : set(['c', 'e', 'h', 'o', 's'])
+  4. statck.py P222
+	 
+	 queue.py P227
+  5. 
+
+* 2013-04-16 火曜日<2013-04-16 Tue>
+  1. 使用映射对象（比如字典）搜索比类似的if-elif-else或者for块.
+
+	 *Attention:*
+	 =else= 也可以使用在 =while= and =for= 这些循环中。具体操作如下：
+	 只要不是被 =break= 打断的循环，意思就是正常结束的都会去执行跟在下面的 =else= ，
+	 另外的说法就是： =break= 会跳过 =else= 代码区.
+  2. 疑问：msgs.get(user.cmd, default) P290
+	 #+BEGIN_EXAMPLE
+	 解答：	 
+	 dict.get(key, default=None)
+	 #+END_EXAMPLE
+	 *From:* http://www.tutorialspoint.com/python/dictionary_get.htm
+  3. 一个hack的做法：
+	 #+BEGIN_SRC python
+	   smaller = (x < y and [x] or [y])[0]
+	 #+END_SRC
+  4. 与序列相关的内建函数
+	 #+BEGIN_SRC python
+       sorted()
+       reversed()
+       enumerate()
+       for i, album in enumerate(albums):
+           pirnt i, album
+       zip()
+	 #+END_SRC
+  5. break 语句：
+
+	 结束当前循环，然后跳转到下一个语句
+  6. itet()创建它的迭代器
+	 #+BEGIN_SRC python
+       iter(obj)
+       iter(func, sentinel)            # 反复调用func，直到迭代器的下一个值为sentinel
+	 #+END_SRC
+  7. [expr for iter_var in iterable if cond_expr]
+  8. 我敬爱的矩阵：
+	 #+BEGIN_SRC python :results output
+       list = [(x+1, y+1) for x in range(3) for y in range(5)]
+       print list
+	 #+END_SRC
+
+     #+RESULTS:
+	 : [(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (2, 1), (2, 2), (2, 3), (2, 4), (2, 5), (3, 1), (3, 2), (3, 3), (3, 4), (3, 5)]
+  9. 计算一个段落中有多少个空格：
+	 #+BEGIN_SRC python :results output
+       f = open('hhga.txt', 'r')
+       len([word for line in f for word in line.split()])
+	 #+END_SRC
+  10. 列表解析：[expr for iter\_var in iterable if cond\_expr]	
+	  PEP 202 
+	  From: http://www.python.org/dev/peps/pep-0202/
+  
+	  生成器表达式：(expr for iter\_var in iterable if cond\_expr)
+	  PEP 289
+	  From: http://www.python.org/dev/peps/pep-0289/
+
+	  惰性求值：lazy evaluation
+  11. 交叉配对的例子：
+	  #+BEGIN_SRC python :results output
+        rows = [1, 2, 3, 17]
+        def cols():
+            yield 56
+            yield 2
+            yield 1
+        x_product_pairs = ((i, j) for i in rows for j in cols())
+        for pair in x_product_pairs:
+            print pair
+	  #+END_SRC
+
+      RESULTS:
+      #+begin_example
+	  (1, 56)
+	  (1, 2)
+	  (1, 1)
+	  (2, 56)
+	  (2, 2)
+	  (2, 1)
+	  (3, 56)
+	  (3, 2)
+	  (3, 1)
+	  (17, 56)
+	  (17, 2)
+	  (17, 1)
+	  #+end_example
+
+* 2013-04-18 木曜日<2013-04-18 Thu>
+  SCHEDULED: <2013-04-21 Sun>
+  1. try-except-else-finally P367
+  2. with语句
+	 
+	 with context\_expr [as var]:
+	     with\_suite
+  3. 先搁置with中 上下文管理协议 P369
+	 
+  4. raise
+
+	 raise [SomeException [, args, [, traceback]]]
+  5. assert expression[, arguments]
+	 
+	 AsserionError
+  6. 标准异常 P375
+
+* 2013-04-19 金曜日<2013-04-19 Fri>
+*** 可变长度的参数 P411
+	   
+	  1. 11.2.4 使用元组（非关键字参数）和字典（关键字参数）
+	   	 *port=8080这叫关键字参数*
+	   
+	   	 func(*tuple-grp-nonkw-args, **dict-grp-kw-args)
+
+	  2. 带元组的函数普通语法：
+		 #+BEGIN_SRC python
+           def function_name([formal_args,] *vargs_tuple):
+               "function_documentation_string"
+               function_body_suite
+		 #+END_SRC
+
+		 实例：
+		 #+BEGIN_SRC python :results output
+           def tupleVarArgs(arg1, arg2='defaultB', *theRest):
+               print 'formal arg 1:', arg1 
+               print 'formal arg 2:', arg2
+               for eachXtrArg in theRest:
+                   print 'another arg:', eachXtrArg
+           
+           tupleVarArgs('abc', 123, 'xyz', 456.789)
+		 #+END_SRC
+
+         RESULTS:
+         : formal arg 1: abc
+         : formal arg 2: 123
+         : another arg: xyz
+         : another arg: 456.789
+
+	  3. 字典函数普通用法：
+		 #+BEGIN_SRC python
+           def function_name([formal_args,][*vargst,] **vargsd):
+               function_documentation_string
+               function_body_suite
+                   
+		 #+END_SRC
+
+		 实例：
+		 #+BEGIN_SRC python :results output
+           def dictVarArgs(arg1, arg2='defaultB', **theRest):
+               print 'formal arg1:', arg1
+               print 'formal arg2:', arg2
+               for eachXtrArg in theRest.keys():
+                   print 'Xtra arg %s: %s' % \
+                   (eachXtrArg, str(theRest[eachXtrArg]))
+           
+           dictVarArgs('one', d=10, e='zoo', men=('freud', 'gaudi'))
+		 #+END_SRC
+
+         RESULTS:
+         : formal arg1: one
+         : formal arg2: defaultB
+         : Xtra arg men: ('freud', 'gaudi')
+         : Xtra arg e: zoo
+         : Xtra arg d: 10
+
+	  4. lambda表达式:
+		 
+		 #+BEGIN_SRC python
+           lambda [arg1[, arg2, ... argN]]: expression
+		 #+END_SRC
+
+* 2013-04-20 土曜日<2013-04-20 Sat>
+*** 内建函数apply(), fliter(), map(), reduce()
+   	玩一下：
+     #+BEGIN_SRC python :results output
+       print 'the total is:', reduce((lambda x,y: x+y), range(5))
+     #+END_SRC
+
+     #+RESULTS:
+	 : the total is: 10
+
+*** 偏函数(Partial Application)和柯里化Currying
+   	functional模块中的partial()函数创建PFA:
+   	#+BEGIN_SRC python :results output
+      from functools import partial
+      basetwo = partial(int, base=2)
+      basetwo.__doc__ = 'Convert base 2'
+      print basetwo('10010')
+      
+   	#+END_SRC
+
+   	RESULTS:
+   	: 18
+
+   	#+BEGIN_SRC python :results output
+      from operator import add, mul
+      from functools import partial
+      
+      add1 = partial(add, 1)
+      mul100 = partial(mul, 100)
+      
+      print add1(10)
+      print mul100(1)
+      
+   	#+END_SRC
+
+   	RESULTS:
+   	: 11
+   	: 100
+
+
+   	*Reference:*
+
+   	1. [[http://alecbenzer.com/blog/currying-partial-application/][Currying vs. Partial Application]]
+   	2. [[http://www.aqee.net/currying-partial-application/][函数加里化(Currying)和偏函数应用(Partial Application)的比较]]
+   	3. http://book.51cto.com/art/200806/77578.htm
+   	4. http://book.51cto.com/art/200806/77579.htm
+   	
+* 2013-04-21 日曜日<2013-04-21 Sun>
+*** 作用域和lambda
+   	#+BEGIN_SRC python :results output
+      x = 10
+      def foo():
+          y = 5
+          bar = lambda : x + y
+          print bar()
+      foo()
+   	#+END_SRC
+
+   	RESULTS:
+   	: 15
+
+*** 生成器
+   	协同程序的概念：可以运行的独立函数调用，可以暂停或者挂起，并从程序离开的地方继续或者重新开始。
+
+	资料参考:
+	
+	  1. PEP 255: http://www.python.org/dev/peps/pep-0255/
+	
+	  2. Python yield 使用浅析: http://www.ibm.com/developerworks/cn/opensource/os-cn-python-yield/
+
+	  3. 第9章 Lua协同程序http://blog.csdn.net/andylin02/article/details/2185367
+
+   	#+BEGIN_SRC python :results output
+      def simpleGen():
+          yield 1
+          yield '2 --> punch!'
+      myG = simpleGen()
+      myG.next()
+   	#+END_SRC
+
+   	#+RESULTS:
+
+	另外一个例子，求解fib：
+	#+BEGIN_SRC python :results output
+      def fib():
+          a, b = 0, 1
+          while 1:
+              yield b
+              a, b = b, a + b
+      
+      # Test
+      f = fib()
+      for i in xrange(5):
+          print f.next()
+	#+END_SRC
+
+    RESULTS:
+	: 1
+	: 1
+	: 2
+	: 3
+	: 5
+
+	如果函数有return的话，会立即终止迭代。貌似yield的出现简化程序，但是可以达到
+	节省内存的作用，如同下面的一句话。
+
+   	8.13生成器
+
+   	使用生成器的地方：迭代穿越一个巨大的数据集合。到时就知道怎么用了。呵呵。
+
+
+*** 模块：模块是组织python代码的方法，包是组织模块的。
+
+*** 名称空间与变量作用域比较 12.3.1
+	
+	1. 名称空间是纯粹意义上的名字和对象间的映射关系，
+	   作用域还指出从用户代码的哪些物理位置可以访问到这些名字。
+	
+	2. =from module import *= 的使用要限制
+
+	3. =about =__future__=:
+	   PEP 236
+
+	4. 绝对导入：
+
+	   相对导入：
+
+	5. 如果你不想导入某个模块，你可以属性名称前加 =_=
+	   例如：
+	   #+BEGIN_SRC python
+         import foo._bar
+	   #+END_SRC
+
+	6. 一个UTF-8编码文件可以这样指示：
+	   #+BEGIN_SRC python
+         #!/usr/bin/env python
+         #-*- coding: UTF-8 -*-
+	   #+END_SRC
+
+	7. 循环导入：
+	   
+	   解决方法：
+	   
+	   1. 将import语句移动到cli4vof
+
+	   2. 将import语句移动到最后
+
+	8. 13.4.2方法 下面这段代码究竟是什么意思呢？ P486
+	   #+BEGIN_SRC python :results output
+         class MyClass(object):
+             def myNoActionMethod(self):
+                 pass
+         
+         mc = MyClass()
+         mc.myNoActionMethod();
+	   #+END_SRC
+
+    #+RESULTS:
+
+*** 面向对象
+	1. =__init__()= 应当返回None
+	2. 特殊的实例属性
+	   #+BEGIN_EXAMPLE
+	   I.__class__   实例化I的类
+	   
+	   I.__dict__    I的属性
+	   #+END_EXAMPLE
+	3. 实现 =__setattr__()= 本身就是一个冒险的经历，满是圈套和陷阱，例如：
+	   无穷递归和破坏实例对象。
+	4. classmethod
+	   #+BEGIN_SRC python :results output
+         class TestClassMethod:
+             @classmethod
+             def foo(cls):
+                 print 'calling class method foo()'
+                 print 'foo() is part of class: ', cls.__name__
+         
+         TestClassMethod.foo()
+	   #+END_SRC
+
+       #+RESULTS:
+	   : calling class method foo()
+	   : foo() is part of class:  TestClassMethod
+	   
+* 2013-04-22 月曜日<2013-04-22 Mon>
+  1. 疑问：
+	 P545中， =__XXX(parent)= and =__XXX(child)=
+  2. 难道是Python2.2之前，从Python标准类型子类化或派生类都是不允许的。
+	 于是出现了包装？？？？？？？？？？？？？？
+  3. =_bulitin_= and =_builtins_=
+* 2013-04-23 火曜日<2013-04-23 Tue>
+  1. =exec= =eval()= and =compile()=
+	 #+BEGIN_SRC python :results output
+       # -*-coding: utf-8 -*-
+       # 'eval' 可求值的表达式[和eval()一起使用]
+       # 'single' 单一可执行语句[和exec 一起使用]
+       # 'exec' 可执行语句组[和exec 一起使用]
+       eval_code = compile('100+300', '', 'eval')
+       print eval(eval_code)
+       
+       single_code = compile('print "icecream!"', '', 'single')
+       print single_code
+       exec single_code
+	 #+END_SRC
+
+     RESULTS:
+	 : 400
+	 : <code object <module> at 0000000002553F30, file "", line 1>
+	 : icecream!
+
+  2. exec 还可以接受有效的python文件对象。意思就是你将代码写在一个icecream.py的
+	 文件中，然后在解释器中写入:
+	 #+BEGIN_SRC python
+       f = open('icecream.py')
+       exec f   
+	 #+END_SRC
+	 *Attention:*
+	 再次执行exec时，文件已经到达EOF。如果想再次执行，需要如下操作：
+	 #+BEGIN_SRC python
+       f.seek(0)
+       exec f
+	 #+END_SRC
+
+  3. input() = eval() + raw\_input() = eval(raw\_input())
+	 #+BEGIN_SRC python :results output
+	   aList = input('Enter a list:') #Enter a list: [123, 'abc']
+	   aList                          # [123, 'abc']
+	 #+END_SRC
+
+
+** 11.3.6 *函数（与方法）装饰器
+   装饰器在函数调用之上的装饰，装饰器可以如图函数调用一样“堆叠”起来。
+   装饰器实际就是函数，他们接受函数对象。本质上：java's AOP(Aspect Oriented Progrmming)
+
+   函数组合数学定义：
+   #+BEGIN_EXAMPLE
+     (g · f)(x) = g(f(x))
+     @g
+     @f
+     def foo():
+         ......
+     与foo=g(f(foo))相同   
+   #+END_EXAMPLE
+
+   一个小列子：
+   #+BEGIN_SRC python
+     @deco1(deco_arg)
+     @deco2
+     def func(): pass
+     
+     This is equivalent to:这等价于：
+     func = deco1(deco_arg)(deco2(func))
+        
+   #+END_SRC
+
+   一个较大的例子：
+   #+BEGIN_SRC python :results output
+     #!/usr/bin/env python
+     #-*- coding: utf-8 -*-
+     
+     from time import ctime, sleep
+     
+     def tsfunc(func):
+         def wrappedFunc():
+             print '[%s] %s() called' % (ctime(), func.__name__)
+             return func;
+         return wrappedFunc;
+     
+     @tsfunc
+     def foo():
+         pass
+     
+     foo()
+     sleep(2)
+     
+     for i in range(2):
+         sleep(1)
+         foo()
+     
+   #+END_SRC
+
+   RESULTS:
+   : [Tue Apr 23 14:37:08 2013] foo() called
+   : [Tue Apr 23 14:37:11 2013] foo() called
+   : [Tue Apr 23 14:37:12 2013] foo() called
+
+   *Reference*:
+   From: http://docs.python.org/2/library/functools.html
+   
+
+** Random - Generate pseudo-random numbers
+   #+BEGIN_SRC python :results output
+     import random
+     
+     print 'random:', random.random()
+     print 'uniform:', random.uniform(1, 10)
+     print 'randint:', random.randint(1, 10)
+     print 'randrange:', random.randrange(0, 101, 2)
+     print 'choice:', random.choice('abcd')
+     
+     items = [1,2,3,4,5,6]
+     random.shuffle(items)
+     print 'items:', items
+     
+     print 'sample:', random.sample([1,2,3,4,5], 3)   # choose 3 elements
+   #+END_SRC
+
+   RESULTS:
+   : random: 0.624959723641
+   : uniform: 4.2231135682
+   : randint: 7
+   : randrange: 56
+   : choice: b
+   : items: [2, 4, 6, 1, 5, 3]
+   : sample: [5, 2, 3]
+   From: http://docs.python.org/2/library/random.html#random.gammavariate
+ 
+
+** =__builtins__= and =__builtin__=
+   P454
+   
+   =__builtins__= 包含 =__builtin__= 所有的名字
+
+   =__builtins__= 模块和 =__builtin__= 模块不能混淆。 虽然它们的名字相似——尤其对于新手来
+   说。 =__builtins__= 模块包含内建名称空间中内建名字的集合。 其中大多数(如果不是全部的话)来
+   自 =__builtin__= 模块, 该模块包含内建函数, 异常以及其他属性。 在标准 Python 执行环境下,
+   =__builtins__= 包含 =__builtin__= 的所有名字。 Python 曾经有一个限制执行模式, 允许你修改
+   =__builtins__= , 只保留来自 =__builtin__= 的一部分, 创建一个沙盒（sandbox）环境。但是, 因为
+   它有一定的安全缺陷, 而且修复它很困难, Python 已经不再支持限制执行模式。(如版本2.3 )
+
+* 2013-04-24 水曜日<2013-04-24 Wed>
+  1.正则表达式：
+    #+BEGIN_SRC python :results output
+      #-*-coding: utf-8 -*-
+      
+      import re
+      data = 'Thu Feb 15 17:46:04 2007::creamidea@icecream.com::1171590364-8-8'
+      
+      patt = '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)'
+      m = re.match(patt, data)
+      print 'm.group():', m.group()
+      print 'm.group(1):', m.group(1)
+      print 'm.groups():', m.groups()
+      
+      print '-'*20
+      patt = '^((\w){3})'
+      m = re.match(patt, data)
+      print 'm.group():', m.group()
+      print 'm.group(1):', m.group(1)
+      print 'm.groups():', m.groups()
+      
+      print '-'*20
+      patt = '^(\w){3}'
+      m = re.match(patt, data)
+      print 'm.group():', m.group()
+      print 'm.group(1):', m.group(1)
+      print 'm.groups():', m.groups()
+      
+      print '-'*20
+      patt = '\d+-\d+-\d+'
+      m = re.search(patt, data)
+      print 'm.group():', m.group()
+      
+      print '-'*20
+      patt = '.+?(\d+-\d+-\d+)'       # ？ 取消系统的贪婪匹配
+      m = re.match(patt, data)        # 使用匹配函数
+      print 'm.group():', m.group()
+      print 'm.group(1):', m.group(1)
+      
+    #+END_SRC
+
+    #+RESULTS:
+    #+begin_example
+    m.group(): Thu
+    m.group(1): Thu
+    m.groups(): ('Thu',)
+    --------------------
+    m.group(): Thu
+    m.group(1): Thu
+    m.groups(): ('Thu', 'u')
+    --------------------
+    m.group(): Thu
+    m.group(1): u
+    m.groups(): ('u',)
+    --------------------
+    m.group(): 1171590364-8-8
+    --------------------
+    m.group(): Thu Feb 15 17:46:04 2007::creamidea@icecream.com::1171590364-8-8
+    m.group(1): 1171590364-8-8
+    #+end_example
+
+* 2013-05-13 月曜日<2013-05-13 Mon>
+  1. 解决 =error: Unable to find vcvarsall.bat= 问题：
+
+	 If you have Visual Studio 2010 installed, execute
+
+	 =SET VS90COMNTOOLS=%VS100COMNTOOLS%=
+	 
+	 or with Visual Studio 2012 installed
+	 
+	 =SET VS90COMNTOOLS=%VS110COMNTOOLS%=
+	 
+	 *Reference:*
+	 + http://stackoverflow.com/questions/2817869/error-unable-to-find-vcvarsall-bat
+	 + http://wangye.org/blog/archives/738/
+
+
+* Footnotes
+
+[fn:1] http://www.python.org/
+
+[fn:2] http://www.tornadoweb.org/en/stable/
+  
+[fn:3] http://www.python.org/dev/peps/pep-0008/
+
+[fn:4] Imports: Multi-Line and Absolute/Relative: http://www.python.org/dev/peps/pep-0328/
+
+[fn:5] http://docs.python.org/2/tutorial/modules.html#packages

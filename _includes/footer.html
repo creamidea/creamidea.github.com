@@ -1,7 +1,7 @@
 <footer class="footer">
   <p>Copyright © 2013 
-    <a href="http://creamidea.github.com/">ICECREAM(氷菓)</a>.
-    Licencia Creative Commons
+    <a href="/">ICECREAM(氷菓)</a>.
+    Licencia Creative Commons 3.0
   </p>
   <p>
     Edited by <a href="http://www.gnu.org/software/emacs/">Emacs</a>. 
@@ -12,16 +12,16 @@
 <div class="clear"></div>
 <script>
   $(function() {
-  <!-- Draggabel -->
-      $("div#search-bar").draggable();
-      $("div#table-of-contents").draggable();
-  <!-- make navigation can move by click -->
-      $("div.right_navigation").draggable();
+  <!-- <\!-- Draggabel -\-> -->
+  <!--     $("div#search-bar").draggable(); -->
+  <!--     $("div#table-of-contents").draggable(); -->
+  <!-- <\!-- make navigation can move by click -\-> -->
+  <!--     $("div.right_navigation").draggable(); -->
 
-      $("#logo").tooltip({ 
-	  placement: 'top'
-	  , delay: { show: 500, hide: 100 }
-      });
+  <!--     $("#logo").tooltip({  -->
+	<!--   placement: 'top' -->
+	<!--   , delay: { show: 500, hide: 100 } -->
+  <!--     }); -->
 
   <!-- Back To Top And slide -->
       var $backToTop = $(".backToTop")
@@ -46,14 +46,14 @@
       });
 
   <!-- Google Custom Search -->
-      (function() {
-	  var cx = '{{ site.google_custom_search_id }}';
-	  var gcse = document.createElement('script'); gcse.type = 'text/javascript';
-	  gcse.async = true;
-	  gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-	      '//www.google.com/cse/cse.js?cx=' + cx;
-	  var s = document.getElementsByTagName('script')[0];
-	  s.parentNode.insertBefore(gcse, s);
-      })();
+    <!--   (function() { -->
+	  <!-- var cx = '{{ site.google_custom_search_id }}'; -->
+	  <!-- var gcse = document.createElement('script'); gcse.type = 'text/javascript'; -->
+	  <!-- gcse.async = true; -->
+	  <!-- gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + -->
+	  <!--     '//www.google.com/cse/cse.js?cx=' + cx; -->
+	  <!-- var s = document.getElementsByTagName('script')[0]; -->
+	  <!-- s.parentNode.insertBefore(gcse, s); -->
+    <!--   })(); -->
   });
 </script>

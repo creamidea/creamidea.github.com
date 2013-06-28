@@ -14,6 +14,31 @@ tags: TeX LaTeX
 <li><a href="#sec-1">1 前言</a></li>
 <li><a href="#sec-2">2 软件环境</a></li>
 <li><a href="#sec-3">3 安装Installation</a></li>
+<li><a href="#sec-4">4 安装中文环境</a>
+<ul>
+<li><a href="#sec-4-1">4.1 CJK简介：</a></li>
+<li><a href="#sec-4-2">4.2 安装过程：</a></li>
+<li><a href="#sec-4-3">4.3 测试代码：</a></li>
+<li><a href="#sec-4-4">4.4 <b>Reference:</b></a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5 常用命令</a></li>
+<li><a href="#sec-6">6 命令与环境</a>
+<ul>
+<li><a href="#sec-6-1">6.1 长度</a></li>
+</ul>
+</li>
+<li><a href="#sec-7">7 特殊字符</a>
+<ul>
+<li><a href="#sec-7-1">7.1 连字符和破折号</a></li>
+<li><a href="#sec-7-2">7.2 £ § ¶ © ®</a></li>
+<li><a href="#sec-7-3">7.3 外文字母</a></li>
+<li><a href="#sec-7-4">7.4 重音</a></li>
+<li><a href="#sec-7-5">7.5 连写</a></li>
+</ul>
+</li>
+<li><a href="#sec-8">8 章节：</a></li>
+<li><a href="#sec-9">9 一些常用：</a></li>
 </ul>
 </div>
 </div>
@@ -84,6 +109,285 @@ tags: TeX LaTeX
 </ol>
 
 
+
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">安装中文环境</h2>
+<div class="outline-text-2" id="text-4">
+
+
+</div>
+
+<div id="outline-container-4-1" class="outline-3">
+<h3 id="sec-4-1">CJK简介：</h3>
+<div class="outline-text-3" id="text-4-1">
+
+<p>   <a href="http://www.math.zju.edu.cn/ligangliu/latexforum/tex_cjk.htm">http://www.math.zju.edu.cn/ligangliu/latexforum/tex_cjk.htm</a>
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-2" class="outline-3">
+<h3 id="sec-4-2">安装过程：</h3>
+<div class="outline-text-3" id="text-4-2">
+
+<p>  笔者是用LaTex2011作的实验，等我下次重新安装系统的时候会使用最新版本，但愿到时一切顺利。
+</p>
+<p>
+  其实根据我这几个小时的查阅资料来看，LaTex已经可以支持部分的中文，日文和韩文了。具体可以
+  参见CJK support in LaTeX。
+</p>
+<p>
+  我下面给出在windows上的安装过程，Linux平台和Mac OS平台的资料有很多（从我搜资料的过程中得出，
+  所以这里就不再累述了。）
+</p>
+<p>
+  最简单的方式：
+</p>
+
+
+<pre class="example">&gt; tlmgr -gui
+</pre>
+
+<p>
+  弹出如果所示对话框：
+</p>
+<div style="text-align: center">
+
+<a href="http://www.flickr.com/photos/85376793@N04/9089198961/" title="Tex Live Manager 2011 by aprilgalaxy, on Flickr"><img src="http://farm8.staticflickr.com/7385/9089198961_99cb1d2ab3.jpg" width="500" height="481" alt="Tex Live Manager 2011"></a>
+
+</div>
+
+<p>
+  注意我框出的两个红色框：
+</p>
+<p>  
+  一个是选择从哪里加载，笔者默认的是H：（我开始安装的时候加载到H:盘），也可以选择
+  其他的安装路径，比如网络上的库等等。
+</p>
+<p>
+  另一个是搜索框，在里面输入cjk，然后选择安装：
+  cjk, cjkpunct, ctex, cjkutils, collection-langcjk.
+  （有问题在联系我吧，我们一起解决）
+</p>
+<p>
+  先就这么多吧，我一开始还认为不可能安装好的。现在基本的字体都可以显示了。估计只能在Linux上选择源码安装了。
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-3" class="outline-3">
+<h3 id="sec-4-3">测试代码：</h3>
+<div class="outline-text-3" id="text-4-3">
+
+<p>  下面给出一个测试代码：
+  (预装的字体配置在C:\texlive\2011\texmf-dist\tex\latex\ctex\fontset\目录下,
+  注意路径会有所不同)
+</p>
+
+
+<pre class="example">\documentclass[UTF8]{ctexart}
+
+\begin{document}
+
+%% 注意这里的编码是UTF8，如果使用GB貌似还是不行
+%% 如果谁知道怎么解决希望能够告诉我，不甚感激
+\begin{CJK*}{UTF8}{zhyou}
+  这个是公式:\[\int_a^b f(x)dx\]
+\end{CJK*}
+
+\begin{CJK*}{UTF8}{zhkai}
+  你好么？这个是真的么？
+\end{CJK*}
+
+\begin{CJK*}{UTF8}{gkai}
+  这个是楷体么？
+\end{CJK*}
+
+\section{论语}
+这个是我的一个\TeX{}文件
+
+子曰:有朋自远方来，不亦乐乎？
+
+\end{document}
+</pre>
+
+
+<p>
+  <b>果然要如安装文档中说的那样，先要看看《Tex Live 指南》, 其中学到很多命令如：tlmgr,texhash&hellip;</b>
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-4" class="outline-3">
+<h3 id="sec-4-4"><b>Reference:</b></h3>
+<div class="outline-text-3" id="text-4-4">
+
+<ul>
+<li><a href="http://latex-my.blogspot.com/2010/06/cjk-support-in-latex.html">CJK support in LaTeX</a>
+</li>
+<li><a href="http://tex.stackexchange.com/questions/49621/how-to-install-fonts">How to install fonts</a>
+</li>
+<li><a href="http://www.latex-community.org/forum/viewtopic.php?f=48&amp;t=5975&amp;sid=93c191a815d3e8b22f8464bcaa3e7b65">How do I install fonts?</a>
+</li>
+<li><a href="http://tex.stackexchange.com/questions/17611/how-does-one-type-chinese-in-latex/17637#17637">How does one type Chinese in LaTeX?</a>
+</li>
+<li><a href="https://docs.google.com/file/d/0B1C5aL1-2qlMaUt0S3ZJdHRSZ3FGOEpsR1plNWlkQQ/edit">中文LaTex安装与应用 蔡炎龙</a>
+</li>
+<li><a href="http://www.cnblogs.com/SunSmileCS/archive/2013/02/22/2923002.html">emacs 探索之六：latex中文支持</a>
+</li>
+<li><a href="http://tex.stackexchange.com/questions/15516/how-to-write-japanese-with-latex/15524#15524">How to write Japanese with LaTeX?</a>
+</li>
+<li><a href="http://www.ptt.cc/bbs/LaTeX/M.1332762990.A.671.html">http://www.ptt.cc/bbs/LaTeX/M.1332762990.A.671.html</a>
+</li>
+<li><a href="http://www.ctan.org/tex-archive/fonts/CJK/">http://www.ctan.org/tex-archive/fonts/CJK/</a>
+</li>
+<li><a href="http://www.ctan.org/tex-archive/fonts/wadalabb">http://www.ctan.org/tex-archive/fonts/wadalabb</a>
+</li>
+</ul>
+
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">常用命令</h2>
+<div class="outline-text-2" id="text-5">
+
+
+
+
+<pre class="example">2.5 TEX Live 中其他值得一提的程序
+这里是在TEX Live 中其他的一些常用程序：
+bibtex, bibtex8 参考文献支持。
+makeindex, xindy 索引支持。
+dvips 将DVI 转换为PostScript。
+xdvi X Window System 下的DVI 阅读器。
+dvilj HP LaserJet 系列打印机的DVI 驱动。
+dviconcat, dviselect 从DVI 文件中复制和粘贴页面。
+dvipdfmx 将DVI 转换为PDF，是(前面提到过的) pdfTEX 的一套替换方案。
+psselect, psnup, . . . PostScript 实用程序。
+pdfjam, pdfjoin, . . . PDF 实用程序。
+texexec, texmfstart ConTEXt 和PDF 处理工具。
+tex4ht TEX 到HTML (还有XML 等其他格式) 的转换器。
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6">命令与环境</h2>
+<div class="outline-text-2" id="text-6">
+
+
+</div>
+
+<div id="outline-container-6-1" class="outline-3">
+<h3 id="sec-6-1">长度</h3>
+<div class="outline-text-3" id="text-6-1">
+
+
+
+
+<pre class="example">\setlength{\长度命令}{\已定义的长度}
+\setlength{\textwidth}{12.5cm}
+</pre>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7">特殊字符</h2>
+<div class="outline-text-2" id="text-7">
+
+
+</div>
+
+<div id="outline-container-7-1" class="outline-3">
+<h3 id="sec-7-1">连字符和破折号</h3>
+<div class="outline-text-3" id="text-7-1">
+
+
+
+
+<pre class="example">1. -    -
+2. --   ー
+3. ---  ——
+4. 符号- $-$
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-7-2" class="outline-3">
+<h3 id="sec-7-2">£ § ¶ © ®</h3>
+<div class="outline-text-3" id="text-7-2">
+
+<p>   £=\pounds §=\S ¶=\P ©=\copyright ®
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-7-3" class="outline-3">
+<h3 id="sec-7-3">外文字母</h3>
+<div class="outline-text-3" id="text-7-3">
+
+</div>
+
+</div>
+
+<div id="outline-container-7-4" class="outline-3">
+<h3 id="sec-7-4">重音</h3>
+<div class="outline-text-3" id="text-7-4">
+
+</div>
+
+</div>
+
+<div id="outline-container-7-5" class="outline-3">
+<h3 id="sec-7-5">连写</h3>
+<div class="outline-text-3" id="text-7-5">
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="sec-8">章节：</h2>
+<div class="outline-text-2" id="text-8">
+
+<p>  \part \chapter \subsection \paragrahp
+  \section \subsubsection \subparagrahp
+</p></div>
+
+</div>
+
+<div id="outline-container-9" class="outline-2">
+<h2 id="sec-9">一些常用：</h2>
+<div class="outline-text-2" id="text-9">
+
+<p>  \textsl
+  \textit
+</p>
+<p>
+Chapter 4
+</p>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
@@ -92,11 +396,7 @@ tags: TeX LaTeX
 
 
 <p class="footnote"><sup><a class="footnum" name="fn-.2" href="#fnr-.2">2</a></sup> <a href="http://tug.org/">http://tug.org/</a>
-</p>
-
-
-
-</div>
+</p></div>
 </div>
 
 </div>

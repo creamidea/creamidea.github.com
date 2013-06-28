@@ -3,6 +3,7 @@ auto:        false
 server:      true
 # server_port: 4000
 # url: http://localhost:4000
+# url: /
 paginator: 5
 
 source:      .
@@ -58,7 +59,9 @@ author:
   email: creamidea@gmail.com
 
 archive: /archive
-about: /about
+# about: /about
+about: http://www.douban.com/people/creamidea/
+github: https://github.com/creamidea
 rss: /rss/index.xml
 tags_path: /tags
 categories_path: /categories

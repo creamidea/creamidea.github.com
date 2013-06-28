@@ -15,11 +15,25 @@ tags: linux windows config
 <li><a href="#sec-2">2 Windows</a>
 <ul>
 <li><a href="#sec-2-1">2.1 Install Windows7 Ultimate</a></li>
-<li><a href="#sec-2-2">2.2 Install Emacs and config her</a></li>
+<li><a href="#sec-2-2">2.2 Install Emacs and config her</a>
+<ul>
+<li><a href="#sec-2-2-1">2.2.1 Change the Home Directory:</a></li>
+<li><a href="#sec-2-2-2">2.2.2 Swap the CapsLk &amp;&amp; Ctrl<sub>L</sub></a></li>
+<li><a href="#sec-2-2-3">2.2.3 Reference:</a></li>
+</ul>
+</li>
 <li><a href="#sec-2-3">2.3 Install Foobar and config her</a></li>
 <li><a href="#sec-2-4">2.4 Install Win7Code</a></li>
 <li><a href="#sec-2-5">2.5 Install mit-scheme and fix some issue</a></li>
 <li><a href="#sec-2-6">2.6 Install Java Development</a></li>
+<li><a href="#sec-2-7">2.7 Install Qt Development</a>
+<ul>
+<li><a href="#sec-2-7-1">2.7.1 Download:</a></li>
+<li><a href="#sec-2-7-2">2.7.2 Install:</a></li>
+<li><a href="#sec-2-7-3">2.7.3 Configure:</a></li>
+<li><a href="#sec-2-7-4">2.7.4 Emacs:</a></li>
+<li><a href="#sec-2-7-5">2.7.5 Q &amp;&amp; A:</a></li>
+</ul></li>
 </ul>
 </li>
 <li><a href="#sec-3">3 Linux</a>
@@ -96,6 +110,85 @@ tags: linux windows config
 <h3 id="sec-2-2">Install Emacs and config her</h3>
 <div class="outline-text-3" id="text-2-2">
 
+
+</div>
+
+<div id="outline-container-2-2-1" class="outline-4">
+<h4 id="sec-2-2-1">Change the Home Directory:</h4>
+<div class="outline-text-4" id="text-2-2-1">
+
+<ol>
+<li>Ctrl + R
+</li>
+<li>Input "regedit"
+</li>
+<li>HKEY<sub>CURRENT</sub><sub>USER</sub>/Software/GNU/Emacs/HOME=%The Home of Emacs%
+</li>
+</ol>
+
+<p>    (New a string value)
+</p></div>
+
+</div>
+
+<div id="outline-container-2-2-2" class="outline-4">
+<h4 id="sec-2-2-2">Swap the CapsLk &amp;&amp; Ctrl<sub>L</sub></h4>
+<div class="outline-text-4" id="text-2-2-2">
+
+<ol>
+<li>Modify the regedit
+
+
+
+<pre class="example">REGEDIT4
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout]
+"Scancode Map"=hex:00,00,00,00,00,00,00,00,
+                   03,00,00,00,1d,00,3a,00,
+                   3a,00,1d,00,00,00,00,00
+(New a binary Values)
+</pre>
+
+</li>
+<li>Download Software:
+<ul>
+<li>The script: <a href="http://www.cs.umb.edu/~wimiller/stuff/caps2ctrl.exe">http://www.cs.umb.edu/~wimiller/stuff/caps2ctrl.exe</a>
+</li>
+</ul>
+
+<p>       +The source: <a href="http://www.cs.umb.edu/~wimiller/stuff/caps2ctrl.ahk">http://www.cs.umb.edu/~wimiller/stuff/caps2ctrl.ahk</a>
+</p></li>
+<li>AutoHotKey:
+
+
+
+<pre class="example">Capslock::Ctrl
+</pre>
+
+</li>
+<li><b>Reference:</b>
+<ul>
+<li><a href="http://www.emacswiki.org/emacs/MovingTheCtrlKey">http://www.emacswiki.org/emacs/MovingTheCtrlKey</a>
+</li>
+</ul>
+
+</li>
+</ol>
+
+</div>
+
+</div>
+
+<div id="outline-container-2-2-3" class="outline-4">
+<h4 id="sec-2-2-3">Reference:</h4>
+<div class="outline-text-4" id="text-2-2-3">
+
+<ul>
+<li><a href="http://www.emacswiki.org/emacs/JonathanArnoldDotEmacs">http://www.emacswiki.org/emacs/JonathanArnoldDotEmacs</a>
+</li>
+</ul>
+
+</div>
 </div>
 
 </div>
@@ -129,6 +222,108 @@ tags: linux windows config
 <div class="outline-text-3" id="text-2-6">
 
 
+</div>
+
+</div>
+
+<div id="outline-container-2-7" class="outline-3">
+<h3 id="sec-2-7">Install Qt Development</h3>
+<div class="outline-text-3" id="text-2-7">
+
+
+</div>
+
+<div id="outline-container-2-7-1" class="outline-4">
+<h4 id="sec-2-7-1">Download:</h4>
+<div class="outline-text-4" id="text-2-7-1">
+
+<ol>
+<li>Download Address:  <a href="http://qt-project.org/downloads">http://qt-project.org/downloads</a>
+</li>
+<li>我下载的是：<a href="http://mirrors.ustc.edu.cn/qtproject/official_releases/qt/4.8/4.8.4/qt-win-opensource-4.8.4-vs2010.exe">Qt libraries 4.8.4 for Windows (VS 2010, 234 MB) (Info)</a>
+</li>
+</ol>
+
+</div>
+
+</div>
+
+<div id="outline-container-2-7-2" class="outline-4">
+<h4 id="sec-2-7-2">Install:</h4>
+<div class="outline-text-4" id="text-2-7-2">
+
+<ol>
+<li>Next-&gt;Next-&gt;&hellip;-&gt;Finish
+</li>
+</ol>
+
+</div>
+
+</div>
+
+<div id="outline-container-2-7-3" class="outline-4">
+<h4 id="sec-2-7-3">Configure:</h4>
+<div class="outline-text-4" id="text-2-7-3">
+
+<ol>
+<li>use it in terminal (vs2010):
+       Please use the : Qt 4.8.4 Command Prompt
+</li>
+</ol>
+
+</div>
+
+</div>
+
+<div id="outline-container-2-7-4" class="outline-4">
+<h4 id="sec-2-7-4">Emacs:</h4>
+<div class="outline-text-4" id="text-2-7-4">
+
+<ul>
+<li><a href="http://www.emacswiki.org/emacs/QtMode">http://www.emacswiki.org/emacs/QtMode</a>
+</li>
+<li><a href="http://www.emacswiki.org/emacs/CcMode">http://www.emacswiki.org/emacs/CcMode</a>
+</li>
+<li><a href="http://alexott.blogspot.it/2009/02/cedet-qt.html">http://alexott.blogspot.it/2009/02/cedet-qt.html</a>
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-2-7-5" class="outline-4">
+<h4 id="sec-2-7-5">Q &amp;&amp; A:</h4>
+<div class="outline-text-4" id="text-2-7-5">
+
+<ol>
+<li>Makefile.Debug:59: *** missing separator.  Stop.:
+
+
+
+<pre class="example"># Qt 4.8.4 Command Prompt
+&gt; qmake -project
+&gt; qmake
+&gt; nmake
+</pre>
+
+<p>
+       Reference:
+</p><ul>
+<li><a href="http://stackoverflow.com/questions/12339099/what-does-the-missing-separator-make-error-mean-when-using-qt/16714236#16714236">http://stackoverflow.com/questions/12339099/what-does-the-missing-separator-make-error-mean-when-using-qt/16714236#16714236</a>
+</li>
+<li><a href="http://www.verydemo.com/demo_c92_i131633.html">http://www.verydemo.com/demo_c92_i131633.html</a>
+</li>
+<li><a href="http://www.qtforum.org/article/23450/qt4-and-mysql-driver-problem.html">http://www.qtforum.org/article/23450/qt4-and-mysql-driver-problem.html</a>
+</li>
+<li><a href="http://superuser.com/questions/375029/make-interrupt-exception-caught">http://superuser.com/questions/375029/make-interrupt-exception-caught</a>
+</li>
+</ul>
+
+</li>
+</ol>
+
+</div>
 </div>
 </div>
 
@@ -410,6 +605,7 @@ stop on starting rc RUNLEVEL=[016]
 <div class="outline-text-2" id="text-4">
 
 
+
 </div>
 
 </div>
@@ -419,11 +615,11 @@ stop on starting rc RUNLEVEL=[016]
 <div class="outline-text-2" id="text-5">
 
 <p>待阅读：
-<a href="http://stackoverflow.com/questions/4352367/is-it-possible-to-start-emacs-using-a-remote-configuration-file">Is it possible to start emacs using a remote configuration file?</a>
-<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-emacs-shell/">当 Shell 遇见 Emacs &ndash; 大话 Emacs Shell Mode</a>
-<a href="http://lifegoo.pluskid.org/wiki/EmacsAsFileManger.html">Emacs &ndash; 强大的文件管理器</a>
-<a href="http://cx4a.org/software/gccsense/manual.html#Installation">GCCSense User Manual</a>
-<a href="http://emacser.com/emacs-gccsense.htm">Emacs补全利器：auto-complete+gccsense</a>
-<a href="http://blog.csdn.net/astropeak/article/details/6666527">《Emacs——你不能不用的神级利器》——补全（下）</a>
+<a href="http://stackoverflow.com/questions/4352367/is-it-possible-to-start-emacs-using-a-remote-configuration-file"> Is it possible to start emacs using a remote configuration file?</a>
+<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-emacs-shell/"> 当 Shell 遇见 Emacs &ndash; 大话 Emacs Shell Mode</a>
+<a href="http://lifegoo.pluskid.org/wiki/EmacsAsFileManger.html"> Emacs &ndash; 强大的文件管理器</a>
+<a href="http://cx4a.org/software/gccsense/manual.html#Installation"> GCCSense User Manual</a>
+<a href="http://emacser.com/emacs-gccsense.htm"> Emacs补全利器：auto-complete+gccsense</a>
+<a href="http://blog.csdn.net/astropeak/article/details/6666527"> 《Emacs——你不能不用的神级利器》——补全（下）</a>
 </p></div>
 </div>

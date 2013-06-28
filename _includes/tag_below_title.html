@@ -1,0 +1,13 @@
+<!-- The basic information of articles -->
+<nav>
+  <!-- tags -->
+  <!-- <h4><a href="{{ site.url }}{{ site.tags_path }}"><i class="icon-tags"></i> Article Tages </a></h4> -->
+  {% if page.tags %}
+  <ul class="tags">
+		{% for tag in page.tags %}
+		<li><a href="{{ site.url }}{{ site.tags_path }}#{{ tag }}"><i class="icon-tag"></i>{{ tag }}</a></li>
+		{% endfor %}
+  </ul>
+  {% endif %}
+	<div class="clearfix"></div>
+</nav>

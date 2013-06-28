@@ -8,22 +8,21 @@ overview: true
   <div class="content">
     <div class="grid10 first">
       <article>
-	<div class="note info">
-	  <h1 style="font-size: 36px;">{{ page.title }} <i class="icon-list"></i></h1>
-	</div>
-	<ul class="archive">
-	  {% for post in site.posts %}
-	    <li>
-	      <!-- <span class="date"> -->
-		<i class="icon-time"></i>{{ post.date | date: '%b %d, %Y' }}
-	      <!-- </span> -->
-	      >>
-	      <a href="{{ post.url }}"{% if post.subtitle %} title="{{ post.subtitle | escape }}"{% endif %}>
-		<strong><i class="icon-file-alt"></i>{{ post.title }}</strong>
-	      </a>
-	    </li>
+				<h1 style="font-size: 36px; color: yellowgreen">{{ page.title }} <i class="icon-list"></i></h1>
+				<ul class="archive">
+					{% for post in site.posts %}
+					<li>
+						<span class="date">
+							<!-- <i class="icon-time"></i> -->
+							{{ post.date | date: '%b %d, %Y' }}
+						</span>
+						>>
+						<a href="{{ post.url }}"{% if post.subtitle %} title="{{ post.subtitle | escape }}"{% endif %}>
+							<strong><i class="icon-file-alt"></i>{{ post.title }}</strong>
+						</a>
+					</li>
           {% endfor %}
-	<!-- - <a href="archive.html"><strong>显示更多 >> </strong></a></li> -->
+					<!-- - <a href="archive.html"><strong>显示更多 >> </strong></a></li> -->
         </ul>
       </article>
     </div>

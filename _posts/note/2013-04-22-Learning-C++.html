@@ -1,9 +1,9 @@
 ---
 layout: doc
 title: Learning C++
-subtitle: 学习C++笔记 
+subtitle: 学习C++笔记
 categories: note
-tags: C++ 
+tags: Cpp
 ---
 
 
@@ -29,10 +29,11 @@ tags: C++
 <ul>
 <li><a href="#sec-4-1-1">4.1.1 堆空间：</a></li>
 <li><a href="#sec-4-1-2">4.1.2 &amp;: 去地址/引用</a></li>
+</ul></li>
 </ul>
 </li>
-</ul>
-</li>
+<li><a href="#sec-5">5 第四课  1. 类的拷贝：</a></li>
+<li><a href="#sec-6">6 </a></li>
 </ul>
 </div>
 </div>
@@ -64,7 +65,6 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     cout &lt;&lt; "hi, icecream" &lt;&lt; endl;
-    return 0;
 }
 </pre>
 
@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
 </pre>
 
 
-<p>   
+<p>
    <code>inline</code>
    类的成员函数，提过效率。
    避免C中宏定义的二义性。
@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
 
 </li>
 <li>默认参数:
-          在参数列表中的某些参数有默认值时，在调用的时候会报错。代码如下：
+    在参数列表中的某些参数有默认值时，在调用的时候会报错。代码如下：
 
 
 
@@ -208,5 +208,45 @@ int &amp;p1 = num;                  /* 引用 */
 
 </div>
 </div>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">第四课  1. 类的拷贝：</h2>
+<div class="outline-text-2" id="text-5">
+
+<p>   浅拷贝
+</p>
+<p>
+   深拷贝
+</p>
+<ol>
+<li>友元类和友元方法
+</li>
+</ol>
+
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6"><span class="timestamp-wrapper"> <span class="timestamp">2013-05-16 Thu</span></span></h2>
+<div class="outline-text-2" id="text-6">
+
+<ol>
+<li>虚基类
+     class A: virtual public b
+
+<p>
+     不产生二义性
+     画一个图真难啊
+</p>
+<p>
+		 <img src="asciiExample_0c521cd9c714f4ab5670357d0cd01b23fa460a19.png"  alt="asciiExample_0c521cd9c714f4ab5670357d0cd01b23fa460a19.png" />
+</p>
+</li>
+</ol>
+
 </div>
 </div>
