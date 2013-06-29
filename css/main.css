@@ -225,6 +225,10 @@ ul#mainNav li {
 		margin: auto 0.9em;
 }
 
+/* ul#mainNav li:hover:after { */
+/* 		content: "icecream"; */
+/* } */
+
 ul#mainNav a{
 		text-decoration: none;
 }
