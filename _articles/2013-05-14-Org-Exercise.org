@@ -19,8 +19,9 @@ tags: org-mode
 #+END_HTML
 
 * 前言
+	这个只是用来练习的文档，后期会将其转成org的入门手册
 * Table
-** Reference: http://www.gnu.org/software/emacs/manual/html_node/org/Built_002din-table-editor.html
+Reference: http://www.gnu.org/software/emacs/manual/html_node/org/Built_002din-table-editor.html
 ** 练习部分
 1. 
 		 |---+------------------------------+----|

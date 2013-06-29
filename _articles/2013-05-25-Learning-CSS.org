@@ -589,7 +589,8 @@ CSS，现在让我既爱你又恨你啊。
 	 7. [[http://www.tolearn.com.cn/use_css/css_regard.php][CSS 使用注意事项]]
  
 * 布局技巧：
-** [[http://g.51cto.com/wangzhanqianduankaifa/49213][八个需要掌握的CSS布局技巧]]:
+** 八个需要掌握的CSS布局技巧:
+	 链接地址：http://g.51cto.com/wangzhanqianduankaifa/49213
 	 1. 若有疑问立即检测: [[http://csslint.net/][CSS LINT]]
    2. 使用浮动功能时记得适当清除指令: =clear=
 	 3. 边界重合时利用padding或border来避免
@@ -598,7 +599,8 @@ CSS，现在让我既爱你又恨你啊。
 	 6. 若有疑问，先减少百分比: 50% -> 49.9%
 	 7. 记住“TRouBLed”写法:border，margin与padding的简写语法有特定顺序，top,right,bottom,left. 
 	 8. 只要不是零的值，都要指定单位: font，margin（唯一的例外是line-height）
-** [[http://developer.51cto.com/art/201009/223657.htm][详解CSS布局技巧十则]]:
+** 详解CSS布局技巧十则:
+	 [[http://developer.51cto.com/art/201009/223657.htm][详解CSS布局技巧十则]]
 
 * Sprites， 图片的特定位置选取：
 	#+BEGIN_SRC css
@@ -1024,27 +1026,29 @@ CSS，现在让我既爱你又恨你啊。
 		 #+END_HTML
 
 * CSS Pseudo Class/Elements
+	#+BEGIN_EXAMPLE
 	:link	a:link	Selects all unvisited links
-
+	
 	:visited	a:visited	Selects all visited links
-
+	
 	:active	a:active	Selects the active link
-
+	
 	:hover	a:hover	Selects links on mouse over
-
+	
 	:focus	input:focus	Selects the input element which has focus
-
+	
 	:first-letter	p:first-letter	Selects the first letter of every <p> element
-
+	
 	:first-line	p:first-line	Selects the first line of every <p> element
-
+	
 	:first-child	p:first-child	Selects every <p> elements that is the first child of its parent
-
+	
 	:before	p:before	Insert content before every <p> element
-
+	
 	:after	p:after	Insert content after every <p> element
-
+	
 	:lang(language)	p:lang(it)	Selects every <p> element with a lang attribute value starting with "it"
+	#+END_EXAMPLE
 
 ** =:before= && =:after=
 	 1. [[http://coding.smashingmagazine.com/2011/07/13/learning-to-use-the-before-and-after-pseudo-elements-in-css/#top][Learning To Use The :before And :after Pseudo-Elements In CSS]]
@@ -1053,7 +1057,8 @@ CSS，现在让我既爱你又恨你啊。
 	*Reference*
   + [[http://www.w3schools.com/css/css_pseudo_elements.asp][CSS Pseudo-elements]]
 		
-* [[http://www.w3schools.com/cssref/pr_text_white-space.asp][CSS white-space Property]]
+* CSS white-space Property
+  [[http://www.w3schools.com/cssref/pr_text_white-space.asp][CSS white-space Property]]
 * CSS部分术语解释：
 	1. 替换元素(Replaced):
 		 替换元素就是浏览器根据元素的标签和属性，来决定元素的具体显示内容。
@@ -1090,3 +1095,5 @@ CSS，现在让我既爱你又恨你啊。
 
 	Reference:
 	1. [[http://blog.sina.com.cn/s/blog_61e439e50100tacn.html][CSS:替换元素(Replaced)、不可替换元素(Nonreplaced)、块元素(Block-level)和行内/内联元素(Inline)]]
+* HTML Useful Character Entities:
+	Reference: http://www.w3schools.com/html/html_entities.asp

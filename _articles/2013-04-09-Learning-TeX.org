@@ -47,7 +47,6 @@ tags: TeX LaTeX
 
   2. For Linux
 
-
 * 安装中文环境
 ** CJK简介：
 	 http://www.math.zju.edu.cn/ligangliu/latexforum/tex_cjk.htm
@@ -66,11 +65,16 @@ tags: TeX LaTeX
     > tlmgr -gui
 	#+END_SRC
 	弹出如果所示对话框：
+	#+CAPTION: P1. TeX Live Manager 2011
 	#+BEGIN_HTML
     #+BEGIN_CENTER
-    <a href="http://www.flickr.com/photos/85376793@N04/9089198961/" title="Tex Live Manager 2011 by aprilgalaxy, on Flickr"><img src="http://farm8.staticflickr.com/7385/9089198961_99cb1d2ab3.jpg" width="500" height="481" alt="Tex Live Manager 2011"></a>
+      <a href="http://www.flickr.com/photos/85376793@N04/9089198961/" title="Tex Live Manager 2011 by aprilgalaxy, on Flickr"><img src="http://farm8.staticflickr.com/7385/9089198961_99cb1d2ab3.jpg" width="500" height="481" alt="Tex Live Manager 2011"></a>
     #+END_CENTER
 	#+END_HTML
+	#+BEGIN_CENTER
+	  P1. TeX Live Manager 2011
+	#+END_CENTER
+
 	注意我框出的两个红色框：
 	
 	一个是选择从哪里加载，笔者默认的是H：（我开始安装的时候加载到H:盘），也可以选择
@@ -127,7 +131,6 @@ tags: TeX LaTeX
 	 * http://www.ctan.org/tex-archive/fonts/CJK/
 	 * http://www.ctan.org/tex-archive/fonts/wadalabb
 
-
 * 常用命令
 	#+BEGIN_EXAMPLE
     2.5 TEX Live 中其他值得一提的程序
@@ -161,7 +164,6 @@ tags: TeX LaTeX
 	 #+END_SRC
 ** £ § ¶ © ®
 	 £=\pounds §=\S ¶=\P ©=\copyright ®
-
 ** 外文字母
 ** 重音
 ** 连写
@@ -172,7 +174,7 @@ tags: TeX LaTeX
 	\textsl
 	\textit
 
-Chapter 4
+	Chapter 4
 * Footnotes
 
 [fn:1] https://en.wikipedia.org/wiki/TeX

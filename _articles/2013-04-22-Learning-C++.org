@@ -2,7 +2,7 @@
 #+AUTHOR:ICECREAM(氷菓)
 #+EMAIL:creamidea(AT)gmail.com
 #+DESCRIPTION:ICECREAM(氷菓)
-#+KEYWORDS:Cpp
+#+KEYWORDS:CPlusPlus
 #+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t
 #+LINK_HOME: https://creamidea.github.io
 #+STYLE:<link rel="stylesheet" type="text/css" href="../css/style.css">
@@ -14,7 +14,7 @@ layout: doc
 title: Learning C++
 subtitle: 学习C++笔记
 categories: note
-tags: Cpp
+tags: CPlusPlus
 ---
 #+END_HTML
 
@@ -87,7 +87,7 @@ tags: Cpp
         int * p = new int();            /* 初始化为0（加上()） */
       #+END_SRC
 
-*** &: 去地址/引用
+*** &: 取地址/引用
     #+BEGIN_SRC c
       int *p = &num;                  /* 取地址符 */
       int &p1 = num;                  /* 引用 */
@@ -102,7 +102,18 @@ tags: Cpp
 	1. 虚基类
 	   class A: virtual public b
 
-		 不产生二义性
-		 画一个图真难啊
-		 #+BEGIN_DITAA asciiExample.png -o -r -S
-		 #+END_DITAA
+  不产生二义性
+  画一个图真难啊
+	#+BEGIN_EXAMPLE
+  #+BEGIN_DITAA asciiExample.png -o -r -S
+  +--------------+
+  |              |
+  | Hello World! |
+  |              |
+  +--------------+
+  #+END_DITAA
+	
+	#+END_EXAMPLE
+
+* 写在最后
+	最后居然还是草草收场，一个没有任何实现的CuteCube!!

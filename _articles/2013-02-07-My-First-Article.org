@@ -143,8 +143,8 @@ Jekyll的搭建过程，网络上已经有许多的高手写的很详细了，�
 1. [[http://daringfireball.net/projects/markdown/syntax][Markdown: Syntax]]
 2. [[http://blog.markdownwiki.com/][Improving Wiki Editing with Markdown]]
 
- *致Vimer, 不好意思，这里暂时不提供vim的markdown-mode， 
-我相信你们也可以自行搜索到，我现在暂时使用Emacs，虽然Vim也是我喜欢的编辑器。*
+  *致Vimer, 不好意思，这里暂时不提供vim的markdown-mode， 
+   我相信你们也可以自行搜索到，我现在暂时使用Emacs，虽然Vim也是我喜欢的编辑器。*
 
 * 结尾
 非常感谢你能够阅读到最后，以上只是我在这次blog设计中考虑到的一些问题，
@@ -154,11 +154,13 @@ Jekyll的搭建过程，网络上已经有许多的高手写的很详细了，�
 
 * 更新的地方
 #+BEGIN_HTML
-1. <a href="{{ site.url }}{% post_url 2013-02-13-How-to-create-article-contents-by-js %}">How to create article contents by js</a>
+1. <a href="{{ site.url }}{% post_url 2013-02-13-How-to-create-article-contents-by-js-and-css %}">
+      How to create article contents by js and CSS
+   </a>
 </br>
 2. <a href="{{ site.url }}{% post_url 2013-04-05-A-New-Design %}">A New Design</a>
 #+END_HTML
-
+	
 * Footnotes
 
 [fn:1] https://en.wikipedia.org/wiki/KISS_principle

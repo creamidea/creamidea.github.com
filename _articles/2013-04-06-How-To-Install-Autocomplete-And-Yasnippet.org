@@ -2,7 +2,7 @@
 #+AUTHOR:ICECREAM(氷菓)
 #+EMAIL:creamidea(AT)gmail.com
 #+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t
-#+LINK_HOME: https://creamidea.github.com
+#+LINK_HOME: https://creamidea.github.io
 #+STYLE:<link rel="stylesheet" type="text/css" href="../css/style.css">
 #+INFOJS_OPT:
 
@@ -17,16 +17,16 @@ tags: emacs autocomplete yanisppet
 #+END_HTML
 
 * 前言
-写这篇blog主要是测试一些网络服务，如图片服务和音乐链接服务。
-当然写这个还是因为我敬爱的小杰同学的要求。作为刚刚入门的New Emacser，我感觉是时候给他一些好玩的插件了。
-当然我这些步骤google一下全部会出来，但是作为要求还是写这篇blog吧。
-
-
+	写这篇blog主要是测试一些网络服务，如图片服务和音乐链接服务。
+	当然写这个还是因为我敬爱的小杰同学的要求。作为刚刚入门的New Emacser，我感觉是时候给他一些好玩的插件了。
+	当然我这些步骤google一下全部会出来，但是作为要求还是写这篇blog吧。
+	
+	
 * Auto Complete
-过多的介绍我就不在这里陈述了，具体的可以前往
-Auto Complete官网（http://cx4a.org/software/auto-complete/) 和 
-Auto Complete所在的EmacsWiki (http://emacswiki.org/emacs/AutoComplete）。 
-这里只是简单的介绍如何安装。
+	过多的介绍我就不在这里陈述了，具体的可以前往
+	Auto Complete官网（http://cx4a.org/software/auto-complete/) 和 
+	Auto Complete所在的EmacsWiki(http://emacswiki.org/emacs/AutoComplete）。 
+	这里只是简单的介绍如何安装。
 ** Download Auto Complete
 1. Lasest Stable(v1.3.1):
   - [[http://cx4a.org/pub/auto-complete/auto-complete-1.3.1.tar.bz2][auto-complete-1.3.1.tar.bz2]]
@@ -76,28 +76,29 @@ $ make install DIR=$HOME/.emacs.d/
 最后附上日文教程：[[http://ubuntu-note.blog.so-net.ne.jp/2010-11-08-1][Emacs 23 に Auto Complete をインストール　{Emacs 23}]] 
 
 ** Screenshot
-
-#+begin_html
-#+BEGIN_CENTER
-<a href="http://www.flickr.com/photos/85376793@N04/8622523251/" title="Emacs-autocomplete in windows7 by aprilgalaxy, on Flickr"><img src="http://farm9.staticflickr.com/8112/8622523251_32b176270a.jpg" width="500" height="405" alt="Emacs-autocomplete in windows7"></a>
-#+END_CENTER
-#+end_html
-#+BEGIN_CENTER
-P1. Auto Complete In Windows 7
-#+END_CENTER
-
-#+BEGIN_HTML
-#+BEGIN_CENTER
-<a href="http://www.flickr.com/photos/85376793@N04/8624108132/" title="Autocomplete in ubuntu by aprilgalaxy, on Flickr"><img src="http://farm9.staticflickr.com/8379/8624108132_89fe11ac0c.jpg" width="500" height="281" alt="Autocomplete in ubuntu"></a>
-#+END_CENTER
-#+END_HTML
-#+BEGIN_CENTER
-P2. Auto Complete In Ubuntu 12.04
-#+END_CENTER
-
-
+	 
+	 #+CAPTION:	P1. Auto Complete In Windows 7
+	 #+begin_html
+	   #+BEGIN_CENTER
+	     <a href="http://www.flickr.com/photos/85376793@N04/8622523251/" title="Emacs-autocomplete in windows7 by aprilgalaxy, on Flickr"><img src="http://farm9.staticflickr.com/8112/8622523251_32b176270a.jpg" width="500" height="405" alt="Emacs-autocomplete in windows7"></a>
+	   #+END_CENTER
+	 #+end_html
+	 #+BEGIN_CENTER
+	   P1. Auto Complete In Windows 7
+	 #+END_CENTER
+	 
+	 #+BEGIN_HTML
+	 #+BEGIN_CENTER
+	 <a href="http://www.flickr.com/photos/85376793@N04/8624108132/" title="Autocomplete in ubuntu by aprilgalaxy, on Flickr"><img src="http://farm9.staticflickr.com/8379/8624108132_89fe11ac0c.jpg" width="500" height="281" alt="Autocomplete in ubuntu"></a>
+	 #+END_CENTER
+	 #+END_HTML
+	 #+BEGIN_CENTER
+	 P2. Auto Complete In Ubuntu 12.04
+	 #+END_CENTER
+	 
+	 
 * Yanisppet
-同样的，过多的介绍我就不在这里陈述了，在Yanisppet项目官网有详细介绍：
+	同样的，过多的介绍我就不在这里陈述了，在Yanisppet项目官网有详细介绍：
 1. EmacsWiki:
    - [[http://emacswiki.org/emacs/Yasnippet]]
 2. Github: (现在使用)
@@ -106,11 +107,11 @@ P2. Auto Complete In Ubuntu 12.04
 #+BEGIN_SRC sh
 $ git clone https://github.com/capitaomorte/yasnippet.git
 #+END_SRC
-如果没有安装git的话，那么直接单击[[https://nodeload.github.com/capitaomorte/yasnippet/zip/master][这里（github上master分支zip包）]] 进行下载。
-
+	 如果没有安装git的话，那么直接单击[[https://nodeload.github.com/capitaomorte/yasnippet/zip/master][这里（github上master分支zip包）]] 进行下载。
+	 
 ** Install Yanisppet
-安装说白了就是将文件拷贝到相应的位置（当然有些还需要经过编译）
-下载完之后，解压文件并拷贝进.emacs.d,然后将下面代码复制进.emacs中：
+	 安装说白了就是将文件拷贝到相应的位置（当然有些还需要经过编译）
+	 下载完之后，解压文件并拷贝进.emacs.d,然后将下面代码复制进.emacs中：
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'load-path "~/.emacs.d/path/to/yasnippet")
     (require 'yasnippet) ;; not yasnippet-bundle
@@ -118,21 +119,21 @@ $ git clone https://github.com/capitaomorte/yasnippet.git
     (yas--initialize)
     (yas/load-directory "~/.emacs.d/path/to/yasnippet/snippets")
 #+END_SRC
-这些步骤在windows和linux都是使用的。所以我在这里只写一份。
-
-如果还有问题你可以继续google或者看官方文档或者写电子邮件给我，我将尽快回复。
-
-祝君使用愉快。
-
-
+	 这些步骤在windows和linux都是使用的。所以我在这里只写一份。
+	 
+	 如果还有问题你可以继续google或者看官方文档或者写电子邮件给我，我将尽快回复。
+	 
+	 祝君使用愉快。
+	 
+	 
 * 写在最后
-这个不过是一个简单的安装介绍而已，具体的使用则是需要看文档之后才能了解，我告诉你的也只能是简单的一些而已。
-如果你有什么问题，当然可以随时联系我，只要写电子邮件，我将尽快回复。没有问题的话也可以写邮件，然后我们就成为朋友啦。
-
-最后附上献给小杰的一首歌：あの日見た花の名前を僕達はまだ知らないED(顺便测试一下)
-
-#+BEGIN_HTML
-<embed src="http://www.xiami.com/widget/10429952_1770159571/singlePlayer.swf" type="application/x-shockwave-flash" width="257" height="33" wmode="transparent"></embed>
-#+END_HTML
-
-写到这里终于结束了。在ubuntu上使用ibus写中文真是具有挑战性啊。尤其是在Emacs中。(的和到啊)
+	这个不过是一个简单的安装介绍而已，具体的使用则是需要看文档之后才能了解，我告诉你的也只能是简单的一些而已。
+	如果你有什么问题，当然可以随时联系我，只要写电子邮件，我将尽快回复。没有问题的话也可以写邮件，然后我们就成为朋友啦。
+	
+	最后附上献给小杰的一首歌：「あの日見た花の名前を僕達はまだ知らない」ED(顺便测试一下)
+	
+	#+BEGIN_HTML
+	<embed src="http://www.xiami.com/widget/10429952_1770159571/singlePlayer.swf" type="application/x-shockwave-flash" width="257" height="33" wmode="transparent"></embed>
+	#+END_HTML
+	
+	写到这里终于结束了。在ubuntu上使用ibus写中文真是具有挑战性啊。尤其是在Emacs中。(的和到啊)

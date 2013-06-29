@@ -152,7 +152,6 @@ tags: jekyll org-mode design
 
 お休みなさい。
 
-
 * Footnotes
 
 [fn:1] http://orgmode.org/

@@ -261,7 +261,7 @@ tags: python django
            
           admin.site.register(User)
 	    #+END_SRC
-* COMMENT 第七章 表单 木曜日<2013-04-25 Thu>
+* 第七章 表单 木曜日<2013-04-25 Thu>
   1. 在创建contact的时候，我没有使用 =python manage.py startapp contact= 
      导致在写urls.py的时候老是提示找不到 =contact=
 
@@ -403,6 +403,7 @@ tags: python django
 
 	   为了控制模板的自动转意,用标签 =autoescape= 来包装整个模板(或者模板中常用的部分),就像这样：
 	   #+BEGIN_SRC python
+         # &#37; = % &#123; = { 
          {&#37; autoescape off &#37;}
          Hello {&#123; name &#123;}
          {&#37; endautoescape &#37;}       

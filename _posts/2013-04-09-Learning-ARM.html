@@ -1,0 +1,1176 @@
+---
+layout: doc
+title: Learning ARM
+subtitle: 学习arm的笔记 
+categories: note
+tags: arm
+---
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 前言</a></li>
+<li><a href="#sec-2">2 2013-04-09 火曜日</a></li>
+<li><a href="#sec-3">3 2013-04-14 日曜日</a>
+<ul>
+<li><a href="#sec-3-1">3.1 1. 汇编控制LED</a></li>
+<li><a href="#sec-3-2">3.2 2. The Linux Kernel Module Programming : Hello World</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4 2013-04-15 月曜日</a>
+<ul>
+<li><a href="#sec-4-1">4.1 声明全局变量数组和函数</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5 2013-04-16 火曜日</a>
+<ul>
+<li><a href="#sec-5-1">5.1 跨模块的函数调用</a></li>
+<li><a href="#sec-5-2">5.2 字符设备驱动程序</a></li>
+</ul>
+</li>
+<li><a href="#sec-6">6 2013-04-18 木曜日</a>
+<ul>
+<li><a href="#sec-6-1">6.1 创建自己的设备，调用自己写的模块中的函数。</a></li>
+<li><a href="#sec-6-2">6.2 编写LED，交叉编译</a></li>
+<li><a href="#sec-6-3">6.3 总结到目前为止编写此类代码步骤：</a></li>
+</ul>
+</li>
+<li><a href="#sec-7">7 2013-04-19 金曜日</a>
+<ul>
+<li><a href="#sec-7-1">7.1 代码的准备</a></li>
+<li><a href="#sec-7-2">7.2 烧写环境的配置</a>
+<ul>
+<li><a href="#sec-7-2-1">7.2.1 交叉编译环境的搭建</a></li>
+</ul>
+</li>
+<li><a href="#sec-7-3">7.3 编译：</a></li>
+<li><a href="#sec-7-4">7.4 程序下载</a>
+<ul>
+<li><a href="#sec-7-4-1">7.4.1 下载</a></li>
+<li><a href="#sec-7-4-2">7.4.2 ARM系统中设置</a></li>
+</ul></li>
+</ul>
+</li>
+<li><a href="#sec-8">8 写在最后</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">前言</h2>
+<div class="outline-text-2" id="text-1">
+
+<p>这个学期中间的企业实训是学习ARM。感觉这个学期学习了很多的嵌入式啊。
+</p>
+<p>
+那么我们就开始记录学习ARM的过程吧。
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">2013-04-09 火曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-09 Tue</span></span></h2>
+<div class="outline-text-2" id="text-2">
+
+<p>数据稍候处理：
+</p>
+<p>
+0xFFEE1122
+</p>
+<p>
+area:数据段的申明
+code: 代码段。
+还有数据段data, 常量段
+READONLY: 段的说明 只读
+</p>
+<p>
+entry: 相当于C函数main，段的入口
+code32: 下面的程序使用32位
+</p>
+<p>
+start: 标号，相当于goto后面的标号
+</p>
+<p>
+end：表示代码段的结束
+</p>
+<p>
+ADS
+伪指令：area，entry， code32，start， end
+</p>
+<p>
+MOV R0, PC ;将PC的值移入R0   
+</p>
+<p>
+11010011管理程序 
+三级指令流水线
+。。。
+</p>
+
+<p>
+arm指令
+</p>
+<p>
+<b>不能出现Mov</b>
+</p>
+<p>
+arm处理器寻址
+arm指令集
+arm汇编程序设计
+</p>
+<p>
+LSL 
+</p>
+
+<p>
+逻辑移位溢出位丢弃
+</p>
+<p>
+算术移位溢出位填充
+</p>
+<p>
+带链接的分支指令BL -&gt; 子函数的调用
+</p>
+<p>
+标号，数组用=
+</p>
+<p>
+BNE
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">2013-04-14 日曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-14 Sun</span></span></h2>
+<div class="outline-text-2" id="text-3">
+
+<p>  今天是周日，现在终于有时间。现在稍微写一些东西。
+</p>
+<p>  
+  本来有好几个实验的，但是只记得两个了。
+</p>
+
+</div>
+
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1">1. 汇编控制LED</h3>
+<div class="outline-text-3" id="text-3-1">
+
+<p>     这个是需要参考文档手册来写的。
+     MCU具体型号我忘记了。貌似是ARMXX。 S3C2440 TQ2440
+     反正需要看手册查到LED对应的管脚，然后置相应的电平。
+     然后过程中貌似让WatchDog休眠了，就是没有让其工作。代码中有说明。
+     <script src="https://gist.github.com/creamidea/fddb89ea273e7166d001.js"></script>
+
+</p></div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2">2. The Linux Kernel Module Programming : Hello World</h3>
+<div class="outline-text-3" id="text-3-2">
+
+<p>     模块源代码：
+     <script src="https://gist.github.com/creamidea/5381888.js"></script>
+</p>
+<p>     
+     Makefile文件：
+     <script src="https://gist.github.com/creamidea/5381898.js"></script>
+
+     执行过程，及其运行结果：
+</p>
+
+
+<pre class="example">$ make
+make -C /usr/src/linux-headers-3.5.0-23-generic M=/home/icecream/Desktop/hello-module modules
+make[1]: Entering directory `/usr/src/linux-headers-3.5.0-23-generic'
+  Building modules, stage 2.
+  MODPOST 1 modules
+make[1]: Leaving directory `/usr/src/linux-headers-3.5.0-23-generic'
+
+$ sudo insmod ./hello.ko
+
+$ dmesg | tail -n 3
+[21284.503186] sd 6:0:0:0: [sdb] Assuming drive cache: write through
+[21284.503192] sd 6:0:0:0: [sdb] Attached SCSI removable disk
+[22175.061237] Hello, icecream!
+
+$ sudo rmmod ./hello.ko
+
+$ dmesg | tail -n 3
+[21284.503192] sd 6:0:0:0: [sdb] Attached SCSI removable disk
+[22175.061237] Hello, icecream!
+[22362.563031] Exit the driver module!
+
+$ modinfo ./hello.ko
+filename:       ./hello.ko
+description:    A sample driver
+author:         icecream &lt;creamidea@gmail.com&gt;
+license:        Dual BSD/GPL
+srcversion:     599D2E058D4F2272D19DE0C
+depends:        
+vermagic:       3.5.0-23-generic SMP mod_unload modversions 
+</pre>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">2013-04-15 月曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-15 Mon</span></span></h2>
+<div class="outline-text-2" id="text-4">
+
+
+</div>
+
+<div id="outline-container-4-1" class="outline-3">
+<h3 id="sec-4-1">声明全局变量数组和函数</h3>
+<div class="outline-text-3" id="text-4-1">
+
+<ol>
+<li>这个是声明全局（外部可以使用，修改的）变量，
+     数组和函数的实例程序代码。 linux内核模块编程。
+     代码中有详细注释.
+     <script src="https://gist.github.com/creamidea/5387156.js"></script>
+</li>
+<li>运行测试
+
+
+
+<pre class="example">$ make
+make -C /usr/src/linux-headers-3.5.0-23-generic M=/home/icecream/Desktop/drive/export modules
+make[1]: Entering directory `/usr/src/linux-headers-3.5.0-23-generic'
+  CC [M]  /home/icecream/Desktop/drive/export/export.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/icecream/Desktop/drive/export/export.mod.o
+  LD [M]  /home/icecream/Desktop/drive/export/export.ko
+make[1]: Leaving directory `/usr/src/linux-headers-3.5.0-23-generic'
+
+$ sudo insmod export.ko
+
+$ dmesg | tail -12
+[ 1738.701615] a + b = 22
+[ 1738.701617] count = 0
+[ 1738.701618] name = Hello, icecream
+[ 1738.701619] Array[0]: 1
+[ 1738.701620] Array[1]: 9
+[ 1738.701621] Array[2]: 9
+[ 1738.701621] Array[3]: 1
+[ 1738.701622] Array[4]: 1
+[ 1738.701623] Array[5]: 0
+[ 1738.701623] Array[6]: 0
+[ 1738.701624] Array[7]: 4
+[ 1738.701625] my fun is invoked!
+
+$ sudo rmmod export.ko
+
+$ dmesg | tail -12
+[ 1738.701618] name = Hello, icecream
+[ 1738.701619] Array[0]: 1
+[ 1738.701620] Array[1]: 9
+[ 1738.701621] Array[2]: 9
+[ 1738.701621] Array[3]: 1
+[ 1738.701622] Array[4]: 1
+[ 1738.701623] Array[5]: 0
+[ 1738.701623] Array[6]: 0
+[ 1738.701624] Array[7]: 4
+[ 1738.701625] my fun is invoked!
+[ 1788.664571] The sum of the array is 25 # 求和在退出时执行
+[ 1788.664574] Exit the driver module!
+
+#外界修改的方法:
+
+$ sudo insmod export.ko count=100 name="qooni"
+
+$ sudo insmod export.ko array=1,2,3,4,5 #(注意不要越界)
+</pre>
+
+</li>
+<li>A small order:
+
+
+
+<pre class="example">$ export PS1="icecream$"
+# The bash will be icecream$
+</pre>
+
+<p>
+     From: <a href="http://www.thegeekstuff.com/2008/09/bash-shell-ps1-10-examples-to-make-your-linux-prompt-like-angelina-jolie/">http://www.thegeekstuff.com/2008/09/bash-shell-ps1-10-examples-to-make-your-linux-prompt-like-angelina-jolie/</a>
+</p></li>
+</ol>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">2013-04-16 火曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-16 Tue</span></span></h2>
+<div class="outline-text-2" id="text-5">
+
+
+</div>
+
+<div id="outline-container-5-1" class="outline-3">
+<h3 id="sec-5-1">跨模块的函数调用</h3>
+<div class="outline-text-3" id="text-5-1">
+
+<ol>
+<li>首先另创建一个export1，这个就是我们将用来调用函数的模块。
+      export1.c的代码：
+      <script src="https://gist.github.com/creamidea/5395322.js"></script>
+
+</li>
+<li>运行，插入模块
+
+
+
+<pre class="example"># 首先挂载export(我昨天写的代码)
+$ sudo insmod ./export.ko
+
+# 挂载export1
+$ sudo insmod ./export1.ko 
+
+# 显示信息
+$ dmesg | tail -4
+[ 6798.157855] Array[6]: 0
+[ 6798.157856] Array[7]: 4
+[ 6798.157857] my fun is invoked!
+[ 6815.811947] In export1: my fun is invoked!
+
+# 卸载时，先卸载export1,再卸载export
+# 否则会报错：
+# ERROR: Module export is in use by export1
+$ sudo rmmod export1
+$ sudo rmmod export
+</pre>
+
+</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5-2" class="outline-3">
+<h3 id="sec-5-2">字符设备驱动程序</h3>
+<div class="outline-text-3" id="text-5-2">
+
+<ol>
+<li>实现步骤：
+<ol>
+<li>确定主设备号和次设备号
+
+<p>
+         dev_t (long int) 32bit high:12-&gt;major low:20-&gt;minor
+</p>
+<p>
+         &lt;linux/types.h&gt;
+</p>
+<p>
+         MAJOR(dev_t dev)
+</p>
+<p>
+         MINOR(dev_t dev)
+</p>
+<p>
+         &lt;linux/fs.h&gt;
+</p>
+</li>
+<li>确定设备文件
+</li>
+<li>创建设备文件
+<ol>
+<li>操作系统
+</li>
+<li>人为
+</li>
+</ol>
+
+</li>
+<li>实现字符驱动程序
+
+</li>
+</ol>
+
+</li>
+<li>参考代码：
+      <script src="https://gist.github.com/creamidea/5395456.js"></script>
+
+</li>
+<li>Character Device Drivers代码：
+
+
+
+<pre class="example">/*
+ *  chardev.c: Creates a read-only char device that says how many times
+ *  you've read from the dev file
+ */
+
+#include &lt;linux/kernel.h&gt;
+#include &lt;linux/module.h&gt;
+#include &lt;linux/fs.h&gt;
+#include &lt;asm/uaccess.h&gt;/* for put_user */
+
+/*  
+ *  Prototypes - this would normally go in a .h file
+ */
+int init_module(void);
+void cleanup_module(void);
+static int device_open(struct inode *, struct file *);
+static int device_release(struct inode *, struct file *);
+static ssize_t device_read(struct file *, char *, size_t, loff_t *);
+static ssize_t device_write(struct file *, const char *, size_t, loff_t *);
+
+#define SUCCESS 0
+#define DEVICE_NAME "chardev"/* Dev name as it appears in /proc/devices   */
+#define BUF_LEN 80/* Max length of the message from the device */
+
+/* 
+ * Global variables are declared as static, so are global within the file. 
+ */
+
+static int Major;/* Major number assigned to our device driver */
+static int Device_Open = 0;/* Is device open?  
+                            * Used to prevent multiple access to device */
+static char msg[BUF_LEN];/* The msg the device will give when asked */
+static char *msg_Ptr;
+
+static struct file_operations fops = {
+  .read = device_read,
+  .write = device_write,
+  .open = device_open,
+  .release = device_release
+};
+
+/*
+ * This function is called when the module is loaded
+ */
+int init_module(void)
+{
+  Major = register_chrdev(0, DEVICE_NAME, &amp;fops);
+
+  if (Major &lt; 0) {
+    printk(KERN_ALERT "Registering char device failed with %d\n", Major);
+    return Major;
+  }
+
+  printk(KERN_INFO "I was assigned major number %d. To talk to\n", Major);
+  printk(KERN_INFO "the driver, create a dev file with\n");
+  printk(KERN_INFO "'mknod /dev/%s c %d 0'.\n", DEVICE_NAME, Major);
+  printk(KERN_INFO "Try various minor numbers. Try to cat and echo to\n");
+  printk(KERN_INFO "the device file.\n");
+  printk(KERN_INFO "Remove the device file and module when done.\n");
+
+  return SUCCESS;
+}
+
+/*
+ * This function is called when the module is unloaded
+ */
+void cleanup_module(void)
+{
+  /* 
+   * Unregister the device 
+   */
+  int ret = unregister_chrdev(Major, DEVICE_NAME);
+  if (ret &lt; 0)
+    printk(KERN_ALERT "Error in unregister_chrdev: %d\n", ret);
+}
+
+/*
+ * Methods
+ */
+
+/* 
+ * Called when a process tries to open the device file, like
+ * "cat /dev/mycharfile"
+ */
+static int device_open(struct inode *inode, struct file *file)
+{
+  static int counter = 0;
+
+  if (Device_Open)
+    return -EBUSY;
+
+  Device_Open++;
+  sprintf(msg, "I already told you %d times Hello world!\n", counter++);
+  msg_Ptr = msg;
+  try_module_get(THIS_MODULE);
+
+  return SUCCESS;
+}
+
+/* 
+ * Called when a process closes the device file.
+ */
+static int device_release(struct inode *inode, struct file *file)
+{
+  Device_Open--;/* We're now ready for our next caller */
+
+  /* 
+   * Decrement the usage count, or else once you opened the file, you'll
+   * never get get rid of the module. 
+   */
+  module_put(THIS_MODULE);
+
+  return 0;
+}
+
+/* 
+ * Called when a process, which already opened the dev file, attempts to
+ * read from it.
+ */
+static ssize_t device_read(struct file *filp,/* see include/linux/fs.h   */
+                           char *buffer,/* buffer to fill with data */
+                           size_t length,/* length of the buffer     */
+                           loff_t * offset)
+{
+  /*
+   * Number of bytes actually written to the buffer 
+   */
+  int bytes_read = 0;
+
+  /*
+   * If we're at the end of the message, 
+   * return 0 signifying end of file 
+   */
+  if (*msg_Ptr == 0)
+    return 0;
+
+  /* 
+   * Actually put the data into the buffer 
+   */
+  while (length &amp;&amp; *msg_Ptr) {
+
+    /* 
+     * The buffer is in the user data segment, not the kernel 
+     * segment so "*" assignment won't work.  We have to use 
+     * put_user which copies data from the kernel data segment to
+     * the user data segment. 
+     */
+    put_user(*(msg_Ptr++), buffer++);
+
+    length--;
+    bytes_read++;
+  }
+
+  /* 
+   * Most read functions return the number of bytes put into the buffer
+   */
+  return bytes_read;
+}
+
+/*  
+ * Called when a process writes to dev file: echo "hi" &gt; /dev/hello 
+ */
+static ssize_t
+device_write(struct file *filp, const char *buff, size_t len, loff_t * off)
+{
+  printk(KERN_ALERT "Sorry, this operation isn't supported.\n");
+  return -EINVAL;
+}
+</pre>
+
+<p>
+      From: <a href="http://www.tldp.org/LDP/lkmpg/2.6/html/x569.html">http://www.tldp.org/LDP/lkmpg/2.6/html/x569.html</a>
+</p>
+</li>
+<li>代码稍微讲解：
+
+<p>      
+      实现file_operations结构体
+      初始化函数，注册字符设备（挂载的过程中）
+      销毁函数，取消设备（卸载的时候）
+</p>
+<p>      
+      struct cdev结构体及其操作&lt;linux/cdev.h&gt;：
+</p>
+
+
+<pre class="example">struct cdev {
+  struct kobject kobj;
+  struct module *owner;
+  const struct file_operations *ops;
+  struct list_head list;
+  dev_t dev;
+  unsigned int count;ruct cdev {
+};
+
+void cdev_init(struct cdev *, const struct file_operations *);
+
+int cdev_add(struct cdev *, dev_t, unsigned);
+
+void cdev_del(struct cdev *);
+</pre>
+
+<p>
+      From: <a href="http://lxr.free-electrons.com/source/include/linux/cdev.h">http://lxr.free-electrons.com/source/include/linux/cdev.h</a>
+</p>
+
+
+
+<pre class="example">kmalloc 小
+kmalloc(size_t, type)
+vmalloc 堆分配
+底层实现：
+页分配：get_free_pages()
+</pre>
+
+
+<p>
+      更加详细的一篇参考文章：
+      <a href="http://www.linuxsir.org/bbs/thread193994.html">http://www.linuxsir.org/bbs/thread193994.html</a>
+</p>
+<p>
+      其他资料：
+      <a href="http://tuxthink.blogspot.com/2012/05/working-of-macros-majorminor-and-mkdev.html">http://tuxthink.blogspot.com/2012/05/working-of-macros-majorminor-and-mkdev.html</a>
+</p></li>
+</ol>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6">2013-04-18 木曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-18 Thu</span></span></h2>
+<div class="outline-text-2" id="text-6">
+
+
+</div>
+
+<div id="outline-container-6-1" class="outline-3">
+<h3 id="sec-6-1">创建自己的设备，调用自己写的模块中的函数。</h3>
+<div class="outline-text-3" id="text-6-1">
+
+
+<ol>
+<li>模块代码：
+      <script src="https://gist.github.com/creamidea/5410271.js"></script>      
+
+</li>
+<li>测试代码：
+
+
+
+<pre class="example">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;errno.h&gt;
+
+int main(int argc, char *argv[])
+{
+  if (argc &lt; 2) {
+    /* fprintf(STDOUT, "%s: %d",); */
+    printf("Less 2");
+    exit(0);
+  }
+
+  int fd;
+  if ((fd = open(argv[1], O_RDONLY|O_NONBLOCK)) &lt; 0) {
+    printf ("Open error\n");
+    exit(0);
+  }
+  sleep(1);
+  close(fd);
+
+  if ((fd = open(argv[1], O_WRONLY|O_NONBLOCK)) &lt; 0) {
+    printf ("Open error\n");
+    exit(0);
+  }
+  sleep(1);
+  close(fd);
+
+  return 0;
+}
+</pre>
+
+
+</li>
+<li>运行和测试结果：
+
+
+
+<pre class="example">$ make
+$ sudo insmod ./openclose.ko
+$ sudo mknod /dev/chardev c 200 0
+$ sudo chmod 777 /dev/chardev 
+
+$ gcc test.c -Wall 
+$ ./a.out /dev/chardev 
+$ dmesg | tail -6
+[ 2165.567054] Open file Read Only
+[ 2165.567063] NON Block
+[ 2166.566718] Chr_close Close
+[ 2166.566759] Open file Write Only
+[ 2166.566763] NON Block
+[ 2167.566404] Chr_close Close
+</pre>
+
+</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-6-2" class="outline-3">
+<h3 id="sec-6-2">编写LED，交叉编译</h3>
+<div class="outline-text-3" id="text-6-2">
+
+
+<ol>
+<li>LED.h代码：
+      <script src="https://gist.github.com/creamidea/5410956.js"></script>
+</li>
+<li>LED.c代码：
+      <script src="https://gist.github.com/creamidea/5410963.js"></script>
+</li>
+<li>Makefile：
+      <script src="https://gist.github.com/creamidea/5410972.js"></script>
+</li>
+</ol>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-6-3" class="outline-3">
+<h3 id="sec-6-3">总结到目前为止编写此类代码步骤：</h3>
+<div class="outline-text-3" id="text-6-3">
+
+<ol>
+<li>Linux内核模板：
+
+
+
+<pre class="example">#include &lt;linux/init.h&gt;
+#include &lt;linux/kernel.h&gt;
+#include &lt;linux/module.h&gt;
+#include &lt;linux/moduleparam.h&gt;  /* Param header */
+#include &lt;linux/fs.h&gt;
+#include &lt;linux/types.h&gt;
+#include &lt;linux/cdev.h&gt;
+#include &lt;linux/slab.h&gt;
+
+#define DRIVER_AUTHOR "icecream &lt;creamidea@gmail.com&gt;"
+#define DRIVER_DESC "A sample driver"
+
+static int __init _init(void) 
+{
+
+  return 0;
+}
+
+static void __exit _exit(void)
+{
+
+  printk("Exit the driver module!\n");
+}
+
+module_init(_init);     /* enter */
+module_exit(_exit);     /* out */
+
+MODULE_LICENSE("Dual BSD/GPL");
+MODULE_AUTHOR(DRIVER_AUTHOR);
+MODULE_DESCRIPTION(DRIVER_DESC);
+MODULE_ALIAS("Linux Module");
+
+</pre>
+
+
+</li>
+<li>如果有外部变量，则引入： 
+
+
+
+<pre class="example">/* 引入两个变量 */
+module_param(mymajor, int, 0644);
+module_param(name, charp, 0644);
+
+</pre>
+
+</li>
+<li>宏定义设备基础信息：
+
+
+
+<pre class="example">#define MAJOR_NUM 200           /* 主设备号 */
+#define MINOR_NUM 0             /* 次设备号 */
+#define DEV_NAME "chardev"      /* 设备名称 */
+
+</pre>
+
+
+</li>
+<li>申请主设备号： 
+
+
+
+<pre class="example">/* mymajor宏定义或者普通定义，用于手动申请设备号 */
+devno = MKDEV(mymajor, 0);
+ret = register_chrdev_region(devno, 1, name);
+if (ret &lt; 0) {
+  /* 申请失败让系统帮其申请 */
+  alloc_chrdev_region(&amp;devno, 0, 1, name);
+  mymajor = MAJOR(devno);
+ }
+printk ("Major: %d, Minor: %d\n", mymajor, MINOR(devno));
+
+</pre>
+
+
+</li>
+<li>自己封装一个结构体，便于变量的管理：
+
+
+
+<pre class="example">/* 自己封装的结构体 */
+typedef struct {
+  struct cdev cdev;             /*  */
+} global_dev;
+global_dev* global_devp = NULL; /* 全局的指针 */
+
+</pre>
+
+
+</li>
+<li>在__init函数中申请内存空间：
+
+
+
+<pre class="example">/* 申请内存空间 */
+/* GFP_KERNEL will block(sleep)（阻塞），直到分配成功 */
+global_devp = (global_dev*)kmalloc(sizeof(global_dev), GFP_KERNEL);
+if (global_devp == NULL) {
+  goto err;
+}
+
+</pre>
+
+</li>
+<li>在__init函数中编写挂载设备：
+
+
+
+<pre class="example">/* 把当前添加到内核中正在使用的列表中,通过fops结构体 */
+cdev_init(&amp;devp-&gt;cdev, &amp;fops);
+/* 动态配置 */
+devp-&gt;cdev.owner = THIS_MODULE;
+devp-&gt;cdev.ops = &amp;fops;
+/* 设备，设备号，数量 */
+cdev_add(&amp;devp-&gt;cdev, MKDEV(major_num, 0), 1);
+/* 记得delete */
+
+</pre>
+
+</li>
+<li>编写file_operations，这个结构体用于链接User and Kernel 
+
+
+
+<pre class="example">/* 实现file_operations结构体 */
+/* 上层和内核，中间桥梁作用 */
+static struct file_operations fops = {
+  .owner = THIS_MODULE,         /* 指向当前指针模块 */
+  .open = chr_open,
+  .release = chr_close, /* close函数中只是简单的打印即可，系统会自动释放 */
+  .compat_ioctl = chr_ioctl
+};
+
+</pre>
+
+</li>
+<li>编写file_operations中关联的函数（本实例代码）：
+
+
+
+<pre class="example">/*　读写操作 */
+/* inode描述节点，file描述的是系统中的 */
+static int chr_open(struct inode* inode, struct file* file) 
+{
+  /* 先判断权限问题 */
+  /* f_mode默认 全1 */
+  if (file-&gt;f_mode &amp; FMODE_READ) {
+    printk ("Open file Read Only\n"); 
+  } else if (file-&gt;f_mode &amp; FMODE_WRITE) {
+    printk ("Open file Write Only\n"); 
+  } else {
+    printk ("read / write\n");
+  }
+  /* 打开标志 */
+  if (file-&gt;f_flags &amp; O_NONBLOCK) {
+    printk ("NON Block\n");
+  } else {
+    printk ("Block\n");
+  }
+  return 0;
+}
+
+static int chr_close(struct inode* inode, struct file* file)
+{
+  printk ("Chr_close Close\n");
+  return 0;
+}
+
+/* 控制函数 */
+static long chr_ioctl (struct file * file, 
+                       unsigned int cmd, 
+                       unsigned long arg) 
+{
+  switch(cmd) {
+  case 0:
+    printk ("arg: %lu\n", arg);
+    break;
+  case 1:
+    printk ("arg: %lu\n",arg);
+    break;
+  default:
+    printk ("No this cmd\n");
+    break;
+  }
+  return 0;
+}
+
+</pre>
+
+
+</li>
+<li>在__exit函数中编写卸载移除设备：
+
+
+
+<pre class="example">/* 删除设备，空间，释放空间 */
+cdev_del(&amp;global_devp-&gt;cdev);
+kfree(global_devp);
+
+/* 注销设备 */
+/* 利用主次编号获取设备编号 */
+unregister_chrdev_region(MKDEV(major_num, 0), 1);
+printk("unregister devno finished!\n");
+
+</pre>
+
+
+</li>
+<li>编写Makefile文件:
+
+
+
+<pre class="example">obj-m:=openclose.o              #这里.c文件名同名
+KERVER=$(shell uname -r)        #获得内核版本
+KERDIR=/usr/src/linux-headers-$(KERVER) #内核路径
+
+CURDIR=$(shell pwd)             #生成位置
+
+all:
+        make -C $(KERDIR) M=$(CURDIR) modules #编译代码
+clean:
+        make -C $(KERDIR) M=$(CURDIR) clean #清除代码
+
+</pre>
+
+</li>
+</ol>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7">2013-04-19 金曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-19 Fri</span></span></h2>
+<div class="outline-text-2" id="text-7">
+
+<p>  今天这堂课上得有些吃力。环境完全搭建不起来。貌似最后排查下来是因为
+  我是64位的ubuntu12.04，和那个编译工具不匹配了。后来想安装32位的库文件。
+  最后，由于依赖太多了，只能暂时先搁置了。如果以后有机会的继续。
+</p>
+<p>
+  那么我们开始记录今天上课的笔记吧。
+</p>
+
+</div>
+
+<div id="outline-container-7-1" class="outline-3">
+<h3 id="sec-7-1">代码的准备</h3>
+<div class="outline-text-3" id="text-7-1">
+
+<p>   代码的话就是2013-04-19那三个文件(led.h, led.c, Makefile),
+   在这里就不再贴出了。
+   这里只补充一个测试代码：
+</p>
+
+
+<pre class="example">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;string.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;fcntl.h&gt;
+#include "led.h"
+
+int main(void)
+{
+  int fd;
+  if((fd=open("/dev/myled", O_RDWR, 0644)) &lt; 0){
+    fprintf(stderr, "open error:%s\n",strerror(errno));
+    exit(0);
+  }
+  int i = 0;
+  while(1){
+    ioctl(fd, LED_OFF, 1);
+    ioctl(fd, LED_OFF, 2);
+    ioctl(fd, LED_OFF, 3);
+    ioctl(fd, LED_OFF, 4);
+    sleep(1); i++;
+    ioctl(fd, LED_ON, 1);
+    ioctl(fd, LED_ON, 2);
+    ioctl(fd, LED_ON, 3);
+    ioctl(fd, LED_ON, 4);
+    sleep(1); i++;
+    if(i &gt; 100) break;
+  }
+  close(fd);
+  return 0;
+}
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-7-2" class="outline-3">
+<h3 id="sec-7-2">烧写环境的配置</h3>
+<div class="outline-text-3" id="text-7-2">
+
+
+</div>
+
+<div id="outline-container-7-2-1" class="outline-4">
+<h4 id="sec-7-2-1">交叉编译环境的搭建</h4>
+<div class="outline-text-4" id="text-7-2-1">
+
+<ul>
+<li>下载：<a href="http://filesresidence.com/File/c890jgedo09pg">EABI_4.3.3_EmbedSky_20090812.tar.bz2</a> 
+</li>
+<li>解压： <code>$ sudo tar -jxvf EABI_4.3.3_EmbedSky_20090812.tar.bz2 -C /</code>
+</li>
+<li>修改系统路径：
+
+
+
+<pre class="example">$ sudo vim /etc/bash.bashrc
+在文件最后加入：
+export PATH=$PATH:/opt/EmbedSky/4.3.3/bin
+
+$ vim ~/.bashrc
+在文件最后加入：
+export PATH=$PATH:/opt/EmbedSky/4.3.3/bin
+
+生效环境变量
+$. ~/.bashrc
+
+测试
+$ arm-linux-gcc-v
+</pre>
+
+</li>
+</ul>
+
+
+<p>    
+    我省略了一些不必要的步骤，详细的可以看这个：
+</p>
+<p>
+    <a href="http://blog.csdn.net/ymsunshine/article/details/8037315">http://blog.csdn.net/ymsunshine/article/details/8037315</a>
+</p>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-7-3" class="outline-3">
+<h3 id="sec-7-3">编译：</h3>
+<div class="outline-text-3" id="text-7-3">
+
+
+
+
+<pre class="example">$ arm-linux-gcc ./test.c -o arm_test
+$ make
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-7-4" class="outline-3">
+<h3 id="sec-7-4">程序下载</h3>
+<div class="outline-text-3" id="text-7-4">
+
+
+</div>
+
+<div id="outline-container-7-4-1" class="outline-4">
+<h4 id="sec-7-4-1">下载</h4>
+<div class="outline-text-4" id="text-7-4-1">
+
+<p>    去SecureCRT官网<a href="http://www.vandyke.com/products/securecrt/">http://www.vandyke.com/products/securecrt/</a>
+    下载符合你版本的。
+</p>
+<p>
+    使用的话，装上驱动，连上ARM，然后将SecureCRT调至COM3（视情况而定）
+    选择7下载（貌似，记不清了。）
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-7-4-2" class="outline-4">
+<h4 id="sec-7-4-2">ARM系统中设置</h4>
+<div class="outline-text-4" id="text-7-4-2">
+
+<p>    使用上述工具SecureCRT连接ARM，之后如下：(具体的不知道了，只能下次做实验
+    时候的继续补充了。)
+</p>
+
+
+<pre class="example">挂载U盘
+/usb/
+# mount /dev/sda1 /usb
+cp /usb/tst/ar
+insmod led.ko
+mknod /dev/myled c 252 0
+./arm_test /dev/myled
+ led open
+ open successfully!
+</pre>
+
+
+</div>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="sec-8">写在最后</h2>
+<div class="outline-text-2" id="text-8">
+
+<p>  最后居然草草收场？！实在感到有些许惋惜。
+</p></div>
+</div>

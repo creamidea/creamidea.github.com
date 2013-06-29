@@ -248,18 +248,13 @@ tags: linux windows config
    #+END_SRC
 * Mac
 
-
 * Emacs
 待阅读：
-[[http://stackoverflow.com/questions/4352367/is-it-possible-to-start-emacs-using-a-remote-configuration-file][
-Is it possible to start emacs using a remote configuration file?]]
-[[http://www.ibm.com/developerworks/cn/linux/l-cn-emacs-shell/][
-当 Shell 遇见 Emacs -- 大话 Emacs Shell Mode]]
-[[http://lifegoo.pluskid.org/wiki/EmacsAsFileManger.html][
-Emacs -- 强大的文件管理器]]
-[[http://cx4a.org/software/gccsense/manual.html#Installation][
-GCCSense User Manual]]
-[[http://emacser.com/emacs-gccsense.htm][
-Emacs补全利器：auto-complete+gccsense]]
-[[http://blog.csdn.net/astropeak/article/details/6666527][
-《Emacs——你不能不用的神级利器》——补全（下）]]
+  1.[[http://stackoverflow.com/questions/4352367/is-it-possible-to-start-emacs-using-a-remote-configuration-file][Is it possible to start emacs using a remote configuration file?]]
+	2.[[http://www.ibm.com/developerworks/cn/linux/l-cn-emacs-shell/][当 Shell 遇见 Emacs -- 大话 Emacs Shell Mode]]
+	3.[[http://lifegoo.pluskid.org/wiki/EmacsAsFileManger.html][Emacs -- 强大的文件管理器]]
+	4.[[http://cx4a.org/software/gccsense/manual.html#Installation][GCCSense User Manual]]
+	5.[[http://emacser.com/emacs-gccsense.htm][Emacs补全利器：auto-complete+gccsense]]
+	6.[[http://blog.csdn.net/astropeak/article/details/6666527][《Emacs——你不能不用的神级利器》——补全（下）]]
+
+

@@ -33,8 +33,6 @@ life is short - you need Python!
 
 等待学习记录中...
 
-file://D:/Org/org-mode-unicorn-logo.ico
-
 * 2013-04-13 土曜日<2013-04-13 Sat>
   1. Tips:
      *How to run Python in Emacs org-mode? Below is the answer*

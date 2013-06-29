@@ -128,6 +128,27 @@ body a:visited {
 .left   {margin-left:0px;  margin-right:auto; text-align:left;}
 .center {margin-left:auto; margin-right:auto; text-align:center;}
 p.verse { margin-left: 3% }
+blockquote {
+		background:#f9f9f9;
+		border-left:10px solid #ccc;
+		margin:1.5em 10px;
+		padding:.5em 10px;
+		quotes:"\201C""\201D""\2018""\2019";
+}
+blockquote:before {
+		color:#ccc;
+		content:open-quote;
+		font-size:4em;
+		line-height:.1em;
+		margin-right:.25em;
+		vertical-align:-.4em;
+}
+blockquote p {
+		font-family: Georgia, serif, 'Vivaldi';
+		font-style: italic;
+		font-weight: bold;
+		/* display:inline; */
+}
 pre {
 		border: 1pt solid #AEBDCC;
 		background-color: #F3F5F7;
@@ -136,6 +157,19 @@ pre {
     font-size: 90%;
     overflow:auto;
 		box-shadow: 1px 1px 6px gray;
+}
+code {
+		background: rgb(255, 226, 231);
+		color: black;
+		box-shadow: 2px 2px 8px gray;
+		padding: 0em .4em;
+		font-weight: bold;
+		font-family: Monaco;
+		margin: .2em 0.4em;
+}
+code:hover {
+		/* color: #00a; */
+		box-shadow: 1px 1px 1px gray;
 }
 table { border-collapse: collapse; }
 td, th { vertical-align: top;  }
@@ -162,6 +196,15 @@ textarea { overflow-x: auto; }
                              white-space:nowrap; }
 .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
                                font-weight:bold; }
+/* ol { */
+/* 		counter-reset: section;                /\* 为每个ol元素创建新的计数器实例 *\/ */
+/* 		/\* list-style-type: none; *\/ */
+/* } */
+/* li:before { */
+/* 		counter-increment: section;            /\* 只增加计数器的当前实例 *\/ */
+/* 		content: counters(section, ".") " ";   /\* 为所有计数器实例增加以“.”分隔的值 *\/ */
+/* } */
+
 #table-of-contents {
     font-size: 9pt;
     position: fixed;
@@ -252,7 +295,7 @@ ul.archive>li {
 }
 ul.archive>li:hover {
 		box-shadow: 1px 1px 1px gray;
-		cursor: pointer;
+		/* cursor: pointer; */
 }
 ul.archive>li a{
 		color: #1aa90c;
@@ -318,6 +361,10 @@ article header {
 		text-align: center;
 }
 
+article header .article-head {
+		text-shadow: 4px 4px 9px gray;
+		font-size: 1.4em;
+}
 article header nav {
 		list-style-type: none;
 		text-align: center;
@@ -354,6 +401,7 @@ article h2[id*='sec'] {
 		color: white;
 		padding-left: 4px;
 		box-shadow: 1px 1px 4px gray;
+		text-shadow: 2px 2px 8px gray;
 }
 
 article h3[id*='sec'] {
@@ -364,11 +412,12 @@ article h3[id*='sec'] {
 		color: white;
 		padding-left: 4px;
 		box-shadow: 1px 1px 4px gray;
-		
+		text-shadow: 2px 2px 6px gray;
 		/* color: #3369e8; */
 }
 
-article h4[id*='sec'] {
+article h4[id*='sec'],
+article h2.footnotes {
 		background-color: rgb(128, 88, 165);
 		color: white;
 		padding-left: 4px;
@@ -380,6 +429,14 @@ article h4[id*='sec'] {
 /* 		box-shadow: 1px 1px 1px gray; */
 /* } */
 
+article .article-content img {
+		box-shadow: 4px 4px 19px gray;
+}
+/* article .article-content img:after { */
+/* 		content: "test"; */
+/* } */
+
+/* Section Navigators */
 .section-nav a {
 		background: purple;
 		box-shadow: 3px 3px 6px gray;
@@ -434,7 +491,8 @@ article h4[id*='sec'] {
 /* footer */
 .footer {
     text-align: center;
-    font-family: 'Vivaldi', italic;
+    font-family: 'Vivaldi';
+		font-style: italic;
 }
 .footer a {
     text-decoration: none;

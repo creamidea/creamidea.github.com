@@ -12,12 +12,12 @@ overview: true
 				<ul class="archive">
 					{% for post in site.posts %}
 					<li>
-						<span class="date">
-							<!-- <i class="icon-time"></i> -->
-							{{ post.date | date: '%b %d, %Y' }}
-						</span>
-						>>
 						<a href="{{ post.url }}"{% if post.subtitle %} title="{{ post.subtitle | escape }}"{% endif %}>
+							<span class="date">
+								<!-- <i class="icon-time"></i> -->
+								{{ post.date | date: '%b %d, %Y' }}
+							</span>
+							>>
 							<strong><i class="icon-file-alt"></i>{{ post.title }}</strong>
 						</a>
 					</li>
