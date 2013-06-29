@@ -170,8 +170,10 @@ textarea { overflow-x: auto; }
     background: white;
     -webkit-box-shadow: 0 0 1em #777777;
     -moz-box-shadow: 0 0 1em #777777;
+    box-shadow: 0 0 1em #777777;
     -webkit-border-bottom-left-radius: 5px;
     -moz-border-radius-bottomleft: 5px;
+		border-bottom-left-radius: 5px;
     text-align: right;
     max-height: 80%;
     overflow: auto;
@@ -337,6 +339,10 @@ article header nav li a:hover{
 		color: white;
 		text-decoration: none;
 }
+article header nav li a:visited{
+		color: #ddd;
+		text-decoration: none;
+}
 
 article h2[id*='sec'] {
 		/* border-left: solid 6px #f55641; */
@@ -373,7 +379,7 @@ article h4[id*='sec'] {
 .section-nav a {
 		background: purple;
 		box-shadow: 3px 3px 6px gray;
-		color: white;
+		color: #ddd;
 		text-decoration: none;
 		border-radius: 2px;
 		padding: 0.4em;
@@ -383,7 +389,7 @@ article h4[id*='sec'] {
 		box-shadow: 1px 1px 1px gray;
 }
 .section-nav a:visited {
-		color: white;
+		color: #ddd;
 }
 
 /* 回到顶部 */
