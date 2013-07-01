@@ -167,10 +167,35 @@ tags: TeX LaTeX
 ** 外文字母
 ** 重音
 ** 连写
-* 章节：
+* 章节
 	\part \chapter \subsection \paragrahp
 	\section \subsubsection \subparagrahp
-* 一些常用：
+* 图表引用
+	#+BEGIN_SRC latex
+    \pagebreak
+    \begin{figure}[here]
+      \includegraphics[width=0.9\textwidth]{images/JobInformationDialog.jpg}
+      \caption{A prototype of the Job Information dialog}
+      \label{fig:jobInformationDialog}
+    \end{figure}
+    
+    Please see Figure ~\ref{fig:JobInformationDialog} for a prototype yada yada yada
+	#+END_SRC
+	
+	在 =Org-mode= 中可以这么书写：
+	#+BEGIN_SRC org
+    实时数据展示界面如图\ref{realTime}所示：
+    ,#+CAPTION: 实时数据展示界面截图
+    ,#+LABEL: realTime
+  	,#+ATTR_LATEX: scale=0.5
+    ./img/realTime.png]]
+	#+END_SRC
+
+	*Reference:*
+	1. http://alvinalexander.com/blog/post/latex/reference-figure-or-table-within-latex-document
+	2. http://en.wikibooks.org/wiki/LaTeX/Labels_and_Cross-referencing
+	3. http://en.wikibooks.org/wiki/LaTeX/Importing_Graphics
+* 一些常用
 	\textsl
 	\textit
 

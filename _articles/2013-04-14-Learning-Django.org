@@ -338,12 +338,12 @@ tags: python django
      =/articles/2006/03/= 
      将会等同于这样的函数调用:
      #+BEGIN_SRC python
-       =month_archive(request, '2006', '03')=
+       month_archive(request, '2006', '03')
      #+END_SRC
 
      而带命名组,同样的请求就会变成这样的函数调用:
      #+BEGIN_SRC python
-       month_archive(request, year\='2006', month='03')
+       month_archive(request, year='2006', month='03')
      #+END_SRC
 
   2. 对一个可选URL配置参数的优雅解决方法: 
