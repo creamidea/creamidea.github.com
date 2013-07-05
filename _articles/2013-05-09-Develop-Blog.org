@@ -103,7 +103,7 @@ tags: javascript python django css mysql
     var csrftoken = getCookie('csrftoken');
       
 	#+END_SRC
-* login_required 作下面这些事情：
+* login\_required 作下面这些事情：
 	+ 如果用户没有登录，那么重定向到／accounts/login/ ，
     传入当前的绝对URL路径作为 query string next 的值。
 	  例如：/accounts/login/?next=/polls/3／。
@@ -141,8 +141,8 @@ tags: javascript python django css mysql
 ** 如何快速更改项目的名称？
 ** 如何构造优美的URLs？
 ** Django Error u“'polls” is not a registered namespace
-	 A: + http://stackoverflow.com/questions/14892462/django-error-upolls-is-not-a-registered-namespace?answertab=active#tab-top
-	    + http://djangounchain.wordpress.com/2013/01/05/tutorial-4-writing-first-django-app-part-3/ 
+   + http://stackoverflow.com/questions/14892462/django-error-upolls-is-not-a-registered-namespace?answertab=active#tab-top
+	 + http://djangounchain.wordpress.com/2013/01/05/tutorial-4-writing-first-django-app-part-3/ 
 	      (Below the 'Namespacing URL names')
 
 * Design:

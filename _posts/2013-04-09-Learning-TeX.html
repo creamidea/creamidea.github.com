@@ -37,8 +37,9 @@ tags: TeX LaTeX
 <li><a href="#sec-7-5">7.5 连写</a></li>
 </ul>
 </li>
-<li><a href="#sec-8">8 章节：</a></li>
-<li><a href="#sec-9">9 一些常用：</a></li>
+<li><a href="#sec-8">8 章节</a></li>
+<li><a href="#sec-9">9 图表引用</a></li>
+<li><a href="#sec-10">10 一些常用</a></li>
 </ul>
 </div>
 </div>
@@ -372,7 +373,7 @@ tex4ht TEX 到HTML (还有XML 等其他格式) 的转换器。
 </div>
 
 <div id="outline-container-8" class="outline-2">
-<h2 id="sec-8">章节：</h2>
+<h2 id="sec-8">章节</h2>
 <div class="outline-text-2" id="text-8">
 
 <p>  \part \chapter \subsection \paragrahp
@@ -382,8 +383,51 @@ tex4ht TEX 到HTML (还有XML 等其他格式) 的转换器。
 </div>
 
 <div id="outline-container-9" class="outline-2">
-<h2 id="sec-9">一些常用：</h2>
+<h2 id="sec-9">图表引用</h2>
 <div class="outline-text-2" id="text-9">
+
+
+
+
+<pre class="example">\pagebreak
+\begin{figure}[here]
+  \includegraphics[width=0.9\textwidth]{images/JobInformationDialog.jpg}
+  \caption{A prototype of the Job Information dialog}
+  \label{fig:jobInformationDialog}
+\end{figure}
+
+Please see Figure ~\ref{fig:JobInformationDialog} for a prototype yada yada yada
+</pre>
+
+
+<p>  
+  在 <code>Org-mode</code> 中可以这么书写：
+</p>
+
+
+<pre class="example">实时数据展示界面如图\ref{realTime}所示：
+./img/realTime.png]]
+</pre>
+
+
+<p>
+  <b>Reference:</b>
+</p><ol>
+<li><a href="http://alvinalexander.com/blog/post/latex/reference-figure-or-table-within-latex-document">http://alvinalexander.com/blog/post/latex/reference-figure-or-table-within-latex-document</a>
+</li>
+<li><a href="http://en.wikibooks.org/wiki/LaTeX/Labels_and_Cross-referencing">http://en.wikibooks.org/wiki/LaTeX/Labels_and_Cross-referencing</a>
+</li>
+<li><a href="http://en.wikibooks.org/wiki/LaTeX/Importing_Graphics">http://en.wikibooks.org/wiki/LaTeX/Importing_Graphics</a>
+</li>
+</ol>
+
+</div>
+
+</div>
+
+<div id="outline-container-10" class="outline-2">
+<h2 id="sec-10">一些常用</h2>
+<div class="outline-text-2" id="text-10">
 
 <p>  \textsl
   \textit

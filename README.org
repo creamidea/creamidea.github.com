@@ -20,6 +20,16 @@
 	
   Hosted by [[https://github.com/][Github]].
 
-* BACKUP:
+* Live IN
+	
+	中文 English 日本語
+
+	MIT-SCHEME C {JavaScript CSS HTML} Nodejs Python Django
+
+	Ubuntu13.04 Windows7
+
+	Emacs Latex Org-mode Git GIMP
+
+* BACKUP
 
 	[[http://creamidea.bitbucket.org/][ICECREAM(氷菓)]]
