@@ -41,7 +41,7 @@ tags: linux windows config
     2. Input "regedit"
     3. HKEY_CURRENT_USER/Software/GNU/Emacs/HOME=%The Home of Emacs%
     (New a string value)
-*** Swap the CapsLk && Ctrl_L
+*** Swap the CapsLk && Ctrl\_L
 		1. Modify the regedit
 		   #+BEGIN_EXAMPLE
 		     REGEDIT4
@@ -54,7 +54,7 @@ tags: linux windows config
 		     #+END_EXAMPLE
 		2. Download Software:
 			 + The script: http://www.cs.umb.edu/~wimiller/stuff/caps2ctrl.exe
-       +The source: http://www.cs.umb.edu/~wimiller/stuff/caps2ctrl.ahk
+       + The source: http://www.cs.umb.edu/~wimiller/stuff/caps2ctrl.ahk
 		3. AutoHotKey:
 			 #+BEGIN_EXAMPLE
 			   Capslock::Ctrl
@@ -75,6 +75,8 @@ tags: linux windows config
 		#+BEGIN_SRC sh
       > jekyll serve
 		#+END_SRC
+*** Change:
+		http://ruby.taobao.org/
 *** Q&A:
 		1. Liquid Exception: incompatible character encodings: IBM437 and UTF-8
 			 #+BEGIN_SRC sh

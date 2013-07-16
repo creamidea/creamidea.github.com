@@ -42,7 +42,9 @@ tags: python django
   2. [[https://docs.djangoproject.com/en/1.5/topics/install/]]
   3. https://docs.djangoproject.com/en/1.5/intro/install/
 
-* 第二章 入门 && 第三章 视图和URL配置 日曜日<2013-04-14 Sun>
+* 第二章 入门 && 第三章 视图和URL配置 
+	日曜日<2013-04-14 Sun>
+
   只是稍微看了一下，然后写了一个Hello(呵呵，真是经典啊)
   1. 使用 =django-admin.py startproject mysite=
 	 (笔者我在Windows7上尝试，估计路径没有加入，所以我直接将Scripts/django-admin.py
@@ -91,7 +93,9 @@ tags: python django
 	 http://127.0.0.1:8080/hello
   
   P30
-* 第四章 模板 火曜日<2013-04-16 Tue>
+* 第四章 模板 
+	火曜日<2013-04-16 Tue>
+
   1. Template System
 	 #+BEGIN_SRC python :results output
        from django import template
@@ -100,12 +104,14 @@ tags: python django
        print t.render(c)
 	 #+END_SRC
   2. 给标签增加一个reversed使得该列表被反向迭代：
-	 #+BEGIN_SRC python
+		 #+BEGIN_EXAMPLE
        {% for athlete in athlete_list reversed %}
        ...
        {% endfor %}
-	 #+END_SRC
-* 第五章 模型 水曜日<2013-04-17 Wed>
+		 #+END_EXAMPLE
+* 第五章 模型 
+	水曜日<2013-04-17 Wed>
+
   1. 安装python-mysql：
 
      在Windows7 64bit上貌似安装不了，它说是64bit的原因。
@@ -216,7 +222,9 @@ tags: python django
 		Reference:
 		+ http://www.sqlite.org/howtocompile.html
 
-* 第六章 Django站点管理 火曜日<2013-04-23 Tue>
+* 第六章 Django站点管理 
+	火曜日<2013-04-23 Tue>
+
 1. 搭建步骤
    #+BEGIN_EXAMPLE
      #INSTALLED_APPS
@@ -261,7 +269,9 @@ tags: python django
            
           admin.site.register(User)
 	    #+END_SRC
-* 第七章 表单 木曜日<2013-04-25 Thu>
+* 第七章 表单 
+	木曜日<2013-04-25 Thu>
+
   1. 在创建contact的时候，我没有使用 =python manage.py startapp contact= 
      导致在写urls.py的时候老是提示找不到 =contact=
 
@@ -307,7 +317,9 @@ tags: python django
 				2) http://www.5i1y.com/post/8/Django-CSRF/
 
 				3) https://docs.djangoproject.com/en/dev/ref/templates/api/#subclassing-context-requestcontext
-* 第八章 高级视图和URL配置 木曜日<2013-04-25 Thu>
+* 第八章 高级视图和URL配置 
+	木曜日<2013-04-25 Thu>
+	
   1. 在 Python 正则表达式中,命名的正则表达式组的语法是 =(?P<name>pattern)= ,
      这里 =name= 是组的名字,而 =pattern= 是匹配的某个模式。
      
@@ -381,7 +393,8 @@ tags: python django
      它不会去管这些参数到底是捕捉回来的还是被额外提供的。
      month和day
 
-* 第九章 模板高级进阶 木曜日<2013-05-07 Tue>  
+* 第九章 模板高级进阶 
+	木曜日<2013-05-07 Tue>  
 
   1. 关闭html自动转义
 	 + 对于单独的变量
@@ -422,7 +435,8 @@ tags: python django
        它会返回列表中存在的第一个模板。 如果模板都不存在，
        将会触发TemplateDoesNotExist异常。
 
-* 第十章 数据模型高级进阶 土曜日<2013-05-11 Sat>
+* 第十章 数据模型高级进阶 
+	土曜日<2013-05-11 Sat>
   CLOCK: [2013-05-12 Sun 12:53]
   
   1. 打开Session功能：

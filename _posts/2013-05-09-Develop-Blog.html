@@ -1,11 +1,20 @@
+---
+layout: doc
+title: Develop Blog
+subtitle: 在智胜进行网站开发的日志文件
+categories: blog
+tags: javascript python django css mysql
+---
+
+
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#sec-1">1 前言</a></li>
 <li><a href="#sec-2">2 制作登录界面</a></li>
-<li><a href="#sec-3">3 高级视图和URL配置 月曜日</a></li>
-<li><a href="#sec-4">4 'NoneType' object has no attribute 'has<sub>header'</sub></a></li>
+<li><a href="#sec-3">3 高级视图和URL配置</a></li>
+<li><a href="#sec-4">4 'NoneType' object has no attribute 'has_header'</a></li>
 <li><a href="#sec-5">5 locals()小技巧</a></li>
 <li><a href="#sec-6">6 Cross Site Request Forgery protection</a></li>
 <li><a href="#sec-7">7 login_required 作下面这些事情：</a></li>
@@ -41,10 +50,13 @@
 </div>
 
 <div id="outline-container-2" class="outline-2">
-<h2 id="sec-2">制作登录界面 <span class="timestamp-wrapper"> <span class="timestamp">2013-05-09 Thu</span></span></h2>
+<h2 id="sec-2">制作登录界面</h2>
 <div class="outline-text-2" id="text-2">
 
-<p>  <b>Attention:</b>
+<p> <span class="timestamp-wrapper"> <span class="timestamp">2013-05-09 Thu</span></span><br/>
+</p>
+<p>  
+  <b>Attention:</b>
 </p><ol>
 <li>在IE中的cookie存储时几个不同项目之间有空格，需要处理掉
    空格才能正常运行。如 "email" and " email"
@@ -69,15 +81,19 @@ String.prototype.Rtrim = function() { // 去掉右空格
 </ol>
 
 
+
 </div>
 
 </div>
 
 <div id="outline-container-3" class="outline-2">
-<h2 id="sec-3">高级视图和URL配置 月曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-05-14 Tue</span></span></h2>
+<h2 id="sec-3">高级视图和URL配置</h2>
 <div class="outline-text-2" id="text-3">
 
-<p>  高级视图和URL配置:
+<p> <span class="timestamp-wrapper"> <span class="timestamp">2013-05-14 Tue</span></span><br/>
+</p>
+<p>
+  高级视图和URL配置:
 </p>
 
 
@@ -101,7 +117,7 @@ def foobar_view(request, template_name):
 </div>
 
 <div id="outline-container-4" class="outline-2">
-<h2 id="sec-4">'NoneType' object has no attribute 'has<sub>header'</sub></h2>
+<h2 id="sec-4">'NoneType' object has no attribute 'has_header'</h2>
 <div class="outline-text-2" id="text-4">
 
 <p>  A:

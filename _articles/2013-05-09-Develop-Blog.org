@@ -21,7 +21,9 @@ tags: javascript python django css mysql
 * 前言
 开发日志
 
-* 制作登录界面 <2013-05-09 Thu>
+* 制作登录界面
+	<2013-05-09 Thu>
+	
   *Attention:*
   1. 在IE中的cookie存储时几个不同项目之间有空格，需要处理掉
 	 空格才能正常运行。如 "email" and " email"
@@ -39,7 +41,10 @@ tags: javascript python django css mysql
        }            
 	 #+END_SRC
 
-* 高级视图和URL配置 月曜日<2013-05-14 Tue>
+
+* 高级视图和URL配置 
+	<2013-05-14 Tue>
+
 	高级视图和URL配置:
 	#+BEGIN_SRC python
 		# urls.py
@@ -56,13 +61,13 @@ tags: javascript python django css mysql
 				m_list = MyModel.objects.filter(is_new=True)
 				return render_to_response(template_name, {'m_list': m_list})
 	#+END_SRC
-* 'NoneType' object has no attribute 'has_header'
+* 'NoneType' object has no attribute 'has\_header'
 	A:
 	#+BEGIN_EXAMPLE
-    on if not response.has_header(‘ETag’):
-    This error appears if you don’t return anything from your view.
-      return direct_to_template(request, "template")
-    I wonder if this is a new error message? I recall a more specific error in my previous version of django, something along the lines of “Your view didn’t return anything!”
+		on if not response.has_header(‘ETag’):
+		This error appears if you don’t return anything from your view.
+			return direct_to_template(request, "template")
+		I wonder if this is a new error message? I recall a more specific error in my previous version of django, something along the lines of “Your view didn’t return anything!”
 	#+END_EXAMPLE
 * locals()小技巧
 	#+BEGIN_SRC python

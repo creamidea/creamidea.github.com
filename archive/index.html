@@ -4,28 +4,39 @@ title: Archive
 overview: true
 ---
 
-<section class="docs">
-  <div class="content">
-    <div class="grid10 first">
-      <article>
-				<h1 style="font-size: 36px; color: yellowgreen">{{ page.title }} <i class="icon-list"></i></h1>
-				<ul class="archive">
-					{% for post in site.posts %}
-					<li>
+<div id="archive">
+	<section class="">
+		<h1 style="font-size: 36px; color: yellowgreen; text-shadow: 1px 1px 24px;">{{ page.title }} <i class="icon-list"></i></h1>
+		{% for post in site.posts %}
+		<article class="post-item">
+			<header>
+				<div class="article-head">
+					<h1>
 						<a href="{{ post.url }}"{% if post.subtitle %} title="{{ post.subtitle | escape }}"{% endif %}>
-							<span class="date">
-								<!-- <i class="icon-time"></i> -->
-								{{ post.date | date: '%b %d, %Y' }}
-							</span>
-							>>
-							<strong><i class="icon-file-alt"></i>{{ post.title }}</strong>
+							<!-- <i class="icon-file-alt"></i> -->
+							{{ post.title }}
 						</a>
-					</li>
-          {% endfor %}
-					<!-- - <a href="archive.html"><strong>显示更多 >> </strong></a></li> -->
-        </ul>
-      </article>
-    </div>
-    <div class="clear"></div>
-  </div>
-</section>
+					</h1>
+				</div>
+				<ul class="post-meta">
+					<li><i class="icon-calendar"></i> {{ post.date | date: '%A, %d %B %Y' }}</li>
+					<li><i class="icon-github-alt"></i>{{ site.author.name }}</li>
+				</ul>
+				<nav>
+					{% if post.tags %}
+					<ul class="tags">
+						{% for tag in post.tags %}
+						<li><a href="{{ site.url }}{{ site.tags_path }}#{{ tag }}"><i class="icon-tag"></i>{{ tag }}</a></li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+					<div class="clearfix"></div>
+				</nav>
+			</header>
+		</article>
+		{% endfor %}
+		<!-- - <a href="archive.html"><strong>显示更多 >> </strong></a></li> -->
+	</section>
+</div>
+<div class="clearfix"></div>
+
