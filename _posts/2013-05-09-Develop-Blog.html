@@ -55,14 +55,14 @@ tags: javascript python django css mysql
 
 <p> <span class="timestamp-wrapper"> <span class="timestamp">2013-05-09 Thu</span></span><br/>
 </p>
-<p>  
+<p>        
   <b>Attention:</b>
 </p><ol>
 <li>在IE中的cookie存储时几个不同项目之间有空格，需要处理掉
-   空格才能正常运行。如 "email" and " email"
+         空格才能正常运行。如 "email" and " email"
 
-<p>   
-   处理函数: 
+<p>         
+         处理函数: 
 </p>
 
 
@@ -93,7 +93,7 @@ String.prototype.Rtrim = function() { // 去掉右空格
 <p> <span class="timestamp-wrapper"> <span class="timestamp">2013-05-14 Tue</span></span><br/>
 </p>
 <p>
-  高级视图和URL配置:
+        高级视图和URL配置:
 </p>
 
 
@@ -101,15 +101,15 @@ String.prototype.Rtrim = function() { // 去掉右空格
 from django.conf.urls.defaults import *
 from mysite import views
 urlpatterns = patterns('',
-    (r'^foo/$', views.foobar_view, {'template_name': 'template1.html'}),
-    (r'^bar/$', views.foobar_view, {'template_name': 'template2.html'}),
+                (r'^foo/$', views.foobar_view, {'template_name': 'template1.html'}),
+                (r'^bar/$', views.foobar_view, {'template_name': 'template2.html'}),
 )
 # views.py
 from django.shortcuts import render_to_response
 from mysite.models import MyModel
 def foobar_view(request, template_name):
-    m_list = MyModel.objects.filter(is_new=True)
-    return render_to_response(template_name, {'m_list': m_list})
+                m_list = MyModel.objects.filter(is_new=True)
+                return render_to_response(template_name, {'m_list': m_list})
 </pre>
 
 </div>
@@ -120,13 +120,13 @@ def foobar_view(request, template_name):
 <h2 id="sec-4">'NoneType' object has no attribute 'has_header'</h2>
 <div class="outline-text-2" id="text-4">
 
-<p>  A:
+<p>        A:
 </p>
 
 
 <pre class="example">on if not response.has_header(‘ETag’):
 This error appears if you don’t return anything from your view.
-  return direct_to_template(request, "template")
+        return direct_to_template(request, "template")
 I wonder if this is a new error message? I recall a more specific error in my previous version of django, something along the lines of “Your view didn’t return anything!”
 </pre>
 
@@ -147,7 +147,7 @@ I wonder if this is a new error message? I recall a more specific error in my pr
 </pre>
 
 <p>
-  等价于：
+        等价于：
 </p>
 
 
@@ -157,13 +157,13 @@ I wonder if this is a new error message? I recall a more specific error in my pr
 </pre>
 
 <p>
-  注意：
-  locals()导致了一点点开销，因为Python不得不动态创建字典 
-  如果你手动指定context字典则可以避免这项开销
+        注意：
+        locals()导致了一点点开销，因为Python不得不动态创建字典 
+        如果你手动指定context字典则可以避免这项开销
 </p>
-<p>  
-  Reference：
-  <a href="http://hi.baidu.com/javalang/item/2d4e14f7a39e3f16cf9f3236">http://hi.baidu.com/javalang/item/2d4e14f7a39e3f16cf9f3236</a>
+<p>        
+        Reference：
+        <a href="http://hi.baidu.com/javalang/item/2d4e14f7a39e3f16cf9f3236">http://hi.baidu.com/javalang/item/2d4e14f7a39e3f16cf9f3236</a>
 </p></div>
 
 </div>
@@ -205,10 +205,13 @@ var csrftoken = getCookie('csrftoken');
 
 <ul>
 <li>如果用户没有登录，那么重定向到／accounts/login/ ，
-    传入当前的绝对URL路径作为 query string next 的值。
-    例如：/accounts/login/?next=/polls/3／。
-
 </li>
+</ul>
+
+<p>    传入当前的绝对URL路径作为 query string next 的值。
+          例如：/accounts/login/?next=/polls/3／。
+</p>
+<ul>
 <li>如果用户已经登录了，那么就正常执行view的代码。
 </li>
 </ul>
@@ -226,11 +229,11 @@ var csrftoken = getCookie('csrftoken');
 <li>如果通过 ``GET`` 方式调用的话，它显示一个登录表单并通过POST的方式登录。
 </li>
 <li>如果通过 ``POST`` 方式调用的话，它试图把用户登录进去。 
-    如果登录成功， 视图（view）重定向到 ``/accounts/profile/``
-    （目前是硬性编码的，就是写死的。）。如果登录失败，则继续显示登录表单。
+          如果登录成功， 视图（view）重定向到 ``/accounts/profile/``
+          （目前是硬性编码的，就是写死的。）。如果登录失败，则继续显示登录表单。
 </li>
 <li>你需要自己提供一个登录表单的模板，默认叫 registration/login.html 。
-    这个模板需要获得3个模板上下文的变量：
+          这个模板需要获得3个模板上下文的变量：
 
 
 
@@ -254,7 +257,7 @@ site_name：当前 Site 的名字。根据 SITE_ID 设置的信息获取。参�
 <h2 id="sec-9">python Data Structures</h2>
 <div class="outline-text-2" id="text-9">
 
-<p>  <a href="http://docs.python.org/2/tutorial/datastructures.html">http://docs.python.org/2/tutorial/datastructures.html</a>
+<p>        <a href="http://docs.python.org/2/tutorial/datastructures.html">http://docs.python.org/2/tutorial/datastructures.html</a>
 </p></div>
 
 </div>
@@ -263,13 +266,13 @@ site_name：当前 Site 的名字。根据 SITE_ID 设置的信息获取。参�
 <h2 id="sec-10">django.core.urlresolvers</h2>
 <div class="outline-text-2" id="text-10">
 
-<p>  <a href="https://docs.djangoproject.com/en/dev/ref/urlresolvers/">https://docs.djangoproject.com/en/dev/ref/urlresolvers/</a>
+<p>        <a href="https://docs.djangoproject.com/en/dev/ref/urlresolvers/">https://docs.djangoproject.com/en/dev/ref/urlresolvers/</a>
 </p>
 <p>  
-  reverse():
+        reverse():
 </p>
 <p>
-  <a href="http://stackoverflow.com/questions/5448148/problem-with-django-reverse">http://stackoverflow.com/questions/5448148/problem-with-django-reverse</a>
+        <a href="http://stackoverflow.com/questions/5448148/problem-with-django-reverse">http://stackoverflow.com/questions/5448148/problem-with-django-reverse</a>
 </p></div>
 
 </div>
@@ -278,7 +281,7 @@ site_name：当前 Site 的名字。根据 SITE_ID 设置的信息获取。参�
 <h2 id="sec-11">URL dispatcher</h2>
 <div class="outline-text-2" id="text-11">
 
-<p>  <a href="https://docs.djangoproject.com/en/dev/topics/http/urls/#django.core.urlresolvers.reverse">https://docs.djangoproject.com/en/dev/topics/http/urls/#django.core.urlresolvers.reverse</a>
+<p>        <a href="https://docs.djangoproject.com/en/dev/topics/http/urls/#django.core.urlresolvers.reverse">https://docs.djangoproject.com/en/dev/topics/http/urls/#django.core.urlresolvers.reverse</a>
 </p>
 </div>
 
@@ -313,9 +316,12 @@ site_name：当前 Site 的名字。根据 SITE_ID 设置的信息获取。参�
 
 <ul>
 <li><a href="http://stackoverflow.com/questions/14892462/django-error-upolls-is-not-a-registered-namespace?answertab=active#tab-top">http://stackoverflow.com/questions/14892462/django-error-upolls-is-not-a-registered-namespace?answertab=active#tab-top</a>
-</li>
+<ul>
 <li><a href="http://djangounchain.wordpress.com/2013/01/05/tutorial-4-writing-first-django-app-part-3/">http://djangounchain.wordpress.com/2013/01/05/tutorial-4-writing-first-django-app-part-3/</a> 
-        (Below the 'Namespacing URL names')
+              (Below the 'Namespacing URL names')
+</li>
+</ul>
+
 </li>
 </ul>
 
@@ -355,7 +361,7 @@ site_name：当前 Site 的名字。根据 SITE_ID 设置的信息获取。参�
 <h2 id="sec-14">Django &amp;&amp; Ajax:</h2>
 <div class="outline-text-2" id="text-14">
 
-<p>  <a href="https://docs.djangoproject.com/en/dev/ref/contrib/csrf/#page-uses-ajax-without-any-html-form">https://docs.djangoproject.com/en/dev/ref/contrib/csrf/#page-uses-ajax-without-any-html-form</a>
+<p>        <a href="https://docs.djangoproject.com/en/dev/ref/contrib/csrf/#page-uses-ajax-without-any-html-form">https://docs.djangoproject.com/en/dev/ref/contrib/csrf/#page-uses-ajax-without-any-html-form</a>
 </p>
 </div>
 </div>

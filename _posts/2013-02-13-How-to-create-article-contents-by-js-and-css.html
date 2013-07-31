@@ -69,19 +69,19 @@ tags: javascript css
 
 <pre class="example">$.each($('h2,h3'),function(index,item){
     if(item.tagName.toLowerCase() == 'h2'){
-    var h2item = {};
-    h2item.name = $(item).text();
-    h2item.id = 'menuIndex'+index;
-    h2.push(h2item);
-    h2index++;
+          var h2item = {};
+          h2item.name = $(item).text();
+          h2item.id = 'menuIndex'+index;
+          h2.push(h2item);
+          h2index++;
     }else{
-    var h3item = {};
-    h3item.name = $(item).text();
-    h3item.id = 'menuIndex'+index;
-    if(!h3[h2index-1]){
-      h3[h2index-1] = [];
-    }
-    h3[h2index-1].push(h3item);
+          var h3item = {};
+          h3item.name = $(item).text();
+          h3item.id = 'menuIndex'+index;
+          if(!h3[h2index-1]){
+            h3[h2index-1] = [];
+          }
+          h3[h2index-1].push(h3item);
     }
     item.id = 'menuIndex' + index
 });
@@ -153,10 +153,10 @@ tags: javascript css
 <h2 id="sec-3">利用纯CSS实现目录功能</h2>
 <div class="outline-text-2" id="text-3">
 
-<p>  这个也是我最近在学习org-mode的时候看到的。
+<p>        这个也是我最近在学习org-mode的时候看到的。
 </p>
 <p>
-  org-mode在生成html的时候会自动生成一个目录，html代码（我的第一篇文章）如下：
+        org-mode在生成html的时候会自动生成一个目录，html代码（我的第一篇文章）如下：
 </p>
 
 
@@ -204,7 +204,7 @@ tags: javascript css
 
 
 <p>
-  可以很清楚的知道文章结构，然后利用<a href="http://orgmode.org/org.html">The Org Manual</a>目录CSS，代码如下：
+        可以很清楚的知道文章结构，然后利用<a href="http://orgmode.org/org.html">The Org Manual</a>目录CSS，代码如下：
 </p>
 
 
@@ -255,9 +255,9 @@ tags: javascript css
 
 
 <p>
-  当然，我稍微做了一下修改，但是总体上的效果没有多大的区别，只是更改了部分连接的颜色。
+        当然，我稍微做了一下修改，但是总体上的效果没有多大的区别，只是更改了部分连接的颜色。
 </p>
 <p>
-  你当然完全可以自己设计。我就在这里偷懒一下啦。
+        你当然完全可以自己设计。我就在这里偷懒一下啦。
 </p></div>
 </div>

@@ -59,7 +59,9 @@ tags: linux windows config
 <li><a href="#sec-3-7-2">3.7.2 Luarocks</a></li>
 </ul>
 </li>
-<li><a href="#sec-3-8">3.8 MySQL</a></li>
+<li><a href="#sec-3-8">3.8 Install Java</a></li>
+<li><a href="#sec-3-9">3.9 MySQL</a></li>
+<li><a href="#sec-3-10">3.10 Change Some Key Shortcuts</a></li>
 </ul>
 </li>
 <li><a href="#sec-4">4 Mac</a></li>
@@ -693,8 +695,62 @@ $ sudo cp -r usr/* /usr
 </div>
 
 <div id="outline-container-3-8" class="outline-3">
-<h3 id="sec-3-8">MySQL</h3>
+<h3 id="sec-3-8">Install Java</h3>
 <div class="outline-text-3" id="text-3-8">
+
+<ol>
+<li>Download the tar.gz package from official <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">repo</a>
+</li>
+<li>Unzipped
+</li>
+<li>Copy/Move the unzipped category to <i>usr/lib/jvm</i>
+</li>
+<li>Now Run
+
+
+
+<pre class="example">update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.7.0/bin/java" 1
+sudo update-alternatives --install "/usr/bin/javac" "javac" "/usr/lib/jvm/jdk1.7.0/bin/javac" 1
+sudo update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/lib/jvm/jdk1.7.0/bin/javaws" 1
+</pre>
+
+</li>
+<li>Correct the file ownership and the permissions of the executables:(if necessary)
+
+
+
+<pre class="example">sudo chmod a+x /usr/bin/java 
+sudo chmod a+x /usr/bin/javac 
+sudo chmod a+x /usr/bin/javaws
+sudo chown -R root:root /usr/lib/jvm/jdk1.7.0
+</pre>
+
+</li>
+<li>Test
+
+
+
+<pre class="example">java -version
+</pre>
+
+</li>
+</ol>
+
+<p>   <b>Reference:</b>
+</p><ul>
+<li><a href="http://au9ustine.bitbucket.org/blogs/2012-06-08.html">http://au9ustine.bitbucket.org/blogs/2012-06-08.html</a>
+</li>
+<li><a href="http://askubuntu.com/questions/55848/how-do-i-install-oracle-java-jdk-7">http://askubuntu.com/questions/55848/how-do-i-install-oracle-java-jdk-7</a>
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-9" class="outline-3">
+<h3 id="sec-3-9">MySQL</h3>
+<div class="outline-text-3" id="text-3-9">
 
 
 
@@ -702,6 +758,29 @@ $ sudo cp -r usr/* /usr
 <pre class="example"># start on runlevel [2345]
 stop on starting rc RUNLEVEL=[016]
 </pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-10" class="outline-3">
+<h3 id="sec-3-10">Change Some Key Shortcuts</h3>
+<div class="outline-text-3" id="text-3-10">
+
+<ol>
+<li>Launchers &gt; Key to show the HUD
+      <code>Alt+Alt R</code>
+
+</li>
+<li>Windows &gt; Activate the window menu 
+      <code>Menu</code>
+
+</li>
+<li>Alt + key to active menu
+      Alt+E &gt; Keyboard Shortcuts
+</li>
+</ol>
+
 
 </div>
 </div>

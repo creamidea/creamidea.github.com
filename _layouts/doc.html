@@ -1,6 +1,19 @@
 ---
 layout: default
 ---
+<div id="logo-doc" class="">
+	<ul>
+		<li><a href="/" style="font-size: 28px; color:blueviolet;" data-toggle="tooltip" data-placement="top" title="Home"><i class="icon-home"></i></a></li>
+		<li><a href="{{ site.url }}{{ site.archive}}" style="font-size: 24px; color:yellowgreen;" data-toggle="tooltip" data-placement="top" title="Archive"><i class="icon-list"></i></a></li>
+		<li><a href="{{ site.url }}{{ site.tags_path}}" style="font-size: 24px; color:#24A0DA;" data-toggle="tooltip" data-placement="top" title="Tags"><i class="icon-tags"></i></a></li>
+		<li><a href="{{ site.github }}" style="font-size: 24px; color:black;" data-toggle="tooltip" data-placement="top" title="Github"><i class="icon-github"></i></a></li>
+		<li><a href="{{ site.url }}{{ site.rss }}" style="font-size: 24px; color:#ff9933;" data-toggle="tooltip" data-placement="top" title="RSS"><i class="icon-rss"></i></a></li>
+		<li><a href="mailto:{{ site.author.email }}" style="font-size: 24px; color:rgb(255, 105, 105);" data-toggle="tooltip" data-placement="top" title="Email Me"><i class="icon-envelope"></i></a></li>
+		<li><a href="{{ site.about }}" style="font-size: 24px;" data-toggle="tooltip" data-placement="top" title="About Me"><i class="icon-github-alt"></i></a></li>
+		<li><a href="http://www.google.com/cse/publicurl?cx=017951989687920165329:0e60irxxe5m" style="font-size: 24px; color: #24A0DA" data-toggle="tooltip" data-placement="top" title="Search"><i class="icon-search"></i></a></li>
+	</ul>
+</div>
+
 <article>
 	<header>
 		<div class="article-head">
@@ -50,3 +63,6 @@ layout: default
 <!-- Load disqus model -->
 <h1 style="color: yellowgreen; text-shadow: 1px 1px 2px gray;"> Comments </h1>
 {% include disqus.html %}
+
+
+{% include footer.html %}

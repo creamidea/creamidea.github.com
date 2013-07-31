@@ -22,7 +22,11 @@
 
 * Live IN
 	
-	中文 English 日本語
+	English:The Future World
+
+	中文：现实生活
+
+	日本語：二次元の世界
 
 	MIT-SCHEME C {JavaScript CSS HTML} Nodejs Python Django
 

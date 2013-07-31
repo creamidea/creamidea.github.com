@@ -53,8 +53,8 @@ tags: linux windows config
 		     (New a binary Values)
 		     #+END_EXAMPLE
 		2. Download Software:
-			 + The script: http://www.cs.umb.edu/~wimiller/stuff/caps2ctrl.exe
-       + The source: http://www.cs.umb.edu/~wimiller/stuff/caps2ctrl.ahk
+          + The script: http://www.cs.umb.edu/~wimiller/stuff/caps2ctrl.exe
+          + The source: http://www.cs.umb.edu/~wimiller/stuff/caps2ctrl.ahk
 		3. AutoHotKey:
 			 #+BEGIN_EXAMPLE
 			   Capslock::Ctrl
@@ -243,11 +243,61 @@ tags: linux windows config
     3. =make=
     4. =sudo make install=
     5. Over~
+** Install Java
+   1. Download the tar.gz package from official [[http://www.oracle.com/technetwork/java/javase/downloads/index.html][repo]]
+   2. Unzipped
+   3. Copy/Move the unzipped category to /usr/lib/jvm/
+   4. Now Run
+      #+BEGIN_SRC sh
+        update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.7.0/bin/java" 1
+        sudo update-alternatives --install "/usr/bin/javac" "javac" "/usr/lib/jvm/jdk1.7.0/bin/javac" 1
+        sudo update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/lib/jvm/jdk1.7.0/bin/javaws" 1
+      #+END_SRC
+   5. Correct the file ownership and the permissions of the executables:(if necessary)
+      #+BEGIN_SRC sh
+        sudo chmod a+x /usr/bin/java 
+        sudo chmod a+x /usr/bin/javac 
+        sudo chmod a+x /usr/bin/javaws
+        sudo chown -R root:root /usr/lib/jvm/jdk1.7.0
+      #+END_SRC
+   6. Test
+      #+BEGIN_SRC sh
+        java -version
+      #+END_SRC
+   *Reference:*
+   + http://au9ustine.bitbucket.org/blogs/2012-06-08.html
+   + http://askubuntu.com/questions/55848/how-do-i-install-oracle-java-jdk-7
 ** MySQL
    #+BEGIN_SRC sh
      # start on runlevel [2345]
      stop on starting rc RUNLEVEL=[016]
    #+END_SRC
+** Change Some Key Shortcuts
+   1. Launchers > Key to show the HUD
+      =Alt+Alt R=
+
+   2. Windows > Activate the window menu 
+      =Menu=
+      
+   3. Alt + key to active menu
+      Alt+E > Keyboard Shortcuts
+      
+** Make Ubuntu12.04 hibernation
+   1. open file
+      #+BEGIN_SRC sh
+        sudo vi /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla
+      #+END_SRC
+   2. modify
+      #+BEGIN_SRC sh
+        [Re-enable hibernate by default]
+        Identity=unix-user:*
+        Action=org.freedesktop.upower.hibernate
+        ResultActive=yes
+      #+END_SRC
+   3. reboot
+
+   *Reference:*
+   + http://askubuntu.com/questions/94754/how-to-enable-hibernation
 * Mac
 
 * Emacs
