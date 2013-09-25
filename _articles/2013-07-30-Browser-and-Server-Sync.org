@@ -61,9 +61,10 @@ tags: nodejs javascript coffeescript python
 
 * Polling
 	这是轮询的方式，是一种很常见的解决方案。然后我这里没有写代码。
+  思路就是使用setInterval()函数，定时访问服务器。构成一个一个polling.
 
 * Comet
-
+  等待填坑……
 * Long Polling
 	长轮询方式。
 	代码：
@@ -72,6 +73,7 @@ tags: nodejs javascript coffeescript python
 	#+END_HTML
 
 * WebSocket
+  等待填坑……
 
 * Socket.IO
 	[[http://socket.io/][Socket.IO]] 这个我个人感觉不错，支持的浏览器也很多，然后使用的是nodejs。
@@ -86,3 +88,4 @@ tags: nodejs javascript coffeescript python
 
 * 后记
 	然后接下来需要思考的是数据库更新，如何通知web服务器发送更新数据？
+  继续等待填坑……

@@ -24,6 +24,7 @@ tags: javascript bower backbone requirejs
 主要参考的是这个视频：A RequireJS, Backbone, and Bower Starter Template[fn:1]，
 来自于这篇文章：[[http://net.tutsplus.com/tutorials/javascript-ajax/a-requirejs-backbone-and-bower-starter-template/][A RequireJS, Backbone, and Bower Starter Template]]
 
+* 等待填坑……
 
 * Footnotes
 

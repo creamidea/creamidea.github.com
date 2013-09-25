@@ -163,7 +163,10 @@ Jekyll的搭建过程，网络上已经有许多的高手写的很详细了，�
 
 <2013-09-25 Wed>
 经过两天的修改，将整个blog更新成现在的模样。不过还有许多需要完善的地方，后期在继续吧。
+这次主要是文章排版和主页的更换以及归档页面和标签页面的初期整合，后期的话将其作为首页，只用一个页面。
 最头疼的地方就是浏览器兼容性问题了。现代浏览器基本都有用。	
+
+刚刚去标注填坑的时候，发现有些标题太深了，估计是自己不会写文章。以后要加强这方面的训练。
 
 * Footnotes
 
@@ -173,4 +176,3 @@ Jekyll的搭建过程，网络上已经有许多的高手写的很详细了，�
 [fn:Enrmarc]: http://enrmarc.github.com/index.htm
 [fn:PradeepNayak]: http://pradeepnayak.in/
 [fn:au9ustine]: http://au9ustine.github.com/
-

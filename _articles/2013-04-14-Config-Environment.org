@@ -39,7 +39,7 @@ tags: linux windows config
 *** Change the Home Directory:
 		1. Ctrl + R
     2. Input "regedit"
-    3. HKEY_CURRENT_USER/Software/GNU/Emacs/HOME=%The Home of Emacs%
+    3. HKEY\_CURRENT\_USER/Software/GNU/Emacs/HOME=%The Home of Emacs%
     (New a string value)
 *** Swap the CapsLk && Ctrl\_L
 		1. Modify the regedit
