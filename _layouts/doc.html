@@ -1,68 +1,102 @@
 ---
 layout: default
 ---
-<div id="logo-doc" class="">
-	<ul>
-		<li><a href="/" style="font-size: 28px; color:blueviolet;" data-toggle="tooltip" data-placement="top" title="Home"><i class="icon-home"></i></a></li>
-		<li><a href="{{ site.url }}{{ site.archive}}" style="font-size: 24px; color:yellowgreen;" data-toggle="tooltip" data-placement="top" title="Archive"><i class="icon-list"></i></a></li>
-		<li><a href="{{ site.url }}{{ site.tags_path}}" style="font-size: 24px; color:#24A0DA;" data-toggle="tooltip" data-placement="top" title="Tags"><i class="icon-tags"></i></a></li>
-		<li><a href="{{ site.github }}" style="font-size: 24px; color:black;" data-toggle="tooltip" data-placement="top" title="Github"><i class="icon-github"></i></a></li>
-		<li><a href="{{ site.url }}{{ site.rss }}" style="font-size: 24px; color:#ff9933;" data-toggle="tooltip" data-placement="top" title="RSS"><i class="icon-rss"></i></a></li>
-		<li><a href="mailto:{{ site.author.email }}" style="font-size: 24px; color:rgb(255, 105, 105);" data-toggle="tooltip" data-placement="top" title="Email Me"><i class="icon-envelope"></i></a></li>
-		<li><a href="{{ site.about }}" style="font-size: 24px;" data-toggle="tooltip" data-placement="top" title="About Me"><i class="icon-github-alt"></i></a></li>
-		<li><a href="http://www.google.com/cse/publicurl?cx=017951989687920165329:0e60irxxe5m" style="font-size: 24px; color: #24A0DA" data-toggle="tooltip" data-placement="top" title="Search"><i class="icon-search"></i></a></li>
-	</ul>
+<div class="screen-content post-supplemental-loaded">
+  <article class="post-article grid-breaking">
+    <div class="metabar">
+      
+    </div>
+    <!-- 正文部分 -->
+    <section class="post-page-wrapper post-page-wrapper-contain">
+      <div class="post-page-wrapper-inner">
+        <div class="post-author-side">
+          <div class="post-author-card">
+            <a href="{{ site.url }}/" class="post-author-image">
+              <img src="/img/icecream.png" class="" alt="" />
+            </a>
+            <div class="post-author-info">
+              <a href="{{ site.url }}/" class="post-author-name">icecream</a>
+              <a href="mailto:creamidea@gmail.com" title="gmail me" style="color: #dd4b39">Gmail</a>
+            </div>
+            <div class="post-published-date">
+              <strong>Post Date</strong>
+              <p><time class="post-date">{{ page.date | date: '%A, %d %B %Y' }}</time></p>
+            </div>
+            <a href="{{ site.archive }}" style="color: #00a753;" title="Shortcuts(A/a)">Archive</a>
+            <div class="post-tags">
+              {% include tag_below_title.html %}
+            </div>
+          </div>
+        </div>
+        <div class="post-field image image-picker-wrap background-size-contain">
+          
+        </div>
+        <!-- <header class="post-header post-header-top post-item-meta"> -->
+        <!--   <\!-- <ul class="post-meta"> -\-> -->
+        <!--     <\!-- <li class="post-meta-item">post-meta-item -\-> -->
+            
+        <!--     <\!-- </li> -\-> -->
+        <!--   <\!-- </ul> -\-> -->
+        <!-- </header> -->
+        <div class="post-content">
+          <div class="post-content-inner">
+            <div class="notes-source">
+              <header class="post-header post-header-headline">
+                <h1 name="title" class="post-title">{{ page.title }}</h1>
+              </header>
+              <div class="post-field body">
+		            {{ content }}
+                <!-- 文章结尾处 -->
+                <hr />
+                <div class="post-tags-bottom">
+                  {% include tag_below_title.html %}
+                </div>
+                <div class="post-section-nav">
+                  <!-- the nagivation below the article -->
+                  {% include section_nav.html %}
+                </div>
+              </div>
+            </div>
+            <div class="post-author-bottom post-supplemental">
+              <div class="post-author-card">
+                <a href="{{ site.url }}/" class="post-author-image">
+                  <img src="/img/icecream.png" class="" alt="" />
+                </a>
+                <div class="post-author-info">
+                  <a href="{{ site.url }}/" class="post-author-name">icecream</a>
+                  <a href="mailto:creamidea@gmail.com" title="gmail me" style="color: #dd4b39">Gmail</a>
+                </div>
+                <a href="{{ site.archive }}" class="archive" title="Shortcuts(A/a)">Archive</a>
+                <div class="post-published-date">
+                  <strong>Post Date</strong>
+                  <p><time class="post-date">{{ page.date | date: '%A, %d %B %Y' }}</time></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="post-footer post-supplemental">
+      <div class="post-footer-inner">
+        <div class="post-footer-content post-content">
+          <div class="comments">
+            {% include disqus.html %}
+          </div>
+          {% include footer_copyright.html %}
+        </div>
+      </div>
+    </footer>
+  </article>
 </div>
-
-<article>
-	<header>
-		<div class="article-head">
-			<!-- artical title -->
-			<h1 id="article_title">{{ page.title }}</h1>
-			<!-- artical subtitle -->
-		</div>
-
-		<!-- page basic info -->
-		<ul class="post-meta">
-			<li><i class="icon-calendar"></i> {{ page.date | date: '%A, %d %B %Y' }}</li>
-			<li><i class="icon-github-alt"></i>{{ site.author.name }}</li>
-		</ul>
-
-		<!-- Update the date of modify -->
-		{% if page.updated %}
-		<p class="updated-time">
-			<span>Last updated: <span class="date">{{ page.updated | date: '%A, %d %B %Y - %H:%M' }}</span></span>
-		</p>
-		{% endif %}
-
-		{% include tag_below_title.html %}
-	</header>
-
-	<div class="article-content">
-		<!-- the content of the artical -->
-		{{ content }}
-	</div>
-</article>
-<!-- 水平分割虚线(Horizontal dividing dotted line) -->
-<hr />
-
-<!-- the nagivation below the article -->
-{% include section_nav.html %}
-
+<!-- <\!-- 水平分割虚线(Horizontal dividing dotted line) -\-> -->
+<!-- <hr /> -->
 <div class="clearfix"></div>
-
-<!-- documents keyboard setting -->
-{% include doc_key.html %}
 <!-- Back To Top -->
 <div class="backToTop">
   <a href="#top">
     <i class="icon-chevron-up"></i>
   </a>
 </div>
-
-<!-- Load disqus model -->
-<h1 style="color: yellowgreen; text-shadow: 1px 1px 2px gray;"> Comments </h1>
-{% include disqus.html %}
-
-
-{% include footer.html %}
+<!-- documents keyboard setting -->
+{% include doc_key.html %}

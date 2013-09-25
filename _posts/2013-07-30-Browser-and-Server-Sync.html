@@ -61,12 +61,12 @@ tags: nodejs javascript coffeescript python
 
 <ol>
 <li>Install
-   安装步骤，请移步 <a href="http://flask.pocoo.org/docs/installation/#installation">这里</a> ，这里是官方的安装方式，在这里我接触到了python的虚拟环境。
-   感觉用这个virtualenv的确不错，然后我找到了一篇介绍这种的文章：<a href="https://virtualenv-chinese-docs.readthedocs.org/en/latest/">virtualenv</a>
+     安装步骤，请移步 <a href="http://flask.pocoo.org/docs/installation/#installation">这里</a> ，这里是官方的安装方式，在这里我接触到了python的虚拟环境。
+     感觉用这个virtualenv的确不错，然后我找到了一篇介绍这种的文章：<a href="https://virtualenv-chinese-docs.readthedocs.org/en/latest/">virtualenv</a>
 </li>
 <li>Quick Start
-   请移步<a href="http://flask.pocoo.org/docs/quickstart/#quickstart">这里</a> 。我也是跟着快速教程一步一步做的，写出来的服务器也很简单。
-   毕竟这篇文章的主题不是这个。
+     请移步<a href="http://flask.pocoo.org/docs/quickstart/#quickstart">这里</a> 。我也是跟着快速教程一步一步做的，写出来的服务器也很简单。
+     毕竟这篇文章的主题不是这个。
 </li>
 </ol>
 
@@ -78,15 +78,15 @@ tags: nodejs javascript coffeescript python
 <h3 id="sec-2-2">Nodejs</h3>
 <div class="outline-text-3" id="text-2-2">
 
-<p>   关于如何安装 <a href="http://nodejs.org/">nodejs</a> 以及如何使用我在此不多累述。官方文档写的很详细。
-   然后我使用的是 <a href="http://expressjs.com/">expressjs</a> 这一WEB框架。安装方式和快速入门点击 <a href="http://expressjs.com/guide.html">QuickStart</a> 。
+<p>     关于如何安装 <a href="http://nodejs.org/">nodejs</a> 以及如何使用我在此不多累述。官方文档写的很详细。
+     然后我使用的是 <a href="http://expressjs.com/">expressjs</a> 这一WEB框架。安装方式和快速入门点击 <a href="http://expressjs.com/guide.html">QuickStart</a> 。
 </p>
 <p>
-   在这里着重写一下使用 <code>coffeescript</code> 来写nodejs的代码。
-   具体可以看这篇文章：<a href="http://sparklinlabs.com/2013/06/my-node-js-express-coffeescript-setup/">My Node.js Express + CoffeeScript setup</a>
+     在这里着重写一下使用 <code>coffeescript</code> 来写nodejs的代码。
+     具体可以看这篇文章：<a href="http://sparklinlabs.com/2013/06/my-node-js-express-coffeescript-setup/">My Node.js Express + CoffeeScript setup</a>
 </p>
 <p>
-   我的做法只是用来其中的一条命令：
+     我的做法只是用来其中的一条命令：
 </p>
 
 
@@ -94,7 +94,7 @@ tags: nodejs javascript coffeescript python
 </pre>
 
 <p>
-   将express生成的app.js转成了app.coffee，然后将 package.json 中的
+     将express生成的app.js转成了app.coffee，然后将 package.json 中的
 </p>
 
 
@@ -102,7 +102,7 @@ tags: nodejs javascript coffeescript python
 </pre>
 
 <p>
-   变成了：
+     变成了：
 </p>
 
 
@@ -111,7 +111,7 @@ tags: nodejs javascript coffeescript python
 
 
 <p>
-   具体的在我上面提到文章中有详细介绍。当然还可以看看这个：<a href="http://twilson63.github.io/express-coffee/">Express-coffee</a>
+     具体的在我上面提到文章中有详细介绍。当然还可以看看这个：<a href="http://twilson63.github.io/express-coffee/">Express-coffee</a>
 </p>
 </div>
 </div>
@@ -122,7 +122,7 @@ tags: nodejs javascript coffeescript python
 <h2 id="sec-3">Polling</h2>
 <div class="outline-text-2" id="text-3">
 
-<p>  这是轮询的方式，是一种很常见的解决方案。然后我这里没有写代码。
+<p>    这是轮询的方式，是一种很常见的解决方案。然后我这里没有写代码。
 </p>
 </div>
 
@@ -141,9 +141,9 @@ tags: nodejs javascript coffeescript python
 <h2 id="sec-5">Long Polling</h2>
 <div class="outline-text-2" id="text-5">
 
-<p>  长轮询方式。
-  代码：
-  <script src="https://gist.github.com/creamidea/6114508.js"></script>
+<p>    长轮询方式。
+    代码：
+    <script src="https://gist.github.com/creamidea/6114508.js"></script>
 
 </p></div>
 
@@ -162,15 +162,15 @@ tags: nodejs javascript coffeescript python
 <h2 id="sec-7">Socket.IO</h2>
 <div class="outline-text-2" id="text-7">
 
-<p>  <a href="http://socket.io/">Socket.IO</a> 这个我个人感觉不错，支持的浏览器也很多，然后使用的是nodejs。
-  有空的时候看看源代码，看看究竟是如何实现的。
+<p>    <a href="http://socket.io/">Socket.IO</a> 这个我个人感觉不错，支持的浏览器也很多，然后使用的是nodejs。
+    有空的时候看看源代码，看看究竟是如何实现的。
 </p>
 <p>
-  然后下面的代码都是按照官方的步骤做的，只是稍微修改了一下。具体的可以参照 <a href="http://socket.io/#how-to-use">这里</a>
+    然后下面的代码都是按照官方的步骤做的，只是稍微修改了一下。具体的可以参照 <a href="http://socket.io/#how-to-use">这里</a>
 </p>
-<p>  
-  代码：
-  <script src="https://gist.github.com/creamidea/6114473.js"></script>
+<p>    
+    代码：
+    <script src="https://gist.github.com/creamidea/6114473.js"></script>
 
 </p></div>
 
@@ -180,6 +180,6 @@ tags: nodejs javascript coffeescript python
 <h2 id="sec-8">后记</h2>
 <div class="outline-text-2" id="text-8">
 
-<p>  然后接下来需要思考的是数据库更新，如何通知web服务器发送更新数据？
+<p>    然后接下来需要思考的是数据库更新，如何通知web服务器发送更新数据？
 </p></div>
 </div>

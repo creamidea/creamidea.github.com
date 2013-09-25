@@ -12,36 +12,37 @@
   <!--     }); -->
 
   <!-- Back To Top And slide -->
-      var $backToTop = $(".backToTop")
-      , $title = $("#article_title")
-      , $contents = $("div#text-table-of-contents");
-      $('a[href=#top]').click(function(){
-	  $('html, body').animate({scrollTop:0}, 'slow');
-	  return false;
-      });
-      $('#text-table-of-contents').delegate('a', 'click', function() {
-	  var target = $(this).attr("href");
-	  var scrollNum = $(target)[0].offsetTop;
-	  $('html, body').animate({ scrollTop: scrollNum-24 }, 'slow');
-      })
-      $(window).scroll(function() {
-          <!-- $contents.css("display", "none"); -->
-	  if($(this).scrollTop() == 0)
-	      $backToTop.fadeOut();
-	  else {
-	      $backToTop.fadeIn();
-          } 
-      });
+  var $backToTop = $(".backToTop")
+  , $title = $("#article_title")
+  , $contents = $("div#text-table-of-contents");
+  $('a[href=#top]').click(function(){
+	    $('.screen-content').animate({scrollTop:0}, 'slow');
+	    return false;
+  });
+  $('#text-table-of-contents').delegate('a', 'click', function(e) {
+      e.preventDefault();
+	    var target = $(this).attr("href");
+	    var scrollNum = $(target)[0].offsetTop;
+	    $('.screen-content').animate({ scrollTop: scrollNum + 124 }, 'slow');
+  });
+  $('.screen-content').scroll(function() {
+      <!-- $contents.css("display", "none"); -->
+	    if($(this).scrollTop() == 0)
+	            $backToTop.fadeOut();
+	    else {
+	        $backToTop.fadeIn();
+      } 
+  });
 
   <!-- Google Custom Search -->
-    <!--   (function() { -->
-	  <!-- var cx = '{{ site.google_custom_search_id }}'; -->
-	  <!-- var gcse = document.createElement('script'); gcse.type = 'text/javascript'; -->
-	  <!-- gcse.async = true; -->
-	  <!-- gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + -->
-	  <!--     '//www.google.com/cse/cse.js?cx=' + cx; -->
-	  <!-- var s = document.getElementsByTagName('script')[0]; -->
-	  <!-- s.parentNode.insertBefore(gcse, s); -->
-    <!--   })(); -->
+  <!--   (function() { -->
+	<!-- var cx = '{{ site.google_custom_search_id }}'; -->
+	<!-- var gcse = document.createElement('script'); gcse.type = 'text/javascript'; -->
+	<!-- gcse.async = true; -->
+	<!-- gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + -->
+	<!--     '//www.google.com/cse/cse.js?cx=' + cx; -->
+	<!-- var s = document.getElementsByTagName('script')[0]; -->
+	<!-- s.parentNode.insertBefore(gcse, s); -->
+  <!--   })(); -->
   });
 </script>

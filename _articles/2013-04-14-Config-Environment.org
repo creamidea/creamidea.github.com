@@ -298,6 +298,14 @@ tags: linux windows config
 
    *Reference:*
    + http://askubuntu.com/questions/94754/how-to-enable-hibernation
+** Install Ubuntu12.04 black screen
+   安装ubuntu12.04花屏。
+   #+BEGIN_EXAMPLE
+   在开机时进入grub编辑程序，在quite splash后面加上nomodeset
+   #+END_EXAMPLE
+   *Reference:*
+   1. http://ycool.com/post/brncevj
+   2. http://wiki.ubuntu-tw.org/index.php?title=FAQinstall
 * Mac
 
 * Emacs

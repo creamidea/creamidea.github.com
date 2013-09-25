@@ -2,28 +2,28 @@
 <div class="section-nav" style="font-size: 16px;">
   <div class="left align-right">
     {% if page.previous != null %}
-      <a href="{{ site.url }}{{ page.previous.url }}" class="prev">
-	{% if page.previous.title %}
-	  <i class="icon-chevron-left"></i><i class="icon-chevron-left"></i>&#32;{{ page.previous.title }}
-	{% else %}
-          <i class="icon-chevron-left"></i><i class="icon-chevron-left"></i>&#32;Back
-	{% endif %}
-      </a>
+    <a href="{{ site.url }}{{ page.previous.url }}" class="prev" title="Shortcuts(←)">
+	    {% if page.previous.title %}
+	    <i class="icon-chevron-left"></i><i class="icon-chevron-left"></i>&#32;{{ page.previous.title }}
+	    {% else %}
+      <i class="icon-chevron-left"></i><i class="icon-chevron-left"></i>&#32;Back
+	    {% endif %}
+    </a>
     {% else %}
-      <span class="prev disabled"></span>
+    <span class="prev disabled"></span>
     {% endif %}
   </div>
   <div class="right align-left">
     {% if page.next != null %}
-      <a href="{{ site.url }}{{ page.next.url }}" class="next">
-	{% if page.next.title %}
-	  {{ page.next.title }}&#32;<i class="icon-chevron-right"></i><i class="icon-chevron-right"></i>
-	{% else %}
-          Next&#32;<i class="icon-chevron-right"></i><i class="icon-chevron-right"></i>
-	{% endif %}
-      </a>
+    <a href="{{ site.url }}{{ page.next.url }}" class="next" title="Shortcuts(→)">
+	    {% if page.next.title %}
+	    {{ page.next.title }}&#32;<i class="icon-chevron-right"></i><i class="icon-chevron-right"></i>
+	    {% else %}
+      Next&#32;<i class="icon-chevron-right"></i><i class="icon-chevron-right"></i>
+	    {% endif %}
+    </a>
     {% else %}
-      <span class="next disabled"></span>
+    <span class="next disabled"></span>
     {% endif %}
   </div>
   <div class="clear"></div>

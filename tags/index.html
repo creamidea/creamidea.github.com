@@ -3,69 +3,122 @@ layout: default
 title: Tags 
 overview: true
 ---
-
-<section class="article">
-  <div class="grid10 first">
-    <article>
-			<h1 style="font-size: 36px; color: #24A0DA;"><i class="icon-tags"></i>{{ page.title }}</h1>
-			<!-- ================================================== -->
-			<!-- tag -->
-			<div class="tag-cloud">
-				{% for tag in site.tags %}
-        <a class="__{{ tag[0] }}">{{ tag[0] }}</a>
-        <ul class="list_{{ tag[0] }}" style="display:none;">
-          {% for post in tag[1] %}
-          <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-          {% endfor %}
-        </ul>
-				{% endfor %}
+<div id="tags">
+  <!-- 左侧图片区 -->
+	<aside class="cover cover-home img-loaded" data-load-img=".cover-img">
+		<div class="cover-img" style="background-image: url('../img/road1.jpg')"></div>
+		<div class="cover-body">
+			<div class="cover-body-inner">
+				<!-- <h1 class="cover-title"><a href="/" style="color: black">ICECREAM(氷菓)</a></h1> -->
 			</div>
-			<h2 style="padding-top: 20px;"><i class="icon-file-alt"></i>Articles in this tags</h2>
-			<div class="post-list" style="font-size: 24px; width: 90%; text-align: center"></div>
-			<!-- ================================================== -->
+		</div>
+	</aside>
+  
+  <section class="wrapper" tabindex="-1">
+		<div class="wrapper-inner">
+      <div class="bucket post-bucket homepage-posts">
+        <div class="bucket-header bucket-header-list show-subtitles-variant">
+          <nav class="bucket-sort">
+            <h5 class="bucket-title">
+              <a href="{{ site.archive }}" title="archive">
+                <span class="bucket-header-title">Archive</span>
+              </a>
+            </h5>
+            <h5 class="bucket-title active">
+              <a href="#" class="no-link">
+                <span class="bucket-header-title">Tags</span>
+              </a>
+            </h5>
+          </nav>
+        </div>
 
-    </article>
-  </div>
-  <div class="clear"></div>
-</section>
+        <article>
+			    <!-- <h1 style="font-size: 36px; color: #24A0DA;"><i class="icon-tags"></i> page.title </h1> -->
+			    <!-- ================================================== -->
+			    <!-- tag -->
+			    <div class="tag-cloud">
+				    {% for tag in site.tags %}
+            <!-- 我猜测：tag[0]就是一个字符串，表明该标签的名称；tag[1]是一个数组，用于存放文章 -->
+            <a class="__{{ tag[0] }}">
+              <span>{{ tag[0] }}</span>
+              <sup>{{ tag[1].size }}</sup>
+            </a>
+            <ul class="list_{{ tag[0] }}" style="display:none;">
+              {% for post in tag[1] %}
+			        <article class="post-item post-status- show-subtitles-variant">
+					      <h3 class="post-item-title">
+						      <a href="{{ post.url }}"{% if post.subtitle %} title="{{ post.subtitle | escape }}"{% endif %}>
+							      <!-- <i class="icon-file-alt"></i> -->
+							      {{ post.title }}
+						      </a>
+					      </h3>
+					      <ul class="post-item-meta">
+						      <li class="post-item-meta-item"><i class="icon-calendar"></i> {{ post.date | date: '%A, %d %B %Y' }}</li>
+						      <li class="post-item-meta-item"><i class="icon-github-alt"></i>{{ site.author.name }}</li>
+						      <li class="post-item-meta-item"><i class="icon-envelope"></i><a href="mailto:creamidea@gmail.com" title="gmail me">Gmail</a></li>
+					        <nav>
+						        {% if post.tags %}
+						        <ul class="tags">
+							        {% for tag in post.tags %}
+							        <li><a href="{{ site.url }}{{ site.tags_path }}#{{ tag }}"><i class="icon-tag"></i>{{ tag }}</a></li>
+							        {% endfor %}
+						        </ul>
+						        {% endif %}
+						        <div class="clearfix"></div>
+					        </nav>
+					      </ul>
+			        </article>
+              {% endfor %}
+            </ul>
+				    {% endfor %}
+			    </div>
+			    <!-- <h2 style="padding-top: 20px;"><i class="icon-file-alt"></i>Articles in this tags</h2> -->
+			    <div class="post-list" style="font-size: 24px; width: 90%; text-align: center"></div>
+			    <!-- ================================================== -->
+
+        </article>
+      </div>
+      <footer class="wrapper-footer"></footer>
+		</div>
+		<!-- - <a href="archive.html"><strong>显示更多 >> </strong></a></li> -->
+	</section>
+</div>
 
 <script type="text/javascript">
   (function() {
 	// get the information from url when is the tag thar require
-	var tag = window.location.hash;
-	if(tag) { 		// when the tag is exist
-	tag = tag.slice(1);
-  $('.list_' + tag).each(function() {
-  $('.post-list').append($(this).html());
-  });
-	}
+	    var tag = window.location.hash;
+	    if(tag) { 		// when the tag is exist
+	        tag = tag.slice(1);
+          $('.list_' + tag).each(function() {
+              $('.post-list').append($(this).html());
+          });
+	    }
 
-	// below is to calculate the size of the tages and
-	// when click the tage show the article(s)
-  var minFont = 10.0,
-  maxFont = 35.0,
-  diffFont = maxFont - minFont,
-  size = 0;
+	    // below is to calculate the size of the tages and
+	    // when click the tage show the article(s)
+      var minFont = 10.0,
+      maxFont = 35.0,
+      diffFont = maxFont - minFont,
+      size = 0;
 
-  {% assign max = 1.0 %}
-  {% for tag in site.tags %}
-  {% if tag[1].size > max %}
-  {% assign max = tag[1].size %}
-  {% endif %}
-  {% endfor %}
-  
-  {% for tag in site.tags %}
-  size = (Math.log({{ tag[1].size }}) / Math.log({{ max }})) * diffFont + minFont;
-  $(".__{{ tag[0] }}").css("font-size", size + "px");
-  {% endfor %}
+      {% assign max = 1.0 %}
+      {% for tag in site.tags %}
+      {% if tag[1].size > max %}
+      {% assign max = tag[1].size %}
+      {% endif %}
+      {% endfor %}
+      
+      {% for tag in site.tags %}
+      size = (Math.log({{ tag[1].size }}) / Math.log({{ max }})) * diffFont + minFont;
+      $(".__{{ tag[0] }}").css("font-size", size + "px");
+      {% endfor %}
 
-  $('.tag-cloud a[class^="__"]').click(function() {
-  $('.post-list').empty();
-  $('.list_' + $(this).text()).each(function() {
-  $('.post-list').append($(this).html());
-  });
-  });
+      $('.tag-cloud a[class^="__"]').click(function() {
+          $('.post-list').empty();
+          $('.list_' + $(this).find("span").text()).each(function() {
+              $('.post-list').append($(this).html());
+          });
+      });
   })();
 </script>
-
-{% include footer.html %}

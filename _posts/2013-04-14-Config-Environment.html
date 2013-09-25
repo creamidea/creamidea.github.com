@@ -62,6 +62,8 @@ tags: linux windows config
 <li><a href="#sec-3-8">3.8 Install Java</a></li>
 <li><a href="#sec-3-9">3.9 MySQL</a></li>
 <li><a href="#sec-3-10">3.10 Change Some Key Shortcuts</a></li>
+<li><a href="#sec-3-11">3.11 Make Ubuntu12.04 hibernation</a></li>
+<li><a href="#sec-3-12">3.12 Install Ubuntu12.04 black screen</a></li>
 </ul>
 </li>
 <li><a href="#sec-4">4 Mac</a></li>
@@ -781,6 +783,70 @@ stop on starting rc RUNLEVEL=[016]
 </li>
 </ol>
 
+
+</div>
+
+</div>
+
+<div id="outline-container-3-11" class="outline-3">
+<h3 id="sec-3-11">Make Ubuntu12.04 hibernation</h3>
+<div class="outline-text-3" id="text-3-11">
+
+<ol>
+<li>open file
+
+
+
+<pre class="example">sudo vi /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla
+</pre>
+
+</li>
+<li>modify
+
+
+
+<pre class="example">[Re-enable hibernate by default]
+Identity=unix-user:*
+Action=org.freedesktop.upower.hibernate
+ResultActive=yes
+</pre>
+
+</li>
+<li>reboot
+</li>
+</ol>
+
+
+<p>
+   <b>Reference:</b>
+</p><ul>
+<li><a href="http://askubuntu.com/questions/94754/how-to-enable-hibernation">http://askubuntu.com/questions/94754/how-to-enable-hibernation</a>
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-12" class="outline-3">
+<h3 id="sec-3-12">Install Ubuntu12.04 black screen</h3>
+<div class="outline-text-3" id="text-3-12">
+
+<p>   安装ubuntu12.04花屏。
+</p>
+
+
+<pre class="example">在开机时进入grub编辑程序，在quite splash后面加上nomodeset
+</pre>
+
+<p>
+   <b>Reference:</b>
+</p><ol>
+<li><a href="http://ycool.com/post/brncevj">http://ycool.com/post/brncevj</a>
+</li>
+<li><a href="http://wiki.ubuntu-tw.org/index.php?title=FAQinstall">http://wiki.ubuntu-tw.org/index.php?title=FAQinstall</a>
+</li>
+</ol>
 
 </div>
 </div>
