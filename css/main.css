@@ -29,6 +29,7 @@ body {
     line-height: 1.4;
 		background-position: left 40px;
 		background-attachment: fixed;
+    overflow: hidden;
 }
 
 a {
@@ -125,7 +126,7 @@ body a{
    default
    ====================== */
 .content {
-    overflow: auto;
+    /* overflow: auto; */
 }
 .surface{
     position: absolute;
@@ -374,7 +375,7 @@ body a{
     .screen-scroll, .screen-content {
         position: relative;
         height: 100%;
-        overflow: scroll;
+        overflow: auto;
         -webkit-overflow-scrolling: touch;
     }
 }
@@ -707,6 +708,16 @@ code:hover {
     margin-right:auto; 
     text-align:left;
 }
+/* 回到顶部 */
+.backToTop {
+		color: #24A0DA;
+    z-index: 44;
+    position: fixed;
+    bottom: 4px;
+    right: 4px;
+    font-size: 24px;
+    display: none;
+}
 
 /* ================= */
 /* footer */
@@ -785,16 +796,6 @@ code:hover {
 #text-table-of-contents li a:hover {
     /* font-size: 16px; */
     color: yellowgreen;
-}
-/* 回到顶部 */
-.backToTop {
-		color: #24A0DA;
-    z-index: 44;
-    position: fixed;
-    bottom: 44px;
-    right: 150px;
-    font-size: 44px;
-    display: none;
 }
 
 /* ==========================================================================
@@ -917,6 +918,13 @@ code:hover {
 				left: 0;
 				position: relative;
 		}
+}
+@media (min-width: 1100px) {
+    .backToTop {
+        bottom: 44px;
+        right: 150px;
+        font-size: 44px;
+    }
 }
 @media (min-width: 1200px) {
 		.post-author-side {
