@@ -44,7 +44,7 @@ overview: true
 					</h3>
 					<ul class="post-item-meta">
 						<li class="post-item-meta-item"><i class="icon-calendar"></i> {{ post.date | date: '%A, %d %B %Y' }}</li>
-						<li class="post-item-meta-item"><i class="icon-github-alt"></i>{{ site.author.name }}</li>
+						<li class="post-item-meta-item"><i class="icon-github-alt"></i><a href="{{ site.url }}/">{{ site.author.name }}</a></li>
 						<li class="post-item-meta-item"><i class="icon-envelope"></i><a href="mailto:creamidea@gmail.com" title="gmail me">Gmail</a></li>
 					  <nav>
 						  {% if post.tags %}

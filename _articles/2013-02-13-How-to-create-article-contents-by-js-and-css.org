@@ -26,9 +26,15 @@ tags: javascript css
 
 ** 编程思路
 总体上，思路就是你想的那个样子：
-1.当页面加载完毕之后，使用js将h1, h2, h3...等标签中的内容和id（原文作者记录的是标题的位置）提取出来，可以存入数组。
-2.设置相应的目录的容器，说白了就是相应的HTML,CSS。
-3.使用js设置HTML a rel Attribute,不过这里原文作者是直接记录标题的位置，而不是使用href="#{id}",不过这点细节没有什么大的影响。将数组的内    容放入相应的位置。
+
+1. 当页面加载完毕之后，使用js将h1, h2, h3...等标签中的内容和id
+   （原文作者记录的是标题的位置）提取出来，可以存入数组。
+
+2. 设置相应的目录的容器，说白了就是相应的HTML,CSS。
+
+3. 使用js设置HTML a rel Attribute,不过这里原文作者是直接记录标题的位置，
+   而不是使用href="#{id}",不过这点细节没有什么大的影响。
+   将数组的内容放入相应的位置。
 
 ** js部分代码
 由于js部分有些许长，这里直接给出我repo中的[[https://github.com/creamidea/creamidea.github.com/blob/master/_includes/article_contents.html][生成目录JS代码]].

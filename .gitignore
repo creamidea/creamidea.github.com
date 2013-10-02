@@ -3,4 +3,10 @@ _site/
 pkg/
 test/
 desktop.ini
+
+_articles/*.html
+_articles/*.tex
+
 *-.*
+archive/*-.*
+tags/*-.*
