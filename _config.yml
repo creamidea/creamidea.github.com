@@ -5,6 +5,7 @@ server:      true
 # url: http://localhost:4000
 # url: /
 # paginator: 5
+# 分页功能
 paginate: 9
 paginate_path: "/archive/index.html:num"
 

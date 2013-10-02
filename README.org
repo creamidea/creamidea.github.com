@@ -35,11 +35,15 @@
 
 	日本語（にほん）：二次元（にじげん）の世界（せかい）
 
+  ελληνικά:χρόνος διάστημα
+
 	MIT-SCHEME C {JavaScript CSS HTML} Nodejs Python Django
 
 	Ubuntu12.04 Windows7
 
 	Emacs Latex Org-mode Git GIMP
+
+  Astronomy
 
 * BACKUP
 
