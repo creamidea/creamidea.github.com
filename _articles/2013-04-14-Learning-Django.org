@@ -1,4 +1,4 @@
-#+TITLE:Learning Django
+w#+TITLE:Learning Django
 #+AUTHOR:ICECREAM(氷菓)
 #+EMAIL:creamidea(AT)gmail.com
 #+DESCRIPTION:ICECREAM(氷菓)
@@ -126,6 +126,13 @@ tags: python django
      然后我跟着：
      http://stackoverflow.com/questions/3652625/installing-setuptools-on-64-bit-windows
      修改注册表还是失败了。以后再试吧。
+
+     *Update:*
+     <2013-10-15 Tue>更新在Windows7上安装问题：
+     今天我感觉已经找到一种解决方式，那就是我重新将python安装在了C盘根目录下，而不是在
+     =Program Files= 下。
+     貌似有许多的开发环境必须安装在根目录下，或者目录名称中不能有空格特殊字符等等。只能是字母+数字。 \\
+     以后要记住这点啦。
 
      在Linux上安装的话就下载源码安装呗。
      我以为直接下载源码，然后：
@@ -477,7 +484,7 @@ tags: python django
 	 + 在设计登录表单时，如何判断输入的是合法字符，使得提交按钮生效？
 * 第十二章 部署Django
 ** Linux
-*** mod_wsgi
+*** mod\_wsgi
    1. Install it on Ubuntu12.04
       #+BEGIN_SRC sh
       sudo aptitude install libapache2-mod-wsgi
@@ -494,14 +501,51 @@ tags: python django
       #+END_SRC
       
 * Q&A
-  1. Q: Django Models (1054, "Unknown column" XXXX.id in 'field list'")
+  1. Q: Django Models (1054, "Unknown column" XXXX.id in 'field list'") \\
      A: =manage.py sqlall [appname]= to get the sql.
         #+BEGIN_EXAMPLE
         ALTER TABLE tb_realtime_data ADD COLUMN id INTEGER FIRST;
         ALTER TABLE software_type DROP COLUMN upid;        
         #+END_EXAMPLE
-  2. Q: Django automatic primary key fields
+  2. Q: Django automatic primary key fields \\
      A: [[https://docs.djangoproject.com/en/1.6/topics/db/models/#automatic-primary-key-fields][Automatic primary key fields]]
-  3. Q: 1136, "Column count doesn't match value count at row 1"
+  3. Q: 1136, "Column count doesn't match value count at row 1" \\
      A: *始终记住，django使用模型时创建数据库会多创建一列，id列，在第一列，这个非常非常的重要。
-         无论是否有主键，都必须有id列的存在。*
+         无论是否有主键，都有id列的存在。因此在插入数据的时候，必须写明要插入的列。例如：*
+        #+BEGIN_SRC sql
+          -- 在第一列是id列，自增长。
+          INSERT INTO tb_realtime_data(node_id, sensor_id, data, insert_time) VALUES (
+              new.node_id,
+              new.sensor_id,
+              new.data,
+              new.insert_time 
+          );
+        #+END_SRC
+  4. Q: 模板中字典的遍历 \\
+     A: 都是使用 =.= 运算符，例如：
+        #+BEGIN_SRC python
+          contents = {
+              "home": 主页,
+              "about": 关于,
+          }
+        #+END_SRC
+        #+BEGIN_SRC html
+          {% for k, v in contents.items %}
+          <li><a href="/nori/{{ k }}">{{ v }}</a></li>
+          {% endfor %}
+        #+END_SRC
+        *Attetion*:
+        字典本身是Hash散列的，所以无法指望其按你想要的顺序打印。
+  5. Q: 模板中元组的使用 \\
+     A: 使用 =.= 运算符
+        #+BEGIN_SRC python
+          'contents': (
+              ("home", "主页"), 
+              ("node", "节点"), 
+          ),
+        #+END_SRC
+        #+BEGIN_SRC html
+          {% for v in contents %}
+          <li><a href="/nori/{{ v.0 }}">{{ v.1 }}</a></li>
+          {% endfor %}
+        #+END_SRC
