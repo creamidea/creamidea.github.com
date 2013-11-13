@@ -1,0 +1,24 @@
+<nav class="bucket-sort">
+  {% for title in site.bucket_title %}
+  {% assign page_url = page.url|split: '/' %}
+  {% if page_url[1] == title.text or page.layout == link.layout %}
+    {% assign href = "#" %}
+    {% assign class = "no-link" %}
+    {% assign active = "active" %}
+  {% else %}
+    {% assign href = title.url %}
+    {% assign class = "" %}
+    {% assign active = "" %}
+  {% endif %}
+  <h5 class="bucket-title {{active}}">
+    <a  href="{{ href }}" class="{{ class }}">
+      <span class="bucket-header-title">{{ title.text }}</span>
+    </a>
+  </h5>
+  {% endfor %}
+  <!-- <h5 class="bucket-title"> -->
+  <!--   <a href="{{ site.tags_path }}"> -->
+  <!--     <span class="bucket-header-title">Tags</span> -->
+  <!--   </a> -->
+  <!-- </h5> -->
+</nav>

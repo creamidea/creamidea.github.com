@@ -17,12 +17,14 @@ tags: jekyll design
 #+END_HTML
 
 * 前言
+
 很高兴你能看我的第一篇文章，虽然以前也写过一些东西，但是始终觉得只是小打小闹，
 没有任何技术blog的意味，一度让我不知所错。而这次在github上搭建的blog可以说是
 一个时代的结束，一个全新的开始。虽然我现在还是不知道如何写出一篇高质量的blog，
 但是我还是想先写一篇: Hello, world.
 
 * 搭建此博客的目的
+
 其实我很早以前就想开始写自己的博客，可是却不知道如何写博客，就算写了一些东西，
 最后给我的感觉是笔记而不是博客，一堆知识的堆叠，没有层次，没有目的。
 于是对于写blog这件很具有挑战性的活动渐渐失去了兴趣。
@@ -135,14 +137,12 @@ Jekyll的搭建过程，网络上已经有许多的高手写的很详细了，�
 其官方文档是 [[http://jblevins.org/projects/markdown-mode/][Emacs Markdown Mode]]  ，EmaceWiki中的文档是 [[http://emacswiki.org/emacs/MarkdownMode][MarkdownMode]]。
 
 **** Markdonw 参考文档
-
 *繁文版:*
 1. [[http://markdown.tw/#blockquote][Markdown: Syntax]]
  
 *English Version:*
 1. [[http://daringfireball.net/projects/markdown/syntax][Markdown: Syntax]]
 2. [[http://blog.markdownwiki.com/][Improving Wiki Editing with Markdown]]
-
   *致Vimer, 不好意思，这里暂时不提供vim的markdown-mode， 
    我相信你们也可以自行搜索到，我现在暂时使用Emacs，虽然Vim也是我喜欢的编辑器。*
 

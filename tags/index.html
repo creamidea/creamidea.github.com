@@ -18,18 +18,7 @@ overview: true
 		<div class="wrapper-inner">
       <div class="bucket post-bucket homepage-posts">
         <div class="bucket-header bucket-header-list show-subtitles-variant">
-          <nav class="bucket-sort">
-            <h5 class="bucket-title">
-              <a href="{{ site.archive }}" title="archive">
-                <span class="bucket-header-title">Archive</span>
-              </a>
-            </h5>
-            <h5 class="bucket-title active">
-              <a href="#" class="no-link">
-                <span class="bucket-header-title">Tags</span>
-              </a>
-            </h5>
-          </nav>
+          {% include bucket_title.html %}
         </div>
 
         <article>

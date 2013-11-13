@@ -19,6 +19,7 @@ tags: nodejs javascript coffeescript python
 #+END_HTML
 
 * 前言
+
 这只是一篇简单介绍浏览器与服务器之间的实时数据交换的方法。
 在客户端使用的是 [[http://coffeescript.org/][coffeescript]] ，接触下来感觉这种语法还是不错的，
 然后在学习的过程中，貌似coffeescript借鉴了许多 [[http://www.ruby-lang.org/en/][Ruby]] 的语法，
@@ -62,7 +63,6 @@ tags: nodejs javascript coffeescript python
 * Polling
 	这是轮询的方式，是一种很常见的解决方案。然后我这里没有写代码。
   思路就是使用setInterval()函数，定时访问服务器。构成一个一个polling.
-
 * Comet
   等待填坑……
 * Long Polling
@@ -71,10 +71,8 @@ tags: nodejs javascript coffeescript python
 	#+BEGIN_HTML
 	<script src="https://gist.github.com/creamidea/6114508.js"></script>
 	#+END_HTML
-
 * WebSocket
   等待填坑……
-
 * Socket.IO
 	[[http://socket.io/][Socket.IO]] 这个我个人感觉不错，支持的浏览器也很多，然后使用的是nodejs。
 	有空的时候看看源代码，看看究竟是如何实现的。

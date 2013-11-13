@@ -70,6 +70,16 @@ tags_path: /tags
 categories_path: /categories
 search: /public/search.html
 
+bucket_title:
+- text: archive
+  url: /archive/index.html
+- text: tags
+  url: /tags/index.html
+- text: draft
+  url: https://github.com/creamidea/creamidea.github.com/tree/master/_draft
+- text: emotion
+  url: http://www.douban.com/people/creamidea/notes
+
 email_me: <a href="mailto:{{ site.author.email }}"><strong>[E-Mail<i class="icon-envelope"></i>]</strong></a>
 
 google_analytics_id: UA-38213594-1

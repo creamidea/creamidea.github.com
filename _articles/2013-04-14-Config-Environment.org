@@ -316,3 +316,4 @@ tags: linux windows config
 	4. [[http://cx4a.org/software/gccsense/manual.html#Installation][GCCSense User Manual]]
 	5. [[http://emacser.com/emacs-gccsense.htm][Emacs补全利器：auto-complete+gccsense]]
 	6. [[http://blog.csdn.net/astropeak/article/details/6666527][《Emacs——你不能不用的神级利器》——补全（下）]]
+* Footnote

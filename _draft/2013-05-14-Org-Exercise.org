@@ -1,0 +1,131 @@
+#+TITLE:Org Mode Exercise
+#+AUTHOR:ICECREAM(氷菓)
+#+EMAIL:creamidea(AT)gmail.com
+#+DESCRIPTION:ICECREAM(氷菓)
+#+KEYWORDS:org-mode
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t
+#+LINK_HOME: https://creamidea.github.io
+#+STYLE:<link rel="stylesheet" type="text/css" href="../css/style.css">
+#+INFOJS_OPT: view: showall toc: nil
+
+#+BEGIN_HTML
+---
+layout: doc
+title: Org Mode Exercise
+subtitle: 练习一些org-mode的功能 
+categories: note
+tags: org-mode
+---
+#+END_HTML
+
+* 前言
+	这个只是用来练习的文档，后期会将其转成org的入门手册[fn:1]
+
+  等待填坑……
+  
+* Table
+Reference: http://www.gnu.org/software/emacs/manual/html_node/org/Built_002din-table-editor.html
+** 练习部分
+1. 
+		 |---+------------------------------+----|
+		 |   |                              |    |
+		 | 1 | one                          |    |
+		 | 2 | two                          | => |
+		 | 3 | This is a long chunk of text |    |
+		 | 4 | four                         |    |
+		 |---+------------------------------+----|
+		 #+TBLFM: $3=>
+		 : Then C-c C-c or Tab
+     |---+--------|
+     |   | <6>    |
+     | 1 | one    |
+     | 2 | two    |
+     | 3 | This is a long chunk of text |
+     | 4 | four   |
+     |---+--------|
+
+2. 
+   | 项目       |    金额 |
+   |------------+---------|
+   | 总金额     |   22000 |
+   | 预留资金   |    6600 |
+   | 第一次报销 | 4712.08 |
+   | 第二次报销 |    6200 |
+   | 第三次报销 | 3915.49 |
+   | 结余       |         |
+   |------------+---------|
+
+	 
+1. 
+   | N | N^2 | N^3 | N^4 | sqrt(n) | sqrt[4](N) |
+   | / | <   |     | >   | <       | >          |
+   | 1 |     |     |     |         |            |
+   | 2 |     |     |     |         |            |
+   | 3 |     |     |     |         |            |
+   |---+-----+-----+-----+---------+------------|
+	 #+TBLFM: $2=$1^2::$3=$1^3::$4=$1^4::$5=sqrt($1)::$6=sqrt(sqrt(($1)))
+2. 
+** 练习部分
+1. 
+		 |---+------------------------------+----|
+		 |   |                              |    |
+		 | 1 | one                          |    |
+		 | 2 | two                          | => |
+		 | 3 | This is a long chunk of text |    |
+		 | 4 | four                         |    |
+		 |---+------------------------------+----|
+		 #+TBLFM: $3=>
+		 : Then C-c C-c or Tab
+     |---+--------|
+     |   | <6>    |
+     | 1 | one    |
+     | 2 | two    |
+     | 3 | This is a long chunk of text |
+     | 4 | four   |
+     |---+--------|
+
+2. 
+   | 项目       |    金额 |
+   |------------+---------|
+   | 总金额     |   22000 |
+   | 预留资金   |    6600 |
+   | 第一次报销 | 4712.08 |
+   | 第二次报销 |    6200 |
+   | 第三次报销 | 3915.49 |
+   | 结余       |  572.43 |
+   |------------+---------|
+	 #+TBLFM: @7$2=@2$2-@3$2-@4-@5-@6
+	 
+   =C-c ?= and =C-c }= and =C-c '=
+	 
+2. 
+   | N | N^2 | N^3 | N^4 |   sqrt(N) | sqrt(sqrt(N)) |
+   | / |   < |     |   > |         < |             > |
+   | 1 |   1 |   1 |   1 |         1 |             1 |
+   | 2 |   4 |   8 |  16 | 1.4142136 |     1.1892071 |
+   | 3 |   9 |  27 |  81 | 1.7320508 |     1.3160740 |
+   |---+-----+-----+-----+-----------+---------------|
+	 #+TBLFM: $2=$1^2::$3=$1^3::$4=$1^4::$5=sqrt($1)::$6=sqrt(sqrt(($1)))
+3. 
+   | N | N^2 | N^3 | N^4 |   sqrt(N) | sqrt(sqrt(N)) |
+   | 1 |   1 |   1 |   1 |         1 |             1 |
+   | 2 |   4 |   8 |  16 | 1.4142136 |     1.1892071 |
+   | 3 |   9 |  27 |  81 | 1.7320508 |     1.3160740 |
+   |---+-----+-----+-----+-----------+---------------|
+	 #+TBLFM: $2=$1^2::$3=$1^3::$4=$1^4::$5=sqrt($1)::$6=sqrt(sqrt(($1)))
+3. 
+
+4. 
+
+5. 
+   | ! |   |   |   |   |
+   | # |   |   |   |   |
+   | ^ |   |   |   |   |
+   |---+---+---+---+---|
+   |   |   |   |   |   |
+
+* Footnotes
+
+[fn:1] [[http://orgmode.org/org.html][The Org Manual]]
+
+	 

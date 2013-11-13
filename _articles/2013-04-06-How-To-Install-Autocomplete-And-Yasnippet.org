@@ -21,7 +21,6 @@ tags: emacs autocomplete yanisppet
 	当然写这个还是因为我敬爱的小杰同学的要求。作为刚刚入门的New Emacser，我感觉是时候给他一些好玩的插件了。
 	当然我这些步骤google一下全部会出来，但是作为要求还是写这篇blog吧。
 	
-	
 * Auto Complete
 	过多的介绍我就不在这里陈述了，具体的可以前往
 	Auto Complete官网（http://cx4a.org/software/auto-complete/) 和 
@@ -96,7 +95,6 @@ $ make install DIR=$HOME/.emacs.d/
 	 P2. Auto Complete In Ubuntu 12.04
 	 #+END_CENTER
 	 
-	 
 * Yanisppet
 	同样的，过多的介绍我就不在这里陈述了，在Yanisppet项目官网有详细介绍：
 1. EmacsWiki:
@@ -124,7 +122,6 @@ $ git clone https://github.com/capitaomorte/yasnippet.git
 	 如果还有问题你可以继续google或者看官方文档或者写电子邮件给我，我将尽快回复。
 	 
 	 祝君使用愉快。
-	 
 	 
 * 写在最后
 	这个不过是一个简单的安装介绍而已，具体的使用则是需要看文档之后才能了解，我告诉你的也只能是简单的一些而已。

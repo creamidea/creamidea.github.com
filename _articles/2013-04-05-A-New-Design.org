@@ -122,7 +122,8 @@ tags: jekyll org-mode design
 *记得重新启动Emacs*
 
 * 本次其他改进点
-主要是文章的目录，我这次使用的是css，然后配合js完成平滑滚动的效果。css的代码是我从[[http://orgmode.org/][orgmode官网]] 截取下来的：
+主要是文章的目录，我这次使用的是css，然后配合js完成平滑滚动的效果。
+css的代码是我从[[http://orgmode.org/][orgmode官网]] 截取下来的：
 #+BEGIN_HTML
 <script src="https://gist.github.com/creamidea/5320378.js"></script>
 #+END_HTML

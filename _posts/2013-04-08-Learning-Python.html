@@ -458,8 +458,8 @@ print s
 </li>
 <li>statck.py P222
 
-<p>         
-         queue.py P227
+<p>   
+   queue.py P227
 </p></li>
 <li>
 </li>
@@ -478,10 +478,10 @@ print s
 <li>使用映射对象（比如字典）搜索比类似的if-elif-else或者for块.
 
 <p>
-         <b>Attention:</b>
-         <code>else</code> 也可以使用在 <code>while</code> and <code>for</code> 这些循环中。具体操作如下：
-         只要不是被 <code>break</code> 打断的循环，意思就是正常结束的都会去执行跟在下面的 <code>else</code> ，
-         另外的说法就是： <code>break</code> 会跳过 <code>else</code> 代码区.
+   <b>Attention:</b>
+   <code>else</code> 也可以使用在 <code>while</code> and <code>for</code> 这些循环中。具体操作如下：
+   只要不是被 <code>break</code> 打断的循环，意思就是正常结束的都会去执行跟在下面的 <code>else</code> ，
+   另外的说法就是： <code>break</code> 会跳过 <code>else</code> 代码区.
 </p></li>
 <li>疑问：msgs.get(user.cmd, default) P290
 
@@ -492,7 +492,7 @@ dict.get(key, default=None)
 </pre>
 
 <p>
-         <b>From:</b> <a href="http://www.tutorialspoint.com/python/dictionary_get.htm">http://www.tutorialspoint.com/python/dictionary_get.htm</a>
+   <b>From:</b> <a href="http://www.tutorialspoint.com/python/dictionary_get.htm">http://www.tutorialspoint.com/python/dictionary_get.htm</a>
 </p></li>
 <li>一个hack的做法：
 
@@ -518,7 +518,7 @@ zip()
 <li>break 语句：
 
 <p>
-         结束当前循环，然后跳转到下一个语句
+   结束当前循环，然后跳转到下一个语句
 </p></li>
 <li>itet()创建它的迭代器
 
@@ -550,16 +550,16 @@ len([word for line in f for word in line.split()])
 
 </li>
 <li>列表解析：[expr for iter_var in iterable if cond_expr]  
-          PEP 202 
-          From: <a href="http://www.python.org/dev/peps/pep-0202/">http://www.python.org/dev/peps/pep-0202/</a>
+    PEP 202 
+    From: <a href="http://www.python.org/dev/peps/pep-0202/">http://www.python.org/dev/peps/pep-0202/</a>
 
 <p>  
-          生成器表达式：(expr for iter_var in iterable if cond_expr)
-          PEP 289
-          From: <a href="http://www.python.org/dev/peps/pep-0289/">http://www.python.org/dev/peps/pep-0289/</a>
+    生成器表达式：(expr for iter_var in iterable if cond_expr)
+    PEP 289
+    From: <a href="http://www.python.org/dev/peps/pep-0289/">http://www.python.org/dev/peps/pep-0289/</a>
 </p>
 <p>
-          惰性求值：lazy evaluation
+    惰性求值：lazy evaluation
 </p></li>
 <li>交叉配对的例子：
 
@@ -613,9 +613,9 @@ for pair in x_product_pairs:
 </li>
 <li>with语句
 
-<p>         
-         with context_expr [as var]:
-             with_suite
+<p>   
+   with context_expr [as var]:
+       with_suite
 </p></li>
 <li>先搁置with中 上下文管理协议 P369
 
@@ -623,12 +623,12 @@ for pair in x_product_pairs:
 <li>raise
 
 <p>
-         raise [SomeException [, args, [, traceback]]]
+   raise [SomeException [, args, [, traceback]]]
 </p></li>
 <li>assert expression[, arguments]
 
-<p>         
-         AsserionError
+<p>   
+   AsserionError
 </p></li>
 <li>标准异常 P375
 </li>
@@ -653,10 +653,10 @@ for pair in x_product_pairs:
 
 <ol>
 <li>11.2.4 使用元组（非关键字参数）和字典（关键字参数）
-                 <b>port=8080这叫关键字参数</b>
+       <b>port=8080这叫关键字参数</b>
 
-<p>           
-                 func(*tuple-grp-nonkw-args, **dict-grp-kw-args)
+<p>     
+       func(*tuple-grp-nonkw-args, **dict-grp-kw-args)
 </p>
 </li>
 <li>带元组的函数普通语法：
@@ -670,7 +670,7 @@ for pair in x_product_pairs:
 
 
 <p>
-                 实例：
+     实例：
 </p>
 
 
@@ -683,9 +683,6 @@ for pair in x_product_pairs:
 tupleVarArgs('abc', 123, 'xyz', 456.789)
 </pre>
 
-</li>
-</ol>
-
 
 <p>
          RESULTS:
@@ -697,7 +694,7 @@ another arg: 456.789
 </pre>
 
 
-<ol>
+</li>
 <li>字典函数普通用法：
 
 
@@ -710,7 +707,7 @@ another arg: 456.789
 
 
 <p>
-                 实例：
+     实例：
 </p>
 
 
@@ -724,9 +721,6 @@ another arg: 456.789
 dictVarArgs('one', d=10, e='zoo', men=('freud', 'gaudi'))
 </pre>
 
-</li>
-</ol>
-
 
 <p>
          RESULTS:
@@ -739,7 +733,7 @@ Xtra arg d: 10
 </pre>
 
 
-<ol>
+</li>
 <li>lambda表达式:
 
 
@@ -768,7 +762,7 @@ Xtra arg d: 10
 <h4 id="sec-8-1">内建函数apply(), fliter(), map(), reduce()</h4>
 <div class="outline-text-4" id="text-8-1">
 
-<p>        玩一下：
+<p>    玩一下：
 </p>
 
 
@@ -784,7 +778,7 @@ Xtra arg d: 10
 <h4 id="sec-8-2">偏函数(Partial Application)和柯里化Currying</h4>
 <div class="outline-text-4" id="text-8-2">
 
-<p>        functional模块中的partial()函数创建PFA:
+<p>    functional模块中的partial()函数创建PFA:
 </p>
 
 
@@ -797,7 +791,7 @@ print basetwo('10010')
 
 
 <p>
-        RESULTS:
+    RESULTS:
 </p><pre class="example">
 18
 </pre>
@@ -819,7 +813,7 @@ print mul100(1)
 
 
 <p>
-        RESULTS:
+    RESULTS:
 </p><pre class="example">
 11
 100
@@ -828,7 +822,7 @@ print mul100(1)
 
 
 <p>
-        <b>Reference:</b>
+    <b>Reference:</b>
 </p>
 <ol>
 <li><a href="http://alecbenzer.com/blog/currying-partial-application/">Currying vs. Partial Application</a>
@@ -871,7 +865,7 @@ foo()
 
 
 <p>
-        RESULTS:
+    RESULTS:
 </p><pre class="example">
 15
 </pre>
@@ -885,10 +879,10 @@ foo()
 <h4 id="sec-9-2">生成器</h4>
 <div class="outline-text-4" id="text-9-2">
 
-<p>        协同程序的概念：可以运行的独立函数调用，可以暂停或者挂起，并从程序离开的地方继续或者重新开始。
+<p>    协同程序的概念：可以运行的独立函数调用，可以暂停或者挂起，并从程序离开的地方继续或者重新开始。
 </p>
 <p>
-        资料参考:
+  资料参考:
 </p>
 <ol>
 <li>PEP 255: <a href="http://www.python.org/dev/peps/pep-0255/">http://www.python.org/dev/peps/pep-0255/</a>
@@ -914,7 +908,7 @@ myG.next()
 
 
 <p>
-        另外一个例子，求解fib：
+  另外一个例子，求解fib：
 </p>
 
 
@@ -943,14 +937,14 @@ for i in xrange(5):
 
 
 <p>
-        如果函数有return的话，会立即终止迭代。貌似yield的出现简化程序，但是可以达到
-        节省内存的作用，如同下面的一句话。
+  如果函数有return的话，会立即终止迭代。貌似yield的出现简化程序，但是可以达到
+  节省内存的作用，如同下面的一句话。
 </p>
 <p>
-        8.13生成器
+    8.13生成器
 </p>
 <p>
-        使用生成器的地方：迭代穿越一个巨大的数据集合。到时就知道怎么用了。呵呵。
+    使用生成器的地方：迭代穿越一个巨大的数据集合。到时就知道怎么用了。呵呵。
 </p>
 
 </div>
@@ -973,24 +967,24 @@ for i in xrange(5):
 
 <ol>
 <li>名称空间是纯粹意义上的名字和对象间的映射关系，
-           作用域还指出从用户代码的哪些物理位置可以访问到这些名字。
+     作用域还指出从用户代码的哪些物理位置可以访问到这些名字。
 
 </li>
 <li><code>from module import *</code> 的使用要限制
 
 </li>
 <li><code>about =__future__</code>:
-           PEP 236
+     PEP 236
 
 </li>
 <li>绝对导入：
 
 <p>
-           相对导入：
+     相对导入：
 </p>
 </li>
 <li>如果你不想导入某个模块，你可以属性名称前加 <code>_</code>
-           例如：
+     例如：
 
 
 
@@ -1011,8 +1005,8 @@ for i in xrange(5):
 </li>
 <li>循环导入：
 
-<p>           
-           解决方法：
+<p>     
+     解决方法：
 </p>
 <ol>
 <li>将import语句移动到cli4vof
@@ -1040,7 +1034,6 @@ mc.myNoActionMethod();
 </ol>
 
 
-
 </div>
 
 </div>
@@ -1063,7 +1056,7 @@ I.__dict__    I的属性
 
 </li>
 <li>实现 <code>__setattr__()</code> 本身就是一个冒险的经历，满是圈套和陷阱，例如：
-           无穷递归和破坏实例对象。
+     无穷递归和破坏实例对象。
 </li>
 <li>classmethod
 
@@ -1082,12 +1075,6 @@ TestClassMethod.foo()
 </ol>
 
 
-<pre class="example">
-calling class method foo()
-foo() is part of class:  TestClassMethod
-</pre>
-
-
 </div>
 </div>
 
@@ -1099,10 +1086,10 @@ foo() is part of class:  TestClassMethod
 
 <ol>
 <li>疑问：
-         P545中， <code>__XXX(parent)</code> and <code>__XXX(child)</code>
+   P545中， <code>__XXX(parent)</code> and <code>__XXX(child)</code>
 </li>
 <li>难道是Python2.2之前，从Python标准类型子类化或派生类都是不允许的。
-         于是出现了包装？？？？？？？？？？？？？？
+   于是出现了包装？？？？？？？？？？？？？？
 </li>
 <li><code>_bulitin_</code> and <code>_builtins_</code>
 </li>
@@ -1145,7 +1132,7 @@ icecream!
 
 </li>
 <li>exec 还可以接受有效的python文件对象。意思就是你将代码写在一个icecream.py的
-         文件中，然后在解释器中写入:
+   文件中，然后在解释器中写入:
 
 
 
@@ -1154,8 +1141,8 @@ exec f
 </pre>
 
 <p>
-         <b>Attention:</b>
-         再次执行exec时，文件已经到达EOF。如果想再次执行，需要如下操作：
+   <b>Attention:</b>
+   再次执行exec时，文件已经到达EOF。如果想再次执行，需要如下操作：
 </p>
 
 
@@ -1388,19 +1375,19 @@ print 'm.group(1):', m.group(1)
 <li>解决 <code>error: Unable to find vcvarsall.bat</code> 问题：
 
 <p>
-         If you have Visual Studio 2010 installed, execute
+   If you have Visual Studio 2010 installed, execute
 </p>
 <p>
-         <code>SET VS90COMNTOOLS=%VS100COMNTOOLS%</code>
+   <code>SET VS90COMNTOOLS=%VS100COMNTOOLS%</code>
 </p>
-<p>         
-         or with Visual Studio 2012 installed
+<p>   
+   or with Visual Studio 2012 installed
 </p>
-<p>         
-         <code>SET VS90COMNTOOLS=%VS110COMNTOOLS%</code>
+<p>   
+   <code>SET VS90COMNTOOLS=%VS110COMNTOOLS%</code>
 </p>
-<p>         
-         <b>Reference:</b>
+<p>   
+   <b>Reference:</b>
 </p><ul>
 <li><a href="http://stackoverflow.com/questions/2817869/error-unable-to-find-vcvarsall-bat">http://stackoverflow.com/questions/2817869/error-unable-to-find-vcvarsall-bat</a>
 </li>

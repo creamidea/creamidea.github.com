@@ -1,0 +1,32 @@
+#+TITLE:Learning Computer Graphics
+#+AUTHOR:ICECREAM(氷菓)
+#+EMAIL:creamidea(AT)gmail.com
+#+DESCRIPTION:ICECREAM(氷菓)
+#+KEYWORDS:CG
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t
+#+LINK_HOME: https://creamidea.github.io
+#+STYLE:<link rel="stylesheet" type="text/css" href="../css/style.css">
+#+INFOJS_OPT: view: showall toc: nil
+
+#+BEGIN_HTML
+---
+layout: doc
+title: Learning Computer Graphics
+subtitle: 学习计算机图形学 
+categories: note
+tags: CG
+---
+#+END_HTML
+
+* 前言
+	这是一篇简单的学习计算机图形学的笔记，初次版本会显得很乱，随着知识的加深，会重新编辑。
+
+	还在学习中，近期开始书写。（其实最近一直在看LaTeX）
+
+* 光栅图形学
+	<2013-07-28 Sun>
+
+	*Reference:*
+	+ http://www.cnblogs.com/doudougou/archive/2012/04/22/2464707.html
+	+ http://bbs.9ria.com/thread-183380-1-1.html
+

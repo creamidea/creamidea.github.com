@@ -21,7 +21,6 @@ tags: javascript css
 不过看到 [[http://beiyuu.com/][BeiYuu]] 的文章 [[http://beiyuu.com/why-blog/][《我为什么写博客？》]] 的文章目录时，
 感觉自己写得没有他的好，于是参考他写的，写了下面的文章内容。
 
-
 * 动态生成文章目录过程
 
 ** 编程思路
