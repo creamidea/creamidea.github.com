@@ -1,14 +1,15 @@
+{% unless page.layout == 'front' %}
 <nav class="bucket-sort">
   {% for title in site.bucket_title %}
   {% assign page_url = page.url|split: '/' %}
   {% if page_url[1] == title.text or page.layout == link.layout %}
-    {% assign href = "#" %}
-    {% assign class = "no-link" %}
-    {% assign active = "active" %}
+  {% assign href = "#" %}
+  {% assign class = "no-link" %}
+  {% assign active = "active" %}
   {% else %}
-    {% assign href = title.url %}
-    {% assign class = "" %}
-    {% assign active = "" %}
+  {% assign href = title.url %}
+  {% assign class = "" %}
+  {% assign active = "" %}
   {% endif %}
   <h5 class="bucket-title {{active}}">
     <a  href="{{ href }}" class="{{ class }}">
@@ -22,3 +23,4 @@
   <!--   </a> -->
   <!-- </h5> -->
 </nav>
+{% endunless %}
