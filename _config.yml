@@ -80,7 +80,5 @@ bucket_title:
 - text: emotion
   url: http://www.douban.com/people/creamidea/notes
 
-email_me: <a href="mailto:{{ site.author.email }}"><strong>[E-Mail<i class="icon-envelope"></i>]</strong></a>
-
 google_analytics_id: UA-38213594-1
 google_custom_search_id: 017951989687920165329:0e60irxxe5m

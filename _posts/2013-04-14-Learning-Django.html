@@ -76,7 +76,7 @@ tags: python django
 
 </li>
 <li>Linux/Mac OS X:
-   前往django所在文件目录，之后输入：
+     前往django所在文件目录，之后输入：
 
 
 
@@ -107,31 +107,31 @@ tags: python django
 <h2 id="sec-3">第二章 入门 &amp;&amp; 第三章 视图和URL配置</h2>
 <div class="outline-text-2" id="text-3">
 
-<p>  日曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-14 Sun</span></span>
+<p>    日曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-14 Sun</span></span>
 </p>
 <p>
   只是稍微看了一下，然后写了一个Hello(呵呵，真是经典啊)
 </p><ol>
 <li>使用 <code>django-admin.py startproject mysite</code>
-   (笔者我在Windows7上尝试，估计路径没有加入，所以我直接将Scripts/django-admin.py
-   放入了工程文件夹才解决)。
+     (笔者我在Windows7上尝试，估计路径没有加入，所以我直接将Scripts/django-admin.py
+     放入了工程文件夹才解决)。
 
-<p>   
-   创建完成之后的目录：
+<p>     
+     创建完成之后的目录：
 </p>
 
 
 <pre class="example">icecream/
-  manage.py
-  icecream/
-    __init__.py   
-    settings.py   
-    urls.py   
-    wsgi.py
-    __init__.pyc  
-    settings.pyc  
-    urls.pyc  
-    wsgi.pyc
+    manage.py
+    icecream/
+        __init__.py   
+        settings.py   
+        urls.py   
+        wsgi.py
+        __init__.pyc  
+        settings.pyc  
+        urls.pyc  
+        wsgi.pyc
 </pre>
 
 
@@ -143,7 +143,7 @@ tags: python django
 <pre class="example">from django.http import HttpResponse
 
 def hello(request):
-  return HttpResponse("Hello, icecream")
+    return HttpResponse("Hello, icecream")
 </pre>
 
 
@@ -156,7 +156,7 @@ def hello(request):
 from icecream.views import hello
 
 urlpatterns = patterns('',
-  ('^hello/$', hello),        # 增加这句映射
+    ('^hello/$', hello),        # 增加这句映射
 )
 </pre>
 
@@ -173,7 +173,7 @@ urlpatterns = patterns('',
 
 </li>
 <li>在浏览器中输入：
-   <a href="http://127.0.0.1:8080/hello">http://127.0.0.1:8080/hello</a>
+     <a href="http://127.0.0.1:8080/hello">http://127.0.0.1:8080/hello</a>
 </li>
 </ol>
 
@@ -188,7 +188,7 @@ urlpatterns = patterns('',
 <h2 id="sec-4">第四章 模板</h2>
 <div class="outline-text-2" id="text-4">
 
-<p>  火曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-16 Tue</span></span>
+<p>    火曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-16 Tue</span></span>
 </p>
 <ol>
 <li>Template System
@@ -222,7 +222,7 @@ print t.render(c)
 <h2 id="sec-5">第五章 模型</h2>
 <div class="outline-text-2" id="text-5">
 
-<p>  水曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-17 Wed</span></span>
+<p>    水曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-17 Wed</span></span>
 </p>
 <ol>
 <li>安装python-mysql：
@@ -236,7 +236,7 @@ print t.render(c)
      我下载的包是：
      <a href="http://nchc.dl.sourceforge.net/project/mysql-python/mysql-python-test/1.2.4b4/MySQL-python-1.2.4b4.win32-py2.7.exe">http://nchc.dl.sourceforge.net/project/mysql-python/mysql-python-test/1.2.4b4/MySQL-python-1.2.4b4.win32-py2.7.exe</a>
 </p>
-<p>   
+<p>     
      然后我跟着：
      <a href="http://stackoverflow.com/questions/3652625/installing-setuptools-on-64-bit-windows">http://stackoverflow.com/questions/3652625/installing-setuptools-on-64-bit-windows</a>
      修改注册表还是失败了。以后再试吧。
@@ -367,7 +367,7 @@ COMMIT;
 <li>使用Sqlite3 （因为笔者最近在Windows7上开发，又不想安装中大型数据库，于是。。。）:
 
 <p>
-   For Windows7:
+     For Windows7:
 </p>
 <ol>
 <li>下载源代码：sqlite-amalgamation-xxxxxxx.zip,点击这里进入下载页面。
@@ -382,7 +382,7 @@ COMMIT;
 </pre>
 
 <p>
-    Reference:
+        Reference:
 </p><ul>
 <li><a href="http://www.sqlite.org/howtocompile.html">http://www.sqlite.org/howtocompile.html</a>
 </li>
@@ -413,7 +413,7 @@ COMMIT;
 <h2 id="sec-6">第六章 Django站点管理</h2>
 <div class="outline-text-2" id="text-6">
 
-<p>  火曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-23 Tue</span></span>
+<p>    火曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-23 Tue</span></span>
 </p>
 <ol>
 <li>搭建步骤
@@ -468,8 +468,8 @@ STATICFILES_DIRS = (
 <p>   2)一些注意点
 </p><ol>
 <li>在管理界面显示自己创建的应用程序：
-      这点我也是我自己要记住的，记住写的模型需要在当前应用程序下的admin.py中注册，
-      代码类似这样：
+        这点我也是我自己要记住的，记住写的模型需要在当前应用程序下的admin.py中注册，
+        代码类似这样：
 
 
 
@@ -493,7 +493,7 @@ admin.site.register(User)
 <h2 id="sec-7">第七章 表单</h2>
 <div class="outline-text-2" id="text-7">
 
-<p>  木曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-25 Thu</span></span>
+<p>    木曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-25 Thu</span></span>
 </p>
 <ol>
 <li>在创建contact的时候，我没有使用 <code>python manage.py startapp contact</code> 
@@ -549,7 +549,7 @@ return render_to_response('login.html', context_instance=RequestContext(request)
 
 
 <p>
-      Reference:
+            Reference:
 </p><ol>
 <li><a href="http://stackoverflow.com/questions/14848603/django-csrf-cookie-not-setting">http://stackoverflow.com/questions/14848603/django-csrf-cookie-not-setting</a>
 
@@ -575,7 +575,7 @@ return render_to_response('login.html', context_instance=RequestContext(request)
 <h2 id="sec-8">第八章 高级视图和URL配置</h2>
 <div class="outline-text-2" id="text-8">
 
-<p>  木曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-25 Thu</span></span>
+<p>    木曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-04-25 Thu</span></span>
 </p>
 <ol>
 <li>在 Python 正则表达式中,命名的正则表达式组的语法是 <code>(?P&lt;name&gt;pattern)</code> ,
@@ -692,7 +692,7 @@ def foobar_view(request, template_name):
 <h2 id="sec-9">第九章 模板高级进阶</h2>
 <div class="outline-text-2" id="text-9">
 
-<p>  木曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-05-07 Tue</span></span>  
+<p>    木曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-05-07 Tue</span></span>  
 </p>
 <ol>
 <li>关闭html自动转义
@@ -724,7 +724,7 @@ This will not be escaped: &lt;b&gt;
 <li>对于模板块
 
 <p>
-     为了控制模板的自动转意,用标签 <code>autoescape</code> 来包装整个模板(或者模板中常用的部分),就像这样：
+       为了控制模板的自动转意,用标签 <code>autoescape</code> 来包装整个模板(或者模板中常用的部分),就像这样：
 </p>
 
 
@@ -769,7 +769,7 @@ Hello {&amp;#123; name &amp;#123;}
 <h2 id="sec-10">第十章 数据模型高级进阶</h2>
 <div class="outline-text-2" id="text-10">
 
-<p>  土曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-05-11 Sat</span></span>
+<p>    土曜日 <span class="timestamp-wrapper"> <span class="timestamp">2013-05-11 Sat</span></span>
 </p>
 <ol>
 <li>打开Session功能：
@@ -796,9 +796,9 @@ INSTALLED_APPS 中有 'django.contrib.sessions'
 <li>会话密钥(session key)
 </li>
 <li>设置Cookies:
-   <code>request.session.set_test_cookie()</code>
-   后续view中：
-   <code>request.seesion.test_cookie_worked()</code>
+     <code>request.session.set_test_cookie()</code>
+     后续view中：
+     <code>request.seesion.test_cookie_worked()</code>
 </li>
 <li>认证(authentication)框架
 </li>
@@ -816,7 +816,7 @@ INSTALLED_APPS 中有 'django.contrib.sessions'
 <li>疑问点：
 <ul>
 <li>关于这些session属性怎么设置，直接写入setting.py文件么？
-     参考地址：<a href="https://docs.djangoproject.com/en/dev/ref/settings/#sessions">https://docs.djangoproject.com/en/dev/ref/settings/#sessions</a>
+       参考地址：<a href="https://docs.djangoproject.com/en/dev/ref/settings/#sessions">https://docs.djangoproject.com/en/dev/ref/settings/#sessions</a>
 
 </li>
 <li>在设计登录表单时，如何判断输入的是合法字符，使得提交按钮生效？

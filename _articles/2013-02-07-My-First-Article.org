@@ -105,10 +105,10 @@ Jekyll的搭建过程，网络上已经有许多的高手写的很详细了，�
 
 *** blog标签系统(Tag-Cloud)的设计
 完成了Tag-Cloud(Simple)，在每篇文章的右侧会列出该文章被标记的标签，单击其中一个标签，显示该标签包含的文章。这个标签的来源： [[http://enrmarc.github.com/blog/Jekyll-tagcloud/][Jekyll-tagcloud]]
-不过我设计的页面有些许寒酸，如果你有什么好的建议或者意见可以告诉我，谢谢。{% include comments_email.html %}
+不过我设计的页面有些许寒酸，如果你有什么好的建议或者意见可以告诉我，谢谢。
 
 *** blog中使用的Icons
-我本来是想使用Github的全套图标的[[https://github.com/styleguide/css/7.0][Github Icons]],但是感觉那个字体 [[https://github.com/blog/1135-the-making-of-octicons][Octicons-regular]] 始终无法正常使用，如果你知道如何使用[[https://github.com/styleguide/css/7.0][Github Icons]]的话，希望能够告诉我，不胜感激啊。{% include comments_email.html %}
+我本来是想使用Github的全套图标的[[https://github.com/styleguide/css/7.0][Github Icons]],但是感觉那个字体 [[https://github.com/blog/1135-the-making-of-octicons][Octicons-regular]] 始终无法正常使用，如果你知道如何使用[[https://github.com/styleguide/css/7.0][Github Icons]]的话，希望能够告诉我，不胜感激啊。
 后来找了一个替代的Icons: [[http://fortawesome.github.com/Font-Awesome/][Awesome Icons]]，使用起来相当的简单，而且效果不错。
 当然你也可以使用 [[http://twitter.github.com/bootstrap/][Bootstrap]] 中使用 [[http://glyphicons.com/][Glyphicons Icons]]，设计的也是相当的不错。
 
