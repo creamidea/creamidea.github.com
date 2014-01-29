@@ -1,0 +1,378 @@
+---
+layout: doc
+title: GWT ABC
+subtitle: GWT的使用简单介绍
+categories: blog
+tags: google gwt java
+---
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 前言</a></li>
+<li><a href="#sec-2">2 开发环境</a></li>
+<li><a href="#sec-3">3 Hello World</a></li>
+<li><a href="#sec-4">4 简单分析</a>
+<ul>
+<li><a href="#sec-4-1">4.1 路由</a></li>
+<li><a href="#sec-4-2">4.2 接口</a>
+<ul>
+<li><a href="#sec-4-2-1">4.2.1 GreetingService</a></li>
+<li><a href="#sec-4-2-2">4.2.2 GreetingServiceAsync</a></li>
+</ul>
+</li>
+<li><a href="#sec-4-3">4.3 入口</a></li>
+<li><a href="#sec-4-4">4.4 其他</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5 结束语</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">前言</h2>
+<div class="outline-text-2" id="text-1">
+
+<p>又这个样子混过去好多天啦。不过挖的坑始终是要来填的。话说不知道为何对GWT有如此的好感。
+（这个是为什么呢？难道是因为Google？这不过科学啊）
+</p>
+<p>
+<a href="http://www.gwtproject.org/">GWT(Google Web Tookit)</a>，Google推出的一款使用Java主打的前端编程工具套件。
+当初我也不知道有这个东西，还是一位<a href="https://twitter.com/au9ustine">@au9ustine</a> 学长推荐的。可惜当初什么都不懂，看到又是以Java
+来开发的，当时就不知所措了。于是就一直搁置在那里了。不过心中还是痒痒的。
+</p>
+<p>
+这不在寒假学车期间顺便玩了一下这个工具。好有爱啊。
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">开发环境</h2>
+<div class="outline-text-2" id="text-2">
+
+<p>第一步当然是安装开发环境啦。我使用的Java IDE是Eclipse<sup><a class="footref" name="fnr-.1" href="#fn-.1">1</a></sup>，具体的安装配置过程我在这里就不累述了。
+主要讲一下安装Google Plugin for Eclipse这个插件。（这是一个相当 <del>坑爹的事情</del> ）。
+</p>
+<p>
+我们先来下载SDK，地址为：<a href="https://google-web-toolkit.googlecode.com/files/gwt-2.5.1.zip">here</a>(v2.5.1)。
+（官网下载地址：<a href="http://www.gwtproject.org/download.html">http://www.gwtproject.org/download.html</a>）
+</p>
+<p>
+接下来安装Eclipse插件。第一步去 <a href="https://developers.google.com/eclipse/docs/getting_started">here</a> 复制地址，然后在Eclipse<sup><a class="footref" name="fnr-.1.2" href="#fn-.1">1</a></sup>的 
+<code>Help &gt;&gt; Install New Software</code> 增加新的地址。
+之后就是等待&hellip;
+（这是一个漫长而漫长的过程，笔者等待了很久很久，终于……她报错了。好吧， <del>我承认人品不行</del> ）报错截图如下：
+<img src="http://farm8.staticflickr.com/7309/12204599783_c368afd41c.jpg"  alt="http://farm8.staticflickr.com/7309/12204599783_c368afd41c.jpg" />
+</p>
+<p>
+PS:这是一个顽固的错误，不知道什么原因，难道被 <del>和谐</del> 了？反正我尝试了很久很久。
+</p>
+<p>
+最终我觉得下载压缩包安装，下载地址是 <a href="https://developers.google.com/eclipse/docs/install-from-zip">这里</a> 。（怎么安装官方写的很清楚，我在这里就不说啦）
+</p>
+<p>
+Ok，接下来就是配置SDK的位置，简单，具体步骤如下： Window &gt; Perferences &gt; Google &gt; App Engine 
+&gt; Add &gt; the path of sdk。截图如下：
+<img src="http://farm4.staticflickr.com/3782/12205767695_6b4865d5c4.jpg"  alt="http://farm4.staticflickr.com/3782/12205767695_6b4865d5c4.jpg" />
+</p>
+<p>
+好的，到此为止，开发环境应该差不多了。接下来就开始我们真正的旅途吧。
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">Hello World</h2>
+<div class="outline-text-2" id="text-3">
+
+<p>我是按照 <a href="http://www.tutorialspoint.com/gwt/gwt_create_application.htm">这个</a> 来做的。这个网站已经写的很详细了，我就不再写了。 <del>截图真的很累啊！</del>
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">简单分析</h2>
+<div class="outline-text-2" id="text-4">
+
+<p>笔者还没有学过Java， <del>才愧啊，</del> 所以分析也不会很深入，只是稍微讲解一下这个的工作原理，
+待日后学习了Java再来细细品味。
+</p>
+<p>
+首先，GWT SDK内置了一个tomcat的服务，用于开发时测试用（我是这么想的）。
+其具体的业务开发流程是这个样子的：
+</p>
+
+</div>
+
+<div id="outline-container-4-1" class="outline-3">
+<h3 id="sec-4-1">路由</h3>
+<div class="outline-text-3" id="text-4-1">
+
+<p>在路由方面（我的意思是找到相应的java代码）和servlet的原理是一样的。
+其配置都是在 <code>web.xml</code> 中。其实笔者一开始没有明白，忘记配置了。然后就一直提示这个问题：
+</p>
+
+
+<pre class="example">This application is out of date, please click the refresh button on your browser. ( Expecting version 4 from server, got 5. )
+</pre>
+
+<p>
+如果你也碰到了这个问题，看看是不是没有修改web.xml。举个例子：
+</p>
+
+
+<pre class="example">&lt;servlet&gt;
+  &lt;servlet-name&gt;greetServlet&lt;/servlet-name&gt;
+  &lt;servlet-class&gt;com.creamidea.helloworld.server.GreetingServiceImpl&lt;/servlet-class&gt;
+&lt;/servlet&gt;
+
+&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;greetServlet&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;/helloworld/greet&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-2" class="outline-3">
+<h3 id="sec-4-2">接口</h3>
+<div class="outline-text-3" id="text-4-2">
+
+<p>主要是定义了两个接口， <code>GreetingService</code> 和 <code>GreetingServiceAsync</code> ，主要这两个接口的
+命名规则。
+</p>
+<p>
+通过这两个接口来实现服务器和客户端之间的通信。
+</p>
+
+</div>
+
+<div id="outline-container-4-2-1" class="outline-4">
+<h4 id="sec-4-2-1">GreetingService</h4>
+<div class="outline-text-4" id="text-4-2-1">
+
+<p>在开始之前，谁能告诉我这个语法 <code>@RemoteServiceRelativePath("greet")</code> 是什么意思？
+(<del>java的装饰器？</del>)
+我所理解的作用是：将这个类绑定映射到 <code>/helloworld/greet</code> ，这里的 <code>greet</code> 需要和 <b>web.xml</b> 中 
+<code>&lt;url-pattern&gt;/helloworld/greet&lt;/url-pattern&gt;</code> 匹配。看到这里greet的位置了么？
+</p>
+<p>
+这个接口的实现是 <b>服务器</b> 端的业务代码，
+继承于 <code>com.google.gwt.user.client.rpc.RemoteService;</code> 
+</p>
+
+
+<pre class="example">package com.creamidea.helloworld.client;
+
+import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+
+/**
+ * The client side stub for the RPC service.
+ */
+@RemoteServiceRelativePath("greet")
+public interface GreetingService extends RemoteService {
+    // 这个方法就是处理来自客户端的请求的
+    // 参数：name 就是客户端携带的信息啦
+    // 返回：字符串
+    String greetServer(String name) throws IllegalArgumentException;
+}
+</pre>
+
+
+<p>
+实现代码是写在 <code>com.creamidea.helloworld.server.GreetingServiceImpl.java</code> ，没错，
+这个就是在 <b>web.xml</b> 中配置的！这样当有指向这个服务的请求时就会调用这段代码了。
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-2-2" class="outline-4">
+<h4 id="sec-4-2-2">GreetingServiceAsync</h4>
+<div class="outline-text-4" id="text-4-2-2">
+
+<p>这个接口是在 <b>客户端</b> 使用的，主要是一种代理机制，用于向远程服务器进行通信的。类似于 <b>js</b> 中的 /ajax/。这个接口
+必须包含和服务器通信的方法。
+</p>
+
+
+<pre class="example">package com.creamidea.helloworld.client;
+
+import com.google.gwt.user.client.rpc.AsyncCallback;
+
+/**
+ * The async counterpart of &lt;code&gt;GreetingService&lt;/code&gt;.
+ */
+public interface GreetingServiceAsync {
+    // 这个方法有两个参数
+    // 一个是需要向服务器发送什么信息
+    // 另一个是回调，就是服务器成功返回之后客户端需要做的事情
+  void greetServer(String input, AsyncCallback&lt;String&gt; callback)
+      throws IllegalArgumentException;
+}
+</pre>
+
+
+<p>
+使用的地方是在 <b>HelloWorld.java</b> （本例中）。
+</p>
+
+
+<pre class="example">/**
+ * 创建一个用于和远程服务(Greeting Service)进行通信的代理
+ * 将客户端的发送器和服务器端的处理器绑定
+ */
+private final GreetingServiceAsync greetingService = GWT
+    .create(GreetingService.class);
+
+/**
+ * 调用发送信息的方法。
+ * 发送需要发送的信息
+ * 绑定回调函数
+ */
+greetingService.greetServer(textToServer,
+                            new AsyncCallback&lt;String&gt;() {
+                                public void onFailure(Throwable caught) {
+                                    // Show the RPC error message to the user
+                                    dialogBox
+                                        .setText("Remote Procedure Call - Failure");
+                                    serverResponseLabel
+                                        .addStyleName("serverResponseLabelError");
+                                    serverResponseLabel.setHTML(SERVER_ERROR);
+                                    dialogBox.center();
+                                    closeButton.setFocus(true);
+                                }
+
+                                public void onSuccess(String result) {
+                                    dialogBox.setText("Remote Procedure Call");
+                                    serverResponseLabel
+                                        .removeStyleName("serverResponseLabelError");
+                                    serverResponseLabel.setHTML(result);
+                                    dialogBox.center();
+                                    closeButton.setFocus(true);
+                                }
+                            });
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4-3" class="outline-3">
+<h3 id="sec-4-3">入口</h3>
+<div class="outline-text-3" id="text-4-3">
+
+<p>程序的入口是实现 <code>com.google.gwt.core.client.EntryPoint</code> ，
+本示例具体代码在 <b>HelloWorld.java</b>
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-4" class="outline-3">
+<h3 id="sec-4-4">其他</h3>
+<div class="outline-text-3" id="text-4-4">
+
+<ol>
+<li><code>public void onModuleLoad() {...}</code> 这个是页面加载完毕之后处理的代码。相当于js中的 <code>window.onload()</code>
+
+</li>
+<li>如何实现DOM搜索呢？使用实例代码如下： <br/>
+   HelloWorld.html
+
+
+
+<pre class="example">&lt;td id="nameFieldContainer"&gt;&lt;/td&gt;
+</pre>
+
+
+<p>
+   HelloWorld.java
+</p>
+
+
+<pre class="example">RootPanel.get("nameFieldContainer");
+</pre>
+
+
+</li>
+<li>创建按钮和绑定按钮处理事件： <br/>
+   HelloWorld.html
+
+
+
+<pre class="example">&lt;td id="sendButtonContainer"&gt;&lt;/td&gt;
+</pre>
+
+
+<p>   
+   HelloWorld.java
+</p>
+
+
+<pre class="example">final Button closeButton = new Button("Close"); // 这里的Close就是按钮上显示的字符
+// We can set the id of a widget by accessing its Element
+closeButton.getElement().setId("closeButton");
+// Add a handler to close the DialogBox
+closeButton.addClickHandler(new ClickHandler() {
+        public void onClick(ClickEvent event) {
+            dialogBox.hide();
+            sendButton.setEnabled(true);
+            sendButton.setFocus(true);
+        }       
+    });
+</pre>
+
+</li>
+</ol>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">结束语</h2>
+<div class="outline-text-2" id="text-5">
+
+<p>看到了吧，其实很简单的。整个过程就是这么的简单。接下就是仔细去看文档，熟悉一些常用的类库啦，
+如如何创建其他的html组件等。
+</p>
+<p>
+因为笔者近期内不会用到Java来开发项目， <del>而且我现在也不会java，</del> 所以就不会使用这个「犀利」的工具啦。
+不过如果你是要用Java来进行WEB开发，但你又不会js或者觉得在两种语言直接切换实在太麻烦的话就可以
+使用这个工具来提高你的开发效率，享受编程的乐趣啦。还有就是这个很适合开发signal page哦。
+好生羡慕啊。( ^_^)／□☆□＼(^-^ )
+</p>
+<p>
+另外貌似这个自带动画函数哦，要实现动画很简单的哦。不信的话现在就去创建一个DEMO看看吧。
+</p>
+<p>
+嗯，差不多了解的就这么多了。但愿能够对于看到这篇文章的读者有所帮助。
+</p>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+<p class="footnote"><sup><a class="footnum" name="fn-.1" href="#fnr-.1">1</a></sup> <a href="http://www.eclipse.org/">http://www.eclipse.org/</a>
+</p>
+
+
+</div>
+</div>
+
+</div>
+</div>

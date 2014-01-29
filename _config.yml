@@ -72,10 +72,12 @@ search: /public/search.html
 bucket_title:
 - text: archive
   url: /archive/index.html
-- text: tags
-  url: /tags/index.html
 - text: draft
   url: https://github.com/creamidea/creamidea.github.com/tree/master/_draft
+- text: tags
+  url: /tags/index.html
+- text: issue
+  url: https://github.com/creamidea/creamidea.github.com/issues?state=open
 - text: emotion
   url: http://www.douban.com/people/creamidea/notes
 

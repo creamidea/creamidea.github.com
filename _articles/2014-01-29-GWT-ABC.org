@@ -1,0 +1,230 @@
+#+TITLE:GWT ABC
+#+AUTHOR:ICECREAM(氷菓)
+#+EMAIL:creamidea(AT)gmail.com
+#+DESCRIPTION:ICECREAM(氷菓)
+#+KEYWORDS:google gwt java
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t
+#+LINK_HOME: https://creamidea.github.io
+#+STYLE:<link rel="stylesheet" type="text/css" href="../css/style.css">
+#+INFOJS_OPT: view: showall toc: nil
+
+#+BEGIN_HTML
+---
+layout: doc
+title: GWT ABC
+subtitle: GWT的使用简单介绍
+categories: blog
+tags: google gwt java
+---
+#+END_HTML
+
+* 前言
+又这个样子混过去好多天啦。不过挖的坑始终是要来填的。话说不知道为何对GWT有如此的好感。
+（这个是为什么呢？难道是因为Google？这不过科学啊）
+
+[[http://www.gwtproject.org/][GWT(Google Web Tookit)]]，Google推出的一款使用Java主打的前端编程工具套件。
+当初我也不知道有这个东西，还是一位[[https://twitter.com/au9ustine][@au9ustine]] 学长推荐的。可惜当初什么都不懂，看到又是以Java
+来开发的，当时就不知所措了。于是就一直搁置在那里了。不过心中还是痒痒的。
+
+这不在寒假学车期间顺便玩了一下这个工具。好有爱啊。
+
+* 开发环境
+第一步当然是安装开发环境啦。我使用的Java IDE是Eclipse[fn:1]，具体的安装配置过程我在这里就不累述了。
+主要讲一下安装Google Plugin for Eclipse这个插件。（这是一个相当 +坑爹的事情+ ）。
+
+我们先来下载SDK，地址为：[[https://google-web-toolkit.googlecode.com/files/gwt-2.5.1.zip][here]](v2.5.1)。
+（官网下载地址：http://www.gwtproject.org/download.html）
+
+接下来安装Eclipse插件。第一步去 [[https://developers.google.com/eclipse/docs/getting_started][here]] 复制地址，然后在Eclipse[fn:1]的 
+=Help >> Install New Software= 增加新的地址。
+之后就是等待...
+（这是一个漫长而漫长的过程，笔者等待了很久很久，终于……她报错了。好吧， +我承认人品不行+ ）报错截图如下：
+[[file:http://farm8.staticflickr.com/7309/12204599783_c368afd41c.jpg]]
+
+PS:这是一个顽固的错误，不知道什么原因，难道被 +和谐+ 了？反正我尝试了很久很久。
+
+最终我觉得下载压缩包安装，下载地址是 [[https://developers.google.com/eclipse/docs/install-from-zip][这里]] 。（怎么安装官方写的很清楚，我在这里就不说啦）
+
+Ok，接下来就是配置SDK的位置，简单，具体步骤如下： Window > Perferences > Google > App Engine 
+> Add > the path of sdk。截图如下：
+[[file:http://farm4.staticflickr.com/3782/12205767695_6b4865d5c4.jpg]]
+
+好的，到此为止，开发环境应该差不多了。接下来就开始我们真正的旅途吧。
+
+* Hello World
+我是按照 [[http://www.tutorialspoint.com/gwt/gwt_create_application.htm][这个]] 来做的。这个网站已经写的很详细了，我就不再写了。 +截图真的很累啊！+
+
+* 简单分析
+笔者还没有学过Java， +才愧啊，+ 所以分析也不会很深入，只是稍微讲解一下这个的工作原理，
+待日后学习了Java再来细细品味。
+
+首先，GWT SDK内置了一个tomcat的服务，用于开发时测试用（我是这么想的）。
+其具体的业务开发流程是这个样子的：
+
+** 路由
+在路由方面（我的意思是找到相应的java代码）和servlet的原理是一样的。
+其配置都是在 =web.xml= 中。其实笔者一开始没有明白，忘记配置了。然后就一直提示这个问题：
+#+begin_example
+This application is out of date, please click the refresh button on your browser. ( Expecting version 4 from server, got 5. )
+#+end_example
+如果你也碰到了这个问题，看看是不是没有修改web.xml。举个例子：
+#+begin_src xml
+  <servlet>
+    <servlet-name>greetServlet</servlet-name>
+    <servlet-class>com.creamidea.helloworld.server.GreetingServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>greetServlet</servlet-name>
+    <url-pattern>/helloworld/greet</url-pattern>
+  </servlet-mapping>
+#+end_src
+
+** 接口
+主要是定义了两个接口， =GreetingService= 和 =GreetingServiceAsync= ，主要这两个接口的
+命名规则。
+
+通过这两个接口来实现服务器和客户端之间的通信。
+
+*** GreetingService
+在开始之前，谁能告诉我这个语法 =@RemoteServiceRelativePath("greet")= 是什么意思？
+(+java的装饰器？+)
+我所理解的作用是：将这个类绑定映射到 =/helloworld/greet= ，这里的 =greet= 需要和 *web.xml* 中 
+=<url-pattern>/helloworld/greet</url-pattern>= 匹配。看到这里greet的位置了么？
+
+这个接口的实现是 *服务器* 端的业务代码，
+继承于 =com.google.gwt.user.client.rpc.RemoteService;= 
+#+begin_src java
+  package com.creamidea.helloworld.client;
+  
+  import com.google.gwt.user.client.rpc.RemoteService;
+  import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+  
+  /**
+   ,* The client side stub for the RPC service.
+   ,*/
+  @RemoteServiceRelativePath("greet")
+  public interface GreetingService extends RemoteService {
+      // 这个方法就是处理来自客户端的请求的
+      // 参数：name 就是客户端携带的信息啦
+      // 返回：字符串
+      String greetServer(String name) throws IllegalArgumentException;
+  }
+#+end_src
+
+实现代码是写在 =com.creamidea.helloworld.server.GreetingServiceImpl.java= ，没错，
+这个就是在 *web.xml* 中配置的！这样当有指向这个服务的请求时就会调用这段代码了。
+
+*** GreetingServiceAsync
+这个接口是在 *客户端* 使用的，主要是一种代理机制，用于向远程服务器进行通信的。类似于 *js* 中的 /ajax/。这个接口
+必须包含和服务器通信的方法。
+#+begin_src java
+  package com.creamidea.helloworld.client;
+  
+  import com.google.gwt.user.client.rpc.AsyncCallback;
+  
+  /**
+   ,* The async counterpart of <code>GreetingService</code>.
+   ,*/
+  public interface GreetingServiceAsync {
+      // 这个方法有两个参数
+      // 一个是需要向服务器发送什么信息
+      // 另一个是回调，就是服务器成功返回之后客户端需要做的事情
+    void greetServer(String input, AsyncCallback<String> callback)
+        throws IllegalArgumentException;
+  }
+#+end_src
+
+使用的地方是在 *HelloWorld.java* （本例中）。
+#+begin_src java
+  /**
+   ,* 创建一个用于和远程服务(Greeting Service)进行通信的代理
+   ,* 将客户端的发送器和服务器端的处理器绑定
+   ,*/
+  private final GreetingServiceAsync greetingService = GWT
+      .create(GreetingService.class);
+  
+  /**
+   ,* 调用发送信息的方法。
+   ,* 发送需要发送的信息
+   ,* 绑定回调函数
+   ,*/
+  greetingService.greetServer(textToServer,
+                              new AsyncCallback<String>() {
+                                  public void onFailure(Throwable caught) {
+                                      // Show the RPC error message to the user
+                                      dialogBox
+                                          .setText("Remote Procedure Call - Failure");
+                                      serverResponseLabel
+                                          .addStyleName("serverResponseLabelError");
+                                      serverResponseLabel.setHTML(SERVER_ERROR);
+                                      dialogBox.center();
+                                      closeButton.setFocus(true);
+                                  }
+  
+                                  public void onSuccess(String result) {
+                                      dialogBox.setText("Remote Procedure Call");
+                                      serverResponseLabel
+                                          .removeStyleName("serverResponseLabelError");
+                                      serverResponseLabel.setHTML(result);
+                                      dialogBox.center();
+                                      closeButton.setFocus(true);
+                                  }
+                              });
+#+end_src
+
+** 入口
+程序的入口是实现 =com.google.gwt.core.client.EntryPoint= ，
+本示例具体代码在 *HelloWorld.java*
+
+** 其他
+1. =public void onModuleLoad() {...}= 这个是页面加载完毕之后处理的代码。相当于js中的 =window.onload()=
+
+2. 如何实现DOM搜索呢？使用实例代码如下： \\
+   HelloWorld.html
+   #+begin_src html
+<td id="nameFieldContainer"></td>
+#+end_src
+
+   HelloWorld.java
+   #+begin_src java
+RootPanel.get("nameFieldContainer");
+#+end_src
+
+3. 创建按钮和绑定按钮处理事件： \\
+   HelloWorld.html
+   #+begin_src html
+     <td id="sendButtonContainer"></td>
+   #+end_src
+   
+   HelloWorld.java
+   #+begin_src java
+     final Button closeButton = new Button("Close"); // 这里的Close就是按钮上显示的字符
+     // We can set the id of a widget by accessing its Element
+     closeButton.getElement().setId("closeButton");
+     // Add a handler to close the DialogBox
+     closeButton.addClickHandler(new ClickHandler() {
+             public void onClick(ClickEvent event) {
+                 dialogBox.hide();
+                 sendButton.setEnabled(true);
+                 sendButton.setFocus(true);
+             }       
+         });
+   #+end_src
+
+* 结束语
+看到了吧，其实很简单的。整个过程就是这么的简单。接下就是仔细去看文档，熟悉一些常用的类库啦，
+如如何创建其他的html组件等。
+
+因为笔者近期内不会用到Java来开发项目， +而且我现在也不会java，+ 所以就不会使用这个「犀利」的工具啦。
+不过如果你是要用Java来进行WEB开发，但你又不会js或者觉得在两种语言直接切换实在太麻烦的话就可以
+使用这个工具来提高你的开发效率，享受编程的乐趣啦。还有就是这个很适合开发signal page哦。
+好生羡慕啊。( ^_^)／□☆□＼(^-^ )
+
+另外貌似这个自带动画函数哦，要实现动画很简单的哦。不信的话现在就去创建一个DEMO看看吧。
+
+嗯，差不多了解的就这么多了。但愿能够对于看到这篇文章的读者有所帮助。
+
+* Footnotes
+
+[fn:1] http://www.eclipse.org/

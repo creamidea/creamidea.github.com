@@ -1,0 +1,31 @@
+#+TITLE: CPU自制入門
+#+AUTHOR:ICECREAM(氷菓)
+#+EMAIL:creamidea(AT)gmail.com
+#+DESCRIPTION:ICECREAM(氷菓)
+#+KEYWORDS:
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t
+#+LINK_HOME: https://creamidea.github.io
+#+STYLE:<link rel="stylesheet" type="text/css" href="../css/style.css">
+#+INFOJS_OPT: view: showall toc: nil
+
+#+BEGIN_HTML
+---
+layout: doc
+title: CPU自制入門
+subtitle: CPU自制入门跟着走
+categories: note
+tags: CPU VerilogHDL Hardware
+---
+#+END_HTML
+
+* 前言
+  先来开一个题，然后就是配置Emace.
+  首先下载[[http://courses.cs.washington.edu/courses/cse467/04wi/misc/verilog-mode.el][verilog-mode.el]] 然后解压，将其放入某文件夹(lisp)，最后修改.emacs.将下面的内容放入：
+  
+  #+BEGIN_HTML
+  <script src="https://gist.github.com/creamidea/8382122.js"></script>
+  #+END_HTML
+
+  收工。
+  详细的可以参考 [[http://www.verilog.com/emacs_install.html][这里]] 。
+
