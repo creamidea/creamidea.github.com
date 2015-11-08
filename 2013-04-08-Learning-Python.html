@@ -1,0 +1,1473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Learning Python</title>
+<!-- 2015-11-08 Sun 20:34 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="ICECREAM(氷菓)" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/static/style.css"/>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Learning Python</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">前言</a></li>
+<li><a href="#sec-2">2013-04-13 土曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-13 Sat&gt;</span></span></a></li>
+<li><a href="#sec-3">2013-04-14 日曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-14 Sun&gt;</span></span></a></li>
+<li><a href="#sec-4">2013-04-15 月曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-15 Mon&gt;</span></span></a></li>
+<li><a href="#sec-5">2013-04-16 火曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-16 Tue&gt;</span></span></a></li>
+<li><a href="#sec-6">2013-04-18 木曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-18 Thu&gt;</span></span></a></li>
+<li><a href="#sec-7">2013-04-19 金曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-19 Fri&gt;</span></span></a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-7-0-1">可变长度的参数 P411</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-8">2013-04-20 土曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-20 Sat&gt;</span></span></a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-8-0-1">内建函数apply(), fliter(), map(), reduce()</a></li>
+<li><a href="#sec-8-0-2">偏函数(Partial Application)和柯里化Currying</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-9">2013-04-21 日曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-21 Sun&gt;</span></span></a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-9-0-1">作用域和lambda</a></li>
+<li><a href="#sec-9-0-2">生成器</a></li>
+<li><a href="#sec-9-0-3">模块：模块是组织python代码的方法，包是组织模块的。</a></li>
+<li><a href="#sec-9-0-4">名称空间与变量作用域比较 12.3.1</a></li>
+<li><a href="#sec-9-0-5">面向对象</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-10">2013-04-22 月曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-22 Mon&gt;</span></span></a></li>
+<li><a href="#sec-11">2013-04-23 火曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-23 Tue&gt;</span></span></a>
+<ul>
+<li><a href="#sec-11-1">11.3.6 *函数（与方法）装饰器</a></li>
+<li><a href="#sec-11-2">Random - Generate pseudo-random numbers</a></li>
+<li><a href="#sec-11-3"><code>__builtins__</code> and <code>__builtin__</code></a></li>
+</ul>
+</li>
+<li><a href="#sec-12">2013-04-24 水曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-24 Wed&gt;</span></span></a></li>
+<li><a href="#sec-13">2013-05-13 月曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-05-13 Mon&gt;</span></span></a></li>
+</ul>
+</div>
+</div>
+---
+layout: doc
+title: Learning Python
+subtitle: 学习Python的小型笔记 
+categories: note
+tags: python
+---
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">前言</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+这个仅仅是一个开始。是的，这个仅仅是一个开始。
+</p>
+
+<p>
+为何学习python？因为
+</p>
+<blockquote>
+<p>
+life is short - you need Python!
+</p>
+</blockquote>
+<p>
+<b>From</b> <a href="http://love-python.blogspot.com/">http://love-python.blogspot.com/</a>
+</p>
+
+<p>
+还有就是下面一个项目需要使用python<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup>和tornado<sup><a id="fnr.2" name="fnr.2" class="footref" href="#fn.2">2</a></sup>来开发项目，一个上位机吧。
+我们小组主要负责数据展示这个部分。硬件部分，也就是实际数据采集那个部分由企业来负责。
+</p>
+
+<p>
+等待学习记录中&#x2026;
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">2013-04-13 土曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-13 Sat&gt;</span></span></h2>
+<div class="outline-text-2" id="text-2">
+<ol class="org-ol">
+<li>Tips:
+<b>How to run Python in Emacs org-mode? Below is the answer</b>
+Just input below into .emacs:
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(org-babel-do-load-languages
+  'org-babel-load-languages '((python . t) (R . t)))
+</pre>
+</div>
+<p>
+From:
+<a href="http://www.johndcook.com/blog/2012/02/09/python-org-mode/">Running Python and R inside Emacs</a>
+</p>
+</li>
+
+<li>python的一个切片操作：将字符串倒序输出
+<div class="org-src-container">
+
+<pre class="src src-python">s = 'abcdefgh'
+a = s[::-1]
+print a  #a : hgfedcba
+</pre>
+</div>
+</li>
+
+<li>每次把最后的一个字符砍掉
+<div class="org-src-container">
+
+<pre class="src src-python">s = 'abcde'
+i = -1
+for i in [None]+range(-1, -len(s), -1):
+  print s[:i]
+</pre>
+</div>
+</li>
+
+<li>浅拷贝： 只拷贝了对对象的索引，而不是重新建立了一个对象。P162
+</li>
+
+<li>basestring() 抽象工厂函数，作用仅仅是为str和unicode函数提过父类。
+所有不能被实例化，也不能被调用。
+</li>
+
+<li>在一个对象上使用dir()来查看它所有的方法和属性
+</li>
+</ol>
+
+
+<p>
+おやすみなさい
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">2013-04-14 日曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-14 Sun&gt;</span></span></h2>
+<div class="outline-text-2" id="text-3">
+<ol class="org-ol">
+<li>Write a test code to test
+<div class="org-src-container">
+
+<pre class="src src-python">#!/usr/bin/env python                                                          
+import string                                                                  
+
+alphas = string.letters + '_'                                                  
+nums = string.digits                                                           
+
+print 'Welcome to the Idetifier Checket v1.0'                                  
+print 'Testees must be at least 2 chars long'                                  
+
+# 我知道为何这里不行了，在org-mode中无法从标准输入读取数据
+# myInput = raw_input("Identifier to test?")                                   
+myInput = "abcdefgh"
+
+if len(myInput) &gt; 1:               
+    if myInput[0] not in alphas:    
+        print '''invalid: first symbol must be                                 
+        alphabetic'''                                                          
+    else:                                         
+        for otherChar in myInput[1:]:                                          
+            if otherChar not in alphas + nums:   
+                print '''invalid: remaining      
+                symbols must be alphanumeric'''  
+                break                            
+            else:                                
+                print "Okay as an identifier"
+else:
+    print "Here is 404"
+</pre>
+</div>
+</li>
+
+<li>Operational:
+
+<pre class="example">
+# 接收一个可迭代的对象，返回一个有序列表
+sorted(iter, func=None, key=None, reverse=False)
+
+# 返回一个列表,
+# 其第一个元素是 it0,it1,...
+# 这些元素的第一个元素组成的一个元组,第二个...,类推.
+zip([it0, it1,...,itN])
+</pre>
+
+<div class="org-src-container">
+
+<pre class="src src-python">s, t = 'foa', 'obr'
+print zip(s, t)
+</pre>
+</div>
+</li>
+
+<li>字符串格式化符号：
+P175
+</li>
+
+<li>格式化操作符辅助指令  :
+P176
+</li>
+
+<li>Template and substitute
+</li>
+
+<li>string 
+
+<p>
+From:
+<a href="http://docs.python.org/2/library/string.html?highlight=string#deprecated-string-functions">7.1.6. Deprecated string functions</a>
+</p>
+</li>
+
+<li>三引号
+<div class="org-src-container">
+
+<pre class="src src-python">hi = '''hi there'''
+hi # 'hi\nhere' 
+print hi
+</pre>
+</div>
+</li>
+
+<li>Codecs
+
+<p>
+COder/DECoder
+</p>
+
+<p>
+UTF-16: 单独的一个16位字，两个字节。
+BOM(Byte Order Mark)
+</p>
+</li>
+
+<li>把Unicode应用到实际应用中：
+<ul class="org-ul">
+<li>程序中出现字符串时一定要加个前缀*u*.
+</li>
+<li>不要用str()函数,用unicode()代替.
+</li>
+<li>不要用过时的 string 模块 &#x2013; 如果传给它的是非 ASCII 字符,它会把一切搞砸。
+</li>
+<li>不到必须时不要在你的程序里面编解码*Unicod*字符.
+只在你要写入文件或数据库或者网络时,才调用 encode()函数;相应地,
+只在你需要把数据读回来的时候才调用decode()函数.
+</li>
+</ul>
+</li>
+
+<li>pickle
+</li>
+
+<li>从现实中得来的教训
+
+<ul class="org-ul">
+<li>失误 #1: 你必须在一个极有限的时间内写出一个大型的应用,
+而且需要其他语言的支持,
+但是产品经理并没有明确定义这一点。
+你并没有考虑 Unicode 的兼容,
+直到项目快要结束&#x2026; ,
+这时候再添加 Unicode 的支持几乎不太可能,不是吗?
+
+<p>
+结果 #1: 没能预测到最终用户对其他语言界面的需求,
+在集成他们用的面向其他语种的应
+用时又没有使用 Unicode 支持.更新整个系统既让让人觉得枯燥和更是浪费时间。
+</p>
+</li>
+
+<li>失误 #2:在源码中到处使用 string 模块或者 str()和 chr()函数.
+
+<p>
+结果 #2:通过全局的查找替换把 str()和 chr()替换成 unicode()和 unichr(),
+但是这样一来很可能就不能再用 pickle 模块,
+要用只能把所有要 pickle 处理的数据存成二进制形式,这
+样一来就必须修改数据库的结构,而修改数据库结构就意味着全部推倒重来.
+</p>
+</li>
+
+<li>失误 #3: 不能确定所有的辅助系统都完全地支持 Unicode.
+
+<p>
+结果 #3: 不得不去为那些系统打补丁,而其中有些系统可能你根本就没有源码.修复对
+Unicode 支持的 bug 可能会降低代码的可靠性,而且非常有可能引入新的 bug.
+</p>
+</li>
+
+<li>总结: 使应用程序完全支持 Unicode,兼容其他的语言本身就是一个工程.
+它需要详细的考虑、计划.所有涉及到的软件、系统都需要检查,包括 Python 的标准库和其 
+他将要用到的第三方扩展模块.你甚至有可能需要组建一个经验丰富的团队来专门负责国际化
+(I18N)问题.
+</li>
+</ul>
+</li>
+
+<li>列表：切片: ([] and [:])
+
+<p>
+还有一点要注意,如果你想以子列表的形式
+得到一个列表中的一个切片,那需要确保在
+赋值时等号的左边也是一个列表而不是一个列表的
+元素.
+</p>
+</li>
+
+<li>列表：连接接操作符( + )
+
+<ul class="org-ul">
+<li>运算符两边必须是列表
+</li>
+
+<li>比 extend() 低效
+</li>
+</ul>
+</li>
+
+<li>在使用可变对象的方法如 sort(),extend()和 reverse()的时候要注意,
+这些操作会在列表
+中原地执行操作,也就是说现有的列表内容会被改变,
+但是没有返回值!是的,与之相反,字符串
+方法确实有返回值
+
+<p>
+温习一下,字符串是不可变的 &#x2013; 不可变对象的方法是不能改变它们的值的,
+所以它们必须
+返回一个新的对象.如果你确实需要返回一个对象,
+那么我们建议你看一下 Python2.4 以后加入
+的 reversed()和 sorted()内建函数.
+它们像列表的方法一样工作,不同的是它们可以用做表达式,因为它们返回一个对象.同时
+原来的那个列表还是那个列表,没有改变,而你得到的是一个新的对象.
+</p>
+</li>
+
+<li>sort() -&gt; 归并排序的衍生算法
+</li>
+
+<li>工厂方法
+</li>
+
+<li>元组可以使用 + 运算， 两边都是元组即可。
+</li>
+
+<li>元组本身不可以修改，但是她包含的元组可以修改。
+</li>
+
+<li>由圆括号包裹的一个单一元素首
+先被作为分组操作,而不是作为元组的分界符。
+一个变通的方法是在第一个元素后面添一个逗
+号(,)来表明这是一个元组而不是在做分组操作.
+</li>
+
+<li>list() and tuple()
+</li>
+
+<li>浅拷贝和深拷贝
+<pre class="example">
+      浅拷贝：内容是原来对象元素的引用
+      可以以下几种方式实施:
+        (1)完全切片操作[:],
+        (2)利用工厂函数,比如 list(),dict()等,
+        (3)使用 copy 模块的 copy 函数.
+      注意：当进行浅拷贝时,字符串被显式的拷贝,并新创建了一个字符串对象,而列
+      表元素只是把它的引用复制了一下,并不是它的成员.
+</pre>
+
+<pre class="example">
+深拷贝：
+copy.deepcopy()函数
+#+BEGIN_SRC python
+  import copy
+  wifey = copy.deepcopy(person)
+#+END_SRC
+</pre>
+</li>
+
+<li>以下有几点关于拷贝操作的警告:
+
+<p>
+第一,非容器类型(比如数字,字符串和其他"原子"类型的
+对象,像代码,类型和 xrange 对象等)没有被拷贝一说,
+浅拷贝是用完全切片操作来完成的.
+</p>
+
+<p>
+第二,如果元组变量只包含原子类型对象,
+对它的深拷贝将不会进行.如果我们把账户信息改成元组类 
+型,那么即便按我们的要求使用深拷贝操作也只能得到一个浅拷贝:
+</p>
+</li>
+
+<li>核心模块: copy
+
+<p>
+我们刚才描述的浅拷贝和深拷贝操作都可以在 copy 模块中找到.
+其实 copy 模块中只有两个函数可用:
+</p>
+
+<p>
+copy()进行浅拷贝操作,
+</p>
+
+<p>
+deepcopy()进行深拷贝操作.
+</p>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">2013-04-15 月曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-15 Mon&gt;</span></span></h2>
+<div class="outline-text-2" id="text-4">
+<ol class="org-ol">
+<li>字典 dict() fromkeys()
+</li>
+<li>所有不可变的类型都是可哈希的
+
+<p>
+解释器调用哈希函数,根据字典中键的值来计算存储你的数据的位置。
+</p>
+</li>
+<li>集合
+可变集合：   set()
+不可变集合： frozenset()
+<div class="org-src-container">
+
+<pre class="src src-python">s = set('cheeseshop')
+print s
+# below fun will delete 'p'
+s -= set('pypi')
+print s
+</pre>
+</div>
+</li>
+<li>statck.py P222
+
+<p>
+queue.py P227
+</p>
+</li>
+<li></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">2013-04-16 火曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-16 Tue&gt;</span></span></h2>
+<div class="outline-text-2" id="text-5">
+<ol class="org-ol">
+<li>使用映射对象（比如字典）搜索比类似的if-elif-else或者for块.
+
+<p>
+<b>Attention:</b>
+<code>else</code> 也可以使用在 <code>while</code> and <code>for</code> 这些循环中。具体操作如下：
+只要不是被 <code>break</code> 打断的循环，意思就是正常结束的都会去执行跟在下面的 <code>else</code> ，
+另外的说法就是： <code>break</code> 会跳过 <code>else</code> 代码区.
+</p>
+</li>
+<li>疑问：msgs.get(user.cmd, default) P290
+<pre class="example">
+解答：	 
+dict.get(key, default=None)
+</pre>
+<p>
+<b>From:</b> <a href="http://www.tutorialspoint.com/python/dictionary_get.htm">http://www.tutorialspoint.com/python/dictionary_get.htm</a>
+</p>
+</li>
+<li>一个hack的做法：
+<div class="org-src-container">
+
+<pre class="src src-python">smaller = (x &lt; y and [x] or [y])[0]
+</pre>
+</div>
+</li>
+<li>与序列相关的内建函数
+<div class="org-src-container">
+
+<pre class="src src-python">sorted()
+reversed()
+enumerate()
+for i, album in enumerate(albums):
+    pirnt i, album
+zip()
+</pre>
+</div>
+</li>
+<li>break 语句：
+
+<p>
+结束当前循环，然后跳转到下一个语句
+</p>
+</li>
+<li>itet()创建它的迭代器
+<div class="org-src-container">
+
+<pre class="src src-python">iter(obj)
+iter(func, sentinel)            # 反复调用func，直到迭代器的下一个值为sentinel
+</pre>
+</div>
+</li>
+<li>[expr for iter<sub>var</sub> in iterable if cond<sub>expr]</sub>
+</li>
+<li>我敬爱的矩阵：
+<div class="org-src-container">
+
+<pre class="src src-python">list = [(x+1, y+1) for x in range(3) for y in range(5)]
+print list
+</pre>
+</div>
+</li>
+<li>计算一个段落中有多少个空格：
+<div class="org-src-container">
+
+<pre class="src src-python">f = open('hhga.txt', 'r')
+len([word for line in f for word in line.split()])
+</pre>
+</div>
+</li>
+<li>列表解析：[expr for iter\<sub>var</sub> in iterable if cond\<sub>expr]</sub> 
+PEP 202 
+From: <a href="http://www.python.org/dev/peps/pep-0202/">http://www.python.org/dev/peps/pep-0202/</a>
+
+<p>
+生成器表达式：(expr for iter\<sub>var</sub> in iterable if cond\<sub>expr</sub>)
+PEP 289
+From: <a href="http://www.python.org/dev/peps/pep-0289/">http://www.python.org/dev/peps/pep-0289/</a>
+</p>
+
+<p>
+惰性求值：lazy evaluation
+</p>
+</li>
+<li>交叉配对的例子：
+<div class="org-src-container">
+
+<pre class="src src-python">rows = [1, 2, 3, 17]
+def cols():
+    yield 56
+    yield 2
+    yield 1
+x_product_pairs = ((i, j) for i in rows for j in cols())
+for pair in x_product_pairs:
+    print pair
+</pre>
+</div>
+
+<p>
+RESULTS:
+</p>
+<pre class="example">
+(1, 56)
+(1, 2)
+(1, 1)
+(2, 56)
+(2, 2)
+(2, 1)
+(3, 56)
+(3, 2)
+(3, 1)
+(17, 56)
+(17, 2)
+(17, 1)
+</pre>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">2013-04-18 木曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-18 Thu&gt;</span></span></h2>
+<div class="outline-text-2" id="text-6">
+<ol class="org-ol">
+<li>try-except-else-finally P367
+</li>
+<li>with语句
+
+<p>
+with context\<sub>expr</sub> [as var]:
+    with\<sub>suite</sub>
+</p>
+</li>
+<li>先搁置with中 上下文管理协议 P369
+</li>
+
+<li>raise
+
+<p>
+raise [SomeException [, args, [, traceback]]]
+</p>
+</li>
+<li>assert expression[, arguments]
+
+<p>
+AsserionError
+</p>
+</li>
+<li>标准异常 P375
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">2013-04-19 金曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-19 Fri&gt;</span></span></h2>
+<div class="outline-text-2" id="text-7">
+</div><div id="outline-container-sec-7-0-1" class="outline-4">
+<h4 id="sec-7-0-1">可变长度的参数 P411</h4>
+<div class="outline-text-4" id="text-7-0-1">
+<ol class="org-ol">
+<li>11.2.4 使用元组（非关键字参数）和字典（关键字参数）
+<b>port=8080这叫关键字参数</b>
+
+<p>
+func(*tuple-grp-nonkw-args, **dict-grp-kw-args)
+</p>
+</li>
+
+<li>带元组的函数普通语法：
+<div class="org-src-container">
+
+<pre class="src src-python">def function_name([formal_args,] *vargs_tuple):
+    "function_documentation_string"
+    function_body_suite
+</pre>
+</div>
+
+<p>
+实例：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">def tupleVarArgs(arg1, arg2='defaultB', *theRest):
+    print 'formal arg 1:', arg1 
+    print 'formal arg 2:', arg2
+    for eachXtrArg in theRest:
+        print 'another arg:', eachXtrArg
+
+tupleVarArgs('abc', 123, 'xyz', 456.789)
+</pre>
+</div>
+
+<p>
+RESULTS:
+</p>
+<pre class="example">
+formal arg 1: abc
+formal arg 2: 123
+another arg: xyz
+another arg: 456.789
+</pre>
+</li>
+
+<li>字典函数普通用法：
+<div class="org-src-container">
+
+<pre class="src src-python">def function_name([formal_args,][*vargst,] **vargsd):
+    function_documentation_string
+    function_body_suite
+</pre>
+</div>
+
+<p>
+实例：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">def dictVarArgs(arg1, arg2='defaultB', **theRest):
+    print 'formal arg1:', arg1
+    print 'formal arg2:', arg2
+    for eachXtrArg in theRest.keys():
+        print 'Xtra arg %s: %s' % \
+        (eachXtrArg, str(theRest[eachXtrArg]))
+
+dictVarArgs('one', d=10, e='zoo', men=('freud', 'gaudi'))
+</pre>
+</div>
+
+<p>
+RESULTS:
+</p>
+<pre class="example">
+formal arg1: one
+formal arg2: defaultB
+Xtra arg men: ('freud', 'gaudi')
+Xtra arg e: zoo
+Xtra arg d: 10
+</pre>
+</li>
+
+<li>lambda表达式:
+
+<div class="org-src-container">
+
+<pre class="src src-python">lambda [arg1[, arg2, ... argN]]: expression
+</pre>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8">2013-04-20 土曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-20 Sat&gt;</span></span></h2>
+<div class="outline-text-2" id="text-8">
+</div><div id="outline-container-sec-8-0-1" class="outline-4">
+<h4 id="sec-8-0-1">内建函数apply(), fliter(), map(), reduce()</h4>
+<div class="outline-text-4" id="text-8-0-1">
+<p>
+玩一下：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">print 'the total is:', reduce((lambda x,y: x+y), range(5))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-8-0-2" class="outline-4">
+<h4 id="sec-8-0-2">偏函数(Partial Application)和柯里化Currying</h4>
+<div class="outline-text-4" id="text-8-0-2">
+<p>
+functional模块中的partial()函数创建PFA:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">from functools import partial
+basetwo = partial(int, base=2)
+basetwo.__doc__ = 'Convert base 2'
+print basetwo('10010')
+</pre>
+</div>
+
+<p>
+RESULTS:
+</p>
+<pre class="example">
+18
+</pre>
+
+<div class="org-src-container">
+
+<pre class="src src-python">from operator import add, mul
+from functools import partial
+
+add1 = partial(add, 1)
+mul100 = partial(mul, 100)
+
+print add1(10)
+print mul100(1)
+</pre>
+</div>
+
+<p>
+RESULTS:
+</p>
+<pre class="example">
+11
+100
+</pre>
+
+
+<p>
+<b>Reference:</b>
+</p>
+
+<ol class="org-ol">
+<li><a href="http://alecbenzer.com/blog/currying-partial-application/">Currying vs. Partial Application</a>
+</li>
+<li><a href="http://www.aqee.net/currying-partial-application/">函数加里化(Currying)和偏函数应用(Partial Application)的比较</a>
+</li>
+<li><a href="http://book.51cto.com/art/200806/77578.htm">http://book.51cto.com/art/200806/77578.htm</a>
+</li>
+<li><a href="http://book.51cto.com/art/200806/77579.htm">http://book.51cto.com/art/200806/77579.htm</a>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9">2013-04-21 日曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-21 Sun&gt;</span></span></h2>
+<div class="outline-text-2" id="text-9">
+</div><div id="outline-container-sec-9-0-1" class="outline-4">
+<h4 id="sec-9-0-1">作用域和lambda</h4>
+<div class="outline-text-4" id="text-9-0-1">
+<div class="org-src-container">
+
+<pre class="src src-python">x = 10
+def foo():
+    y = 5
+    bar = lambda : x + y
+    print bar()
+foo()
+</pre>
+</div>
+
+<p>
+RESULTS:
+</p>
+<pre class="example">
+15
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-9-0-2" class="outline-4">
+<h4 id="sec-9-0-2">生成器</h4>
+<div class="outline-text-4" id="text-9-0-2">
+<p>
+协同程序的概念：可以运行的独立函数调用，可以暂停或者挂起，并从程序离开的地方继续或者重新开始。
+</p>
+
+<p>
+资料参考:
+</p>
+
+<ol class="org-ol">
+<li>PEP 255: <a href="http://www.python.org/dev/peps/pep-0255/">http://www.python.org/dev/peps/pep-0255/</a>
+</li>
+
+<li>Python yield 使用浅析: <a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-python-yield/">http://www.ibm.com/developerworks/cn/opensource/os-cn-python-yield/</a>
+</li>
+
+<li>第9章 Lua协同程序<a href="http://blog.csdn.net/andylin02/article/details/2185367">http://blog.csdn.net/andylin02/article/details/2185367</a>
+</li>
+</ol>
+
+<div class="org-src-container">
+
+<pre class="src src-python">def simpleGen():
+    yield 1
+    yield '2 --&gt; punch!'
+myG = simpleGen()
+myG.next()
+</pre>
+</div>
+
+<p>
+另外一个例子，求解fib：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">def fib():
+    a, b = 0, 1
+    while 1:
+        yield b
+        a, b = b, a + b
+
+# Test
+f = fib()
+for i in xrange(5):
+    print f.next()
+</pre>
+</div>
+
+<p>
+RESULTS:
+</p>
+<pre class="example">
+1
+1
+2
+3
+5
+</pre>
+
+<p>
+如果函数有return的话，会立即终止迭代。貌似yield的出现简化程序，但是可以达到
+节省内存的作用，如同下面的一句话。
+</p>
+
+<p>
+8.13生成器
+</p>
+
+<p>
+使用生成器的地方：迭代穿越一个巨大的数据集合。到时就知道怎么用了。呵呵。
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-9-0-3" class="outline-4">
+<h4 id="sec-9-0-3">模块：模块是组织python代码的方法，包是组织模块的。</h4>
+</div>
+
+<div id="outline-container-sec-9-0-4" class="outline-4">
+<h4 id="sec-9-0-4">名称空间与变量作用域比较 12.3.1</h4>
+<div class="outline-text-4" id="text-9-0-4">
+<ol class="org-ol">
+<li>名称空间是纯粹意义上的名字和对象间的映射关系，
+作用域还指出从用户代码的哪些物理位置可以访问到这些名字。
+</li>
+
+<li><code>from module import *</code> 的使用要限制
+</li>
+
+<li><code>about =__future__</code>:
+PEP 236
+</li>
+
+<li>绝对导入：
+
+<p>
+相对导入：
+</p>
+</li>
+
+<li>如果你不想导入某个模块，你可以属性名称前加 <code>_</code>
+     例如：
+<div class="org-src-container">
+
+<pre class="src src-python">import foo._bar
+</pre>
+</div>
+</li>
+
+<li>一个UTF-8编码文件可以这样指示：
+<div class="org-src-container">
+
+<pre class="src src-python">#!/usr/bin/env python
+#-*- coding: UTF-8 -*-
+</pre>
+</div>
+</li>
+
+<li>循环导入：
+
+<p>
+解决方法：
+</p>
+
+<ol class="org-ol">
+<li>将import语句移动到cli4vof
+</li>
+
+<li>将import语句移动到最后
+</li>
+</ol>
+</li>
+
+<li>13.4.2方法 下面这段代码究竟是什么意思呢？ P486
+<div class="org-src-container">
+
+<pre class="src src-python">class MyClass(object):
+    def myNoActionMethod(self):
+        pass
+
+mc = MyClass()
+mc.myNoActionMethod();
+</pre>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-sec-9-0-5" class="outline-4">
+<h4 id="sec-9-0-5">面向对象</h4>
+<div class="outline-text-4" id="text-9-0-5">
+<ol class="org-ol">
+<li><code>__init__()</code> 应当返回None
+</li>
+<li>特殊的实例属性
+<pre class="example">
+I.__class__   实例化I的类
+
+I.__dict__    I的属性
+</pre>
+</li>
+<li>实现 <code>__setattr__()</code> 本身就是一个冒险的经历，满是圈套和陷阱，例如：
+无穷递归和破坏实例对象。
+</li>
+<li>classmethod
+<div class="org-src-container">
+
+<pre class="src src-python">class TestClassMethod:
+    @classmethod
+    def foo(cls):
+        print 'calling class method foo()'
+        print 'foo() is part of class: ', cls.__name__
+
+TestClassMethod.foo()
+</pre>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10">2013-04-22 月曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-22 Mon&gt;</span></span></h2>
+<div class="outline-text-2" id="text-10">
+<ol class="org-ol">
+<li>疑问：
+P545中， <code>__XXX(parent)</code> and <code>__XXX(child)</code>
+</li>
+<li>难道是Python2.2之前，从Python标准类型子类化或派生类都是不允许的。
+于是出现了包装？？？？？？？？？？？？？？
+</li>
+<li><code>_bulitin_</code> and <code>_builtins_</code>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-sec-11" class="outline-2">
+<h2 id="sec-11">2013-04-23 火曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-23 Tue&gt;</span></span></h2>
+<div class="outline-text-2" id="text-11">
+<ol class="org-ol">
+<li><code>exec</code> <code>eval()</code> and <code>compile()</code>
+<div class="org-src-container">
+
+<pre class="src src-python"># -*-coding: utf-8 -*-
+# 'eval' 可求值的表达式[和eval()一起使用]
+# 'single' 单一可执行语句[和exec 一起使用]
+# 'exec' 可执行语句组[和exec 一起使用]
+eval_code = compile('100+300', '', 'eval')
+print eval(eval_code)
+
+single_code = compile('print "icecream!"', '', 'single')
+print single_code
+exec single_code
+</pre>
+</div>
+
+<p>
+RESULTS:
+</p>
+<pre class="example">
+400
+&lt;code object &lt;module&gt; at 0000000002553F30, file "", line 1&gt;
+icecream!
+</pre>
+</li>
+
+<li>exec 还可以接受有效的python文件对象。意思就是你将代码写在一个icecream.py的
+文件中，然后在解释器中写入:
+<div class="org-src-container">
+
+<pre class="src src-python">f = open('icecream.py')
+exec f
+</pre>
+</div>
+<p>
+<b>Attention:</b>
+再次执行exec时，文件已经到达EOF。如果想再次执行，需要如下操作：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">f.seek(0)
+exec f
+</pre>
+</div>
+</li>
+
+<li>input() = eval() + raw\<sub>input</sub>() = eval(raw\<sub>input</sub>())
+<div class="org-src-container">
+
+<pre class="src src-python">aList = input('Enter a list:') #Enter a list: [123, 'abc']
+aList                          # [123, 'abc']
+</pre>
+</div>
+</li>
+</ol>
+</div>
+
+
+<div id="outline-container-sec-11-1" class="outline-3">
+<h3 id="sec-11-1">11.3.6 *函数（与方法）装饰器</h3>
+<div class="outline-text-3" id="text-11-1">
+<p>
+装饰器在函数调用之上的装饰，装饰器可以如图函数调用一样“堆叠”起来。
+装饰器实际就是函数，他们接受函数对象。本质上：java's AOP(Aspect Oriented Progrmming)
+</p>
+
+<p>
+函数组合数学定义：
+</p>
+<pre class="example">
+(g · f)(x) = g(f(x))
+@g
+@f
+def foo():
+    ......
+与foo=g(f(foo))相同
+</pre>
+
+<p>
+一个小列子：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">@deco1(deco_arg)
+@deco2
+def func(): pass
+
+This is equivalent to:这等价于：
+func = deco1(deco_arg)(deco2(func))
+</pre>
+</div>
+
+<p>
+一个较大的例子：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">#!/usr/bin/env python
+#-*- coding: utf-8 -*-
+
+from time import ctime, sleep
+
+def tsfunc(func):
+    def wrappedFunc():
+        print '[%s] %s() called' % (ctime(), func.__name__)
+        return func;
+    return wrappedFunc;
+
+@tsfunc
+def foo():
+    pass
+
+foo()
+sleep(2)
+
+for i in range(2):
+    sleep(1)
+    foo()
+</pre>
+</div>
+
+<p>
+RESULTS:
+</p>
+<pre class="example">
+[Tue Apr 23 14:37:08 2013] foo() called
+[Tue Apr 23 14:37:11 2013] foo() called
+[Tue Apr 23 14:37:12 2013] foo() called
+</pre>
+
+<p>
+<b>Reference</b>:
+From: <a href="http://docs.python.org/2/library/functools.html">http://docs.python.org/2/library/functools.html</a>
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-11-2" class="outline-3">
+<h3 id="sec-11-2">Random - Generate pseudo-random numbers</h3>
+<div class="outline-text-3" id="text-11-2">
+<div class="org-src-container">
+
+<pre class="src src-python">import random
+
+print 'random:', random.random()
+print 'uniform:', random.uniform(1, 10)
+print 'randint:', random.randint(1, 10)
+print 'randrange:', random.randrange(0, 101, 2)
+print 'choice:', random.choice('abcd')
+
+items = [1,2,3,4,5,6]
+random.shuffle(items)
+print 'items:', items
+
+print 'sample:', random.sample([1,2,3,4,5], 3)   # choose 3 elements
+</pre>
+</div>
+
+<p>
+RESULTS:
+</p>
+<pre class="example">
+random: 0.624959723641
+uniform: 4.2231135682
+randint: 7
+randrange: 56
+choice: b
+items: [2, 4, 6, 1, 5, 3]
+sample: [5, 2, 3]
+</pre>
+<p>
+From: <a href="http://docs.python.org/2/library/random.html#random.gammavariate">http://docs.python.org/2/library/random.html#random.gammavariate</a>
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-11-3" class="outline-3">
+<h3 id="sec-11-3"><code>__builtins__</code> and <code>__builtin__</code></h3>
+<div class="outline-text-3" id="text-11-3">
+<p>
+P454
+</p>
+
+<p>
+<code>__builtins__</code> 包含 <code>__builtin__</code> 所有的名字
+</p>
+
+<p>
+<code>__builtins__</code> 模块和 <code>__builtin__</code> 模块不能混淆。 虽然它们的名字相似——尤其对于新手来
+说。 <code>__builtins__</code> 模块包含内建名称空间中内建名字的集合。 其中大多数(如果不是全部的话)来
+自 <code>__builtin__</code> 模块, 该模块包含内建函数, 异常以及其他属性。 在标准 Python 执行环境下,
+<code>__builtins__</code> 包含 <code>__builtin__</code> 的所有名字。 Python 曾经有一个限制执行模式, 允许你修改
+<code>__builtins__</code> , 只保留来自 <code>__builtin__</code> 的一部分, 创建一个沙盒（sandbox）环境。但是, 因为
+它有一定的安全缺陷, 而且修复它很困难, Python 已经不再支持限制执行模式。(如版本2.3 )
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-12" class="outline-2">
+<h2 id="sec-12">2013-04-24 水曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-24 Wed&gt;</span></span></h2>
+<div class="outline-text-2" id="text-12">
+<p>
+1.正则表达式：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">#-*-coding: utf-8 -*-
+
+import re
+data = 'Thu Feb 15 17:46:04 2007::creamidea@icecream.com::1171590364-8-8'
+
+patt = '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)'
+m = re.match(patt, data)
+print 'm.group():', m.group()
+print 'm.group(1):', m.group(1)
+print 'm.groups():', m.groups()
+
+print '-'*20
+patt = '^((\w){3})'
+m = re.match(patt, data)
+print 'm.group():', m.group()
+print 'm.group(1):', m.group(1)
+print 'm.groups():', m.groups()
+
+print '-'*20
+patt = '^(\w){3}'
+m = re.match(patt, data)
+print 'm.group():', m.group()
+print 'm.group(1):', m.group(1)
+print 'm.groups():', m.groups()
+
+print '-'*20
+patt = '\d+-\d+-\d+'
+m = re.search(patt, data)
+print 'm.group():', m.group()
+
+print '-'*20
+patt = '.+?(\d+-\d+-\d+)'       # ？ 取消系统的贪婪匹配
+m = re.match(patt, data)        # 使用匹配函数
+print 'm.group():', m.group()
+print 'm.group(1):', m.group(1)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-13" class="outline-2">
+<h2 id="sec-13">2013-05-13 月曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-05-13 Mon&gt;</span></span></h2>
+<div class="outline-text-2" id="text-13">
+<ol class="org-ol">
+<li>解决 <code>error: Unable to find vcvarsall.bat</code> 问题：
+
+<p>
+If you have Visual Studio 2010 installed, execute
+</p>
+
+<p>
+<code>SET VS90COMNTOOLS=%VS100COMNTOOLS%</code>
+</p>
+
+<p>
+or with Visual Studio 2012 installed
+</p>
+
+<p>
+<code>SET VS90COMNTOOLS=%VS110COMNTOOLS%</code>
+</p>
+
+<p>
+<b>Reference:</b>
+</p>
+<ul class="org-ul">
+<li><a href="http://stackoverflow.com/questions/2817869/error-unable-to-find-vcvarsall-bat">http://stackoverflow.com/questions/2817869/error-unable-to-find-vcvarsall-bat</a>
+</li>
+<li><a href="http://wangye.org/blog/archives/738/">http://wangye.org/blog/archives/738/</a>
+</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+<a href="http://www.python.org/">http://www.python.org/</a>
+</p></div>
+
+<div class="footdef"><sup><a id="fn.2" name="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p class="footpara">
+<a href="http://www.tornadoweb.org/en/stable/">http://www.tornadoweb.org/en/stable/</a>
+</p></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<script src="/static/app.js"></script>
+</div>
+</body>
+</html>

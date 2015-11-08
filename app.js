@@ -7,7 +7,7 @@ function initImgWapper (body) {
     return div
 }
 
-function getMetaInfo () {
+function getMetaInfo (isPrint) {
     var head = document.getElementsByTagName('head')[0]
     var childNodes = head.childNodes
     var meta = {}
@@ -24,7 +24,15 @@ function getMetaInfo () {
         meta.generatedTime = cn.data.slice(1,-1) // remove the blank symbol
         break
     }
-    console.log('Article\'s Meta: ', meta)
+
+    if (isPrint === true) {
+        // Print the Article's meta information
+        console.log('Article\'s Meta')
+        Array.prototype.forEach.call(Object.keys(meta), function (name) {
+            console.log(name.toUpperCase() + ': ' + meta[name])
+        })
+    }
+
     return meta
 }
 
@@ -135,7 +143,7 @@ function ImgClickEvent (body, wapper) {
 window.onload = function () {
     var pathname = window.location.pathname
     var body = document.getElementsByTagName('body')[0]
-    var meta = getMetaInfo()
+    var meta = getMetaInfo(true)
 
     showTags(body, meta)
     if (pathname === '/') {

@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Develop Blog</title>
+<!-- 2015-11-08 Sun 20:35 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="ICECREAM(氷菓)" />
+<meta  name="description" content="ICECREAM(氷菓)"
+ />
+<meta  name="keywords" content="javascript python django css mysql" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/static/style.css"/>
+
+<script type="text/javascript" src="http://orgmode.org/org-info.js">
+/**
+ *
+ * @source: http://orgmode.org/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in http://orgmode.org/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in http://orgmode.org/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "4");
+org_html_manager.set("LINK_HOME", "");
+org_html_manager.set("LINK_UP", "");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Develop Blog</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">前言</a></li>
+<li><a href="#sec-2">制作登录界面</a></li>
+<li><a href="#sec-3">高级视图和URL配置</a></li>
+<li><a href="#sec-4">'NoneType' object has no attribute 'has\<sub>header'</sub></a></li>
+<li><a href="#sec-5">locals()小技巧</a></li>
+<li><a href="#sec-6">Cross Site Request Forgery protection</a></li>
+<li><a href="#sec-7">login\<sub>required</sub> 作下面这些事情：</a></li>
+<li><a href="#sec-8">django.contrib.auth.views.login 的作用是：</a></li>
+<li><a href="#sec-9">python Data Structures</a></li>
+<li><a href="#sec-10">django.core.urlresolvers</a></li>
+<li><a href="#sec-11">URL dispatcher</a></li>
+<li><a href="#sec-12">Q&amp;A:</a>
+<ul>
+<li><a href="#sec-12-1">如何快速更改项目的名称？</a></li>
+<li><a href="#sec-12-2">如何构造优美的URLs？</a></li>
+<li><a href="#sec-12-3">Django Error u“'polls” is not a registered namespace</a></li>
+</ul>
+</li>
+<li><a href="#sec-13">Design:</a>
+<ul>
+<li><a href="#sec-13-1">用户的分类：</a></li>
+</ul>
+</li>
+<li><a href="#sec-14">Django &amp;&amp; Ajax:</a></li>
+</ul>
+</div>
+</div>
+---
+layout: doc
+title: Develop Blog
+subtitle: 在智胜进行网站开发的日志文件
+categories: blog
+tags: javascript python django css mysql
+---
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">前言</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+开发日志
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">制作登录界面</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-05-09 Thu&gt;</span></span>
+</p>
+
+<p>
+<b>Attention:</b>
+</p>
+<ol class="org-ol">
+<li>在IE中的cookie存储时几个不同项目之间有空格，需要处理掉
+空格才能正常运行。如 "email" and " email"
+
+<p>
+处理函数: 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-javascript">String.prototype.Trim = function() { // 去掉左右空格
+    return this.replace(/(^\s*)|(\s*$)/g, ""); 
+}   
+String.prototype.Ltrim = function() { // 去掉左空格
+    return this.replace(/(^\s*)/g, ""); 
+}
+String.prototype.Rtrim = function() { // 去掉右空格
+    return this.replace(/(\s*$)/g, ""); 
+}
+</pre>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">高级视图和URL配置</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-05-14 Tue&gt;</span></span>
+</p>
+
+<p>
+高级视图和URL配置:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"># urls.py
+from django.conf.urls.defaults import *
+from mysite import views
+urlpatterns = patterns('',
+    (r'^foo/$', views.foobar_view, {'template_name': 'template1.html'}),
+    (r'^bar/$', views.foobar_view, {'template_name': 'template2.html'}),
+)
+# views.py
+from django.shortcuts import render_to_response
+from mysite.models import MyModel
+def foobar_view(request, template_name):
+    m_list = MyModel.objects.filter(is_new=True)
+    return render_to_response(template_name, {'m_list': m_list})
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">'NoneType' object has no attribute 'has\<sub>header'</sub></h2>
+<div class="outline-text-2" id="text-4">
+<p>
+A:
+</p>
+<pre class="example">
+on if not response.has_header(‘ETag’):
+This error appears if you don’t return anything from your view.
+	return direct_to_template(request, "template")
+I wonder if this is a new error message? I recall a more specific error in my previous version of django, something along the lines of “Your view didn’t return anything!”
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">locals()小技巧</h2>
+<div class="outline-text-2" id="text-5">
+<div class="org-src-container">
+
+<pre class="src src-python">def current_datetime(request):  
+    now = datetime.datetime.now()  
+    return render_to_response('current_datetime.html', {'current_date': now})
+</pre>
+</div>
+<p>
+等价于：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">def current_datetime(request):  
+    current_date = datetime.datetime.now()  
+    return render_to_response('current_datetime.html', locals())
+</pre>
+</div>
+<p>
+注意：
+locals()导致了一点点开销，因为Python不得不动态创建字典 
+如果你手动指定context字典则可以避免这项开销
+</p>
+
+<p>
+Reference：
+<a href="http://hi.baidu.com/javalang/item/2d4e14f7a39e3f16cf9f3236">http://hi.baidu.com/javalang/item/2d4e14f7a39e3f16cf9f3236</a>
+</p>
+</div>
+</div>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">Cross Site Request Forgery protection</h2>
+<div class="outline-text-2" id="text-6">
+<div class="org-src-container">
+
+<pre class="src src-js">// using jQuery
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie &amp;&amp; document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i &lt; cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">login\<sub>required</sub> 作下面这些事情：</h2>
+<div class="outline-text-2" id="text-7">
+<ul class="org-ul">
+<li>如果用户没有登录，那么重定向到／accounts/login/ ，
+传入当前的绝对URL路径作为 query string next 的值。
+例如：/accounts/login/?next=/polls/3／。
+</li>
+
+<li>如果用户已经登录了，那么就正常执行view的代码。
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8">django.contrib.auth.views.login 的作用是：</h2>
+<div class="outline-text-2" id="text-8">
+<ul class="org-ul">
+<li>如果通过 ``GET`` 方式调用的话，它显示一个登录表单并通过POST的方式登录。
+</li>
+<li>如果通过 ``POST`` 方式调用的话，它试图把用户登录进去。 
+如果登录成功， 视图（view）重定向到 ``/accounts/profile/``
+（目前是硬性编码的，就是写死的。）。如果登录失败，则继续显示登录表单。
+</li>
+<li>你需要自己提供一个登录表单的模板，默认叫 registration/login.html 。
+这个模板需要获得3个模板上下文的变量：
+<pre class="example">
+form：一个 FormWrapper 对象，用来显示登录表单。更多请看``FormWrapper`` 对象的 forms documentation 。
+
+next：登录成功后重定向的URL。也可能包含一个查询字符串。
+
+site_name：当前 Site 的名字。根据 SITE_ID 设置的信息获取。参考 site framework docs 。
+如果你不想使用 registration/login.html 这个模板，你可以为在URLconf中的视图（view）传入一个 template_name 作为扩展的参数。
+</pre>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9">python Data Structures</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+<a href="http://docs.python.org/2/tutorial/datastructures.html">http://docs.python.org/2/tutorial/datastructures.html</a>
+</p>
+</div>
+</div>
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10">django.core.urlresolvers</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+<a href="https://docs.djangoproject.com/en/dev/ref/urlresolvers/">https://docs.djangoproject.com/en/dev/ref/urlresolvers/</a>
+</p>
+
+<p>
+reverse():
+</p>
+
+<p>
+<a href="http://stackoverflow.com/questions/5448148/problem-with-django-reverse">http://stackoverflow.com/questions/5448148/problem-with-django-reverse</a>
+</p>
+</div>
+</div>
+<div id="outline-container-sec-11" class="outline-2">
+<h2 id="sec-11">URL dispatcher</h2>
+<div class="outline-text-2" id="text-11">
+<p>
+<a href="https://docs.djangoproject.com/en/dev/topics/http/urls/#django.core.urlresolvers.reverse">https://docs.djangoproject.com/en/dev/topics/http/urls/#django.core.urlresolvers.reverse</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-12" class="outline-2">
+<h2 id="sec-12">Q&amp;A:</h2>
+<div class="outline-text-2" id="text-12">
+</div><div id="outline-container-sec-12-1" class="outline-3">
+<h3 id="sec-12-1">如何快速更改项目的名称？</h3>
+</div>
+<div id="outline-container-sec-12-2" class="outline-3">
+<h3 id="sec-12-2">如何构造优美的URLs？</h3>
+</div>
+<div id="outline-container-sec-12-3" class="outline-3">
+<h3 id="sec-12-3">Django Error u“'polls” is not a registered namespace</h3>
+<div class="outline-text-3" id="text-12-3">
+<ul class="org-ul">
+<li><a href="http://stackoverflow.com/questions/14892462/django-error-upolls-is-not-a-registered-namespace?answertab=active#tab-top">http://stackoverflow.com/questions/14892462/django-error-upolls-is-not-a-registered-namespace?answertab=active#tab-top</a>
+</li>
+<li><a href="http://djangounchain.wordpress.com/2013/01/05/tutorial-4-writing-first-django-app-part-3/">http://djangounchain.wordpress.com/2013/01/05/tutorial-4-writing-first-django-app-part-3/</a> 
+        (Below the 'Namespacing URL names')
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-13" class="outline-2">
+<h2 id="sec-13">Design:</h2>
+<div class="outline-text-2" id="text-13">
+</div><div id="outline-container-sec-13-1" class="outline-3">
+<h3 id="sec-13-1">用户的分类：</h3>
+<div class="outline-text-3" id="text-13-1">
+<ul class="org-ul">
+<li>普通用户
+</li>
+<li>医生
+</li>
+<li>系统管理员？？？
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-14" class="outline-2">
+<h2 id="sec-14">Django &amp;&amp; Ajax:</h2>
+<div class="outline-text-2" id="text-14">
+<p>
+<a href="https://docs.djangoproject.com/en/dev/ref/contrib/csrf/#page-uses-ajax-without-any-html-form">https://docs.djangoproject.com/en/dev/ref/contrib/csrf/#page-uses-ajax-without-any-html-form</a>
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<script src="/static/app.js"></script>
+</div>
+</body>
+</html>

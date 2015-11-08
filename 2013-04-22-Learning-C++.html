@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Learning C++</title>
+<!-- 2015-11-08 Sun 20:35 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="ICECREAM(氷菓)" />
+<meta  name="description" content="ICECREAM(氷菓)"
+ />
+<meta  name="keywords" content="CPlusPlus" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/static/style.css"/>
+
+<script type="text/javascript" src="http://orgmode.org/org-info.js">
+/**
+ *
+ * @source: http://orgmode.org/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in http://orgmode.org/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in http://orgmode.org/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "4");
+org_html_manager.set("LINK_HOME", "");
+org_html_manager.set("LINK_UP", "");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Learning C++</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">前言</a></li>
+<li><a href="#sec-2">第一课</a></li>
+<li><a href="#sec-3">第二课</a>
+<ul>
+<li><a href="#sec-3-1">内联函数和重载函数inline</a></li>
+<li><a href="#sec-3-2">函数重载</a></li>
+<li><a href="#sec-3-3">多态</a>
+<ul>
+<li><a href="#sec-3-3-1">静态多态：</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-4">第三课</a>
+<ul>
+<li><a href="#sec-4-1">动态内存分配</a>
+<ul>
+<li><a href="#sec-4-1-1">堆空间：</a></li>
+<li><a href="#sec-4-1-2">&amp;: 取地址/引用</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-5">第四课</a></li>
+<li><a href="#sec-6">第五课</a></li>
+<li><a href="#sec-7">写在最后</a></li>
+</ul>
+</div>
+</div>
+---
+layout: doc
+title: Learning C++
+subtitle: 学习C++笔记
+categories: note
+tags: CPlusPlus
+---
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">前言</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+好的，匆忙地学习完ARM之后，立即转战C++学习。真是有意思的安排啊。おもしろい。
+</p>
+
+<p>
+那么我们就开始记录吧。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">第一课</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-22 Mon&gt;</span></span>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++">#include &lt;iostream&gt;
+
+using namespace std;
+
+int main(int argc, char *argv[])
+{
+    cout &lt;&lt; "hi, icecream" &lt;&lt; endl;
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">第二课</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-23 Tue&gt;</span></span>
+</p>
+</div>
+
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1">内联函数和重载函数inline</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+C中宏定义注意二义性：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c">#define max(a, b) (a)&gt;(b)?(a):(b)
+</pre>
+</div>
+
+<p>
+<code>inline</code>
+类的成员函数，提过效率。
+避免C中宏定义的二义性。
+使用1～5行的小程序。不要含有复杂的结构控制语句以及递归。
+<b>不能使用函数指针</b>
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2">函数重载</h3>
+<div class="outline-text-3" id="text-3-2">
+<ol class="org-ol">
+<li>函数重载与返回值无关。
+</li>
+
+<li>有关：类型，顺序，个数
+</li>
+
+<li>默认参数:
+在参数列表中的某些参数有默认值时，在调用的时候会报错。代码如下：
+<div class="org-src-container">
+
+<pre class="src src-c">int mul(int a, int b)
+{
+     return 1;
+}
+
+int mul(int a, int b, int c = 0, int d = 10)
+{
+     return 2;
+}
+/* 下面的代码设置默认值是不被允许的,原因是参数入栈时，没有赋值。 */
+int mul(int a=10, int b=10, int c = 0, int d)
+{
+     return 2;
+}
+</pre>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3">多态</h3>
+<div class="outline-text-3" id="text-3-3">
+</div><div id="outline-container-sec-3-3-1" class="outline-4">
+<h4 id="sec-3-3-1">静态多态：</h4>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">第三课</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-25 Thu&gt;</span></span>
+</p>
+</div>
+
+<div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1">动态内存分配</h3>
+<div class="outline-text-3" id="text-4-1">
+</div><div id="outline-container-sec-4-1-1" class="outline-4">
+<h4 id="sec-4-1-1">堆空间：</h4>
+<div class="outline-text-4" id="text-4-1-1">
+<p>
+C:
+  <code>malloc</code> / <code>calloc</code> / <code>realloc</code> | <code>free</code>
+</p>
+
+<p>
+C++:
+  <code>new</code> | <code>delete</code> (两个操作符)
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-C">int * p = new int;              /* 在堆上面分配空间sizeof(int) */
+int * p = new int();            /* 初始化为0（加上()） */
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-1-2" class="outline-4">
+<h4 id="sec-4-1-2">&amp;: 取地址/引用</h4>
+<div class="outline-text-4" id="text-4-1-2">
+<div class="org-src-container">
+
+<pre class="src src-c">int *p = &amp;num;                  /* 取地址符 */
+int &amp;p1 = num;                  /* 引用 */
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">第四课</h2>
+<div class="outline-text-2" id="text-5">
+<ol class="org-ol">
+<li>类的拷贝：
+浅拷贝 <br  />
+    深拷贝
+</li>
+
+<li>友元类和友元方法
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">第五课</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-05-16 Thu&gt;</span></span>
+</p>
+
+<ol class="org-ol">
+<li>虚基类
+class A: virtual public b
+</li>
+</ol>
+
+<p>
+不产生二义性
+画一个图真难啊
+</p>
+<pre class="example">
+#+BEGIN_DITAA asciiExample.png -o -r -S
++--------------+
+|              |
+| Hello World! |
+|              |
++--------------+
+#+END_DITAA
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">写在最后</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+最后居然还是草草收场，一个没有任何实现的CuteCube!!
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<script src="/static/app.js"></script>
+</div>
+</body>
+</html>

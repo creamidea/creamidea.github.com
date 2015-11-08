@@ -99,7 +99,8 @@ ul.org-ul,
     list-style-type: lower-greek;
 }
 
-ul.org-ul {
+#text-table-of-contents {
+/* ul.org-ul { */
     font-size: 26px;
 }
 ul.org-ul a,
