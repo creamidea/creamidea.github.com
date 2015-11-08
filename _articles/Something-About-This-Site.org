@@ -1,16 +1,23 @@
-#+TITLE: Write And Public
-#+DESCRIPTION: ICECREAM(氷菓)
-#+KEYWORDS: 感想 orgmode
+#+TITLE: Something About This Site And My Life
+#+DESCRIPTION: 关于本站的一些说明和最近的人生感悟
+#+KEYWORDS: orgmode emacs github-page blog design 感想
 #+SELECT_TAGS: orgmode
 #+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t
 #+LINK_HOME: https://creamidea.github.io
-
-是的，你没有看错，我又重新设计了一下自己的知识书写系统。荒废了好多年之后，
-又回到了这里。最近遇到一些事情感触挺大的。感觉一年过去了，自己也贬值了许多。
-我也不知道说什么好，于是我又开始折腾起自己写字的地方。
 
 #+begin_src example
 时光飞逝，岁月如染。
 #+end_src
 
-以上。
+* 前言
+
+是的，你没有看错，我又重新设计了一下自己的知识书写系统。荒废了好多年之后，
+又回到了这里。最近遇到一些事情感触挺大的。感觉一年过去了，自己也贬值了许多。
+我也不知道说什么好，于是我又开始折腾起自己写字的地方。
+也许是想找一个地方满满的度过这么多时光吧。这么说真是暴殄天物啊！！
+
+到现在已经工作差不多一年多了。我成长了多少呢？
+
+* 设计
+
+* 尾声
