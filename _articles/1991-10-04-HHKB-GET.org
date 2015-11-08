@@ -3,20 +3,8 @@
 #+EMAIL:creamidea(AT)gmail.com
 #+DESCRIPTION:ICECREAM(氷菓)
 #+KEYWORDS:HHKB
-#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
-#+STYLE:<link rel="stylesheet" type="text/css" href="../css/style.css">
-#+INFOJS_OPT: view: showall toc: nil
-
-#+BEGIN_HTML
----
-layout: doc
-title: HHKB GET
-subtitle: 获到HHKB
-categories: blog
-tags: HHKB
----
-#+END_HTML
 
 * 前言
 
