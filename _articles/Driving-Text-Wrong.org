@@ -1,3 +1,16 @@
+#+TITLE:Driving Test Wrong List
+#+AUTHOR:Ni Junjia
+#+EMAIL:creamidea(AT)gmail.com
+#+DESCRIPTION:ICECREAM(氷菓)CREAMIDEA
+#+KEYWORDS:driving test
+#+SELECT_TAGS: driving test
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t timestamp:t
+#+LINK_HOME: https://creamidea.github.io
+
+* 前言
+这是很久之前写的笔记，不知为何会混入这里，那就把它放在这里吧。嘛～
+
+* 驾驶考试错题考题
 1. 新交规中 超20%以下就扣3分了，20%-50%扣6分了，50%以上扣12分.
 2. 机动车驾驶证有效期分为6年、10年和长期。
 3. 变更车道时，应开转向灯，迅速驶入测方车道。（X）
