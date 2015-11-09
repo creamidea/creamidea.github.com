@@ -1,23 +1,559 @@
 #+TITLE: Something About This Site And My Life
 #+DESCRIPTION: 关于本站的一些说明和最近的人生感悟
-#+KEYWORDS: orgmode emacs github-page blog design 感想
+#+KEYWORDS: orgmode emacs github-page github blog design jekyll static-blog 感想
 #+SELECT_TAGS: orgmode
-#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 
-#+begin_src example
+#+begin_example
 时光飞逝，岁月如染。
-#+end_src
+#+end_example
 
 * 前言
 
 是的，你没有看错，我又重新设计了一下自己的知识书写系统。荒废了好多年之后，
 又回到了这里。最近遇到一些事情感触挺大的。感觉一年过去了，自己也贬值了许多。
 我也不知道说什么好，于是我又开始折腾起自己写字的地方。
-也许是想找一个地方满满的度过这么多时光吧。这么说真是暴殄天物啊！！
+也许是想找一个地方慢慢的度过这么多时光吧。这么说真是暴殄天物啊！！
 
-到现在已经工作差不多一年多了。我成长了多少呢？
+到现在已经工作差不多一年多了。我成长了多少呢？我感觉我是没有什么实质性的进展，仍然像一个刚刚毕业的学生。
+技能上也么有什么大的提升，被人说成刚刚入门。嗯，就是刚刚入门嘛～
 
 * 设计
 
+下面的文字是介绍这个blog是如何一步一步搭建起来的。（功能比较的弱，>_<）
+
+** 舍弃Jekyll
+不得不说Jekyll是开了一个好头，把我带入了这么神奇的世界。从最初开始接触到现在，Jekyll都给了我很大的启发。
+但是，无奈，找了半天，也没有找到对org文件的直接支持，所以之前的实现方案比较的丑陋，使用了2次“编译”的方式解决。
+
+首先将org文件用org-mode导出成html，然后再用Jekyll进行2次处理，最终变成一个完成的页面。
+现在分支 [[https://github.com/creamidea/creamidea.github.com/tree/jekyll][Jekyll]] 仍然保存着我之前的实现方案。算是对之前的一点点怀念吧。
+
+可以看到，通过上面的步骤来进行文章的编写和发布，比之前直接编写md文件多了一步，这个让我非常的不爽。但是为了不写md，而写org，我选择了隐忍。就这么持续了几个月。
+期间一直想改变这个，重新设计。于是有了下面的想法。
+
+** 又一想法：富前端
+这个也是在学习了 *JavaScript* 之后，想提升自己JavaScript水平而产生的一个想法。思路很简单：
+
+首先，编写一个前端的解析框架，可以将org格式的文本翻译成html，然后动态的插入的页面中去即可。编写好的org文件被放在了dropbox这类可以存储文件的服务器上面，
+通过ajax请求获取（这个可能需要查看相应厂商提供的API来实现）。我找了一个 [[https://github.com/creamidea/org-js][这个]] 来干翻译的事情，看了一下，效果还是很好的。文件通过 Dropbox API 来获取。
+
+一切都是这么的美好。但是，问题是我当时没有能过解决通过Ajax从Dropbox获取文件的功能，之后也就不了了之了。
+哦，对了，突然想起来，那个解析的js库貌似也是有一点点让我纠结的地方，想通过改源代码实现自己的效果，但是奈何当时技术不行，搞了一个国庆也没有完成。之后也就不了了之了。
+（PS：那个国庆回了一次学校，见了 [[https://forestgump.me/][van9ogh]] 和 [[https://github.com/JohnChain][JohnChain]] ，在学校的湖边写了一会儿代码，再也没有那个时光了。
+国庆之后因为工作上的事情，也没有时间搞这个了。如果有空，再说吧。估计，应该是不会来搞这个解决方案了。
+因为我有了现在的方案。）
+
+** 全Org-mode
+嗯，这次我全部用Org-mode这个来实现现在的文章发布系统。其实也是很简单的，就是之前的Jekyll方案中去掉了Jekyll二次编译的那一步。通过自己写js来进行交互，写css来美化网站。
+当然，功能上也会比之前的弱一点。但是没有什么关系，我想了其它的替代方案。理论上，还是说的过去的:)
+
+*** 创建核心(.emacs)
+通过编辑.emacs文件，来实现对org文件的导出。最近也是学习了一些elisp的语法，所以对之前直接copy来的项目配置做了一些修改。
+主要是将项目地址变量化，这样子变动项目路径也会相对方便一点。需要说明的是这个 =`()= ，
+这个语法结构让列表中的元素可以选择性的求解。
+比如这里的 =creamidea= 可以被求解。
+#+begin_src elisp
+  ;; ===================================================
+  ;; creamidea
+  (require 'ox-publish)
+  (setq org-src-fontify-natively t)
+  ;; 这里设置项目的路径
+  (setq creamidea-path "/Users/creamidea/Documents/creamidea") 
+  (setq org-publish-project-alist
+        `(
+          ;; 把各部分的配置文件写到这里面来
+          ("creamidea-article"
+           :base-directory ,(concat creamidea-path "/_articles/")
+           :base-extension "org"
+           
+           :publishing-directory ,creamidea-path
+           :recursive f
+           :publishing-function org-html-publish-to-html
+           :headline-levels 4             ; Just the default for this project.
+           :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/style.css\"/>"
+           :html-postamble "<script src=\"/static/app.js\"></script>"
+           :html-extension "html"
+           :auto-preamble t
+           :section-numbers nil
+           :body-only: t
+           :author "Ni Junjia(NekoTrek)"  ; 设置作者的名字
+           :email "creamidea@gmail.com"   ; 设置作者的联系方式
+           :auto-sitemap t                ; Generate sitemap.org automagically...
+           :sitemap-filename "index.org"  ; ... call it sitemap.org (it's the default)...
+           :sitemap-title "e[(i)(pi)]+1=0(19890514)" ; ... with title 'Sitemap'.
+           :sitemap-sort-files anti-chronologically
+           :sitemap-file-entry-format "%d %t"
+           )
+          ("creamidea-static"
+           :base-directory ,(concat creamidea-path "/static")
+           :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+           :publishing-directory creamidea-path
+           :recursive f
+           :publishing-function org-publish-attachment
+           )
+          ("creamidea" :components ("creamidea-article" "creamidea-static"))
+          ;; ("creamidea" :components ("creamidea-article" "creamidea-static"))
+          ;; http://lujun9972.github.io/emacs/elisp/
+          ;; http://forrestchang.github.io/2015/08/29/use-emacs-org-mode-build-blog/
+          ))
+  ;; 绑定快捷键
+  (global-set-key (kbd "C-c x") 'org-publish-current-project)
+#+end_src
+复制完成之后，在.emacs这个buffer下面，按住 =M-x= 调出输入命令的buffer，然后输入 =eval-buffer= 即可。
+可以当场生效，不需要重启Emacs。
+
+*** 凌波微步(snippet)
+我使用的是 [[http://emacswiki.org/emacs/Yasnippet][Yasnippet]] 这个自动“填充”工具。然后写了一个这个 *Snippet*
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: blog
+# key: blog
+# --
+#+TITLE:${1:No Title}
+#+AUTHOR:Ni Junjia
+#+EMAIL:creamidea(AT)gmail.com
+#+DESCRIPTION:ICECREAM(氷菓)CREAMIDEA
+#+KEYWORDS:${2:CS}
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t timestamp:t
+#+LINK_HOME: https://creamidea.github.io
+
+$0
+#+end_src
+稍作修改即可，然后打开.emacs文件。在.emacs这个buffer下面，按住 =M-x= 调出输入命令的buffer，然后输入 =eval-buffer= 即可。
+可以当场生效，不需要重启Emacs。
+
+
+*** 披上衣裳(CSS)
+为了达到美观的阅读效果，参考了 [[https://medium.com][medium]] 的设计哲学，
+文章正文部分采用居中、width:700px的样式，正文字体使用-apple-system，标签放在正文底部等。
+达到的效果如本文所示。
+#+begin_src css
+body {
+    margin: 0;
+    
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Open Sans","Helvetica Neue",sans-serif;
+    letter-spacing: 0;
+    font-weight: 400;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-font-feature-settings: "liga" on;
+    color: rgba(0,0,0,0.8);
+    font-size: 18px;
+    line-height: 1.4;
+
+    /* letter-spacing: .01rem; */
+    /* font-weight: 400; */
+    /* font-style: normal; */
+    /* font-size: 21px; */
+    /* line-height: 1.58; */
+    /* letter-spacing: -0.003em; */
+
+}
+
+#avatar-wapper {
+    position: fixed;
+    top: 40px;
+    left: 40px;
+}
+#avatar-wapper img {
+    border-radius: 60px;
+    width: 60px;
+    height: 60px;
+}
+
+#banner-wrapper {
+    margin: 0 auto;
+    width: 700px;
+    line-height: 2;
+    font-size: 10em;
+    font-family: Georgia,Cambria,"Times New Roman",Times,serif;
+    font-weight: 400;
+}
+/* #banner-wrapper:before { */
+/*     content: ' '; */
+/*     position: fixed; */
+/*     width: 100%; */
+/*     height: 100%; */
+/*     top: 0; */
+/*     left: 0; */
+/*     background-color: white; */
+/*     background: url('/static/avatar.png') no-repeat center center; */
+/*     background-size: cover; */
+/*     will-change: transform; */
+/*     z-index: -1; */
+/* } */
+/* #banner-wrapper img { */
+/*     width: 100%; */
+/* } */
+
+#content {
+    margin: 0 auto;
+    width: 700px;
+    height: 100%;
+    background-color: white;
+}
+#content img {
+    display: block;
+    margin: 0 auto;
+    margin-top: 21px;
+    /* width: 76%; */
+    z-index: 100;
+    box-shadow: 0 0 0 white !important;
+    /* box-shadow: 3px 3px 3px #eee; */
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0s,opacity 400ms 0ms;
+
+    cursor: pointer;
+    cursor: -webkit-zoom-in;
+}
+#content a,
+footer a{
+    text-decoration: none;
+    color: #4285F4; /* google blue */
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    background-color: transparent;
+    font-family: "medium-content-serif-font",Georgia,Cambria,"Times New Roman",Times,serif;
+    letter-spacing: .01rem;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 21px;
+    line-height: 1.58;
+    letter-spacing: -0.003em;
+}
+
+ul.org-ul,
+#text-table-of-contents ul {
+    list-style-type: none;
+    /* list-style-type: lower-greek; */
+}
+
+#text-table-of-contents {
+/* ul.org-ul { */
+    font-size: 26px;
+}
+ul.org-ul a,
+#text-table-of-contents a {
+    color: black !important;
+}
+
+pre {
+    margin-left: 0;
+    box-shadow: initial !important;
+    border: 0 !important;
+}
+
+pre.src,
+pre.example,
+footer {
+
+    font-family: Menlo,Monaco,"Courier New",Courier,monospace;
+    font-size: 16px;
+    background: rgba(0,0,0,0.05);
+    padding: 20px;
+    
+    /* margin-right: 3px; */
+
+    /* color: rgba(0,0,0,0.6); */
+    /* border: none; */
+    /* padding: 0; */
+    /* padding-left: 50px; */
+    /* text-align: left; */
+}
+pre.example,
+footer {
+    font-family: "medium-content-slab-serif-font",Georgia,Cambria,"Times New Roman",Times,serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.48;
+    letter-spacing: -0.014em;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+pre.src {
+    overflow: auto;
+    max-height: 767px;
+}
+
+#tags {
+    font-size: 12px;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Open Sans","Helvetica Neue",sans-serif;
+    letter-spacing: 0;
+    font-weight: 400;
+    font-style: normal;
+}
+#tags a {
+    border: none;
+    color: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.05);
+
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Open Sans","Helvetica Neue",sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: rgba(0,0,0,0.44);
+    font-size: 13px;
+    letter-spacing: 0;
+    line-height: 22px;
+    text-decoration: none;
+    background: #fafafa;
+    border-radius: 3px;
+    border: 1px solid #f0f0f0;
+    padding: 5px 10px;
+    display: inline-block;
+
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+#tags a:hover {
+    background: rgba(0,0,0,0.1);
+    color: rgba(0,0,0,0.6);
+    border-color: rgba(0,0,0,0.15);
+    text-decoration: none;
+}
+
+/* image */
+#img-wapper {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: white;
+    visibility: visible;
+    opacity: 0;
+    transition: opacity 400ms 0ms;
+}
+#img-wapper img {
+    opacity: 1;
+    margin-top: 11%;
+    transition: transform 300ms cubic-bezier(.2, 0, .2, 1);
+}
+
+footer {
+    text-align: center;
+}
+footer a {
+    color: black;
+    
+}
+
+
+@media (max-width: 767px) {
+    #content {
+        margin: 0 auto;
+        margin-left: 2%;
+        margin-right: 2%;
+        width: 95.999%;
+    } 
+}
+#+end_src
+
+*** 增加灵性(JavaScript)
+为了实现一些交互效果，
+如：首页公式(banner)的处理，图片点击放大，显示标签，显示文章元信息（打开终端即可用看见）等，
+都是通过js来动态处理的，然后这个写的比较的丑陋，不是很美，后面有空的时候要来改一下。
+#+begin_src javascript
+'use strict'
+
+function initImgWapper (body) {
+    var div = document.createElement('div')
+    div.id = 'img-wapper'
+    body.appendChild(div)
+    return div
+}
+
+function getMetaInfo (isPrint) {
+    var head = document.getElementsByTagName('head')[0]
+    var childNodes = head.childNodes
+    var meta = {}
+    Array.prototype.forEach.call(head.children, function (child) {
+        var name = child.getAttribute('name')
+        if (name === null || name === "" || name === undefined)
+            return
+        meta[name] = child.getAttribute('content')
+    })
+    for (var i = 0, max = childNodes.length; i < max; i++) {
+        var cn = childNodes[i]
+        if (cn.nodeName !== '#comment') continue
+        // TODO: maybe here will wrong
+        meta.generatedTime = cn.data.slice(1,-1) // remove the blank symbol
+        break
+    }
+
+    if (isPrint === true) {
+        // Print the Article's meta information
+        console.log('Article\'s Meta')
+        Array.prototype.forEach.call(Object.keys(meta), function (name) {
+            console.log(name.toUpperCase() + ': ' + meta[name])
+        })
+    }
+
+    return meta
+}
+
+function showBanner (body) {
+    var content = document.getElementById('content')
+    var div = document.createElement('div')
+    div.id = 'banner-wrapper'
+    Array.prototype.forEach.call(['e', 'i&#960;', '+', '1', '=', '0'], function(s, index) {
+        var tag
+        if (index === 1) {
+            tag = document.createElement('sup')
+        } else {
+            tag = document.createElement('span')            
+        }
+        tag.innerHTML = s
+        div.appendChild(tag)
+    })
+    body.insertBefore(div, content)
+
+    content.getElementsByClassName('title')[0].style.display = 'none'
+}
+
+function showHomeButton (body) {
+    var div = document.createElement('div')
+    var a = document.createElement('a')
+    var img = document.createElement('img')
+    div.id = "avatar-wapper"
+    a.href = '/'
+    a.alt = 'Return'
+    img.src = '/static/avatar.png'
+    img.alt = 'Return'
+    div.appendChild(a)
+    a.appendChild(img)
+    body.appendChild(div)
+}
+
+function showFooter (body, meta) {
+    // TODO: change the email
+    var footer = document.createElement('footer')
+    footer.innerHTML =
+        '<p><a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/">Attribution-NonCommercial-ShareAlike 3.0 China Mainland</a></p>' +
+        '<p>Author is <a href="mailto:creamidea@gmail.com">'+
+        (meta.author || 'Unknow') +
+        '</a>. Edited by <a href="http://www.gnu.org/software/emacs/">Emacs</a>. Generated by <a href="http://orgmode.org/">Org-mode</a>. Hosted by <a href="https://github.com/">Github</a>.</p>'
+    body.appendChild(footer)
+}
+
+function showTags (body, meta) {
+    if (!meta.keywords) return
+    var keywords = meta.keywords.split(' ')
+    if (keywords && keywords.length > 0) {
+        var div = document.createElement('div')
+        var content = document.getElementById('content')
+        var footnotes = document.getElementById('footnotes')
+        var searchEngine = 'https://g.forestgump.me/?gws_rd=ssl#q='
+        keywords.forEach(function (key) {
+            var a = document.createElement('a')
+            a.href = searchEngine +
+                key + '+site:' + window.location.hostname
+            a.title = 'Go to ' + key
+            a.innerText = key
+            div.appendChild(a)
+        })
+        div.id = 'tags'
+        content.insertBefore(div, footnotes)
+    }
+}
+
+function ImgClickEvent (body, wapper) {
+
+    function fun (e) {
+        var img = wapper.getElementsByTagName('img')
+        var target = e.target
+        if (target.nodeName === 'IMG' || target.id === 'img-wapper') {
+            if (img.length > 0 || target.id === 'img-wapper') {
+                // hide image
+                wapper.style.opacity = 0
+                body.style.overflow = null
+                setTimeout(function(){
+                    for (var i = 0, max = img.length; i < max; i++) {
+                        img[i].style.transform = 'scale(1.25977) translateZ(0)'
+                        wapper.removeChild(img[i])
+                    }
+                    wapper.style.display = 'none'
+                }, 100)
+            } else if (img.length === 0) {
+                // show image
+                var img = document.createElement('img')
+                img.src = e.target.src
+                wapper.appendChild(img)
+                wapper.style.display = 'block'
+                setTimeout(function () {
+                    wapper.style.opacity = 1
+                    img.style.transform = 'scale(1.25977) translateZ(0)'
+                    
+                }, 100)
+                body.style.overflow = 'hidden'
+            }
+        }
+    }
+
+    if (window.attachEvent) 
+        body.attachEvent('click', fun);  //IE浏览器
+    else
+        body.addEventListener('click', fun, false);  //非IE浏览器
+}
+
+function somefix (body) {
+    var content = body.getElementById('content')
+    var orgUl = content.getElementsByClassName('org-ul')[0]
+    orgUl.style.listStyleType = 'lower-greek'
+}
+
+window.onload = function () {
+    var pathname = window.location.pathname
+    var body = document.getElementsByTagName('body')[0]
+    var meta = getMetaInfo(true)
+
+    somefix(body)
+
+    showTags(body, meta)
+    if (pathname === '/') {
+        showBanner(body)
+    } else {
+        // showHomeButton(body)
+        ImgClickEvent(body, initImgWapper(body))
+    }
+    showFooter(body, meta)
+}
+#+end_src
+
 * 尾声
+基本上，这个就是全部的内容了。写完一篇文章之后，可以使用 =C-c x= 进行文章的发布。效果就是现在这个效果了。
+
+之前还做了上文和下文之间的链接，一些快捷键的功能，在这个版本中我都去掉了。
+我的想法是可以回到首页（目录）进行选择跳转。回到首页的按钮我暂时也不准备做，
+可以通过浏览器的回退按钮回到首页，前提是你是从那里过来的。也可以修改URL来达到同样的目的。
+
+关于标签的这个功能，我交给了Google搜索引擎，我拼接了链接，点击标签即可。可能会由于Google搜录的速度，
+及时性可能不是那么的好。但是，这个小站估计也没有什么点击量，自己玩玩就好了。PS：因为Google在天朝水土
+不服，所以我用了我一个朋友([[https://forestgump.me/][forestgump]])的Google搜索代理，如果感兴趣可以去了解一些，或者资助一下:)
+后面如果有兴趣，可以考虑写一段elisp代码来搞定这个。
+
+关于代码高亮，这个我暂时也不搞了，有兴趣的可以用 [[https://highlightjs.org][highlight.js]] 来搞定。
+我准备后面如果有时间自己来实现一下玩玩。（哎，又是以后，不知道又要到什么时候来填坑了。）
+
+关于评论的问题，可以采用 [[https://disqus.com/][disqus]] 来解决。因为考虑到目前没有这个需求，所以暂时就不搞了。
+有需要的时候再加上去吧。
+
+关于图片，我使用了 [[http://www.flickr.com/][flickr]] 的服务。感觉还行吧。就是获取图片的链接比较的麻烦，后面想想要不用chrome脚本搞定，或者换一家（笑）。
+
+关于之前的文章，我移动了 *_draft* 这个目录下边，感兴趣的可以去 [[https://github.com/creamidea/creamidea.github.com/tree/master/_draft][这里]] 看看。因为要有一个全新的开始嘛～。
+404页面也不做了，反正也是抄，直接用Github的吧。
+
+其他的问题，后面边写边改吧，哦，对了，如果你感兴趣，可以fork一下自己修改 :)
+
+有什么问题，写信给我就好了。我会及时回复的，邮箱地址请戳页脚上的作者，或者在 [[https://github.com/creamidea/creamidea.github.com/issues][issue]] 这里创建你的问题:)
+
+嘛～自娱自乐。
+
+以上です。
+

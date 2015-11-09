@@ -140,6 +140,12 @@ function ImgClickEvent (body, wapper) {
         body.addEventListener('click', fun, false);  //非IE浏览器
 }
 
+function somefix (body) {
+    var content = document.getElementById('content')
+    var orgUl = document.getElementsByClassName('org-ul')[0]
+    orgUl.style.listStyleType = 'lower-greek'
+}
+
 window.onload = function () {
     var pathname = window.location.pathname
     var body = document.getElementsByTagName('body')[0]
@@ -147,6 +153,7 @@ window.onload = function () {
 
     showTags(body, meta)
     if (pathname === '/') {
+        somefix(body)
         showBanner(body)
     } else {
         // showHomeButton(body)
