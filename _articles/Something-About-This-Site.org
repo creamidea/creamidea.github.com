@@ -1,13 +1,13 @@
 #+TITLE: Something About This Site And My Life
 #+DESCRIPTION: 关于本站的一些说明和最近的人生感悟
 #+KEYWORDS: orgmode emacs github-page github blog design jekyll static-blog 感想
-#+SELECT_TAGS: orgmode
 #+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 
 #+begin_example
 时光飞逝，岁月如染。
 #+end_example
+
 
 * 前言
 

@@ -13,8 +13,11 @@ function getMetaInfo (isPrint) {
     var meta = {}
     Array.prototype.forEach.call(head.children, function (child) {
         var name = child.getAttribute('name')
-        if (name === null || name === "" || name === undefined)
+        if (child.nodeName === 'TITLE') {
+            meta.title = child.innerText
             return
+        }
+        if (name === null || name === "" || name === undefined) return
         meta[name] = child.getAttribute('content')
     })
     for (var i = 0, max = childNodes.length; i < max; i++) {
