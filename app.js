@@ -39,8 +39,7 @@ function getMetaInfo (isPrint) {
     return meta
 }
 
-function showBanner (body) {
-    var content = document.getElementById('content')
+function showBanner (body, content) {
     var div = document.createElement('div')
     div.id = 'banner-wrapper'
     Array.prototype.forEach.call(['e', 'i&#960;', '+', '1', '=', '0'], function(s, index) {
@@ -83,12 +82,11 @@ function showFooter (body, meta) {
     body.appendChild(footer)
 }
 
-function showTags (body, meta) {
+function showTags (body, content, meta) {
     if (!meta.keywords) return
     var keywords = meta.keywords.split(' ')
     if (keywords && keywords.length > 0) {
         var div = document.createElement('div')
-        var content = document.getElementById('content')
         var footnotes = document.getElementById('footnotes')
         var searchEngine = 'https://g.forestgump.me/?gws_rd=ssl#q='
         keywords.forEach(function (key) {
@@ -143,24 +141,63 @@ function ImgClickEvent (body, wapper) {
         body.addEventListener('click', fun, false);  //非IE浏览器
 }
 
-function somefix (body) {
-    var content = document.getElementById('content')
+function someHomeFix (body, content) {
+
     var orgUl = document.getElementsByClassName('org-ul')[0]
     orgUl.style.listStyleType = 'lower-greek'
+
+    document.getElementById('org-div-home-and-up').style.display = 'none'
+}
+
+function someArticleFix (body, content) {
+    
+}
+
+function loadDisqus(body, content) {
+    var div = document.createElement('div')
+    div.className = 'comm'
+    div.innerHTML = '<div class="comm_open_btn" comment="copy from bilibili.com :P" onclick="loadDisqusComment(this)"></div>'
+    content.appendChild(div)
+}
+function loadDisqusComment (target) {
+    var parent = target.parentElement
+    parent.style.display = 'none'
+    
+    var d = document
+    var s = document.createElement('script')
+    s.src = '//creamidea.disqus.com/embed.js'
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    
+    var content = document.getElementById('content')
+    var disqus = document.createElement('div')
+    disqus.id = 'outline_disqus_thread'
+    disqus.className = 'outline-2'
+    disqus.style.marginBottom = '44px'
+    disqus.innerHTML = '<h2 id="disqus_thread_header">Comments</h2><div id="disqus_thread"></div>'
+    content.appendChild(disqus)
+}
+function disqus_config () {
+    // 这里是配置disqus地方，具体可以参考
+    // https://help.disqus.com/customer/portal/articles/472098-javascript-configuration-variables
 }
 
 window.onload = function () {
     var pathname = window.location.pathname
     var body = document.getElementsByTagName('body')[0]
+    var content = document.getElementById('content')
     var meta = getMetaInfo(true)
 
-    showTags(body, meta)
+    showTags(body, content, meta)
     if (pathname === '/') {
-        somefix(body)
-        showBanner(body)
+        someHomeFix(body, content)
+        showBanner(body, content)
     } else {
         // showHomeButton(body)
-        ImgClickEvent(body, initImgWapper(body))
+        ImgClickEvent(body, initImgWapper(body, content))
+        someArticleFix(body, content)
+        loadDisqus(body, content)
     }
-    showFooter(body, meta)
+    showFooter(body, content, meta)
+
 }
