@@ -1,6 +1,6 @@
 #+TITLE: e[(i)(pi)]+1=0(19890514)
 
-   + [[file:Something-About-Orgmode-And-Deckjs.org][2015-11-13 Something About Orgmode And Deckjs]]
-   + [[file:Something-About-This-Site.org][2015-11-13 Something About This Site And My Life]]
    + [[file:GWT-ABC.org][2015-11-13 GWT ABC]]
    + [[file:How-To-Install-Autocomplete-And-Yasnippet.org][2015-11-13 How To Install Autocomplete and Yanisppet]]
+   + [[file:Something-About-Orgmode-And-Deckjs.org][2015-11-13 Something About Orgmode And Deckjs]]
+   + [[file:Something-About-This-Site.org][2015-11-13 Something About This Site And My Life]]
