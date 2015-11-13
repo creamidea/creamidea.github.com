@@ -1,3 +1,4 @@
 #+TITLE: e[(i)(pi)]+1=0(19890514)
 
+   + [[file:Something-About-Orgmode-And-Deckjs.org][2015-11-13 Something About Orgmode And Deckjs]]
    + [[file:Something-About-This-Site.org][2015-11-09 Something About This Site And My Life]]

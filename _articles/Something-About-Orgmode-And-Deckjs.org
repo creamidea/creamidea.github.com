@@ -1,0 +1,58 @@
+#+TITLE:Something About Orgmode And Deckjs
+#+AUTHOR:Junjia Ni
+#+EMAIL:creamidea(AT)gmail.com
+#+DESCRIPTION:ICECREAM(氷菓)CREAMIDEA
+#+KEYWORDS:emacs org-mode deck.js
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t timestamp:t
+#+LINK_HOME: https://creamidea.github.io
+
+* 前言
+
+有一次翻 *org-mode* 的官方文档，无意中发现了这篇文章 [[http://orgmode.org/worg/exporters/ox-overview.html][The New Org-mode Exporter Framework]] 。看到了deck.js[fn:1]，于是开始觊觎org-mode导出web slide的功能。
+之前一直不知道怎么搞，因为自己当时不会 *elisp* ，也看不懂deck.js[fn:1]。什么都不会。但是我就是想搞出这个。当时的内心是奔腾的。
+
+最近，由于看了一些elisp的基础知识，对于org-mode的publish的配置也做了一些了解。于是，开始了这次的折腾。
+期间，走了很多的弯路，主要是org-mode的发布模块做了改动，然后ox-deck我找到的是老版本，不匹配，于是跑不起来。还好，最后解决了。
+
+废话不说了，我们开始吧。
+
+* 正文
+首先，推荐使用org-mode官方网站的最新包[fn:2] 。下载完成之后，将其加载至emacs中，覆盖掉emacs自带的版本。
+#+begin_src elisp
+(add-to-list 'load-path "~/.emacs.d/package/org-mode")
+(add-to-list 'load-path "~/.emacs.d/package/org-mode/contrib/lisp" t)
+#+end_src
+
+安装完org-mode，开始安装导出deck的功能组件。这一步我也是走了好久，之前一直卡在导出那一步，提示我 =invalid format character: %s= 。
+后来我发现就是我一开始说的那个问题，版本兼容问题。我找到这篇文章 [[http://orgmode.org/worg/org-contrib/#unnumbered-6][org-contrib#Obsolete]] ，这篇文章中给了我这个解决方案。
+#+begin_example
+For use with the new exporter, ox-s5.el (link to raw file) and ox-deck.el (link to raw file), both by Rick Frankel, are included in the contrib directory. The latest source and documentation for both are at https://github.com/cybercode/org-slides.
+#+end_example
+
+于是，我找到了新版的 [[https://raw.githubusercontent.com/cybercode/org-slides/master/ox-deck.el][ox-deck.el]] 。把这个文件复制到 =/path/to/org-mode/contrib/lisp= 下面。复制完成之后，加载至.emacs中（包括一些配置）。
+#+begin_src elisp
+  (require 'ox-deck)
+  (custom-set-variables
+   ;; neon swiss web-2.0
+   '(org-deck-theme "web-2.0.css")
+   ;; horizontal-slide vertical-slide fade
+   '(org-deck-transition "fade.css")
+   ;; '(org-deck-include-extensions '(goto menu navigation scale status))
+   '(org-html-link-home "http://creamidea.github.io"))))
+#+end_src
+
+到这里，deck这个已经安装到我们的emacs中了，之后我们只要 =C-c C-e d h= 就可以导出成html了。
+
+* 尾声
+
+其实我最初写文章是不想写教程类的，但是发现自己也只会做这个。而且我发现，还写不好>_< 。嘛～先这个样子吧，练练手，毕竟好久没有写文章了，而且这个问题我找了好久，牺牲了好多休息时间。
+等有空了，看一下ox-deck.el中写了什么，安装过程中也只是 =喵= 了一眼。然后再写几篇关于学习elisp的小文章试试 :P
+
+有什么问题，欢迎随时 contact me。
+
+* Footnotes
+
+[fn:1] http://imakewebthings.com/deck.js/
+
+[fn:2] git clone git://orgmode.org/org-mode.git
+
