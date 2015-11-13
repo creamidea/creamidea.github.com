@@ -35,7 +35,6 @@ function getMetaInfo (isPrint) {
             console.log(name.toUpperCase() + ': ' + meta[name])
         })
     }
-    
     return meta
 }
 
@@ -148,10 +147,10 @@ function someHomeFix (body, content) {
     var orgUl = document.getElementsByClassName('org-ul')[0]
     orgUl.style.listStyleType = 'lower-greek'
 
-    document.getElementById('org-div-home-and-up').style.display = 'none'
+    // document.getElementById('org-div-home-and-up').style.display = 'none'
 }
 
-function someArticleFix (body, content, meta) {
+function orgDivHomeAndUpFix (body, content, meta, isHome) {
     var orgDivHomeAndUp = document.getElementById('org-div-home-and-up')
     var Links = [{
         "name": 'HOME', "url": '/'
@@ -161,6 +160,9 @@ function someArticleFix (body, content, meta) {
     var hLinks = []
     Links.forEach(function (link) {
         var lname = ''
+        
+        if (link.name === 'HOME' && isHome) return
+
         if (link.name.toUpperCase() === 'GMAIL') {
             var colors = ['#0C77B6', '#D82C2D', '#FCCB0A', '#0C77B6', '#31B454']
             link.name.split('').forEach(function (c, i) {
@@ -208,7 +210,11 @@ document.addEventListener('DOMContentLoaded', function () {
     var body = document.getElementsByTagName('body')[0]
     var content = document.getElementById('content')
     var meta = getMetaInfo(true)
+    var isHome = false
 
+    if (window.location.pathname === '/') isHome = true
+    orgDivHomeAndUpFix(body, content, meta, isHome)
+    
     showTags(body, content, meta)
     if (pathname === '/') {
         someHomeFix(body, content)
@@ -216,7 +222,6 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         // showHomeButton(body)
         ImgClickEvent(body, initImgWapper(body, content))
-        someArticleFix(body, content, meta)
         loadDisqus(body, content)
     }
     showFooter(body, content, meta)
