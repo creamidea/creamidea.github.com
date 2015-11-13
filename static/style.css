@@ -228,7 +228,7 @@ footer a {
     display: block;
     width: 320px;
     height: 80px;
-    background: url(/static/morecomm.gif) no-repeat;
+    background: url(morecomm.gif) no-repeat;
     cursor: pointer;
 }
 

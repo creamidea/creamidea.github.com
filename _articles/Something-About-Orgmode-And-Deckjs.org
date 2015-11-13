@@ -6,6 +6,7 @@
 #+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 
+
 * 前言
 
 有一次翻 *org-mode* 的官方文档，无意中发现了这篇文章 [[http://orgmode.org/worg/exporters/ox-overview.html][The New Org-mode Exporter Framework]] 。看到了deck.js[fn:1]，于是开始觊觎org-mode导出web slide的功能。
@@ -48,11 +49,83 @@ For use with the new exporter, ox-s5.el (link to raw file) and ox-deck.el (link 
 其实我最初写文章是不想写教程类的，但是发现自己也只会做这个。而且我发现，还写不好>_< 。嘛～先这个样子吧，练练手，毕竟好久没有写文章了，而且这个问题我找了好久，牺牲了好多休息时间。
 等有空了，看一下ox-deck.el中写了什么，安装过程中也只是 =喵= 了一眼。然后再写几篇关于学习elisp的小文章试试 :P
 
-有什么问题，欢迎随时 contact me。
+有什么问题，欢迎留言。
+
+我的完整配置
+#+begin_src emacs-lisp
+;; ===================================================
+;; for org mode
+(add-to-list 'load-path "~/.emacs.d/package/org-mode")
+(add-to-list 'load-path "~/.emacs.d/package/org-mode/contrib/lisp" t)
+
+(defun load-deck ()
+  "Load Deck Configures"
+  ((lambda ()
+    "Run"
+    (require 'ox-deck)
+    (custom-set-variables
+     ;; neon swiss web-2.0
+     '(org-deck-theme "web-2.0.css")
+     ;; horizontal-slide vertical-slide fade
+     '(org-deck-transition "fade.css")
+     ;; '(org-deck-include-extensions '(goto menu navigation scale status))
+     '(org-html-link-home "http://creamidea.github.io"))))
+  ())
+(defun load-creamidea-publish ()
+  "Load Creamidea Publish Configures"
+  (funcall (lambda ()
+     "Run"
+     (require 'ox-publish)
+     (setq org-src-fontify-natively t)
+     (setq creamidea-path "/Users/creamidea/Documents/creamidea")
+     (setq org-publish-project-alist
+	 `(
+	   ;; 把各部分的配置文件写到这里面来
+	   ("creamidea-article"
+	    :base-directory ,(concat creamidea-path "/_articles/")
+	    :base-extension "org"
+	    
+	    :publishing-directory ,creamidea-path
+	    :recursive f
+	    :publishing-function org-html-publish-to-html
+	    :headline-levels 4             ; Just the default for this project.
+	    :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/style.css\"/>"
+	    :html-postamble "<script src=\"/static/app.js\"></script>"
+	    :html-extension "html"
+	    :auto-preamble t
+	    :section-numbers t
+	    ;; :body-only: t
+	    :author "Junjia Ni(NekoTrek)"
+	    :email "creamidea@gmail.com"
+	    :auto-sitemap t                ; Generate sitemap.org automagically...
+	    :sitemap-filename "index.org"  ; ... call it sitemap.org (it's the default)...
+	    :sitemap-title "e[(i)(pi)]+1=0(19890514)" ; ... with title 'Sitemap'.
+	    :sitemap-sort-files anti-chronologically
+	    :sitemap-file-entry-format "%d %t"
+	    ;; :org-html-doctype-alist html5
+	    )
+	   ("creamidea-static"
+	    :base-directory ,(concat creamidea-path "/static")
+	    :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+	    :publishing-directory creamidea-path
+	    :recursive f
+	    :publishing-function org-publish-attachment
+	    )
+	   ("creamidea" :components ("creamidea-article" "creamidea-static"))
+	   ;; ("creamidea" :components ("creamidea-article" "creamidea-static"))
+	   ;; http://lujun9972.github.io/emacs/elisp/
+	   ;; http://forrestchang.github.io/2015/08/29/use-emacs-org-mode-build-blog/
+	   ))
+     (global-set-key (kbd "C-c x") 'org-publish-current-project)))
+  ())
+(eval-after-load "org"
+  (lambda ()
+    (load-deck)
+    (load-creamidea-publish)))
+#+end_src
 
 * Footnotes
 
 [fn:1] http://imakewebthings.com/deck.js/
 
 [fn:2] git clone git://orgmode.org/org-mode.git
-

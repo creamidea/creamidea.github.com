@@ -1,10 +1,9 @@
 #+TITLE:GWT ABC
-#+AUTHOR:ICECREAM(氷菓)
-#+EMAIL:creamidea@gmail.com
-#+DESCRIPTION:ICECREAM(氷菓)
+#+DESCRIPTION:Something about gwt
 #+KEYWORDS:google gwt java
 #+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t tex:t email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
+
 
 * 前言
 又这个样子混过去好多天啦。不过挖的坑始终是要来填的。话说不知道为何对GWT有如此的好感。
@@ -15,6 +14,8 @@
 来开发的，当时就不知所措了。于是就一直搁置在那里了。不过心中还是痒痒的。
 
 这不在寒假学车期间顺便玩了一下这个工具。好有爱啊。
+
+这篇文章实际写于 *2014-01-29*
 
 * 开发环境
 第一步当然是安装开发环境啦。我使用的Java IDE是Eclipse[fn:1]，具体的安装配置过程我在这里就不累述了。
@@ -27,7 +28,8 @@
 =Help >> Install New Software= 增加新的地址。
 之后就是等待...
 （这是一个漫长而漫长的过程，笔者等待了很久很久，终于……她报错了。好吧， +我承认人品不行+ ）报错截图如下：
-[[file:http://farm8.staticflickr.com/7309/12204599783_c368afd41c.jpg]]
+#+CAPTION: Eclipse安装插件出错
+[[http://farm8.staticflickr.com/7309/12204599783_c368afd41c.jpg]]
 
 PS:这是一个顽固的错误，不知道什么原因，难道被 +和谐+ 了？反正我尝试了很久很久。
 
@@ -35,7 +37,8 @@ PS:这是一个顽固的错误，不知道什么原因，难道被 +和谐+ 了�
 
 Ok，接下来就是配置SDK的位置，简单，具体步骤如下： Window > Perferences > Google > App Engine 
 > Add > the path of sdk。截图如下：
-[[file:http://farm4.staticflickr.com/3782/12205767695_6b4865d5c4.jpg]]
+#+CAPTION: SDK本地加载
+[[http://farm4.staticflickr.com/3782/12205767695_6b4865d5c4.jpg]]
 
 好的，到此为止，开发环境应该差不多了。接下来就开始我们真正的旅途吧。
 
@@ -131,34 +134,35 @@ This application is out of date, please click the refresh button on your browser
    ,*/
   private final GreetingServiceAsync greetingService = GWT
       .create(GreetingService.class);
-  
+
   /**
    ,* 调用发送信息的方法。
    ,* 发送需要发送的信息
    ,* 绑定回调函数
    ,*/
-  greetingService.greetServer(textToServer,
-                              new AsyncCallback<String>() {
-                                  public void onFailure(Throwable caught) {
-                                      // Show the RPC error message to the user
-                                      dialogBox
-                                          .setText("Remote Procedure Call - Failure");
-                                      serverResponseLabel
-                                          .addStyleName("serverResponseLabelError");
-                                      serverResponseLabel.setHTML(SERVER_ERROR);
-                                      dialogBox.center();
-                                      closeButton.setFocus(true);
-                                  }
-  
-                                  public void onSuccess(String result) {
-                                      dialogBox.setText("Remote Procedure Call");
-                                      serverResponseLabel
-                                          .removeStyleName("serverResponseLabelError");
-                                      serverResponseLabel.setHTML(result);
-                                      dialogBox.center();
-                                      closeButton.setFocus(true);
-                                  }
-                              });
+  greetingService.greetServer(
+    textToServer,
+    new AsyncCallback<String>() {
+        public void onFailure(Throwable caught) {
+            // Show the RPC error message to the user
+            dialogBox
+                .setText("Remote Procedure Call - Failure");
+            serverResponseLabel
+                .addStyleName("serverResponseLabelError");
+            serverResponseLabel.setHTML(SERVER_ERROR);
+            dialogBox.center();
+            closeButton.setFocus(true);
+        }
+
+        public void onSuccess(String result) {
+            dialogBox.setText("Remote Procedure Call");
+            serverResponseLabel
+                .removeStyleName("serverResponseLabelError");
+            serverResponseLabel.setHTML(result);
+            dialogBox.center();
+            closeButton.setFocus(true);
+        }
+    });
 #+end_src
 
 ** 入口
@@ -200,7 +204,7 @@ RootPanel.get("nameFieldContainer");
          });
    #+end_src
 
-* 结束语
+* 尾声
 看到了吧，其实很简单的。整个过程就是这么的简单。接下就是仔细去看文档，熟悉一些常用的类库啦，
 如如何创建其他的html组件等。
 

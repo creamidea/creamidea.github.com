@@ -1,9 +1,11 @@
 _site/
 _backup/
+public/*
 *.swp
 pkg/
 test/
 desktop.ini
+.DS_Store
 
 _articles/*.html
 _articles/*.tex

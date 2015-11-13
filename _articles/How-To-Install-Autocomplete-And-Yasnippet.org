@@ -1,25 +1,16 @@
 #+TITLE: How To Install Autocomplete and Yanisppet
-#+AUTHOR:ICECREAM(氷菓)
-#+EMAIL:creamidea(AT)gmail.com
-#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t
+#+DESCRIPTION: install them into emacs in linux and windows 
+#+KEYWORDS: orgmode emacs autocomplete yanisppet
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
-#+STYLE:<link rel="stylesheet" type="text/css" href="../css/style.css">
-#+INFOJS_OPT:
 
-#+BEGIN_HTML
----
-layout: doc
-title: How To Install Autocomplete and Yanisppet
-subtitle: install them in emacs in linux and windows 
-categories: note
-tags: emacs autocomplete yanisppet
----
-#+END_HTML
 
 * 前言
 	写这篇blog主要是测试一些网络服务，如图片服务和音乐链接服务。
 	当然写这个还是因为我敬爱的小杰同学的要求。作为刚刚入门的New Emacser，我感觉是时候给他一些好玩的插件了。
 	当然我这些步骤google一下全部会出来，但是作为要求还是写这篇blog吧。
+  
+  这篇文章写于 *2013-04-06* ，也是一个很简单的教程文章，不舍得删掉，于是迁移到了这里。
 	
 * Auto Complete
 	过多的介绍我就不在这里陈述了，具体的可以前往
@@ -35,35 +26,35 @@ tags: emacs autocomplete yanisppet
   - [[https://github.com/m2ym/auto-complete]](GitHub mirror)
 ** Install Auto Complete
 *** For Linux
-将下载的文件移动到.emacs.d并将文件解压：(以tar为例)
-#+BEGIN_SRC sh
+    将下载的文件移动到.emacs.d并将文件解压：(以tar为例)
+    #+BEGIN_SRC sh
 $ mv auto-complete-1.3.1.tar.bz2 ~/.emacs.d
 $ cd ~/.emacs.d
 $ tar -jxvf auto-complete-1.3.1.tar.bz2
-#+END_SRC
-之后make install安装
-#+BEGIN_SRC sh
-$ make install
-$ # or with directory specified
-$ make install DIR=$HOME/.emacs.d/
-#+END_SRC
-然后将这段代码贴到.emacs中：
-#+BEGIN_SRC emacs-lisp
-(add-to-list 'load-path "~/.emacs.d")    ; This may not be appeared if you have already added.
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-(require 'auto-complete-config)
-(ac-config-default)
-#+END_SRC
-至此重启Emacs应该就可以正常运行了。
-如果还有问题可以去 [[http://cx4a.org/software/auto-complete/manual.html#Installation][这里]] 查询，也可以写电子邮件给我，我们一起讨论。
-
+    #+END_SRC
+    之后make install安装
+    #+BEGIN_SRC sh
+      $ make install
+      # or with directory specified
+      $ make install DIR=$HOME/.emacs.d/
+    #+END_SRC
+    然后将这段代码贴到.emacs中：
+    #+BEGIN_SRC emacs-lisp
+      (add-to-list 'load-path "~/.emacs.d")    ; This may not be appeared if you have already added.
+      (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+      (require 'auto-complete-config)
+      (ac-config-default)
+    #+END_SRC
+    至此重启Emacs应该就可以正常运行了。
+    如果还有问题可以去 [[http://cx4a.org/software/auto-complete/manual.html#Installation][这里]] 查询，也可以写电子邮件给我，我们一起讨论。
+    
 *** For Windows
-首先第一步也是解压，在windows上我们就不用命令了，直接使用你最爱的解压软件解压吧。
-然后使用组合键 =win+R= 输入 =cmd= ，在弹出的对话框中输入以下命令：
-#+BEGIN_SRC sh
-> /path/to/emacs.exe --batch -l /path/to/autocomplete/etc/install.el
-#+END_SRC
-然后根据提示一步一步往下操作，主要的就是这几步：
+    首先第一步也是解压，在windows上我们就不用命令了，直接使用你最爱的解压软件解压吧。
+    然后使用组合键 =win+R= 输入 =cmd= ，在弹出的对话框中输入以下命令：
+    #+BEGIN_SRC sh
+      > /path/to/emacs.exe --batch -l /path/to/autocomplete/etc/install.el
+    #+END_SRC
+    然后根据提示一步一步往下操作，主要的就是这几步：
 1. 选择安装路径：
 : Specify path to install: c:\applications\emacs-24.2\lisp(自行选择)
 : ...
@@ -75,25 +66,14 @@ $ make install DIR=$HOME/.emacs.d/
 最后附上日文教程：[[http://ubuntu-note.blog.so-net.ne.jp/2010-11-08-1][Emacs 23 に Auto Complete をインストール　{Emacs 23}]] 
 
 ** Screenshot
-	 
-	 #+CAPTION:	P1. Auto Complete In Windows 7
-	 #+begin_html
-	   #+BEGIN_CENTER
-	     <a href="http://www.flickr.com/photos/85376793@N04/8622523251/" title="Emacs-autocomplete in windows7 by aprilgalaxy, on Flickr"><img src="http://farm9.staticflickr.com/8112/8622523251_32b176270a.jpg" width="500" height="405" alt="Emacs-autocomplete in windows7"></a>
-	   #+END_CENTER
-	 #+end_html
-	 #+BEGIN_CENTER
-	   P1. Auto Complete In Windows 7
-	 #+END_CENTER
-	 
-	 #+BEGIN_HTML
-	 #+BEGIN_CENTER
-	 <a href="http://www.flickr.com/photos/85376793@N04/8624108132/" title="Autocomplete in ubuntu by aprilgalaxy, on Flickr"><img src="http://farm9.staticflickr.com/8379/8624108132_89fe11ac0c.jpg" width="500" height="281" alt="Autocomplete in ubuntu"></a>
-	 #+END_CENTER
-	 #+END_HTML
-	 #+BEGIN_CENTER
-	 P2. Auto Complete In Ubuntu 12.04
-	 #+END_CENTER
+
+	 #+CAPTION: Auto Complete In Windows 7
+   #+ATTR_HTML: :title Emacs-autocomplete in windows7 by aprilgalaxy, on Flickr :align center :alt Emacs-autocomplete in windows7
+   [[http://farm9.staticflickr.com/8112/8622523251_32b176270a.jpg]]
+   
+	 #+CAPTION: Auto Complete In Ubuntu 12.04
+   #+ATTR_HTML: :title Autocomplete in ubuntu by aprilgalaxy, on Flickr :align center :alt Autocomplete in ubuntu
+   [[http://farm9.staticflickr.com/8379/8624108132_89fe11ac0c.jpg]]
 	 
 * Yanisppet
 	同样的，过多的介绍我就不在这里陈述了，在Yanisppet项目官网有详细介绍：
@@ -102,28 +82,27 @@ $ make install DIR=$HOME/.emacs.d/
 2. Github: (现在使用)
    - [[http://github.com/capitaomorte/yasnippet]]
 ** Download Yanisppet
-#+BEGIN_SRC sh
-$ git clone https://github.com/capitaomorte/yasnippet.git
-#+END_SRC
+   #+BEGIN_SRC sh
+     $ git clone https://github.com/capitaomorte/yasnippet.git
+   #+END_SRC
 	 如果没有安装git的话，那么直接单击[[https://nodeload.github.com/capitaomorte/yasnippet/zip/master][这里（github上master分支zip包）]] 进行下载。
 	 
 ** Install Yanisppet
 	 安装说白了就是将文件拷贝到相应的位置（当然有些还需要经过编译）
 	 下载完之后，解压文件并拷贝进.emacs.d,然后将下面代码复制进.emacs中：
-#+BEGIN_SRC emacs-lisp
-(add-to-list 'load-path "~/.emacs.d/path/to/yasnippet")
-    (require 'yasnippet) ;; not yasnippet-bundle
-
-    (yas--initialize)
-    (yas/load-directory "~/.emacs.d/path/to/yasnippet/snippets")
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+     (add-to-list 'load-path "~/.emacs.d/path/to/yasnippet")
+     (require 'yasnippet) ;; not yasnippet-bundle
+     (yas--initialize)
+     (yas/load-directory "~/.emacs.d/path/to/yasnippet/snippets")
+   #+END_SRC
 	 这些步骤在windows和linux都是使用的。所以我在这里只写一份。
 	 
 	 如果还有问题你可以继续google或者看官方文档或者写电子邮件给我，我将尽快回复。
 	 
 	 祝君使用愉快。
 	 
-* 写在最后
+* 尾声
 	这个不过是一个简单的安装介绍而已，具体的使用则是需要看文档之后才能了解，我告诉你的也只能是简单的一些而已。
 	如果你有什么问题，当然可以随时联系我，只要写电子邮件，我将尽快回复。没有问题的话也可以写邮件，然后我们就成为朋友啦。
 	
