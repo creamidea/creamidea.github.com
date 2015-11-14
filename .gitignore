@@ -13,3 +13,5 @@ _articles/*.tex
 *-.*
 archive/*-.*
 tags/*-.*
+\#.*\#
+\.\#.*
