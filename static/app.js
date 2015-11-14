@@ -146,7 +146,9 @@ function someHomeFix (body, content) {
 
     var orgUl = document.getElementsByClassName('org-ul')[0]
     orgUl.style.listStyleType = 'lower-greek'
-
+    var style = document.createElement('style')
+    style.innerText = "#content ul {margin-left: 40px;font-size: 1.4em;} #content a {text-decoration: none;}"
+    orgUl.appendChild(style)
     // document.getElementById('org-div-home-and-up').style.display = 'none'
 }
 
