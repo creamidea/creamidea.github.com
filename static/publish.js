@@ -50,13 +50,13 @@ function addPublishBtn(body, content, ws) {
 
 function loadAce(body) {
   var s = document.createElement('script')
-  s.src = '/requirejs/require.js'
+  s.src = '/bower_components/requirejs/require.js'
   s.type = 'text\/javascript'
   s.onload = function(e) {
     require.config({
       // baseUrl: '/ace/lib/ace',
       paths: {
-        ace: "/ace/lib/ace"
+        ace: "/bower_components/ace/lib/ace"
       }
     })
 
