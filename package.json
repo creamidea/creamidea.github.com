@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/creamidea/creamidea.github.com.git"
+    "url": "git+https://github.com/creamidea/creamidea.git"
   },
   "keywords": [
     "koa",
@@ -21,9 +21,9 @@
   "author": "junjia ni",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/creamidea/creamidea.github.com/issues"
+    "url": "https://github.com/creamidea/creamidea/issues"
   },
-  "homepage": "https://github.com/creamidea/creamidea.github.com#creamideagithubio",
+  "homepage": "https://github.com/creamidea/creamidea#creamideagithubio",
   "dependencies": {
     "colors": "^1.1.2",
     "koa": "^1.1.2",

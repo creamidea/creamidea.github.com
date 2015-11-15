@@ -54,53 +54,9 @@
 主要是将项目地址变量化，这样子变动项目路径也会相对方便一点。需要说明的是这个 =`()= ，
 这个语法结构让列表中的元素可以选择性的求解。
 比如这里的 =creamidea= 可以被求解。
-#+begin_src elisp
-  ;; ===================================================
-  ;; creamidea
-  (require 'ox-publish)
-  (setq org-src-fontify-natively t)
-  ;; 这里设置项目的路径
-  (setq creamidea-path "/Users/creamidea/Documents/creamidea") 
-  (setq org-publish-project-alist
-        `(
-          ;; 把各部分的配置文件写到这里面来
-          ("creamidea-article"
-           :base-directory ,(concat creamidea-path "/_articles/")
-           :base-extension "org"
-           
-           :publishing-directory ,creamidea-path
-           :recursive f
-           :publishing-function org-html-publish-to-html
-           :headline-levels 4             ; Just the default for this project.
-           :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/style.css\"/>"
-           :html-postamble "<script src=\"/static/app.js\"></script>"
-           :html-extension "html"
-           :auto-preamble t
-           :section-numbers nil
-           :body-only: t
-           :author "Ni Junjia(NekoTrek)"  ; 设置作者的名字
-           :email "creamidea@gmail.com"   ; 设置作者的联系方式
-           :auto-sitemap t                ; Generate sitemap.org automagically...
-           :sitemap-filename "index.org"  ; ... call it sitemap.org (it's the default)...
-           :sitemap-title "e[(i)(pi)]+1=0(19890514)" ; ... with title 'Sitemap'.
-           :sitemap-sort-files anti-chronologically
-           :sitemap-file-entry-format "%d %t"
-           )
-          ("creamidea-static"
-           :base-directory ,(concat creamidea-path "/static")
-           :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-           :publishing-directory creamidea-path
-           :recursive f
-           :publishing-function org-publish-attachment
-           )
-          ("creamidea" :components ("creamidea-article" "creamidea-static"))
-          ;; ("creamidea" :components ("creamidea-article" "creamidea-static"))
-          ;; http://lujun9972.github.io/emacs/elisp/
-          ;; http://forrestchang.github.io/2015/08/29/use-emacs-org-mode-build-blog/
-          ))
-  ;; 绑定快捷键
-  (global-set-key (kbd "C-c x") 'org-publish-current-project)
-#+end_src
+
+#+INCLUDE: "~/.emacs.d/config/org-mode.el" src emacs-lisp
+
 复制完成之后，在.emacs这个buffer下面，按住 =M-x= 调出输入命令的buffer，然后输入 =eval-buffer= 即可。
 可以当场生效，不需要重启Emacs。
 
