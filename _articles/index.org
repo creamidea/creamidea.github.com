@@ -1,6 +1,6 @@
 #+TITLE: e[(i)(pi)]+1=0(19890514)
 
-   + [[file:How-To-Install-Autocomplete-And-Yasnippet.org][How To Install Autocomplete and Yanisppet]]
-   + [[file:Something-About-Orgmode-And-Deckjs.org][Something About Orgmode And Deckjs]]
    + [[file:Something-About-This-Site.org][Something About This Site And My Life]]
+   + [[file:Something-About-Orgmode-And-Deckjs.org][Something About Orgmode And Deckjs]]
+   + [[file:How-To-Install-Autocomplete-And-Yasnippet.org][How To Install Autocomplete and Yanisppet]]
    + [[file:GWT-ABC.org][GWT ABC]]
