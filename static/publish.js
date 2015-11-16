@@ -1,3 +1,5 @@
+'use strict'
+
 function Publish(body, content) {
   loadAce(body)
   body.addEventListener('ready.ace', function() {
@@ -84,9 +86,6 @@ function loadAce(body) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-
-  'use strict'
-
   var pathname = window.location.pathname
   var body = document.getElementsByTagName('body')[0]
   var content = document.getElementById('content')
@@ -103,5 +102,4 @@ document.addEventListener('DOMContentLoaded', function() {
   if (!isHome) {
     Publish(body, content)
   }
-
 })
