@@ -160,6 +160,13 @@ function orgDivHomeAndUpFix (body, content, meta, isHome) {
         "name": 'GMAIL', "url": 'mailto:'+meta.gmail
     }]
     var hLinks = []
+
+    if (!orgDivHomeAndUp) {
+        orgDivHomeAndUp = document.createElement('div')
+        orgDivHomeAndUp.id = 'org-div-home-and-up'
+        body.insertBefore(orgDivHomeAndUp, content, false)
+    }
+    
     Links.forEach(function (link) {
         var lname = ''
         
@@ -218,7 +225,7 @@ document.addEventListener('DOMContentLoaded', function () {
     orgDivHomeAndUpFix(body, content, meta, isHome)
     
     showTags(body, content, meta)
-    if (pathname === '/') {
+    if (isHome) {
         someHomeFix(body, content)
         showBanner(body, content)
     } else {

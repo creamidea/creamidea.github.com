@@ -1,0 +1,20 @@
+#+TITLE:OE And Nk
+#+DESCRIPTION:静态博客预览编辑发布工具
+#+KEYWORDS:emacs orgmode 静态博客 blog static-blog
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t timestamp:t
+#+LINK_HOME: https://creamidea.github.io
+
+
+* 前奏
+
+最近闲着无聊，感觉也没有什么特别的事情要干，于是又回到了整博客上了。
+一开始的时候，也没有想要做成什么样子，只是自己写写字的地方。用orgmode来写文章，写好之后导出。
+加一点点js和css让其变得好看一点。没有想过到后来就变成来这个样子。
+
+这篇文章主要是讲: 如何将orgmode导出的文章发到Github上去。另外后期加上在线编辑的功能。
+供昳子写文章。
+
+目前还在开发阶段，有空就来写一点点。
+
+* 尾声
+

@@ -26,6 +26,7 @@ build/Release
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
 public
+public/bower_components
 temp
 temp2
 
@@ -37,6 +38,7 @@ test/
 desktop.ini
 .DS_Store
 
+*.html
 _articles/*.html
 _articles/*.tex
 

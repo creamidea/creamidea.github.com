@@ -1,23 +1,54 @@
 #+Title: creamidea.github.io
-#+Author: icecream/creamidea 氷菓/creamidea/nekotrek/au9ustin
-#+Email: creamidea(AT)gmail.com
+#+AUTHOR: Junjia Ni
+#+EMAIL: creamidea(AT)gmail.com
+#+DESCRIPTION: 一些关于这里的简单说明
+#+KEYWORDS: emacs orgmode creamidea nekotrek
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t timestamp:t
+#+LINK_HOME: https://creamidea.github.io
 
-* [[http://creamidea.github.io][creamidea.github.io]]
-  
+
+* Home 
+
+  [[http://creamidea.github.io][creamidea.github.io]]
+
 * LICENSES
   
   + [[http://creativecommons.org/licenses/by-nc-sa/3.0/us/][Attribution-NonCommercial-ShareAlike 3.0 United States]]
   + [[http://creativecommons.org/licenses/by-nc-sa/3.0/cn/][署名-非商业性使用-相同方式共享 3.0 中国大陆]]
   + [[http://creativecommons.org/licenses/by-nc-sa/2.1/jp/][表示 - 非営利 - 継承 2.1 日本]]
-    
-* Shortcuts(Not Support Now)
+
+* Content
   
+  #+BEGIN_EXAMPLE
+  /creamide(nekotrek)
+  |-- _artilces ;; where your articles putting directory that you want to publish
+  |-- _draft ;; your draft
+  |-- static
+      |-- CNAME ;; Github CNAME
+      |-- about ;; about me
+      |-- app.js ;; main js
+      |-- avatar.png ;; your avatar
+      |-- favicon.ico ;; site's favicon
+      |-- medium-fonts.css ;; font
+      |-- morecomm.gif ;; comment's picture (click)
+      `-- style.css ;; main css
+  `-- README.org
+  #+END_EXAMPLE
+
+* Reading Guide
+  
+  - Back(browser)         -> Back History
+  - Forward(browser)      -> Forwad History
+  - Fn + Left (Key: Home) -> To the top
+  - Fn + Right (Key: End) -> To the bottom
+
+** Shortcuts(Not Supportting Now)
 	+ H -> Home
 	+ A -> Archive
 	+ I -> About Me
 	+ R -> RSS
 	+ / -> Search
-      
+    
 * Basic information
   
   Edited by [[http://www.gnu.org/software/emacs/][Emacs]]. 
@@ -36,9 +67,9 @@
   
   ελληνικά:χρόνος διάστημα
   
-  MIT-SCHEME C {JavaScript/CoffeeScript CSS HTML} Nodejs Python Django
+  Elisp MIT-SCHEME C {JavaScript/CoffeeScript CSS HTML} Nodejs Python Django 
   
-  Ubuntu12.04 Windows7
+  Ubuntu12.04 Windows7 OSX
   
   Emacs Latex Org-mode Git GIMP
   
@@ -52,7 +83,10 @@
   
 * BACKUP
   
-	ICECREAM(氷菓)
-  CREAMDIEA
-  NEKOTREK
-  Ni Junjia
+	- ICECREAM(氷菓)
+  - CREAMDIEA
+  - NEKOTREK
+  - Ni Junjia
+  - Junjia Ni
+  - Qooni
+

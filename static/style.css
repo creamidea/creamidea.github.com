@@ -22,6 +22,13 @@ body a {
     background-color: transparent;
 }
 
+h2[id*=sec-]:hover:after {
+    content: '#';
+    padding-left: 12px;
+    color: #4285F4;
+    cursor: pointer;
+}
+
 #avatar-wapper {
     position: fixed;
     top: 40px;
@@ -265,4 +272,3 @@ footer a {
         width: 95.999%;
     }
 }
-
