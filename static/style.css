@@ -84,10 +84,10 @@ h2:hover a,h3:hover a,h4:hover a{visibility: visible;}
 .nav-tabs li.articles.active {border-bottom: solid #D82C2D 4px;}
 .nav-tabs li.wiki.active {border-bottom: solid #0C77B6 4px;}
 .nav-tabs a {text-decoration: none;}
-.nav-tabs a[href="#_articles"] { color: #D82C2D; }
-.nav-tabs a[href="#_articles"]:hover {border-bottom: solid #D82C2D 4px;}
-.nav-tabs a[href="#_wiki"] {color: #0C77B6;}
-.nav-tabs a[href="#_wiki"]:hover {border-bottom: solid #0C77B6 4px;}
+.nav-tabs a[href="#articles"] { color: #D82C2D; }
+.nav-tabs a[href="#articles"]:hover {border-bottom: solid #D82C2D 4px;}
+.nav-tabs a[href="#wiki"] {color: #0C77B6;}
+.nav-tabs a[href="#wiki"]:hover {border-bottom: solid #0C77B6 4px;}
 .tab-content {}
 .tab-content ul {list-style-type: none;}
 .tab-content ul li{border-bottom: 1px solid rgba(0,0,0,0.05); padding: 16px; font-size: 1.4em;}
@@ -100,7 +100,7 @@ h2:hover a,h3:hover a,h4:hover a{visibility: visible;}
     visibility: hidden;
     opacity: 0;
     transform: translate(0, 16px);
-    transition: all 0.344s linear 200ms;
+    transition: all 0.344s linear 100ms;
 }
 .tab-content .tab-pane.active{
     position: static;

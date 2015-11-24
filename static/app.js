@@ -156,14 +156,14 @@ function ImgClickEvent (body, wapper) {
 }
 
 /*
- * 用于获取index.html中的分类内容，主要是 _articles _wiki 这两个分类
+ * 用于获取index.html中的分类内容，主要是 articles wiki 这两个分类
  */
 function genCategories (body, content) {
   var orgUl = content.children[1]
   var categories = []
   var sTitle = {
-    _articles: "Articles",
-    _wiki: "Wiki"
+    articles: "Articles",
+    wiki: "Wiki"
   }
   var navTabs = [], tabContent = []
   if (orgUl) {
@@ -176,7 +176,7 @@ function genCategories (body, content) {
 
       // TODO: 这里后面需要调整一下，如果URL变化，这样做是不会有什么变化的。
       navTabs.push(
-	'<li role="presentation" class="'+_name.slice(1)+'"><a onClick=showTabpane("'+_name+'") href="#'+_name+'">' +
+	'<li role="presentation" class="'+_name+'"><a onClick=showTabpane("'+_name+'") href="#'+_name+'">' +
 	  title +
 	  '</a></li>'
       )
@@ -220,7 +220,7 @@ function showTabpane (name) {
   
   __forEach.call(document.getElementsByClassName('nav-tabs')[0].children, function(li) {
     var a = li.children[0]
-    var a_name = a.getAttribute('href').slice(1)
+    var a_name = a.getAttribute('href')
     var _className = li.className
     li.className = addActive(_className, name, a_name)
   })
@@ -232,7 +232,7 @@ function showTabpane (name) {
 }
 
 function someHomeFix (body, content, pathname) {
-  showTabpane(window.location.hash.slice(1))
+  showTabpane(window.location.hash)
   // var orgUl = document.getElementsByClassName('org-ul')[0]
   // orgUl.style.listStyleType = 'lower-greek'
   // var style = document.createElement('style')
