@@ -11,6 +11,7 @@
   
 - [[http://creamidea.github.io][creamidea.github.io]]
 - [[./_articles]]
+- [[./_draft]]
   
 * LICENSES
   

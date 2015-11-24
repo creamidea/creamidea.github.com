@@ -16,5 +16,27 @@
 
 目前还在开发阶段，有空就来写一点点。
 
+* 初始化操作
+
+** 两个库（两个分支）
+这里你也可以是两个分支。
+- artilces  用来放文章的地方，原始的org文件
+- public 导出的文章，包括js/css，这个分支同步到你的 *nickname*.github.io
+
+** articles
+文章库的初始化，将文章库的位置赋值给 *deploy.js* 中的 =articlesDir= 
+然后增加远程库地址并设置--set-upstream:
+#+BEGIN_SRC sh
+$ git remote add origin git@github.com:your-repo-path
+$ git branch --set-upstream my_branch origin/my_branch
+#+END_SRC
+
+** public
+文章公共库，用于Github Page引擎渲染的库，赋值 *deploy.js* 中的 =publicDir=
+#+BEGIN_SRC sh
+$ git remote add origin git@github.com:your-page-repo-path
+$ git branch --set-upstream my_branch origin/my_branch
+#+END_SRC
+
 * 尾声
 
