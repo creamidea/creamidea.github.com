@@ -115,7 +115,7 @@ h2:hover a,h3:hover a,h4:hover a{visibility: visible;}
     visibility: hidden;
     opacity: 0;
     transform: translate(0, 24px);
-    transition: visibility 0s linear 0.5s, opacity 0.344s linear, transform 0.344s linear;
+    transition: visibility 0s linear 0.5s, opacity 0.344s linear, transform 0.344s linear, height 0.344s linear;
 }
 .tab-content .tab-pane.active{
     position: static;
@@ -130,6 +130,8 @@ h2:hover a,h3:hover a,h4:hover a{visibility: visible;}
     width: 700px;
     height: 100%;
     background-color: white;
+    -webkit-transition: height 0.344s linear;
+    transition: height 0.344s linear;
 }
 #content img {
     display: block;
@@ -140,8 +142,8 @@ h2:hover a,h3:hover a,h4:hover a{visibility: visible;}
     /* box-shadow: 3px 3px 3px #eee; */
     visibility: visible;
     opacity: 1;
-    transition: visibility 0s linear 0s,opacity 400ms 0ms;
     -webkit-transition: visibility 0s linear 0s,opacity 400ms 0ms;
+    transition: visibility 0s linear 0s,opacity 400ms 0ms;
     cursor: pointer;
     cursor: -webkit-zoom-in;
 }

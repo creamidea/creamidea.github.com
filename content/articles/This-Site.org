@@ -1,4 +1,4 @@
-#+TITLE: Something About This Site And My Life
+#+TITLE: This Site
 #+DESCRIPTION: 关于本站的一些说明和最近的人生感悟
 #+KEYWORDS: orgmode emacs github-page github blog design jekyll static-blog 感想
 #+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t timestamp:t

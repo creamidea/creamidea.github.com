@@ -68,7 +68,10 @@ function showBanner (body, content) {
   // })
   // body.insertBefore(div, content)
 
-  content.getElementsByClassName('title')[0].style.display = 'none'
+  var title = content.getElementsByClassName('title')
+  if (title && title.length > 0) {
+    title[0].style.display = 'none'
+  }
 }
 
 function showHomeButton (body) {
@@ -337,9 +340,9 @@ document.addEventListener('DOMContentLoaded', function () {
   
   showTags(body, content, meta)
   if (isHome) {
-    showBanner(body, content)
     genCategories(body, content)
     someHomeFix(body, content, pathname)
+    showBanner(body, content)
   } else {
     // showHomeButton(body)
     ImgClickEvent(body, initImgWapper(body, content))

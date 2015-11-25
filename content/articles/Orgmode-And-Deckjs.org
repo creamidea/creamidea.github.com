@@ -1,7 +1,5 @@
-#+TITLE:Something About Orgmode And Deckjs
-#+AUTHOR:Junjia Ni
-#+EMAIL:creamidea(AT)gmail.com
-#+DESCRIPTION:ICECREAM(氷菓)CREAMIDEA
+#+TITLE: Orgmode And Deckjs
+#+DESCRIPTION: 一些关于如何用orgmode配合deckjs导出HTML Slider
 #+KEYWORDS:emacs org-mode deck.js
 #+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
