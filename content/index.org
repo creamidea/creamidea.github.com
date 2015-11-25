@@ -7,5 +7,7 @@
      + [[file:articles/How-To-Install-Autocomplete-And-Yasnippet.org][How To Install Autocomplete and Yanisppet 2015-11-16]]
      + [[file:articles/GWT-ABC.org][GWT ABC 2015-11-16]]
    + wiki
+     + [[file:wiki/css.org][CSS Cookie 2015-11-25]]
+     + [[file:wiki/friends.org][Friends 2015-11-25]]
      + [[file:wiki/install.org][Install Something 2015-11-24]]
      + [[file:wiki/git.org][Git-Cookbook 2015-11-24]]

@@ -1,0 +1,29 @@
+#+TITLE: CSS Cookie
+#+AUTHOR: Junjia Ni
+#+EMAIL: creamidea(AT)gmail.com
+#+DESCRIPTION: 一些关于css的小知识
+#+KEYWORDS: emacs orgmode
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t timestamp:t
+#+LINK_HOME: https://creamidea.github.io
+
+
+* 前奏
+  收集一些css的小内容
+* 间奏
+  在做一些动画效果，需要隐藏一些元素的时候，如果直接使用 =display: none= 浏览器就不理我了。于是需要下面这些折衷的办法。
+  #+BEGIN_SRC css
+    div > ul {
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s, opacity 0.5s linear;
+    }
+    div:hover > ul {
+      visibility: visible;
+      opacity: 1;
+      transition-delay: 0s; /*在出现的时候不延迟*/
+    }
+  #+END_SRC
+  Reference:
+  + [[http://stackoverflow.com/questions/3331353/transitions-on-the-display-property][Transitions on the display: property]]
+  + [[http://www.greywyvern.com/?post%3D337][CSS3 transitions using visibility and delay]]
+* 尾声

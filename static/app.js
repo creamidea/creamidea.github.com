@@ -43,17 +43,19 @@ function getMetaInfo (isPrint) {
 
 function showBanner (body, content) {
   var div = document.createElement('div')
-  var img = document.createElement('img')
-  var a = document.createElement('a')
-  img.onload = function () {
-    body.insertBefore(div, content)
-  }
-  a.href = 'https://github.com/creamidea'
-  a.alt = a.title = 'Check me out on :octocat:'
-  img.src = 'foundingfather_v2.png'
+  // var img = document.createElement('img')
+  // var a = document.createElement('a')
+  // img.onload = function () {
+  //   body.insertBefore(div, content)
+  // }
+  // a.href = 'https://github.com/creamidea'
+  // a.alt = a.title = 'Check me out on :octocat:'
+  // img.src = 'foundingfather_v2.png'
   div.id = 'banner-wrapper'
-  a.appendChild(img)
-  div.appendChild(a)
+  body.insertBefore(div, content)
+  // a.appendChild(img)
+  // div.appendChild(a)
+  
   // __forEach.call(['e', 'i&#960;', '+', '1', '=', '0'], function(s, index) {
   //   var tag
   //   if (index === 1) {
@@ -188,8 +190,7 @@ function genCategories (body, content) {
 	_tabContent.push(
 	  a.innerText.replace(
 	      /(.*) (\d{4}-\d{2}-\d{2})/,
-	    '<li class="link"><a href="'+ a.getAttribute('href') + '">$1</a><p class="date">$2</p></li>'))
-
+	    '<li class="link"><a href="'+ a.getAttribute('href') + '">$1</a><p class="date">WROTR AT: $2</p></li>'))
       })
       tabContent.push('<div class="tab-pane" id="'+ _name +'"><ul>'+_tabContent.join(' ')+'</ul></div>')
     })
@@ -220,7 +221,7 @@ function showTabpane (name) {
   
   __forEach.call(document.getElementsByClassName('nav-tabs')[0].children, function(li) {
     var a = li.children[0]
-    var a_name = a.getAttribute('href')
+    var a_name = a.getAttribute('href').slice(1)
     var _className = li.className
     li.className = addActive(_className, name, a_name)
   })
@@ -232,7 +233,7 @@ function showTabpane (name) {
 }
 
 function someHomeFix (body, content, pathname) {
-  showTabpane(window.location.hash)
+  showTabpane(window.location.hash.slice(1))
   // var orgUl = document.getElementsByClassName('org-ul')[0]
   // orgUl.style.listStyleType = 'lower-greek'
   // var style = document.createElement('style')

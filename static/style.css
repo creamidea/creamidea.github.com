@@ -59,7 +59,22 @@ h2:hover a,h3:hover a,h4:hover a{visibility: visible;}
     /* font-family: Menlo,Georgia,Cambria,"Times New Roman",Times,serif; */
     /* font-weight: 400; */
     text-align: center;
+    
+    background: url(foundingfather_v2.png) no-repeat top center fixed;
+    height: 552px;
+    width: 100%;
+    position: relative;
 }
+/* #banner-wrapper:after { */
+/*     content: ''; */
+/*     position: absolute; */
+/*     bottom: 0; */
+/*     left: 0; */
+/*     width: 100%; */
+/*     height: 16px; */
+/*     background: linear-gradient(rgba(242,245,240, 0), rgba(255,255,255, 1)); */
+/*     pointer-events: none; */
+/* } */
 /* #banner-wrapper:before { */
 /*     content: ' '; */
 /*     position: fixed; */
@@ -99,14 +114,15 @@ h2:hover a,h3:hover a,h4:hover a{visibility: visible;}
     top: -10000px;
     visibility: hidden;
     opacity: 0;
-    transform: translate(0, 16px);
-    transition: all 0.344s linear 100ms;
+    transform: translate(0, 24px);
+    transition: visibility 0s linear 0.5s, opacity 0.344s linear, transform 0.344s linear;
 }
 .tab-content .tab-pane.active{
     position: static;
     visibility: visible;
     opacity: 1;
     transform: translate(0);
+    transition-delay:0s;
 }
 
 #content {
@@ -176,7 +192,7 @@ footer {
 }
 
 code {
-    padding: 2px;
+    padding: 3px;
 }
 
 pre.src,
