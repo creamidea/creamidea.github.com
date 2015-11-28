@@ -5,9 +5,9 @@
 #+LINK_HOME: https://creamidea.github.io
 
 
-#+begin_example
+#+BEGIN_VERSE
 时光飞逝，岁月如染。
-#+end_example
+#+END_VERSE
 
 * 前奏
 
@@ -94,6 +94,7 @@ $0
 #+INCLUDE: "../../static/app.js" src js
 
 * 演化历史
+- 2015-11-26 增加Google Analytics.js
 - 2015-11-24 首页改版，增加一些动画效果
 - 2015-11-17 将预览发布功能和文章库分离，具体的可以看 [[./OE-NK.org][OE-NK]]
 - 2015-11-14 增加预览／发布功能

@@ -1,6 +1,4 @@
 #+TITLE: CSS Cookie
-#+AUTHOR: Junjia Ni
-#+EMAIL: creamidea(AT)gmail.com
 #+DESCRIPTION: 一些关于css的小知识
 #+KEYWORDS: emacs orgmode
 #+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t timestamp:t
@@ -26,4 +24,5 @@
   Reference:
   + [[http://stackoverflow.com/questions/3331353/transitions-on-the-display-property][Transitions on the display: property]]
   + [[http://www.greywyvern.com/?post%3D337][CSS3 transitions using visibility and delay]]
+  + [[http://www.css3.info/preview/css3-transitions/][How Transitions Work]]
 * 尾声

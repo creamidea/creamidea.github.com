@@ -136,7 +136,7 @@ h2:hover a,h3:hover a,h4:hover a{visibility: visible;}
 #content img {
     display: block;
     margin: 0 auto;
-    width: 100%;
+    /* width: 100%; */
     z-index: 100;
     box-shadow: 0 0 0 white !important;
     /* box-shadow: 3px 3px 3px #eee; */
@@ -187,6 +187,7 @@ pre {
 code,
 pre.src,
 pre.example,
+p.verse,
 footer {
     font-family: Menlo,Monaco,"Courier New",Courier,monospace;
     font-size: 16px;
@@ -197,6 +198,7 @@ code {
     padding: 3px;
 }
 
+p.verse,
 pre.src,
 pre.example,
 footer {
@@ -208,7 +210,7 @@ footer {
     /* padding-left: 50px; */
     /* text-align: left; */
 }
-pre.example,
+p.verse,
 footer {
     font-family: "medium-content-slab-serif-font",Georgia,Cambria,"Times New Roman",Times,serif;
     font-weight: bold;
@@ -222,6 +224,9 @@ footer {
 pre.src {
     overflow: auto;
     max-height: 767px;
+}
+pre.src:before {
+    top: 10px !important;
 }
 
 #tags {

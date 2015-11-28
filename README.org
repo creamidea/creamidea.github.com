@@ -10,7 +10,8 @@
 * Articles
   
 - [[http://creamidea.github.io][creamidea.github.io]]
-- [[./_articles]]
+- [[./content/articles]]
+- [[./content/wiki]]
 - [[./_draft]]
   
 * LICENSES
@@ -22,8 +23,10 @@
 * Content
   
   #+BEGIN_EXAMPLE
-  /creamide(nekotrek)
-  |-- _artilces ;; where your articles putting directory that you want to publish
+  /creamidea
+  |-- content ;; where your articles putting directory
+      |-- articles ;; articles
+      `-- wiki ;; wiki
   |-- _draft ;; your draft
   |-- static
       |-- CNAME ;; Github CNAME
@@ -33,6 +36,7 @@
       |-- favicon.ico ;; site's favicon
       |-- medium-fonts.css ;; font
       |-- morecomm.gif ;; comment's picture (click)
+      |-- foundingfather_v2.png ;; 
       `-- style.css ;; main css
   `-- README.org
   #+END_EXAMPLE

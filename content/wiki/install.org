@@ -1,18 +1,38 @@
 #+TITLE: Install Something
 #+DESCRIPTION: 安装一些东西
 #+KEYWORDS: emacs orgmode install
-#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t timestamp:t
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 
 
 * 前奏
 安装一些东西。
 
-* 间奏
-** Install Protobuf
+* Install Protobuf
+
+** PKG_CONFIG_PATH unknow
 #+BEGIN_SRC sh
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 #+END_SRC
+
+* Install GnuPG
+
+** error: intmax_t unknow when compile
+#+BEGIN_QUOTE
+After upgrading to Apple's Xcode 5.0, gnupg2 2.0.21 would no longer compile.
+
+For some reason or other, sm/stdint.h could not resolve certain typedefs.
+Workaround was to crassly force typedef resolution in sm/stdint.h with these
+lines after #include <stdint.h> :
+
+typedef long  			intptr_t;
+typedef long long               intmax_t;
+typedef unsigned long   	uintptr_t;
+typedef unsigned long long      uintmax_t;
+
+After that everything compiled and all make checks passed.
+#+END_QUOTE
+Reference: https://bugs.gnupg.org/gnupg/msg4744
 
 * 尾声

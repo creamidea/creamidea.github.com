@@ -1,4 +1,4 @@
-#+TITLE: Git-Cookbook
+#+TITLE: Git Cookbook
 #+DESCRIPTION: Git Cookbook
 #+KEYWORDS: git
 #+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t timestamp:t
