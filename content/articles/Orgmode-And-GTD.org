@@ -149,7 +149,7 @@ David Allen的第二部著作Ready for Anything 中文翻译本《结果第一�
 完整配置
 #+INCLUDE: "~/.emacs.d/config/worg-dto-org-gtd.el" src emacs-lisp
 
-** 其他工具
+* 其他工具
 
 其实，是有“专业”的GTD工具存在的，Google搜索 [[https://www.google.com/search?hl%3Den&q%3Dbest%2Bgtd%2Btools][Best GTD Tools]] 可以出现很多的结果。
 为了避免被说做广告，我就不列举了。你们自己玩的开心就好 :P
