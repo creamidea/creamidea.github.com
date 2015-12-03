@@ -1,14 +1,15 @@
 #+TITLE: e[(i)(pi)]+1=0(19890514)
 
-   + wiki
-     + [[file:wiki/install.org][Install Something 2015-11-26]]
-     + [[file:wiki/git.org][Git Cookbook 2015-11-26]]
-     + [[file:wiki/friends.org][Friends 2015-11-25]]
-     + [[file:wiki/css.org][CSS Cookie 2015-11-25]]
    + articles
+     + [[file:articles/TeX-Cookie.org][Tex Cookie 2015-12-01]]
      + [[file:articles/Orgmode-And-GTD.org][Org-mode And GTD 2015-11-28]]
      + [[file:articles/This-Site.org][This Site 2015-11-26]]
      + [[file:articles/OE-NK.org][OE And NK 2015-11-25]]
      + [[file:articles/Orgmode-And-Deckjs.org][Orgmode And Deckjs 2015-11-25]]
      + [[file:articles/How-To-Install-Autocomplete-And-Yasnippet.org][How To Install Autocomplete and Yanisppet 2015-11-16]]
      + [[file:articles/GWT-ABC.org][GWT ABC 2015-11-16]]
+   + wiki
+     + [[file:wiki/install.org][Install Something 2015-12-01]]
+     + [[file:wiki/git.org][Git Cookbook 2015-11-26]]
+     + [[file:wiki/friends.org][Friends 2015-11-25]]
+     + [[file:wiki/css.org][CSS Cookie 2015-11-25]]

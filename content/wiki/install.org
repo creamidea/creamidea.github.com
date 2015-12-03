@@ -35,4 +35,15 @@ After that everything compiled and all make checks passed.
 #+END_QUOTE
 Reference: https://bugs.gnupg.org/gnupg/msg4744
 
+** Install TeX on Mac
+#+BEGIN_SRC sh
+$ sudo ln -s /Volumes/MyTeXLive/bin/universal-darwin /usr/texbin
+#+END_SRC
+
+或者 =TeX Live Utility > TeX programs (choose)= 这里修改TeX路径。
+
+使用清华TUNA: http://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/tlnet
+
+Reference: https://www.tug.org/texlive/doc/texlive-en/texlive-en.html#tlportable
+
 * 尾声

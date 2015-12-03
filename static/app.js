@@ -3,6 +3,30 @@
 var __forEach = Array.prototype.forEach
 var rActive = /active/g
 
+function changeOctoCat2 (body) {
+  var iframe = document.createElement('iframe')
+  iframe.style.display = 'none'
+  iframe.src = 'https://octodex.github.com/'
+  iframe.id = 'octodex'
+  iframe.onload = function () {
+    console.log('iframe load success');
+  }
+  body.appendChild(iframe)
+}
+
+function changeOctoCat (body) {
+  var s = document.createElement('script')
+  s.src = '/octodex-data.js'
+  s.onload = function () {
+    var octodex = window.octodex
+    if (!octodex) return
+    var max = octodex.length
+    var octocat = octodex[Math.round(Math.random(max) * 10000 % max)]
+    document.getElementById('banner-wrapper').style.backgroundImage = 'url(https://octodex.github.com' + octocat.src + ')'
+  }
+  body.appendChild(s)
+}
+
 function initImgWapper (body) {
   var div = document.createElement('div')
   div.id = 'img-wapper'
@@ -344,6 +368,7 @@ document.addEventListener('DOMContentLoaded', function () {
     genCategories(body, content)
     someHomeFix(body, content, pathname)
     showBanner(body, content)
+    changeOctoCat(body)
   } else {
     // showHomeButton(body)
     ImgClickEvent(body, initImgWapper(body, content))
