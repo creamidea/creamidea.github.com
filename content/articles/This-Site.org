@@ -1,15 +1,15 @@
 #+TITLE: This Site
-#+DESCRIPTION: 关于本站的一些说明和最近的人生感悟
-#+KEYWORDS: orgmode emacs github-page github blog design jekyll static-blog 感想
-#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t timestamp:t
+#+DESCRIPTION: 关于本站的一些说明
+#+KEYWORDS: orgmode emacs github-page github blog design jekyll static-blog
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:f f:t TeX:t email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 
 
-#+BEGIN_VERSE
-时光飞逝，岁月如染。
-#+END_VERSE
+* 前言
 
-* 前奏
+#+BEGIN_QUOTE
+时光飞逝，岁月如染。
+#+END_QUOTE
 
 是的，你没有看错，我又重新设计了一下自己的知识书写系统。荒废了好多年之后，
 又回到了这里。最近遇到一些事情感触挺大的。感觉一年过去了，自己也贬值了许多。
@@ -60,34 +60,19 @@
 复制完成之后，在.emacs这个buffer下面，按住 =M-x= 调出输入命令的buffer，然后输入 =eval-buffer= 即可。
 可以当场生效，不需要重启Emacs。
 
-*** 凌波微步(snippet)
+*** 固定开头(snippet)
 我使用的是 [[http://emacswiki.org/emacs/Yasnippet][Yasnippet]] 这个自动“填充”工具。然后写了一个这个 *Snippet*
-#+begin_src snippet
-# -*- mode: snippet -*-
-# name: blog
-# key: blog
-# --
-#+TITLE:${1:No Title}
-#+AUTHOR:Ni Junjia
-#+EMAIL:creamidea(AT)gmail.com
-#+DESCRIPTION:ICECREAM(氷菓)CREAMIDEA
-#+KEYWORDS:${2:CS}
-#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t timestamp:t
-#+LINK_HOME: https://creamidea.github.io
+#+INCLUDE: "~/.emacs.d/snippets/org-mode/blog" src org
 
-$0
-#+end_src
 稍作修改即可，然后打开.emacs文件。在.emacs这个buffer下面，按住 =M-x= 调出输入命令的buffer，然后输入 =eval-buffer= 即可。
 可以当场生效，不需要重启Emacs。
 
-
-*** 披上衣裳(CSS)
+*** 美化字体(CSS)
 为了达到美观的阅读效果，参考了 [[https://medium.com][medium]] 的设计哲学，
 文章正文部分采用居中、width:700px的样式，正文字体使用-apple-system，标签放在正文底部等。
-达到的效果如本文所示。
-#+INCLUDE: "../../static/style.css" src CSS
+达到的效果如本文所示。[[../../style.css][代码]]
 
-*** 增加灵性(JavaScript)
+*** 增加互动(JavaScript)
 为了实现一些交互效果，
 如：首页公式(banner)的处理，图片点击放大，显示标签，显示文章元信息（打开终端即可用看见）等，
 都是通过js来动态处理的，然后这个写的比较的丑陋，不是很美，后面有空的时候要来改一下。
@@ -102,15 +87,17 @@ $0
 - 2015-11-09 初始化版本
 
 * 尾声
+
 基本上，这个就是全部的内容了。写完一篇文章之后，可以使用 =C-c x= 进行文章的发布。效果就是现在这个效果了。
 
 之前还做了上文和下文之间的链接，一些快捷键的功能，在这个版本中我都去掉了。
 我的想法是可以回到首页（目录）进行选择跳转。回到首页的按钮我暂时也不准备做，
 可以通过浏览器的回退按钮回到首页，前提是你是从那里过来的。也可以修改URL来达到同样的目的。
+充分利用浏览器本身的设计理念。
 
 关于标签的这个功能，我交给了Google搜索引擎，我拼接了链接，点击标签即可。可能会由于Google搜录的速度，
 及时性可能不是那么的好。但是，这个小站估计也没有什么点击量，自己玩玩就好了。PS：因为Google在天朝水土
-不服，所以我用了我一个朋友([[https://forestgump.me/][forestgump]])的Google搜索代理，如果感兴趣可以去了解一些，或者资助一下:)
+不服，所以我用了我一个朋友([[https://forestgump.me/][@forestgump]])的Google搜索代理，如果感兴趣可以去了解一些，或者资助一下:)
 后面如果有兴趣，可以考虑写一段elisp代码来搞定这个。
 
 关于代码高亮，这个我暂时也不搞了，有兴趣的可以用 [[https://highlightjs.org][highlight.js]] 来搞定。
@@ -119,7 +106,8 @@ $0
 关于评论的问题，可以采用 [[https://disqus.com/][disqus]] 来解决。因为考虑到目前没有这个需求，所以暂时就不搞了。
 有需要的时候再加上去吧。
 
-关于图片，我使用了 [[http://www.flickr.com/][flickr]] 的服务。感觉还行吧。就是获取图片的链接比较的麻烦，后面想想要不用chrome脚本搞定，或者换一家（笑）。
+关于图片，我使用了 [[http://www.flickr.com/][flickr]] 的服务。感觉还行吧（现在已经被qiang了，我最近在想换哪一家呢？）。
+就是获取图片的链接比较的麻烦，后面想想要不用chrome脚本搞定，或者换一家（笑）。
 
 关于之前的文章，我移动了 *_draft* 这个目录下边，感兴趣的可以去 [[https://github.com/creamidea/creamidea.github.com/tree/master/_draft][这里]] 看看。因为要有一个全新的开始嘛～。
 404页面也不做了，反正也是抄，直接用Github的吧。
@@ -128,6 +116,4 @@ $0
 
 有什么问题，写信给我就好了。我会及时回复的，邮箱地址请戳页脚上的作者，或者在 [[https://github.com/creamidea/creamidea.github.com/issues][issue]] 这里创建你的问题:)
 
-嘛～自娱自乐。
-
-以上です。
+嘛～自娱自乐。以上です。

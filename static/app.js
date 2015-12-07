@@ -22,7 +22,10 @@ function changeOctoCat (body) {
     if (!octodex) return
     var max = octodex.length
     var octocat = octodex[Math.round(Math.random(max) * 10000 % max)]
-    document.getElementById('banner-wrapper').style.backgroundImage = 'url(https://octodex.github.com' + octocat.src + ')'
+    var oBannerWrapper = document.getElementById('banner-wrapper')
+    var src = 'https://octodex.github.com' + octocat.src
+    oBannerWrapper.style.backgroundImage = 'url('+ src +')'
+    oBannerWrapper.innerHTML = '<p style="display:none;"><a href="https://github.com/">Check me out on :octocat:</a></p>'
   }
   body.appendChild(s)
 }
@@ -328,7 +331,8 @@ function loadDisqus(body, content) {
   var div = document.createElement('div')
   div.className = 'comm'
   div.innerHTML = '<div class="comm_open_btn" comment="copy from bilibili.com :P" onclick="loadDisqusComment(this)"></div>'
-  content.appendChild(div)
+  if (content) 
+    content.appendChild(div)
 }
 function loadDisqusComment (target) {
   var parent = target.parentElement

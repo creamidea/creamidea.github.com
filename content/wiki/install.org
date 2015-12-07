@@ -3,10 +3,36 @@
 #+KEYWORDS: emacs orgmode install
 #+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
+#+STARTUP: showall
 
 
 * 前奏
-安装一些东西。
+这个是我的一个配置环境的wiki，主要记录我这些年安装的软件和配置的一些服务。
+主要是在Windows7上和Linux(现在主要是Ubuntu)上。
+详细记录一些配置过程和安装的软件。方便以后重新安装系统。
+
+* Extract Files
+#+BEGIN_SRC sh
+  if [ -f $1 ] ; then
+      case $1 in
+          ,*.tar.bz2)      tar xvjf $1 && cd $(basename "$1" .tar.bz2) ;;
+          ,*.tar.gz)       tar xvzf $1 && cd $(basename "$1" .tar.gz) ;;
+          ,*.tar.xz)       tar Jxvf $1 && cd $(basename "$1" .tar.xz) ;;
+          ,*.bz2)          bunzip2 $1 && cd $(basename "$1" /bz2) ;;
+          ,*.rar)          unrar x $1 && cd $(basename "$1" .rar) ;;
+          ,*.gz)           gunzip $1 && cd $(basename "$1" .gz) ;;
+          ,*.tar)          tar xvf $1 && cd $(basename "$1" .tar) ;;
+          ,*.tbz2)         tar xvjf $1 && cd $(basename "$1" .tbz2) ;;
+          ,*.tgz)          tar xvzf $1 && cd $(basename "$1" .tgz) ;;
+          ,*.zip)          unzip $1 && cd $(basename "$1" .zip) ;;
+          ,*.Z)            uncompress $1 && cd $(basename "$1" .Z) ;;
+          ,*.7z)           7z x $1 && cd $(basename "$1" .7z) ;;
+          ,*)              echo "don't know how to extract '$1'..." ;;
+      esac
+  else
+      echo "'$1' is not a valid file!"
+  fi
+#+END_SRC
 
 * Install Protobuf
 
@@ -17,7 +43,6 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 #+END_SRC
 
 * Install GnuPG
-
 ** error: intmax_t unknow when compile
 #+BEGIN_QUOTE
 After upgrading to Apple's Xcode 5.0, gnupg2 2.0.21 would no longer compile.
@@ -46,4 +71,314 @@ $ sudo ln -s /Volumes/MyTeXLive/bin/universal-darwin /usr/texbin
 
 Reference: https://www.tug.org/texlive/doc/texlive-en/texlive-en.html#tlportable
 
+* iTerm2 GBK编码
+让iTerm2临时变成GBK编码的环境，首先创建一个名为GBK的Profile，然后将其字符编码改成GBK。运行下面的sh即可用。
+#+BEGIN_SRC sh
+  #!/bin/bash
+  # 使用GBK Profile
+  echo -e "\033]50;SetProfile=GBK\a"
+  # 环境编码切换为GBK
+  export LANG=zh_CN.GBK
+  export LC_ALL=zh_CN.GBK
+  # 更改当前 iTerm2 tab title
+  echo -ne "\033]0;"$@"\007"
+  $@
+  echo -ne "\033]0;"${PWD/#$HOME/~}"\007"
+  # GBK任务完成后，自动切换回默认编码（UTF-8）
+  echo -e "\033]50;SetProfile=Default\a"
+  export LANG=zh_CN.UTF-8
+  export LC_ALL=zh_CN.UTF-8
+#+END_SRC
+
+* Windows
+** Install Windows7 Ultimate
+   1. From Home basic to Ultimate FOR LenoveY470:
+      #+BEGIN_EXAMPLE
+      6K2KY-BFH24-PJW6W-9GK29-TMPWP
+      22TKD-F8XX6-YG69F-9M66D-PMJBM
+      #+END_EXAMPLE
+   2. Install Windows7 Ultimate by DVD/USB:
+      
+      waiting...
+** Install Emacs and config her
+*** Change the Home Directory:
+		1. Ctrl + R
+    2. Input "regedit"
+    3. HKEY\_CURRENT\_USER/Software/GNU/Emacs/HOME=%The Home of Emacs%
+    (New a string value)
+*** Swap the CapsLk && Ctrl\_L
+		1. Modify the regedit
+		   #+BEGIN_EXAMPLE
+		     REGEDIT4
+
+         [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout]
+         "Scancode Map"=hex:00,00,00,00,00,00,00,00,
+                            03,00,00,00,1d,00,3a,00,
+                            3a,00,1d,00,00,00,00,00
+		     (New a binary Values)
+		     #+END_EXAMPLE
+		2. Download Software:
+          + The script: http://www.cs.umb.edu/~wimiller/stuff/caps2ctrl.exe
+          + The source: http://www.cs.umb.edu/~wimiller/stuff/caps2ctrl.ahk
+		3. AutoHotKey:
+			 #+BEGIN_EXAMPLE
+			   Capslock::Ctrl
+			 #+END_EXAMPLE
+		4. *Reference:*
+		     + http://www.emacswiki.org/emacs/MovingTheCtrlKey
+*** Reference:
+		+ http://www.emacswiki.org/emacs/JonathanArnoldDotEmacs
+** Install Jekyll
+*** Download:
+		[[http://rubyinstaller.org/downloads/][RubyInstaller && DEVELOPMENT KIT]]
+*** Install:
+		Next -> Next -> ... -> Finish
+
+		*Attention:*
+		The path of the installer cannot have space!!!
+*** Run:
+		#+BEGIN_SRC sh
+      > jekyll serve
+		#+END_SRC
+*** Change:
+		http://ruby.taobao.org/
+*** Q&A:
+		1. Liquid Exception: incompatible character encodings: IBM437 and UTF-8
+			 #+BEGIN_SRC sh
+         # windows:
+         > chcp 65001
+         
+         # Linux
+         $ export LC_ALL=en_US.UTF-8
+         $ export LANG=en_US.UTF-8
+         $ jekyll --server --auto
+         
+			 #+END_SRC
+		   Reference:
+			 + http://chxt6896.github.io/blog/2012/02/13/blog-jekyll-native.html
+
+		2. Python Django:
+			   {&#37; autoescape off &#37;}
+         Hello {&#123; name &#123;}
+         {&#37; endautoescape &#37;}       
+			 Reference:
+			 + http://www.ascii.cl/htmlcodes.htm
+** Install Foobar and config her
+** Install Win7Code
+** Install mit-scheme and fix some issue
+** Install Java Development
+
+** Install Qt Development
+*** Download:
+		1. Download Address:  http://qt-project.org/downloads
+		2. 我下载的是：[[http://mirrors.ustc.edu.cn/qtproject/official_releases/qt/4.8/4.8.4/qt-win-opensource-4.8.4-vs2010.exe][Qt libraries 4.8.4 for Windows (VS 2010, 234 MB) (Info)]]
+*** Install:
+		1. Next->Next->...->Finish
+*** Configure:
+		1. use it in terminal (vs2010):
+			 Please use the : Qt 4.8.4 Command Prompt
+*** Emacs:
+		+ http://www.emacswiki.org/emacs/QtMode
+		+ http://www.emacswiki.org/emacs/CcMode
+		+ http://alexott.blogspot.it/2009/02/cedet-qt.html
+*** Q && A:
+		1. Makefile.Debug:59: *** missing separator.  Stop.:
+			 #+BEGIN_SRC sh
+         # Qt 4.8.4 Command Prompt
+         > qmake -project
+         > qmake
+         > nmake
+			 #+END_SRC
+			 Reference:
+			 + http://stackoverflow.com/questions/12339099/what-does-the-missing-separator-make-error-mean-when-using-qt/16714236#16714236
+			 + http://www.verydemo.com/demo_c92_i131633.html
+			 + http://www.qtforum.org/article/23450/qt4-and-mysql-driver-problem.html
+			 + http://superuser.com/questions/375029/make-interrupt-exception-caught
+
+* Linux
+** Install Emacs and config it
+   1. Go to [[http://ftp.gnu.org/gnu/emacs/][here(main GNU ftp)]] to download the lastest .xz
+   2. Install the depends below:
+      #+BEGIN_SRC sh
+        $ sudo apt-get install texinfo build-essential
+        $ sudo aptitude install libdbus-1-dev libgconf2-dev libgif-dev libgpm-dev \
+          libgtk2.0-dev libjpeg62-dev libm17n-dev libncurses5-dev \
+          libotf-dev librsvg2-dev libtiff4-dev libXpm-dev
+        
+        $ ./configure
+        $ make bootstrap
+        $ make
+        $ src/emacs -q ;; This checks that it built properly
+        $ sudo make install
+        $ mv /usr/local/bin/emacs-24.0.50 /usr/local/bin/emacs24
+        ;; Change the number to whatever the version is, I moved it to a more convienent name
+        $ emacs24 -q
+      #+END_SRC
+   3. Download this config files!
+** Install Google Chrome
+   1. Go to [[https://www.google.com/intl/en/chrome/browser/][here]] to download the leaset google-chrome
+   2. Who can tell me why hwo to solve it:
+      =Dependency is not satisfiable: libudev0(>=147)=
+      (I was in Ubuntu13.04 amd64)
+** Return to classic gnome for ubuntu12.04+
+   #+BEGIN_SRC sh
+     $ sudo apt-get install gnome-session-fallback
+   #+END_SRC
+** Install Git (You can find the books. Just click [[https://github.s3.amazonaws.com/media/progit.en.pdf][here]])
+   1. Go to [[https://github.com/git/git][here]] download the lastest git.
+   2. Follow the [[http://git-scm.com/book/en/Getting-Started-Installing-Git][1.4 Getting Started - Installing Git]].
+      The main steps are:
+      #+BEGIN_SRC sh
+        $ apt-get install libcurl4-gnutls-dev libexpat1-dev gettext \
+          libz-dev libssl-dev
+        $ tar -zxf git-1.7.2.2.tar.gz
+        $ cd git-1.7.2.2
+        $ make prefix=/usr/local all
+        $ sudo make prefix=/usr/local install
+        # Below is options:
+        $ git clone git://git.kernel.org/pub/scm/git/git.git
+      #+END_SRC
+   3. Follow the [[http://git-scm.com/book/en/Getting-Started-First-Time-Git-Setup][1.5 Getting Started - First-Time Git Setup]].
+      The main steps are:
+      #+BEGIN_SRC sh
+        $ git config --global user.name "John Doe"
+        $ git config --global user.email johndoe@example.com
+      #+END_SRC
+   4. Now, you can [[https://help.github.com/articles/generating-ssh-keys][Generating SSH Keys]].
+      The main steps are:
+      #+BEGIN_SRC sh
+        $ ssh-keygen -t rsa -C "your_email@example.com"
+        $ sudo apt-get install xclip
+        $ xclip -sel clip < ~/.ssh/id_rsa.pub
+      #+END_SRC
+** Add the picture when ubuntu boot up
+   *Please pay more attenttion to modify this file*
+   1. Move the picture to the =/usr/share/backgrounds=
+   2. Replace:
+      #+BEGIN_SRC sh
+        ### BEGIN /etc/grub.d/05_debian_theme ###
+        set menu_color_normal=white/black
+        set menu_color_highlight=black/light-gray
+        if background_color 44,0,30; then
+          clear
+        fi
+        ### END /etc/grub.d/05_debian_theme ###
+      #+END_SRC
+
+      With:
+      #+BEGIN_SRC sh
+        ### BEGIN /etc/grub.d/05_debian_theme ###
+        insmod part_msdos
+        insmod ext4
+        # Here you should use (sudo fdisk -l) to see /dev/sda?? 
+        set root='(hd0,msdos10)'
+        search --no-floppy --fs-uuid --set e3a8ca35-417d-4da2-9380-91f08a9e4fb2
+        insmod png
+        if background_image /usr/share/backgrounds/spacefun-grub-widescreen.png; 
+        then
+          set color_normal=light-gray/black
+          set color_highlight=white/black
+        else
+          set menu_color_normal=cyan/blue
+          set menu_color_highlight=white/blue
+        fi
+        ### END /etc/grub.d/05_debian_theme ###
+      #+END_SRC
+   3. Reboot
+** Install Adobe Flash Player
+   1. Go to [[http://get.adobe.com/flashplayer/?no_redirect][here]] to download it.
+   2. Extract it.
+   3. Follow below:
+      #+BEGIN_SRC sh
+        # Make sure libflashplayer.so with +x
+        $ sudo cp libflashplayer.so /usr/lib/firefox/plugins/
+        $ sudo cp -r usr/* /usr
+      #+END_SRC
+   4. Open your browser to test!
+** Install Lua and Luarocks
+*** lua
+    1. Go to [[http://www.lua.org/download.html][here]] to download
+    2. Extra it
+    3. =make linux= 
+       (if error: no readline.h. =sudo apt-get install libreadline-dev=)
+    4. =sudo make install=
+    5. Over~
+*** Luarocks
+    1. Go to [[http://luarocks.org/releases/][here]] to doanload and the extra it
+    2. =./configure=
+    3. =make=
+    4. =sudo make install=
+    5. Over~
+** Install Java
+   1. Download the tar.gz package from official [[http://www.oracle.com/technetwork/java/javase/downloads/index.html][repo]]
+   2. Unzipped
+   3. Copy/Move the unzipped category to /usr/lib/jvm/
+   4. Now Run
+      #+BEGIN_SRC sh
+        update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.7.0/bin/java" 1
+        sudo update-alternatives --install "/usr/bin/javac" "javac" "/usr/lib/jvm/jdk1.7.0/bin/javac" 1
+        sudo update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/lib/jvm/jdk1.7.0/bin/javaws" 1
+      #+END_SRC
+   5. Correct the file ownership and the permissions of the executables:(if necessary)
+      #+BEGIN_SRC sh
+        sudo chmod a+x /usr/bin/java 
+        sudo chmod a+x /usr/bin/javac 
+        sudo chmod a+x /usr/bin/javaws
+        sudo chown -R root:root /usr/lib/jvm/jdk1.7.0
+      #+END_SRC
+   6. Test
+      #+BEGIN_SRC sh
+        java -version
+      #+END_SRC
+   *Reference:*
+   + http://au9ustine.bitbucket.org/blogs/2012-06-08.html
+   + http://askubuntu.com/questions/55848/how-do-i-install-oracle-java-jdk-7
+** MySQL
+   #+BEGIN_SRC sh
+     # start on runlevel [2345]
+     stop on starting rc RUNLEVEL=[016]
+   #+END_SRC
+** Change Some Key Shortcuts
+   1. Launchers > Key to show the HUD
+      =Alt+Alt R=
+
+   2. Windows > Activate the window menu 
+      =Menu=
+      
+   3. Alt + key to active menu
+      Alt+E > Keyboard Shortcuts
+      
+** Make Ubuntu12.04 hibernation
+   1. open file
+      #+BEGIN_SRC sh
+        sudo vi /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla
+      #+END_SRC
+   2. modify
+      #+BEGIN_SRC sh
+        [Re-enable hibernate by default]
+        Identity=unix-user:*
+        Action=org.freedesktop.upower.hibernate
+        ResultActive=yes
+      #+END_SRC
+   3. reboot
+
+   *Reference:*
+   + http://askubuntu.com/questions/94754/how-to-enable-hibernation
+** Install Ubuntu12.04 black screen
+   安装ubuntu12.04花屏。
+   #+BEGIN_EXAMPLE
+   在开机时进入grub编辑程序，在quite splash后面加上nomodeset
+   #+END_EXAMPLE
+   *Reference:*
+   1. http://ycool.com/post/brncevj
+   2. http://wiki.ubuntu-tw.org/index.php?title=FAQinstall
+
+* Emacs
+待阅读：
+  1. [[http://stackoverflow.com/questions/4352367/is-it-possible-to-start-emacs-using-a-remote-configuration-file][Is it possible to start emacs using a remote configuration file?]]
+	2. [[http://www.ibm.com/developerworks/cn/linux/l-cn-emacs-shell/][当 Shell 遇见 Emacs -- 大话 Emacs Shell Mode]]
+	3. [[http://lifegoo.pluskid.org/wiki/EmacsAsFileManger.html][Emacs -- 强大的文件管理器]]
+	4. [[http://cx4a.org/software/gccsense/manual.html#Installation][GCCSense User Manual]]
+	5. [[http://emacser.com/emacs-gccsense.htm][Emacs补全利器：auto-complete+gccsense]]
+	6. [[http://blog.csdn.net/astropeak/article/details/6666527][《Emacs——你不能不用的神级利器》——补全（下）]]
 * 尾声

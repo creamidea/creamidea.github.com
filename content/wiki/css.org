@@ -5,9 +5,9 @@
 #+LINK_HOME: https://creamidea.github.io
 
 
-* 前奏
+* 前言
   收集一些css的小内容
-* 间奏
+* 动画效果
   在做一些动画效果，需要隐藏一些元素的时候，如果直接使用 =display: none= 浏览器就不理我了。于是需要下面这些折衷的办法。
   #+BEGIN_SRC css
     div > ul {
