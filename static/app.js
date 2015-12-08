@@ -35,8 +35,11 @@ function changeOctoCat (body) {
     img.src = src
     img.onload = function () {
       var oBannerWrapper = document.getElementById('banner-wrapper')
-      oBannerWrapper.style.backgroundImage = 'url('+ src +')'
+      oBannerWrapper.style.background = 'url('+ src +') no-repeat top center fixed'
       oBannerWrapper.innerHTML = '<p style="display:none;"><a href="https://github.com/">Check me out on :octocat:</a></p>'
+    }
+    img.onerror = function () {
+      console.log('Load the image of octocat failed!')
     }
     body.appendChild(img)
   }
@@ -101,6 +104,7 @@ function showBanner (body, content) {
   // a.alt = a.title = 'Check me out on :octocat:'
   // img.src = 'foundingfather_v2.png'
   div.id = 'banner-wrapper'
+  div.innerHTML = '<p style="font-size: 16em; margin: 0;">&gt;<span class="blink" data-frequency="700">_</span></p>'
   body.insertBefore(div, content)
   // a.appendChild(img)
   // div.appendChild(a)
@@ -121,6 +125,7 @@ function showBanner (body, content) {
   if (title && title.length > 0) {
     title[0].style.display = 'none'
   }
+  changeOctoCat(body)
 }
 
 /**
@@ -263,7 +268,7 @@ function genCategories (body, content) {
     content.innerHTML =
       '<ul class="nav nav-tabs" role="tablist">'+ navTabs.join(' ') +'</ul>' +
       '<div class="tab-content">'+ tabContent.join('') +'</div>' +
-      '<div class="next-page-left"><a onclick="nextPage(this, -1)"><span class="blink">|</span><</a></div><div class="next-page-right"><a onclick="nextPage(this, 1)">><span class="blink">_</span></a></div>'
+      '<div class="next-page-left"><a onclick="nextPage(this, -1)"><span class="blink" data-frequency="0">|</span><</a></div><div class="next-page-right"><a onclick="nextPage(this, 1)">><span class="blink" data-frequency="0">_</span></a></div>'
 
     // blink()
   } else {
@@ -272,9 +277,15 @@ function genCategories (body, content) {
 }
 function blink () {
   __forEach.call(document.getElementsByClassName('blink'), function (blink) {
-    blink.style.display = blink.style.display === 'none' ? 'block' : 'none'
+    var oldColor = blink.getAttribute('data-old-color')
+    if (!oldColor)
+      blink.setAttribute('data-old-color', blink.style.color)
+    var frequency = parseInt(blink.getAttribute('data-frequency'), 10)
+    if (frequency > 0)
+      setInterval(function(blink, oldColor) {
+	blink.style.color = blink.style.color === 'white' ? oldColor : 'white'	
+      }, frequency, blink, oldColor)
   })
-  setTimeout(blink, 1500)
 }
 
 /**
@@ -503,7 +514,7 @@ document.addEventListener('DOMContentLoaded', function () {
     genCategories(body, content)
     someHomeFix(body, content, pathname)
     showBanner(body, content)
-    changeOctoCat(body)
+    blink()
   } else {
     // showHomeButton(body)
     ImgClickEvent(body, initImgWapper(body, content))
