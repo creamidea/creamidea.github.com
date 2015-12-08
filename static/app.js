@@ -1,8 +1,12 @@
 'use strict'
 
 var __forEach = Array.prototype.forEach
+var __slice = Array.prototype.slice
 var rActive = /active/g
 
+/**
+ * 变换首页octocat图片 iframe方案
+ */
 function changeOctoCat2 (body) {
   var iframe = document.createElement('iframe')
   iframe.style.display = 'none'
@@ -14,6 +18,9 @@ function changeOctoCat2 (body) {
   body.appendChild(iframe)
 }
 
+/**
+ * 变换首页octocat图片 本地预处理
+ */
 function changeOctoCat (body) {
   var s = document.createElement('script')
   s.src = '/octodex-data.js'
@@ -22,14 +29,23 @@ function changeOctoCat (body) {
     if (!octodex) return
     var max = octodex.length
     var octocat = octodex[Math.round(Math.random(max) * 10000 % max)]
-    var oBannerWrapper = document.getElementById('banner-wrapper')
     var src = 'https://octodex.github.com' + octocat.src
-    oBannerWrapper.style.backgroundImage = 'url('+ src +')'
-    oBannerWrapper.innerHTML = '<p style="display:none;"><a href="https://github.com/">Check me out on :octocat:</a></p>'
+    var img = document.createElement('img')
+    img.style.display = 'none'
+    img.src = src
+    img.onload = function () {
+      var oBannerWrapper = document.getElementById('banner-wrapper')
+      oBannerWrapper.style.backgroundImage = 'url('+ src +')'
+      oBannerWrapper.innerHTML = '<p style="display:none;"><a href="https://github.com/">Check me out on :octocat:</a></p>'
+    }
+    body.appendChild(img)
   }
   body.appendChild(s)
 }
 
+/**
+ * 初始化首页banner图片
+ */
 function initImgWapper (body) {
   var div = document.createElement('div')
   div.id = 'img-wapper'
@@ -37,6 +53,9 @@ function initImgWapper (body) {
   return div
 }
 
+/**
+ * 从head头部中的meta获取基础信息，并在终端中打印
+ */
 function getMetaInfo (isPrint) {
   var head = document.getElementsByTagName('head')[0]
   var childNodes = head.childNodes
@@ -68,6 +87,9 @@ function getMetaInfo (isPrint) {
   return meta
 }
 
+/**
+ * 增加首页背景图片的容器
+ */
 function showBanner (body, content) {
   var div = document.createElement('div')
   // var img = document.createElement('img')
@@ -101,6 +123,9 @@ function showBanner (body, content) {
   }
 }
 
+/**
+ * 显示回首页的按钮
+ */
 function showHomeButton (body) {
   var div = document.createElement('div')
   var a = document.createElement('a')
@@ -115,6 +140,9 @@ function showHomeButton (body) {
   body.appendChild(div)
 }
 
+/**
+ * 显示页脚信息
+ */
 function showFooter (body, content, meta) {
   // TODO: change the email
   var footer = document.createElement('footer')
@@ -129,6 +157,9 @@ function showFooter (body, content, meta) {
   body.appendChild(footer)
 }
 
+/**
+ * 在每篇文章底部显示标签
+ */
 function showTags (body, content, meta) {
   if (!meta.keywords) return
   var keywords = meta.keywords.split(' ')
@@ -149,8 +180,10 @@ function showTags (body, content, meta) {
   }
 }
 
+/**
+ * 图片点击处理
+ */
 function ImgClickEvent (body, wapper) {
-
   function fun (e) {
     var img = wapper.getElementsByTagName('img')
     var target = e.target
@@ -219,24 +252,52 @@ function genCategories (body, content) {
       __forEach.call(children, function(c) {
 	var a = c.children[0]
 	_tabContent.push(
-	  a.innerText.replace(
+	  a.innerHTML.replace(
 	      /(.*) (\d{4}-\d{2}-\d{2})/,
 	    '<li class="link"><a href="'+ a.getAttribute('href') + '">$1</a><p class="date">WROTR AT: $2</p></li>'))
       })
-      tabContent.push('<div class="tab-pane" id="'+ _name +'"><ul>'+_tabContent.join(' ')+'</ul></div>')
+
+      // pagin
+      tabContent.push('<div class="tab-pane" id="'+ _name +'">'+paging(_tabContent, content).join(' ')+'</div>')
     })
     content.innerHTML =
       '<ul class="nav nav-tabs" role="tablist">'+ navTabs.join(' ') +'</ul>' +
-      '<div class="tab-content">'+ tabContent.join('') +'</div>'
+      '<div class="tab-content">'+ tabContent.join('') +'</div>' +
+      '<div class="next-page-left"><a onclick="nextPage(this, -1)"><span class="blink">|</span><</a></div><div class="next-page-right"><a onclick="nextPage(this, 1)">><span class="blink">_</span></a></div>'
+
+    // blink()
   } else {
     console.error('At Home Page: Parse content Error! The Org UL isnt exist.')
   }
 }
-function showTabpane (name) {
+function blink () {
+  __forEach.call(document.getElementsByClassName('blink'), function (blink) {
+    blink.style.display = blink.style.display === 'none' ? 'block' : 'none'
+  })
+  setTimeout(blink, 1500)
+}
+
+/**
+ * @param {name} String 这个是点击之后，传入的name
+ * @param {_name} String 这个是要被匹配的name
+ * @param {pagnum} Int 这个是页码，默认为1
+ * @retrun {String} 返回加上active的className
+ */
+function showTabpane (name, pagnum) {
+  if (!pagnum) pagnum = 1
+  window._category = name // Please more attension
+  var dCategory = document.getElementById(name)
+  if (dCategory && dCategory.children.length > 1) {
+    document.getElementsByClassName('next-page-left')[0].style.display = 'block'
+    document.getElementsByClassName('next-page-right')[0].style.display = 'block'
+  } else {
+    document.getElementsByClassName('next-page-left')[0].style.display = 'none'
+    document.getElementsByClassName('next-page-right')[0].style.display = 'none'
+  }
+
   /**
-   * @param {name} String 这个是点击之后，传入的name
-   * @param {_name} String 这个是要被匹配的name
-   * @retrun {String} 返回加上active的className
+   * 给class加上active，外层不用管是否有active
+   * 如果有active，会自动去掉
    */
   function addActive (_className, name, _name) {
     _className = _className.replace(/\s*$/g, '')
@@ -259,12 +320,75 @@ function showTabpane (name) {
   __forEach.call(document.getElementsByClassName('tab-content')[0].children, function (pane) {
     var _name = pane.id
     var _className = pane.className
+    var pages = pane.children
     pane.className = addActive(_className, name, _name)
+
+    __forEach.call(pages, function (page, index) {
+      var _pagnum = parseInt(page.getAttribute('pagnum'), 10)
+      page.className = page.className.replace(/\s*active/g, '')
+      if (_pagnum === pagnum) {
+	page.className = page.className + ' active'
+      }
+    })
   })
 }
+function paging (_tabContent, content) {
+  var pages = [], frg = 4, tabContentLength = _tabContent.length
+  var s_cursor = 0, e_cursor = tabContentLength / frg
+  if (e_cursor === 0 || tabContentLength % frg) {
+    e_cursor += 1
+  }
+  for (var i = 0; i < e_cursor; i++) {
+    pages.push('<ul class="page" pagnum="'+ (i+1) +'">' + _tabContent.slice(s_cursor, s_cursor + frg).join(' ') + '</ul>')
+    s_cursor += frg
+  }
+  return pages
+}
+function nextPage (elt, direction) {
+  var category = window._category
+  var pagnum = parseInt(window._search.pagnum, 10) || 1
+  var total = document.getElementById(category).children.length
+  var next
+  
+  switch (direction) {
+  case 1:
+    next = pagnum + 1 > total ? 1 : pagnum + 1
+    break
+  case -1:
+    next = pagnum - 1 < 1 ? total : pagnum - 1
+    break
+  default:
+    break
+  }
+  if (next) {
+    showTabpane(category, next)
+    window.location.hash = '#' + category + '?pagnum=' + next
+    window._category = category
+    window._search.pagnum = next
+  }
+}
 
+/**
+ * 对URL中的hash部分进行分解 
+ * e.g. /#articles?pagnum=1
+ */
+function hashBreakDown () {
+  var hash = window.location.hash.slice(1)
+  var _hash = hash.split('?')
+  var _category = _hash[0]
+  var search = (_hash[1] && _hash[1].split('&')) || [], _search = {}
+  __forEach.call(search, function (s, index) {
+    var a = s.split('=')
+    _search[a[0]] = a[1]
+  })
+  window._category = _category
+  window._search = _search
+}
 function someHomeFix (body, content, pathname) {
-  showTabpane(window.location.hash.slice(1))
+  content.style.position = 'relative'
+  var category = window._category
+  var pagnum = parseInt((window._search.pagnum), 10) || 1
+  showTabpane(category, pagnum)
   // var orgUl = document.getElementsByClassName('org-ul')[0]
   // orgUl.style.listStyleType = 'lower-greek'
   // var style = document.createElement('style')
@@ -274,6 +398,9 @@ function someHomeFix (body, content, pathname) {
   // document.getElementById('org-div-home-and-up').style.display = 'none'
 }
 
+/**
+ * 为h2 h3 h4标题类型后面增加#符号
+ */
 function someArticlesFix (body, content, isHome) {
   var tableOfContents = document.getElementById('table-of-contents')
   tableOfContents.style.display = 'none'
@@ -290,6 +417,9 @@ function someArticlesFix (body, content, isHome) {
   })
 }
 
+/**
+ * 页面右上角处理 HOME/GMAIL
+ */
 function orgDivHomeAndUpFix (body, content, meta, isHome) {
   var orgDivHomeAndUp = document.getElementById('org-div-home-and-up')
   var Links = [{
@@ -369,6 +499,7 @@ document.addEventListener('DOMContentLoaded', function () {
   
   showTags(body, content, meta)
   if (isHome) {
+    hashBreakDown()
     genCategories(body, content)
     someHomeFix(body, content, pathname)
     showBanner(body, content)
