@@ -6,8 +6,8 @@
      + [[file:wiki/git.org][Git Cookbook 2015-11-26]]
      + [[file:wiki/friends.org][Friends 2015-11-25]]
    + articles
-     + [[file:articles/Unicode-And-UTF8.org][Unicode and UTF8 2015-12-07]]
-     + [[file:articles/This-Site.org][This Site 2015-12-05]]
+     + [[file:articles/This-Site.org][This Site 2015-12-08]]
+     + [[file:articles/Unicode-And-UTF8.org][Unicode and UTF8 2015-12-08]]
      + [[file:articles/TeX-Cookie.org][Tex Cookie 2015-12-05]]
      + [[file:articles/Orgmode-And-GTD.org][Org-mode And GTD 2015-11-28]]
      + [[file:articles/OE-NK.org][OE And NK 2015-11-25]]

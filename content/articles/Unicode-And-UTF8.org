@@ -17,15 +17,15 @@
 
 最近明明事情很多，但是就是什么事情都不想干，这个是为什么呢？
 没事干，就去折腾一些并没有什么用的东西。这不，花了一个周末，看了一些关于编码方面的文章。
-下面就是我的一些理解和笔记。
+下面就是我的一些理解和笔记。很肤浅，只是一个很简单的介绍文章，详细的你可以阅读 [[Reference]] 中前几篇文章。
 
 * Unicode
-#+BEGIN_VERSE
+#+BEGIN_QUOTE
 Unicode provides a unique number for every character,
 no matter what the platform,
 no matter what the program,
 no matter what the language. 
-#+END_VERSE
+#+END_QUOTE
 想象一下这是一个扩展的ASCII码的表，当你迷糊的时候，想想这句话。什么是Unicode。
 
 举一个例子:
@@ -57,13 +57,17 @@ no matter what the language.
 然后他的编号（数字） =97= 来指代这个 =a(U+0097)= 。
 
 现在在会过来看这句话
-#+BEGIN_VERSE
+#+BEGIN_QUOTE
 Unicode provides a unique number for every character,
 no matter what the platform,
 no matter what the program,
 no matter what the language. 
-#+END_VERSE
+#+END_QUOTE
 希望你已经明白什么是"真"Unicode。为每一个字符提供唯一的数字。
+
+#+BEGIN_HTML
+<img src="https://docs.google.com/drawings/d/1ZI9lDMtH1I9i4_vm-aEffr37Q09cBd4Kzl3jpA6yMSQ/pub?w=750&h=390" alt="字符－编号－编码" title="字符－编号－编码"/>
+#+END_HTML
 
 * UTF8
 好了，在理解了Unicode之后，再来看UTF-8，这个又是什么东东呢？ \\
@@ -97,6 +101,8 @@ E6 98 B3 按字节重新转换成16进制
   昳
 #+END_SRC
 
+如果平常看到类似这样每3个字节出现一个E，你应该可以反应过来应该是中文的UTF-8编码了吧。
+
 * Python
 #+BEGIN_EXAMPLE
 编码：unicode-->str
@@ -114,13 +120,15 @@ str.encode()实际上就等价于str.decode(sys.defaultencoding).encode().而sys
 系统字符编码控制优先级 =LC_ALL>LC_*>LANG=
 
 * 尾声
-基本上，我所理解的Unicode和UTF8就是这个样子了，在Python上面做了很多的实验，希望以后不要再犯一些低级错误
+基本上，我所理解的Unicode和UTF8就是这个样子了，在Python上面做了很多的实验，希望以后不要再犯一些低级错误。
+希望不会因为我的无知，再痛恨 *Python2.X*
 #+BEGIN_SRC python
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 UnicodeEncodeError: 'ascii' codec can't encode character u'\u6633' in position 0: ordinal not in range(128)
 #+END_SRC
 
+#+NAME: Reference
 * Reference
 1. [[http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html][字符编码笔记：ASCII，Unicode和UTF-8]]
 2. [[http://my.oschina.net/goldenshaw/blog/470946][文本在内存中的编码(1)——乱码探源(4)]]
