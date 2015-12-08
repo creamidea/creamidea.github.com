@@ -29,6 +29,10 @@ function changeOctoCat (body) {
     if (!octodex) return
     var max = octodex.length
     var octocat = octodex[Math.round(Math.random(max) * 10000 % max)]
+    if (!octocat.src) {
+      console.log('Now, I want to load ', octocat, '. But failed!');
+      return
+    }
     var src = 'https://octodex.github.com' + octocat.src
     var img = document.createElement('img')
     img.style.display = 'none'
@@ -268,7 +272,8 @@ function genCategories (body, content) {
     content.innerHTML =
       '<ul class="nav nav-tabs" role="tablist">'+ navTabs.join(' ') +'</ul>' +
       '<div class="tab-content">'+ tabContent.join('') +'</div>' +
-      '<div class="next-page-left"><a onclick="nextPage(this, -1)"><span class="blink" data-frequency="0">|</span><</a></div><div class="next-page-right"><a onclick="nextPage(this, 1)">><span class="blink" data-frequency="0">_</span></a></div>'
+      '<div class="next-page-left"><a onclick="nextPage(this, -1)"><span class="blink" data-frequency="0">|</span><</a></div><div class="next-page-right"><a onclick="nextPage(this, 1)">><span class="blink" data-frequency="0">_</span></a></div>' +
+      '<div class="page-footer" style="text-align: right; font-size: 1.2em;"></div>'
 
     // blink()
   } else {
@@ -298,13 +303,15 @@ function showTabpane (name, pagnum) {
   if (!pagnum) pagnum = 1
   window._category = name // Please more attension
   var dCategory = document.getElementById(name)
-  if (dCategory && dCategory.children.length > 1) {
+  var xx_total = dCategory.children.length
+  if (dCategory && xx_total > 1) {
     document.getElementsByClassName('next-page-left')[0].style.display = 'block'
     document.getElementsByClassName('next-page-right')[0].style.display = 'block'
   } else {
     document.getElementsByClassName('next-page-left')[0].style.display = 'none'
     document.getElementsByClassName('next-page-right')[0].style.display = 'none'
   }
+  showPageFooter(pagnum, xx_total)
 
   /**
    * 给class加上active，外层不用管是否有active
@@ -343,6 +350,9 @@ function showTabpane (name, pagnum) {
     })
   })
 }
+/**
+ * 分页函数
+ */
 function paging (_tabContent, content) {
   var pages = [], frg = 4, tabContentLength = _tabContent.length
   var s_cursor = 0, e_cursor = tabContentLength / frg
@@ -355,6 +365,9 @@ function paging (_tabContent, content) {
   }
   return pages
 }
+/**
+ * 翻页函数
+ */
 function nextPage (elt, direction) {
   var category = window._category
   var pagnum = parseInt(window._search.pagnum, 10) || 1
@@ -378,7 +391,20 @@ function nextPage (elt, direction) {
     window._search.pagnum = next
   }
 }
-
+/**
+ * 分页页脚 1/2
+ */
+function showPageFooter (next, total) {
+  if (!total) total = document.getElementById(window._category).children.length
+  var pageFooter = document.getElementsByClassName('page-footer')[0]
+  if (total <= 1) {
+    pageFooter.style.display = 'none'
+    return 
+  }
+  pageFooter.style.display = 'block'
+  if (!next) next = window._search.pagnum || 1
+  pageFooter.innerHTML = next + '/' + total
+}
 /**
  * 对URL中的hash部分进行分解 
  * e.g. /#articles?pagnum=1
@@ -396,10 +422,12 @@ function hashBreakDown () {
   window._search = _search
 }
 function someHomeFix (body, content, pathname) {
+  // show the correct content
   content.style.position = 'relative'
   var category = window._category
   var pagnum = parseInt((window._search.pagnum), 10) || 1
   showTabpane(category, pagnum)
+
   // var orgUl = document.getElementsByClassName('org-ul')[0]
   // orgUl.style.listStyleType = 'lower-greek'
   // var style = document.createElement('style')
@@ -512,8 +540,8 @@ document.addEventListener('DOMContentLoaded', function () {
   if (isHome) {
     hashBreakDown()
     genCategories(body, content)
-    someHomeFix(body, content, pathname)
     showBanner(body, content)
+    someHomeFix(body, content, pathname)
     blink()
   } else {
     // showHomeButton(body)
