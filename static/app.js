@@ -181,7 +181,7 @@ function showTags (body, content, meta) {
       a.href = searchEngine +
         key + '+site:' + window.location.hostname
       a.title = 'Go to ' + key
-      a.innerText = key
+      a.innerHTML = key
       div.appendChild(a)
     })
     div.id = 'tags'
@@ -287,7 +287,9 @@ function blink () {
       blink.setAttribute('data-old-color', blink.style.color)
     var frequency = parseInt(blink.getAttribute('data-frequency'), 10)
     if (frequency > 0)
-      setInterval(function(blink, oldColor) {
+      setInterval(function(_blink, _oldColor) {
+	if (!_blink) _blink = blink
+	if (!_oldColor) _oldColor = oldColor
 	blink.style.color = blink.style.color === 'white' ? oldColor : 'white'	
       }, frequency, blink, oldColor)
   })
@@ -449,7 +451,7 @@ function someArticlesFix (body, content, isHome) {
   function genTagA (h) {
     var a = document.createElement('a')
     a.href = '#' + h.id
-    a.innerText = '#'
+    a.innerHTML = '#'
     return a
   }
   ['h2', 'h3', 'h4'].forEach(function (hTag) {
@@ -529,7 +531,7 @@ function disqus_config () {
   // https://help.disqus.com/customer/portal/articles/472098-javascript-configuration-variables
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+function main() {
   var pathname = window.location.pathname
   var body = document.getElementsByTagName('body')[0]
   var content = document.getElementById('content')
@@ -553,5 +555,13 @@ document.addEventListener('DOMContentLoaded', function () {
     someArticlesFix(body, content)
   }
   showFooter(body, content, meta)
+}
 
-}, false);
+if (document.addEventListener) 
+  document.addEventListener('DOMContentLoaded', function () {
+    main()
+  }, false);
+else
+  document.attachEvent('onDOMContentLoaded', function () {
+    main()
+  }, false);

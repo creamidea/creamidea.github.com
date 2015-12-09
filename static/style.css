@@ -65,7 +65,7 @@ h2:hover a,h3:hover a,h4:hover a{visibility: visible;}
 .tab-content .tab-pane,
 .tab-content .page {
     position: absolute;
-    z-index: -1;
+    /* z-index: -1; */
     top: -10000px;
     visibility: hidden;
     opacity: 0;
