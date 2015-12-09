@@ -271,10 +271,14 @@ function genCategories (body, content) {
       // pagin
       tabContent.push('<div class="tab-pane" id="'+ _name +'">'+paging(_tabContent, content).join(' ')+'</div>')
     })
+
+    navTabs.push(
+      '<li role="presentation" class="octocat"><a href="https://octodex.github.com/">Octocats</a></li>'
+    )
     content.innerHTML =
       '<ul class="nav nav-tabs" role="tablist">'+ navTabs.join(' ') +'</ul>' +
       '<div class="tab-content">'+ tabContent.join('') +'</div>' +
-      '<div class="next-page-left"><a onclick="nextPage(this, -1)"><span class="blink" data-frequency="0">|</span><</a></div><div class="next-page-right"><a onclick="nextPage(this, 1)">><span class="blink" data-frequency="0">_</span></a></div>' +
+      '<div class="next-page-left"><a onclick="nextPage(this, -1)">&lt;</a></div><div class="next-page-right"><a onclick="nextPage(this, 1)">&gt;</a></div>' +
       '<div class="page-footer" style="text-align: right; font-size: 1.2em;"></div>'
 
     // blink()
