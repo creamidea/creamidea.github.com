@@ -303,7 +303,7 @@ function showTabpane (name, pagnum) {
   if (!pagnum) pagnum = 1
   window._category = name // Please more attension
   var dCategory = document.getElementById(name)
-  var xx_total = dCategory.children.length
+  var xx_total = dCategory ? dCategory.children.length : 0
   if (dCategory && xx_total > 1) {
     document.getElementsByClassName('next-page-left')[0].style.display = 'block'
     document.getElementsByClassName('next-page-right')[0].style.display = 'block'
@@ -395,7 +395,10 @@ function nextPage (elt, direction) {
  * 分页页脚 1/2
  */
 function showPageFooter (next, total) {
-  if (!total) total = document.getElementById(window._category).children.length
+  if (!total) {
+    var oCategory = document.getElementById(window._category)
+    total = oCategory ? oCategory.children.length : 0
+  }
   var pageFooter = document.getElementsByClassName('page-footer')[0]
   if (total <= 1) {
     pageFooter.style.display = 'none'
