@@ -41,9 +41,11 @@ function changeOctoCat (body) {
       var oBannerWrapper = document.getElementById('banner-wrapper')
       oBannerWrapper.style.background = 'url('+ src +') no-repeat top center fixed'
       oBannerWrapper.innerHTML = '<p style="display:none;"><a href="https://github.com/">Check me out on :octocat:</a></p>'
+      clearInterval(window.blinkTimer)
     }
     img.onerror = function () {
       console.log('Load the image of octocat failed!')
+      clearInterval(window.blinkTimer)
     }
     body.appendChild(img)
   }
@@ -287,10 +289,11 @@ function blink () {
       blink.setAttribute('data-old-color', blink.style.color)
     var frequency = parseInt(blink.getAttribute('data-frequency'), 10)
     if (frequency > 0)
-      setInterval(function(_blink, _oldColor) {
+      window.blinkTimer = setInterval(function(_blink, _oldColor) {
 	if (!_blink) _blink = blink
 	if (!_oldColor) _oldColor = oldColor
-	blink.style.color = blink.style.color === 'white' ? oldColor : 'white'	
+	if (blink)
+	  blink.style.color = blink.style.color === 'white' ? oldColor : 'white'	
       }, frequency, blink, oldColor)
   })
 }
@@ -562,6 +565,6 @@ if (document.addEventListener)
     main()
   }, false);
 else
-  document.attachEvent('onDOMContentLoaded', function () {
+  window.attachEvent('onDOMContentLoaded', function () {
     main()
-  }, false);
+  });
