@@ -365,6 +365,7 @@ function showTabpane (name, pagnum) {
 function paging (_tabContent, content) {
   var pages = [], frg = 4, tabContentLength = _tabContent.length
   var s_cursor = 0, e_cursor = tabContentLength / frg
+  e_cursor = parseInt(e_cursor.toString().split('.')[0], 10)
   if (e_cursor === 0 || tabContentLength % frg) {
     e_cursor += 1
   }
@@ -415,6 +416,7 @@ function showPageFooter (next, total) {
   }
   pageFooter.style.display = 'block'
   if (!next) next = window._search.pagnum || 1
+  if (next > total) next = NaN
   pageFooter.innerHTML = next + '/' + total
 }
 /**
