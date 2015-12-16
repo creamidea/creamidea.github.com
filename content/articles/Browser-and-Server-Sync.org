@@ -1,0 +1,75 @@
+#+TITLE:Browser and Server Sync (Polling, Comet, Long Polling, WebSocket)
+#+KEYWORDS: polling commet long-polling websocket nodejs javascript coffeescript python
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t
+#+LINK_HOME: https://creamidea.github.io
+
+
+* 前言
+
+这只是一篇简单介绍浏览器与服务器之间的实时数据交换的方法。
+在客户端使用的是 [[http://coffeescript.org/][coffeescript]] ，接触下来感觉这种语法还是不错的，
+然后在学习的过程中，貌似coffeescript借鉴了许多 [[http://www.ruby-lang.org/en/][Ruby]] 的语法，
+所以接下来我准备去看看Ruby，当然这个是题外话啦。
+一旦接受了coffeescript这种设定，还是很带感的。
+
+然后服务器用的是 [[http://www.python.org/][python]] 的 [[http://flask.pocoo.org/][Flask]] 这一WEB框架以及 [[http://nodejs.org/][nodejs]] 
+
+主要参考的是：[[http://www.josephj.com/entry.php?id%3D358][Browser 與 Server 持續同步的作法介紹 (Polling, Comet, Long Polling, WebSocket)]]
+
+* 环境的搭建
+** Flask
+1. Install
+	 安装步骤，请移步 [[http://flask.pocoo.org/docs/installation/#installation][这里]] ，这里是官方的安装方式，在这里我接触到了python的虚拟环境。
+	 感觉用这个virtualenv的确不错，然后我找到了一篇介绍这种的文章：[[https://virtualenv-chinese-docs.readthedocs.org/en/latest/][virtualenv]]
+2. Quick Start
+	 请移步[[http://flask.pocoo.org/docs/quickstart/#quickstart][这里]] 。我也是跟着快速教程一步一步做的，写出来的服务器也很简单。
+	 毕竟这篇文章的主题不是这个。
+** Nodejs
+	 关于如何安装 [[http://nodejs.org/][nodejs]] 以及如何使用我在此不多累述。官方文档写的很详细。
+	 然后我使用的是 [[http://expressjs.com/][expressjs]] 这一WEB框架。安装方式和快速入门点击 [[http://expressjs.com/guide.html][QuickStart]] 。
+
+	 在这里着重写一下使用 =coffeescript= 来写nodejs的代码。
+	 具体可以看这篇文章：[[http://sparklinlabs.com/2013/06/my-node-js-express-coffeescript-setup/][My Node.js Express + CoffeeScript setup]]
+
+	 我的做法只是用来其中的一条命令：
+	 #+BEGIN_SRC sh
+     $ sudo npm install -g js2coffee
+	 #+END_SRC
+	 将express生成的app.js转成了app.coffee，然后将 package.json 中的
+	 #+BEGIN_SRC js
+     "start": "node app.js"
+	 #+END_SRC
+	 变成了：
+	 #+BEGIN_SRC js
+     "start": "coffee app.coffee"
+	 #+END_SRC
+
+	 具体的在我上面提到文章中有详细介绍。当然还可以看看这个：[[http://twilson63.github.io/express-coffee/][Express-coffee]]
+
+* Polling
+	这是轮询的方式，是一种很常见的解决方案。然后我这里没有写代码。
+  思路就是使用setInterval()函数，定时访问服务器。构成一个一个polling.
+* Comet
+  等待填坑……
+* Long Polling
+	长轮询方式。
+	代码：
+	#+BEGIN_HTML
+	<script src="https://gist.github.com/creamidea/6114508.js"></script>
+	#+END_HTML
+* WebSocket
+  等待填坑……
+* Socket.IO
+	[[http://socket.io/][Socket.IO]] 这个我个人感觉不错，支持的浏览器也很多，然后使用的是nodejs。
+	有空的时候看看源代码，看看究竟是如何实现的。
+
+	然后下面的代码都是按照官方的步骤做的，只是稍微修改了一下。具体的可以参照 [[http://socket.io/#how-to-use][这里]]
+	
+	代码：
+	#+BEGIN_HTML
+	<script src="https://gist.github.com/creamidea/6114473.js"></script>
+	#+END_HTML
+
+* 后记
+	然后接下来需要思考的是数据库更新，如何通知web服务器发送更新数据？
+  继续等待填坑……

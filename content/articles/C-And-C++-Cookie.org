@@ -1,0 +1,241 @@
+#+TITLE:C And C++ Cookie
+#+DESCRIPTION: 学习C/C++基础笔记
+#+KEYWORDS:c CPlusPlus cpp learning
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
+#+LINK_HOME: https://creamidea.github.io
+#+STARTUP: showall
+
+
+* 前言
+好的，匆忙地学习完ARM之后，立即转战C++学习。真是有意思的安排啊。おもしろい。 \\
+那么我们就开始记录吧。原本这个是写于 *2013-04-22* 的笔记。
+由于最近想看一下 *node* 的源码，所以，这个笔记又被翻出来啦。
+
+* 模版
+
+** 函数模版
+*template <typename T>*
+
+#+BEGIN_SRC c++
+template <class T>
+void foo(T param)
+{
+// do something
+}
+#+END_SRC
+
+** 类模版
+#+BEGIN_SRC c++
+template <class T>
+class MyClass
+{
+    MyClass();
+    void swap(T &a, T &b);
+}
+MyClass<T>::MyClass()
+{
+    // 初始化操作。
+}
+template <>
+type ClassName<class T>::FunctionName (parameters)
+#+END_SRC 
+
+* 重载操作符
+#+BEGIN_SRC c++
+type operator sign (parameters);
+#+END_SRC
+| Expression | Operator (@)                           | Function member        | Global function   |
+|------------+----------------------------------------+------------------------+-------------------|
+| @a         | + - * & ! ~ ++ --                      | A::operator@( )        | operator@(A)      |
+| a@         | ++ --                                  | A::operator@(int)      | operator@(A, int) |
+| a@b        | + - * / % ^ & < > == != <= >= << >> && | A::operator@(B)        | operator@(A, B)   |
+| a@b        | = += -= *= /= %= ^= &=  = <<= >>= [ ]  | A::operator@(B)        | -                 |
+| a(b, c...) | ( )                                    | A::operator()(B, C...) | -                 |
+| a->b       | ->                                     | A::operator->()        | -                 |
+#+TBLFM: $2=+= -= *= /= %= ^= &=  = <<= >>= [ ]
+Reference: http://www.prglab.com/cms/pages/c-tutorial/oo-programming/overloading-operators.php
+* 副本构造器(copy construct)
+#+BEGIN_SRC c++
+ClassName(const ClassName &cn);
+#+END_SRC
+当重载操作符 *=* ，并不能深度拷贝的时候，需要用一个副本构造器来避免编译器在找不到副本构造器时，自己创建一个“逐位复制”的副本构造器。
+
+Reference: http://www.cnblogs.com/li-peng/p/3776384.html
+
+* 类型高级转化(Advanced Class Type-casting)
+** reinterpert_cast
+reinterpret_cast 可以将一个指针转换为任意其它类型的指针。它也可以用来将一个指针转换为一个整型，或反之亦然。 \\
+这个操作符可以在互不相关的类之间进行指针转换，操作的结果是简单的将一个指针的二进制数据(binary copy)复制到另一个指针。对指针指向的内容不做任何检查或转换。
+** static_cast
+static_cast 可以执行所有能够隐含执行的类型转换，以及它们的反向操作（即使这种方向操作是不允许隐含执行的）。\\
+用于类的指针，也就是说，它允许将一个引申类的指针转换为其基类类型（这是可以被隐含执行的有效转换），同时也允许进行相反的转换：将一个基类转换为一个引申类类型。
+** dynamtic_cast
+dynamic_cast 完全被用来进行指针的操作。它可以用来进行任何可以隐含进行的转换操作以及它们被用于多态类情况下的方向操作。
+然而与static_cast不同的是， dynamic_cast 会检查后一种情况的操作是否合法，也就是说它会检查类型转换操作是否会返回一个被要求类型的有效的完整的对象。
+** const_cast
+这种类型转换对常量const 进行设置或取消操作
+
+#+BEGIN_HTML
+<img src="http://blog.fishc.com/wp-content/uploads/2012/08/%E5%9B%BE%E7%89%871.gif" alt="引用fishc图，侵删" title="引用fishc图，侵删"/>
+#+END_HTML
+
+Reference:
+1. http://blog.fishc.com/479.html
+2. http://www.prglab.com/cms/pages/c-tutorial/advanced-concepts/class-type-casting.php
+*  避免内存泄漏
+1. 在 =return= 前 =delete=
+2. 把 =new= 出来的地址给调用者
+
+* 库
+** 动态链接库
+*** 编译
+在使用GCC编译程序时，只需加上-shared选项即可，这样生成的执行程序即为动态链接库。例如
+#+BEGIN_SRC sh
+gcc hello.c -fPIC -o libhello.so  
+#+END_SRC
+其中 =-fPIC= 选项的作用是：表示编译为位置独立的代码，不用此选项的话编译后的代码是位置相关的，
+所以动态载入时是通过代码拷贝的方式来满足不同的调用，而不能达到真正的代码段共享的目的。
+*** 链接
+#+BEGIN_SRC sh
+gcc main.c -L. -lhello -o main
+#+END_SRC
+
+** 静态库
+*** 编译
+#+BEGIN_SRC sh
+gcc hello.c -o hello.o  #这里没有使用-shared
+#+END_SRC
+*** 归档
+#+BEGIN_SRC sh
+ar -r libhello.a hello.o  #这里的ar相当于tar的作用，将多个目标打包。
+#+END_SRC
+*ar -- create and maintain library archives*
+
+程序 =ar= 配合参数 =-r= 创建一个新库libhello.a，并将命令行中列出的文件打包入其中。这种方法，如果libhello.a已经存在，将会覆盖现在文件，否则将新创建。
+*** 链接
+#+BEGIN_SRC sh
+gcc main.c -lhello -L. -static -o main
+#+END_SRC
+或者
+#+BEGIN_SRC sh
+gcc main.c libhello.a -L. -o main
+#+END_SRC
+** ldd
+*ldd - print shared library dependencies* 
+#+BEGIN_SRC sh
+  $ ldd a.out
+  linux-vdso.so.1 =>  (0x00007fff15100000)
+  /usr/local/snoopy/lib/snoopy.so (0x00007f436e245000)
+  /opt/aegis/$LIB/aegis_monitor.so => /opt/aegis/lib64/aegis_monitor.so (0x00007f436e042000)
+  libc.so.6 => /lib64/libc.so.6 (0x00007f436dca0000)
+  libdl.so.2 => /lib64/libdl.so.2 (0x00007f436da9c000)
+  /lib64/ld-linux-x86-64.so.2 (0x000000303d200000)
+#+END_SRC
+Reference:
++ http://blog.csdn.net/a600423444/article/details/7206015
++ http://my.oschina.net/u/1413984/blog/199027?fromerr=sb8PM08I
+
+
+
+* 第一课
+<2013-04-22 Mon>
+
+#+BEGIN_SRC c++
+    #include <iostream>
+
+    using namespace std;
+
+    int main(int argc, char *argv[])
+    {
+        cout << "hi, icecream" << endl;
+    }
+#+END_SRC
+* 第二课
+<2013-04-23 Tue>
+
+** 内联函数和重载函数inline
+C中宏定义注意二义性：
+#+BEGIN_SRC c
+     #define max(a, b) (a)>(b)?(a):(b)
+#+END_SRC
+
+=inline=
+类的成员函数，提过效率。
+避免C中宏定义的二义性。
+使用1～5行的小程序。不要含有复杂的结构控制语句以及递归。
+*不能使用函数指针*
+
+** 函数重载
+   1. 函数重载与返回值无关。
+      
+   2. 有关：类型，顺序，个数
+      
+   3. 默认参数:
+      在参数列表中的某些参数有默认值时，在调用的时候会报错。代码如下：
+      #+BEGIN_SRC c
+        int mul(int a, int b)
+        {
+             return 1;
+        }
+
+        int mul(int a, int b, int c = 0, int d = 10)
+        {
+             return 2;
+        }
+        /* 下面的代码设置默认值是不被允许的,原因是参数入栈时，没有赋值。 */
+        int mul(int a=10, int b=10, int c = 0, int d)
+        {
+             return 2;
+        }
+      #+END_SRC
+      
+** 多态
+*** 静态多态：
+* 第三课
+<2013-04-25 Thu>
+
+** 动态内存分配
+*** 堆空间：
+C:
+=malloc= / =calloc= / =realloc= | =free=
+
+C++:
+=new= | =delete= (两个操作符)
+
+#+BEGIN_SRC C
+        int * p = new int;              /* 在堆上面分配空间sizeof(int) */
+        int * p = new int();            /* 初始化为0（加上()） */
+#+END_SRC
+
+*** &: 取地址/引用
+#+BEGIN_SRC c
+      int *p = &num;                  /* 取地址符 */
+      int &p1 = num;                  /* 引用 */
+#+END_SRC
+* 第四课  
+  1. 类的拷贝：
+     浅拷贝 \\
+     深拷贝
+     
+  2. 友元类和友元方法
+* 第五课 
+<2013-05-16 Thu>
+
+	1. 虚基类
+	   class A: virtual public b
+	   
+	不产生二义性
+	画一个图真难啊
+	#+BEGIN_EXAMPLE
+	#+BEGIN_DITAA asciiExample.png -o -r -S
+	+--------------+
+	|              |
+	| Hello World! |
+	|              |
+	+--------------+
+	#+END_DITAA
+	
+	#+END_EXAMPLE
+	
+* 写在最后
+最后居然还是草草收场，一个没有任何实现的CuteCube!!

@@ -1,0 +1,18 @@
+#+TITLE: Shell
+#+DESCRIPTION: 记住一些命令
+#+KEYWORDS: shell
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
+#+LINK_HOME: https://creamidea.github.io
+#+STARTUP: showall
+
+
+* 前言
+一些常用的命令
+
+#+BEGIN_SRC sh
+  grep -rnw '/path/to/somewhere/' -e "pattern"
+#+END_SRC
+Reference: http://stackoverflow.com/a/16957078/1925954
+
+
+* 尾声

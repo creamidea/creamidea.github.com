@@ -11,6 +11,50 @@
 主要是在Windows7上和Linux(现在主要是Ubuntu)上。
 详细记录一些配置过程和安装的软件。方便以后重新安装系统。
 
+* System Images SHA
+https://msdn.microsoft.com/zh-cn/subscriptions/securedownloads/hh442898#searchTerm=&ProductFamilyId=481&Languages=en&PageSize=10&PageIndex=0&FileId=0
+
+文件名： cn_windows_8_enterprise_x64_dvd_917570.iso
+SHA1：1280BC3A38A7001FDE981FA2E465DEB341478667
+
+文件名： en_windows_8_x64_dvd_915440.iso
+语言： English
+SHA1：1CE53AD5F60419CF04A715CF3233F247E48BEEC4
+
+文件名： cn_windows_8.1_with_update_x64_dvd_4048046.iso
+SHA1：F44B2BBD1F6F243DAAE172FA8C1DB342CB98EDAA
+
+* libuv
+
+依赖 *autoconf* *automake* *libtool*
+
+** Error: glibtoolize cannot found.
+#+BEGIN_SRC sh
+if [ "$LIBTOOLIZE" = "" ] && [ "`uname`" = "Darwin" ]; then
+  LIBTOOLIZE=libtoolize # 这里的glibtoolize -> libtoolize
+fi
+#+END_SRC
+
+** Undefined symbols for architecture x86_64
+#+BEGIN_SRC sh
+clang -Wall -I/usr/local/libuv/include -L/usr/local/libuv/lib -luv main.c
+#+END_SRC
+
+* m4
+看完这个文档 [[http://mbreen.com/m4.html][m4-doc]] or [[http://www.gnu.org/software/m4/manual/m4.html][GNU M4 1.4.17 macro processor]] ，感觉m4就是lisp宏的一个翻版嘛~ (逃...
+
+也可以参考这个[[http://garfileo.is-programmer.com/2011/4/21/interesting-gnu-m4.26282.html][有趣的 M4]] 。
+
+* Verify the Signature
+#+BEGIN_SRC sh
+  gpg --verify xxx.tar.gz.sig xxx.tar.gz
+  # get the key ID
+  gpg --recv-keys [key ID]
+  # add the key
+  gpg --verify --verbose xxx.tar.gz.sig xxx.tar.gz
+#+END_SRC  
+Reference: http://www.cnblogs.com/daemon369/p/3204020.html
+
 * Extract Files
 #+BEGIN_SRC sh
   if [ -f $1 ] ; then
