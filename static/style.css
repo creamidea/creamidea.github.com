@@ -16,7 +16,7 @@ body {
 }
 
 body a { text-decoration: none; color: #4285F4; /* google blue */ -webkit-tap-highlight-color: rgba(0,0,0,0); background-color: transparent;}
-body p {line-height: 1.7em;}/*text-align: justify;text-justify: ideographic;}*/
+body p {line-height: 1.7em; word-wrap: break-word;}/*text-align: justify;text-justify: ideographic;}*/
 
 h2 a,h3 a,h4 a{visibility: hidden;margin-left: 14px;}
 h2:hover a,h3:hover a,h4:hover a{visibility: visible;}
