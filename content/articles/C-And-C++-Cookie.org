@@ -85,7 +85,7 @@ Reference:
 *  避免内存泄漏
 1. 在 =return= 前 =delete=
 2. 把 =new= 出来的地址给调用者
-
+   
 * 库
 ** 动态链接库
 *** 编译
@@ -134,8 +134,8 @@ gcc main.c libhello.a -L. -o main
 Reference:
 + http://blog.csdn.net/a600423444/article/details/7206015
 + http://my.oschina.net/u/1413984/blog/199027?fromerr=sb8PM08I
-
-
+  
+  
 
 * 第一课
 <2013-04-22 Mon>

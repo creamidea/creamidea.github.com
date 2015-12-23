@@ -6,13 +6,29 @@
 #+STARTUP: showall
 
 
-* 前奏
+* 前言
 这个是我的一个配置环境的wiki，主要记录我这些年安装的软件和配置的一些服务。
 主要是在Windows7上和Linux(现在主要是Ubuntu)上。
 详细记录一些配置过程和安装的软件。方便以后重新安装系统。
 
+* Emacs
+** Refile
+#+BEGIN_SRC elisp
+  ;; http://superuser.com/a/373976
+  (setq org-refile-use-outline-path 'file)
+  (setq org-refile-targets '((org-agenda-files :level . 1)))
+#+END_SRC
+
+** 待阅读：
+1. [[http://stackoverflow.com/questions/4352367/is-it-possible-to-start-emacs-using-a-remote-configuration-file][Is it possible to start emacs using a remote configuration file?]]
+2. [[http://www.ibm.com/developerworks/cn/linux/l-cn-emacs-shell/][当 Shell 遇见 Emacs -- 大话 Emacs Shell Mode]]
+3. [[http://lifegoo.pluskid.org/wiki/EmacsAsFileManger.html][Emacs -- 强大的文件管理器]]
+4. [[http://cx4a.org/software/gccsense/manual.html#Installation][GCCSense User Manual]]
+5. [[http://emacser.com/emacs-gccsense.htm][Emacs补全利器：auto-complete+gccsense]]
+6. [[http://blog.csdn.net/astropeak/article/details/6666527][《Emacs——你不能不用的神级利器》——补全（下）]]
+
 * System Images SHA
-https://msdn.microsoft.com/zh-cn/subscriptions/securedownloads/hh442898#searchTerm=&ProductFamilyId=481&Languages=en&PageSize=10&PageIndex=0&FileId=0
+链接 [[https://msdn.microsoft.com/zh-cn/subscriptions/securedownloads/hh442898#searchTerm=&ProductFamilyId=481&Languages=en&PageSize=10&PageIndex=0&FileId=0][microsoft-msdn]]
 
 文件名： cn_windows_8_enterprise_x64_dvd_917570.iso
 SHA1：1280BC3A38A7001FDE981FA2E465DEB341478667
@@ -417,12 +433,4 @@ Reference: https://www.tug.org/texlive/doc/texlive-en/texlive-en.html#tlportable
    1. http://ycool.com/post/brncevj
    2. http://wiki.ubuntu-tw.org/index.php?title=FAQinstall
 
-* Emacs
-待阅读：
-  1. [[http://stackoverflow.com/questions/4352367/is-it-possible-to-start-emacs-using-a-remote-configuration-file][Is it possible to start emacs using a remote configuration file?]]
-	2. [[http://www.ibm.com/developerworks/cn/linux/l-cn-emacs-shell/][当 Shell 遇见 Emacs -- 大话 Emacs Shell Mode]]
-	3. [[http://lifegoo.pluskid.org/wiki/EmacsAsFileManger.html][Emacs -- 强大的文件管理器]]
-	4. [[http://cx4a.org/software/gccsense/manual.html#Installation][GCCSense User Manual]]
-	5. [[http://emacser.com/emacs-gccsense.htm][Emacs补全利器：auto-complete+gccsense]]
-	6. [[http://blog.csdn.net/astropeak/article/details/6666527][《Emacs——你不能不用的神级利器》——补全（下）]]
 * 尾声

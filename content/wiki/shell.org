@@ -1,18 +1,43 @@
-#+TITLE: Shell
+#+TITLE: Shell Cookies
 #+DESCRIPTION: 记住一些命令
-#+KEYWORDS: shell
+#+KEYWORDS: shell emacs etags
 #+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
 
 
 * 前言
-一些常用的命令
+一些常用的命令，包括使用Emacs的小技巧。
+
+** grep
 
 #+BEGIN_SRC sh
   grep -rnw '/path/to/somewhere/' -e "pattern"
 #+END_SRC
 Reference: http://stackoverflow.com/a/16957078/1925954
 
+** etags & ctags
+#+BEGIN_SRC sh
+  cd /path/to/my/project
+  ctags -e -R *.cpp *.hpp *.h
+
+  cd /path/to/my/project
+  find . | grep ".*\.\(hh\|hxx\|cc\)" | xargs etags -f TAGS
+
+  cd /path/to/my/project
+  find . -type f -iname "*.[ch]" | etags -
+#+END_SRC
+常用热键
+#+BEGIN_EXAMPLE
+`M-.’ (‘find-tag’) – find a tag, that is, use the Tags file to look up a definition. If there are multiple tags in the project with the same name
+`C-u M-.’ to go to the next match.
+‘M-x find-tag-other-window’ – selects the buffer containing the tag’s definition in another window, and move point there.
+‘M-*’ (‘pop-tag-mark’) – jump back
+‘M-x tags-search’ – regexp-search through the source files indexed by a tags file (a bit like ‘grep’)
+‘M-x tags-query-replace’ – query-replace through the source files indexed by a tags file
+`M-,’ (‘tags-loop-continue’) – resume  ‘tags-search’ or ‘tags-query-replace’ starting at point in a source file
+‘M-x tags-apropos’ – list all tags in a tags file that match a regexp
+‘M-x list-tags’ – list all tags defined in a source file
+#+END_EXAMPLE
 
 * 尾声

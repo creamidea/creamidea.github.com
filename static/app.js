@@ -455,8 +455,8 @@ function someHomeFix (body, content, pathname) {
  * 为h2 h3 h4标题类型后面增加#符号
  */
 function someArticlesFix (body, content, isHome) {
-  var tableOfContents = document.getElementById('table-of-contents')
-  tableOfContents.style.display = 'none'
+  // var tableOfContents = document.getElementById('table-of-contents')
+  // tableOfContents.style.display = 'none'
   function genTagA (h) {
     var a = document.createElement('a')
     a.href = '#' + h.id
