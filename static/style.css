@@ -292,7 +292,14 @@ footer a {
     background: url(morecomm.gif) no-repeat;
     cursor: pointer;
 }
-
+.section-divider {margin-top: 52px;margin-bottom: 42px; display: block; border: 0; text-align: center;box-sizing: content-box; height: 0;}
+hr.section-divider:before {font-family: "medium-content-slab-serif-font",Georgia,Cambria,"Times New Roman",Times,serif; font-weight: 400; font-style: italic; font-size: 28px; letter-spacing: 0.6em;}
+hr.section-divider:before {content: '...'; display: inline-block; margin-left: 0.6em; color: rgba(0,0,0,0.6); position: relative; top: -30px;}
+.card {overflow: hidden; *zoom: 1;}
+.card .card-avatar{float: left; margin-right: 42px;}
+.card .card-avatar img {height: 150px;}
+.card .card-content .card-name {margin-top: 0;}
+#postamble {display: none;}
 @media (max-width: 896px) {
     #banner-wrapper img {width: 90%;}
 }
