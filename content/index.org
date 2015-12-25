@@ -1,7 +1,14 @@
 #+TITLE: e[(i)(pi)]+1=0(19890514)
 
+   + wiki
+     + [[file:wiki/install.org][Install Something 2015-12-23]]
+     + [[file:wiki/shell.org][Shell Cookies 2015-12-20]]
+     + [[file:wiki/css.org][CSS Cookie 2015-12-05]]
+     + [[file:wiki/git.org][Git Cookbook 2015-11-26]]
+     + [[file:wiki/friends.org][Friends 2015-11-25]]
    + articles
-     + [[file:articles/C-And-C++-Cookie.org][C And C++ Cookie 2015-12-19]]
+     + [[file:articles/Storm-Tutorial.org][Storm Tutorial 2015-12-26]]
+     + [[file:articles/C-And-C++-Cookie.org][C And C++ Cookie 2015-12-26]]
      + [[file:articles/Browser-and-Server-Sync.org][Browser and Server Sync (Polling, Comet, Long Polling, WebSocket) 2015-12-09]]
      + [[file:articles/HHKB-GET.org][HHKB GET 2015-12-09]]
      + [[file:articles/Learning-Japanese-1.org][Learning Japanese 1 （新日标） 2015-12-09]]
@@ -14,9 +21,3 @@
      + [[file:articles/Orgmode-And-Deckjs.org][Orgmode And Deckjs 2015-11-25]]
      + [[file:articles/How-To-Install-Autocomplete-And-Yasnippet.org][How To Install Autocomplete and Yanisppet 2015-11-16]]
      + [[file:articles/GWT-ABC.org][GWT ABC 2015-11-16]]
-   + wiki
-     + [[file:wiki/install.org][Install Something 2015-12-23]]
-     + [[file:wiki/shell.org][Shell Cookies 2015-12-20]]
-     + [[file:wiki/css.org][CSS Cookie 2015-12-05]]
-     + [[file:wiki/git.org][Git Cookbook 2015-11-26]]
-     + [[file:wiki/friends.org][Friends 2015-11-25]]

@@ -1,7 +1,7 @@
 #+TITLE:C And C++ Cookie
 #+DESCRIPTION: 学习C/C++基础笔记
 #+KEYWORDS:c CPlusPlus cpp learning
-#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t data:t
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
 
