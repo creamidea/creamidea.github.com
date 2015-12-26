@@ -115,7 +115,7 @@ function getMetaInfo (isPrint) {
 function showMetaInfo (body, content, meta) {
   var div = document.createElement('div'), img = 'None'
   if (meta.author_en) {
-    img = "<img class=author-" + meta.author_en + " src=/" + meta.author_en.toLowerCase().replace(/\s/g, '-') + '.png' + "></img>"
+    img = "<img class=author-" + meta.author_en + " src=./img/" + meta.author_en.toLowerCase().replace(/\s/g, '-') + '.png' + "></img>"
   }
   div.innerHTML = "<hr class=\"section-divider\"></hr>" +
     "<div class=\"card\"> " +
@@ -177,7 +177,7 @@ function showHomeButton (body) {
   div.id = "avatar-wapper"
   a.href = '/'
   a.alt = 'Return'
-  img.src = '/static/avatar.png'
+  img.src = './img/avatar.png'
   img.alt = 'Return'
   div.appendChild(a)
   a.appendChild(img)
