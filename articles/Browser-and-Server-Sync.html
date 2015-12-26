@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Browser and Server Sync (Polling, Comet, Long Polling, WebSocket)</title>
+<!-- 2015-12-26 Sat 23:08 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="倪俊佳(Junjia Ni)" />
+<meta  name="keywords" content="polling,commet,long-polling,websocket,nodejs,javascript,coffeescript,python" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/static/style.css"><link rel="stylesheet" type="text/css" href="/static/medium-fonts.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
+ |
+ <a accesskey="H" href="http://creamidea.github.io"> HOME </a>
+</div><div id="content">
+<h1 class="title">Browser and Server Sync (Polling, Comet, Long Polling, WebSocket)</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. 前言</a></li>
+<li><a href="#sec-2">2. 环境的搭建</a>
+<ul>
+<li><a href="#sec-2-1">2.1. Flask</a></li>
+<li><a href="#sec-2-2">2.2. Nodejs</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Polling</a></li>
+<li><a href="#sec-4">4. Comet</a></li>
+<li><a href="#sec-5">5. Long Polling</a></li>
+<li><a href="#sec-6">6. WebSocket</a></li>
+<li><a href="#sec-7">7. Socket.IO</a></li>
+<li><a href="#sec-8">8. 后记</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> 前言</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+这只是一篇简单介绍浏览器与服务器之间的实时数据交换的方法。
+在客户端使用的是 <a href="http://coffeescript.org/">coffeescript</a> ，接触下来感觉这种语法还是不错的，
+然后在学习的过程中，貌似coffeescript借鉴了许多 <a href="http://www.ruby-lang.org/en/">Ruby</a> 的语法，
+所以接下来我准备去看看Ruby，当然这个是题外话啦。
+一旦接受了coffeescript这种设定，还是很带感的。
+</p>
+
+<p>
+然后服务器用的是 <a href="http://www.python.org/">python</a> 的 <a href="http://flask.pocoo.org/">Flask</a> 这一WEB框架以及 <a href="http://nodejs.org/">nodejs</a> 
+</p>
+
+<p>
+主要参考的是：<a href="http://www.josephj.com/entry.php?id=358">Browser 與 Server 持續同步的作法介紹 (Polling, Comet, Long Polling, WebSocket)</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> 环境的搭建</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Flask</h3>
+<div class="outline-text-3" id="text-2-1">
+<ol class="org-ol">
+<li>Install
+安装步骤，请移步 <a href="http://flask.pocoo.org/docs/installation/#installation">这里</a> ，这里是官方的安装方式，在这里我接触到了python的虚拟环境。
+感觉用这个virtualenv的确不错，然后我找到了一篇介绍这种的文章：<a href="https://virtualenv-chinese-docs.readthedocs.org/en/latest/">virtualenv</a>
+</li>
+<li>Quick Start
+请移步<a href="http://flask.pocoo.org/docs/quickstart/#quickstart">这里</a> 。我也是跟着快速教程一步一步做的，写出来的服务器也很简单。
+毕竟这篇文章的主题不是这个。
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Nodejs</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+关于如何安装 <a href="http://nodejs.org/">nodejs</a> 以及如何使用我在此不多累述。官方文档写的很详细。
+然后我使用的是 <a href="http://expressjs.com/">expressjs</a> 这一WEB框架。安装方式和快速入门点击 <a href="http://expressjs.com/guide.html">QuickStart</a> 。
+</p>
+
+<p>
+在这里着重写一下使用 <code>coffeescript</code> 来写nodejs的代码。
+具体可以看这篇文章：<a href="http://sparklinlabs.com/2013/06/my-node-js-express-coffeescript-setup/">My Node.js Express + CoffeeScript setup</a>
+</p>
+
+<p>
+我的做法只是用来其中的一条命令：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">$ sudo npm install -g js2coffee
+</pre>
+</div>
+<p>
+将express生成的app.js转成了app.coffee，然后将 package.json 中的
+</p>
+<div class="org-src-container">
+
+<pre class="src src-js"><span style="color: #2aa198;">"start"</span>: <span style="color: #2aa198;">"node app.js"</span>
+</pre>
+</div>
+<p>
+变成了：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-js"><span style="color: #2aa198;">"start"</span>: <span style="color: #2aa198;">"coffee app.coffee"</span>
+</pre>
+</div>
+
+<p>
+具体的在我上面提到文章中有详细介绍。当然还可以看看这个：<a href="http://twilson63.github.io/express-coffee/">Express-coffee</a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Polling</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+      这是轮询的方式，是一种很常见的解决方案。然后我这里没有写代码。
+思路就是使用setInterval()函数，定时访问服务器。构成一个一个polling.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Comet</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+等待填坑……
+</p>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Long Polling</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+长轮询方式。
+代码：
+</p>
+<script src="https://gist.github.com/creamidea/6114508.js"></script>
+</div>
+</div>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> WebSocket</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+等待填坑……
+</p>
+</div>
+</div>
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Socket.IO</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+<a href="http://socket.io/">Socket.IO</a> 这个我个人感觉不错，支持的浏览器也很多，然后使用的是nodejs。
+有空的时候看看源代码，看看究竟是如何实现的。
+</p>
+
+<p>
+然后下面的代码都是按照官方的步骤做的，只是稍微修改了一下。具体的可以参照 <a href="http://socket.io/#how-to-use">这里</a>
+</p>
+
+<p>
+代码：
+</p>
+<script src="https://gist.github.com/creamidea/6114473.js"></script>
+</div>
+</div>
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> 后记</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+      然后接下来需要思考的是数据库更新，如何通知web服务器发送更新数据？
+继续等待填坑……
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="meta-article"><p class="author">倪俊佳(Junjia Ni)</p>
+<p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
+<p class="date"></p>
+<p class="export-date">2015-12-26 Sat 23:08</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="last-modification-time">2015-12-26 Sat 22:52</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+</div>
+</body>
+</html>
