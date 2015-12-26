@@ -115,7 +115,7 @@ function getMetaInfo (isPrint) {
 function showMetaInfo (body, content, meta) {
   var div = document.createElement('div'), img = 'None'
   if (meta.author_en) {
-    img = "<img class=author-" + meta.author_en + " src=./img/" + meta.author_en.toLowerCase().replace(/\s/g, '-') + '.png' + "></img>"
+    img = "<img class=author-" + meta.author_en + " src=/static/img/" + meta.author_en.toLowerCase().replace(/\s/g, '-') + '.png' + "></img>"
   }
   div.innerHTML = "<hr class=\"section-divider\"></hr>" +
     "<div class=\"card\"> " +
@@ -206,11 +206,11 @@ function showFooter (body, content, meta) {
  */
 function showTags (body, content, meta) {
   if (!meta.keywords) return
-  var keywords = meta.keywords.split(' ')
+  var keywords = meta.keywords.split(',')
   if (keywords && keywords.length > 0) {
     var div = document.createElement('div')
     var footnotes = document.getElementById('footnotes')
-    var searchEngine = 'https://g.forestgump.me/?gws_rd=ssl#q='
+    var searchEngine = 'https://g.forestgump.me/#q='
     keywords.forEach(function (key) {
       var a = document.createElement('a')
       a.href = searchEngine +
@@ -306,7 +306,7 @@ function genCategories (body, content) {
     })
 
     navTabs.push(
-      '<li role="presentation" class="about"><a href="/about.html">Ab<span style="color: #ED462F;font-size: 0.6em;">&hearts;</span>ut</a></li>'
+      '<li role="presentation" class="about"><a href="/static/about.html">Ab<span style="color: #ED462F;font-size: 0.6em;">&hearts;</span>ut</a></li>'
     )
     
     navTabs.push(

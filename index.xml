@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+     xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+     xmlns:georss="http://www.georss.org/georss"
+     xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+     xmlns:media="http://search.yahoo.com/mrss/"><channel>
+  <title>(e[(i)(pi)]+1=0(19890514))</title>
+  <atom:link href="http://creamidea.github.io/index.xml" rel="self" type="application/rss+xml" />
+  <link>http://creamidea.github.io/</link>
+  <description><![CDATA[]]></description>
+  <language>en</language>
+  <pubDate>Sat, 26 Dec 2015 23:11:46 +0800</pubDate>
+  <lastBuildDate>Sat, 26 Dec 2015 23:11:46 +0800</lastBuildDate>
+  <generator>Emacs 24.5 Org-mode 8.2.10</generator>
+  <webMaster>creamidea@gmail.com (Junjia Ni)</webMaster>
+  <image>
+    <url>http://orgmode.org/img/org-mode-unicorn-logo.png</url>
+    <title>(e[(i)(pi)]+1=0(19890514))</title>
+    <link>http://creamidea.github.io/</link>
+  </image>
+
+  <ul class="org-ul">
+    <li>articles
+    <ul class="org-ul">
+      <li><a href="http://creamidea.github.io/articles/Storm-Tutorial.html">［译］Storm Tutorial 2015-12-26</a>
+      </li>
+      <li><a href="http://creamidea.github.io/articles/Orgmode-And-GTD.html">Org-mode And GTD 2015-12-26</a>
+      </li>
+      <li><a href="http://creamidea.github.io/articles/OE-NK.html">OE And NK 2015-12-26</a>
+      </li>
+      <li><a href="http://creamidea.github.io/articles/How-To-Install-Autocomplete-And-Yasnippet.html">How To Install Autocomplete and Yanisppet 2015-12-26</a>
+      </li>
+      <li><a href="http://creamidea.github.io/articles/HHKB-GET.html">HHKB GET 2015-12-26</a>
+      </li>
+      <li><a href="http://creamidea.github.io/articles/GWT-ABC.html">GWT ABC 2015-12-26</a>
+      </li>
+      <li><a href="http://creamidea.github.io/articles/Browser-and-Server-Sync.html">Browser and Server Sync (Polling, Comet, Long Polling, WebSocket) 2015-12-26</a>
+      </li>
+      <li><a href="http://creamidea.github.io/articles/Unicode-And-UTF8.html">Unicode and UTF8 2015-12-26</a>
+      </li>
+      <li><a href="http://creamidea.github.io/articles/This-Site.html">This Site 2015-12-26</a>
+      </li>
+      <li><a href="http://creamidea.github.io/articles/TeX-Cookie.html">Tex Cookie 2015-12-26</a>
+      </li>
+      <li><a href="http://creamidea.github.io/articles/Orgmode-And-Deckjs.html">Orgmode And Deckjs 2015-12-26</a>
+      </li>
+      <li><a href="http://creamidea.github.io/articles/Learning-Japanese-1.html">Learning Japanese 1 （新日标） 2015-12-26</a>
+      </li>
+      <li><a href="http://creamidea.github.io/articles/Learning-Japanese-2.html">Learning Japanese 2 （整理归纳） 2015-12-26</a>
+      </li>
+      <li><a href="http://creamidea.github.io/articles/C-And-C++-Cookie.html">C And C++ Cookie 2015-12-26</a>
+      </li>
+    </ul>
+    </li>
+    <li>wiki
+    <ul class="org-ul">
+      <li><a href="http://creamidea.github.io/wiki/git.html">Git Cookbook 2015-12-26</a>
+      </li>
+      <li><a href="http://creamidea.github.io/wiki/friends.html">Friends 2015-12-26</a>
+      </li>
+      <li><a href="http://creamidea.github.io/wiki/css.html">CSS Cookie 2015-12-26</a>
+      </li>
+      <li><a href="http://creamidea.github.io/wiki/shell.html">Shell Cookies 2015-12-26</a>
+      </li>
+      <li><a href="http://creamidea.github.io/wiki/install.html">Install Something 2015-12-26</a>
+      </li>
+    </ul>
+    </li>
+  </ul>
+</channel>
+</rss>

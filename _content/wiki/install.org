@@ -1,6 +1,6 @@
 #+TITLE: Install Something
 #+DESCRIPTION: 安装一些东西
-#+KEYWORDS: emacs orgmode install
+#+KEYWORDS: emacs,orgmode,install
 #+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
@@ -11,6 +11,14 @@
 主要是在Windows7上和Linux(现在主要是Ubuntu)上。
 详细记录一些配置过程和安装的软件。方便以后重新安装系统。
 
+* Git
+
+** git lfs error: failed to push some refs to
+#+BEGIN_SRC sh
+  # you should be able to fix your pushes by removing the .git/hooks/pre-push file from your repository. This is where git is trying to run git lfs when you push.
+  rm .git/hooks/pre-push
+#+END_SRC
+Reference: https://github.com/github/git-lfs/issues/333
 * Emacs
 ** Refile
 #+BEGIN_SRC elisp

@@ -1,8 +1,8 @@
 #+TITLE: Tex Cookie
 #+CATEGORY: article
 #+DESCRIPTION: Tex note
-#+KEYWORDS: emacs latex
-#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:f f:t TeX:t email:t timestamp:t
+#+KEYWORDS: emacs,latex
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 
 * 序章

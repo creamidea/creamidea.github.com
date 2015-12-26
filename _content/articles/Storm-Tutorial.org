@@ -1,21 +1,14 @@
-#+TITLE: Storm Tutorial
+#+TITLE: ［译］Storm Tutorial
 #+AUTHOR: 欧昳(Yi Ou)
 #+EMAIL: 718413182@qq.com
 #+CATEGORY: article
 #+DESCRIPTION: Storm Tutorial
-#+KEYWORDS: storm tutorial
+#+KEYWORDS: storm,tutorial,java
 #+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t <:t date:t timestamp:t email:t
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
 
 
-* 总览
-1. Hadoop：HDFS MapReduce HBase Hive zookeeper
-2. Storm 
-3. Spark 
-4. Drools
-5. Drill
-6. Yarn
 * Storm教程-官网翻译
 原网页：http://storm.apache.org/tutorial.html \\
 参考：http://ifeve.com/getting-started-with-stom-index/

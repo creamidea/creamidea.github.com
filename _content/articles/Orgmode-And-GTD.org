@@ -1,9 +1,7 @@
 #+TITLE: Org-mode And GTD
-#+AUTHOR: Junjia Ni
-#+EMAIL: creamidea(AT)gmail.com
 #+CATEGORY: article
 #+DESCRIPTION: 如何配置orgmode使其变成GTD工具
-#+KEYWORDS: emacs orgmode GTD
+#+KEYWORDS: emacs,orgmode,GTD
 #+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 

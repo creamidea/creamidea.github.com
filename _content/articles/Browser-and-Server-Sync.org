@@ -1,6 +1,6 @@
 #+TITLE:Browser and Server Sync (Polling, Comet, Long Polling, WebSocket)
-#+KEYWORDS: polling commet long-polling websocket nodejs javascript coffeescript python
-#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t
+#+KEYWORDS: polling,commet,long-polling,websocket,nodejs,javascript,coffeescript,python
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t
 #+LINK_HOME: https://creamidea.github.io
 
 

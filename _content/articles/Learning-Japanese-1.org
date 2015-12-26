@@ -1,6 +1,6 @@
 #+TITLE:Learning Japanese 1 （新日标）
-#+KEYWORDS: language japanese
-#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:f f:t TeX:t email:t
+#+KEYWORDS: language,japanese
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t
 #+LINK_HOME: http://creamidea.github.io
 #+STARTUP: showall
 

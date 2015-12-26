@@ -1,8 +1,9 @@
 #+TITLE:GWT ABC
 #+DESCRIPTION:Something about gwt
-#+KEYWORDS:google gwt java
-#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t tex:t email:t timestamp:t
+#+KEYWORDS:google,gwt,java
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:t email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
+#+STARTUP: showall
 
 
 * 前言

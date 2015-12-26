@@ -1,17 +1,18 @@
-#+Title: creamidea.github.io
-#+AUTHOR: Junjia Ni
+#+TITLE: creamidea.github.io
+#+AUTHOR: 倪俊佳(Junjia Ni)
 #+EMAIL: creamidea(AT)gmail.com
 #+DESCRIPTION: 一些关于这里的简单说明
 #+KEYWORDS: emacs orgmode creamidea nekotrek
-#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t timestamp:t
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
+#+STARTUP: showall
 
 
 * Articles
   
 - [[http://creamidea.github.io][creamidea.github.io]]
-- [[./content/articles]]
-- [[./content/wiki]]
+- [[./_content/articles]]
+- [[./_content/wiki]]
 - [[./_draft]]
   
 * LICENSES
@@ -22,24 +23,27 @@
   
 * Content
   
-  #+BEGIN_EXAMPLE
-  /creamidea
-  |-- content ;; where your articles putting directory
+#+BEGIN_EXAMPLE
+  /creamidea.github.com
+  |-- README.org
+  |-- _cv ;; your cv
+  |-- _draft ;; your draft
+  |-- _content ;; where your articles putting directory
       |-- articles ;; articles
       `-- wiki ;; wiki
-  |-- _draft ;; your draft
-  |-- static
+  `-- static
       |-- CNAME ;; Github CNAME
       |-- about ;; about me
+      |-- about.html ;; about me
       |-- app.js ;; main js
-      |-- avatar.png ;; your avatar
+      |-- style.css ;; main css
       |-- favicon.ico ;; site's favicon
       |-- medium-fonts.css ;; font
       |-- morecomm.gif ;; comment's picture (click)
-      |-- foundingfather_v2.png ;; 
-      `-- style.css ;; main css
-  `-- README.org
-  #+END_EXAMPLE
+      `-- img ;; git lfs track "*.png"
+         |-- avatar.png ;; your avatar
+         `-- foundingfather_v2.png ;; 
+#+END_EXAMPLE
   
 * Reading Guide
   
@@ -81,7 +85,9 @@
   
   没有自我描述，你可以从我的字里行间体会我是一个怎样的人。或者直接[[mailto:%20creamidea%2540gmail.com][Email Me]]
   
-  You can know me from my words or [[mailto:creamidea%2540gmail.com][Email Me]]
+  You can know me from my words or [[mailto:creamidea%2540gmail.com][Email Me]].
+
+  2015-12-26 蜂蜜甜甜圈加入。
   
 * NICKNAME
   

@@ -1,8 +1,9 @@
 #+TITLE: CSS Cookie
 #+DESCRIPTION: 一些关于css的小知识
-#+KEYWORDS: emacs orgmode
-#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t timestamp:t
+#+KEYWORDS: css,cookie,BFC
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
+#+STARTUP: showall
 
 
 * 前言

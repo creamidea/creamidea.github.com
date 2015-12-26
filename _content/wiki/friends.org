@@ -1,0 +1,12 @@
+#+TITLE: Friends
+#+DESCRIPTION: 自认为的Friends
+#+KEYWORDS: friends-link,friends
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
+#+LINK_HOME: https://creamidea.github.io
+
+
+* 前言
+  收集一些自己认为好的友链，自认为。如果不认同的请写信给我删除 >_<
+  当然热烈欢迎各位主动交换链接啦，在下方留言或者 *email* ，都是可以的。
+
+* 尾声
