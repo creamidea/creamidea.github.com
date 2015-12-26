@@ -1,5 +1,11 @@
 #+TITLE: e[(i)(pi)]+1=0(19890514)
 
+   + wiki
+     + [[file:wiki/git.org][Git Cookbook 2015-12-26]]
+     + [[file:wiki/friends.org][Friends 2015-12-26]]
+     + [[file:wiki/css.org][CSS Cookie 2015-12-26]]
+     + [[file:wiki/shell.org][Shell Cookies 2015-12-26]]
+     + [[file:wiki/install.org][Install Something 2015-12-26]]
    + articles
      + [[file:articles/Storm-Tutorial.org][［译］Storm Tutorial 2015-12-26]]
      + [[file:articles/Orgmode-And-GTD.org][Org-mode And GTD 2015-12-26]]
@@ -15,9 +21,3 @@
      + [[file:articles/Learning-Japanese-1.org][Learning Japanese 1 （新日标） 2015-12-26]]
      + [[file:articles/Learning-Japanese-2.org][Learning Japanese 2 （整理归纳） 2015-12-26]]
      + [[file:articles/C-And-C++-Cookie.org][C And C++ Cookie 2015-12-26]]
-   + wiki
-     + [[file:wiki/git.org][Git Cookbook 2015-12-26]]
-     + [[file:wiki/friends.org][Friends 2015-12-26]]
-     + [[file:wiki/css.org][CSS Cookie 2015-12-26]]
-     + [[file:wiki/shell.org][Shell Cookies 2015-12-26]]
-     + [[file:wiki/install.org][Install Something 2015-12-26]]

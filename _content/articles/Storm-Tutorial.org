@@ -1,6 +1,7 @@
 #+TITLE: ［译］Storm Tutorial
 #+AUTHOR: 欧昳(Yi Ou)
 #+EMAIL: 718413182@qq.com
+#+DATE: 2015-12-26
 #+CATEGORY: article
 #+DESCRIPTION: Storm Tutorial
 #+KEYWORDS: storm,tutorial,java
