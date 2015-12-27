@@ -114,8 +114,9 @@ function getMetaInfo (isPrint) {
 }
 function showMetaInfo (body, content, meta) {
   var div = document.createElement('div'), img = 'None'
+  var glfs = "https://media.githubusercontent.com/media/creamidea/creamidea.github.com/master"
   if (meta.author_en) {
-    img = "<img class=author-" + meta.author_en + " src=/static/img/" + meta.author_en.toLowerCase().replace(/\s/g, '-') + '.png' + "></img>"
+    img = "<img class=author-" + meta.author_en + " src=" + glfs + "/static/img/" + meta.author_en.toLowerCase().replace(/\s/g, '-') + '.png' + "></img>"
   }
   div.innerHTML = "<hr class=\"section-divider\"></hr>" +
     "<div class=\"card\"> " +
