@@ -1,4 +1,5 @@
 #+TITLE:C And C++ Cookie
+#+DATE: 2013-04-22
 #+DESCRIPTION: 学习C/C++基础笔记
 #+KEYWORDS: c,CPlusPlus,cpp,learning
 #+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t data:t

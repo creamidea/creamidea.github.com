@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Install Something</title>
-<!-- 2015-12-26 Sat 23:08 -->
+<!-- 2015-12-27 Sun 21:23 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="倪俊佳(Junjia Ni)" />
@@ -239,7 +239,6 @@ for the JavaScript code in this tag.
 <li><a href="#sec-13-12">13.12. Install Ubuntu12.04 black screen</a></li>
 </ul>
 </li>
-<li><a href="#sec-14">14. 尾声</a></li>
 </ul>
 </div>
 </div>
@@ -264,7 +263,7 @@ for the JavaScript code in this tag.
 <div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 
-<pre class="src src-sh"><span style="color: #586e75; font-style: italic;"># </span><span style="color: #586e75; font-style: italic;">you should be able to fix your pushes by removing the .git/hooks/pre-push file from your repository. This is where git is trying to run git lfs when you push.</span>
+<pre class="src src-sh"><span style="color: #c0c5ce;"># </span><span style="color: #65737e;">you should be able to fix your pushes by removing the .git/hooks/pre-push file from your repository. This is where git is trying to run git lfs when you push.</span>
 rm .git/hooks/pre-push
 </pre>
 </div>
@@ -282,9 +281,9 @@ Reference: <a href="https://github.com/github/git-lfs/issues/333">https://github
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 
-<pre class="src src-elisp"><span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">http://superuser.com/a/373976</span>
+<pre class="src src-elisp"><span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">http://superuser.com/a/373976</span>
 (setq org-refile-use-outline-path 'file)
-(setq org-refile-targets '((org-agenda-files <span style="color: #859900;">:level</span> . 1)))
+(setq org-refile-targets '((org-agenda-files <span style="color: #d08770;">:level</span> . 1)))
 </pre>
 </div>
 </div>
@@ -349,9 +348,9 @@ SHA1：F44B2BBD1F6F243DAAE172FA8C1DB342CB98EDAA
 <div class="outline-text-3" id="text-5-1">
 <div class="org-src-container">
 
-<pre class="src src-sh"><span style="color: #859900;">if</span> [ <span style="color: #2aa198;">"$LIBTOOLIZE"</span> = <span style="color: #2aa198;">""</span> ] &amp;&amp; [ <span style="color: #2aa198;">"`uname`"</span> = <span style="color: #2aa198;">"Darwin"</span> ]; <span style="color: #859900;">then</span>
-  <span style="color: #268bd2;">LIBTOOLIZE</span>=libtoolize <span style="color: #586e75; font-style: italic;"># </span><span style="color: #586e75; font-style: italic;">&#36825;&#37324;&#30340;glibtoolize -&gt; libtoolize</span>
-<span style="color: #859900;">fi</span>
+<pre class="src src-sh"><span style="color: #b48ead;">if</span> [ <span style="color: #a3be8c;">"$LIBTOOLIZE"</span> = <span style="color: #a3be8c;">""</span> ] &amp;&amp; [ <span style="color: #a3be8c;">"`uname`"</span> = <span style="color: #a3be8c;">"Darwin"</span> ]; <span style="color: #b48ead;">then</span>
+  <span style="color: #bf616a;">LIBTOOLIZE</span>=libtoolize <span style="color: #c0c5ce;"># </span><span style="color: #65737e;">&#36825;&#37324;&#30340;glibtoolize -&gt; libtoolize</span>
+<span style="color: #b48ead;">fi</span>
 </pre>
 </div>
 </div>
@@ -388,9 +387,9 @@ SHA1：F44B2BBD1F6F243DAAE172FA8C1DB342CB98EDAA
 <div class="org-src-container">
 
 <pre class="src src-sh">gpg --verify xxx.tar.gz.sig xxx.tar.gz
-<span style="color: #586e75; font-style: italic;"># </span><span style="color: #586e75; font-style: italic;">get the key ID</span>
+<span style="color: #c0c5ce;"># </span><span style="color: #65737e;">get the key ID</span>
 gpg --recv-keys [key ID]
-<span style="color: #586e75; font-style: italic;"># </span><span style="color: #586e75; font-style: italic;">add the key</span>
+<span style="color: #c0c5ce;"># </span><span style="color: #65737e;">add the key</span>
 gpg --verify --verbose xxx.tar.gz.sig xxx.tar.gz
 </pre>
 </div>
@@ -405,25 +404,25 @@ Reference: <a href="http://www.cnblogs.com/daemon369/p/3204020.html">http://www.
 <div class="outline-text-2" id="text-8">
 <div class="org-src-container">
 
-<pre class="src src-sh"><span style="color: #859900;">if</span> [ -f $<span style="color: #268bd2;">1</span> ] ; <span style="color: #859900;">then</span>
-    <span style="color: #859900;">case</span> $<span style="color: #268bd2;">1</span><span style="color: #859900;"> in</span>
-        *.tar.bz2)      tar xvjf $<span style="color: #268bd2;">1</span> &amp;&amp; <span style="color: #859900;">cd</span> $(basename <span style="color: #2aa198;">"$1"</span> .tar.bz2) ;;
-        *.tar.gz)       tar xvzf $<span style="color: #268bd2;">1</span> &amp;&amp; <span style="color: #859900;">cd</span> $(basename <span style="color: #2aa198;">"$1"</span> .tar.gz) ;;
-        *.tar.xz)       tar Jxvf $<span style="color: #268bd2;">1</span> &amp;&amp; <span style="color: #859900;">cd</span> $(basename <span style="color: #2aa198;">"$1"</span> .tar.xz) ;;
-        *.bz2)          bunzip2 $<span style="color: #268bd2;">1</span> &amp;&amp; <span style="color: #859900;">cd</span> $(basename <span style="color: #2aa198;">"$1"</span> /bz2) ;;
-        *.rar)          unrar x $<span style="color: #268bd2;">1</span> &amp;&amp; <span style="color: #859900;">cd</span> $(basename <span style="color: #2aa198;">"$1"</span> .rar) ;;
-        *.gz)           gunzip $<span style="color: #268bd2;">1</span> &amp;&amp; <span style="color: #859900;">cd</span> $(basename <span style="color: #2aa198;">"$1"</span> .gz) ;;
-        *.tar)          tar xvf $<span style="color: #268bd2;">1</span> &amp;&amp; <span style="color: #859900;">cd</span> $(basename <span style="color: #2aa198;">"$1"</span> .tar) ;;
-        *.tbz2)         tar xvjf $<span style="color: #268bd2;">1</span> &amp;&amp; <span style="color: #859900;">cd</span> $(basename <span style="color: #2aa198;">"$1"</span> .tbz2) ;;
-        *.tgz)          tar xvzf $<span style="color: #268bd2;">1</span> &amp;&amp; <span style="color: #859900;">cd</span> $(basename <span style="color: #2aa198;">"$1"</span> .tgz) ;;
-        *.zip)          unzip $<span style="color: #268bd2;">1</span> &amp;&amp; <span style="color: #859900;">cd</span> $(basename <span style="color: #2aa198;">"$1"</span> .zip) ;;
-        *.Z)            uncompress $<span style="color: #268bd2;">1</span> &amp;&amp; <span style="color: #859900;">cd</span> $(basename <span style="color: #2aa198;">"$1"</span> .Z) ;;
-        *.7z)           7z x $<span style="color: #268bd2;">1</span> &amp;&amp; <span style="color: #859900;">cd</span> $(basename <span style="color: #2aa198;">"$1"</span> .7z) ;;
-        *)              <span style="color: #859900;">echo</span> <span style="color: #2aa198;">"don't know how to extract '$1'..."</span> ;;
-    <span style="color: #859900;">esac</span>
-<span style="color: #859900;">else</span>
-    <span style="color: #859900;">echo</span> <span style="color: #2aa198;">"'$1' is not a valid file!"</span>
-<span style="color: #859900;">fi</span>
+<pre class="src src-sh"><span style="color: #b48ead;">if</span> [ -f $<span style="color: #bf616a;">1</span> ] ; <span style="color: #b48ead;">then</span>
+    <span style="color: #b48ead;">case</span> $<span style="color: #bf616a;">1</span><span style="color: #b48ead;"> in</span>
+        *.tar.bz2)      tar xvjf $<span style="color: #bf616a;">1</span> &amp;&amp; <span style="color: #d08770;">cd</span> $(basename <span style="color: #a3be8c;">"$1"</span> .tar.bz2) ;;
+        *.tar.gz)       tar xvzf $<span style="color: #bf616a;">1</span> &amp;&amp; <span style="color: #d08770;">cd</span> $(basename <span style="color: #a3be8c;">"$1"</span> .tar.gz) ;;
+        *.tar.xz)       tar Jxvf $<span style="color: #bf616a;">1</span> &amp;&amp; <span style="color: #d08770;">cd</span> $(basename <span style="color: #a3be8c;">"$1"</span> .tar.xz) ;;
+        *.bz2)          bunzip2 $<span style="color: #bf616a;">1</span> &amp;&amp; <span style="color: #d08770;">cd</span> $(basename <span style="color: #a3be8c;">"$1"</span> /bz2) ;;
+        *.rar)          unrar x $<span style="color: #bf616a;">1</span> &amp;&amp; <span style="color: #d08770;">cd</span> $(basename <span style="color: #a3be8c;">"$1"</span> .rar) ;;
+        *.gz)           gunzip $<span style="color: #bf616a;">1</span> &amp;&amp; <span style="color: #d08770;">cd</span> $(basename <span style="color: #a3be8c;">"$1"</span> .gz) ;;
+        *.tar)          tar xvf $<span style="color: #bf616a;">1</span> &amp;&amp; <span style="color: #d08770;">cd</span> $(basename <span style="color: #a3be8c;">"$1"</span> .tar) ;;
+        *.tbz2)         tar xvjf $<span style="color: #bf616a;">1</span> &amp;&amp; <span style="color: #d08770;">cd</span> $(basename <span style="color: #a3be8c;">"$1"</span> .tbz2) ;;
+        *.tgz)          tar xvzf $<span style="color: #bf616a;">1</span> &amp;&amp; <span style="color: #d08770;">cd</span> $(basename <span style="color: #a3be8c;">"$1"</span> .tgz) ;;
+        *.zip)          unzip $<span style="color: #bf616a;">1</span> &amp;&amp; <span style="color: #d08770;">cd</span> $(basename <span style="color: #a3be8c;">"$1"</span> .zip) ;;
+        *.Z)            uncompress $<span style="color: #bf616a;">1</span> &amp;&amp; <span style="color: #d08770;">cd</span> $(basename <span style="color: #a3be8c;">"$1"</span> .Z) ;;
+        *.7z)           7z x $<span style="color: #bf616a;">1</span> &amp;&amp; <span style="color: #d08770;">cd</span> $(basename <span style="color: #a3be8c;">"$1"</span> .7z) ;;
+        *)              <span style="color: #d08770;">echo</span> <span style="color: #a3be8c;">"don't know how to extract '$1'..."</span> ;;
+    <span style="color: #b48ead;">esac</span>
+<span style="color: #b48ead;">else</span>
+    <span style="color: #d08770;">echo</span> <span style="color: #a3be8c;">"'$1' is not a valid file!"</span>
+<span style="color: #b48ead;">fi</span>
 </pre>
 </div>
 </div>
@@ -437,8 +436,8 @@ Reference: <a href="http://www.cnblogs.com/daemon369/p/3204020.html">http://www.
 <div class="outline-text-3" id="text-9-1">
 <div class="org-src-container">
 
-<pre class="src src-sh"><span style="color: #859900;">export</span> <span style="color: #268bd2;">LD_LIBRARY_PATH</span>=$<span style="color: #268bd2;">LD_LIBRARY_PATH</span>:/usr/local/lib
-<span style="color: #859900;">export</span> <span style="color: #268bd2;">PKG_CONFIG_PATH</span>=/usr/local/lib/pkgconfig
+<pre class="src src-sh"><span style="color: #d08770;">export</span> <span style="color: #bf616a;">LD_LIBRARY_PATH</span>=$<span style="color: #bf616a;">LD_LIBRARY_PATH</span>:/usr/local/lib
+<span style="color: #d08770;">export</span> <span style="color: #bf616a;">PKG_CONFIG_PATH</span>=/usr/local/lib/pkgconfig
 </pre>
 </div>
 </div>
@@ -511,20 +510,20 @@ Reference: <a href="https://www.tug.org/texlive/doc/texlive-en/texlive-en.html#t
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh"><span style="color: #586e75; font-style: italic;">#</span><span style="color: #586e75; font-style: italic;">!/bin/</span><span style="color: #859900;">bash</span>
-<span style="color: #586e75; font-style: italic;"># </span><span style="color: #586e75; font-style: italic;">&#20351;&#29992;GBK Profile</span>
-<span style="color: #859900;">echo</span> -e <span style="color: #2aa198;">"\033]50;SetProfile=GBK\a"</span>
-<span style="color: #586e75; font-style: italic;"># </span><span style="color: #586e75; font-style: italic;">&#29615;&#22659;&#32534;&#30721;&#20999;&#25442;&#20026;GBK</span>
-<span style="color: #859900;">export</span> <span style="color: #268bd2;">LANG</span>=zh_CN.GBK
-<span style="color: #859900;">export</span> <span style="color: #268bd2;">LC_ALL</span>=zh_CN.GBK
-<span style="color: #586e75; font-style: italic;"># </span><span style="color: #586e75; font-style: italic;">&#26356;&#25913;&#24403;&#21069; iTerm2 tab title</span>
-<span style="color: #859900;">echo</span> -ne <span style="color: #2aa198;">"\033]0;"</span>$<span style="color: #268bd2;">@</span><span style="color: #2aa198;">"\007"</span>
-$<span style="color: #268bd2;">@</span>
-<span style="color: #859900;">echo</span> -ne <span style="color: #2aa198;">"\033]0;"</span>${<span style="color: #268bd2;">PWD</span>/#$<span style="color: #268bd2;">HOME</span>/~}<span style="color: #2aa198;">"\007"</span>
-<span style="color: #586e75; font-style: italic;"># </span><span style="color: #586e75; font-style: italic;">GBK&#20219;&#21153;&#23436;&#25104;&#21518;&#65292;&#33258;&#21160;&#20999;&#25442;&#22238;&#40664;&#35748;&#32534;&#30721;&#65288;UTF-8&#65289;</span>
-<span style="color: #859900;">echo</span> -e <span style="color: #2aa198;">"\033]50;SetProfile=Default\a"</span>
-<span style="color: #859900;">export</span> <span style="color: #268bd2;">LANG</span>=zh_CN.UTF-8
-<span style="color: #859900;">export</span> <span style="color: #268bd2;">LC_ALL</span>=zh_CN.UTF-8
+<pre class="src src-sh"><span style="color: #c0c5ce;">#</span><span style="color: #65737e;">!/bin/</span><span style="color: #b48ead;">bash</span>
+<span style="color: #c0c5ce;"># </span><span style="color: #65737e;">&#20351;&#29992;GBK Profile</span>
+<span style="color: #d08770;">echo</span> -e <span style="color: #a3be8c;">"\033]50;SetProfile=GBK\a"</span>
+<span style="color: #c0c5ce;"># </span><span style="color: #65737e;">&#29615;&#22659;&#32534;&#30721;&#20999;&#25442;&#20026;GBK</span>
+<span style="color: #d08770;">export</span> <span style="color: #bf616a;">LANG</span>=zh_CN.GBK
+<span style="color: #d08770;">export</span> <span style="color: #bf616a;">LC_ALL</span>=zh_CN.GBK
+<span style="color: #c0c5ce;"># </span><span style="color: #65737e;">&#26356;&#25913;&#24403;&#21069; iTerm2 tab title</span>
+<span style="color: #d08770;">echo</span> -ne <span style="color: #a3be8c;">"\033]0;"</span>$<span style="color: #bf616a;">@</span><span style="color: #a3be8c;">"\007"</span>
+$<span style="color: #bf616a;">@</span>
+<span style="color: #d08770;">echo</span> -ne <span style="color: #a3be8c;">"\033]0;"</span>${<span style="color: #bf616a;">PWD</span>/#$<span style="color: #bf616a;">HOME</span>/~}<span style="color: #a3be8c;">"\007"</span>
+<span style="color: #c0c5ce;"># </span><span style="color: #65737e;">GBK&#20219;&#21153;&#23436;&#25104;&#21518;&#65292;&#33258;&#21160;&#20999;&#25442;&#22238;&#40664;&#35748;&#32534;&#30721;&#65288;UTF-8&#65289;</span>
+<span style="color: #d08770;">echo</span> -e <span style="color: #a3be8c;">"\033]50;SetProfile=Default\a"</span>
+<span style="color: #d08770;">export</span> <span style="color: #bf616a;">LANG</span>=zh_CN.UTF-8
+<span style="color: #d08770;">export</span> <span style="color: #bf616a;">LC_ALL</span>=zh_CN.UTF-8
 </pre>
 </div>
 </div>
@@ -667,12 +666,12 @@ The path of the installer cannot have space!!!
 <li>Liquid Exception: incompatible character encodings: IBM437 and UTF-8
 <div class="org-src-container">
 
-<pre class="src src-sh"><span style="color: #586e75; font-style: italic;"># </span><span style="color: #586e75; font-style: italic;">windows:</span>
+<pre class="src src-sh"><span style="color: #c0c5ce;"># </span><span style="color: #65737e;">windows:</span>
 &gt; chcp 65001
 
-<span style="color: #586e75; font-style: italic;"># </span><span style="color: #586e75; font-style: italic;">Linux</span>
-$ export <span style="color: #268bd2;">LC_ALL</span>=en_US.UTF-8
-$ export <span style="color: #268bd2;">LANG</span>=en_US.UTF-8
+<span style="color: #c0c5ce;"># </span><span style="color: #65737e;">Linux</span>
+$ export <span style="color: #bf616a;">LC_ALL</span>=en_US.UTF-8
+$ export <span style="color: #bf616a;">LANG</span>=en_US.UTF-8
 $ jekyll --server --auto
 </pre>
 </div>
@@ -767,7 +766,7 @@ Please use the : Qt 4.8.4 Command Prompt
 <li>Makefile.Debug:59: <b>*</b> missing separator.  Stop.:
 <div class="org-src-container">
 
-<pre class="src src-sh"><span style="color: #586e75; font-style: italic;"># </span><span style="color: #586e75; font-style: italic;">Qt 4.8.4 Command Prompt</span>
+<pre class="src src-sh"><span style="color: #c0c5ce;"># </span><span style="color: #65737e;">Qt 4.8.4 Command Prompt</span>
 &gt; qmake -project
 &gt; qmake
 &gt; nmake
@@ -806,8 +805,8 @@ Reference:
 <div class="org-src-container">
 
 <pre class="src src-sh">$ sudo apt-get install texinfo build-essential
-$ sudo aptitude install libdbus-1-dev libgconf2-dev libgif-dev libgpm-dev <span style="color: #2aa198;">\</span>
-  libgtk2.0-dev libjpeg62-dev libm17n-dev libncurses5-dev <span style="color: #2aa198;">\</span>
+$ sudo aptitude install libdbus-1-dev libgconf2-dev libgif-dev libgpm-dev <span style="color: #a3be8c;">\</span>
+  libgtk2.0-dev libjpeg62-dev libm17n-dev libncurses5-dev <span style="color: #a3be8c;">\</span>
   libotf-dev librsvg2-dev libtiff4-dev libXpm-dev
 
 $ ./configure
@@ -859,13 +858,13 @@ $ emacs24 -q
 The main steps are:
 <div class="org-src-container">
 
-<pre class="src src-sh">$ apt-get install libcurl4-gnutls-dev libexpat1-dev gettext <span style="color: #2aa198;">\</span>
+<pre class="src src-sh">$ apt-get install libcurl4-gnutls-dev libexpat1-dev gettext <span style="color: #a3be8c;">\</span>
   libz-dev libssl-dev
 $ tar -zxf git-1.7.2.2.tar.gz
 $ cd git-1.7.2.2
-$ make <span style="color: #268bd2;">prefix</span>=/usr/local all
-$ sudo make <span style="color: #268bd2;">prefix</span>=/usr/local install
-<span style="color: #586e75; font-style: italic;"># </span><span style="color: #586e75; font-style: italic;">Below is options:</span>
+$ make <span style="color: #bf616a;">prefix</span>=/usr/local all
+$ sudo make <span style="color: #bf616a;">prefix</span>=/usr/local install
+<span style="color: #c0c5ce;"># </span><span style="color: #65737e;">Below is options:</span>
 $ git clone git://git.kernel.org/pub/scm/git/git.git
 </pre>
 </div>
@@ -874,7 +873,7 @@ $ git clone git://git.kernel.org/pub/scm/git/git.git
 The main steps are:
 <div class="org-src-container">
 
-<pre class="src src-sh">$ git config --global user.name <span style="color: #2aa198;">"John Doe"</span>
+<pre class="src src-sh">$ git config --global user.name <span style="color: #a3be8c;">"John Doe"</span>
 $ git config --global user.email johndoe@example.com
 </pre>
 </div>
@@ -883,7 +882,7 @@ $ git config --global user.email johndoe@example.com
 The main steps are:
 <div class="org-src-container">
 
-<pre class="src src-sh">$ ssh-keygen -t rsa -C <span style="color: #2aa198;">"your_email@example.com"</span>
+<pre class="src src-sh">$ ssh-keygen -t rsa -C <span style="color: #a3be8c;">"your_email@example.com"</span>
 $ sudo apt-get install xclip
 $ xclip -sel clip &lt; ~/.ssh/id_rsa.pub
 </pre>
@@ -904,13 +903,13 @@ $ xclip -sel clip &lt; ~/.ssh/id_rsa.pub
 <li>Replace:
 <div class="org-src-container">
 
-<pre class="src src-sh"><span style="color: #586e75; font-style: italic;">### </span><span style="color: #586e75; font-style: italic;">BEGIN /etc/grub.d/05_debian_theme ###</span>
-<span style="color: #859900;">set</span> <span style="color: #268bd2;">menu_color_normal</span>=white/black
-<span style="color: #859900;">set</span> <span style="color: #268bd2;">menu_color_highlight</span>=black/light-gray
-<span style="color: #859900;">if</span> background_color 44,0,30; <span style="color: #859900;">then</span>
+<pre class="src src-sh"><span style="color: #c0c5ce;">### </span><span style="color: #65737e;">BEGIN /etc/grub.d/05_debian_theme ###</span>
+<span style="color: #d08770;">set</span> <span style="color: #bf616a;">menu_color_normal</span>=white/black
+<span style="color: #d08770;">set</span> <span style="color: #bf616a;">menu_color_highlight</span>=black/light-gray
+<span style="color: #b48ead;">if</span> background_color 44,0,30; <span style="color: #b48ead;">then</span>
   clear
-<span style="color: #859900;">fi</span>
-<span style="color: #586e75; font-style: italic;">### </span><span style="color: #586e75; font-style: italic;">END /etc/grub.d/05_debian_theme ###</span>
+<span style="color: #b48ead;">fi</span>
+<span style="color: #c0c5ce;">### </span><span style="color: #65737e;">END /etc/grub.d/05_debian_theme ###</span>
 </pre>
 </div>
 
@@ -919,22 +918,22 @@ With:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh"><span style="color: #586e75; font-style: italic;">### </span><span style="color: #586e75; font-style: italic;">BEGIN /etc/grub.d/05_debian_theme ###</span>
+<pre class="src src-sh"><span style="color: #c0c5ce;">### </span><span style="color: #65737e;">BEGIN /etc/grub.d/05_debian_theme ###</span>
 insmod part_msdos
 insmod ext4
-<span style="color: #586e75; font-style: italic;"># </span><span style="color: #586e75; font-style: italic;">Here you should use (sudo fdisk -l) to see /dev/sda?? </span>
-<span style="color: #859900;">set</span> <span style="color: #268bd2;">root</span>=<span style="color: #2aa198;">'(hd0,msdos10)'</span>
+<span style="color: #c0c5ce;"># </span><span style="color: #65737e;">Here you should use (sudo fdisk -l) to see /dev/sda?? </span>
+<span style="color: #d08770;">set</span> <span style="color: #bf616a;">root</span>=<span style="color: #a3be8c;">'(hd0,msdos10)'</span>
 search --no-floppy --fs-uuid --set e3a8ca35-417d-4da2-9380-91f08a9e4fb2
 insmod png
-<span style="color: #859900;">if</span> background_image /usr/share/backgrounds/spacefun-grub-widescreen.png; 
-<span style="color: #859900;">then</span>
-  <span style="color: #859900;">set</span> <span style="color: #268bd2;">color_normal</span>=light-gray/black
-  <span style="color: #859900;">set</span> <span style="color: #268bd2;">color_highlight</span>=white/black
-<span style="color: #859900;">else</span>
-  <span style="color: #859900;">set</span> <span style="color: #268bd2;">menu_color_normal</span>=cyan/blue
-  <span style="color: #859900;">set</span> <span style="color: #268bd2;">menu_color_highlight</span>=white/blue
-<span style="color: #859900;">fi</span>
-<span style="color: #586e75; font-style: italic;">### </span><span style="color: #586e75; font-style: italic;">END /etc/grub.d/05_debian_theme ###</span>
+<span style="color: #b48ead;">if</span> background_image /usr/share/backgrounds/spacefun-grub-widescreen.png; 
+<span style="color: #b48ead;">then</span>
+  <span style="color: #d08770;">set</span> <span style="color: #bf616a;">color_normal</span>=light-gray/black
+  <span style="color: #d08770;">set</span> <span style="color: #bf616a;">color_highlight</span>=white/black
+<span style="color: #b48ead;">else</span>
+  <span style="color: #d08770;">set</span> <span style="color: #bf616a;">menu_color_normal</span>=cyan/blue
+  <span style="color: #d08770;">set</span> <span style="color: #bf616a;">menu_color_highlight</span>=white/blue
+<span style="color: #b48ead;">fi</span>
+<span style="color: #c0c5ce;">### </span><span style="color: #65737e;">END /etc/grub.d/05_debian_theme ###</span>
 </pre>
 </div>
 </li>
@@ -954,7 +953,7 @@ insmod png
 <li>Follow below:
 <div class="org-src-container">
 
-<pre class="src src-sh"><span style="color: #586e75; font-style: italic;"># </span><span style="color: #586e75; font-style: italic;">Make sure libflashplayer.so with +x</span>
+<pre class="src src-sh"><span style="color: #c0c5ce;"># </span><span style="color: #65737e;">Make sure libflashplayer.so with +x</span>
 $ sudo cp libflashplayer.so /usr/lib/firefox/plugins/
 $ sudo cp -r usr/* /usr
 </pre>
@@ -1017,9 +1016,9 @@ $ sudo cp -r usr/* /usr
 <li>Now Run
 <div class="org-src-container">
 
-<pre class="src src-sh">update-alternatives --install <span style="color: #2aa198;">"/usr/bin/java"</span> <span style="color: #2aa198;">"java"</span> <span style="color: #2aa198;">"/usr/lib/jvm/jdk1.7.0/bin/java"</span> 1
-sudo update-alternatives --install <span style="color: #2aa198;">"/usr/bin/javac"</span> <span style="color: #2aa198;">"javac"</span> <span style="color: #2aa198;">"/usr/lib/jvm/jdk1.7.0/bin/javac"</span> 1
-sudo update-alternatives --install <span style="color: #2aa198;">"/usr/bin/javaws"</span> <span style="color: #2aa198;">"javaws"</span> <span style="color: #2aa198;">"/usr/lib/jvm/jdk1.7.0/bin/javaws"</span> 1
+<pre class="src src-sh">update-alternatives --install <span style="color: #a3be8c;">"/usr/bin/java"</span> <span style="color: #a3be8c;">"java"</span> <span style="color: #a3be8c;">"/usr/lib/jvm/jdk1.7.0/bin/java"</span> 1
+sudo update-alternatives --install <span style="color: #a3be8c;">"/usr/bin/javac"</span> <span style="color: #a3be8c;">"javac"</span> <span style="color: #a3be8c;">"/usr/lib/jvm/jdk1.7.0/bin/javac"</span> 1
+sudo update-alternatives --install <span style="color: #a3be8c;">"/usr/bin/javaws"</span> <span style="color: #a3be8c;">"javaws"</span> <span style="color: #a3be8c;">"/usr/lib/jvm/jdk1.7.0/bin/javaws"</span> 1
 </pre>
 </div>
 </li>
@@ -1057,8 +1056,8 @@ sudo chown -R root:root /usr/lib/jvm/jdk1.7.0
 <div class="outline-text-3" id="text-13-9">
 <div class="org-src-container">
 
-<pre class="src src-sh"><span style="color: #586e75; font-style: italic;"># </span><span style="color: #586e75; font-style: italic;">start on runlevel [2345]</span>
-stop on starting rc <span style="color: #268bd2;">RUNLEVEL</span>=[016]
+<pre class="src src-sh"><span style="color: #c0c5ce;"># </span><span style="color: #65737e;">start on runlevel [2345]</span>
+stop on starting rc <span style="color: #bf616a;">RUNLEVEL</span>=[016]
 </pre>
 </div>
 </div>
@@ -1097,9 +1096,9 @@ Alt+E &gt; Keyboard Shortcuts
 <div class="org-src-container">
 
 <pre class="src src-sh">[Re-enable hibernate by default]
-<span style="color: #268bd2;">Identity</span>=unix-user:*
-<span style="color: #268bd2;">Action</span>=org.freedesktop.upower.hibernate
-<span style="color: #268bd2;">ResultActive</span>=yes
+<span style="color: #bf616a;">Identity</span>=unix-user:*
+<span style="color: #bf616a;">Action</span>=org.freedesktop.upower.hibernate
+<span style="color: #bf616a;">ResultActive</span>=yes
 </pre>
 </div>
 </li>
@@ -1137,19 +1136,15 @@ Alt+E &gt; Keyboard Shortcuts
 </div>
 </div>
 </div>
-
-<div id="outline-container-sec-14" class="outline-2">
-<h2 id="sec-14"><span class="section-number-2">14</span> 尾声</h2>
-</div>
 </div>
 <div id="postamble" class="status">
 <div id="meta-article"><p class="author">倪俊佳(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
-<p class="date"></p>
-<p class="export-date">2015-12-26 Sat 23:08</p>
+<p class="date">2015-12-27</p>
+<p class="export-date">2015-12-27 Sun 21:23</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
-<p class="last-modification-time">2015-12-26 Sat 22:42</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+<p class="last-modification-time">2015-12-27 Sun 18:58</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

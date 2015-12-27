@@ -23,7 +23,7 @@ function changeOctoCat2 (body) {
  */
 function changeOctoCat (body) {
   var s = document.createElement('script')
-  s.src = '/octodex-data.js'
+  s.src = '/static/octodex-data.js'
   s.onload = function () {
     var octodex = window.octodex
     if (!octodex) return
@@ -123,6 +123,7 @@ function showMetaInfo (body, content, meta) {
     "<div class=\"card-content\">" +
     "<h3 class=\"card-name\">Author: " + meta.author  + "</h3>" +
     "<p>Email: <a href=\"mailto:" + meta.email +"\">" + meta.email + "</a></p>" +
+    "<p>Date: " + meta['date']  + "</p>" +
     "<p>Last Modification Time: " + meta['last-modification-time']  + "</p>" +
     "</div>" +
     "</div>"
@@ -295,6 +296,8 @@ function genCategories (body, content) {
       div.id = _name
       __forEach.call(children, function(c) {
 	var a = c.children[0]
+	// 去掉friends.html
+	if ( a.innerHTML.search(/friends/i) >= 0 ) return 
 	_tabContent.push(
 	  a.innerHTML.replace(
 	      /(.*) (\d{4}-\d{2}-\d{2})/,
@@ -308,16 +311,17 @@ function genCategories (body, content) {
     navTabs.push(
       '<li role="presentation" class="about"><a href="/static/about.html">Ab<span style="color: #ED462F;font-size: 0.6em;">&hearts;</span>ut</a></li>'
     )
-    
+    navTabs.push(
+      '<li role="presentation" class="friends"><a href="/wiki/friends.html">Friends</a></li>'
+    )
     navTabs.push(
       '<li role="presentation" class="octocat"><a href="https://octodex.github.com/">Octocats</a></li>'
     )
     content.innerHTML =
       '<ul class="nav nav-tabs" role="tablist">'+ navTabs.join(' ') +'</ul>' +
-      '<div class="tab-content">'+ tabContent.join('') +'</div>' +
-      '<div class="next-page-left"><a onclick="nextPage(this, -1)">&lt;</a></div><div class="next-page-right"><a onclick="nextPage(this, 1)">&gt;</a></div>' +
+      '<div class="tab-content">'+ tabContent.join('') +'</div>'
+      + '<div class="next-page-left"><a onclick="nextPage(this, -1)">&lt;</a></div><div class="next-page-right"><a onclick="nextPage(this, 1)">&gt;</a></div>' +
       '<div class="page-footer" style="text-align: right; font-size: 1.2em;"></div>'
-
     // blink()
   } else {
     console.error('At Home Page: Parse content Error! The Org UL isnt exist.')
@@ -400,7 +404,7 @@ function showTabpane (name, pagnum) {
  * 分页函数
  */
 function paging (_tabContent, content) {
-  var pages = [], frg = 4, tabContentLength = _tabContent.length
+  var pages = [], frg = 100, tabContentLength = _tabContent.length
   var s_cursor = 0, e_cursor = tabContentLength / frg
   e_cursor = parseInt(e_cursor.toString().split('.')[0], 10)
   if (e_cursor === 0 || tabContentLength % frg) {
@@ -527,6 +531,7 @@ function orgDivHomeAndUpFix (body, content, meta, isHome) {
   if (isHome) {
     orgDivHomeAndUp.style.position = 'fixed'
     orgDivHomeAndUp.style.right = 0
+    orgDivHomeAndUp.style.zIndex = 10
   }
   
   Links.forEach(function (link) {
@@ -600,8 +605,8 @@ function main() {
     someArticlesFix(body, content)
     showMetaInfo(body, content, meta)
     loadDisqus(body, content)
+    showFooter(body, content, meta)
   }
-  showFooter(body, content, meta)
 }
 
 if (document.addEventListener) 

@@ -1,4 +1,6 @@
 #+TITLE: This Site
+#+DATE: 2015-12-27
+#+CATEGORY: article
 #+DESCRIPTION: 关于本站的一些说明
 #+KEYWORDS: orgmode,emacs,github-page,github,blog,design,jekyll,static-blog
 #+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
@@ -45,9 +47,14 @@
 国庆之后因为工作上的事情，也没有时间搞这个了。如果有空，再说吧。估计，应该是不会来搞这个解决方案了。
 因为我有了现在的方案。）
 
-** 全Org-mode
+** 全Org-mode(现行方案)
 嗯，这次我全部用Org-mode这个来实现现在的文章发布系统。其实也是很简单的，就是之前的Jekyll方案中去掉了Jekyll二次编译的那一步。通过自己写js来进行交互，写css来美化网站。
 当然，功能上也会比之前的弱一点。但是没有什么关系，我想了其它的替代方案。理论上，还是说的过去的:)
+
+2015-12-26这天我又一次把 blog 重新整合，从 *OE-NK* 的项目中剥离了出来。去掉了 =org-publish= 中的 =org-publish-attachment= 。使用同一个 *static* 文件夹来存放和文章无关的静态文本。
+我突然发现导出速度有了提高，不知道是不是我的幻觉。然后使用 [[https://git-lfs.github.com/][Github-LFS]] 服务，存放静态的图片。解决我之前不知道如何安放图片的问题。
+
+感谢 [[https://www.flickr.com/][Flickr]] 之前的免费服务，后面的话主要是放游记、旅游等拍摄的照片。
 
 *** 创建核心(.emacs)
 通过编辑.emacs文件，来实现对org文件的导出。最近也是学习了一些elisp的语法，所以对之前直接copy来的项目配置做了一些修改。
@@ -70,14 +77,15 @@
 *** 美化字体(CSS)
 为了达到美观的阅读效果，参考了 [[https://medium.com][medium]] 的设计哲学，
 文章正文部分采用居中、width:700px的样式，正文字体使用-apple-system，标签放在正文底部等。
-达到的效果如本文所示。[[../../style.css][代码]]
+达到的效果如本文所示。[[../static/style.css][style.css]]
 
 *** 增加互动(JavaScript)
 为了实现一些交互效果，
 如：首页公式(banner)的处理，图片点击放大，显示标签，显示文章元信息（打开终端即可用看见）等，
-都是通过js来动态处理的，然后这个写的比较的丑陋，不是很美，后面有空的时候要来改一下。[[../../app.js][代码]]
+都是通过js来动态处理的，然后这个写的比较的丑陋，不是很美，后面有空的时候要来改一下。[[../static/app.js][app.js]]
 
 * 演化历史
+- 2015-12-26 从 OE-NK 项目中剥离，自成体系。去掉了 *org-publish* 带的 =org-publish-attachment= 功能，使结构精简
 - 2015-12-08 增加首页分页的机制，每页显示4个。另修复首页banner图片为加载完成出现白屏的问题
 - 2015-11-26 增加Google Analytics.js
 - 2015-11-24 首页改版，增加一些动画效果
@@ -108,6 +116,7 @@
 
 关于图片，我使用了 [[http://www.flickr.com/][flickr]] 的服务。感觉还行吧（现在已经被qiang了，我最近在想换哪一家呢？）。
 就是获取图片的链接比较的麻烦，后面想想要不用chrome脚本搞定，或者换一家（笑）。
+后来我把一些类似于结构图的这种图片放到了 github-lfs 的服务上面 :-)
 
 关于之前的文章，我移动了 *_draft* 这个目录下边，感兴趣的可以去 [[https://github.com/creamidea/creamidea.github.com/tree/master/_draft][这里]] 看看。因为要有一个全新的开始嘛～。
 404页面也不做了，反正也是抄，直接用Github的吧。

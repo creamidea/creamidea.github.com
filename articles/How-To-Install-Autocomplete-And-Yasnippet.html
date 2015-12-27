@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>How To Install Autocomplete and Yanisppet</title>
-<!-- 2015-12-26 Sat 23:08 -->
+<!-- 2015-12-27 Sun 13:49 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="倪俊佳(Junjia Ni)" />
@@ -179,10 +179,6 @@ for the JavaScript code in this tag.
 <h2 id="sec-1"><span class="section-number-2">1</span> 前言</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-这篇文章写于 <b>2013-04-06</b> 
-</p>
-
-<p>
 写这篇blog主要是测试一些网络服务，如图片服务和音乐链接服务。
 当然写这个还是因为我敬爱的小杰同学的要求。作为刚刚入门的New Emacser，我感觉是时候给他一些好玩的插件了。
 当然我这些步骤google一下全部会出来，但是作为要求还是写这篇blog吧。
@@ -233,8 +229,8 @@ $ tar -jxvf auto-complete-1.3.1.tar.bz2
 <div class="org-src-container">
 
 <pre class="src src-sh">$ make install
-<span style="color: #586e75; font-style: italic;"># </span><span style="color: #586e75; font-style: italic;">or with directory specified</span>
-$ make install <span style="color: #268bd2;">DIR</span>=$<span style="color: #268bd2;">HOME</span>/.emacs.d/
+<span style="color: #c0c5ce;"># </span><span style="color: #65737e;">or with directory specified</span>
+$ make install <span style="color: #bf616a;">DIR</span>=$<span style="color: #bf616a;">HOME</span>/.emacs.d/
 </pre>
 </div>
 <p>
@@ -242,9 +238,9 @@ $ make install <span style="color: #268bd2;">DIR</span>=$<span style="color: #26
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(add-to-list 'load-path <span style="color: #2aa198;">"~/.emacs.d"</span>)    <span style="color: #586e75; font-style: italic;">; </span><span style="color: #586e75; font-style: italic;">This may not be appeared if you have already added.</span>
-(add-to-list 'ac-dictionary-directories <span style="color: #2aa198;">"~/.emacs.d/ac-dict"</span>)
-(<span style="color: #859900;">require</span> '<span style="color: #2aa198;">auto-complete-config</span>)
+<pre class="src src-emacs-lisp">(add-to-list 'load-path <span style="color: #a3be8c;">"~/.emacs.d"</span>)    <span style="color: #c0c5ce;">; </span><span style="color: #65737e;">This may not be appeared if you have already added.</span>
+(add-to-list 'ac-dictionary-directories <span style="color: #a3be8c;">"~/.emacs.d/ac-dict"</span>)
+(<span style="color: #b48ead;">require</span> '<span style="color: #d08770;">auto-complete-config</span>)
 (ac-config-default)
 </pre>
 </div>
@@ -338,10 +334,10 @@ Specify path to install: c:\applications\emacs-24.2\lisp(自行选择)
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(add-to-list 'load-path <span style="color: #2aa198;">"~/.emacs.d/path/to/yasnippet"</span>)
-(<span style="color: #859900;">require</span> '<span style="color: #2aa198;">yasnippet</span>) <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">not yasnippet-bundle</span>
+<pre class="src src-emacs-lisp">(add-to-list 'load-path <span style="color: #a3be8c;">"~/.emacs.d/path/to/yasnippet"</span>)
+(<span style="color: #b48ead;">require</span> '<span style="color: #d08770;">yasnippet</span>) <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">not yasnippet-bundle</span>
 (yas--initialize)
-(yas/load-directory <span style="color: #2aa198;">"~/.emacs.d/path/to/yasnippet/snippets"</span>)
+(yas/load-directory <span style="color: #a3be8c;">"~/.emacs.d/path/to/yasnippet/snippets"</span>)
 </pre>
 </div>
 <p>
@@ -382,11 +378,11 @@ Specify path to install: c:\applications\emacs-24.2\lisp(自行选择)
 <div id="postamble" class="status">
 <div id="meta-article"><p class="author">倪俊佳(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
-<p class="date"></p>
-<p class="export-date">2015-12-26 Sat 23:08</p>
+<p class="date">2013-04-06</p>
+<p class="export-date">2015-12-27 Sun 13:49</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
-<p class="last-modification-time">2015-12-26 Sat 22:53</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+<p class="last-modification-time">2015-12-27 Sun 13:34</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

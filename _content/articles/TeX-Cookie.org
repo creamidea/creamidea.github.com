@@ -1,4 +1,5 @@
 #+TITLE: Tex Cookie
+#+DATE: 2013-04-09
 #+CATEGORY: article
 #+DESCRIPTION: Tex note
 #+KEYWORDS: emacs,latex

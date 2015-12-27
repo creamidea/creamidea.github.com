@@ -1,4 +1,5 @@
 #+TITLE: Git Cookbook
+#+DATE: 2015-12-27
 #+DESCRIPTION: Git Cookbook
 #+KEYWORDS: git
 #+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t

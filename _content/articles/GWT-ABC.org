@@ -1,4 +1,5 @@
 #+TITLE:GWT ABC
+#+DATE:2014-01-29
 #+DESCRIPTION:Something about gwt
 #+KEYWORDS:google,gwt,java
 #+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:t email:t timestamp:t

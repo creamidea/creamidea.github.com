@@ -1,4 +1,5 @@
 #+TITLE: Shell Cookies
+#+DATE: 2015-12-27
 #+DESCRIPTION: 记住一些命令
 #+KEYWORDS: shell,emacs,etags
 #+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
@@ -15,6 +16,12 @@
   grep -rnw '/path/to/somewhere/' -e "pattern"
 #+END_SRC
 Reference: http://stackoverflow.com/a/16957078/1925954
+
+* Emacs
+** 插入当前时间
+#+BEGIN_SRC sh
+C-u M-! date
+#+END_SRC
 
 * etags & ctags
 #+BEGIN_SRC sh

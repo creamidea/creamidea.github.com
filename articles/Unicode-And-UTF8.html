@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Unicode and UTF8</title>
-<!-- 2015-12-26 Sat 23:08 -->
+<!-- 2015-12-27 Sun 13:49 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="倪俊佳(Junjia Ni)" />
@@ -242,15 +242,15 @@ no matter what the language.
 </p>
 <div class="org-src-container">
 
-<pre class="src src-python"><span style="color: #586e75; font-style: italic;"># </span><span style="color: #586e75; font-style: italic;">ord&#26159;unicode ordinal&#30340;&#32553;&#20889;,&#21363;&#32534;&#21495;</span>
-<span style="color: #586e75; font-style: italic;"># </span><span style="color: #586e75; font-style: italic;">chr&#26159;character&#30340;&#32553;&#20889;,&#21363;&#23383;&#31526;</span>
-<span style="color: #586e75; font-style: italic;"># </span><span style="color: #586e75; font-style: italic;">ord&#21644;chr&#26159;&#20114;&#30456;&#23545;&#24212;&#36716;&#25442;&#30340;.</span>
-<span style="color: #586e75; font-style: italic;"># </span><span style="color: #586e75; font-style: italic;">&#20294;&#26159;&#30001;&#20110;chr&#23616;&#38480;&#20110;ascii,&#38271;&#24230;&#21482;&#26377;256.</span>
-<span style="color: #586e75; font-style: italic;"># </span><span style="color: #586e75; font-style: italic;">&#20110;&#26159;&#21448;&#22810;&#20102;&#20010;unichr.</span>
-&gt;&gt;&gt; <span style="color: #268bd2;">c</span> = u<span style="color: #2aa198;">'&#26163;'</span>
+<pre class="src src-python"><span style="color: #c0c5ce;"># </span><span style="color: #65737e;">ord&#26159;unicode ordinal&#30340;&#32553;&#20889;,&#21363;&#32534;&#21495;</span>
+<span style="color: #c0c5ce;"># </span><span style="color: #65737e;">chr&#26159;character&#30340;&#32553;&#20889;,&#21363;&#23383;&#31526;</span>
+<span style="color: #c0c5ce;"># </span><span style="color: #65737e;">ord&#21644;chr&#26159;&#20114;&#30456;&#23545;&#24212;&#36716;&#25442;&#30340;.</span>
+<span style="color: #c0c5ce;"># </span><span style="color: #65737e;">&#20294;&#26159;&#30001;&#20110;chr&#23616;&#38480;&#20110;ascii,&#38271;&#24230;&#21482;&#26377;256.</span>
+<span style="color: #c0c5ce;"># </span><span style="color: #65737e;">&#20110;&#26159;&#21448;&#22810;&#20102;&#20010;unichr.</span>
+&gt;&gt;&gt; <span style="color: #bf616a;">c</span> = u<span style="color: #a3be8c;">'&#26163;'</span>
 &gt;&gt;&gt; c
-u<span style="color: #2aa198;">'\u6633'</span>
-&gt;&gt;&gt; <span style="color: #859900;">ord</span>(u<span style="color: #2aa198;">'\u6633'</span>)
+u<span style="color: #a3be8c;">'\u6633'</span>
+&gt;&gt;&gt; <span style="color: #d08770;">ord</span>(u<span style="color: #a3be8c;">'\u6633'</span>)
 26163
 </pre>
 </div>
@@ -265,10 +265,10 @@ u<span style="color: #2aa198;">'\u6633'</span>
 </p>
 <div class="org-src-container">
 
-<pre class="src src-python">&gt;&gt;&gt; <span style="color: #268bd2;">d</span> = u<span style="color: #2aa198;">'a'</span>
+<pre class="src src-python">&gt;&gt;&gt; <span style="color: #bf616a;">d</span> = u<span style="color: #a3be8c;">'a'</span>
 &gt;&gt;&gt; d
-u<span style="color: #2aa198;">'a'</span>
-&gt;&gt;&gt; <span style="color: #859900;">ord</span>(d)
+u<span style="color: #a3be8c;">'a'</span>
+&gt;&gt;&gt; <span style="color: #d08770;">ord</span>(d)
 97
 </pre>
 </div>
@@ -332,10 +332,10 @@ E6 98 B3 按字节重新转换成16进制
 <div class="org-src-container">
 
 <pre class="src src-python">&gt;&gt;&gt; c
-u<span style="color: #2aa198;">'\u6633'</span>
-&gt;&gt;&gt; c.encode(<span style="color: #2aa198;">'utf-8'</span>)
-<span style="color: #2aa198;">'\xe6\x98\xb3'</span>
-&gt;&gt;&gt; <span style="color: #859900;">print</span> c
+u<span style="color: #a3be8c;">'\u6633'</span>
+&gt;&gt;&gt; c.encode(<span style="color: #a3be8c;">'utf-8'</span>)
+<span style="color: #a3be8c;">'\xe6\x98\xb3'</span>
+&gt;&gt;&gt; <span style="color: #b48ead;">print</span> c
 &#26163;
 </pre>
 </div>
@@ -388,8 +388,8 @@ str.encode()实际上就等价于str.decode(sys.defaultencoding).encode().而sys
 <div class="org-src-container">
 
 <pre class="src src-python">Traceback (most recent call last):
-  File <span style="color: #2aa198;">"&lt;stdin&gt;"</span>, line 1, <span style="color: #859900;">in</span> &lt;module&gt;
-<span style="color: #b58900;">UnicodeEncodeError</span>: <span style="color: #2aa198;">'ascii'</span> codec can<span style="color: #2aa198;">'t encode character u'</span>\u6633<span style="color: #2aa198;">' in position 0: ordinal not in range(128)</span>
+  File <span style="color: #a3be8c;">"&lt;stdin&gt;"</span>, line 1, <span style="color: #b48ead;">in</span> &lt;module&gt;
+<span style="color: #c0c5ce;">UnicodeEncodeError</span>: <span style="color: #a3be8c;">'ascii'</span> codec can<span style="color: #a3be8c;">'t encode character u'</span>\u6633<span style="color: #a3be8c;">' in position 0: ordinal not in range(128)</span>
 </pre>
 </div>
 </div>
@@ -437,11 +437,11 @@ str.encode()实际上就等价于str.decode(sys.defaultencoding).encode().而sys
 <div id="postamble" class="status">
 <div id="meta-article"><p class="author">倪俊佳(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
-<p class="date"></p>
-<p class="export-date">2015-12-26 Sat 23:08</p>
+<p class="date">2015-12-05</p>
+<p class="export-date">2015-12-27 Sun 13:49</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
-<p class="last-modification-time">2015-12-26 Sat 22:52</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+<p class="last-modification-time">2015-12-27 Sun 13:37</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
 </div>
 </body>
 </html>
