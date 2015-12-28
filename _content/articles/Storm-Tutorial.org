@@ -52,7 +52,7 @@ Spouts 和 bolts 组成的网络结构被封装进 "topology"（拓扑是提交�
 一个拓扑结构是一个流转换图，它的每一个节点都是一个 spouts 或者 bolts。图中的边表示哪些 bolts 订阅哪些 streams。
 当一个 spout 或者 bolt 发出一个元组到 stream，这个元组就会被发送到所有订阅了这个流的 bolts。
 #+CAPTION: Storm-一个拓扑结构
-[[static-img:Storm-一个拓扑结构.png]]
+[[glfs:Storm-Topologies.png]]
 节点之间的链接展示了元组是如何传递的。例如，Spout A 和 Bolt B 之间有一个链接， Spout A 到 Bolt C 有一个链接， Bolt B 到Bolt C 有一个链接，
 每当 Spout A 发出一个元组，这个元组就会被发送到 Bolt B 和 Bolt C。所有 Bolt B 的输出也都会发送到 Bolt C 。
 一个 Storm 拓扑结构中的每个节点都是并行执行的。在你的拓扑中，你可以指定每个节点的并行度，然后 Storm 会在整个集群中产生指定数量的线程去执行。

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>［译］Storm Tutorial</title>
-<!-- 2015-12-27 Sun 16:42 -->
+<!-- 2015-12-28 Mon 10:57 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="欧昳(Yi Ou)" />
@@ -233,7 +233,7 @@ Spouts 和 bolts 组成的网络结构被封装进 "topology"（拓扑是提交�
 当一个 spout 或者 bolt 发出一个元组到 stream，这个元组就会被发送到所有订阅了这个流的 bolts。
 </p>
 <p>
-<img src="../static/img/reference/Storm-一个拓扑结构.png" alt="Storm-一个拓扑结构.png" />
+<img src="https://media.githubusercontent.com/media/creamidea/creamidea.github.com/master/static/lfs/Storm-Topologies.png" alt="Storm-Topologies.png" />
 节点之间的链接展示了元组是如何传递的。例如，Spout A 和 Bolt B 之间有一个链接， Spout A 到 Bolt C 有一个链接， Bolt B 到Bolt C 有一个链接，
 每当 Spout A 发出一个元组，这个元组就会被发送到 Bolt B 和 Bolt C。所有 Bolt B 的输出也都会发送到 Bolt C 。
 一个 Storm 拓扑结构中的每个节点都是并行执行的。在你的拓扑中，你可以指定每个节点的并行度，然后 Storm 会在整个集群中产生指定数量的线程去执行。
@@ -252,21 +252,21 @@ Storm 中使用 tuples（元组）作为数据模型。
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java"><span style="color: #b48ead;">public</span> <span style="color: #b48ead;">class</span> <span style="color: #c0c5ce;">DoubleAndTripleBolt</span> <span style="color: #b48ead;">extends</span> <span style="color: #c0c5ce;">BaseRichBolt</span> {
-    <span style="color: #b48ead;">private</span> <span style="color: #c0c5ce;">OutputCollectorBase</span> <span style="color: #bf616a;">_collector</span>;
-    <span style="color: #d08770;">@Override</span>
-    <span style="color: #b48ead;">public</span> <span style="color: #c0c5ce;">void</span> <span style="color: #8fa1b3;">prepare</span>(<span style="color: #c0c5ce;">Map</span> <span style="color: #bf616a;">conf</span>, <span style="color: #c0c5ce;">TopologyContext</span> <span style="color: #bf616a;">context</span>, <span style="color: #c0c5ce;">OutputCollectorBase</span> <span style="color: #bf616a;">collector</span>) {
+<pre class="src src-java"><span style="color: #859900;">public</span> <span style="color: #859900;">class</span> <span style="color: #b58900;">DoubleAndTripleBolt</span> <span style="color: #859900;">extends</span> <span style="color: #b58900;">BaseRichBolt</span> {
+    <span style="color: #859900;">private</span> <span style="color: #b58900;">OutputCollectorBase</span> <span style="color: #268bd2;">_collector</span>;
+    <span style="color: #2aa198;">@Override</span>
+    <span style="color: #859900;">public</span> <span style="color: #b58900;">void</span> <span style="color: #268bd2;">prepare</span>(<span style="color: #b58900;">Map</span> <span style="color: #268bd2;">conf</span>, <span style="color: #b58900;">TopologyContext</span> <span style="color: #268bd2;">context</span>, <span style="color: #b58900;">OutputCollectorBase</span> <span style="color: #268bd2;">collector</span>) {
         _collector = collector;
     }
-    <span style="color: #d08770;">@Override</span>
-    <span style="color: #b48ead;">public</span> <span style="color: #c0c5ce;">void</span> <span style="color: #8fa1b3;">execute</span>(<span style="color: #c0c5ce;">Tuple</span> <span style="color: #bf616a;">input</span>) {
-        <span style="color: #c0c5ce;">int</span> <span style="color: #bf616a;">val</span> = input.getInteger(0);        
-        _collector.emit(input, <span style="color: #b48ead;">new</span> <span style="color: #c0c5ce;">Values</span>(val*2, val*3));
+    <span style="color: #2aa198;">@Override</span>
+    <span style="color: #859900;">public</span> <span style="color: #b58900;">void</span> <span style="color: #268bd2;">execute</span>(<span style="color: #b58900;">Tuple</span> <span style="color: #268bd2;">input</span>) {
+        <span style="color: #b58900;">int</span> <span style="color: #268bd2;">val</span> = input.getInteger(0);        
+        _collector.emit(input, <span style="color: #859900;">new</span> <span style="color: #b58900;">Values</span>(val*2, val*3));
         _collector.ack(input);
     }
-    <span style="color: #d08770;">@Override</span>
-    <span style="color: #b48ead;">public</span> <span style="color: #c0c5ce;">void</span> <span style="color: #8fa1b3;">declareOutputFields</span>(<span style="color: #c0c5ce;">OutputFieldsDeclarer</span> <span style="color: #bf616a;">declarer</span>) {
-        declarer.declare(<span style="color: #b48ead;">new</span> <span style="color: #c0c5ce;">Fields</span>(<span style="color: #a3be8c;">"double"</span>, <span style="color: #a3be8c;">"triple"</span>));
+    <span style="color: #2aa198;">@Override</span>
+    <span style="color: #859900;">public</span> <span style="color: #b58900;">void</span> <span style="color: #268bd2;">declareOutputFields</span>(<span style="color: #b58900;">OutputFieldsDeclarer</span> <span style="color: #268bd2;">declarer</span>) {
+        declarer.declare(<span style="color: #859900;">new</span> <span style="color: #b58900;">Fields</span>(<span style="color: #2aa198;">"double"</span>, <span style="color: #2aa198;">"triple"</span>));
     }    
 }
 </pre>
@@ -285,10 +285,10 @@ Storm 中使用 tuples（元组）作为数据模型。
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java"><span style="color: #c0c5ce;">TopologyBuilder</span> <span style="color: #bf616a;">builder</span> = <span style="color: #b48ead;">new</span> <span style="color: #c0c5ce;">TopologyBuilder</span>(); 
-builder.setSpout(<span style="color: #a3be8c;">"words"</span>, <span style="color: #b48ead;">new</span> <span style="color: #c0c5ce;">TestWordSpout</span>(), 10); 
-builder.setBolt(<span style="color: #a3be8c;">"exclaim1"</span>, <span style="color: #b48ead;">new</span> <span style="color: #c0c5ce;">ExclamationBolt</span>(), 3).shuffleGrouping(<span style="color: #a3be8c;">"words"</span>);
-builder.setBolt(<span style="color: #a3be8c;">"exclaim2"</span>, <span style="color: #b48ead;">new</span> <span style="color: #c0c5ce;">ExclamationBolt</span>(), 2).shuffleGrouping(<span style="color: #a3be8c;">"exclaim1"</span>);
+<pre class="src src-java"><span style="color: #b58900;">TopologyBuilder</span> <span style="color: #268bd2;">builder</span> = <span style="color: #859900;">new</span> <span style="color: #b58900;">TopologyBuilder</span>(); 
+builder.setSpout(<span style="color: #2aa198;">"words"</span>, <span style="color: #859900;">new</span> <span style="color: #b58900;">TestWordSpout</span>(), 10); 
+builder.setBolt(<span style="color: #2aa198;">"exclaim1"</span>, <span style="color: #859900;">new</span> <span style="color: #b58900;">ExclamationBolt</span>(), 3).shuffleGrouping(<span style="color: #2aa198;">"words"</span>);
+builder.setBolt(<span style="color: #2aa198;">"exclaim2"</span>, <span style="color: #859900;">new</span> <span style="color: #b58900;">ExclamationBolt</span>(), 2).shuffleGrouping(<span style="color: #2aa198;">"exclaim1"</span>);
 </pre>
 </div>
 <p>
@@ -317,9 +317,9 @@ setBolt 返回一个 <code>InputDeclarer</code> 对象，用来定义 bolt 的�
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java">builder.setBolt(<span style="color: #a3be8c;">"exclaim2"</span>, <span style="color: #b48ead;">new</span> <span style="color: #c0c5ce;">ExclamationBolt</span>(), 5)
-            .shuffleGrouping(<span style="color: #a3be8c;">"words"</span>)
-            .shuffleGrouping(<span style="color: #a3be8c;">"exclaim1"</span>);
+<pre class="src src-java">builder.setBolt(<span style="color: #2aa198;">"exclaim2"</span>, <span style="color: #859900;">new</span> <span style="color: #b58900;">ExclamationBolt</span>(), 5)
+            .shuffleGrouping(<span style="color: #2aa198;">"words"</span>)
+            .shuffleGrouping(<span style="color: #2aa198;">"exclaim1"</span>);
 </pre>
 </div>
 <p>
@@ -330,12 +330,12 @@ Spouts 负责向拓扑结构中发出新消息。TestWordSpout 从字符串列�
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java"><span style="color: #b48ead;">public</span> <span style="color: #c0c5ce;">void</span> <span style="color: #8fa1b3;">nextTuple</span>() {
+<pre class="src src-java"><span style="color: #859900;">public</span> <span style="color: #b58900;">void</span> <span style="color: #268bd2;">nextTuple</span>() {
     Utils.sleep(100);
-    <span style="color: #b48ead;">final</span> <span style="color: #c0c5ce;">String</span>[] <span style="color: #bf616a;">words</span> = <span style="color: #b48ead;">new</span> <span style="color: #c0c5ce;">String</span>[] {<span style="color: #a3be8c;">"nathan"</span>, <span style="color: #a3be8c;">"mike"</span>, <span style="color: #a3be8c;">"jackson"</span>, <span style="color: #a3be8c;">"golda"</span>, <span style="color: #a3be8c;">"bertels"</span>};
-    <span style="color: #b48ead;">final</span> <span style="color: #c0c5ce;">Random</span> <span style="color: #bf616a;">rand</span> = <span style="color: #b48ead;">new</span> <span style="color: #c0c5ce;">Random</span>();
-    <span style="color: #b48ead;">final</span> <span style="color: #c0c5ce;">String</span> <span style="color: #bf616a;">word</span> = words[rand.nextInt(words.length)];
-    _collector.emit(<span style="color: #b48ead;">new</span> <span style="color: #c0c5ce;">Values</span>(word));
+    <span style="color: #859900;">final</span> <span style="color: #b58900;">String</span>[] <span style="color: #268bd2;">words</span> = <span style="color: #859900;">new</span> <span style="color: #b58900;">String</span>[] {<span style="color: #2aa198;">"nathan"</span>, <span style="color: #2aa198;">"mike"</span>, <span style="color: #2aa198;">"jackson"</span>, <span style="color: #2aa198;">"golda"</span>, <span style="color: #2aa198;">"bertels"</span>};
+    <span style="color: #859900;">final</span> <span style="color: #b58900;">Random</span> <span style="color: #268bd2;">rand</span> = <span style="color: #859900;">new</span> <span style="color: #b58900;">Random</span>();
+    <span style="color: #859900;">final</span> <span style="color: #b58900;">String</span> <span style="color: #268bd2;">word</span> = words[rand.nextInt(words.length)];
+    _collector.emit(<span style="color: #859900;">new</span> <span style="color: #b58900;">Values</span>(word));
 }
 </pre>
 </div>
@@ -345,27 +345,27 @@ Spouts 负责向拓扑结构中发出新消息。TestWordSpout 从字符串列�
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java"><span style="color: #b48ead;">public</span> <span style="color: #b48ead;">static</span> <span style="color: #b48ead;">class</span> <span style="color: #c0c5ce;">ExclamationBolt</span> <span style="color: #b48ead;">implements</span> <span style="color: #c0c5ce;">IRichBolt</span> {
-    <span style="color: #c0c5ce;">OutputCollector</span> <span style="color: #bf616a;">_collector</span>;
-    <span style="color: #d08770;">@Override</span>
-    <span style="color: #b48ead;">public</span> <span style="color: #c0c5ce;">void</span> <span style="color: #8fa1b3;">prepare</span>(<span style="color: #c0c5ce;">Map</span> <span style="color: #bf616a;">conf</span>, <span style="color: #c0c5ce;">TopologyContext</span> <span style="color: #bf616a;">context</span>, <span style="color: #c0c5ce;">OutputCollector</span> <span style="color: #bf616a;">collector</span>) {
+<pre class="src src-java"><span style="color: #859900;">public</span> <span style="color: #859900;">static</span> <span style="color: #859900;">class</span> <span style="color: #b58900;">ExclamationBolt</span> <span style="color: #859900;">implements</span> <span style="color: #b58900;">IRichBolt</span> {
+    <span style="color: #b58900;">OutputCollector</span> <span style="color: #268bd2;">_collector</span>;
+    <span style="color: #2aa198;">@Override</span>
+    <span style="color: #859900;">public</span> <span style="color: #b58900;">void</span> <span style="color: #268bd2;">prepare</span>(<span style="color: #b58900;">Map</span> <span style="color: #268bd2;">conf</span>, <span style="color: #b58900;">TopologyContext</span> <span style="color: #268bd2;">context</span>, <span style="color: #b58900;">OutputCollector</span> <span style="color: #268bd2;">collector</span>) {
         _collector = collector;
     }
-    <span style="color: #d08770;">@Override</span>
-    <span style="color: #b48ead;">public</span> <span style="color: #c0c5ce;">void</span> <span style="color: #8fa1b3;">execute</span>(<span style="color: #c0c5ce;">Tuple</span> <span style="color: #bf616a;">tuple</span>) {
-        _collector.emit(tuple, <span style="color: #b48ead;">new</span> <span style="color: #c0c5ce;">Values</span>(tuple.getString(0) + <span style="color: #a3be8c;">"!!!"</span>));
+    <span style="color: #2aa198;">@Override</span>
+    <span style="color: #859900;">public</span> <span style="color: #b58900;">void</span> <span style="color: #268bd2;">execute</span>(<span style="color: #b58900;">Tuple</span> <span style="color: #268bd2;">tuple</span>) {
+        _collector.emit(tuple, <span style="color: #859900;">new</span> <span style="color: #b58900;">Values</span>(tuple.getString(0) + <span style="color: #2aa198;">"!!!"</span>));
         _collector.ack(tuple);
  }
-    <span style="color: #d08770;">@Override</span>
-    <span style="color: #b48ead;">public</span> <span style="color: #c0c5ce;">void</span> <span style="color: #8fa1b3;">cleanup</span>() {
+    <span style="color: #2aa198;">@Override</span>
+    <span style="color: #859900;">public</span> <span style="color: #b58900;">void</span> <span style="color: #268bd2;">cleanup</span>() {
     }
-    <span style="color: #d08770;">@Override</span>
-    <span style="color: #b48ead;">public</span> <span style="color: #c0c5ce;">void</span> <span style="color: #8fa1b3;">declareOutputFields</span>(<span style="color: #c0c5ce;">OutputFieldsDeclarer</span> <span style="color: #bf616a;">declarer</span>) {
-        declarer.declare(<span style="color: #b48ead;">new</span> <span style="color: #c0c5ce;">Fields</span>(<span style="color: #a3be8c;">"word"</span>));
+    <span style="color: #2aa198;">@Override</span>
+    <span style="color: #859900;">public</span> <span style="color: #b58900;">void</span> <span style="color: #268bd2;">declareOutputFields</span>(<span style="color: #b58900;">OutputFieldsDeclarer</span> <span style="color: #268bd2;">declarer</span>) {
+        declarer.declare(<span style="color: #859900;">new</span> <span style="color: #b58900;">Fields</span>(<span style="color: #2aa198;">"word"</span>));
     }
-    <span style="color: #d08770;">@Override</span>
-    <span style="color: #b48ead;">public</span> <span style="color: #c0c5ce;">Map</span> <span style="color: #8fa1b3;">getComponentConfiguration</span>() {
-        <span style="color: #b48ead;">return</span> <span style="color: #d08770;">null</span>;
+    <span style="color: #2aa198;">@Override</span>
+    <span style="color: #859900;">public</span> <span style="color: #b58900;">Map</span> <span style="color: #268bd2;">getComponentConfiguration</span>() {
+        <span style="color: #859900;">return</span> <span style="color: #2aa198;">null</span>;
     }
 }
 </pre>
@@ -401,20 +401,20 @@ ExclamationBolt 通过继承 BaseRichBolt 会写得更简洁，就像下面这�
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java"><span style="color: #b48ead;">public</span> <span style="color: #b48ead;">static</span> <span style="color: #b48ead;">class</span> <span style="color: #c0c5ce;">ExclamationBolt</span> <span style="color: #b48ead;">extends</span> <span style="color: #c0c5ce;">BaseRichBolt</span> {
-    <span style="color: #c0c5ce;">OutputCollector</span> <span style="color: #bf616a;">_collector</span>;
-    <span style="color: #d08770;">@Override</span>
-    <span style="color: #b48ead;">public</span> <span style="color: #c0c5ce;">void</span> <span style="color: #8fa1b3;">prepare</span>(<span style="color: #c0c5ce;">Map</span> <span style="color: #bf616a;">conf</span>, <span style="color: #c0c5ce;">TopologyContext</span> <span style="color: #bf616a;">context</span>, <span style="color: #c0c5ce;">OutputCollector</span> <span style="color: #bf616a;">collector</span>) {
+<pre class="src src-java"><span style="color: #859900;">public</span> <span style="color: #859900;">static</span> <span style="color: #859900;">class</span> <span style="color: #b58900;">ExclamationBolt</span> <span style="color: #859900;">extends</span> <span style="color: #b58900;">BaseRichBolt</span> {
+    <span style="color: #b58900;">OutputCollector</span> <span style="color: #268bd2;">_collector</span>;
+    <span style="color: #2aa198;">@Override</span>
+    <span style="color: #859900;">public</span> <span style="color: #b58900;">void</span> <span style="color: #268bd2;">prepare</span>(<span style="color: #b58900;">Map</span> <span style="color: #268bd2;">conf</span>, <span style="color: #b58900;">TopologyContext</span> <span style="color: #268bd2;">context</span>, <span style="color: #b58900;">OutputCollector</span> <span style="color: #268bd2;">collector</span>) {
         _collector = collector;
     }
-    <span style="color: #d08770;">@Override</span>
-    <span style="color: #b48ead;">public</span> <span style="color: #c0c5ce;">void</span> <span style="color: #8fa1b3;">execute</span>(<span style="color: #c0c5ce;">Tuple</span> <span style="color: #bf616a;">tuple</span>) {
-        _collector.emit(tuple, <span style="color: #b48ead;">new</span> <span style="color: #c0c5ce;">Values</span>(tuple.getString(0) + <span style="color: #a3be8c;">"!!!"</span>));
+    <span style="color: #2aa198;">@Override</span>
+    <span style="color: #859900;">public</span> <span style="color: #b58900;">void</span> <span style="color: #268bd2;">execute</span>(<span style="color: #b58900;">Tuple</span> <span style="color: #268bd2;">tuple</span>) {
+        _collector.emit(tuple, <span style="color: #859900;">new</span> <span style="color: #b58900;">Values</span>(tuple.getString(0) + <span style="color: #2aa198;">"!!!"</span>));
         _collector.ack(tuple);
     }
-    <span style="color: #d08770;">@Override</span>
-    <span style="color: #b48ead;">public</span> <span style="color: #c0c5ce;">void</span> <span style="color: #8fa1b3;">declareOutputFields</span>(<span style="color: #c0c5ce;">OutputFieldsDeclarer</span> <span style="color: #bf616a;">declarer</span>) {
-        declarer.declare(<span style="color: #b48ead;">new</span> <span style="color: #c0c5ce;">Fields</span>(<span style="color: #a3be8c;">"word"</span>));
+    <span style="color: #2aa198;">@Override</span>
+    <span style="color: #859900;">public</span> <span style="color: #b58900;">void</span> <span style="color: #268bd2;">declareOutputFields</span>(<span style="color: #b58900;">OutputFieldsDeclarer</span> <span style="color: #268bd2;">declarer</span>) {
+        declarer.declare(<span style="color: #859900;">new</span> <span style="color: #b58900;">Fields</span>(<span style="color: #2aa198;">"word"</span>));
     }    
 }
 </pre>
@@ -441,14 +441,14 @@ Storm 有两种操作模式：本地模式+分布式模式。
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java"><span style="color: #c0c5ce;">Config</span> <span style="color: #bf616a;">conf</span> = <span style="color: #b48ead;">new</span> <span style="color: #c0c5ce;">Config</span>();
-conf.setDebug(<span style="color: #d08770;">true</span>);
+<pre class="src src-java"><span style="color: #b58900;">Config</span> <span style="color: #268bd2;">conf</span> = <span style="color: #859900;">new</span> <span style="color: #b58900;">Config</span>();
+conf.setDebug(<span style="color: #2aa198;">true</span>);
 conf.setNumWorkers(2);
-<span style="color: #c0c5ce;">//</span><span style="color: #65737e;">&#26412;&#22320;&#27169;&#24335;</span>
-<span style="color: #c0c5ce;">LocalCluster</span> <span style="color: #bf616a;">cluster</span> = <span style="color: #b48ead;">new</span> <span style="color: #c0c5ce;">LocalCluster</span>();
-cluster.submitTopology(<span style="color: #a3be8c;">"test"</span>, conf, builder.createTopology());
+<span style="color: #586e75; font-style: italic;">//</span><span style="color: #586e75; font-style: italic;">&#26412;&#22320;&#27169;&#24335;</span>
+<span style="color: #b58900;">LocalCluster</span> <span style="color: #268bd2;">cluster</span> = <span style="color: #859900;">new</span> <span style="color: #b58900;">LocalCluster</span>();
+cluster.submitTopology(<span style="color: #2aa198;">"test"</span>, conf, builder.createTopology());
 Utils.sleep(10000);
-cluster.killTopology(<span style="color: #a3be8c;">"test"</span>);
+cluster.killTopology(<span style="color: #2aa198;">"test"</span>);
 cluster.shutdown();
 </pre>
 </div>
@@ -486,10 +486,10 @@ WordCountTopology 读取一个 spout 给出的句子，再从 WordCountBolt 流�
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java"><span style="color: #c0c5ce;">TopologyBuilder</span> <span style="color: #bf616a;">builder</span> = <span style="color: #b48ead;">new</span> <span style="color: #c0c5ce;">TopologyBuilder</span>();
-builder.setSpout(<span style="color: #a3be8c;">"sentences"</span>, <span style="color: #b48ead;">new</span> <span style="color: #c0c5ce;">RandomSentenceSpout</span>(), 5);        
-builder.setBolt(<span style="color: #a3be8c;">"split"</span>, <span style="color: #b48ead;">new</span> <span style="color: #c0c5ce;">SplitSentence</span>(), 8).shuffleGrouping(<span style="color: #a3be8c;">"sentences"</span>);
-builder.setBolt(<span style="color: #a3be8c;">"count"</span>, <span style="color: #b48ead;">new</span> <span style="color: #c0c5ce;">WordCount</span>(), 12).fieldsGrouping(<span style="color: #a3be8c;">"split"</span>, <span style="color: #b48ead;">new</span> <span style="color: #c0c5ce;">Fields</span>(<span style="color: #a3be8c;">"word"</span>));
+<pre class="src src-java"><span style="color: #b58900;">TopologyBuilder</span> <span style="color: #268bd2;">builder</span> = <span style="color: #859900;">new</span> <span style="color: #b58900;">TopologyBuilder</span>();
+builder.setSpout(<span style="color: #2aa198;">"sentences"</span>, <span style="color: #859900;">new</span> <span style="color: #b58900;">RandomSentenceSpout</span>(), 5);        
+builder.setBolt(<span style="color: #2aa198;">"split"</span>, <span style="color: #859900;">new</span> <span style="color: #b58900;">SplitSentence</span>(), 8).shuffleGrouping(<span style="color: #2aa198;">"sentences"</span>);
+builder.setBolt(<span style="color: #2aa198;">"count"</span>, <span style="color: #859900;">new</span> <span style="color: #b58900;">WordCount</span>(), 12).fieldsGrouping(<span style="color: #2aa198;">"split"</span>, <span style="color: #859900;">new</span> <span style="color: #b58900;">Fields</span>(<span style="color: #2aa198;">"word"</span>));
 </pre>
 </div>
 <p>
@@ -526,12 +526,12 @@ WordCount 订阅了 SplitSentence 的输出流，通过按照"word"字段进行�
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java"><span style="color: #b48ead;">public</span> <span style="color: #b48ead;">static</span> <span style="color: #b48ead;">class</span> <span style="color: #c0c5ce;">SplitSentence</span> <span style="color: #b48ead;">extends</span> <span style="color: #c0c5ce;">ShellBolt</span> <span style="color: #b48ead;">implements</span> <span style="color: #c0c5ce;">IRichBolt</span> {
-    <span style="color: #b48ead;">public</span> <span style="color: #8fa1b3;">SplitSentence</span>() {
-        <span style="color: #b48ead;">super</span>(<span style="color: #a3be8c;">"python"</span>, <span style="color: #a3be8c;">"splitsentence.py"</span>);
+<pre class="src src-java"><span style="color: #859900;">public</span> <span style="color: #859900;">static</span> <span style="color: #859900;">class</span> <span style="color: #b58900;">SplitSentence</span> <span style="color: #859900;">extends</span> <span style="color: #b58900;">ShellBolt</span> <span style="color: #859900;">implements</span> <span style="color: #b58900;">IRichBolt</span> {
+    <span style="color: #859900;">public</span> <span style="color: #268bd2;">SplitSentence</span>() {
+        <span style="color: #859900;">super</span>(<span style="color: #2aa198;">"python"</span>, <span style="color: #2aa198;">"splitsentence.py"</span>);
     }
-    <span style="color: #b48ead;">public</span> <span style="color: #c0c5ce;">void</span> <span style="color: #8fa1b3;">declareOutputFields</span>(<span style="color: #c0c5ce;">OutputFieldsDeclarer</span> <span style="color: #bf616a;">declarer</span>) {
-        declarer.declare(<span style="color: #b48ead;">new</span> <span style="color: #c0c5ce;">Fields</span>(<span style="color: #a3be8c;">"word"</span>));
+    <span style="color: #859900;">public</span> <span style="color: #b58900;">void</span> <span style="color: #268bd2;">declareOutputFields</span>(<span style="color: #b58900;">OutputFieldsDeclarer</span> <span style="color: #268bd2;">declarer</span>) {
+        declarer.declare(<span style="color: #859900;">new</span> <span style="color: #b58900;">Fields</span>(<span style="color: #2aa198;">"word"</span>));
     }
 }
 </pre>
@@ -541,11 +541,11 @@ SplitSentence 覆盖了 <code>ShellBolt</code> ，构造函数传入 splitsenten
 </p>
 <div class="org-src-container">
 
-<pre class="src src-python"><span style="color: #b48ead;">import</span> storm
-<span style="color: #b48ead;">class</span> <span style="color: #c0c5ce;">SplitSentenceBolt</span>(storm.BasicBolt):
-    <span style="color: #b48ead;">def</span> <span style="color: #8fa1b3;">process</span>(<span style="color: #b48ead;">self</span>, tup):
-        <span style="color: #bf616a;">words</span> = tup.values[0].split(<span style="color: #a3be8c;">" "</span>)
-        <span style="color: #b48ead;">for</span> word <span style="color: #b48ead;">in</span> words:
+<pre class="src src-python"><span style="color: #859900;">import</span> storm
+<span style="color: #859900;">class</span> <span style="color: #b58900;">SplitSentenceBolt</span>(storm.BasicBolt):
+    <span style="color: #859900;">def</span> <span style="color: #268bd2;">process</span>(<span style="color: #859900;">self</span>, tup):
+        <span style="color: #268bd2;">words</span> = tup.values[0].split(<span style="color: #2aa198;">" "</span>)
+        <span style="color: #859900;">for</span> word <span style="color: #859900;">in</span> words:
           storm.emit([word])
 SplitSentenceBolt().run()
 </pre>
@@ -610,10 +610,10 @@ For scalable cross-language services development, office site: <a href="https://
 <div id="meta-article"><p class="author">欧昳(Yi Ou)</p>
 <p class="email"><a href="mailto:718413182@qq.com">718413182@qq.com</a></p>
 <p class="date">2015-12-22</p>
-<p class="export-date">2015-12-27 Sun 16:42</p>
+<p class="export-date">2015-12-28 Mon 10:57</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
-<p class="last-modification-time">2015-12-27 Sun 16:39</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+<p class="last-modification-time">2015-12-28 Mon 10:57</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

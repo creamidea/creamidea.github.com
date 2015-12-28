@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>This Site</title>
-<!-- 2015-12-27 Sun 16:48 -->
+<!-- 2015-12-28 Mon 10:57 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="倪俊佳(Junjia Ni)" />
@@ -275,115 +275,116 @@ for the JavaScript code in this tag.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">===================================================</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">for org mode</span>
-(add-to-list 'load-path <span style="color: #a3be8c;">"~/.emacs.d/package/org-mode"</span>)
-(add-to-list 'load-path <span style="color: #a3be8c;">"~/.emacs.d/package/org-mode/contrib/lisp"</span> t)
+<pre class="src src-emacs-lisp"><span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">===================================================</span>
+<span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">for org mode</span>
+(add-to-list 'load-path <span style="color: #2aa198;">"~/.emacs.d/package/org-mode"</span>)
+(add-to-list 'load-path <span style="color: #2aa198;">"~/.emacs.d/package/org-mode/contrib/lisp"</span> t)
 
-(load-file <span style="color: #a3be8c;">"~/.emacs.d/config/worg-dto-org-gtd.el"</span>)
-(<span style="color: #b48ead;">require</span> '<span style="color: #d08770;">org-gtd</span>)
+(load-file <span style="color: #2aa198;">"~/.emacs.d/config/worg-dto-org-gtd.el"</span>)
+(<span style="color: #859900;">require</span> '<span style="color: #2aa198;">org-gtd</span>)
 
-(<span style="color: #b48ead;">defun</span> <span style="color: #8fa1b3;">load-deck</span> ()
-  <span style="color: #a3be8c;">"Config for Deck"</span>
-  (<span style="color: #b48ead;">require</span> '<span style="color: #d08770;">ox-deck</span>)
+(<span style="color: #859900;">defun</span> <span style="color: #268bd2;">load-deck</span> ()
+  <span style="color: #586e75; font-style: italic;">"Config for Deck"</span>
+  (<span style="color: #859900;">require</span> '<span style="color: #2aa198;">ox-deck</span>)
   (custom-set-variables
-   <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">neon swiss web-2.0</span>
-   '(org-deck-theme <span style="color: #a3be8c;">"web-2.0.css"</span>)
-   <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">horizontal-slide vertical-slide fade</span>
-   '(org-deck-transition <span style="color: #a3be8c;">"fade.css"</span>)
-   <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">'(org-deck-include-extensions '(goto menu navigation scale status))</span>
-   '(org-html-link-home <span style="color: #a3be8c;">"http://creamidea.github.io"</span>)))
-(<span style="color: #b48ead;">defun</span> <span style="color: #8fa1b3;">load-creamidea-publish</span> ()
+   <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">neon swiss web-2.0</span>
+   '(org-deck-theme <span style="color: #2aa198;">"web-2.0.css"</span>)
+   <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">horizontal-slide vertical-slide fade</span>
+   '(org-deck-transition <span style="color: #2aa198;">"fade.css"</span>)
+   <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">'(org-deck-include-extensions '(goto menu navigation scale status))</span>
+   '(org-html-link-home <span style="color: #2aa198;">"http://creamidea.github.io"</span>)))
+(<span style="color: #859900;">defun</span> <span style="color: #268bd2;">load-creamidea-publish</span> ()
 
-  <span style="color: #a3be8c;">"Config for Creamidea Publish"</span>
-  (<span style="color: #b48ead;">require</span> '<span style="color: #d08770;">ox-publish</span>)
-  (<span style="color: #b48ead;">require</span> '<span style="color: #d08770;">ox-rss</span>)
+  <span style="color: #586e75; font-style: italic;">"Config for Creamidea Publish"</span>
+  (<span style="color: #859900;">require</span> '<span style="color: #2aa198;">ox-publish</span>)
+  (<span style="color: #859900;">require</span> '<span style="color: #2aa198;">ox-rss</span>)
   (setq org-src-fontify-natively t)
-  (setq creamidea-path <span style="color: #a3be8c;">"/Users/creamidea/Documents/creamidea"</span>)
-  (setq creamidea-public-path <span style="color: #a3be8c;">"/Users/creamidea/Documents/creamidea"</span>)
-  <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">(setq creamidea-public-path "/Users/creamidea/Code/repos/oe-nk/public") ;; Here will change by your oe-nk's public</span>
+  (setq creamidea-path <span style="color: #2aa198;">"/Users/creamidea/Documents/creamidea"</span>)
+  (setq creamidea-public-path <span style="color: #2aa198;">"/Users/creamidea/Documents/creamidea"</span>)
+  <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">(setq creamidea-public-path "/Users/creamidea/Code/repos/oe-nk/public") ;; Here will change by your oe-nk's public</span>
 
-  <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">(setq meta-linkedin "&lt;meta name=\"linkedin\" content=\"https://cn.linkedin.com/in/junjia-ni-b3a42365\"&gt;")</span>
-  <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">%t stands for the title.</span>
-  <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">%a stands for the author's name.</span>
-  <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">%e stands for the author's email.</span>
-  <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">%d stands for the date.</span>
-  <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">%c will be replaced by `</span><span style="color: #65737e;">org-html-creator-string</span><span style="color: #65737e;">'.</span>
-  <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">%v will be replaced by `</span><span style="color: #65737e;">org-html-validation-link</span><span style="color: #65737e;">'.</span>
-  <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">%T will be replaced by the export time.</span>
-  <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">%C will be replaced by the last modification time.</span>
-  <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">C-h v org-html-postamble-format </span>
-  (setq author-info <span style="color: #a3be8c;">"&lt;div id=\"meta-article\"&gt;&lt;p class=\"author\"&gt;%a&lt;/p&gt;\n&lt;p class=\"email\"&gt;%e&lt;/p&gt;\n&lt;p class=\"date\"&gt;%d&lt;/p&gt;\n&lt;p class=\"export-date\"&gt;%T&lt;/p&gt;\n&lt;p class=\"creator\"&gt;%c&lt;/p&gt;\n&lt;p class=\"validation\"&gt;%v&lt;/p&gt;\n&lt;p class=\"last-modification-time\"&gt;%C&lt;/p&gt;&lt;/div&gt;"</span>) 
-  (setq link-medium-fonts <span style="color: #a3be8c;">"&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"/static/medium-fonts.css\"&gt;"</span>)
-  (setq link-style-css <span style="color: #a3be8c;">"&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"/static/style.css\"&gt;"</span>)
-  (setq analytics-js <span style="color: #a3be8c;">"&lt;!-- Google Analytics --&gt;&lt;script&gt;window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');&lt;/script&gt;&lt;script async src='//www.google-analytics.com/analytics.js'&gt;&lt;/script&gt;&lt;!-- End Google Analytics --&gt;"</span>)
-  (setq app-js <span style="color: #a3be8c;">"&lt;script src=\"/static/app.js\"&gt;&lt;/script&gt;"</span>)
+  <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">(setq meta-linkedin "&lt;meta name=\"linkedin\" content=\"https://cn.linkedin.com/in/junjia-ni-b3a42365\"&gt;")</span>
+  <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">%t stands for the title.</span>
+  <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">%a stands for the author's name.</span>
+  <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">%e stands for the author's email.</span>
+  <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">%d stands for the date.</span>
+  <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">%c will be replaced by `</span><span style="color: #586e75; font-style: italic;">org-html-creator-string</span><span style="color: #586e75; font-style: italic;">'.</span>
+  <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">%v will be replaced by `</span><span style="color: #586e75; font-style: italic;">org-html-validation-link</span><span style="color: #586e75; font-style: italic;">'.</span>
+  <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">%T will be replaced by the export time.</span>
+  <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">%C will be replaced by the last modification time.</span>
+  <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">C-h v org-html-postamble-format </span>
+  (setq author-info <span style="color: #2aa198;">"&lt;div id=\"meta-article\"&gt;&lt;p class=\"author\"&gt;%a&lt;/p&gt;\n&lt;p class=\"email\"&gt;%e&lt;/p&gt;\n&lt;p class=\"date\"&gt;%d&lt;/p&gt;\n&lt;p class=\"export-date\"&gt;%T&lt;/p&gt;\n&lt;p class=\"creator\"&gt;%c&lt;/p&gt;\n&lt;p class=\"validation\"&gt;%v&lt;/p&gt;\n&lt;p class=\"last-modification-time\"&gt;%C&lt;/p&gt;&lt;/div&gt;"</span>) 
+  (setq link-medium-fonts <span style="color: #2aa198;">"&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"/static/medium-fonts.css\"&gt;"</span>)
+  (setq link-style-css <span style="color: #2aa198;">"&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"/static/style.css\"&gt;"</span>)
+  (setq analytics-js <span style="color: #2aa198;">"&lt;!-- Google Analytics --&gt;&lt;script&gt;window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');&lt;/script&gt;&lt;script async src='//www.google-analytics.com/analytics.js'&gt;&lt;/script&gt;&lt;!-- End Google Analytics --&gt;"</span>)
+  (setq app-js <span style="color: #2aa198;">"&lt;script src=\"/static/app.js\"&gt;&lt;/script&gt;"</span>)
 
   (setq org-link-abbrev-alist
-        '((<span style="color: #a3be8c;">"static-img"</span>  . <span style="color: #a3be8c;">"../static/img/reference/%s"</span>)
-          (<span style="color: #a3be8c;">"gdraw"</span>. <span style="color: #a3be8c;">"https://docs.google.com/drawings/d/"</span>)
-          (<span style="color: #a3be8c;">"url-to-ja"</span> . <span style="color: #a3be8c;">"http://translate.google.fr/translate?sl=en&amp;tl=ja&amp;u=%h"</span>)
-          (<span style="color: #a3be8c;">"google"</span>    . <span style="color: #a3be8c;">"http://www.google.com/search?q="</span>)
-          (<span style="color: #a3be8c;">"gmap"</span>      . <span style="color: #a3be8c;">"http://maps.google.com/maps?q=%s"</span>)
-          (<span style="color: #a3be8c;">"omap"</span>      . <span style="color: #a3be8c;">"http://nominatim.openstreetmap.org/search?q=%s&amp;polygon=1"</span>)
-          (<span style="color: #a3be8c;">"ads"</span>       . <span style="color: #a3be8c;">"http://adsabs.harvard.edu/cgi-bin/nph-abs_connect?author=%s&amp;db_key=AST"</span>)))
+        '((<span style="color: #2aa198;">"static-img"</span>  . <span style="color: #2aa198;">"../static/img/reference/%s"</span>)
+          (<span style="color: #2aa198;">"glfs"</span> . <span style="color: #2aa198;">"https://media.githubusercontent.com/media/creamidea/creamidea.github.com/master/static/lfs/%s"</span>)
+          (<span style="color: #2aa198;">"gdraw"</span>. <span style="color: #2aa198;">"https://docs.google.com/drawings/d/"</span>)
+          (<span style="color: #2aa198;">"url-to-ja"</span> . <span style="color: #2aa198;">"http://translate.google.fr/translate?sl=en&amp;tl=ja&amp;u=%h"</span>)
+          (<span style="color: #2aa198;">"google"</span>    . <span style="color: #2aa198;">"http://www.google.com/search?q="</span>)
+          (<span style="color: #2aa198;">"gmap"</span>      . <span style="color: #2aa198;">"http://maps.google.com/maps?q=%s"</span>)
+          (<span style="color: #2aa198;">"omap"</span>      . <span style="color: #2aa198;">"http://nominatim.openstreetmap.org/search?q=%s&amp;polygon=1"</span>)
+          (<span style="color: #2aa198;">"ads"</span>       . <span style="color: #2aa198;">"http://adsabs.harvard.edu/cgi-bin/nph-abs_connect?author=%s&amp;db_key=AST"</span>)))
 
   (setq org-publish-project-alist
         `(
-          <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">&#25226;&#21508;&#37096;&#20998;&#30340;&#37197;&#32622;&#25991;&#20214;&#20889;&#21040;&#36825;&#37324;&#38754;&#26469;</span>
-          (<span style="color: #a3be8c;">"creamidea-article"</span>
-           <span style="color: #d08770;">:base-directory</span> ,(concat creamidea-path <span style="color: #a3be8c;">"/_content"</span>)
-           <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">:base-directory ,(concat creamidea-path "/_articles/")</span>
-           <span style="color: #d08770;">:base-extension</span> <span style="color: #a3be8c;">"org"</span>
+          <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">&#25226;&#21508;&#37096;&#20998;&#30340;&#37197;&#32622;&#25991;&#20214;&#20889;&#21040;&#36825;&#37324;&#38754;&#26469;</span>
+          (<span style="color: #2aa198;">"creamidea-article"</span>
+           <span style="color: #859900;">:base-directory</span> ,(concat creamidea-path <span style="color: #2aa198;">"/_content"</span>)
+           <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">:base-directory ,(concat creamidea-path "/_articles/")</span>
+           <span style="color: #859900;">:base-extension</span> <span style="color: #2aa198;">"org"</span>
 
-           <span style="color: #d08770;">:publishing-directory</span> ,creamidea-public-path
-           <span style="color: #d08770;">:recursive</span> f
-           <span style="color: #d08770;">:publishing-function</span> org-html-publish-to-html
-           <span style="color: #d08770;">:headline-levels</span> 4             <span style="color: #c0c5ce;">; </span><span style="color: #65737e;">Just the default for this project.</span>
-           <span style="color: #d08770;">:html-head</span> ,(concat link-style-css link-medium-fonts)
-           <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">:auto-preamble t</span>
-           <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">:html-preamble ,(concat app-js analytics-js)</span>
-           <span style="color: #d08770;">:html-postamble</span> ,(concat author-info app-js analytics-js )
-           <span style="color: #d08770;">:html-extension</span> <span style="color: #a3be8c;">"html"</span>
-           <span style="color: #d08770;">:section-numbers</span> t
-           <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">:body-only: t</span>
-           <span style="color: #d08770;">:author</span> <span style="color: #a3be8c;">"&#20522;&#20426;&#20339;(Junjia Ni)"</span>
-           <span style="color: #d08770;">:email</span> <span style="color: #a3be8c;">"creamidea@gmail.com"</span>
-           <span style="color: #d08770;">:auto-sitemap</span> t                <span style="color: #c0c5ce;">; </span><span style="color: #65737e;">Generate sitemap.org automagically...</span>
-           <span style="color: #d08770;">:sitemap-filename</span> <span style="color: #a3be8c;">"index.org"</span>  <span style="color: #c0c5ce;">; </span><span style="color: #65737e;">... call it sitemap.org (it's the default)...</span>
-           <span style="color: #d08770;">:sitemap-title</span> <span style="color: #a3be8c;">"e[(i)(pi)]+1=0(19890514)"</span> <span style="color: #c0c5ce;">; </span><span style="color: #65737e;">... with title 'Sitemap'.</span>
-           <span style="color: #d08770;">:sitemap-sort-files</span> anti-chronologically
-           <span style="color: #d08770;">:sitemap-file-entry-format</span> <span style="color: #a3be8c;">"%t %d"</span>
-           <span style="color: #d08770;">:org-html-doctype-alist</span> html5
+           <span style="color: #859900;">:publishing-directory</span> ,creamidea-public-path
+           <span style="color: #859900;">:recursive</span> f
+           <span style="color: #859900;">:publishing-function</span> org-html-publish-to-html
+           <span style="color: #859900;">:headline-levels</span> 4             <span style="color: #586e75; font-style: italic;">; </span><span style="color: #586e75; font-style: italic;">Just the default for this project.</span>
+           <span style="color: #859900;">:html-head</span> ,(concat link-style-css link-medium-fonts)
+           <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">:auto-preamble t</span>
+           <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">:html-preamble ,(concat app-js analytics-js)</span>
+           <span style="color: #859900;">:html-postamble</span> ,(concat author-info app-js analytics-js )
+           <span style="color: #859900;">:html-extension</span> <span style="color: #2aa198;">"html"</span>
+           <span style="color: #859900;">:section-numbers</span> t
+           <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">:body-only: t</span>
+           <span style="color: #859900;">:author</span> <span style="color: #2aa198;">"&#20522;&#20426;&#20339;(Junjia Ni)"</span>
+           <span style="color: #859900;">:email</span> <span style="color: #2aa198;">"creamidea@gmail.com"</span>
+           <span style="color: #859900;">:auto-sitemap</span> t                <span style="color: #586e75; font-style: italic;">; </span><span style="color: #586e75; font-style: italic;">Generate sitemap.org automagically...</span>
+           <span style="color: #859900;">:sitemap-filename</span> <span style="color: #2aa198;">"index.org"</span>  <span style="color: #586e75; font-style: italic;">; </span><span style="color: #586e75; font-style: italic;">... call it sitemap.org (it's the default)...</span>
+           <span style="color: #859900;">:sitemap-title</span> <span style="color: #2aa198;">"e[(i)(pi)]+1=0(19890514)"</span> <span style="color: #586e75; font-style: italic;">; </span><span style="color: #586e75; font-style: italic;">... with title 'Sitemap'.</span>
+           <span style="color: #859900;">:sitemap-sort-files</span> anti-chronologically
+           <span style="color: #859900;">:sitemap-file-entry-format</span> <span style="color: #2aa198;">"%t %d"</span>
+           <span style="color: #859900;">:org-html-doctype-alist</span> html5
            )
-          (<span style="color: #a3be8c;">"creamidea-static"</span>
-           <span style="color: #d08770;">:base-directory</span> ,(concat creamidea-path <span style="color: #a3be8c;">"/static"</span>)
-           <span style="color: #d08770;">:base-extension</span> <span style="color: #a3be8c;">"css</span><span style="color: #a3be8c; font-weight: bold;">\\</span><span style="color: #a3be8c; font-weight: bold;">|</span><span style="color: #a3be8c;">js</span><span style="color: #a3be8c; font-weight: bold;">\\</span><span style="color: #a3be8c; font-weight: bold;">|</span><span style="color: #a3be8c;">png</span><span style="color: #a3be8c; font-weight: bold;">\\</span><span style="color: #a3be8c; font-weight: bold;">|</span><span style="color: #a3be8c;">jpg</span><span style="color: #a3be8c; font-weight: bold;">\\</span><span style="color: #a3be8c; font-weight: bold;">|</span><span style="color: #a3be8c;">gif</span><span style="color: #a3be8c; font-weight: bold;">\\</span><span style="color: #a3be8c; font-weight: bold;">|</span><span style="color: #a3be8c;">pdf</span><span style="color: #a3be8c; font-weight: bold;">\\</span><span style="color: #a3be8c; font-weight: bold;">|</span><span style="color: #a3be8c;">mp3</span><span style="color: #a3be8c; font-weight: bold;">\\</span><span style="color: #a3be8c; font-weight: bold;">|</span><span style="color: #a3be8c;">ogg</span><span style="color: #a3be8c; font-weight: bold;">\\</span><span style="color: #a3be8c; font-weight: bold;">|</span><span style="color: #a3be8c;">swf</span><span style="color: #a3be8c; font-weight: bold;">\\</span><span style="color: #a3be8c; font-weight: bold;">|</span><span style="color: #a3be8c;">html"</span>
-           <span style="color: #d08770;">:publishing-directory</span>  ,creamidea-public-path
-           <span style="color: #d08770;">:recursive</span> f
-           <span style="color: #d08770;">:publishing-function</span> org-publish-attachment
+          (<span style="color: #2aa198;">"creamidea-static"</span>
+           <span style="color: #859900;">:base-directory</span> ,(concat creamidea-path <span style="color: #2aa198;">"/static"</span>)
+           <span style="color: #859900;">:base-extension</span> <span style="color: #2aa198;">"css</span><span style="color: #2aa198;">\\</span><span style="color: #2aa198;">|</span><span style="color: #2aa198;">js</span><span style="color: #2aa198;">\\</span><span style="color: #2aa198;">|</span><span style="color: #2aa198;">png</span><span style="color: #2aa198;">\\</span><span style="color: #2aa198;">|</span><span style="color: #2aa198;">jpg</span><span style="color: #2aa198;">\\</span><span style="color: #2aa198;">|</span><span style="color: #2aa198;">gif</span><span style="color: #2aa198;">\\</span><span style="color: #2aa198;">|</span><span style="color: #2aa198;">pdf</span><span style="color: #2aa198;">\\</span><span style="color: #2aa198;">|</span><span style="color: #2aa198;">mp3</span><span style="color: #2aa198;">\\</span><span style="color: #2aa198;">|</span><span style="color: #2aa198;">ogg</span><span style="color: #2aa198;">\\</span><span style="color: #2aa198;">|</span><span style="color: #2aa198;">swf</span><span style="color: #2aa198;">\\</span><span style="color: #2aa198;">|</span><span style="color: #2aa198;">html"</span>
+           <span style="color: #859900;">:publishing-directory</span>  ,creamidea-public-path
+           <span style="color: #859900;">:recursive</span> f
+           <span style="color: #859900;">:publishing-function</span> org-publish-attachment
            )
-          (<span style="color: #a3be8c;">"homepage-rss"</span>
-           <span style="color: #d08770;">:base-directory</span> ,(concat creamidea-path <span style="color: #a3be8c;">"/_content"</span>)
-           <span style="color: #d08770;">:base-extension</span> <span style="color: #a3be8c;">"org"</span>
-           <span style="color: #d08770;">:publishing-directory</span> ,creamidea-public-path
-           <span style="color: #d08770;">:publishing-function</span> (org-rss-publish-to-rss)
-           <span style="color: #d08770;">:html-link-home</span> <span style="color: #a3be8c;">"http://creamidea.github.io/"</span>
-           <span style="color: #d08770;">:html-link-use-abs-url</span> t)
-          <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">:rss-image-url "http://creamidea.github.io/favicon.ico"</span>
-          <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">:rss-extension "xml"</span>
-          <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">:section-numbers nil</span>
-          <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">:exclude ".*"            ;; To exclude all files...</span>
-          <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">:include ("index.org")   ;; ... except index.org.</span>
-          <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">:table-of-contents nil)</span>
-          (<span style="color: #a3be8c;">"creamidea"</span> <span style="color: #d08770;">:components</span> (<span style="color: #a3be8c;">"creamidea-article"</span> <span style="color: #a3be8c;">"homepage-rss"</span>))
-          <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">("creamidea" :components ("creamidea-article" "creamidea-static"))</span>
-          <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">http://lujun9972.github.io/emacs/elisp/</span>
-          <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">http://forrestchang.github.io/2015/08/29/use-emacs-org-mode-build-blog/</span>
+          (<span style="color: #2aa198;">"homepage-rss"</span>
+           <span style="color: #859900;">:base-directory</span> ,(concat creamidea-path <span style="color: #2aa198;">"/_content"</span>)
+           <span style="color: #859900;">:base-extension</span> <span style="color: #2aa198;">"org"</span>
+           <span style="color: #859900;">:publishing-directory</span> ,creamidea-public-path
+           <span style="color: #859900;">:publishing-function</span> (org-rss-publish-to-rss)
+           <span style="color: #859900;">:html-link-home</span> <span style="color: #2aa198;">"http://creamidea.github.io/"</span>
+           <span style="color: #859900;">:html-link-use-abs-url</span> t)
+          <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">:rss-image-url "http://creamidea.github.io/favicon.ico"</span>
+          <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">:rss-extension "xml"</span>
+          <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">:section-numbers nil</span>
+          <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">:exclude ".*"            ;; To exclude all files...</span>
+          <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">:include ("index.org")   ;; ... except index.org.</span>
+          <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">:table-of-contents nil)</span>
+          (<span style="color: #2aa198;">"creamidea"</span> <span style="color: #859900;">:components</span> (<span style="color: #2aa198;">"creamidea-article"</span> <span style="color: #2aa198;">"homepage-rss"</span>))
+          <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">("creamidea" :components ("creamidea-article" "creamidea-static"))</span>
+          <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">http://lujun9972.github.io/emacs/elisp/</span>
+          <span style="color: #586e75; font-style: italic;">;; </span><span style="color: #586e75; font-style: italic;">http://forrestchang.github.io/2015/08/29/use-emacs-org-mode-build-blog/</span>
           ))
-  (global-set-key (kbd <span style="color: #a3be8c;">"C-c x"</span>) 'org-publish-current-project))
-(eval-after-load <span style="color: #a3be8c;">"org"</span>
-  (<span style="color: #b48ead;">lambda</span> ()
+  (global-set-key (kbd <span style="color: #2aa198;">"C-c x"</span>) 'org-publish-current-project))
+(eval-after-load <span style="color: #2aa198;">"org"</span>
+  (<span style="color: #859900;">lambda</span> ()
     (load-creamidea-publish)
     (load-deck)))
 </pre>
@@ -404,24 +405,24 @@ for the JavaScript code in this tag.
 </p>
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #65737e;"># -*- mode: snippet -*-</span>
-<span style="color: #65737e;"># name: blog</span>
-<span style="color: #65737e;"># key: blog</span>
-<span style="color: #65737e;"># --</span>
-<span style="color: #b3b3b3;">#+TITLE:</span> <span style="color: #afeeee; font-weight: bold;">${1:No Title}</span>
+<pre class="src src-org"><span style="color: #586e75; font-style: italic;"># -*- mode: snippet -*-</span>
+<span style="color: #586e75; font-style: italic;"># name: blog</span>
+<span style="color: #586e75; font-style: italic;"># key: blog</span>
+<span style="color: #586e75; font-style: italic;"># --</span>
+<span style="color: #586e75;">#+TITLE:</span> <span style="color: #2aa198; font-weight: bold;">${1:No Title}</span>
 ${2:$$(yas-choose-value '("#+AUTHOR: &#20522;&#20426;&#20339;(Junjia Ni)\n#+EMAIL: creamidea(AT)gmail.com" "#+AUTHOR: &#27431;&#26163;(Yi Ou)\n#+EMAIL: 718413182(AT)qq.com"))}
-<span style="color: #b3b3b3;">#+DATE:</span> <span style="color: #afeeee;">`(format-time-string "%Y-%m-%d" (current-time))`</span>
-<span style="color: #65737e;">#+CATEGORY: article</span>
-<span style="color: #65737e;">#+DESCRIPTION: ${3:$1}</span>
-<span style="color: #65737e;">#+KEYWORDS: ${4:emacs,orgmode}</span>
-<span style="color: #65737e;">#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t &lt;:t date:t timestamp:t</span>
-<span style="color: #65737e;">#+LINK_HOME: <a href="https://creamidea.github.io">https://creamidea.github.io</a></span>
-<span style="color: #65737e;">#+STARTUP: showall</span>
+<span style="color: #586e75;">#+DATE:</span> <span style="color: #afeeee;">`(format-time-string "%Y-%m-%d" (current-time))`</span>
+<span style="color: #586e75; font-style: italic;">#+CATEGORY: article</span>
+<span style="color: #586e75; font-style: italic;">#+DESCRIPTION: ${3:$1}</span>
+<span style="color: #586e75; font-style: italic;">#+KEYWORDS: ${4:emacs,orgmode}</span>
+<span style="color: #586e75; font-style: italic;">#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t &lt;:t date:t timestamp:t</span>
+<span style="color: #586e75; font-style: italic;">#+LINK_HOME: <a href="https://creamidea.github.io">https://creamidea.github.io</a></span>
+<span style="color: #586e75; font-style: italic;">#+STARTUP: showall</span>
 
 
-<span style="color: #8fa1b3;">* &#21069;&#35328;</span>
+<span style="color: #268bd2;">* &#21069;&#35328;</span>
 $0
-<span style="color: #8fa1b3;">* &#23614;&#22768;</span>
+<span style="color: #268bd2;">* &#23614;&#22768;</span>
 </pre>
 </div>
 
@@ -540,7 +541,7 @@ $0
 <div id="meta-article"><p class="author">倪俊佳(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
 <p class="date">2015-12-27</p>
-<p class="export-date">2015-12-27 Sun 16:48</p>
+<p class="export-date">2015-12-28 Mon 10:57</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 <p class="last-modification-time">2015-12-27 Sun 16:48</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
