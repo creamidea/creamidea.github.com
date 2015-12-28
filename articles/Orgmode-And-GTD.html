@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Org-mode And GTD</title>
-<!-- 2015-12-27 Sun 13:49 -->
+<!-- 2015-12-28 Mon 11:41 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="倪俊佳(Junjia Ni)" />
+<meta  name="author" content="冰糖火箭筒(Junjia Ni)" />
 <meta  name="description" content="如何配置orgmode使其变成GTD工具"
  />
 <meta  name="keywords" content="emacs,orgmode,GTD" />
@@ -321,15 +321,15 @@ David Allen的第二部著作Ready for Anything 中文翻译本《结果第一�
 <div class="outline-text-4" id="text-4-2-1">
 <div class="org-src-container">
 
-<pre class="src src-elisp">(setq org-tag-alist '((<span style="color: #a3be8c;">"STUDIO"</span> . ?s) <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">company studio office</span>
-                      (<span style="color: #a3be8c;">"PROJECT"</span> . ?p) <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">difference task at company</span>
-                      (<span style="color: #a3be8c;">"HOME"</span> . ?h) <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">home</span>
-                      (<span style="color: #a3be8c;">"MAIL"</span> . ?m) <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">mail somebody</span>
-                      (<span style="color: #a3be8c;">"LUNCHTIME"</span> . ?l) <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">breakfast lunchtime dinner onway etc. (rest)</span>
-                      (<span style="color: #a3be8c;">"TOURISM"</span> . ?t) <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">tourism or not at home/company and any where</span>
-                      (<span style="color: #a3be8c;">"COMPUTER"</span> . ?c)
-                      <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">("FIELD" . ?f)</span>
-                      (<span style="color: #a3be8c;">"READING"</span> . ?r))) <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">reading</span>
+<pre class="src src-elisp">(setq org-tag-alist '((<span style="color: #2aa198;">"STUDIO"</span> . ?s) <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">company studio office</span>
+                      (<span style="color: #2aa198;">"PROJECT"</span> . ?p) <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">difference task at company</span>
+                      (<span style="color: #2aa198;">"HOME"</span> . ?h) <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">home</span>
+                      (<span style="color: #2aa198;">"MAIL"</span> . ?m) <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">mail somebody</span>
+                      (<span style="color: #2aa198;">"LUNCHTIME"</span> . ?l) <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">breakfast lunchtime dinner onway etc. (rest)</span>
+                      (<span style="color: #2aa198;">"TOURISM"</span> . ?t) <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">tourism or not at home/company and any where</span>
+                      (<span style="color: #2aa198;">"COMPUTER"</span> . ?c)
+                      <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">("FIELD" . ?f)</span>
+                      (<span style="color: #2aa198;">"READING"</span> . ?r))) <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">reading</span>
 </pre>
 </div>
 </div>
@@ -341,13 +341,13 @@ David Allen的第二部著作Ready for Anything 中文翻译本《结果第一�
 <div class="org-src-container">
 
 <pre class="src src-elisp">(setf org-todo-keyword-faces
-      '((<span style="color: #a3be8c;">"NEXT"</span> . (<span style="color: #d08770;">:foreground</span> <span style="color: #a3be8c;">"yellow"</span> <span style="color: #d08770;">:background</span> <span style="color: #a3be8c;">"red"</span> <span style="color: #d08770;">:bold</span> t <span style="color: #d08770;">:weight</span> bold))
-        (<span style="color: #a3be8c;">"TODO"</span> . (<span style="color: #d08770;">:foreground</span> <span style="color: #a3be8c;">"cyan"</span> <span style="color: #d08770;">:bold</span> t <span style="color: #d08770;">:weight</span> bold))
-        (<span style="color: #a3be8c;">"STARTED"</span> . (<span style="color: #d08770;">:foreground</span> <span style="color: #a3be8c;">"springgreen"</span> <span style="color: #d08770;">:bold</span> t <span style="color: #d08770;">:weight</span> bold))
-        (<span style="color: #a3be8c;">"CANCELLED"</span> . (<span style="color: #d08770;">:foreground</span> <span style="color: #a3be8c;">"#DC143C"</span> <span style="color: #d08770;">:bold</span> t <span style="color: #d08770;">:weight</span> bold))
-        (<span style="color: #a3be8c;">"WAITING"</span> . (<span style="color: #d08770;">:foreground</span> <span style="color: #a3be8c;">"yellow"</span> <span style="color: #d08770;">:bold</span> t <span style="color: #d08770;">:weight</span> bold))
-        (<span style="color: #a3be8c;">"DEFERRED"</span> . (<span style="color: #d08770;">:foreground</span> <span style="color: #a3be8c;">"deepskyblue"</span> <span style="color: #d08770;">:bold</span> t <span style="color: #d08770;">:weight</span> bold))
-        (<span style="color: #a3be8c;">"DONE"</span> . (<span style="color: #d08770;">:foreground</span> <span style="color: #a3be8c;">"gray50"</span> <span style="color: #d08770;">:background</span> <span style="color: #a3be8c;">"gray30"</span>))))
+      '((<span style="color: #2aa198;">"NEXT"</span> . (<span style="color: #859900;">:foreground</span> <span style="color: #2aa198;">"yellow"</span> <span style="color: #859900;">:background</span> <span style="color: #2aa198;">"red"</span> <span style="color: #859900;">:bold</span> t <span style="color: #859900;">:weight</span> bold))
+        (<span style="color: #2aa198;">"TODO"</span> . (<span style="color: #859900;">:foreground</span> <span style="color: #2aa198;">"cyan"</span> <span style="color: #859900;">:bold</span> t <span style="color: #859900;">:weight</span> bold))
+        (<span style="color: #2aa198;">"STARTED"</span> . (<span style="color: #859900;">:foreground</span> <span style="color: #2aa198;">"springgreen"</span> <span style="color: #859900;">:bold</span> t <span style="color: #859900;">:weight</span> bold))
+        (<span style="color: #2aa198;">"CANCELLED"</span> . (<span style="color: #859900;">:foreground</span> <span style="color: #2aa198;">"#DC143C"</span> <span style="color: #859900;">:bold</span> t <span style="color: #859900;">:weight</span> bold))
+        (<span style="color: #2aa198;">"WAITING"</span> . (<span style="color: #859900;">:foreground</span> <span style="color: #2aa198;">"yellow"</span> <span style="color: #859900;">:bold</span> t <span style="color: #859900;">:weight</span> bold))
+        (<span style="color: #2aa198;">"DEFERRED"</span> . (<span style="color: #859900;">:foreground</span> <span style="color: #2aa198;">"deepskyblue"</span> <span style="color: #859900;">:bold</span> t <span style="color: #859900;">:weight</span> bold))
+        (<span style="color: #2aa198;">"DONE"</span> . (<span style="color: #859900;">:foreground</span> <span style="color: #2aa198;">"gray50"</span> <span style="color: #859900;">:background</span> <span style="color: #2aa198;">"gray30"</span>))))
 </pre>
 </div>
 </div>
@@ -358,10 +358,10 @@ David Allen的第二部著作Ready for Anything 中文翻译本《结果第一�
 <div class="outline-text-4" id="text-4-2-3">
 <div class="org-src-container">
 
-<pre class="src src-elisp">(global-set-key <span style="color: #a3be8c;">"\C-cl"</span> 'org-store-link)
-(global-set-key <span style="color: #a3be8c;">"\C-ca"</span> 'org-agenda)
-(global-set-key <span style="color: #a3be8c;">"\C-cg"</span> 'gtd)
-(global-set-key <span style="color: #a3be8c;">"\C-cc"</span> 'org-capture)
+<pre class="src src-elisp">(global-set-key <span style="color: #2aa198;">"\C-cl"</span> 'org-store-link)
+(global-set-key <span style="color: #2aa198;">"\C-ca"</span> 'org-agenda)
+(global-set-key <span style="color: #2aa198;">"\C-cg"</span> 'gtd)
+(global-set-key <span style="color: #2aa198;">"\C-cc"</span> 'org-capture)
 </pre>
 </div>
 </div>
@@ -413,189 +413,189 @@ David Allen的第二部著作Ready for Anything 中文翻译本《结果第一�
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #c0c5ce;">;;; </span><span style="color: #65737e;">dto-org-gtd.el --- dto's org-mode configuration for GTD</span>
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;;; </span><span style="color: #93a1a1; font-style: italic;">dto-org-gtd.el --- dto's org-mode configuration for GTD</span>
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">Copyright (C) 2007  David O'Toole</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Copyright (C) 2007  David O'Toole</span>
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">Author: David O'Toole(require 'org) <a href="mailto:dto%40gnu.org">&lt;dto@gnu.org&gt;</a></span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">Modifier: Junjia Ni (creamidea@gmail.com, 2015) </span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">Keywords: tools</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Author: David O'Toole(require 'org) <a href="mailto:dto%40gnu.org">&lt;dto@gnu.org&gt;</a></span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Modifier: Junjia Ni (creamidea@gmail.com, 2015) </span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Keywords: tools</span>
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">This file is free software; you can redistribute it and/or modify</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">it under the terms of the GNU General Public License as published by</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">the Free Software Foundation; either version 3, or (at your option)</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">any later version.</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">This file is free software; you can redistribute it and/or modify</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">it under the terms of the GNU General Public License as published by</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">the Free Software Foundation; either version 3, or (at your option)</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">any later version.</span>
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">This file is distributed in the hope that it will be useful,</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">GNU General Public License for more details.</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">This file is distributed in the hope that it will be useful,</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">GNU General Public License for more details.</span>
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">You should have received a copy of the GNU General Public License</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">along with GNU Emacs; see the file COPYING.  If not, write to</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">Boston, MA 02110-1301, USA.</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">You should have received a copy of the GNU General Public License</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">along with GNU Emacs; see the file COPYING.  If not, write to</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Boston, MA 02110-1301, USA.</span>
 
-<span style="color: #c0c5ce;">;;; </span><span style="color: #65737e;">Commentary:</span>
+<span style="color: #93a1a1; font-style: italic;">;;; </span><span style="color: #93a1a1; font-style: italic;">Commentary:</span>
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">There are several articles about using GTD (GettingThingsDone) with</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">OrgMode. I'm publishing mine as an Emacs Lisp source</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">file. </span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">There are several articles about using GTD (GettingThingsDone) with</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">OrgMode. I'm publishing mine as an Emacs Lisp source</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">file. </span>
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">This is a very basic example org-and-gtd setup. It's also my real</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">configuration, so you can load it yourself or just take a few</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">pieces.</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">This is a very basic example org-and-gtd setup. It's also my real</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">configuration, so you can load it yourself or just take a few</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">pieces.</span>
 
-<span style="color: #c0c5ce;">;;; </span><span style="color: #65737e;">Code:</span>
+<span style="color: #93a1a1; font-style: italic;">;;; </span><span style="color: #93a1a1; font-style: italic;">Code:</span>
 
-(<span style="color: #b48ead;">require</span> '<span style="color: #d08770;">org</span>)
-(setq gtd-path <span style="color: #a3be8c;">"/Users/creamidea/Documents/GTD"</span>)
+(<span style="color: #859900;">require</span> '<span style="color: #2aa198;">org</span>)
+(setq gtd-path <span style="color: #2aa198;">"/Users/creamidea/Documents/GTD"</span>)
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">I have a nice Wacom tablet, so I like to use the mouse. Org-mouse</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">adds various clickable menus to org-mode constructs.</span>
-(<span style="color: #b48ead;">require</span> '<span style="color: #d08770;">org-mouse</span>)
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">I have a nice Wacom tablet, so I like to use the mouse. Org-mouse</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">adds various clickable menus to org-mode constructs.</span>
+(<span style="color: #859900;">require</span> '<span style="color: #2aa198;">org-mouse</span>)
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">I want files with the extension ".org" to open in org-mode.</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">I want files with the extension ".org" to open in org-mode.</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))</span>
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">I keep almost everything in one big org file.</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">I open my gtd file when I hit C-c g</span>
-(<span style="color: #b48ead;">defvar</span> <span style="color: #bf616a;">org-gtd-file</span> (concat gtd-path <span style="color: #a3be8c;">"/newgtd.org"</span>))
-(<span style="color: #b48ead;">defun</span> <span style="color: #8fa1b3;">gtd</span> ()
-  <span style="color: #a3be8c;">"Open the GTD file."</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">I keep almost everything in one big org file.</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">I open my gtd file when I hit C-c g</span>
+(<span style="color: #859900;">defvar</span> <span style="color: #268bd2;">org-gtd-file</span> (concat gtd-path <span style="color: #2aa198;">"/newgtd.org"</span>))
+(<span style="color: #859900;">defun</span> <span style="color: #268bd2;">gtd</span> ()
+  <span style="color: #93a1a1; font-style: italic;">"Open the GTD file."</span>
   (interactive)
   (find-file org-gtd-file))
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">Some basic keybindings.</span>
-(global-set-key <span style="color: #a3be8c;">"\C-cl"</span> 'org-store-link)
-(global-set-key <span style="color: #a3be8c;">"\C-ca"</span> 'org-agenda)
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">(global-set-key "\C-cr" 'org-remember)</span>
-(global-set-key <span style="color: #a3be8c;">"\C-cg"</span> 'gtd)
-(global-set-key <span style="color: #a3be8c;">"\C-cc"</span> 'org-capture)
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Some basic keybindings.</span>
+(global-set-key <span style="color: #2aa198;">"\C-cl"</span> 'org-store-link)
+(global-set-key <span style="color: #2aa198;">"\C-ca"</span> 'org-agenda)
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">(global-set-key "\C-cr" 'org-remember)</span>
+(global-set-key <span style="color: #2aa198;">"\C-cg"</span> 'gtd)
+(global-set-key <span style="color: #2aa198;">"\C-cc"</span> 'org-capture)
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">This seems like a good basic set of keywords to start out with:</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">This seems like a good basic set of keywords to start out with:</span>
 
 (setq org-use-fast-todo-selection t)
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">(setq org-todo-keywords '((type "TODO" "NEXT" "WAITING" "DONE")))</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">(setq org-todo-keywords '((type "TODO" "NEXT" "WAITING" "DONE")))</span>
 (setq org-todo-keywords
-      (quote ((sequence <span style="color: #a3be8c;">"TODO(t!)"</span> <span style="color: #a3be8c;">"NEXT(n)"</span> <span style="color: #a3be8c;">"|"</span> <span style="color: #a3be8c;">"DONE(d@/!)"</span>)
-              (sequence <span style="color: #a3be8c;">"PROJECT(p)"</span> <span style="color: #a3be8c;">"|"</span> <span style="color: #a3be8c;">"DONE(d!/!)"</span> <span style="color: #a3be8c;">"CANCELLED(c@/!)"</span>)
-              (sequence <span style="color: #a3be8c;">"WAITING(w@/!)"</span> <span style="color: #a3be8c;">"HOLD(h)"</span> <span style="color: #a3be8c;">"|"</span> <span style="color: #a3be8c;">"CANCELLED(c@/!)"</span>)
-              (sequence <span style="color: #a3be8c;">"SOMEDAY(s)"</span>))))
+      (quote ((sequence <span style="color: #2aa198;">"TODO(t!)"</span> <span style="color: #2aa198;">"NEXT(n)"</span> <span style="color: #2aa198;">"|"</span> <span style="color: #2aa198;">"DONE(d@/!)"</span>)
+              (sequence <span style="color: #2aa198;">"PROJECT(p)"</span> <span style="color: #2aa198;">"|"</span> <span style="color: #2aa198;">"DONE(d!/!)"</span> <span style="color: #2aa198;">"CANCELLED(c@/!)"</span>)
+              (sequence <span style="color: #2aa198;">"WAITING(w@/!)"</span> <span style="color: #2aa198;">"HOLD(h)"</span> <span style="color: #2aa198;">"|"</span> <span style="color: #2aa198;">"CANCELLED(c@/!)"</span>)
+              (sequence <span style="color: #2aa198;">"SOMEDAY(s)"</span>))))
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">Some projects need their own org files, but I still want them to</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">show up in my agenda.</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Some projects need their own org files, but I still want them to</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">show up in my agenda.</span>
 
-(<span style="color: #b48ead;">defvar</span> <span style="color: #bf616a;">org-gtd-other-files</span>)
+(<span style="color: #859900;">defvar</span> <span style="color: #268bd2;">org-gtd-other-files</span>)
 (setf org-gtd-other-files
-      (list (concat gtd-path <span style="color: #a3be8c;">"/projects/third-part-monitor.org"</span>)
-            (concat gtd-path <span style="color: #a3be8c;">"/remember.org"</span>)
-            (concat gtd-path <span style="color: #a3be8c;">"/reading.org"</span>)))
+      (list (concat gtd-path <span style="color: #2aa198;">"/projects/third-part-monitor.org"</span>)
+            (concat gtd-path <span style="color: #2aa198;">"/remember.org"</span>)
+            (concat gtd-path <span style="color: #2aa198;">"/reading.org"</span>)))
 (setf org-agenda-files (cons org-gtd-file org-gtd-other-files))
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">(setq org-agenda-files (list "/Users/creamidea/Documents/GTD/project"))</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">(setq org-agenda-files (list "/Users/creamidea/Documents/GTD/project"))</span>
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">When I'm using org to track issues in a project, I use these</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">keywords on a file-local basis: </span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">When I'm using org to track issues in a project, I use these</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">keywords on a file-local basis: </span>
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">#+SEQ_TODO: TODO | DONE</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">#+SEQ_TODO: REPORT BUG KNOWNCAUSE | FIXED </span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">#+SEQ_TODO: | CANCELLED</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">#+SEQ_TODO: TODO | DONE</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">#+SEQ_TODO: REPORT BUG KNOWNCAUSE | FIXED </span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">#+SEQ_TODO: | CANCELLED</span>
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">The lisp version is:</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">The lisp version is:</span>
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">(setq org-todo-keywords '((sequence "TODO" | "DONE")</span>
-<span style="color: #c0c5ce;">;;                        </span><span style="color: #65737e;">(sequence "REPORT" "BUG" "KNOWNCAUSE" | "FIXED")</span>
-<span style="color: #c0c5ce;">;;                        </span><span style="color: #65737e;">(sequence | "CANCELLED")))</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">(setq org-todo-keywords '((sequence "TODO" | "DONE")</span>
+<span style="color: #93a1a1; font-style: italic;">;;                        </span><span style="color: #93a1a1; font-style: italic;">(sequence "REPORT" "BUG" "KNOWNCAUSE" | "FIXED")</span>
+<span style="color: #93a1a1; font-style: italic;">;;                        </span><span style="color: #93a1a1; font-style: italic;">(sequence | "CANCELLED")))</span>
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">Easy basic searches. Get a quick view of nextactions, etc</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Easy basic searches. Get a quick view of nextactions, etc</span>
 
 (setq org-agenda-custom-commands
-      '((<span style="color: #a3be8c;">"w"</span> todo <span style="color: #a3be8c;">"WAITING"</span> nil)
-        (<span style="color: #a3be8c;">"n"</span> todo <span style="color: #a3be8c;">"NEXT"</span> nil)
-        (<span style="color: #a3be8c;">"d"</span> <span style="color: #a3be8c;">"Agenda + Next Actions"</span> ((agenda) (todo <span style="color: #a3be8c;">"NEXT"</span>)))))
+      '((<span style="color: #2aa198;">"w"</span> todo <span style="color: #2aa198;">"WAITING"</span> nil)
+        (<span style="color: #2aa198;">"n"</span> todo <span style="color: #2aa198;">"NEXT"</span> nil)
+        (<span style="color: #2aa198;">"d"</span> <span style="color: #2aa198;">"Agenda + Next Actions"</span> ((agenda) (todo <span style="color: #2aa198;">"NEXT"</span>)))))
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">I use org's tag feature to implement contexts.</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">I use org's tag feature to implement contexts.</span>
 
-(setq org-tag-alist '((<span style="color: #a3be8c;">"STUDIO"</span> . ?s) <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">company studio office</span>
-                      (<span style="color: #a3be8c;">"PROJECT"</span> . ?p) <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">difference task at company</span>
-                      (<span style="color: #a3be8c;">"HOME"</span> . ?h) <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">home</span>
-                      (<span style="color: #a3be8c;">"MAIL"</span> . ?m) <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">mail somebody</span>
-                      (<span style="color: #a3be8c;">"LUNCHTIME"</span> . ?l) <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">breakfast lunchtime dinner onway etc. (rest)</span>
-                      (<span style="color: #a3be8c;">"TOURISM"</span> . ?t) <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">tourism or not at home/company and any where</span>
-                      (<span style="color: #a3be8c;">"COMPUTER"</span> . ?c)
-                      <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">("FIELD" . ?f) </span>
-                      (<span style="color: #a3be8c;">"READING"</span> . ?r))) <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">reading </span>
+(setq org-tag-alist '((<span style="color: #2aa198;">"STUDIO"</span> . ?s) <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">company studio office</span>
+                      (<span style="color: #2aa198;">"PROJECT"</span> . ?p) <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">difference task at company</span>
+                      (<span style="color: #2aa198;">"HOME"</span> . ?h) <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">home</span>
+                      (<span style="color: #2aa198;">"MAIL"</span> . ?m) <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">mail somebody</span>
+                      (<span style="color: #2aa198;">"LUNCHTIME"</span> . ?l) <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">breakfast lunchtime dinner onway etc. (rest)</span>
+                      (<span style="color: #2aa198;">"TOURISM"</span> . ?t) <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">tourism or not at home/company and any where</span>
+                      (<span style="color: #2aa198;">"COMPUTER"</span> . ?c)
+                      <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">("FIELD" . ?f) </span>
+                      (<span style="color: #2aa198;">"READING"</span> . ?r))) <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">reading </span>
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">I like to color-code task types.</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">I like to color-code task types.</span>
 
 (setf org-todo-keyword-faces
-      '((<span style="color: #a3be8c;">"NEXT"</span> . (<span style="color: #d08770;">:foreground</span> <span style="color: #a3be8c;">"yellow"</span> <span style="color: #d08770;">:background</span> <span style="color: #a3be8c;">"red"</span> <span style="color: #d08770;">:bold</span> t <span style="color: #d08770;">:weight</span> bold))
-        (<span style="color: #a3be8c;">"TODO"</span> . (<span style="color: #d08770;">:foreground</span> <span style="color: #a3be8c;">"cyan"</span> <span style="color: #d08770;">:bold</span> t <span style="color: #d08770;">:weight</span> bold))
-        <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">("TODO" . (:foreground "cyan" :background "steelblue" :bold t :weight bold))</span>
-        (<span style="color: #a3be8c;">"STARTED"</span> . (<span style="color: #d08770;">:foreground</span> <span style="color: #a3be8c;">"springgreen"</span> <span style="color: #d08770;">:bold</span> t <span style="color: #d08770;">:weight</span> bold))
-        (<span style="color: #a3be8c;">"CANCELLED"</span> . (<span style="color: #d08770;">:foreground</span> <span style="color: #a3be8c;">"#DC143C"</span> <span style="color: #d08770;">:bold</span> t <span style="color: #d08770;">:weight</span> bold))
-        (<span style="color: #a3be8c;">"WAITING"</span> . (<span style="color: #d08770;">:foreground</span> <span style="color: #a3be8c;">"yellow"</span> <span style="color: #d08770;">:bold</span> t <span style="color: #d08770;">:weight</span> bold))
-        <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">("WAITING" . (:foreground "yellow" :background "magenta2" :bold t :weight bold))</span>
-        (<span style="color: #a3be8c;">"DEFERRED"</span> . (<span style="color: #d08770;">:foreground</span> <span style="color: #a3be8c;">"deepskyblue"</span> <span style="color: #d08770;">:bold</span> t <span style="color: #d08770;">:weight</span> bold))
-        (<span style="color: #a3be8c;">"DONE"</span> . (<span style="color: #d08770;">:foreground</span> <span style="color: #a3be8c;">"gray50"</span> <span style="color: #d08770;">:background</span> <span style="color: #a3be8c;">"gray30"</span>))))
+      '((<span style="color: #2aa198;">"NEXT"</span> . (<span style="color: #859900;">:foreground</span> <span style="color: #2aa198;">"yellow"</span> <span style="color: #859900;">:background</span> <span style="color: #2aa198;">"red"</span> <span style="color: #859900;">:bold</span> t <span style="color: #859900;">:weight</span> bold))
+        (<span style="color: #2aa198;">"TODO"</span> . (<span style="color: #859900;">:foreground</span> <span style="color: #2aa198;">"cyan"</span> <span style="color: #859900;">:bold</span> t <span style="color: #859900;">:weight</span> bold))
+        <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">("TODO" . (:foreground "cyan" :background "steelblue" :bold t :weight bold))</span>
+        (<span style="color: #2aa198;">"STARTED"</span> . (<span style="color: #859900;">:foreground</span> <span style="color: #2aa198;">"springgreen"</span> <span style="color: #859900;">:bold</span> t <span style="color: #859900;">:weight</span> bold))
+        (<span style="color: #2aa198;">"CANCELLED"</span> . (<span style="color: #859900;">:foreground</span> <span style="color: #2aa198;">"#DC143C"</span> <span style="color: #859900;">:bold</span> t <span style="color: #859900;">:weight</span> bold))
+        (<span style="color: #2aa198;">"WAITING"</span> . (<span style="color: #859900;">:foreground</span> <span style="color: #2aa198;">"yellow"</span> <span style="color: #859900;">:bold</span> t <span style="color: #859900;">:weight</span> bold))
+        <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">("WAITING" . (:foreground "yellow" :background "magenta2" :bold t :weight bold))</span>
+        (<span style="color: #2aa198;">"DEFERRED"</span> . (<span style="color: #859900;">:foreground</span> <span style="color: #2aa198;">"deepskyblue"</span> <span style="color: #859900;">:bold</span> t <span style="color: #859900;">:weight</span> bold))
+        (<span style="color: #2aa198;">"DONE"</span> . (<span style="color: #859900;">:foreground</span> <span style="color: #2aa198;">"gray50"</span> <span style="color: #859900;">:background</span> <span style="color: #2aa198;">"gray30"</span>))))
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">I put the archive in a separate file, because the gtd file will</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">probably already get pretty big just with current tasks.</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">I put the archive in a separate file, because the gtd file will</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">probably already get pretty big just with current tasks.</span>
 
-(setq org-archive-location <span style="color: #a3be8c;">"%s_archive::* Archive"</span>)
+(setq org-archive-location <span style="color: #2aa198;">"%s_archive::* Archive"</span>)
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">Remember support. This creates several files:</span>
-<span style="color: #c0c5ce;">;;</span>
-<span style="color: #c0c5ce;">;;   </span><span style="color: #65737e;">~/todo.org      Where remembered TODO's are stored.</span>
-<span style="color: #c0c5ce;">;;   </span><span style="color: #65737e;">~/journal.org   Timestamped journal entries.</span>
-<span style="color: #c0c5ce;">;;   </span><span style="color: #65737e;">~/remember.org  All other notes</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Remember support. This creates several files:</span>
+<span style="color: #93a1a1; font-style: italic;">;;</span>
+<span style="color: #93a1a1; font-style: italic;">;;   </span><span style="color: #93a1a1; font-style: italic;">~/todo.org      Where remembered TODO's are stored.</span>
+<span style="color: #93a1a1; font-style: italic;">;;   </span><span style="color: #93a1a1; font-style: italic;">~/journal.org   Timestamped journal entries.</span>
+<span style="color: #93a1a1; font-style: italic;">;;   </span><span style="color: #93a1a1; font-style: italic;">~/remember.org  All other notes</span>
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">and a keybinding of "C-c r" for making quick notes from any buffer.</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">and a keybinding of "C-c r" for making quick notes from any buffer.</span>
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">These bits of Remembered information must eventually be reviewed</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">and filed somewhere (perhaps in gtd.org, or in a project-specific</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">org file.) The out-of-sight, out-of-mind rule applies here---if I</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">don't review these auxiliary org-files, I'll probably forget what's</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">in them.</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">These bits of Remembered information must eventually be reviewed</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">and filed somewhere (perhaps in gtd.org, or in a project-specific</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">org file.) The out-of-sight, out-of-mind rule applies here---if I</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">don't review these auxiliary org-files, I'll probably forget what's</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">in them.</span>
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">(add-to-list 'load-path "~/.emacs.d/package/remember-el")</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">(require 'remember)</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">move sub-tree from one file to another</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">(add-to-list 'load-path "~/.emacs.d/package/remember-el")</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">(require 'remember)</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">move sub-tree from one file to another</span>
 (setq org-refile-use-outline-path 'file)
-(setq org-refile-targets '((org-agenda-files <span style="color: #d08770;">:level</span> . 1)))
-(setq org-reverse-note-order t)  <span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">note at beginning of file by default.</span>
-(setq org-default-notes-file (concat gtd-path <span style="color: #a3be8c;">"/remember.org"</span>))
+(setq org-refile-targets '((org-agenda-files <span style="color: #859900;">:level</span> . 1)))
+(setq org-reverse-note-order t)  <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">note at beginning of file by default.</span>
+(setq org-default-notes-file (concat gtd-path <span style="color: #2aa198;">"/remember.org"</span>))
 (setq org-capture-templates
-      '((<span style="color: #a3be8c;">"t"</span> <span style="color: #a3be8c;">"Todo"</span> entry (file+headline (concat gtd-path <span style="color: #a3be8c;">"/newgtd.org"</span>) <span style="color: #a3be8c;">"Tasks"</span>)
-         <span style="color: #a3be8c;">"* TODO %?\n  %i\n  %a\n"</span>)
-        (<span style="color: #a3be8c;">"i"</span> <span style="color: #a3be8c;">"Idea"</span> entry (file+headline (concat gtd-path <span style="color: #a3be8c;">"/newgtd.org"</span>) <span style="color: #a3be8c;">"Idea"</span>)
-         <span style="color: #a3be8c;">"** %?\n %T\n  %a\n"</span>)
-        (<span style="color: #a3be8c;">"j"</span> <span style="color: #a3be8c;">"Journal"</span> entry (file+datetree (concat gtd-path <span style="color: #a3be8c;">"/journal.org"</span>))
-         <span style="color: #a3be8c;">"* %?\nEntered on %U\n  %i\n  %a\n"</span>)))
+      '((<span style="color: #2aa198;">"t"</span> <span style="color: #2aa198;">"Todo"</span> entry (file+headline (concat gtd-path <span style="color: #2aa198;">"/newgtd.org"</span>) <span style="color: #2aa198;">"Tasks"</span>)
+         <span style="color: #2aa198;">"* TODO %?\n  %i\n  %a\n"</span>)
+        (<span style="color: #2aa198;">"i"</span> <span style="color: #2aa198;">"Idea"</span> entry (file+headline (concat gtd-path <span style="color: #2aa198;">"/newgtd.org"</span>) <span style="color: #2aa198;">"Idea"</span>)
+         <span style="color: #2aa198;">"** %?\n %T\n  %a\n"</span>)
+        (<span style="color: #2aa198;">"j"</span> <span style="color: #2aa198;">"Journal"</span> entry (file+datetree (concat gtd-path <span style="color: #2aa198;">"/journal.org"</span>))
+         <span style="color: #2aa198;">"* %?\nEntered on %U\n  %i\n  %a\n"</span>)))
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">(setq remember-annotation-functions '(org-remember-annotation))</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">(setq remember-handler-functions '(org-remember-handler))</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">(add-hook 'remember-mode-hook 'org-remember-apply-template)</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">(setq remember-annotation-functions '(org-remember-annotation))</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">(setq remember-handler-functions '(org-remember-handler))</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">(add-hook 'remember-mode-hook 'org-remember-apply-template)</span>
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">(setq org-remember-templates</span>
-<span style="color: #c0c5ce;">;;       </span><span style="color: #65737e;">`((?t "* TODO %?\n  %i\n  %a" ,(concat gtd-path "/todo.org"))</span>
-<span style="color: #c0c5ce;">;;         </span><span style="color: #65737e;">(?j "* %U %?\n\n  %i\n  %a" ,(concat gtd-path "/journal.org"))</span>
-<span style="color: #c0c5ce;">;;         </span><span style="color: #65737e;">(?i "* %^{Title}\n  %i\n  %a" ,(concat gtd-path "/remember.org") "New Ideas")))</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">(setq org-remember-templates</span>
+<span style="color: #93a1a1; font-style: italic;">;;       </span><span style="color: #93a1a1; font-style: italic;">`((?t "* TODO %?\n  %i\n  %a" ,(concat gtd-path "/todo.org"))</span>
+<span style="color: #93a1a1; font-style: italic;">;;         </span><span style="color: #93a1a1; font-style: italic;">(?j "* %U %?\n\n  %i\n  %a" ,(concat gtd-path "/journal.org"))</span>
+<span style="color: #93a1a1; font-style: italic;">;;         </span><span style="color: #93a1a1; font-style: italic;">(?i "* %^{Title}\n  %i\n  %a" ,(concat gtd-path "/remember.org") "New Ideas")))</span>
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">(global-set-key "\C-cr" 'org-remember)</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">(global-set-key [(f12)] 'org-remember)</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">(global-set-key "\C-cr" 'org-remember)</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">(global-set-key [(f12)] 'org-remember)</span>
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">My preferences. These are less related to GTD, and more to my</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">particular setup. They are included here for completeness, and so</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">that new org users can see a complete example org-gtd</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">configuration.</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">My preferences. These are less related to GTD, and more to my</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">particular setup. They are included here for completeness, and so</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">that new org users can see a complete example org-gtd</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">configuration.</span>
 
 (setq org-return-follows-link t)
 (setq org-hide-leading-stars t) 
 (setf org-tags-column -65)
 (setf org-special-ctrl-a/e t)
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">(setq org-log-done t)</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">(setq org-log-done t)</span>
 (setq org-log-done 'time)
 (setq org-log-done 'note)
 (setq org-deadline-warning-days 14)
@@ -605,22 +605,22 @@ David Allen的第二部著作Ready for Anything 中文翻译本《结果第一�
 (setq org-agenda-include-diary t)
 (setq org-agenda-use-time-grid t)
 (setq org-directory gtd-path)
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">org export setting(config)</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">(setq org-export-html-style "&lt;link rel=stylesheet href=\"../e/freeshell2.css\" type=\"text/css\"&gt;")</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">(setq org-export-with-section-numbers nil)</span>
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">(setq org-export-with-toc nil)</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">org export setting(config)</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">(setq org-export-html-style "&lt;link rel=stylesheet href=\"../e/freeshell2.css\" type=\"text/css\"&gt;")</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">(setq org-export-with-section-numbers nil)</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">(setq org-export-with-toc nil)</span>
 (setq org-adapt-indentation nil)
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">widen category field a little</span>
-(setq org-agenda-prefix-format <span style="color: #a3be8c;">"  %-17:c%?-12t% s"</span>)
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">widen category field a little</span>
+(setq org-agenda-prefix-format <span style="color: #2aa198;">"  %-17:c%?-12t% s"</span>)
 
-<span style="color: #c0c5ce;">;; </span><span style="color: #65737e;">fix new keybinding that clobbers mine</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">fix new keybinding that clobbers mine</span>
 (add-hook 'org-mode-hook
-          (<span style="color: #b48ead;">lambda</span> ()
+          (<span style="color: #859900;">lambda</span> ()
             (local-set-key [(control tab)] 'other-window)))
 
-(<span style="color: #b48ead;">provide</span> '<span style="color: #d08770;">org-gtd</span>)
-<span style="color: #c0c5ce;">;;; </span><span style="color: #65737e;">org-gtd.el ends here</span>
+(<span style="color: #859900;">provide</span> '<span style="color: #2aa198;">org-gtd</span>)
+<span style="color: #93a1a1; font-style: italic;">;;; </span><span style="color: #93a1a1; font-style: italic;">org-gtd.el ends here</span>
 </pre>
 </div>
 </div>
@@ -697,10 +697,10 @@ David Allen的第二部著作Ready for Anything 中文翻译本《结果第一�
 </div>
 </div>
 <div id="postamble" class="status">
-<div id="meta-article"><p class="author">倪俊佳(Junjia Ni)</p>
+<div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
 <p class="date">2015-11-18</p>
-<p class="export-date">2015-12-27 Sun 13:49</p>
+<p class="export-date">2015-12-28 Mon 11:41</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 <p class="last-modification-time">2015-12-27 Sun 13:47</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->

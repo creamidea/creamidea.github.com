@@ -1,5 +1,11 @@
 #+TITLE: e[(i)(pi)]+1=0(19890514)
 
+   + wiki
+     + [[file:wiki/install.org][Install Something 2015-12-27]]
+     + [[file:wiki/friends.org][Friends 2015-12-27]]
+     + [[file:wiki/shell.org][Shell Cookies 2015-12-27]]
+     + [[file:wiki/git.org][Git Cookbook 2015-12-27]]
+     + [[file:wiki/css.org][CSS Cookie 2015-12-27]]
    + articles
      + [[file:articles/Storm-Tutorial.org][［译］Storm Tutorial 2015-12-28]]
      + [[file:articles/This-Site.org][This Site 2015-12-27]]
@@ -15,9 +21,3 @@
      + [[file:articles/HHKB-GET.org][HHKB GET 2015-12-27]]
      + [[file:articles/How-To-Install-Autocomplete-And-Yasnippet.org][How To Install Autocomplete and Yanisppet 2015-12-27]]
      + [[file:articles/C-And-C++-Cookie.org][C And C++ Cookie 2015-12-27]]
-   + wiki
-     + [[file:wiki/install.org][Install Something 2015-12-27]]
-     + [[file:wiki/friends.org][Friends 2015-12-27]]
-     + [[file:wiki/shell.org][Shell Cookies 2015-12-27]]
-     + [[file:wiki/git.org][Git Cookbook 2015-12-27]]
-     + [[file:wiki/css.org][CSS Cookie 2015-12-27]]

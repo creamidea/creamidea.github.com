@@ -14,8 +14,8 @@
   <link>http://creamidea.github.io/</link>
   <description><![CDATA[]]></description>
   <language>en</language>
-  <pubDate>Mon, 28 Dec 2015 10:57:57 +0800</pubDate>
-  <lastBuildDate>Mon, 28 Dec 2015 10:57:57 +0800</lastBuildDate>
+  <pubDate>Mon, 28 Dec 2015 11:41:15 +0800</pubDate>
+  <lastBuildDate>Mon, 28 Dec 2015 11:41:15 +0800</lastBuildDate>
   <generator>Emacs 24.5 Org-mode 8.2.10</generator>
   <webMaster>creamidea@gmail.com (Junjia Ni)</webMaster>
   <image>
@@ -25,6 +25,20 @@
   </image>
 
   <ul class="org-ul">
+    <li>wiki
+    <ul class="org-ul">
+      <li><a href="http://creamidea.github.io/wiki/install.html">Install Something 2015-12-27</a>
+      </li>
+      <li><a href="http://creamidea.github.io/wiki/friends.html">Friends 2015-12-27</a>
+      </li>
+      <li><a href="http://creamidea.github.io/wiki/shell.html">Shell Cookies 2015-12-27</a>
+      </li>
+      <li><a href="http://creamidea.github.io/wiki/git.html">Git Cookbook 2015-12-27</a>
+      </li>
+      <li><a href="http://creamidea.github.io/wiki/css.html">CSS Cookie 2015-12-27</a>
+      </li>
+    </ul>
+    </li>
     <li>articles
     <ul class="org-ul">
       <li><a href="http://creamidea.github.io/articles/Storm-Tutorial.html">［译］Storm Tutorial 2015-12-28</a>
@@ -54,20 +68,6 @@
       <li><a href="http://creamidea.github.io/articles/How-To-Install-Autocomplete-And-Yasnippet.html">How To Install Autocomplete and Yanisppet 2015-12-27</a>
       </li>
       <li><a href="http://creamidea.github.io/articles/C-And-C++-Cookie.html">C And C++ Cookie 2015-12-27</a>
-      </li>
-    </ul>
-    </li>
-    <li>wiki
-    <ul class="org-ul">
-      <li><a href="http://creamidea.github.io/wiki/install.html">Install Something 2015-12-27</a>
-      </li>
-      <li><a href="http://creamidea.github.io/wiki/friends.html">Friends 2015-12-27</a>
-      </li>
-      <li><a href="http://creamidea.github.io/wiki/shell.html">Shell Cookies 2015-12-27</a>
-      </li>
-      <li><a href="http://creamidea.github.io/wiki/git.html">Git Cookbook 2015-12-27</a>
-      </li>
-      <li><a href="http://creamidea.github.io/wiki/css.html">CSS Cookie 2015-12-27</a>
       </li>
     </ul>
     </li>

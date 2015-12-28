@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C And C++ Cookie</title>
-<!-- 2015-12-27 Sun 13:49 -->
+<!-- 2015-12-28 Mon 11:41 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="倪俊佳(Junjia Ni)" />
+<meta  name="author" content="冰糖火箭筒(Junjia Ni)" />
 <meta  name="description" content="学习C/C++基础笔记"
  />
 <meta  name="keywords" content="c,CPlusPlus,cpp,learning" />
@@ -239,10 +239,10 @@ for the JavaScript code in this tag.
 
 <div class="org-src-container">
 
-<pre class="src src-c++"><span style="color: #b48ead;">template</span> &lt;<span style="color: #b48ead;">class</span> <span style="color: #c0c5ce;">T</span>&gt;
-<span style="color: #c0c5ce;">void</span> <span style="color: #8fa1b3;">foo</span>(<span style="color: #c0c5ce;">T</span> <span style="color: #bf616a;">param</span>)
+<pre class="src src-c++"><span style="color: #859900;">template</span> &lt;<span style="color: #859900;">class</span> <span style="color: #b58900;">T</span>&gt;
+<span style="color: #b58900;">void</span> <span style="color: #268bd2;">foo</span>(<span style="color: #b58900;">T</span> <span style="color: #268bd2;">param</span>)
 {
-<span style="color: #c0c5ce;">// </span><span style="color: #65737e;">do something</span>
+<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">do something</span>
 }
 </pre>
 </div>
@@ -254,18 +254,18 @@ for the JavaScript code in this tag.
 <div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
 
-<pre class="src src-c++"><span style="color: #b48ead;">template</span> &lt;<span style="color: #b48ead;">class</span> <span style="color: #c0c5ce;">T</span>&gt;
-<span style="color: #b48ead;">class</span> <span style="color: #c0c5ce;">MyClass</span>
+<pre class="src src-c++"><span style="color: #859900;">template</span> &lt;<span style="color: #859900;">class</span> <span style="color: #b58900;">T</span>&gt;
+<span style="color: #859900;">class</span> <span style="color: #b58900;">MyClass</span>
 {
-    <span style="color: #8fa1b3;">MyClass</span>();
-    <span style="color: #c0c5ce;">void</span> <span style="color: #8fa1b3;">swap</span>(<span style="color: #c0c5ce;">T</span> &amp;<span style="color: #bf616a;">a</span>, <span style="color: #c0c5ce;">T</span> &amp;<span style="color: #bf616a;">b</span>);
+    <span style="color: #268bd2;">MyClass</span>();
+    <span style="color: #b58900;">void</span> <span style="color: #268bd2;">swap</span>(<span style="color: #b58900;">T</span> &amp;<span style="color: #268bd2;">a</span>, <span style="color: #b58900;">T</span> &amp;<span style="color: #268bd2;">b</span>);
 }
-<span style="color: #d08770;">MyClass</span>&lt;<span style="color: #c0c5ce;">T</span>&gt;::<span style="color: #8fa1b3;">MyClass</span>()
+<span style="color: #2aa198;">MyClass</span>&lt;<span style="color: #b58900;">T</span>&gt;::<span style="color: #268bd2;">MyClass</span>()
 {
-    <span style="color: #c0c5ce;">// </span><span style="color: #65737e;">&#21021;&#22987;&#21270;&#25805;&#20316;&#12290;</span>
+    <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#21021;&#22987;&#21270;&#25805;&#20316;&#12290;</span>
 }
-<span style="color: #b48ead;">template</span> &lt;&gt;
-<span style="color: #c0c5ce;">type</span> <span style="color: #d08770;">ClassName</span>&lt;<span style="color: #b48ead;">class</span> <span style="color: #c0c5ce;">T</span>&gt;::<span style="color: #8fa1b3;">FunctionName</span> (parameters)
+<span style="color: #859900;">template</span> &lt;&gt;
+<span style="color: #b58900;">type</span> <span style="color: #2aa198;">ClassName</span>&lt;<span style="color: #859900;">class</span> <span style="color: #b58900;">T</span>&gt;::<span style="color: #268bd2;">FunctionName</span> (parameters)
 </pre>
 </div>
 </div>
@@ -277,7 +277,7 @@ for the JavaScript code in this tag.
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 
-<pre class="src src-c++"><span style="color: #c0c5ce;">type</span> <span style="color: #b48ead;">operator</span> <span style="color: #c0c5ce;">sign</span> (parameters);
+<pre class="src src-c++"><span style="color: #b58900;">type</span> <span style="color: #859900;">operator</span> <span style="color: #b58900;">sign</span> (parameters);
 </pre>
 </div>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -354,7 +354,7 @@ Reference: <a href="http://www.prglab.com/cms/pages/c-tutorial/oo-programming/ov
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 
-<pre class="src src-c++">ClassName(<span style="color: #b48ead;">const</span> <span style="color: #c0c5ce;">ClassName</span> &amp;<span style="color: #bf616a;">cn</span>);
+<pre class="src src-c++">ClassName(<span style="color: #859900;">const</span> <span style="color: #b58900;">ClassName</span> &amp;<span style="color: #268bd2;">cn</span>);
 </pre>
 </div>
 <p>
@@ -473,7 +473,7 @@ Reference:
 <div class="outline-text-4" id="text-7-2-1">
 <div class="org-src-container">
 
-<pre class="src src-sh">gcc hello.c -o hello.o  <span style="color: #c0c5ce;">#</span><span style="color: #65737e;">&#36825;&#37324;&#27809;&#26377;&#20351;&#29992;-shared</span>
+<pre class="src src-sh">gcc hello.c -o hello.o  <span style="color: #93a1a1; font-style: italic;">#</span><span style="color: #93a1a1; font-style: italic;">&#36825;&#37324;&#27809;&#26377;&#20351;&#29992;-shared</span>
 </pre>
 </div>
 </div>
@@ -483,7 +483,7 @@ Reference:
 <div class="outline-text-4" id="text-7-2-2">
 <div class="org-src-container">
 
-<pre class="src src-sh">ar -r libhello.a hello.o  <span style="color: #c0c5ce;">#</span><span style="color: #65737e;">&#36825;&#37324;&#30340;ar&#30456;&#24403;&#20110;tar&#30340;&#20316;&#29992;&#65292;&#23558;&#22810;&#20010;&#30446;&#26631;&#25171;&#21253;&#12290;</span>
+<pre class="src src-sh">ar -r libhello.a hello.o  <span style="color: #93a1a1; font-style: italic;">#</span><span style="color: #93a1a1; font-style: italic;">&#36825;&#37324;&#30340;ar&#30456;&#24403;&#20110;tar&#30340;&#20316;&#29992;&#65292;&#23558;&#22810;&#20010;&#30446;&#26631;&#25171;&#21253;&#12290;</span>
 </pre>
 </div>
 <p>
@@ -524,11 +524,11 @@ Reference:
 
 <pre class="src src-sh">$ ldd a.out
 linux-vdso.so.1 =&gt;  (0x00007fff15100000)
-<span style="color: #8fa1b3;">/usr/local/snoopy/lib/snoopy.so</span> (0x00007f436e245000)
-/opt/aegis/$<span style="color: #bf616a;">LIB</span>/aegis_monitor.so =&gt; /opt/aegis/lib64/aegis_monitor.so (0x00007f436e042000)
+<span style="color: #268bd2;">/usr/local/snoopy/lib/snoopy.so</span> (0x00007f436e245000)
+/opt/aegis/$<span style="color: #268bd2;">LIB</span>/aegis_monitor.so =&gt; /opt/aegis/lib64/aegis_monitor.so (0x00007f436e042000)
 libc.so.6 =&gt; /lib64/libc.so.6 (0x00007f436dca0000)
 libdl.so.2 =&gt; /lib64/libdl.so.2 (0x00007f436da9c000)
-<span style="color: #8fa1b3;">/lib64/ld-linux-x86-64.so.2</span> (0x000000303d200000)
+<span style="color: #268bd2;">/lib64/ld-linux-x86-64.so.2</span> (0x000000303d200000)
 </pre>
 </div>
 <p>
@@ -555,13 +555,13 @@ Reference:
 
 <div class="org-src-container">
 
-<pre class="src src-c++"><span style="color: #d08770;">#include</span> <span style="color: #a3be8c;">&lt;iostream&gt;</span>
+<pre class="src src-c++"><span style="color: #cb4b16;">#include</span> <span style="color: #2aa198;">&lt;iostream&gt;</span>
 
-<span style="color: #b48ead;">using</span> <span style="color: #b48ead;">namespace</span> <span style="color: #d08770;">std</span>;
+<span style="color: #859900;">using</span> <span style="color: #859900;">namespace</span> <span style="color: #2aa198;">std</span>;
 
-<span style="color: #c0c5ce;">int</span> <span style="color: #8fa1b3;">main</span>(<span style="color: #c0c5ce;">int</span> <span style="color: #bf616a;">argc</span>, <span style="color: #c0c5ce;">char</span> *<span style="color: #bf616a;">argv</span>[])
+<span style="color: #b58900;">int</span> <span style="color: #268bd2;">main</span>(<span style="color: #b58900;">int</span> <span style="color: #268bd2;">argc</span>, <span style="color: #b58900;">char</span> *<span style="color: #268bd2;">argv</span>[])
 {
-    cout &lt;&lt; <span style="color: #a3be8c;">"hi, icecream"</span> &lt;&lt; endl;
+    cout &lt;&lt; <span style="color: #2aa198;">"hi, icecream"</span> &lt;&lt; endl;
 }
 </pre>
 </div>
@@ -583,7 +583,7 @@ C中宏定义注意二义性：
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c"><span style="color: #d08770;">#define</span> <span style="color: #8fa1b3;">max</span>(<span style="color: #bf616a;">a</span>, <span style="color: #bf616a;">b</span>) (a)&gt;(b)?(a):(b)
+<pre class="src src-c"><span style="color: #cb4b16;">#define</span> <span style="color: #268bd2;">max</span>(<span style="color: #268bd2;">a</span>, <span style="color: #268bd2;">b</span>) (a)&gt;(b)?(a):(b)
 </pre>
 </div>
 
@@ -611,19 +611,19 @@ C中宏定义注意二义性：
 在参数列表中的某些参数有默认值时，在调用的时候会报错。代码如下：
 <div class="org-src-container">
 
-<pre class="src src-c"><span style="color: #c0c5ce;">int</span> <span style="color: #8fa1b3;">mul</span>(<span style="color: #c0c5ce;">int</span> <span style="color: #bf616a;">a</span>, <span style="color: #c0c5ce;">int</span> <span style="color: #bf616a;">b</span>)
+<pre class="src src-c"><span style="color: #b58900;">int</span> <span style="color: #268bd2;">mul</span>(<span style="color: #b58900;">int</span> <span style="color: #268bd2;">a</span>, <span style="color: #b58900;">int</span> <span style="color: #268bd2;">b</span>)
 {
-     <span style="color: #b48ead;">return</span> 1;
+     <span style="color: #859900;">return</span> 1;
 }
 
-<span style="color: #c0c5ce;">int</span> <span style="color: #8fa1b3;">mul</span>(<span style="color: #c0c5ce;">int</span> <span style="color: #bf616a;">a</span>, <span style="color: #c0c5ce;">int</span> <span style="color: #bf616a;">b</span>, <span style="color: #c0c5ce;">int</span> <span style="color: #bf616a;">c</span> = 0, <span style="color: #c0c5ce;">int</span> <span style="color: #bf616a;">d</span> = 10)
+<span style="color: #b58900;">int</span> <span style="color: #268bd2;">mul</span>(<span style="color: #b58900;">int</span> <span style="color: #268bd2;">a</span>, <span style="color: #b58900;">int</span> <span style="color: #268bd2;">b</span>, <span style="color: #b58900;">int</span> <span style="color: #268bd2;">c</span> = 0, <span style="color: #b58900;">int</span> <span style="color: #268bd2;">d</span> = 10)
 {
-     <span style="color: #b48ead;">return</span> 2;
+     <span style="color: #859900;">return</span> 2;
 }
-<span style="color: #c0c5ce;">/* </span><span style="color: #65737e;">&#19979;&#38754;&#30340;&#20195;&#30721;&#35774;&#32622;&#40664;&#35748;&#20540;&#26159;&#19981;&#34987;&#20801;&#35768;&#30340;,&#21407;&#22240;&#26159;&#21442;&#25968;&#20837;&#26632;&#26102;&#65292;&#27809;&#26377;&#36171;&#20540;&#12290; </span><span style="color: #c0c5ce;">*/</span>
-<span style="color: #c0c5ce;">int</span> <span style="color: #8fa1b3;">mul</span>(<span style="color: #c0c5ce;">int</span> <span style="color: #bf616a;">a</span>=10, <span style="color: #c0c5ce;">int</span> <span style="color: #bf616a;">b</span>=10, <span style="color: #c0c5ce;">int</span> <span style="color: #bf616a;">c</span> = 0, <span style="color: #c0c5ce;">int</span> <span style="color: #bf616a;">d</span>)
+<span style="color: #93a1a1; font-style: italic;">/* </span><span style="color: #93a1a1; font-style: italic;">&#19979;&#38754;&#30340;&#20195;&#30721;&#35774;&#32622;&#40664;&#35748;&#20540;&#26159;&#19981;&#34987;&#20801;&#35768;&#30340;,&#21407;&#22240;&#26159;&#21442;&#25968;&#20837;&#26632;&#26102;&#65292;&#27809;&#26377;&#36171;&#20540;&#12290; </span><span style="color: #93a1a1; font-style: italic;">*/</span>
+<span style="color: #b58900;">int</span> <span style="color: #268bd2;">mul</span>(<span style="color: #b58900;">int</span> <span style="color: #268bd2;">a</span>=10, <span style="color: #b58900;">int</span> <span style="color: #268bd2;">b</span>=10, <span style="color: #b58900;">int</span> <span style="color: #268bd2;">c</span> = 0, <span style="color: #b58900;">int</span> <span style="color: #268bd2;">d</span>)
 {
-     <span style="color: #b48ead;">return</span> 2;
+     <span style="color: #859900;">return</span> 2;
 }
 </pre>
 </div>
@@ -666,8 +666,8 @@ C++:
 
 <div class="org-src-container">
 
-<pre class="src src-C"><span style="color: #c0c5ce;">int</span> * <span style="color: #bf616a;">p</span> = new <span style="color: #c0c5ce;">int</span>;              <span style="color: #c0c5ce;">/* </span><span style="color: #65737e;">&#22312;&#22534;&#19978;&#38754;&#20998;&#37197;&#31354;&#38388;sizeof(int) </span><span style="color: #c0c5ce;">*/</span>
-<span style="color: #c0c5ce;">int</span> * <span style="color: #bf616a;">p</span> = new <span style="color: #c0c5ce;">int</span>();            <span style="color: #c0c5ce;">/* </span><span style="color: #65737e;">&#21021;&#22987;&#21270;&#20026;0&#65288;&#21152;&#19978;()&#65289; </span><span style="color: #c0c5ce;">*/</span>
+<pre class="src src-C"><span style="color: #b58900;">int</span> * <span style="color: #268bd2;">p</span> = new <span style="color: #b58900;">int</span>;              <span style="color: #93a1a1; font-style: italic;">/* </span><span style="color: #93a1a1; font-style: italic;">&#22312;&#22534;&#19978;&#38754;&#20998;&#37197;&#31354;&#38388;sizeof(int) </span><span style="color: #93a1a1; font-style: italic;">*/</span>
+<span style="color: #b58900;">int</span> * <span style="color: #268bd2;">p</span> = new <span style="color: #b58900;">int</span>();            <span style="color: #93a1a1; font-style: italic;">/* </span><span style="color: #93a1a1; font-style: italic;">&#21021;&#22987;&#21270;&#20026;0&#65288;&#21152;&#19978;()&#65289; </span><span style="color: #93a1a1; font-style: italic;">*/</span>
 </pre>
 </div>
 </div>
@@ -678,8 +678,8 @@ C++:
 <div class="outline-text-4" id="text-10-1-2">
 <div class="org-src-container">
 
-<pre class="src src-c"><span style="color: #c0c5ce;">int</span> *<span style="color: #bf616a;">p</span> = &amp;num;                  <span style="color: #c0c5ce;">/* </span><span style="color: #65737e;">&#21462;&#22320;&#22336;&#31526; </span><span style="color: #c0c5ce;">*/</span>
-<span style="color: #c0c5ce;">int</span> &amp;p1 = num;                  <span style="color: #c0c5ce;">/* </span><span style="color: #65737e;">&#24341;&#29992; </span><span style="color: #c0c5ce;">*/</span>
+<pre class="src src-c"><span style="color: #b58900;">int</span> *<span style="color: #268bd2;">p</span> = &amp;num;                  <span style="color: #93a1a1; font-style: italic;">/* </span><span style="color: #93a1a1; font-style: italic;">&#21462;&#22320;&#22336;&#31526; </span><span style="color: #93a1a1; font-style: italic;">*/</span>
+<span style="color: #b58900;">int</span> &amp;p1 = num;                  <span style="color: #93a1a1; font-style: italic;">/* </span><span style="color: #93a1a1; font-style: italic;">&#24341;&#29992; </span><span style="color: #93a1a1; font-style: italic;">*/</span>
 </pre>
 </div>
 </div>
@@ -739,10 +739,10 @@ class A: virtual public b
 </div>
 </div>
 <div id="postamble" class="status">
-<div id="meta-article"><p class="author">倪俊佳(Junjia Ni)</p>
+<div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
 <p class="date">2013-04-22</p>
-<p class="export-date">2015-12-27 Sun 13:49</p>
+<p class="export-date">2015-12-28 Mon 11:41</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 <p class="last-modification-time">2015-12-27 Sun 13:34</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->

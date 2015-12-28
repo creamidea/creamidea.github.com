@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>OE And NK</title>
-<!-- 2015-12-27 Sun 13:49 -->
+<!-- 2015-12-28 Mon 11:41 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="倪俊佳(Junjia Ni)" />
+<meta  name="author" content="冰糖火箭筒(Junjia Ni)" />
 <meta  name="description" content="静态博客预览编辑发布工具"
  />
 <meta  name="keywords" content="emacs,orgmode,静态博客,blog,static-blog" />
@@ -232,8 +232,8 @@ for the JavaScript code in this tag.
 </p>
 <div class="org-src-container">
 
-<pre class="src src-js"><span style="color: #b48ead;">var</span> <span style="color: #bf616a;">child1</span> = child_process.fork(__dirname + <span style="color: #a3be8c;">'/deploy.js'</span>, [<span style="color: #a3be8c;">'articles'</span>, <span style="color: #a3be8c;">'.'</span>, message.argv[0]])
-<span style="color: #b48ead;">var</span> <span style="color: #bf616a;">child2</span> = child_process.fork(__dirname + <span style="color: #a3be8c;">'/deploy.js'</span>, [<span style="color: #a3be8c;">'master'</span>, <span style="color: #a3be8c;">'.'</span>, message.argv[0]])
+<pre class="src src-js"><span style="color: #859900;">var</span> <span style="color: #268bd2;">child1</span> = child_process.fork(__dirname + <span style="color: #2aa198;">'/deploy.js'</span>, [<span style="color: #2aa198;">'articles'</span>, <span style="color: #2aa198;">'.'</span>, message.argv[0]])
+<span style="color: #859900;">var</span> <span style="color: #268bd2;">child2</span> = child_process.fork(__dirname + <span style="color: #2aa198;">'/deploy.js'</span>, [<span style="color: #2aa198;">'master'</span>, <span style="color: #2aa198;">'.'</span>, message.argv[0]])
 </pre>
 </div>
 <ul class="org-ul">
@@ -295,31 +295,31 @@ $ git branch --set-upstream my_branch origin/my_branch
 </p>
 <div class="org-src-container">
 
-<pre class="src src-js">app.use(<span style="color: #b48ead;">function</span>*(next) {
-  <span style="color: #c0c5ce;">// </span><span style="color: #65737e;">console.log(this)</span>
-  <span style="color: #b48ead;">yield</span> next
+<pre class="src src-js">app.use(<span style="color: #859900;">function</span>*(next) {
+  <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">console.log(this)</span>
+  <span style="color: #859900;">yield</span> next
 
-  <span style="color: #b48ead;">var</span> <span style="color: #bf616a;">body</span> = <span style="color: #d08770;">this</span>.body
-  <span style="color: #b48ead;">var</span> <span style="color: #bf616a;">type</span> = <span style="color: #d08770;">this</span>.type
-  <span style="color: #b48ead;">if</span> (type === <span style="color: #a3be8c;">'html'</span> || type === <span style="color: #a3be8c;">'text/html'</span>) {
-    <span style="color: #c0c5ce;">// </span><span style="color: #65737e;">&#25130;&#33719;koa-static&#22788;&#29702;&#30340;html&#25991;&#20214;&#65292;&#25554;&#20837;&#33258;&#24049;&#24819;&#35201;&#30340;&#19996;&#35199;&#65292;&#28982;&#21518;&#36820;&#22238;</span>
-    <span style="color: #b48ead;">var</span> <span style="color: #bf616a;">html</span> = <span style="color: #a3be8c;">""</span>
-    body.on(<span style="color: #a3be8c;">'data'</span>, <span style="color: #b48ead;">function</span>(<span style="color: #bf616a;">chunk</span>) {
-      <span style="color: #c0c5ce;">// </span><span style="color: #65737e;">console.log(chunk.toString());</span>
+  <span style="color: #859900;">var</span> <span style="color: #268bd2;">body</span> = <span style="color: #2aa198;">this</span>.body
+  <span style="color: #859900;">var</span> <span style="color: #268bd2;">type</span> = <span style="color: #2aa198;">this</span>.type
+  <span style="color: #859900;">if</span> (type === <span style="color: #2aa198;">'html'</span> || type === <span style="color: #2aa198;">'text/html'</span>) {
+    <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#25130;&#33719;koa-static&#22788;&#29702;&#30340;html&#25991;&#20214;&#65292;&#25554;&#20837;&#33258;&#24049;&#24819;&#35201;&#30340;&#19996;&#35199;&#65292;&#28982;&#21518;&#36820;&#22238;</span>
+    <span style="color: #859900;">var</span> <span style="color: #268bd2;">html</span> = <span style="color: #2aa198;">""</span>
+    body.on(<span style="color: #2aa198;">'data'</span>, <span style="color: #859900;">function</span>(<span style="color: #268bd2;">chunk</span>) {
+      <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">console.log(chunk.toString());</span>
       html = chunk.toString()
       html = html.slice(0, -16) +
-        <span style="color: #a3be8c;">'&lt;div id="oe-nk-local"&gt;&lt;/div&gt;'</span> +
-        <span style="color: #c0c5ce;">// </span><span style="color: #65737e;">'&lt;link rel="stylesheet" type="text/css" href="publish.css"&gt;'+</span>
-        <span style="color: #a3be8c;">'&lt;script src="/bower_components/react/react.min.js"&gt;&lt;/script&gt;'</span> +
-        <span style="color: #a3be8c;">'&lt;script src="/bower_components/react/react-with-addons.min.js"&gt;&lt;/script&gt;'</span> +
-        <span style="color: #a3be8c;">'&lt;script src="/bower_components/react/react-dom.min.js"&gt;&lt;/script&gt;'</span> +
-        <span style="color: #a3be8c;">'&lt;script src="/bower_components/ace/build/src-min-noconflict/ace.js"&gt;&lt;/script&gt;'</span> +
-        <span style="color: #a3be8c;">'&lt;script src="/bundle.js"&gt;&lt;/script&gt;'</span> +
-        <span style="color: #a3be8c;">'&lt;/body&gt;&lt;/html&gt;'</span>
+        <span style="color: #2aa198;">'&lt;div id="oe-nk-local"&gt;&lt;/div&gt;'</span> +
+        <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">'&lt;link rel="stylesheet" type="text/css" href="publish.css"&gt;'+</span>
+        <span style="color: #2aa198;">'&lt;script src="/bower_components/react/react.min.js"&gt;&lt;/script&gt;'</span> +
+        <span style="color: #2aa198;">'&lt;script src="/bower_components/react/react-with-addons.min.js"&gt;&lt;/script&gt;'</span> +
+        <span style="color: #2aa198;">'&lt;script src="/bower_components/react/react-dom.min.js"&gt;&lt;/script&gt;'</span> +
+        <span style="color: #2aa198;">'&lt;script src="/bower_components/ace/build/src-min-noconflict/ace.js"&gt;&lt;/script&gt;'</span> +
+        <span style="color: #2aa198;">'&lt;script src="/bundle.js"&gt;&lt;/script&gt;'</span> +
+        <span style="color: #2aa198;">'&lt;/body&gt;&lt;/html&gt;'</span>
     })
-    <span style="color: #c0c5ce;">// </span><span style="color: #65737e;">yield body.on('end')</span>
-    <span style="color: #b48ead;">yield</span> body.on.bind(body, <span style="color: #a3be8c;">'end'</span>) <span style="color: #c0c5ce;">// </span><span style="color: #65737e;">TODO: &#29702;&#35299;&#36825;&#37324;&#30340;&#24847;&#24605; http://stackoverflow.com/a/23853606/1925954</span>
-    <span style="color: #d08770;">this</span>.body = html
+    <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">yield body.on('end')</span>
+    <span style="color: #859900;">yield</span> body.on.bind(body, <span style="color: #2aa198;">'end'</span>) <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">TODO: &#29702;&#35299;&#36825;&#37324;&#30340;&#24847;&#24605; http://stackoverflow.com/a/23853606/1925954</span>
+    <span style="color: #2aa198;">this</span>.body = html
   }
 })
 </pre>
@@ -362,10 +362,10 @@ $ git branch --set-upstream my_branch origin/my_branch
 </div>
 </div>
 <div id="postamble" class="status">
-<div id="meta-article"><p class="author">倪俊佳(Junjia Ni)</p>
+<div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
 <p class="date">2015-12-27</p>
-<p class="export-date">2015-12-27 Sun 13:49</p>
+<p class="export-date">2015-12-28 Mon 11:41</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 <p class="last-modification-time">2015-12-27 Sun 13:46</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->

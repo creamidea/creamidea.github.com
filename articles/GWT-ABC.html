@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>GWT ABC</title>
-<!-- 2015-12-27 Sun 13:49 -->
+<!-- 2015-12-28 Mon 11:41 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="倪俊佳(Junjia Ni)" />
+<meta  name="author" content="冰糖火箭筒(Junjia Ni)" />
 <meta  name="description" content="Something about gwt"
  />
 <meta  name="keywords" content="google,gwt,java" />
@@ -285,15 +285,15 @@ This application is out of date, please click the refresh button on your browser
 </p>
 <div class="org-src-container">
 
-<pre class="src src-xml">&lt;<span style="color: #8fa1b3;">servlet</span>&gt;
-  &lt;<span style="color: #8fa1b3;">servlet-name</span>&gt;greetServlet&lt;/<span style="color: #8fa1b3;">servlet-name</span>&gt;
-  &lt;<span style="color: #8fa1b3;">servlet-class</span>&gt;com.creamidea.helloworld.server.GreetingServiceImpl&lt;/<span style="color: #8fa1b3;">servlet-class</span>&gt;
-&lt;/<span style="color: #8fa1b3;">servlet</span>&gt;
+<pre class="src src-xml">&lt;<span style="color: #268bd2;">servlet</span>&gt;
+  &lt;<span style="color: #268bd2;">servlet-name</span>&gt;greetServlet&lt;/<span style="color: #268bd2;">servlet-name</span>&gt;
+  &lt;<span style="color: #268bd2;">servlet-class</span>&gt;com.creamidea.helloworld.server.GreetingServiceImpl&lt;/<span style="color: #268bd2;">servlet-class</span>&gt;
+&lt;/<span style="color: #268bd2;">servlet</span>&gt;
 
-&lt;<span style="color: #8fa1b3;">servlet-mapping</span>&gt;
-  &lt;<span style="color: #8fa1b3;">servlet-name</span>&gt;greetServlet&lt;/<span style="color: #8fa1b3;">servlet-name</span>&gt;
-  &lt;<span style="color: #8fa1b3;">url-pattern</span>&gt;/helloworld/greet&lt;/<span style="color: #8fa1b3;">url-pattern</span>&gt;
-&lt;/<span style="color: #8fa1b3;">servlet-mapping</span>&gt;
+&lt;<span style="color: #268bd2;">servlet-mapping</span>&gt;
+  &lt;<span style="color: #268bd2;">servlet-name</span>&gt;greetServlet&lt;/<span style="color: #268bd2;">servlet-name</span>&gt;
+  &lt;<span style="color: #268bd2;">url-pattern</span>&gt;/helloworld/greet&lt;/<span style="color: #268bd2;">url-pattern</span>&gt;
+&lt;/<span style="color: #268bd2;">servlet-mapping</span>&gt;
 </pre>
 </div>
 </div>
@@ -328,20 +328,20 @@ This application is out of date, please click the refresh button on your browser
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java"><span style="color: #b48ead;">package</span> com.creamidea.helloworld.<span style="color: #d08770;">client</span>;
+<pre class="src src-java"><span style="color: #859900;">package</span> com.creamidea.helloworld.<span style="color: #2aa198;">client</span>;
 
-<span style="color: #b48ead;">import</span> <span style="color: #d08770;">com</span>.<span style="color: #d08770;">google</span>.<span style="color: #d08770;">gwt</span>.<span style="color: #d08770;">user</span>.<span style="color: #d08770;">client</span>.<span style="color: #d08770;">rpc</span>.<span style="color: #c0c5ce;">RemoteService</span>;
-<span style="color: #b48ead;">import</span> <span style="color: #d08770;">com</span>.<span style="color: #d08770;">google</span>.<span style="color: #d08770;">gwt</span>.<span style="color: #d08770;">user</span>.<span style="color: #d08770;">client</span>.<span style="color: #d08770;">rpc</span>.<span style="color: #c0c5ce;">RemoteServiceRelativePath</span>;
+<span style="color: #859900;">import</span> <span style="color: #2aa198;">com</span>.<span style="color: #2aa198;">google</span>.<span style="color: #2aa198;">gwt</span>.<span style="color: #2aa198;">user</span>.<span style="color: #2aa198;">client</span>.<span style="color: #2aa198;">rpc</span>.<span style="color: #b58900;">RemoteService</span>;
+<span style="color: #859900;">import</span> <span style="color: #2aa198;">com</span>.<span style="color: #2aa198;">google</span>.<span style="color: #2aa198;">gwt</span>.<span style="color: #2aa198;">user</span>.<span style="color: #2aa198;">client</span>.<span style="color: #2aa198;">rpc</span>.<span style="color: #b58900;">RemoteServiceRelativePath</span>;
 
-<span style="color: #a3be8c;">/**</span>
-<span style="color: #a3be8c;"> * The client side stub for the RPC service.</span>
-<span style="color: #a3be8c;"> */</span>
-<span style="color: #d08770;">@RemoteServiceRelativePath</span>(<span style="color: #a3be8c;">"greet"</span>)
-<span style="color: #b48ead;">public</span> <span style="color: #b48ead;">interface</span> <span style="color: #c0c5ce;">GreetingService</span> <span style="color: #b48ead;">extends</span> <span style="color: #c0c5ce;">RemoteService</span> {
-    <span style="color: #c0c5ce;">// </span><span style="color: #65737e;">&#36825;&#20010;&#26041;&#27861;&#23601;&#26159;&#22788;&#29702;&#26469;&#33258;&#23458;&#25143;&#31471;&#30340;&#35831;&#27714;&#30340;</span>
-    <span style="color: #c0c5ce;">// </span><span style="color: #65737e;">&#21442;&#25968;&#65306;name &#23601;&#26159;&#23458;&#25143;&#31471;&#25658;&#24102;&#30340;&#20449;&#24687;&#21862;</span>
-    <span style="color: #c0c5ce;">// </span><span style="color: #65737e;">&#36820;&#22238;&#65306;&#23383;&#31526;&#20018;</span>
-    <span style="color: #c0c5ce;">String</span> <span style="color: #8fa1b3;">greetServer</span>(<span style="color: #c0c5ce;">String</span> <span style="color: #bf616a;">name</span>) <span style="color: #b48ead;">throws</span> <span style="color: #c0c5ce;">IllegalArgumentException</span>;
+<span style="color: #93a1a1; font-style: italic;">/**</span>
+<span style="color: #93a1a1; font-style: italic;"> * The client side stub for the RPC service.</span>
+<span style="color: #93a1a1; font-style: italic;"> */</span>
+<span style="color: #2aa198;">@RemoteServiceRelativePath</span>(<span style="color: #2aa198;">"greet"</span>)
+<span style="color: #859900;">public</span> <span style="color: #859900;">interface</span> <span style="color: #b58900;">GreetingService</span> <span style="color: #859900;">extends</span> <span style="color: #b58900;">RemoteService</span> {
+    <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#36825;&#20010;&#26041;&#27861;&#23601;&#26159;&#22788;&#29702;&#26469;&#33258;&#23458;&#25143;&#31471;&#30340;&#35831;&#27714;&#30340;</span>
+    <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#21442;&#25968;&#65306;name &#23601;&#26159;&#23458;&#25143;&#31471;&#25658;&#24102;&#30340;&#20449;&#24687;&#21862;</span>
+    <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#36820;&#22238;&#65306;&#23383;&#31526;&#20018;</span>
+    <span style="color: #b58900;">String</span> <span style="color: #268bd2;">greetServer</span>(<span style="color: #b58900;">String</span> <span style="color: #268bd2;">name</span>) <span style="color: #859900;">throws</span> <span style="color: #b58900;">IllegalArgumentException</span>;
 }
 </pre>
 </div>
@@ -362,19 +362,19 @@ This application is out of date, please click the refresh button on your browser
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java"><span style="color: #b48ead;">package</span> com.creamidea.helloworld.<span style="color: #d08770;">client</span>;
+<pre class="src src-java"><span style="color: #859900;">package</span> com.creamidea.helloworld.<span style="color: #2aa198;">client</span>;
 
-<span style="color: #b48ead;">import</span> <span style="color: #d08770;">com</span>.<span style="color: #d08770;">google</span>.<span style="color: #d08770;">gwt</span>.<span style="color: #d08770;">user</span>.<span style="color: #d08770;">client</span>.<span style="color: #d08770;">rpc</span>.<span style="color: #c0c5ce;">AsyncCallback</span>;
+<span style="color: #859900;">import</span> <span style="color: #2aa198;">com</span>.<span style="color: #2aa198;">google</span>.<span style="color: #2aa198;">gwt</span>.<span style="color: #2aa198;">user</span>.<span style="color: #2aa198;">client</span>.<span style="color: #2aa198;">rpc</span>.<span style="color: #b58900;">AsyncCallback</span>;
 
-<span style="color: #a3be8c;">/**</span>
-<span style="color: #a3be8c;"> * The async counterpart of </span><span style="color: #a3be8c;">&lt;code&gt;</span><span style="color: #a3be8c;">GreetingService</span><span style="color: #a3be8c;">&lt;/code&gt;</span><span style="color: #a3be8c;">.</span>
-<span style="color: #a3be8c;"> */</span>
-<span style="color: #b48ead;">public</span> <span style="color: #b48ead;">interface</span> <span style="color: #c0c5ce;">GreetingServiceAsync</span> {
-    <span style="color: #c0c5ce;">// </span><span style="color: #65737e;">&#36825;&#20010;&#26041;&#27861;&#26377;&#20004;&#20010;&#21442;&#25968;</span>
-    <span style="color: #c0c5ce;">// </span><span style="color: #65737e;">&#19968;&#20010;&#26159;&#38656;&#35201;&#21521;&#26381;&#21153;&#22120;&#21457;&#36865;&#20160;&#20040;&#20449;&#24687;</span>
-    <span style="color: #c0c5ce;">// </span><span style="color: #65737e;">&#21478;&#19968;&#20010;&#26159;&#22238;&#35843;&#65292;&#23601;&#26159;&#26381;&#21153;&#22120;&#25104;&#21151;&#36820;&#22238;&#20043;&#21518;&#23458;&#25143;&#31471;&#38656;&#35201;&#20570;&#30340;&#20107;&#24773;</span>
-  <span style="color: #c0c5ce;">void</span> <span style="color: #8fa1b3;">greetServer</span>(<span style="color: #c0c5ce;">String</span> <span style="color: #bf616a;">input</span>, <span style="color: #c0c5ce;">AsyncCallback</span>&lt;<span style="color: #c0c5ce;">String</span>&gt; <span style="color: #bf616a;">callback</span>)
-      <span style="color: #b48ead;">throws</span> <span style="color: #c0c5ce;">IllegalArgumentException</span>;
+<span style="color: #93a1a1; font-style: italic;">/**</span>
+<span style="color: #93a1a1; font-style: italic;"> * The async counterpart of </span><span style="color: #93a1a1; font-style: italic;">&lt;code&gt;</span><span style="color: #93a1a1; font-style: italic;">GreetingService</span><span style="color: #93a1a1; font-style: italic;">&lt;/code&gt;</span><span style="color: #93a1a1; font-style: italic;">.</span>
+<span style="color: #93a1a1; font-style: italic;"> */</span>
+<span style="color: #859900;">public</span> <span style="color: #859900;">interface</span> <span style="color: #b58900;">GreetingServiceAsync</span> {
+    <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#36825;&#20010;&#26041;&#27861;&#26377;&#20004;&#20010;&#21442;&#25968;</span>
+    <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#19968;&#20010;&#26159;&#38656;&#35201;&#21521;&#26381;&#21153;&#22120;&#21457;&#36865;&#20160;&#20040;&#20449;&#24687;</span>
+    <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#21478;&#19968;&#20010;&#26159;&#22238;&#35843;&#65292;&#23601;&#26159;&#26381;&#21153;&#22120;&#25104;&#21151;&#36820;&#22238;&#20043;&#21518;&#23458;&#25143;&#31471;&#38656;&#35201;&#20570;&#30340;&#20107;&#24773;</span>
+  <span style="color: #b58900;">void</span> <span style="color: #268bd2;">greetServer</span>(<span style="color: #b58900;">String</span> <span style="color: #268bd2;">input</span>, <span style="color: #b58900;">AsyncCallback</span>&lt;<span style="color: #b58900;">String</span>&gt; <span style="color: #268bd2;">callback</span>)
+      <span style="color: #859900;">throws</span> <span style="color: #b58900;">IllegalArgumentException</span>;
 }
 </pre>
 </div>
@@ -384,39 +384,39 @@ This application is out of date, please click the refresh button on your browser
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java"><span style="color: #a3be8c;">/**</span>
-<span style="color: #a3be8c;"> * &#21019;&#24314;&#19968;&#20010;&#29992;&#20110;&#21644;&#36828;&#31243;&#26381;&#21153;(Greeting Service)&#36827;&#34892;&#36890;&#20449;&#30340;&#20195;&#29702;</span>
-<span style="color: #a3be8c;"> * &#23558;&#23458;&#25143;&#31471;&#30340;&#21457;&#36865;&#22120;&#21644;&#26381;&#21153;&#22120;&#31471;&#30340;&#22788;&#29702;&#22120;&#32465;&#23450;</span>
-<span style="color: #a3be8c;"> */</span>
-<span style="color: #b48ead;">private</span> <span style="color: #b48ead;">final</span> <span style="color: #c0c5ce;">GreetingServiceAsync</span> <span style="color: #bf616a;">greetingService</span> = GWT
-    .create(GreetingService.<span style="color: #b48ead;">class</span>);
+<pre class="src src-java"><span style="color: #93a1a1; font-style: italic;">/**</span>
+<span style="color: #93a1a1; font-style: italic;"> * &#21019;&#24314;&#19968;&#20010;&#29992;&#20110;&#21644;&#36828;&#31243;&#26381;&#21153;(Greeting Service)&#36827;&#34892;&#36890;&#20449;&#30340;&#20195;&#29702;</span>
+<span style="color: #93a1a1; font-style: italic;"> * &#23558;&#23458;&#25143;&#31471;&#30340;&#21457;&#36865;&#22120;&#21644;&#26381;&#21153;&#22120;&#31471;&#30340;&#22788;&#29702;&#22120;&#32465;&#23450;</span>
+<span style="color: #93a1a1; font-style: italic;"> */</span>
+<span style="color: #859900;">private</span> <span style="color: #859900;">final</span> <span style="color: #b58900;">GreetingServiceAsync</span> <span style="color: #268bd2;">greetingService</span> = GWT
+    .create(GreetingService.<span style="color: #859900;">class</span>);
 
-<span style="color: #a3be8c;">/**</span>
-<span style="color: #a3be8c;"> * &#35843;&#29992;&#21457;&#36865;&#20449;&#24687;&#30340;&#26041;&#27861;&#12290;</span>
-<span style="color: #a3be8c;"> * &#21457;&#36865;&#38656;&#35201;&#21457;&#36865;&#30340;&#20449;&#24687;</span>
-<span style="color: #a3be8c;"> * &#32465;&#23450;&#22238;&#35843;&#20989;&#25968;</span>
-<span style="color: #a3be8c;"> */</span>
+<span style="color: #93a1a1; font-style: italic;">/**</span>
+<span style="color: #93a1a1; font-style: italic;"> * &#35843;&#29992;&#21457;&#36865;&#20449;&#24687;&#30340;&#26041;&#27861;&#12290;</span>
+<span style="color: #93a1a1; font-style: italic;"> * &#21457;&#36865;&#38656;&#35201;&#21457;&#36865;&#30340;&#20449;&#24687;</span>
+<span style="color: #93a1a1; font-style: italic;"> * &#32465;&#23450;&#22238;&#35843;&#20989;&#25968;</span>
+<span style="color: #93a1a1; font-style: italic;"> */</span>
 greetingService.greetServer(
   textToServer,
-  <span style="color: #b48ead;">new</span> <span style="color: #c0c5ce;">AsyncCallback</span>&lt;<span style="color: #c0c5ce;">String</span>&gt;() {
-      <span style="color: #b48ead;">public</span> <span style="color: #c0c5ce;">void</span> <span style="color: #8fa1b3;">onFailure</span>(<span style="color: #c0c5ce;">Throwable</span> <span style="color: #bf616a;">caught</span>) {
-          <span style="color: #c0c5ce;">// </span><span style="color: #65737e;">Show the RPC error message to the user</span>
+  <span style="color: #859900;">new</span> <span style="color: #b58900;">AsyncCallback</span>&lt;<span style="color: #b58900;">String</span>&gt;() {
+      <span style="color: #859900;">public</span> <span style="color: #b58900;">void</span> <span style="color: #268bd2;">onFailure</span>(<span style="color: #b58900;">Throwable</span> <span style="color: #268bd2;">caught</span>) {
+          <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Show the RPC error message to the user</span>
           dialogBox
-              .setText(<span style="color: #a3be8c;">"Remote Procedure Call - Failure"</span>);
+              .setText(<span style="color: #2aa198;">"Remote Procedure Call - Failure"</span>);
           serverResponseLabel
-              .addStyleName(<span style="color: #a3be8c;">"serverResponseLabelError"</span>);
+              .addStyleName(<span style="color: #2aa198;">"serverResponseLabelError"</span>);
           serverResponseLabel.setHTML(SERVER_ERROR);
           dialogBox.center();
-          closeButton.setFocus(<span style="color: #d08770;">true</span>);
+          closeButton.setFocus(<span style="color: #2aa198;">true</span>);
       }
 
-      <span style="color: #b48ead;">public</span> <span style="color: #c0c5ce;">void</span> <span style="color: #8fa1b3;">onSuccess</span>(<span style="color: #c0c5ce;">String</span> <span style="color: #bf616a;">result</span>) {
-          dialogBox.setText(<span style="color: #a3be8c;">"Remote Procedure Call"</span>);
+      <span style="color: #859900;">public</span> <span style="color: #b58900;">void</span> <span style="color: #268bd2;">onSuccess</span>(<span style="color: #b58900;">String</span> <span style="color: #268bd2;">result</span>) {
+          dialogBox.setText(<span style="color: #2aa198;">"Remote Procedure Call"</span>);
           serverResponseLabel
-              .removeStyleName(<span style="color: #a3be8c;">"serverResponseLabelError"</span>);
+              .removeStyleName(<span style="color: #2aa198;">"serverResponseLabelError"</span>);
           serverResponseLabel.setHTML(result);
           dialogBox.center();
-          closeButton.setFocus(<span style="color: #d08770;">true</span>);
+          closeButton.setFocus(<span style="color: #2aa198;">true</span>);
       }
   });
 </pre>
@@ -446,7 +446,7 @@ greetingService.greetServer(
    HelloWorld.html
 <div class="org-src-container">
 
-<pre class="src src-html">&lt;<span style="color: #8fa1b3;">td</span> <span style="color: #bf616a;">id</span>=<span style="color: #a3be8c;">"nameFieldContainer"</span>&gt;&lt;/<span style="color: #8fa1b3;">td</span>&gt;
+<pre class="src src-html">&lt;<span style="color: #268bd2;">td</span> <span style="color: #268bd2;">id</span>=<span style="color: #2aa198;">"nameFieldContainer"</span>&gt;&lt;/<span style="color: #268bd2;">td</span>&gt;
 </pre>
 </div>
 
@@ -455,7 +455,7 @@ HelloWorld.java
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java">RootPanel.get(<span style="color: #a3be8c;">"nameFieldContainer"</span>);
+<pre class="src src-java">RootPanel.get(<span style="color: #2aa198;">"nameFieldContainer"</span>);
 </pre>
 </div>
 </li>
@@ -464,7 +464,7 @@ HelloWorld.java
    HelloWorld.html
 <div class="org-src-container">
 
-<pre class="src src-html">&lt;<span style="color: #8fa1b3;">td</span> <span style="color: #bf616a;">id</span>=<span style="color: #a3be8c;">"sendButtonContainer"</span>&gt;&lt;/<span style="color: #8fa1b3;">td</span>&gt;
+<pre class="src src-html">&lt;<span style="color: #268bd2;">td</span> <span style="color: #268bd2;">id</span>=<span style="color: #2aa198;">"sendButtonContainer"</span>&gt;&lt;/<span style="color: #268bd2;">td</span>&gt;
 </pre>
 </div>
 
@@ -473,15 +473,15 @@ HelloWorld.java
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java"><span style="color: #b48ead;">final</span> <span style="color: #c0c5ce;">Button</span> <span style="color: #bf616a;">closeButton</span> = <span style="color: #b48ead;">new</span> <span style="color: #c0c5ce;">Button</span>(<span style="color: #a3be8c;">"Close"</span>); <span style="color: #c0c5ce;">// </span><span style="color: #65737e;">&#36825;&#37324;&#30340;Close&#23601;&#26159;&#25353;&#38062;&#19978;&#26174;&#31034;&#30340;&#23383;&#31526;</span>
-<span style="color: #c0c5ce;">// </span><span style="color: #65737e;">We can set the id of a widget by accessing its Element</span>
-closeButton.getElement().setId(<span style="color: #a3be8c;">"closeButton"</span>);
-<span style="color: #c0c5ce;">// </span><span style="color: #65737e;">Add a handler to close the DialogBox</span>
-closeButton.addClickHandler(<span style="color: #b48ead;">new</span> <span style="color: #c0c5ce;">ClickHandler</span>() {
-        <span style="color: #b48ead;">public</span> <span style="color: #c0c5ce;">void</span> <span style="color: #8fa1b3;">onClick</span>(<span style="color: #c0c5ce;">ClickEvent</span> <span style="color: #bf616a;">event</span>) {
+<pre class="src src-java"><span style="color: #859900;">final</span> <span style="color: #b58900;">Button</span> <span style="color: #268bd2;">closeButton</span> = <span style="color: #859900;">new</span> <span style="color: #b58900;">Button</span>(<span style="color: #2aa198;">"Close"</span>); <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#36825;&#37324;&#30340;Close&#23601;&#26159;&#25353;&#38062;&#19978;&#26174;&#31034;&#30340;&#23383;&#31526;</span>
+<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">We can set the id of a widget by accessing its Element</span>
+closeButton.getElement().setId(<span style="color: #2aa198;">"closeButton"</span>);
+<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">Add a handler to close the DialogBox</span>
+closeButton.addClickHandler(<span style="color: #859900;">new</span> <span style="color: #b58900;">ClickHandler</span>() {
+        <span style="color: #859900;">public</span> <span style="color: #b58900;">void</span> <span style="color: #268bd2;">onClick</span>(<span style="color: #b58900;">ClickEvent</span> <span style="color: #268bd2;">event</span>) {
             dialogBox.hide();
-            sendButton.setEnabled(<span style="color: #d08770;">true</span>);
-            sendButton.setFocus(<span style="color: #d08770;">true</span>);
+            sendButton.setEnabled(<span style="color: #2aa198;">true</span>);
+            sendButton.setFocus(<span style="color: #2aa198;">true</span>);
         }       
     });
 </pre>
@@ -528,10 +528,10 @@ closeButton.addClickHandler(<span style="color: #b48ead;">new</span> <span style
 </div>
 </div></div>
 <div id="postamble" class="status">
-<div id="meta-article"><p class="author">倪俊佳(Junjia Ni)</p>
+<div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
 <p class="date">2014-01-29</p>
-<p class="export-date">2015-12-27 Sun 13:49</p>
+<p class="export-date">2015-12-28 Mon 11:41</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 <p class="last-modification-time">2015-12-27 Sun 13:41</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
