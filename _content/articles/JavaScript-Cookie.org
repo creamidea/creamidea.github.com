@@ -1,0 +1,216 @@
+#+TITLE: JavaScript Cookie
+#+AUTHOR: 冰糖火箭筒(Junjia Ni)
+#+EMAIL: creamidea(AT)gmail.com
+#+DATE: 2016-01-30
+#+CATEGORY: article
+#+DESCRIPTION: Learn JavaScript
+#+KEYWORDS: javascript
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t <:t date:t timestamp:t
+#+LINK_HOME: https://creamidea.github.io
+#+STARTUP: showall
+
+
+* 前言
+记录一些关于JavaScript有趣的，迷惑的，让人惊叹的功能和陷阱。(⌒▽⌒)
+
+* for...in && for...of
+这个是最近遇到的一个有趣的问题，问: =for...in= 和 =for...of= 有什么区别呢？当时有点凌乱。 >_<
+=for...in= 和 =for...of= 都是可以用来迭代的(Array, Object, Map, Set...)。
+不过 =in= 会读取原型链中的属性。这也是很多人觉得会踩坑的地方。
+（当然还有一个地方，就是需要写成 =var i in a= ，而不是 =i in a= ，不然 =i= 要变成 *global* 啦。）
+试试下面的代码
+#+BEGIN_SRC js
+  // Some code in your deep Library
+  Array.prototype.foo = 'S'
+
+  // Here is your code
+  var a = [1,2,3,4,5]
+  for (var i in a) {
+    console.log(i);
+  }
+  // 0,1,2,3,4,foo 
+  // :P
+#+END_SRC
+
+* Generate Function
+
+=yield= 
+The yield keyword is used to pause and resume a generator function. \\
+=yield*= 
+The yield* expression is used to delegate to another generator or iterable object.
+Besides generator objects, yield* can also yield other kinds of iterables, e.g. arrays, strings or arguments objects.
+yield* is an expression, not a statement, so it evaluates to a value. \\
+
+我的快速理解：
+#+BEGIN_SRC js
+  function * A () {
+    console.log(1)
+    var a1 = yield 1
+    console.log(a1)
+    return 3
+  }
+  var a = A() // 实际A函数内的代码块并未被执行
+  var r = a.next() // 这才开始执行代码，语句被执行到 yield 1。此时yield右侧表达式（这里是1）被求值，并暂停在这里。另外，这个 console.log(1) 将会被执行，你将在终端看到这个1。
+  console.log(r) // {value: 1, done: false} value 存放刚刚求出的值，done标志是否执行到代码块底部，也就是“迭代”是否结束。
+  r = a.next(2) //代码再次启动，从上次暂停的地方开始，此时，yield左边的代码将被执行。注意这里，如果next带了参数，如next(2)，那么a1将被求值为2。
+  console.log(r) // {value: 3, done: true} value 是函数的返回值，如果没有返回则为undefined。
+#+END_SRC
+出现 =yield= 那条语句相当于被打了一个断点， =yield= 右边的表达式将在你执行 =next()= 的时候被求值。
+再下一次 =next()= 时左侧会被求值，并一直执行到下一次（个） =yield= 的右侧或者函数体结束的地方。
+Generator Function 起码需要2次 =next()= 才能执行完。
+
+对于 =yield*= ，这个是用来处理 =function=, =array=, =etc=. 如 =yield * A()=, =yield * [1,2,3]= 。
+这里的函数 =A()= 将被求值， =[1,2,3]= 这个数组将被遍历（求值）等。
+
+然后，TJ大神利用这个特性并结合他神勇的想法，创造出了强大的co库。其核心思想是，将原先的回调函数包装成高阶函数-Thunk[fn:1](返回一个函数)，参数是下一次 =next= 的时机代码。
+
+** co repository
+#+BEGIN_SRC js
+  function co (genFun) {
+    var gen = genFun()
+    function _next (err, res) {
+      if (err) return gen.throw(err)
+      var r = gen.next(res) // 将回调函数中执行的结果传回去（调用yield的地方）
+      if (r.done) return r.value // 如果完成，就返回最后的值，如果没有结束，就把 _next 传到那个回调函数中
+      r.value(_next) // 这里 r.value 就是那个thunk函数
+    }
+    _next()
+  }
+#+END_SRC
+不理解？我们看一个有趣的例子，延迟函数的实现。问题如下
+#+BEGIN_SRC js
+  function * A () {
+    console.log(1)
+    yield wait(1000)
+    console.log(2)
+    return 3
+  }
+#+END_SRC
+需要实现这个 =wait= 。其实很简单啦，用我们上面自己写的 =co= ，实现如下
+#+BEGIN_SRC js
+
+// 实现
+// 包装成thunk函数
+function wait(timeout) {
+  return function (done) {
+    setTimeout(done, timeout)
+  }
+}
+
+// 调用
+co(function * () {
+  var a = yield * A()
+  console.log(a)
+})
+#+END_SRC
+
+将 =setTimeout= 包装成 =thunk= 函数，如上。也就是返回一个带参数的函数，这里的参数就是 =co= 库中 =r.value(_next)= 中的 =_next= ，
+这里的 =r.value= 就是 =function(done){...}= 。
+那现在再来看这里的意思就是，延迟 =timeout= 的时间后，执行 =done= 函数， =done= 就是那个 =_next= ，而 =_next= 中有 =gen.next()= 执行下面函数的开关，于是整个都连起来了。
+是不是很强大的想法？
+
+这个样子就把回调的写法，写成了“同步”的形式，避免了回调金字塔的出现。这个样子就把回调的写法，写成了“同步”的形式，避免了回调金字塔的出现。这个样子就把回调的写法，写成了“同步”的形式，避免了回调金字塔的出现。
+
+那有了这个思路之后，剩下就只需要写一个包装函数啦。包装你想要的一切（开玩笑啦 >_<）。如 =Promise/Generator/GeneratorFunction/Object/Array...= 。
+具体的实现可以参考 [[https://github.com/tj/co/blob/3.1.0/index.js][co@3.1.0]] 的代码。新的co代码应该是用 =Promise= 重写了一遍，代码更加的清晰。
+
+对了，还有各种错误异常的处理，这个不能忘了。
+
+你以为这样子就完了吗？图样，TJ大神还有一个 =koa= ，我们也拿来看看。我们现在有一个新的问题，将下面2个函数以 =3,5,6,4= 的形式输出。
+#+BEGIN_SRC js
+function * B (next) {
+  console.log(3);
+  yield next;
+  console.log(4);
+}
+function * C (next) {
+  console.log(5);
+  yield next;
+  console.log(6);
+}
+#+END_SRC
+
+其实这个现在看也是很简单，只要 =B/C= 能够形成 =B(C)= ，然后我 =yield B= 即可。
+于是我们可以把 =B,C= 组成一个数组，然后从后向前遍历，将其“调用”即可啦 :)
+不过在这之前，我们需要稍微改造一下我们写的 =co= 库，让她能够支持 =yield [GeneratorFunction&Generator]= 。主要增加 *一些判断* 和 *一个thunk函数转换器* 。
+#+BEGIN_SRC js
+  function co (genFun) {
+    var gen
+    if (isGeneratorFunction(genFun)) gen = genFun()
+    else gen = genFun
+    function _next (err, res) {
+      if (err) {
+        console.log('ERROR', err);
+        return gen.throw(err) 
+      }
+      var r = gen.next(res), ctx = this
+      if (r.done) return r.value
+
+      // 主要增加的内容
+      r.value = toTunk(r.value, ctx)
+      if ('function' === typeof r.value) r.value(_next)
+      _next(null, r.value)
+    }
+    _next()
+  }
+  function isGeneratorFunction (obj) {
+    return (obj && obj.constructor && obj.constructor.name === 'GeneratorFunction')
+  }
+  function isGenerator(obj) {
+    return (obj && 'function' === typeof obj.next && 'function' === typeof obj.throw)
+  }
+  function toTunk(obj, ctx) {
+    if (isGeneratorFunction(obj)) {
+      return co(obj.call(ctx))
+    }
+    if (isGenerator(obj)) {
+      return co(obj)
+    }
+    else{
+      return obj
+    }
+  }
+#+END_SRC
+
+** koa
+#+BEGIN_SRC js
+  // 实现
+  function Koa () {
+    this.middleware = []
+  }
+  Koa.prototype.use = function (genFun) {
+    this.middleware.push(genFun)
+    return this
+  }
+  Koa.prototype.listen = function () {
+    this._start()
+  }
+  Koa.prototype._start = function () {
+    var ctx = this,
+        middleware = ctx.middleware,
+        i = middleware.length,
+        prev = null
+    co(function * () {
+      while(i--){
+        prev = middleware[i].call(ctx, prev)
+      }
+      yield prev
+    })
+  }
+
+  // 调用
+  var koa = new Koa
+  koa.use(B).use(C)
+  koa.listen()
+#+END_SRC
+
+至此，有关 =yield= 和 =yield*= 的内容我就讲完了。其实自己还是有点雾里呢！不过，比我之前清晰多了 :)
+
+(另外，请自动忽略上述代码对异常等各种情况的处理，具体实现可以参考TJ大神的代码。不看真的会遗憾的！)
+
+* 尾声
+
+* Footnotes
+
+[fn:1] Thunk: https://en.wikipedia.org/wiki/Thunk
+

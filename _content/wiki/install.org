@@ -12,6 +12,21 @@
 主要是在Windows7上和Linux(现在主要是Ubuntu)上。
 详细记录一些配置过程和安装的软件。方便以后重新安装系统。
 
+* Node
+#+BEGIN_EXAMPLE
+~/.npm
+/usr/local/bin/node
+/usr/local/bin/npm
+/usr/local/lib/node_modules
+/usr/local/libexec/node_modules
+/usr/local/share/man/man1/node*
+/usr/local/lib/dtrace/node.d
+/usr/local/include/node_modules
+/var/db/receipts/org.nodejs.node.pkg.*
+
+.node_repl_history
+#+END_EXAMPLE
+
 * Git
 
 ** git lfs error: failed to push some refs to

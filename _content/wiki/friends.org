@@ -21,11 +21,11 @@
 [[http://au9ustine.github.io/][homepage]] 
 
 * Van9ogh
-大学时期团队成员。大多的话了，今晚暂时不写。\\
+大学时期团队成员。太多的话了，今晚暂时不写。\\
 [[https://forestgump.me/][homepage]] [[https://forestgump.me/rss/][rss]]
 
 * Johnchain
-大学时期团队成员。大多的话了，今晚暂时不写。
+大学时期团队成员。太多的话了，今晚暂时不写。
 这货开了一个Github Page，但是感觉没有怎么好好的弄，还是一个demo的状态，有空的时候该提醒他要修修草了。
 我还是给一个链接吧。\\
 [[http://johnchain.github.io/][homepage]]

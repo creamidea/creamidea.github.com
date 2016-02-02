@@ -9,6 +9,65 @@
 
 * 前言
   收集一些css的小内容
+
+* Jump links and viewport positioning
+** A
+#+BEGIN_SRC css
+  default
+#+END_SRC
+** B
+#+BEGIN_SRC css
+#method-B:before {
+    display: block;
+    content: "";
+    height: 50px;
+    margin: -50px 0 0;
+}
+#+END_SRC
+** C
+#+BEGIN_SRC css
+#method-C {
+    padding-top: 50px;
+    margin-top: -50px;
+    \-webkit-background-clip: content-box;
+    background-clip: content-box;
+}
+#+END_SRC
+** D
+#+BEGIN_SRC css
+#method-D {
+    border-top: 50px solid transparent;
+    margin-top: -50px;
+    \-webkit-background-clip: padding-box;
+    \-moz-background-clip: padding;
+    background-clip: padding-box;
+}
+#+END_SRC
+** E
+#+BEGIN_SRC css
+  #method-E {
+      position: relative;
+      padding: 15px;
+      border-top: 52px solid transparent;
+      margin-top: -50px;
+      \-webkit-background-clip: padding-box;
+      \-moz-background-clip: padding;
+      background-clip: padding-box;
+  }
+
+  #method-E:before {
+      content: "";
+      position: absolute;
+      top: -25px;
+      left: 0;
+      right: 0;
+      border-top: 1px solid #ccc;
+  }
+#+END_SRC
+Reference:
++ http://nicolasgallagher.com/jump-links-and-viewport-positioning/demo/
++ https://css-tricks.com/hash-tag-links-padding/
+
 * 动画效果
   在做一些动画效果，需要隐藏一些元素的时候，如果直接使用 =display: none= 浏览器就不理我了。于是需要下面这些折衷的办法。
   #+BEGIN_SRC css

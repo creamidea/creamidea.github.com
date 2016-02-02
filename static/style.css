@@ -49,7 +49,7 @@ h2:hover a,h3:hover a,h4:hover a{visibility: visible;}
 /* .nav-tabs:after {clear: left;} */
 .nav-tabs {text-align: center; font-size: 1.4em; padding-left: 0;}
 .nav-tabs li {border: 0;display: inline-block; text-align: center;margin-left: 6px; margin-right: 6px;}
-.nav-tabs li.active {border: 0;border-bottom: solid #0C77B6 4px;}
+.nav-tabs li.active {border: 0;border-bottom: solid 4px #ED462F;}
 /* .nav-tabs li.active a {border: 0;} */
 /* .nav-tabs li.articles.active {border-bottom: solid #D82C2D 4px;} */
 /* .nav-tabs li.wiki.active {border-bottom: solid #0C77B6 4px;} */
