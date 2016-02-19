@@ -4,7 +4,7 @@
 #+DATE: 2016-01-30
 #+CATEGORY: article
 #+DESCRIPTION: Learn JavaScript
-#+KEYWORDS: javascript
+#+KEYWORDS: javascript,generate-function,yield,yield*
 #+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t <:t date:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
@@ -162,11 +162,9 @@ function * C (next) {
   function toTunk(obj, ctx) {
     if (isGeneratorFunction(obj)) {
       return co(obj.call(ctx))
-    }
-    if (isGenerator(obj)) {
+    } if (isGenerator(obj)) {
       return co(obj)
-    }
-    else{
+    } else {
       return obj
     }
   }

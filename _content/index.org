@@ -7,7 +7,7 @@
      + [[file:wiki/friends.org][Friends 2016-01-04]]
      + [[file:wiki/git.org][Git Cookbook 2015-12-27]]
    + articles
-     + [[file:articles/JavaScript-Cookie.org][JavaScript Cookie 2016-02-03]]
+     + [[file:articles/JavaScript-Cookie.org][JavaScript Cookie 2016-02-16]]
      + [[file:articles/OE-NK.org][OE And NK 2016-01-07]]
      + [[file:articles/Storm-Tutorial.org][［译］Storm Tutorial 2015-12-28]]
      + [[file:articles/This-Site.org][This Site 2015-12-27]]
