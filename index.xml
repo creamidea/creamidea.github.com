@@ -14,8 +14,8 @@
   <link>http://creamidea.github.io/</link>
   <description><![CDATA[]]></description>
   <language>en</language>
-  <pubDate>Mon, 07 Mar 2016 11:36:45 +0800</pubDate>
-  <lastBuildDate>Mon, 07 Mar 2016 11:36:45 +0800</lastBuildDate>
+  <pubDate>Thu, 31 Mar 2016 11:59:35 +0800</pubDate>
+  <lastBuildDate>Thu, 31 Mar 2016 11:59:35 +0800</lastBuildDate>
   <generator>Emacs 24.5 Org-mode 8.2.10</generator>
   <webMaster>creamidea@gmail.com (Junjia Ni)</webMaster>
   <image>
@@ -41,6 +41,10 @@
     </li>
     <li>articles
     <ul class="org-ul">
+      <li><a href="http://creamidea.github.io/articles/Install-Arch.html">Archlinux With Windows7 (hard disk installation media) 2016-03-31</a>
+      </li>
+      <li><a href="http://creamidea.github.io/articles/Python-Cookie.html">Python Cookie 2016-03-31</a>
+      </li>
       <li><a href="http://creamidea.github.io/articles/Zookeeper-Programming.html">［译］Programming With ZooKeeper 2016-03-07</a>
       </li>
       <li><a href="http://creamidea.github.io/articles/JavaScript-Cookie.html">JavaScript Cookie 2016-02-18</a>

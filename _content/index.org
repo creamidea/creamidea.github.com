@@ -7,6 +7,8 @@
      + [[file:wiki/friends.org][Friends 2016-01-04]]
      + [[file:wiki/git.org][Git Cookbook 2015-12-27]]
    + articles
+     + [[file:articles/Install-Arch.org][Archlinux With Windows7 (hard disk installation media) 2016-03-31]]
+     + [[file:articles/Python-Cookie.org][Python Cookie 2016-03-31]]
      + [[file:articles/Zookeeper-Programming.org][［译］Programming With ZooKeeper 2016-03-07]]
      + [[file:articles/JavaScript-Cookie.org][JavaScript Cookie 2016-02-18]]
      + [[file:articles/OE-NK.org][OE And NK 2016-01-07]]
