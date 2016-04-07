@@ -1,0 +1,43 @@
+#+TITLE: Friends
+#+DESCRIPTION: 自认为的Friends
+#+DATE: 2015-12-26
+#+KEYWORDS: friends-link,friends
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
+#+LINK_HOME: https://creamidea.github.io
+#+STARTUP: showall
+
+
+#+BEGIN_QUOTE
+宠辱不惊，看庭前花开花落。
+#+END_QUOTE
+
+* 前言
+  收集一些自己认为好的友链，自认为。如果不想出现在这里可以私信我 >_< \\
+  当然也很热烈欢迎各po主主动交换链接啦 ｖ（＾＿＾ｖ）♪ \\
+  排名不分先后
+
+* Au9ustine
+贯穿大学时期的学长，一度奉为神的存在。在整个人生道路上起到了巨大的指引作用。\\
+[[http://au9ustine.github.io/][homepage]] 
+
+* Van9ogh
+大学时期团队成员。太多的话了，今晚暂时不写。\\
+[[https://forestgump.me/][homepage]] [[https://forestgump.me/rss/][rss]]
+
+* Johnchain
+大学时期团队成员。太多的话了，今晚暂时不写。
+这货开了一个Github Page，但是感觉没有怎么好好的弄，还是一个demo的状态，有空的时候该提醒他要修修草了。
+我还是给一个链接吧。\\
+[[http://johnchain.github.io/][homepage]]
+
+* JoneWang
+大三的时候在网上认识的，我也不知道怎么认识的。疑？怎么会认识的呢？只记得帮忙买过键盘了。 >_<
+后面想起什么再过来写吧。 \\
+[[http://jone.wang/][homepage]] 
+
+* 尾声
+
+
+#+BEGIN_QUOTE
+去留无意，望天上云卷云舒。
+#+END_QUOTE

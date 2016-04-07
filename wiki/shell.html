@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Shell Cookies</title>
+<!-- 2016-04-07 Thu 16:58 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="冰糖火箭筒(Junjia Ni)" />
+<meta  name="description" content="记住一些命令"
+ />
+<meta  name="keywords" content="shell,emacs,etags" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/static/style.css"><link rel="stylesheet" type="text/css" href="/static/medium-fonts.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Shell Cookies</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. 前言</a></li>
+<li><a href="#sec-2">2. ffmpeg</a></li>
+<li><a href="#sec-3">3. ab</a></li>
+<li><a href="#sec-4">4. grep</a></li>
+<li><a href="#sec-5">5. Emacs</a>
+<ul>
+<li><a href="#sec-5-1">5.1. 插入当前时间</a></li>
+<li><a href="#sec-5-2">5.2. Org-mode</a>
+<ul>
+<li><a href="#sec-5-2-1">5.2.1. Table Sort</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-6">6. etags &amp; ctags</a></li>
+<li><a href="#sec-7">7. 尾声</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> 前言</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+一些常用的命令，包括使用Emacs的小技巧。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> ffmpeg</h2>
+<div class="outline-text-2" id="text-2">
+<div class="org-src-container">
+
+<pre class="src src-sh"># -r 指定频率
+$ ffmpeg -i xxx.mp4 -r 25 xxx.%05d.gif
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> ab</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Apache HTTP server benchmarking tool <br  />
+常用的参数
+</p>
+<pre class="example">
+-n 总请求
+-c 并发数
+-t 测试所进行的最大秒数
+-k 打开KeepAlive功能
+</pre>
+
+<p>
+结果解释
+</p>
+<pre class="example">
+Server Software:        nginx/1.4.6
+Server Hostname:        10.69.109.51
+Server Port:            80
+
+Document Path:          /login.html
+Document Length:        1935 bytes
+
+Concurrency Level:      100             # 并发数
+Time taken for tests:   0.552 seconds   # 测试时间
+Complete requests:      1000            # 完成的请求数
+Failed requests:        0               # 失败的请求数
+Total transferred:      2249000 bytes   # 总共传输的数据量
+HTML transferred:       1935000 bytes   # 请求页面大小
+Requests per second:    1810.97 [#/sec] (mean)  # 每秒处理的请求数（事务数） 平均值
+Time per request:       55.219 [ms] (mean)      # 每次并发耗时 平均值
+Time per request:       0.552 [ms] (mean, across all concurrent requests) # 每次请求耗时 平均值 注：每次请求耗时 * 并发数 = 每次并发耗时
+Transfer rate:          3977.41 [Kbytes/sec] received # 网络中传输速率
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        5   25  10.5     23      56
+Processing:    10   28   8.9     26      58
+Waiting:       10   27   8.8     26      58
+Total:         28   53  10.9     51      82
+
+Percentage of the requests served within a certain time (ms)
+  50%     51
+  66%     55
+  75%     58
+  80%     64
+  90%     70
+  95%     73
+  98%     75
+  99%     80
+ 100%     82 (longest request)
+</pre>
+<p>
+Reference:
+</p>
+<ul class="org-ul">
+<li><a href="http://www.cnblogs.com/netflu/archive/2010/01/07/1641101.html">http://www.cnblogs.com/netflu/archive/2010/01/07/1641101.html</a>
+</li>
+<li><a href="http://www.nginx.cn/110.html">http://www.nginx.cn/110.html</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> grep</h2>
+<div class="outline-text-2" id="text-4">
+<div class="org-src-container">
+
+<pre class="src src-sh">grep -rnw '/path/to/somewhere/' -e "pattern"
+</pre>
+</div>
+<p>
+Reference: <a href="http://stackoverflow.com/a/16957078/1925954">http://stackoverflow.com/a/16957078/1925954</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Emacs</h2>
+<div class="outline-text-2" id="text-5">
+</div><div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> 插入当前时间</h3>
+<div class="outline-text-3" id="text-5-1">
+<div class="org-src-container">
+
+<pre class="src src-sh">C-u M-! date
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-5-2" class="outline-3">
+<h3 id="sec-5-2"><span class="section-number-3">5.2</span> Org-mode</h3>
+<div class="outline-text-3" id="text-5-2">
+</div><div id="outline-container-sec-5-2-1" class="outline-4">
+<h4 id="sec-5-2-1"><span class="section-number-4">5.2.1</span> Table Sort</h4>
+<div class="outline-text-4" id="text-5-2-1">
+<p>
+<code>C-c ^</code>
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> etags &amp; ctags</h2>
+<div class="outline-text-2" id="text-6">
+<div class="org-src-container">
+
+<pre class="src src-sh">cd /path/to/my/project
+ctags -e -R *.cpp *.hpp *.h
+
+cd /path/to/my/project
+find . | grep ".*\.\(hh\|hxx\|cc\)" | xargs etags -f TAGS
+
+cd /path/to/my/project
+find . -type f -iname "*.[ch]" | etags -
+</pre>
+</div>
+<p>
+常用热键
+</p>
+<pre class="example">
+`M-.’ (‘find-tag’) – find a tag, that is, use the Tags file to look up a definition. If there are multiple tags in the project with the same name
+`C-u M-.’ to go to the next match.
+‘M-x find-tag-other-window’ – selects the buffer containing the tag’s definition in another window, and move point there.
+‘M-*’ (‘pop-tag-mark’) – jump back
+‘M-x tags-search’ – regexp-search through the source files indexed by a tags file (a bit like ‘grep’)
+‘M-x tags-query-replace’ – query-replace through the source files indexed by a tags file
+`M-,’ (‘tags-loop-continue’) – resume  ‘tags-search’ or ‘tags-query-replace’ starting at point in a source file
+‘M-x tags-apropos’ – list all tags in a tags file that match a regexp
+‘M-x list-tags’ – list all tags defined in a source file
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> 尾声</h2>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
+<p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
+<p class="date">2015-12-27</p>
+<p class="export-date">2016-04-07 Thu 16:58</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="last-modification-time">2016-04-06 Wed 15:17</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+</div>
+</body>
+</html>

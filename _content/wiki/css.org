@@ -1,0 +1,89 @@
+#+TITLE: CSS Cookie
+#+DATE: 2015-12-27
+#+DESCRIPTION: 一些关于css的小知识
+#+KEYWORDS: css,cookie,BFC
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
+#+LINK_HOME: https://creamidea.github.io
+#+STARTUP: showall
+
+
+* 前言
+  收集一些css的小内容
+
+* Jump links and viewport positioning
+** A
+#+BEGIN_SRC css
+  default
+#+END_SRC
+** B
+#+BEGIN_SRC css
+#method-B:before {
+    display: block;
+    content: "";
+    height: 50px;
+    margin: -50px 0 0;
+}
+#+END_SRC
+** C
+#+BEGIN_SRC css
+#method-C {
+    padding-top: 50px;
+    margin-top: -50px;
+    \-webkit-background-clip: content-box;
+    background-clip: content-box;
+}
+#+END_SRC
+** D
+#+BEGIN_SRC css
+#method-D {
+    border-top: 50px solid transparent;
+    margin-top: -50px;
+    \-webkit-background-clip: padding-box;
+    \-moz-background-clip: padding;
+    background-clip: padding-box;
+}
+#+END_SRC
+** E
+#+BEGIN_SRC css
+  #method-E {
+      position: relative;
+      padding: 15px;
+      border-top: 52px solid transparent;
+      margin-top: -50px;
+      \-webkit-background-clip: padding-box;
+      \-moz-background-clip: padding;
+      background-clip: padding-box;
+  }
+
+  #method-E:before {
+      content: "";
+      position: absolute;
+      top: -25px;
+      left: 0;
+      right: 0;
+      border-top: 1px solid #ccc;
+  }
+#+END_SRC
+Reference:
++ http://nicolasgallagher.com/jump-links-and-viewport-positioning/demo/
++ https://css-tricks.com/hash-tag-links-padding/
+
+* 动画效果
+  在做一些动画效果，需要隐藏一些元素的时候，如果直接使用 =display: none= 浏览器就不理我了。于是需要下面这些折衷的办法。
+  #+BEGIN_SRC css
+    div > ul {
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s, opacity 0.5s linear;
+    }
+    div:hover > ul {
+      visibility: visible;
+      opacity: 1;
+      transition-delay: 0s; /*在出现的时候不延迟*/
+    }
+  #+END_SRC
+  Reference:
+  + [[http://stackoverflow.com/questions/3331353/transitions-on-the-display-property][Transitions on the display: property]]
+  + [[http://www.greywyvern.com/?post%3D337][CSS3 transitions using visibility and delay]]
+  + [[http://www.css3.info/preview/css3-transitions/][How Transitions Work]]
+* 尾声

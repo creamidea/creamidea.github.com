@@ -1,0 +1,747 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>C And C++ Cookie</title>
+<!-- 2016-04-07 Thu 16:58 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="冰糖火箭筒(Junjia Ni)" />
+<meta  name="description" content="学习C/C++基础笔记"
+ />
+<meta  name="keywords" content="c,CPlusPlus,cpp,learning" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/static/style.css"><link rel="stylesheet" type="text/css" href="/static/medium-fonts.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">C And C++ Cookie</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. 前言</a></li>
+<li><a href="#sec-2">2. 模版</a>
+<ul>
+<li><a href="#sec-2-1">2.1. 函数模版</a></li>
+<li><a href="#sec-2-2">2.2. 类模版</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. 重载操作符</a></li>
+<li><a href="#sec-4">4. 副本构造器(copy construct)</a></li>
+<li><a href="#sec-5">5. 类型高级转化(Advanced Class Type-casting)</a>
+<ul>
+<li><a href="#sec-5-1">5.1. reinterpert_cast</a></li>
+<li><a href="#sec-5-2">5.2. static_cast</a></li>
+<li><a href="#sec-5-3">5.3. dynamtic_cast</a></li>
+<li><a href="#sec-5-4">5.4. const_cast</a></li>
+</ul>
+</li>
+<li><a href="#sec-6">6. 避免内存泄漏</a></li>
+<li><a href="#sec-7">7. 库</a>
+<ul>
+<li><a href="#sec-7-1">7.1. 动态链接库</a>
+<ul>
+<li><a href="#sec-7-1-1">7.1.1. 编译</a></li>
+<li><a href="#sec-7-1-2">7.1.2. 链接</a></li>
+</ul>
+</li>
+<li><a href="#sec-7-2">7.2. 静态库</a>
+<ul>
+<li><a href="#sec-7-2-1">7.2.1. 编译</a></li>
+<li><a href="#sec-7-2-2">7.2.2. 归档</a></li>
+<li><a href="#sec-7-2-3">7.2.3. 链接</a></li>
+</ul>
+</li>
+<li><a href="#sec-7-3">7.3. ldd</a></li>
+</ul>
+</li>
+<li><a href="#sec-8">8. 第一课</a></li>
+<li><a href="#sec-9">9. 第二课</a>
+<ul>
+<li><a href="#sec-9-1">9.1. 内联函数和重载函数inline</a></li>
+<li><a href="#sec-9-2">9.2. 函数重载</a></li>
+<li><a href="#sec-9-3">9.3. 多态</a>
+<ul>
+<li><a href="#sec-9-3-1">9.3.1. 静态多态：</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-10">10. 第三课</a>
+<ul>
+<li><a href="#sec-10-1">10.1. 动态内存分配</a>
+<ul>
+<li><a href="#sec-10-1-1">10.1.1. 堆空间：</a></li>
+<li><a href="#sec-10-1-2">10.1.2. &amp;: 取地址/引用</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-11">11. 第四课</a></li>
+<li><a href="#sec-12">12. 第五课</a></li>
+<li><a href="#sec-13">13. 写在最后</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> 前言</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+好的，匆忙地学习完ARM之后，立即转战C++学习。真是有意思的安排啊。おもしろい。 <br  />
+那么我们就开始记录吧。原本这个是写于 <b>2013-04-22</b> 的笔记。
+由于最近想看一下 <b>node</b> 的源码，所以，这个笔记又被翻出来啦。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> 模版</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> 函数模版</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+<b>template &lt;typename T&gt;</b>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++">template &lt;class T&gt;
+void foo(T param)
+{
+// do something
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> 类模版</h3>
+<div class="outline-text-3" id="text-2-2">
+<div class="org-src-container">
+
+<pre class="src src-c++">template &lt;class T&gt;
+class MyClass
+{
+    MyClass();
+    void swap(T &amp;a, T &amp;b);
+}
+MyClass&lt;T&gt;::MyClass()
+{
+    // 初始化操作。
+}
+template &lt;&gt;
+type ClassName&lt;class T&gt;::FunctionName (parameters)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> 重载操作符</h2>
+<div class="outline-text-2" id="text-3">
+<div class="org-src-container">
+
+<pre class="src src-c++">type operator sign (parameters);
+</pre>
+</div>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Expression</th>
+<th scope="col" class="left">Operator (@)</th>
+<th scope="col" class="left">Function member</th>
+<th scope="col" class="left">Global function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">@a</td>
+<td class="left">+ - * &amp; ! ~ ++ --</td>
+<td class="left">A::operator@( )</td>
+<td class="left">operator@(A)</td>
+</tr>
+
+<tr>
+<td class="left">a@</td>
+<td class="left">++ --</td>
+<td class="left">A::operator@(int)</td>
+<td class="left">operator@(A, int)</td>
+</tr>
+
+<tr>
+<td class="left">a@b</td>
+<td class="left">+ - * / % ^ &amp; &lt; &gt; <code>= !</code> &lt;= &gt;= <a id="" name=""></a> &amp;&amp;</td>
+<td class="left">A::operator@(B)</td>
+<td class="left">operator@(A, B)</td>
+</tr>
+
+<tr>
+<td class="left">a@b</td>
+<td class="left">= += -= *= /= %= ^= &amp;=  = <a id="" name=""></a>= [ ]</td>
+<td class="left">A::operator@(B)</td>
+<td class="left">-</td>
+</tr>
+
+<tr>
+<td class="left">a(b, c&#x2026;)</td>
+<td class="left">( )</td>
+<td class="left">A::operator()(B, C&#x2026;)</td>
+<td class="left">-</td>
+</tr>
+
+<tr>
+<td class="left">a-&gt;b</td>
+<td class="left">-&gt;</td>
+<td class="left">A::operator-&gt;()</td>
+<td class="left">-</td>
+</tr>
+</tbody>
+</table>
+<p>
+Reference: <a href="http://www.prglab.com/cms/pages/c-tutorial/oo-programming/overloading-operators.php">http://www.prglab.com/cms/pages/c-tutorial/oo-programming/overloading-operators.php</a>
+</p>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> 副本构造器(copy construct)</h2>
+<div class="outline-text-2" id="text-4">
+<div class="org-src-container">
+
+<pre class="src src-c++">ClassName(const ClassName &amp;cn);
+</pre>
+</div>
+<p>
+当重载操作符 <b>=</b> ，并不能深度拷贝的时候，需要用一个副本构造器来避免编译器在找不到副本构造器时，自己创建一个“逐位复制”的副本构造器。
+</p>
+
+<p>
+Reference: <a href="http://www.cnblogs.com/li-peng/p/3776384.html">http://www.cnblogs.com/li-peng/p/3776384.html</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> 类型高级转化(Advanced Class Type-casting)</h2>
+<div class="outline-text-2" id="text-5">
+</div><div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> reinterpert_cast</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+reinterpret_cast 可以将一个指针转换为任意其它类型的指针。它也可以用来将一个指针转换为一个整型，或反之亦然。 <br  />
+这个操作符可以在互不相关的类之间进行指针转换，操作的结果是简单的将一个指针的二进制数据(binary copy)复制到另一个指针。对指针指向的内容不做任何检查或转换。
+</p>
+</div>
+</div>
+<div id="outline-container-sec-5-2" class="outline-3">
+<h3 id="sec-5-2"><span class="section-number-3">5.2</span> static_cast</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+static_cast 可以执行所有能够隐含执行的类型转换，以及它们的反向操作（即使这种方向操作是不允许隐含执行的）。<br  />
+用于类的指针，也就是说，它允许将一个引申类的指针转换为其基类类型（这是可以被隐含执行的有效转换），同时也允许进行相反的转换：将一个基类转换为一个引申类类型。
+</p>
+</div>
+</div>
+<div id="outline-container-sec-5-3" class="outline-3">
+<h3 id="sec-5-3"><span class="section-number-3">5.3</span> dynamtic_cast</h3>
+<div class="outline-text-3" id="text-5-3">
+<p>
+dynamic_cast 完全被用来进行指针的操作。它可以用来进行任何可以隐含进行的转换操作以及它们被用于多态类情况下的方向操作。
+然而与static_cast不同的是， dynamic_cast 会检查后一种情况的操作是否合法，也就是说它会检查类型转换操作是否会返回一个被要求类型的有效的完整的对象。
+</p>
+</div>
+</div>
+<div id="outline-container-sec-5-4" class="outline-3">
+<h3 id="sec-5-4"><span class="section-number-3">5.4</span> const_cast</h3>
+<div class="outline-text-3" id="text-5-4">
+<p>
+这种类型转换对常量const 进行设置或取消操作
+</p>
+
+<img src="http://blog.fishc.com/wp-content/uploads/2012/08/%E5%9B%BE%E7%89%871.gif" alt="引用fishc图，侵删" title="引用fishc图，侵删"/>
+
+<p>
+Reference:
+</p>
+<ol class="org-ol">
+<li><a href="http://blog.fishc.com/479.html">http://blog.fishc.com/479.html</a>
+</li>
+<li><a href="http://www.prglab.com/cms/pages/c-tutorial/advanced-concepts/class-type-casting.php">http://www.prglab.com/cms/pages/c-tutorial/advanced-concepts/class-type-casting.php</a>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> 避免内存泄漏</h2>
+<div class="outline-text-2" id="text-6">
+<ol class="org-ol">
+<li>在 <code>return</code> 前 <code>delete</code>
+</li>
+<li>把 <code>new</code> 出来的地址给调用者
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> 库</h2>
+<div class="outline-text-2" id="text-7">
+</div><div id="outline-container-sec-7-1" class="outline-3">
+<h3 id="sec-7-1"><span class="section-number-3">7.1</span> 动态链接库</h3>
+<div class="outline-text-3" id="text-7-1">
+</div><div id="outline-container-sec-7-1-1" class="outline-4">
+<h4 id="sec-7-1-1"><span class="section-number-4">7.1.1</span> 编译</h4>
+<div class="outline-text-4" id="text-7-1-1">
+<p>
+在使用GCC编译程序时，只需加上-shared选项即可，这样生成的执行程序即为动态链接库。例如
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">gcc hello.c -fPIC -o libhello.so
+</pre>
+</div>
+<p>
+其中 <code>-fPIC</code> 选项的作用是：表示编译为位置独立的代码，不用此选项的话编译后的代码是位置相关的，
+所以动态载入时是通过代码拷贝的方式来满足不同的调用，而不能达到真正的代码段共享的目的。
+</p>
+</div>
+</div>
+<div id="outline-container-sec-7-1-2" class="outline-4">
+<h4 id="sec-7-1-2"><span class="section-number-4">7.1.2</span> 链接</h4>
+<div class="outline-text-4" id="text-7-1-2">
+<div class="org-src-container">
+
+<pre class="src src-sh">gcc main.c -L. -lhello -o main
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7-2" class="outline-3">
+<h3 id="sec-7-2"><span class="section-number-3">7.2</span> 静态库</h3>
+<div class="outline-text-3" id="text-7-2">
+</div><div id="outline-container-sec-7-2-1" class="outline-4">
+<h4 id="sec-7-2-1"><span class="section-number-4">7.2.1</span> 编译</h4>
+<div class="outline-text-4" id="text-7-2-1">
+<div class="org-src-container">
+
+<pre class="src src-sh">gcc hello.c -o hello.o  #这里没有使用-shared
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-7-2-2" class="outline-4">
+<h4 id="sec-7-2-2"><span class="section-number-4">7.2.2</span> 归档</h4>
+<div class="outline-text-4" id="text-7-2-2">
+<div class="org-src-container">
+
+<pre class="src src-sh">ar -r libhello.a hello.o  #这里的ar相当于tar的作用，将多个目标打包。
+</pre>
+</div>
+<p>
+<b>ar &#x2013; create and maintain library archives</b>
+</p>
+
+<p>
+程序 <code>ar</code> 配合参数 <code>-r</code> 创建一个新库libhello.a，并将命令行中列出的文件打包入其中。这种方法，如果libhello.a已经存在，将会覆盖现在文件，否则将新创建。
+</p>
+</div>
+</div>
+<div id="outline-container-sec-7-2-3" class="outline-4">
+<h4 id="sec-7-2-3"><span class="section-number-4">7.2.3</span> 链接</h4>
+<div class="outline-text-4" id="text-7-2-3">
+<div class="org-src-container">
+
+<pre class="src src-sh">gcc main.c -lhello -L. -static -o main
+</pre>
+</div>
+<p>
+或者
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">gcc main.c libhello.a -L. -o main
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-7-3" class="outline-3">
+<h3 id="sec-7-3"><span class="section-number-3">7.3</span> ldd</h3>
+<div class="outline-text-3" id="text-7-3">
+<p>
+<b>ldd - print shared library dependencies</b> 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">$ ldd a.out
+linux-vdso.so.1 =&gt;  (0x00007fff15100000)
+/usr/local/snoopy/lib/snoopy.so (0x00007f436e245000)
+/opt/aegis/$LIB/aegis_monitor.so =&gt; /opt/aegis/lib64/aegis_monitor.so (0x00007f436e042000)
+libc.so.6 =&gt; /lib64/libc.so.6 (0x00007f436dca0000)
+libdl.so.2 =&gt; /lib64/libdl.so.2 (0x00007f436da9c000)
+/lib64/ld-linux-x86-64.so.2 (0x000000303d200000)
+</pre>
+</div>
+<p>
+Reference:
+</p>
+<ul class="org-ul">
+<li><a href="http://blog.csdn.net/a600423444/article/details/7206015">http://blog.csdn.net/a600423444/article/details/7206015</a>
+</li>
+<li><a href="http://my.oschina.net/u/1413984/blog/199027?fromerr=sb8PM08I">http://my.oschina.net/u/1413984/blog/199027?fromerr=sb8PM08I</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> 第一课</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-22 Mon&gt;</span></span>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++">#include &lt;iostream&gt;
+
+using namespace std;
+
+int main(int argc, char *argv[])
+{
+    cout &lt;&lt; "hi, icecream" &lt;&lt; endl;
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> 第二课</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-23 Tue&gt;</span></span>
+</p>
+</div>
+
+<div id="outline-container-sec-9-1" class="outline-3">
+<h3 id="sec-9-1"><span class="section-number-3">9.1</span> 内联函数和重载函数inline</h3>
+<div class="outline-text-3" id="text-9-1">
+<p>
+C中宏定义注意二义性：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c">#define max(a, b) (a)&gt;(b)?(a):(b)
+</pre>
+</div>
+
+<p>
+<code>inline</code>
+类的成员函数，提过效率。
+避免C中宏定义的二义性。
+使用1～5行的小程序。不要含有复杂的结构控制语句以及递归。
+<b>不能使用函数指针</b>
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-9-2" class="outline-3">
+<h3 id="sec-9-2"><span class="section-number-3">9.2</span> 函数重载</h3>
+<div class="outline-text-3" id="text-9-2">
+<ol class="org-ol">
+<li>函数重载与返回值无关。
+</li>
+
+<li>有关：类型，顺序，个数
+</li>
+
+<li>默认参数:
+在参数列表中的某些参数有默认值时，在调用的时候会报错。代码如下：
+<div class="org-src-container">
+
+<pre class="src src-c">int mul(int a, int b)
+{
+     return 1;
+}
+
+int mul(int a, int b, int c = 0, int d = 10)
+{
+     return 2;
+}
+/* 下面的代码设置默认值是不被允许的,原因是参数入栈时，没有赋值。 */
+int mul(int a=10, int b=10, int c = 0, int d)
+{
+     return 2;
+}
+</pre>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-sec-9-3" class="outline-3">
+<h3 id="sec-9-3"><span class="section-number-3">9.3</span> 多态</h3>
+<div class="outline-text-3" id="text-9-3">
+</div><div id="outline-container-sec-9-3-1" class="outline-4">
+<h4 id="sec-9-3-1"><span class="section-number-4">9.3.1</span> 静态多态：</h4>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> 第三课</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-25 Thu&gt;</span></span>
+</p>
+</div>
+
+<div id="outline-container-sec-10-1" class="outline-3">
+<h3 id="sec-10-1"><span class="section-number-3">10.1</span> 动态内存分配</h3>
+<div class="outline-text-3" id="text-10-1">
+</div><div id="outline-container-sec-10-1-1" class="outline-4">
+<h4 id="sec-10-1-1"><span class="section-number-4">10.1.1</span> 堆空间：</h4>
+<div class="outline-text-4" id="text-10-1-1">
+<p>
+C:
+<code>malloc</code> / <code>calloc</code> / <code>realloc</code> | <code>free</code>
+</p>
+
+<p>
+C++:
+<code>new</code> | <code>delete</code> (两个操作符)
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-C">int * p = new int;              /* 在堆上面分配空间sizeof(int) */
+int * p = new int();            /* 初始化为0（加上()） */
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-10-1-2" class="outline-4">
+<h4 id="sec-10-1-2"><span class="section-number-4">10.1.2</span> &amp;: 取地址/引用</h4>
+<div class="outline-text-4" id="text-10-1-2">
+<div class="org-src-container">
+
+<pre class="src src-c">int *p = &amp;num;                  /* 取地址符 */
+int &amp;p1 = num;                  /* 引用 */
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-11" class="outline-2">
+<h2 id="sec-11"><span class="section-number-2">11</span> 第四课</h2>
+<div class="outline-text-2" id="text-11">
+<ol class="org-ol">
+<li>类的拷贝：
+浅拷贝 <br  />
+     深拷贝
+</li>
+
+<li>友元类和友元方法
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-sec-12" class="outline-2">
+<h2 id="sec-12"><span class="section-number-2">12</span> 第五课</h2>
+<div class="outline-text-2" id="text-12">
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-05-16 Thu&gt;</span></span>
+</p>
+
+<ol class="org-ol">
+<li>虚基类
+class A: virtual public b
+</li>
+</ol>
+
+<p>
+不产生二义性
+画一个图真难啊
+</p>
+<pre class="example">
+#+BEGIN_DITAA asciiExample.png -o -r -S
++--------------+
+|              |
+| Hello World! |
+|              |
++--------------+
+#+END_DITAA
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-13" class="outline-2">
+<h2 id="sec-13"><span class="section-number-2">13</span> 写在最后</h2>
+<div class="outline-text-2" id="text-13">
+<p>
+最后居然还是草草收场，一个没有任何实现的CuteCube!!
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
+<p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
+<p class="date">2013-04-22</p>
+<p class="export-date">2016-04-07 Thu 16:58</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="last-modification-time">2016-04-06 Wed 15:17</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+</div>
+</body>
+</html>

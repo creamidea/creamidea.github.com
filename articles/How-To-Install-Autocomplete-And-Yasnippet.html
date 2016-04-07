@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>How To Install Autocomplete and Yanisppet</title>
+<!-- 2016-04-07 Thu 16:58 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="冰糖火箭筒(Junjia Ni)" />
+<meta  name="description" content="install them into emacs in linux and windows"
+ />
+<meta  name="keywords" content="orgmode,emacs,autocomplete,yanisppet" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/static/style.css"><link rel="stylesheet" type="text/css" href="/static/medium-fonts.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">How To Install Autocomplete and Yanisppet</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. 前言</a></li>
+<li><a href="#sec-2">2. Auto Complete</a>
+<ul>
+<li><a href="#sec-2-1">2.1. Download Auto Complete</a></li>
+<li><a href="#sec-2-2">2.2. Install Auto Complete</a>
+<ul>
+<li><a href="#sec-2-2-1">2.2.1. For Linux</a></li>
+<li><a href="#sec-2-2-2">2.2.2. For Windows</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-3">2.3. Screenshot</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Yanisppet</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Download Yanisppet</a></li>
+<li><a href="#sec-3-2">3.2. Install Yanisppet</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. 尾声</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> 前言</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+写这篇blog主要是测试一些网络服务，如图片服务和音乐链接服务。
+当然写这个还是因为我敬爱的小杰同学的要求。作为刚刚入门的New Emacser，我感觉是时候给他一些好玩的插件了。
+当然我这些步骤google一下全部会出来，但是作为要求还是写这篇blog吧。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Auto Complete</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+过多的介绍我就不在这里陈述了，具体的可以前往
+Auto Complete官网（<a href="http://cx4a.org/software/auto-complete/">http://cx4a.org/software/auto-complete/</a>) 和 
+Auto Complete所在的EmacsWiki(<a href="http://emacswiki.org/emacs/AutoComplete">http://emacswiki.org/emacs/AutoComplete</a>）。 
+这里只是简单的介绍如何安装。
+</p>
+</div>
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Download Auto Complete</h3>
+<div class="outline-text-3" id="text-2-1">
+<ol class="org-ol">
+<li>Lasest Stable(v1.3.1) <a href="http://cx4a.org/pub/auto-complete/auto-complete-1.3.1.tar.bz2">tar.bz2</a> <a href="http://cx4a.org/pub/auto-complete/auto-complete-1.3.1.zip">zip</a>
+</li>
+<li>Git repositories <a href="http://cx4a.org/repo/auto-complete.git/">cx4a</a>  <a href="https://github.com/m2ym/auto-complete">GitHub-mirror</a>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Install Auto Complete</h3>
+<div class="outline-text-3" id="text-2-2">
+</div><div id="outline-container-sec-2-2-1" class="outline-4">
+<h4 id="sec-2-2-1"><span class="section-number-4">2.2.1</span> For Linux</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<p>
+将下载的文件移动到.emacs.d并将文件解压：(以tar为例)
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">$ mv auto-complete-1.3.1.tar.bz2 ~/.emacs.d
+$ cd ~/.emacs.d
+$ tar -jxvf auto-complete-1.3.1.tar.bz2
+</pre>
+</div>
+<p>
+之后make install安装
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">$ make install
+# or with directory specified
+$ make install DIR=$HOME/.emacs.d/
+</pre>
+</div>
+<p>
+然后将这段代码贴到.emacs中：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-to-list 'load-path "~/.emacs.d")    ; This may not be appeared if you have already added.
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(require 'auto-complete-config)
+(ac-config-default)
+</pre>
+</div>
+<p>
+至此重启Emacs应该就可以正常运行了。
+如果还有问题可以去 <a href="http://cx4a.org/software/auto-complete/manual.html#Installation">这里</a> 查询，也可以写电子邮件给我，我们一起讨论。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2-2" class="outline-4">
+<h4 id="sec-2-2-2"><span class="section-number-4">2.2.2</span> For Windows</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<p>
+首先第一步也是解压，在windows上我们就不用命令了，直接使用你最爱的解压软件解压吧。
+然后使用组合键 <code>win+R</code> 输入 <code>cmd</code> ，在弹出的对话框中输入以下命令：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">&gt; /path/to/emacs.exe --batch -l /path/to/autocomplete/etc/install.el
+</pre>
+</div>
+<p>
+然后根据提示一步一步往下操作。特别注意选择安装路径
+</p>
+<pre class="example">
+Specify path to install: c:\applications\emacs-24.2\lisp(自行选择)
+...
+</pre>
+<p>
+之后如果提示安装成功，那么就可以将他提示需要粘贴进.emacs中的代码粘贴进去即可。第一次安装emacs插件的话，可能会遇到各种问题，这时你可以继续google，也可以和我交流。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Screenshot</h3>
+<div class="outline-text-3" id="text-2-3">
+
+<div class="figure">
+<p><img src="http://farm9.staticflickr.com/8112/8622523251_32b176270a.jpg" alt="Emacs-autocomplete in windows7" title="Emacs-autocomplete in windows7 by aprilgalaxy, on Flickr" align="center" />
+</p>
+<p><span class="figure-number">Figure 1:</span> Auto Complete In Windows 7</p>
+</div>
+
+
+<div class="figure">
+<p><img src="http://farm9.staticflickr.com/8379/8624108132_89fe11ac0c.jpg" alt="Autocomplete in ubuntu" title="Autocomplete in ubuntu by aprilgalaxy, on Flickr" align="center" />
+</p>
+<p><span class="figure-number">Figure 2:</span> Auto Complete In Ubuntu 12.04</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Yanisppet</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+同样的，过多的介绍我就不在这里陈述了，在Yanisppet项目官网有详细介绍：
+</p>
+<ol class="org-ol">
+<li><a href="http://emacswiki.org/emacs/Yasnippet">EmacsWiki:Yasnippet</a>
+</li>
+<li><a href="http://github.com/capitaomorte/yasnippet">Github:Yasnippet</a>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Download Yanisppet</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+
+<pre class="src src-sh">$ git clone https://github.com/capitaomorte/yasnippet.git
+</pre>
+</div>
+<p>
+如果没有安装git的话，那么直接单击 <a href="https://nodeload.github.com/capitaomorte/yasnippet/zip/master">这里(github上master分支zip包)</a> 进行下载。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Install Yanisppet</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+安装说白了就是将文件拷贝到相应的位置（当然有些还需要经过编译）
+下载完之后，解压文件并拷贝进.emacs.d,然后将下面代码复制进.emacs中：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-to-list 'load-path "~/.emacs.d/path/to/yasnippet")
+(require 'yasnippet) ;; not yasnippet-bundle
+(yas--initialize)
+(yas/load-directory "~/.emacs.d/path/to/yasnippet/snippets")
+</pre>
+</div>
+<p>
+这些步骤在windows和linux都是使用的。所以我在这里只写一份。
+</p>
+
+<p>
+如果还有问题你可以继续google或者看官方文档或者写电子邮件给我，我将尽快回复。
+</p>
+
+<p>
+祝君使用愉快。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> 尾声</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+这个不过是一个简单的安装介绍而已，具体的使用则是需要看文档之后才能了解，我告诉你的也只能是简单的一些而已。
+如果你有什么问题，当然可以随时联系我，只要写电子邮件，我将尽快回复。没有问题的话也可以写邮件，然后我们就成为朋友啦。
+</p>
+
+<p>
+最后附上献给小杰的一首歌：「あの日見た花の名前を僕達はまだ知らない」ED(顺便测试一下)
+</p>
+
+<embed src="http://www.xiami.com/widget/10429952_1770159571/singlePlayer.swf" type="application/x-shockwave-flash" width="257" height="33" wmode="transparent"></embed>
+
+<p>
+写到这里终于结束了。在ubuntu上使用ibus写中文真是具有挑战性啊。尤其是在Emacs中。(的和到啊)
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
+<p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
+<p class="date">2013-04-06</p>
+<p class="export-date">2016-04-07 Thu 16:58</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="last-modification-time">2016-04-06 Wed 15:17</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+</div>
+</body>
+</html>

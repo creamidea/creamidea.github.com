@@ -1,0 +1,66 @@
+#+TITLE:Learning Greek
+#+AUTHOR:ICECREAM(氷菓)
+#+EMAIL:creamidea(AT)gmail.com
+#+DESCRIPTION:ICECREAM(氷菓)
+#+KEYWORDS:language greek
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t
+#+LINK_HOME: https://creamidea.github.io
+#+STYLE:<link rel="stylesheet" type="text/css" href="../css/style.css">
+#+INFOJS_OPT: view: showall toc: nil
+
+#+BEGIN_HTML
+---
+layout: doc
+title: Learning Greek
+subtitle: 学习希腊语的笔记 
+categories: note
+tags: language greek
+---
+#+END_HTML
+
+* 前言
+这是一篇学习希腊文字的学习笔记，伴随着学习天文知识的进程而进行着。不定期更新。
+这个让我想起来学习日文的那个烂摊子啊。不过终于跟着新日标将上下两层看完，接下来就是复习吧。
+
+不过现在学习希腊文主要是服务学习天文知识的。
+
+嗯，就是这个样子了。
+
+然后，最新开始的就是装上Greek输入法啦。Windows用户可以使用系统自带的或者下载Google的输入法工具集。
+
+然后就是等待我开始填坑啦。
+
+刚刚搜索了一下学习Greek的网站，现在记录一下：
+1. http://www.xanthi.ilsp.gr/filog/
+2. http://www.greece.org/gr-lessons/gr-english/
+3. http://a2z.fhl.net/bible/greek/greek.html
+4. http://www.tukkk.com/greek/
+
+等待我的填坑吧……
+
+* 希腊文字:
+  α β γ δ ε ζ η θ ι κ λ μ ν ξ ο π ρ σ τ υ φ χ ψ ω
+  暂时先这个样子吧，现在还不会，只是依葫芦画瓢而已。大家可以参考维基百科看看。
+  http://zh.wikipedia.org/wiki/%E5%B8%8C%E8%85%8A%E5%AD%97%E6%AF%8D
+** 如何在org-mode中输入希腊字母？
+   #+BEGIN_EXAMPLE
+     \alpha
+     \beta
+     \gamma
+     ...
+     (\拉丁语)
+   #+END_EXAMPLE
+   
+   Reference:
+   1. http://ergoemacs.org/emacs/emacs_n_unicode.html
+
+** 在windows中输入希腊文
+   1. 使用ms自带的希腊文输入法
+   2. 去 [[http://www.google.com/inputtools/windows/][这里]] 下载 Greek
+
+** How to type in Greek on a computer: Windwos and Mac
+   http://www.cambridgescp.com/downloads/typegreek.pdf
+** Reference:
+   1. 已故新約神學博士Dr.Degner，一口氣唸完全部24個字母。
+      http://a2z.fhl.net/bible/greek/Gclass1.html
+   2. http://zh.wikipedia.org/wiki/%E5%B8%8C%E8%85%8A%E5%AD%97%E6%AF%8D

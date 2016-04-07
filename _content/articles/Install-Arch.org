@@ -1,0 +1,208 @@
+#+TITLE: Archlinux With Windows7 (hard disk installation media)
+#+AUTHOR: 冰糖火箭筒(Junjia Ni)
+#+EMAIL: creamidea(AT)gmail.com
+#+DATE: 2016-03-22
+#+CATEGORY: article
+#+DESCRIPTION: Install Arch
+#+KEYWORDS: linux,arch,archlinux,install,gtk,gnome-terminal,wifi-menu,boot,grub4dos
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t <:t date:t timestamp:t
+#+LINK_HOME: https://creamidea.github.io
+#+STARTUP: showall
+
+
+* 前言
+最近要离职了(2016/04/05正式离职)，公司将收回配置的 *Macbook Air* 。
+
+于是，我无聊得开始安装起 *Linux* ，选择了好久（选择综合恐惧症），最后选择了 *Arch Linux* 。
+找了好久的 *Arch Wiki* 都没有找到通过硬盘来安装的方式。于是，我决定自己试试看。
+还好，网上有许多的资料可以参考。我结合自己实际操作和资料整理如下：
+
+* Boot
+安装操作系统，第一步就是要明白引导。这个是起整个操作系统的关键，也是起安装向导的关键。
+我是在计算机安装window7的基础来做的。
+
+主要需要以下一些工具：
++ Grub4DOS [[http://download.gna.org/grub4dos/][下载地址(gna.org)]]
++ Archlinux ISO [[https://www.archlinux.org/download/][下载地址(Offical)]]
++ FCIV [[https://www.microsoft.com/en-us/download/details.aspx?id%3D11533][下载地址(微软文件校验工具)]]
+
+** Check ISO
+首先解压下载下来的微软文件校验工具。解压完成之后校对下载下来的操作系统是否正常。
+#+BEGIN_SRC sh
+> fciv archlinux-2016.03.01-dual.iso
+#+END_SRC
+这个需要花费一定时间，所以请耐心等待，出来的结果请与 [[https://www.archlinux.org/download/][这个页面]] 的MD5值进行校验。
+
+一切检查完毕，可以开始下面的流程了。
+
+** Install Boot
+解压 *Grub4DOS* ，提取 *grldr* 、 *grldr.mbr* 、 *menu.lst* 这3个文件到 *C盘* 。
+然后我们以 *管理员* 的身份运行 ~cmd~ 。 依次输入以下命令（当然你也可以做成bat可执行脚本文件提高效率）:
+
+#+BEGIN_SRC sh
+  > bcdedit /export "D:\BCD-Backup" # 将BCD备份到“D:\BCD-Backup”目录
+  # bcdedit /import "D:\BCD-Backup" # 恢复之前的BCD备份
+
+  > bcdedit /create /d "Grub4DOS" /application BOOTSECTOR
+  # 执行完这步会返回一个 {ID}
+  > bcdedit /set {ID} device partition=c:
+  > bcdedit /set {ID} path \grldr.mbr
+  > bcdedit /displayorder {ID} /addlast
+#+END_SRC
+
+** Modify Menu.lst
+编辑 *menu.lst* 文件的内容：
+#+BEGIN_SRC text
+  title Archlinux Installer
+  root (hd0,0)
+  kernel /vmlinuz archisolabel=archlinux
+  initrd /archiso.img
+  boot
+#+END_SRC
+ 
+- title 这个类似于描述
+- root 指定从哪一个硬盘，哪一个分区开始
+- kernel 指定去往哪一个操作系统
+- initrd 为Linux格式的启动镜像加载初始的ramdisk，并且在内存中设置合适的参数
+- boot 启动
+
+更多的参数解释可以参考 [[https://www.gnu.org/software/grub/manual/legacy/grub.html#kernel][这里]] 。
+
+编辑完成之后保存，如果你不放心可以再次确认一下是否一切正常。随后，重启。
+在开机画面先选择 *Grub4DOS* ，然后选择 *Archlinux Installer* 。进入安装流程。
+
+注意（关于Archlinux操作系统引导）： \\
+我没有用 *Linux* 的 *Grub* 引导来替换 *Windows* 自带的引导，所以我用 *Grub4DOS* 做了一个引导（这个可以粘贴在文件 *menu.lst* 最下面）：
+#+BEGIN_SRC text
+  title  Arch Linux
+  root   (hd0,你实际的分区号)
+  kernel /boot/vmlinuz-linux root=/dev/sda3 ro
+  initrd /boot/initramfs-linux.img
+#+END_SRC
+在复制这个的时候注意， =root (hd0,X)= 这里的 =X= 是你实际的分区号，就是当初将操作系统（引导）安装到来哪里的那个数字。
+比如我是 =/dev/sda3= ，所以我这里的 =X= 就是 =3= 。切记!
+
+=root=/dev/sda3= 这里是你安装操作系统主体的盘，因为我之前安装的时候偷懒，全部安装在一个盘上面，你们要是也懒的话可以学我。
+我这里和上面的引导是同一个盘，所以还是 =3= 。
+
+* Beginners' guide
+没错，接下来的步骤和官方指南一致啦。可以参考 [[https://wiki.archlinux.org/index.php/beginners'_guide][这里]] 继续下面的步骤。当然也可以参考下面这些文章：
++ [[http://blog.fooleap.org/hard-disk-installation-for-archlinux.html#id-section-1][硬盘安装 Arch Linux]]
++ [[http://www.cnblogs.com/bl4nk/p/3299368.html][Windows7和Archlinux双系统硬盘安装笔记-Step 3]]
++ [[http://blog.csdn.net/holdsky/article/details/8497764][archlinux （2012.12.01-dual） i686 硬盘安装]]
++ [[https://lampjs.wordpress.com/2014/09/01/arch-linux-easy-install-with-with-windows-dual-boot-for-beginners/comment-page-1/][Arch Linux easy install with with windows (dual boot) for beginners]]
+
+当然你也可以看看这些文章：
++ [[https://wiki.archlinux.org/index.php/Dual_boot_with_Windows][Dual boot with Windows]]
++ [[https://wiki.archlinux.org/index.php/Dual_boot_with_Windows/SafeBoot][Dual boot with Windows/SafeBoot]]
++ [[https://wiki.archlinux.org/index.php/USB_flash_installation_media_(%25E7%25AE%2580%25E4%25BD%2593%25E4%25B8%25AD%25E6%2596%2587)][USB flash installation media (简体中文)]]
++ [[http://www.kisa747.com/windows7-grub4dos.html][Windows 7上使用Grub4DOS]]
+
+中间遇到的问题提一下： 
+
+** waiting for device
+*waiting for device* ，也就是著名的 *30s* 问题，解决的方法：
+#+BEGIN_SRC sh
+mkdir /tmpmnt
+mount -r -t ntfs /dev/sda1 /tmpmnt
+modprobe loop
+losetup /dev/loop6 /tmpmnt/archlinux.iso
+ln -s /dev/loop6 /dev/disk/by-label/archlinux
+exit
+#+END_SRC
+
+- modprobe - add a Loadable Kernel Module and its dependencies to a running Linux system.
+- loop - the Loopback module, which allows files to be mounted as filesystems, typically for creating boot disks.
+- losetup - set up and control loop devices
+
+** wifi-menu
+如果你在运行 =wifi-menu= 这个命令的时候出现了报错的情况，可以试试用下面的情况解决：
+#+BEGIN_SRC sh
+  $ sudo killall dhcpcd
+  $ sudo ip link set down # $ sudo ifconfig wlp3s0 down
+  $ sudo wifi-menu
+#+END_SRC
+
+又如果，你运行 =wifi-menu= 这个命令，你得到了提示 *no dialog* 。我是这么解决的：
+在安装系统的 =Live OS= 环境下，我先挂载系统盘，使用 =arch-chroot= 命令切换到相应的环境
+#+BEGIN_SRC sh
+# pacman -S iw wpa_supplicant dialog
+#+END_SRC
+安装必要的组件。
+
+如果你在安装了 *Desktop Envirnoment::Gnome 3* 还遇到了： *Please run NetworkManager* ，可以安装 =networkmanager= 试试，
+具体的可以参考 [[https://wiki.archlinux.org/index.php/NetworkManager_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)][这里(Offical wiki)]]，或者 [[https://bbs.archlinux.org/viewtopic.php?id%3D116629][{SOLVED}{GNOME 3} After install - no Network Manager?]]
+#+BEGIN_SRC sh
+$ sudo pacman -S networkmanager
+#+END_SRC
+
+** gnome-terminal
+如果你在安装了 *Gnome 3* 之后，发现无法启动 *gnome-terminal* ，遇到了
+#+BEGIN_EXAMPLE
+(process:2410): Gtk-WARNING **: Locale not supported by C library.
+	Using the fallback 'C' locale.
+Error constructing proxy for org.gnome.Terminal:/org/gnome/Terminal/Factory0: Error calling StartServiceByName for org.gnome.Terminal: GDBus.Error:org.freedesktop.DBus.Error.Spawn.ChildExited: Process org.gnome.Terminal exited with status 1.
+#+END_EXAMPLE
+或者
+#+BEGIN_EXAMPLE
+Error constructing proxy for org.gnome.Terminal:/org/gnome/Terminal/Factory0: Error calling StartServiceByName for org.gnome.Terminal: GDBus.Error:org.freedesktop.DBus.Error.Spawn.ChildExited: Process org.gnome.Terminal exited with status 1
+#+END_EXAMPLE
+
+可以试试下面的方法：
+#+BEGIN_SRC sh
+$ sudo vi /etc/locale.gen  # 去掉 en_US.UTF-8 和 zh_CN.UTF-8 注释
+$ locale-gen
+#+END_SRC
+然后，重启。
+
+** fcitx
+安装拼音输入法，可以试试这个 [[https://wiki.archlinux.org/index.php/Fcitx_(%25E7%25AE%2580%25E4%25BD%2593%25E4%25B8%25AD%25E6%2596%2587)][Fcitx (简体中文)]]
+#+BEGIN_SRC sh
+$ sudo pacman -S fcitx fcitx-gtk2 fcitx-gtk3 fcitx-rime
+#+END_SRC
+在 [[https://oao.moe][@akafeza]] 的提醒下，添加上一些配置 **~/.xprofile** （如果没有这个文件就创建一个，配置文件在 **/etc/gdm/Xsession** 被调用）
+#+BEGIN_SRC text
+  export GTK_IM_MODULE=fcitx
+  export QT_IM_MODULE=fcitx
+  export XMODIFIERS=@im=fcitx
+#+END_SRC
+
+** Swap
+交换分区/文件。因为笔者的计算机现在有8G RAM（开心脸）。不过还是纠结于要不要配置一个Swap。（安装的时候没有创建交换分区）
+在无聊的摆弄Arch几天之后，我决定，给其配置一个Swap， [[https://wiki.archlinux.org/index.php/Swap_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)][Swap Wiki]] 。
+
+在决定需要Swap之后，你会遇到一个问题，你需要多大的空间？
+这个 [[http://askubuntu.com/a/49138][问题的答案]] 会给你一定的启示。注意这个问题发表的时间：December 2012。
+还有，建议你认真看一下上述那个问题采纳的答案。或许你会更加的有方向性 :P
+顺便说一下，休眠(hibernation)需要这个Swap。
+
+好了，提醒的就这么多，用到的命令罗列一下，如果你比较赶时间的话，直接看这里：
+（我创建的是一个8G的交换文件，然后挂载）
+#+BEGIN_SRC sh
+$ sudo fallocate -l 8192M /swapfile
+$ sudo dd if=/dev/zero of=/swapfile bs=1M count=8192
+$ sudo chmod 600 /swapfile
+$ sudo mkswap /swapfile
+$ sudo swapon /swapfile
+$ sudo vi /etc/fstab
+  # /swapfile none swap defaults 0 0
+$ free -m # checking tool
+$ swapon -s # watch the swap's status
+#+END_SRC
+
+- fallocate - preallocate or deallocate space to a file
+
+最后再罗嗦一下，经过几日的使用，发现交换文件始终没有被使用到。 **0**
+而且，我也没有休眠的意愿。所以还是不需要Swap了吧。
+
+* Terminal
+这么重要的东东，需要单独介绍！[[http://www.acgtyrant.com/][@暴君]] 推荐这个组合：\\
+=i3, termite, caiogondim/bullet-train-oh-my-zsh-theme= \\
+出自：[[https://oao.moe/%E8%AE%BA%E9%A1%BA%E6%89%8B%E7%9A%84%E7%BB%88%E7%AB%AF%E6%A8%A1%E6%8B%9F%E5%99%A8/#comment-2594347643][Disqus]]
+
+* 尾声
+等装完 *Arch* ，发现的确是一件很享受的事情。这篇文章只是记录我安装过程中遇到的一些问题和感想，不一定切合你的实际。
+你可以继续阅读官方的 wiki 或者下面的文章：
++ [[https://wiki.archlinux.org/index.php/beginners'_guide#Locale][Beginners' guide]]
++ [[https://wiki.archlinux.org/index.php/GTK%252B_(%25E7%25AE%2580%25E4%25BD%2593%25E4%25B8%25AD%25E6%2596%2587)][GTK+ (简体中文)]]
++ [[https://wiki.archlinux.org/index.php/chromium][Chromium]]

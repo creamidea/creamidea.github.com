@@ -1,0 +1,31 @@
+#+TITLE:Astronomy ABC
+#+AUTHOR:ICECREAM(氷菓)
+#+EMAIL:creamidea(AT)gmail.com
+#+DESCRIPTION:ICECREAM(氷菓)
+#+KEYWORDS:astronomy
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t
+#+LINK_HOME: https://creamidea.github.io
+#+STYLE:<link rel="stylesheet" type="text/css" href="../css/style.css">
+#+INFOJS_OPT: view: showall toc: nil
+
+#+BEGIN_HTML
+---
+layout: doc
+title: Astronomy ABC
+subtitle: 一篇介绍基础的天文知识的笔记整理 
+categories: note
+tags: astronomy
+---
+#+END_HTML
+
+* 前言
+作为一名伪天文爱好者，现在终于开始其旅程啦。
+这个天文爱好者真是实在太虚伪啦。
+
+这里主要记录一些基础的天文知识，当然资料都是来自网络和书本啦。
+希望这个爱好可以打发我现在大部分的时光。
+
+顺便学习学习基础的拉丁文等古代的文字（唉，我又想说，博大的中华文化不好好学，现在有开始学习西方的古文明了，什么心态啊），感受人类的进化历程。
+
+真想有一天可以背上一台望远镜，然后骑着自己的单车，游遍整个的时间和空间。
+可惜……

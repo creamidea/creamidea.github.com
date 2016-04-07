@@ -1,0 +1,60 @@
+#+TITLE:88 Constellation
+#+AUTHOR:ICECREAM(氷菓)
+#+EMAIL:creamidea(AT)gmail.com
+#+DESCRIPTION:ICECREAM(氷菓)
+#+KEYWORDS:constellation astronomy
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t
+#+LINK_HOME: https://creamidea.github.io
+#+STYLE:<link rel="stylesheet" type="text/css" href="../css/style.css">
+#+INFOJS_OPT: view: showall toc: nil
+
+#+BEGIN_HTML
+---
+layout: doc
+title: 88 Constellation
+subtitle: 88星座简单介绍 
+categories: note
+tags: constellation astronomy
+---
+#+END_HTML
+
+* 前言
+作为一个伪天文爱好者，现在开始一段奇妙的旅程。（可惜买不起设备啊。）
+
+认识星座[fn:1]是基础中的基础，现在开始记录自己从网络中收集到的资料，关于88星座的。
+当然这其中想顺带学习一下希腊的文字系统[fn:2]和拉丁文[fn:3]（很早就想学习你啦）。真是奇妙的人类文字啊。
+
+等我真的有了时间和开始出发的资金时，就要踏上寻找起源的路程啦。（不过说出这些理由的时候，感觉永远也上不了路了）
+
+嘛，现在就这个样子吧，眼前还是要做事情的！没有那么多的闲工夫啊。
+
+学习之前，我需要一个参考路标，于是使用Google一下，关键字:88星座。
+然后，就决定从你们开始啦：
+1. [[http://www.intensive.idv.tw/space/space300.htm][全天88星座表]]
+2. [[http://stella.toxsoft.com/][Cielo Stellato チェーロ・ステラート　88星座完全ガイド]]
+   (如果出现乱码，请将浏览器编码调整为：Shift\_JIS)
+
+开始前的一些说明：
+
+关于天文的基础知识你可以google, 或者请参见我整理的资料：
+#+BEGIN_HTML
+<a href="{{ site.url }}{% post_url 2013-10-01-Astronomy-ABC.html %}">
+  Astronomy-ABC
+</a>
+#+END_HTML
+\\
+
+一级标题标注为英文和中文的混合，下面会标注其拉丁文，希腊文和日文。之后是简单的介绍。
+
+* Andromeda 仙女座
+  等待我的填坑……
+
+* Footnotes
+
+[fn:1] [[http://zh.wikipedia.org/wiki/%25E6%2598%259F%25E5%25BA%25A7][星座]]
+
+[fn:2] [[http://zh.wikipedia.org/wiki/%25E5%25B8%258C%25E8%2585%258A%25E5%25AD%2597%25E6%25AF%258D][希腊字母]]
+
+[fn:3] [[http://zh.wikipedia.org/wiki/%25E6%258B%2589%25E4%25B8%2581%25E8%25AF%25AD][拉丁文]]
+
+

@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Unicode and UTF8</title>
+<!-- 2016-04-07 Thu 16:58 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="冰糖火箭筒(Junjia Ni)" />
+<meta  name="description" content="Unicode and UTF8 的一些学习笔记"
+ />
+<meta  name="keywords" content="unicode,utf8,encoding,编码" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/static/style.css"><link rel="stylesheet" type="text/css" href="/static/medium-fonts.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Unicode and UTF8</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. 前言</a></li>
+<li><a href="#sec-2">2. Unicode</a></li>
+<li><a href="#sec-3">3. UTF8</a></li>
+<li><a href="#sec-4">4. Python</a></li>
+<li><a href="#sec-5">5. 正则表达式匹配中文区间</a></li>
+<li><a href="#sec-6">6. locale</a></li>
+<li><a href="#sec-7">7. 尾声</a></li>
+<li><a href="#sec-8">8. Reference</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> 前言</h2>
+<div class="outline-text-2" id="text-1">
+<blockquote>
+<p>
+终于在杭州看到一场像样子的雪了。<span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-05 Sat&gt;</span></span>
+</p>
+</blockquote>
+
+<p>
+最近明明事情很多，但是就是什么事情都不想干，这个是为什么呢？
+没事干，就去折腾一些并没有什么用的东西。这不，花了一个周末，看了一些关于编码方面的文章。
+下面就是我的一些理解和笔记。很肤浅，只是一个很简单的介绍文章，详细的你可以阅读 <a href="#sec-8">8</a> 中前几篇文章。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Unicode</h2>
+<div class="outline-text-2" id="text-2">
+<blockquote>
+<p>
+Unicode provides a unique number for every character,
+no matter what the platform,
+no matter what the program,
+no matter what the language. 
+</p>
+</blockquote>
+<p>
+想象一下这是一个扩展的ASCII码的表，当你迷糊的时候，想想这句话。什么是Unicode。
+</p>
+
+<p>
+举一个例子:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"># ord是unicode ordinal的缩写,即编号
+# chr是character的缩写,即字符
+# ord和chr是互相对应转换的.
+# 但是由于chr局限于ascii,长度只有256.
+# 于是又多了个unichr.
+&gt;&gt;&gt; c = u'昳'
+&gt;&gt;&gt; c
+u'\u6633'
+&gt;&gt;&gt; ord(u'\u6633')
+26163
+</pre>
+</div>
+
+<p>
+这里的中文字符 <b>昳</b> Unicode编码是 <code>6633(U+6633)</code> ， <code>6633(U+6633)</code> 这个字面量来表示字符 <b>昳</b> 。
+然后他的编号（数字） <code>26163</code> 来指代这个 <code>6633(U+6633)</code> 。
+</p>
+
+<p>
+用ASCII码表来解释是这个样子的，你要显示字符 <b>a</b> 。
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">&gt;&gt;&gt; d = u'a'
+&gt;&gt;&gt; d
+u'a'
+&gt;&gt;&gt; ord(d)
+97
+</pre>
+</div>
+<p>
+然后你这里的字符 <b>a</b> Unicode编码是 <code>a(U+0097)</code>, <code>a(U+0097)</code> 这个字面量来表示字符 <b>a</b> （这里有点绕，希望你能跨过去）。
+然后他的编号（数字） <code>97</code> 来指代这个 <code>a(U+0097)</code> 。
+</p>
+
+<p>
+现在在会过来看这句话
+</p>
+<blockquote>
+<p>
+Unicode provides a unique number for every character,
+no matter what the platform,
+no matter what the program,
+no matter what the language. 
+</p>
+</blockquote>
+<p>
+希望你已经明白什么是"真"Unicode。为每一个字符提供唯一的数字。
+</p>
+
+<img src="https://docs.google.com/drawings/d/1ZI9lDMtH1I9i4_vm-aEffr37Q09cBd4Kzl3jpA6yMSQ/pub?w=750&h=390" alt="字符－编号－编码" title="字符－编号－编码"/>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> UTF8</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+好了，在理解了Unicode之后，再来看UTF-8，这个又是什么东东呢？ <br  />
+UTF-8是Unicode的具体存储方式。怎么说？就是上面提及的那个编码，如：U+6633，怎么存储呢？
+然后UTF-8跳出来说，用我来存，用我的格式来存。nuo，就是这个样子啦。
+</p>
+
+<pre class="example">
+0XXXXXXX                              (U+0000~U+007F 0~127)
+110XXXXX 10XXXXXX                     (U+0080~U+07FF 128~2047)
+1110XXXX 10XXXXXX 10XXXXXX            (U+0800~U+FFFF 2048~65535)
+11110XXX 10XXXXXX 10XXXXXX 10XXXXXX
+</pre>
+<p>
+XXX就是对应的Unicode编码啦。
+</p>
+
+<p>
+举个栗子
+</p>
+<pre class="example">
+U+6633
+0110 0110 0011 0011  16位二进制形式
+0110 011000 110011   4+6+6位分组
+1110XXXX 10XXXXXX 10XXXXXX UTF-8三字节模版
+11100110 10011000 10110011 替换有效位
+E6 98 B3 按字节重新转换成16进制
+</pre>
+<p>
+结果
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">&gt;&gt;&gt; c
+u'\u6633'
+&gt;&gt;&gt; c.encode('utf-8')
+'\xe6\x98\xb3'
+&gt;&gt;&gt; print c
+昳
+</pre>
+</div>
+
+<p>
+如果平常看到类似这样每3个字节出现一个E，你应该可以反应过来应该是中文的UTF-8编码了吧。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Python</h2>
+<div class="outline-text-2" id="text-4">
+<pre class="example">
+编码：unicode--&gt;str
+解码：str--&gt;unicode.
+</pre>
+
+<pre class="example">
+str.encode()实际上就等价于str.decode(sys.defaultencoding).encode().而sys.defaultencoding一般是ascii
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> 正则表达式匹配中文区间</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+<b>\u4E00-\u9FA5</b> （2万个左右）
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> locale</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+系统字符编码控制优先级 <code>LC_ALL&gt;LC_*&gt;LANG</code>
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> 尾声</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+基本上，我所理解的Unicode和UTF8就是这个样子了，在Python上面做了很多的实验，希望以后不要再犯一些低级错误。
+希望不会因为我的无知，再痛恨 <b>Python2.X</b>
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+UnicodeEncodeError: 'ascii' codec can't encode character u'\u6633' in position 0: ordinal not in range(128)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> Reference</h2>
+<div class="outline-text-2" id="text-8">
+<ol class="org-ol">
+<li><a href="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html">字符编码笔记：ASCII，Unicode和UTF-8</a>
+</li>
+<li><a href="http://my.oschina.net/goldenshaw/blog/470946">文本在内存中的编码(1)——乱码探源(4)</a>
+</li>
+<li><a href="http://my.oschina.net/goldenshaw/blog/470948">文本在内存中的编码(2)——乱码探源(5)</a>
+</li>
+<li><a href="http://my.oschina.net/goldenshaw/blog/471370">文本在内存中的编码(3)——乱码探源(6)</a>
+</li>
+<li><a href="http://my.oschina.net/goldenshaw/blog/305805">字符集与编码（二）——编号 vs 编码</a>
+</li>
+<li><a href="http://my.oschina.net/goldenshaw/blog/310331">字符集与编码（四）——Unicode</a>
+</li>
+<li><a href="https://docs.python.org/2/howto/unicode.html">Unicode HOWTO</a>
+</li>
+<li><a href="https://docs.python.org/2/library/functions.html#unichr">unichr</a>
+</li>
+<li><a href="https://docs.python.org/2/library/functions.html#ord">ord</a>
+</li>
+<li><a href="http://blog.csdn.net/trochiluses/article/details/16825269">python 字符编码与解码——unicode、str和中文：UnicodeDecodeError: 'ascii' codec can't decode</a>
+</li>
+<li><a href="http://blog.csdn.net/handsomekang/article/details/39890403">飘逸的python - ord和chr以及unichr</a>
+</li>
+<li><a href="http://www.cnblogs.com/markjiao/archive/2008/05/20/1203316.html">linux系统locale的设定</a>
+</li>
+<li><a href="https://wiki.archlinux.org/index.php/Locale_(%25E7%25AE%2580%25E4%25BD%2593%25E4%25B8%25AD%25E6%2596%2587)">ArchWiki-Locale (简体中文)</a>
+</li>
+<li><a href="http://wiki.ubuntu.org.cn/Locale">UbuntuWiki-Locale</a>
+</li>
+<li><a href="https://segmentfault.com/q/1010000002426378">iterm 配置utf8编码，本地终端中文不乱码，ssh远程中文乱码，咋整啊</a>
+</li>
+<li><a href="https://leohxj.gitbooks.io/a-programmer-prepares/content/software/mac/softwares/iTerm2.html#%25E4%25B8%25AD%25E6%2596%2587%25E4%25B9%25B1%25E7%25A0%2581%25E9%2597%25AE%25E9%25A2%2598">iTerm2-中文乱码问题</a>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
+<p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
+<p class="date">2015-12-05</p>
+<p class="export-date">2016-04-07 Thu 16:58</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="last-modification-time">2016-04-06 Wed 15:17</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+</div>
+</body>
+</html>

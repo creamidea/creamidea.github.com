@@ -1,0 +1,205 @@
+#+TITLE:How To Create Article Contents By JS And CSS
+#+AUTHOR:ICECREAM(氷菓)
+#+EMAIL:creamidea(AT)gmail.com
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t
+#+LINK_HOME: https://creamidea.github.io
+#+STYLE:<link rel="stylesheet" type="text/css" href="../css/style.css">
+#+INFOJS_OPT:
+
+#+BEGIN_HTML
+---
+layout: doc
+title: How To Create Article Contents By JS And CSS
+subtitle: 如何动态生成文章目录
+categories: note
+tags: javascript css
+---
+#+END_HTML
+
+* 前言
+在搭建此次博客时，很想用javascript生成文章的目录，方便阅读，本来自己写了一个，
+不过看到 [[http://beiyuu.com/][BeiYuu]] 的文章 [[http://beiyuu.com/why-blog/][《我为什么写博客？》]] 的文章目录时，
+感觉自己写得没有他的好，于是参考他写的，写了下面的文章内容。
+
+* 动态生成文章目录过程
+
+** 编程思路
+总体上，思路就是你想的那个样子：
+
+1. 当页面加载完毕之后，使用js将h1, h2, h3...等标签中的内容和id
+   （原文作者记录的是标题的位置）提取出来，可以存入数组。
+
+2. 设置相应的目录的容器，说白了就是相应的HTML,CSS。
+
+3. 使用js设置HTML a rel Attribute,不过这里原文作者是直接记录标题的位置，
+   而不是使用href="#{id}",不过这点细节没有什么大的影响。
+   将数组的内容放入相应的位置。
+
+** js部分代码
+由于js部分有些许长，这里直接给出我repo中的[[https://github.com/creamidea/creamidea.github.com/blob/master/_includes/article_contents.html][生成目录JS代码]].
+下面只是贴出如何提取出标题内容的js代码
+#+BEGIN_SRC js
+$.each($('h2,h3'),function(index,item){
+    if(item.tagName.toLowerCase() == 'h2'){
+	  var h2item = {};
+	  h2item.name = $(item).text();
+	  h2item.id = 'menuIndex'+index;
+	  h2.push(h2item);
+	  h2index++;
+    }else{
+	  var h3item = {};
+	  h3item.name = $(item).text();
+	  h3item.id = 'menuIndex'+index;
+	  if(!h3[h2index-1]){
+	    h3[h2index-1] = [];
+	  }
+	  h3[h2index-1].push(h3item);
+    }
+    item.id = 'menuIndex' + index
+});
+#+END_SRC
+#+BEGIN_HTML
+<div class="note warning">
+  <strong>从代码上可以看出，必须要一个二级标题,markdown: "**  **", HTML标签："h2",这点需要记住！</strong>
+</div>
+#+END_HTML
+
+** css部分代码
+#+BEGIN_SRC css
+/* Article Contents */
+#menuIndex {
+    position: fixed;
+    bottom: 88px;
+    right: 20px;
+    width: 200px;
+    overflow: auto;
+    max-height: 602px;
+}
+
+#menuIndex ul {
+    list-style: none;
+}
+
+#menuIndex ul li {
+    font-size: 12px;
+    margin-bottom: 5px;
+    word-wrap: break-word;
+    padding-left: 10px;
+}
+
+#menuIndex li.h1 {
+    font-size: 14px;
+    font-weight: normal;
+    padding-left: 0;
+    margin-bottom: 10px;
+}
+
+#menuIndex li.h3 {
+    padding-left: 25px;
+}
+
+#menuIndex ul li.on {
+    /*这里设置当前的标签的背景颜色，请根据自己的博客主色调具体情况修改*/
+    background-color: rgb(37, 28, 28); 
+}
+#+END_SRC
+
+你有任何问题随时可以联系我
+
+* 利用纯CSS实现目录功能
+	这个也是我最近在学习org-mode的时候看到的。
+
+	org-mode在生成html的时候会自动生成一个目录，html代码（我的第一篇文章）如下：
+	#+BEGIN_SRC html
+    <div id="table-of-contents">
+      <h2>Table of Contents</h2>
+      <div id="text-table-of-contents">
+        <ul>
+          <li><a href="#sec-1">1 前言</a></li>
+          <li><a href="#sec-2">2 搭建此博客的目的</a></li>
+          <li><a href="#sec-3">3 此博客的整体设计</a>
+            <ul>
+              <li><a href="#sec-3-1">3.1 设计哲学</a></li>
+              <li><a href="#sec-3-2">3.2 设计的局部细节</a>
+                <ul>
+                  <li><a href="#sec-3-2-1">3.2.1 Jekyll搭建</a></li>
+                  <li><a href="#sec-3-2-2">3.2.2 中文版</a></li>
+                  <li><a href="#sec-3-2-3">3.2.3 English Version</a></li>
+                  <li><a href="#sec-3-2-4">3.2.4 我的blog目录</a></li>
+                  <li><a href="#sec-3-2-5">3.2.5 blog内容(类别)的设计</a></li>
+                  <li><a href="#sec-3-2-6">3.2.6 blog标签系统(Tag-Cloud)的设计</a></li>
+                  <li><a href="#sec-3-2-7">3.2.7 blog中使用的Icons</a></li>
+                  <li><a href="#sec-3-2-8">3.2.8 blog中搜索引擎</a></li>
+                  <li><a href="#sec-3-2-9">3.2.9 blog分享</a></li>
+                  <li><a href="#sec-3-2-10">3.2.10 blog中的一些快捷功能</a></li>
+              </ul></li>
+            </ul>
+          </li>
+          <li><a href="#sec-4">4 致Emacser： Markdown-Mode</a>
+            <ul>
+              <li>
+                <ul>
+                  <li>
+                    <ul>
+                      <li><a href="#sec-4-1">4.1 Markdonw 参考文档</a></li>
+                  </ul></li>
+              </ul></li>
+            </ul>
+          </li>
+          <li><a href="#sec-5">5 结尾</a></li>
+          <li><a href="#sec-6">6 更新的地方</a></li>
+        </ul>
+      </div>
+    </div>
+	#+END_SRC
+
+	可以很清楚的知道文章结构，然后利用[[http://orgmode.org/org.html][The Org Manual]]目录CSS，代码如下：
+	#+BEGIN_SRC css
+    #table-of-contents {
+        font-size: 9pt;
+        position: fixed;
+        right: 0em;
+        top: 0em;
+        background: white;
+        -webkit-box-shadow: 0 0 1em #777777;
+        -moz-box-shadow: 0 0 1em #777777;
+        box-shadow: 0 0 1em #777777;
+        -webkit-border-bottom-left-radius: 5px;
+        -moz-border-radius-bottomleft: 5px;
+        border-bottom-left-radius: 5px;
+        text-align: right;
+        max-height: 80%;
+        overflow: auto;
+        z-index: 200;
+    }
+    #table-of-contents #text-table-of-contents {
+        display: none;
+        text-align: left;
+    }
+    #table-of-contents:hover #text-table-of-contents {
+        display: block;
+        padding: 0.5em;
+        margin-top: -1.5em; 
+    }
+    #table-of-contents ul {
+        margin-left: 14pt;
+        margin-bottom: 10pt;
+        padding: 0;
+    }
+    #table-of-contents ul>:first-child {
+        color: blue;
+    }
+    #table-of-contents li {
+        padding: 0;
+        margin: 1px;
+        list-style: none;
+    }
+    #text-table-of-contents li a:hover {
+        /* font-size: 16px; */
+        color: yellowgreen;
+    }
+	#+END_SRC
+
+	当然，我稍微做了一下修改，但是总体上的效果没有多大的区别，只是更改了部分连接的颜色。
+
+	你当然完全可以自己设计。我就在这里偷懒一下啦。

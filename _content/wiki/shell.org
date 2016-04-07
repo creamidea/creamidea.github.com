@@ -1,0 +1,111 @@
+#+TITLE: Shell Cookies
+#+DATE: 2015-12-27
+#+DESCRIPTION: 记住一些命令
+#+KEYWORDS: shell,emacs,etags
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
+#+LINK_HOME: https://creamidea.github.io
+#+STARTUP: showall
+
+
+* 前言
+一些常用的命令，包括使用Emacs的小技巧。
+
+* ffmpeg
+#+BEGIN_SRC sh
+# -r 指定频率
+$ ffmpeg -i xxx.mp4 -r 25 xxx.%05d.gif
+#+END_SRC
+
+* ab
+Apache HTTP server benchmarking tool \\
+常用的参数
+#+BEGIN_EXAMPLE
+-n 总请求
+-c 并发数
+-t 测试所进行的最大秒数
+-k 打开KeepAlive功能
+#+END_EXAMPLE
+
+结果解释
+#+BEGIN_EXAMPLE
+  Server Software:        nginx/1.4.6
+  Server Hostname:        10.69.109.51
+  Server Port:            80
+
+  Document Path:          /login.html
+  Document Length:        1935 bytes
+
+  Concurrency Level:      100             # 并发数
+  Time taken for tests:   0.552 seconds   # 测试时间
+  Complete requests:      1000            # 完成的请求数
+  Failed requests:        0               # 失败的请求数
+  Total transferred:      2249000 bytes   # 总共传输的数据量
+  HTML transferred:       1935000 bytes   # 请求页面大小
+  Requests per second:    1810.97 [#/sec] (mean)  # 每秒处理的请求数（事务数） 平均值
+  Time per request:       55.219 [ms] (mean)      # 每次并发耗时 平均值
+  Time per request:       0.552 [ms] (mean, across all concurrent requests) # 每次请求耗时 平均值 注：每次请求耗时 * 并发数 = 每次并发耗时
+  Transfer rate:          3977.41 [Kbytes/sec] received # 网络中传输速率
+
+  Connection Times (ms)
+                min  mean[+/-sd] median   max
+  Connect:        5   25  10.5     23      56
+  Processing:    10   28   8.9     26      58
+  Waiting:       10   27   8.8     26      58
+  Total:         28   53  10.9     51      82
+
+  Percentage of the requests served within a certain time (ms)
+    50%     51
+    66%     55
+    75%     58
+    80%     64
+    90%     70
+    95%     73
+    98%     75
+    99%     80
+   100%     82 (longest request)
+#+END_EXAMPLE
+Reference:
+- http://www.cnblogs.com/netflu/archive/2010/01/07/1641101.html
+- http://www.nginx.cn/110.html
+
+* grep
+
+#+BEGIN_SRC sh
+  grep -rnw '/path/to/somewhere/' -e "pattern"
+#+END_SRC
+Reference: http://stackoverflow.com/a/16957078/1925954
+
+* Emacs
+** 插入当前时间
+#+BEGIN_SRC sh
+C-u M-! date
+#+END_SRC
+** Org-mode
+*** Table Sort
+=C-c ^=
+
+* etags & ctags
+#+BEGIN_SRC sh
+  cd /path/to/my/project
+  ctags -e -R *.cpp *.hpp *.h
+
+  cd /path/to/my/project
+  find . | grep ".*\.\(hh\|hxx\|cc\)" | xargs etags -f TAGS
+
+  cd /path/to/my/project
+  find . -type f -iname "*.[ch]" | etags -
+#+END_SRC
+常用热键
+#+BEGIN_EXAMPLE
+`M-.’ (‘find-tag’) – find a tag, that is, use the Tags file to look up a definition. If there are multiple tags in the project with the same name
+`C-u M-.’ to go to the next match.
+‘M-x find-tag-other-window’ – selects the buffer containing the tag’s definition in another window, and move point there.
+‘M-*’ (‘pop-tag-mark’) – jump back
+‘M-x tags-search’ – regexp-search through the source files indexed by a tags file (a bit like ‘grep’)
+‘M-x tags-query-replace’ – query-replace through the source files indexed by a tags file
+`M-,’ (‘tags-loop-continue’) – resume  ‘tags-search’ or ‘tags-query-replace’ starting at point in a source file
+‘M-x tags-apropos’ – list all tags in a tags file that match a regexp
+‘M-x list-tags’ – list all tags defined in a source file
+#+END_EXAMPLE
+
+* 尾声

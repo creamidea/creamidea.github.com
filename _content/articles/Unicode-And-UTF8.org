@@ -1,0 +1,148 @@
+#+TITLE: Unicode and UTF8
+#+DATE: 2015-12-05
+#+CATEGORY: article
+#+DESCRIPTION: Unicode and UTF8 的一些学习笔记
+#+KEYWORDS: unicode,utf8,encoding,编码
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
+#+LINK_HOME: https://creamidea.github.io
+#+STARTUP: showall
+
+
+* 前言
+
+#+BEGIN_QUOTE
+终于在杭州看到一场像样子的雪了。<2015-12-05 Sat>
+#+END_QUOTE
+
+最近明明事情很多，但是就是什么事情都不想干，这个是为什么呢？
+没事干，就去折腾一些并没有什么用的东西。这不，花了一个周末，看了一些关于编码方面的文章。
+下面就是我的一些理解和笔记。很肤浅，只是一个很简单的介绍文章，详细的你可以阅读 [[Reference]] 中前几篇文章。
+
+* Unicode
+#+BEGIN_QUOTE
+Unicode provides a unique number for every character,
+no matter what the platform,
+no matter what the program,
+no matter what the language. 
+#+END_QUOTE
+想象一下这是一个扩展的ASCII码的表，当你迷糊的时候，想想这句话。什么是Unicode。
+
+举一个例子:
+#+BEGIN_SRC python
+  # ord是unicode ordinal的缩写,即编号
+  # chr是character的缩写,即字符
+  # ord和chr是互相对应转换的.
+  # 但是由于chr局限于ascii,长度只有256.
+  # 于是又多了个unichr.
+  >>> c = u'昳'
+  >>> c
+  u'\u6633'
+  >>> ord(u'\u6633')
+  26163
+#+END_SRC
+
+这里的中文字符 *昳* Unicode编码是 =6633(U+6633)= ， =6633(U+6633)= 这个字面量来表示字符 *昳* 。
+然后他的编号（数字） =26163= 来指代这个 =6633(U+6633)= 。
+
+用ASCII码表来解释是这个样子的，你要显示字符 *a* 。
+#+BEGIN_SRC python
+  >>> d = u'a'
+  >>> d
+  u'a'
+  >>> ord(d)
+  97
+#+END_SRC
+然后你这里的字符 *a* Unicode编码是 =a(U+0097)=, =a(U+0097)= 这个字面量来表示字符 *a* （这里有点绕，希望你能跨过去）。
+然后他的编号（数字） =97= 来指代这个 =a(U+0097)= 。
+
+现在在会过来看这句话
+#+BEGIN_QUOTE
+Unicode provides a unique number for every character,
+no matter what the platform,
+no matter what the program,
+no matter what the language. 
+#+END_QUOTE
+希望你已经明白什么是"真"Unicode。为每一个字符提供唯一的数字。
+
+#+BEGIN_HTML
+<img src="https://docs.google.com/drawings/d/1ZI9lDMtH1I9i4_vm-aEffr37Q09cBd4Kzl3jpA6yMSQ/pub?w=750&h=390" alt="字符－编号－编码" title="字符－编号－编码"/>
+#+END_HTML
+
+* UTF8
+好了，在理解了Unicode之后，再来看UTF-8，这个又是什么东东呢？ \\
+UTF-8是Unicode的具体存储方式。怎么说？就是上面提及的那个编码，如：U+6633，怎么存储呢？
+然后UTF-8跳出来说，用我来存，用我的格式来存。nuo，就是这个样子啦。
+
+#+BEGIN_EXAMPLE
+0XXXXXXX                              (U+0000~U+007F 0~127)
+110XXXXX 10XXXXXX                     (U+0080~U+07FF 128~2047)
+1110XXXX 10XXXXXX 10XXXXXX            (U+0800~U+FFFF 2048~65535)
+11110XXX 10XXXXXX 10XXXXXX 10XXXXXX   
+#+END_EXAMPLE
+XXX就是对应的Unicode编码啦。
+
+举个栗子
+#+BEGIN_EXAMPLE
+U+6633
+0110 0110 0011 0011  16位二进制形式
+0110 011000 110011   4+6+6位分组
+1110XXXX 10XXXXXX 10XXXXXX UTF-8三字节模版
+11100110 10011000 10110011 替换有效位
+E6 98 B3 按字节重新转换成16进制
+#+END_EXAMPLE
+结果
+#+BEGIN_SRC python
+  >>> c
+  u'\u6633'
+  >>> c.encode('utf-8')
+  '\xe6\x98\xb3'
+  >>> print c
+  昳
+#+END_SRC
+
+如果平常看到类似这样每3个字节出现一个E，你应该可以反应过来应该是中文的UTF-8编码了吧。
+
+* Python
+#+BEGIN_EXAMPLE
+编码：unicode-->str
+解码：str-->unicode.
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+str.encode()实际上就等价于str.decode(sys.defaultencoding).encode().而sys.defaultencoding一般是ascii
+#+END_EXAMPLE
+
+* 正则表达式匹配中文区间
+*\u4E00-\u9FA5* （2万个左右）
+
+* locale
+系统字符编码控制优先级 =LC_ALL>LC_*>LANG=
+
+* 尾声
+基本上，我所理解的Unicode和UTF8就是这个样子了，在Python上面做了很多的实验，希望以后不要再犯一些低级错误。
+希望不会因为我的无知，再痛恨 *Python2.X*
+#+BEGIN_SRC python
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+UnicodeEncodeError: 'ascii' codec can't encode character u'\u6633' in position 0: ordinal not in range(128)
+#+END_SRC
+
+#+NAME: Reference
+* Reference
+1. [[http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html][字符编码笔记：ASCII，Unicode和UTF-8]]
+2. [[http://my.oschina.net/goldenshaw/blog/470946][文本在内存中的编码(1)——乱码探源(4)]]
+3. [[http://my.oschina.net/goldenshaw/blog/470948][文本在内存中的编码(2)——乱码探源(5)]]
+4. [[http://my.oschina.net/goldenshaw/blog/471370][文本在内存中的编码(3)——乱码探源(6)]]
+5. [[http://my.oschina.net/goldenshaw/blog/305805][字符集与编码（二）——编号 vs 编码]]
+6. [[http://my.oschina.net/goldenshaw/blog/310331][字符集与编码（四）——Unicode]]
+7. [[https://docs.python.org/2/howto/unicode.html][Unicode HOWTO]]
+8. [[https://docs.python.org/2/library/functions.html#unichr][unichr]]
+9. [[https://docs.python.org/2/library/functions.html#ord][ord]]
+10. [[http://blog.csdn.net/trochiluses/article/details/16825269][python 字符编码与解码——unicode、str和中文：UnicodeDecodeError: 'ascii' codec can't decode]]
+11. [[http://blog.csdn.net/handsomekang/article/details/39890403][飘逸的python - ord和chr以及unichr]]
+12. [[http://www.cnblogs.com/markjiao/archive/2008/05/20/1203316.html][linux系统locale的设定]]
+13. [[https://wiki.archlinux.org/index.php/Locale_(%25E7%25AE%2580%25E4%25BD%2593%25E4%25B8%25AD%25E6%2596%2587)][ArchWiki-Locale (简体中文)]]
+14. [[http://wiki.ubuntu.org.cn/Locale][UbuntuWiki-Locale]]
+15. [[https://segmentfault.com/q/1010000002426378][iterm 配置utf8编码，本地终端中文不乱码，ssh远程中文乱码，咋整啊]]
+16. [[https://leohxj.gitbooks.io/a-programmer-prepares/content/software/mac/softwares/iTerm2.html#%25E4%25B8%25AD%25E6%2596%2587%25E4%25B9%25B1%25E7%25A0%2581%25E9%2597%25AE%25E9%25A2%2598][iTerm2-中文乱码问题]]
+

@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>JavaScript Cookie</title>
+<!-- 2016-04-07 Thu 16:58 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="冰糖火箭筒(Junjia Ni)" />
+<meta  name="description" content="Learn JavaScript"
+ />
+<meta  name="keywords" content="javascript,generate-function,yield,yield*" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/static/style.css"><link rel="stylesheet" type="text/css" href="/static/medium-fonts.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">JavaScript Cookie</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. 前言</a></li>
+<li><a href="#sec-2">2. for&#x2026;in &amp;&amp; for&#x2026;of</a></li>
+<li><a href="#sec-3">3. Generate Function</a>
+<ul>
+<li><a href="#sec-3-1">3.1. co repository</a></li>
+<li><a href="#sec-3-2">3.2. koa</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. 尾声</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> 前言</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+记录一些关于JavaScript有趣的，迷惑的，让人惊叹的功能和陷阱。(⌒▽⌒)
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> for&#x2026;in &amp;&amp; for&#x2026;of</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+这个是最近遇到的一个有趣的问题，问: <code>for...in</code> 和 <code>for...of</code> 有什么区别呢？当时有点凌乱。 &gt;_&lt;
+<code>for...in</code> 和 <code>for...of</code> 都是可以用来迭代的(Array, Object, Map, Set&#x2026;)。
+不过 <code>in</code> 会读取原型链中的属性。这也是很多人觉得会踩坑的地方。
+（当然还有一个地方，就是需要写成 <code>var i in a</code> ，而不是 <code>i in a</code> ，不然 <code>i</code> 要变成 <b>global</b> 啦。）
+试试下面的代码
+</p>
+<div class="org-src-container">
+
+<pre class="src src-js">// Some code in your deep Library
+Array.prototype.foo = 'S'
+
+// Here is your code
+var a = [1,2,3,4,5]
+for (var i in a) {
+  console.log(i);
+}
+// 0,1,2,3,4,foo 
+// :P
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Generate Function</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+<code>yield</code> 
+The yield keyword is used to pause and resume a generator function. <br  />
+<code>yield*</code> 
+The yield* expression is used to delegate to another generator or iterable object.
+Besides generator objects, yield* can also yield other kinds of iterables, e.g. arrays, strings or arguments objects.
+yield* is an expression, not a statement, so it evaluates to a value. <br  />
+</p>
+
+<p>
+我的快速理解：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-js">function * A () {
+  console.log(1)
+  var a1 = yield 1
+  console.log(a1)
+  return 3
+}
+var a = A() // 实际A函数内的代码块并未被执行
+var r = a.next() // 这才开始执行代码，语句被执行到 yield 1。此时yield右侧表达式（这里是1）被求值，并暂停在这里。另外，这个 console.log(1) 将会被执行，你将在终端看到这个1。
+console.log(r) // {value: 1, done: false} value 存放刚刚求出的值，done标志是否执行到代码块底部，也就是“迭代”是否结束。
+r = a.next(2) //代码再次启动，从上次暂停的地方开始，此时，yield左边的代码将被执行。注意这里，如果next带了参数，如next(2)，那么a1将被求值为2。
+console.log(r) // {value: 3, done: true} value 是函数的返回值，如果没有返回则为undefined。
+</pre>
+</div>
+<p>
+出现 <code>yield</code> 那条语句相当于被打了一个断点， <code>yield</code> 右边的表达式将在你执行 <code>next()</code> 的时候被求值。
+再下一次 <code>next()</code> 时左侧会被求值，并一直执行到下一次（个） <code>yield</code> 的右侧或者函数体结束的地方。
+Generator Function 起码需要2次 <code>next()</code> 才能执行完。
+</p>
+
+<p>
+对于 <code>yield*</code> ，这个是用来处理 <code>function</code>, <code>array</code>, <code>etc</code>. 如 <code>yield * A()</code>, <code>yield * [1,2,3]</code> 。
+这里的函数 <code>A()</code> 将被求值， <code>[1,2,3]</code> 这个数组将被遍历（求值）等。
+</p>
+
+<p>
+然后，TJ大神利用这个特性并结合他神勇的想法，创造出了强大的co库。其核心思想是，将原先的回调函数包装成高阶函数-Thunk<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup>(返回一个函数)，参数是下一次 <code>next</code> 的时机代码。
+</p>
+</div>
+
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> co repository</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+
+<pre class="src src-js">function co (genFun) {
+  var gen = genFun()
+  function _next (err, res) {
+    if (err) return gen.throw(err)
+    var r = gen.next(res) // 将回调函数中执行的结果传回去（调用yield的地方）
+    if (r.done) return r.value // 如果完成，就返回最后的值，如果没有结束，就把 _next 传到那个回调函数中
+    r.value(_next) // 这里 r.value 就是那个thunk函数
+  }
+  _next()
+}
+</pre>
+</div>
+<p>
+不理解？我们看一个有趣的例子，延迟函数的实现。问题如下
+</p>
+<div class="org-src-container">
+
+<pre class="src src-js">function * A () {
+  console.log(1)
+  yield wait(1000)
+  console.log(2)
+  return 3
+}
+</pre>
+</div>
+<p>
+需要实现这个 <code>wait</code> 。其实很简单啦，用我们上面自己写的 <code>co</code> ，实现如下
+</p>
+<div class="org-src-container">
+
+<pre class="src src-js">// 实现
+// 包装成thunk函数
+function wait(timeout) {
+  return function (done) {
+    setTimeout(done, timeout)
+  }
+}
+
+// 调用
+co(function * () {
+  var a = yield * A()
+  console.log(a)
+})
+</pre>
+</div>
+
+<p>
+将 <code>setTimeout</code> 包装成 <code>thunk</code> 函数，如上。也就是返回一个带参数的函数，这里的参数就是 <code>co</code> 库中 <code>r.value(_next)</code> 中的 <code>_next</code> ，
+这里的 <code>r.value</code> 就是 <code>function(done){...}</code> 。
+那现在再来看这里的意思就是，延迟 <code>timeout</code> 的时间后，执行 <code>done</code> 函数， <code>done</code> 就是那个 <code>_next</code> ，而 <code>_next</code> 中有 <code>gen.next()</code> 执行下面函数的开关，于是整个都连起来了。
+是不是很强大的想法？
+</p>
+
+<p>
+这个样子就把回调的写法，写成了“同步”的形式，避免了回调金字塔的出现。这个样子就把回调的写法，写成了“同步”的形式，避免了回调金字塔的出现。这个样子就把回调的写法，写成了“同步”的形式，避免了回调金字塔的出现。
+</p>
+
+<p>
+那有了这个思路之后，剩下就只需要写一个包装函数啦。包装你想要的一切（开玩笑啦 &gt;_&lt;）。如 <code>Promise/Generator/GeneratorFunction/Object/Array...</code> 。
+具体的实现可以参考 <a href="https://github.com/tj/co/blob/3.1.0/index.js">co@3.1.0</a> 的代码。新的co代码应该是用 <code>Promise</code> 重写了一遍，代码更加的清晰。
+</p>
+
+<p>
+对了，还有各种错误异常的处理，这个不能忘了。
+</p>
+
+<p>
+你以为这样子就完了吗？图样，TJ大神还有一个 <code>koa</code> ，我们也拿来看看。我们现在有一个新的问题，将下面2个函数以 <code>3,5,6,4</code> 的形式输出。
+</p>
+<div class="org-src-container">
+
+<pre class="src src-js">function * B (next) {
+  console.log(3);
+  yield next;
+  console.log(4);
+}
+function * C (next) {
+  console.log(5);
+  yield next;
+  console.log(6);
+}
+</pre>
+</div>
+
+<p>
+其实这个现在看也是很简单，只要 <code>B/C</code> 能够形成 <code>B(C)</code> ，然后我 <code>yield B</code> 即可。
+于是我们可以把 <code>B,C</code> 组成一个数组，然后从后向前遍历，将其“调用”即可啦 :)
+不过在这之前，我们需要稍微改造一下我们写的 <code>co</code> 库，让她能够支持 <code>yield [GeneratorFunction&amp;Generator]</code> 。主要增加 <b>一些判断</b> 和 <b>一个thunk函数转换器</b> 。
+</p>
+<div class="org-src-container">
+
+<pre class="src src-js">function co (genFun) {
+  var gen
+  if (isGeneratorFunction(genFun)) gen = genFun()
+  else gen = genFun
+  function _next (err, res) {
+    if (err) {
+      console.log('ERROR', err);
+      return gen.throw(err) 
+    }
+    var r = gen.next(res), ctx = this
+    if (r.done) return r.value
+
+    // 主要增加的内容
+    r.value = toTunk(r.value, ctx)
+    if ('function' === typeof r.value) r.value(_next)
+    _next(null, r.value)
+  }
+  _next()
+}
+function isGeneratorFunction (obj) {
+  return (obj &amp;&amp; obj.constructor &amp;&amp; obj.constructor.name === 'GeneratorFunction')
+}
+function isGenerator(obj) {
+  return (obj &amp;&amp; 'function' === typeof obj.next &amp;&amp; 'function' === typeof obj.throw)
+}
+function toTunk(obj, ctx) {
+  if (isGeneratorFunction(obj)) {
+    return co(obj.call(ctx))
+  } if (isGenerator(obj)) {
+    return co(obj)
+  } else {
+    return obj
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> koa</h3>
+<div class="outline-text-3" id="text-3-2">
+<div class="org-src-container">
+
+<pre class="src src-js">// 实现
+function Koa () {
+  this.middleware = []
+}
+Koa.prototype.use = function (genFun) {
+  this.middleware.push(genFun)
+  return this
+}
+Koa.prototype.listen = function () {
+  this._start()
+}
+Koa.prototype._start = function () {
+  var ctx = this,
+      middleware = ctx.middleware,
+      i = middleware.length,
+      prev = null
+  co(function * () {
+    while(i--){
+      prev = middleware[i].call(ctx, prev)
+    }
+    yield prev
+  })
+}
+
+// 调用
+var koa = new Koa
+koa.use(B).use(C)
+koa.listen()
+</pre>
+</div>
+
+<p>
+至此，有关 <code>yield</code> 和 <code>yield*</code> 的内容我就讲完了。其实自己还是有点雾里呢！不过，比我之前清晰多了 :)
+</p>
+
+<p>
+(另外，请自动忽略上述代码对异常等各种情况的处理，具体实现可以参考TJ大神的代码。不看真的会遗憾的！)
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> 尾声</h2>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+Thunk: <a href="https://en.wikipedia.org/wiki/Thunk">https://en.wikipedia.org/wiki/Thunk</a>
+</p></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
+<p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
+<p class="date">2016-01-30</p>
+<p class="export-date">2016-04-07 Thu 16:58</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="last-modification-time">2016-04-06 Wed 15:17</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+</div>
+</body>
+</html>
