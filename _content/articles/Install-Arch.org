@@ -160,6 +160,40 @@ $ locale-gen
 #+BEGIN_SRC sh
 $ sudo pacman -S fcitx fcitx-gtk2 fcitx-gtk3 fcitx-rime
 #+END_SRC
+在 [[https://oao.moe][@akafeza]] 的提醒下，添加上一些配置 **~/.xprofile** （如果没有这个文件就创建一个，配置文件在 **/etc/gdm/Xsession** 被调用）
+#+BEGIN_SRC text
+  export GTK_IM_MODULE=fcitx
+  export QT_IM_MODULE=fcitx
+  export XMODIFIERS=@im=fcitx
+#+END_SRC
+
+** Swap
+交换分区/文件。因为笔者的计算机现在有8G RAM（开心脸）。不过还是纠结于要不要配置一个Swap。（安装的时候没有创建交换分区）
+在无聊的摆弄Arch几天之后，我决定，给其配置一个Swap， [[https://wiki.archlinux.org/index.php/Swap_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)][Swap Wiki]] 。
+
+在决定需要Swap之后，你会遇到一个问题，你需要多大的空间？
+这个 [[http://askubuntu.com/a/49138][问题的答案]] 会给你一定的启示。注意这个问题发表的时间：December 2012。
+还有，建议你认真看一下上述那个问题采纳的答案。或许你会更加的有方向性 :P
+顺便说一下，休眠(hibernation)需要这个Swap。
+
+好了，提醒的就这么多，用到的命令罗列一下，如果你比较赶时间的话，直接看这里：
+（我创建的是一个8G的交换文件，然后挂载）
+#+BEGIN_SRC sh
+$ sudo fallocate -l 8192M /swapfile
+$ sudo dd if=/dev/zero of=/swapfile bs=1M count=8192
+$ sudo chmod 600 /swapfile
+$ sudo mkswap /swapfile
+$ sudo swapon /swapfile
+$ sudo vi /etc/fstab
+  # /swapfile none swap defaults 0 0
+$ free -m # checking tool
+$ swapon -s # watch the swap's status
+#+END_SRC
+
+- fallocate - preallocate or deallocate space to a file
+
+最后再罗嗦一下，经过几日的使用，发现交换文件始终没有被使用到。 **0**
+而且，我也没有休眠的意愿。所以还是不需要Swap了吧。
 
 * Terminal
 这么重要的东东，需要单独介绍！[[http://www.acgtyrant.com/][@暴君]] 推荐这个组合：\\

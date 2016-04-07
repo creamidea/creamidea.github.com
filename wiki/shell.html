@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Shell Cookies</title>
-<!-- 2016-02-03 Wed 07:24 -->
+<!-- 2016-04-07 Thu 16:58 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="冰糖火箭筒(Junjia Ni)" />
@@ -140,11 +140,7 @@ for the JavaScript code in this tag.
 </script>
 </head>
 <body>
-<div id="org-div-home-and-up">
- <a accesskey="h" href=""> UP </a>
- |
- <a accesskey="H" href="http://creamidea.github.io"> HOME </a>
-</div><div id="content">
+<div id="content">
 <h1 class="title">Shell Cookies</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
@@ -185,7 +181,7 @@ for the JavaScript code in this tag.
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 
-<pre class="src src-sh"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">-r &#25351;&#23450;&#39057;&#29575;</span>
+<pre class="src src-sh"># -r 指定频率
 $ ffmpeg -i xxx.mp4 -r 25 xxx.%05d.gif
 </pre>
 </div>
@@ -263,7 +259,7 @@ Reference:
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 
-<pre class="src src-sh">grep -rnw <span style="color: #b5bd68;">'/path/to/somewhere/'</span> -e <span style="color: #b5bd68;">"pattern"</span>
+<pre class="src src-sh">grep -rnw '/path/to/somewhere/' -e "pattern"
 </pre>
 </div>
 <p>
@@ -304,14 +300,14 @@ Reference: <a href="http://stackoverflow.com/a/16957078/1925954">http://stackove
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
 
-<pre class="src src-sh"><span style="color: #8abeb7;">cd</span> /path/to/my/project
+<pre class="src src-sh">cd /path/to/my/project
 ctags -e -R *.cpp *.hpp *.h
 
-<span style="color: #8abeb7;">cd</span> /path/to/my/project
-find . | grep <span style="color: #b5bd68;">".*\.\(hh\|hxx\|cc\)"</span> | xargs etags -f TAGS
+cd /path/to/my/project
+find . | grep ".*\.\(hh\|hxx\|cc\)" | xargs etags -f TAGS
 
-<span style="color: #8abeb7;">cd</span> /path/to/my/project
-find . -type f -iname <span style="color: #b5bd68;">"*.[ch]"</span> | etags -
+cd /path/to/my/project
+find . -type f -iname "*.[ch]" | etags -
 </pre>
 </div>
 <p>
@@ -339,10 +335,10 @@ find . -type f -iname <span style="color: #b5bd68;">"*.[ch]"</span> | etags -
 <div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
 <p class="date">2015-12-27</p>
-<p class="export-date">2016-02-03 Wed 07:24</p>
+<p class="export-date">2016-04-07 Thu 16:58</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
-<p class="last-modification-time">2016-01-08 Fri 03:07</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+<p class="last-modification-time">2016-04-06 Wed 15:17</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

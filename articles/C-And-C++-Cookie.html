@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C And C++ Cookie</title>
-<!-- 2015-12-28 Mon 11:41 -->
+<!-- 2016-04-07 Thu 16:58 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="冰糖火箭筒(Junjia Ni)" />
@@ -140,11 +140,7 @@ for the JavaScript code in this tag.
 </script>
 </head>
 <body>
-<div id="org-div-home-and-up">
- <a accesskey="h" href=""> UP </a>
- |
- <a accesskey="H" href="http://creamidea.github.io"> HOME </a>
-</div><div id="content">
+<div id="content">
 <h1 class="title">C And C++ Cookie</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
@@ -239,10 +235,10 @@ for the JavaScript code in this tag.
 
 <div class="org-src-container">
 
-<pre class="src src-c++"><span style="color: #859900;">template</span> &lt;<span style="color: #859900;">class</span> <span style="color: #b58900;">T</span>&gt;
-<span style="color: #b58900;">void</span> <span style="color: #268bd2;">foo</span>(<span style="color: #b58900;">T</span> <span style="color: #268bd2;">param</span>)
+<pre class="src src-c++">template &lt;class T&gt;
+void foo(T param)
 {
-<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">do something</span>
+// do something
 }
 </pre>
 </div>
@@ -254,18 +250,18 @@ for the JavaScript code in this tag.
 <div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
 
-<pre class="src src-c++"><span style="color: #859900;">template</span> &lt;<span style="color: #859900;">class</span> <span style="color: #b58900;">T</span>&gt;
-<span style="color: #859900;">class</span> <span style="color: #b58900;">MyClass</span>
+<pre class="src src-c++">template &lt;class T&gt;
+class MyClass
 {
-    <span style="color: #268bd2;">MyClass</span>();
-    <span style="color: #b58900;">void</span> <span style="color: #268bd2;">swap</span>(<span style="color: #b58900;">T</span> &amp;<span style="color: #268bd2;">a</span>, <span style="color: #b58900;">T</span> &amp;<span style="color: #268bd2;">b</span>);
+    MyClass();
+    void swap(T &amp;a, T &amp;b);
 }
-<span style="color: #2aa198;">MyClass</span>&lt;<span style="color: #b58900;">T</span>&gt;::<span style="color: #268bd2;">MyClass</span>()
+MyClass&lt;T&gt;::MyClass()
 {
-    <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">&#21021;&#22987;&#21270;&#25805;&#20316;&#12290;</span>
+    // 初始化操作。
 }
-<span style="color: #859900;">template</span> &lt;&gt;
-<span style="color: #b58900;">type</span> <span style="color: #2aa198;">ClassName</span>&lt;<span style="color: #859900;">class</span> <span style="color: #b58900;">T</span>&gt;::<span style="color: #268bd2;">FunctionName</span> (parameters)
+template &lt;&gt;
+type ClassName&lt;class T&gt;::FunctionName (parameters)
 </pre>
 </div>
 </div>
@@ -277,7 +273,7 @@ for the JavaScript code in this tag.
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 
-<pre class="src src-c++"><span style="color: #b58900;">type</span> <span style="color: #859900;">operator</span> <span style="color: #b58900;">sign</span> (parameters);
+<pre class="src src-c++">type operator sign (parameters);
 </pre>
 </div>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -354,7 +350,7 @@ Reference: <a href="http://www.prglab.com/cms/pages/c-tutorial/oo-programming/ov
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 
-<pre class="src src-c++">ClassName(<span style="color: #859900;">const</span> <span style="color: #b58900;">ClassName</span> &amp;<span style="color: #268bd2;">cn</span>);
+<pre class="src src-c++">ClassName(const ClassName &amp;cn);
 </pre>
 </div>
 <p>
@@ -473,7 +469,7 @@ Reference:
 <div class="outline-text-4" id="text-7-2-1">
 <div class="org-src-container">
 
-<pre class="src src-sh">gcc hello.c -o hello.o  <span style="color: #93a1a1; font-style: italic;">#</span><span style="color: #93a1a1; font-style: italic;">&#36825;&#37324;&#27809;&#26377;&#20351;&#29992;-shared</span>
+<pre class="src src-sh">gcc hello.c -o hello.o  #这里没有使用-shared
 </pre>
 </div>
 </div>
@@ -483,7 +479,7 @@ Reference:
 <div class="outline-text-4" id="text-7-2-2">
 <div class="org-src-container">
 
-<pre class="src src-sh">ar -r libhello.a hello.o  <span style="color: #93a1a1; font-style: italic;">#</span><span style="color: #93a1a1; font-style: italic;">&#36825;&#37324;&#30340;ar&#30456;&#24403;&#20110;tar&#30340;&#20316;&#29992;&#65292;&#23558;&#22810;&#20010;&#30446;&#26631;&#25171;&#21253;&#12290;</span>
+<pre class="src src-sh">ar -r libhello.a hello.o  #这里的ar相当于tar的作用，将多个目标打包。
 </pre>
 </div>
 <p>
@@ -524,11 +520,11 @@ Reference:
 
 <pre class="src src-sh">$ ldd a.out
 linux-vdso.so.1 =&gt;  (0x00007fff15100000)
-<span style="color: #268bd2;">/usr/local/snoopy/lib/snoopy.so</span> (0x00007f436e245000)
-/opt/aegis/$<span style="color: #268bd2;">LIB</span>/aegis_monitor.so =&gt; /opt/aegis/lib64/aegis_monitor.so (0x00007f436e042000)
+/usr/local/snoopy/lib/snoopy.so (0x00007f436e245000)
+/opt/aegis/$LIB/aegis_monitor.so =&gt; /opt/aegis/lib64/aegis_monitor.so (0x00007f436e042000)
 libc.so.6 =&gt; /lib64/libc.so.6 (0x00007f436dca0000)
 libdl.so.2 =&gt; /lib64/libdl.so.2 (0x00007f436da9c000)
-<span style="color: #268bd2;">/lib64/ld-linux-x86-64.so.2</span> (0x000000303d200000)
+/lib64/ld-linux-x86-64.so.2 (0x000000303d200000)
 </pre>
 </div>
 <p>
@@ -555,13 +551,13 @@ Reference:
 
 <div class="org-src-container">
 
-<pre class="src src-c++"><span style="color: #cb4b16;">#include</span> <span style="color: #2aa198;">&lt;iostream&gt;</span>
+<pre class="src src-c++">#include &lt;iostream&gt;
 
-<span style="color: #859900;">using</span> <span style="color: #859900;">namespace</span> <span style="color: #2aa198;">std</span>;
+using namespace std;
 
-<span style="color: #b58900;">int</span> <span style="color: #268bd2;">main</span>(<span style="color: #b58900;">int</span> <span style="color: #268bd2;">argc</span>, <span style="color: #b58900;">char</span> *<span style="color: #268bd2;">argv</span>[])
+int main(int argc, char *argv[])
 {
-    cout &lt;&lt; <span style="color: #2aa198;">"hi, icecream"</span> &lt;&lt; endl;
+    cout &lt;&lt; "hi, icecream" &lt;&lt; endl;
 }
 </pre>
 </div>
@@ -583,7 +579,7 @@ C中宏定义注意二义性：
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c"><span style="color: #cb4b16;">#define</span> <span style="color: #268bd2;">max</span>(<span style="color: #268bd2;">a</span>, <span style="color: #268bd2;">b</span>) (a)&gt;(b)?(a):(b)
+<pre class="src src-c">#define max(a, b) (a)&gt;(b)?(a):(b)
 </pre>
 </div>
 
@@ -611,19 +607,19 @@ C中宏定义注意二义性：
 在参数列表中的某些参数有默认值时，在调用的时候会报错。代码如下：
 <div class="org-src-container">
 
-<pre class="src src-c"><span style="color: #b58900;">int</span> <span style="color: #268bd2;">mul</span>(<span style="color: #b58900;">int</span> <span style="color: #268bd2;">a</span>, <span style="color: #b58900;">int</span> <span style="color: #268bd2;">b</span>)
+<pre class="src src-c">int mul(int a, int b)
 {
-     <span style="color: #859900;">return</span> 1;
+     return 1;
 }
 
-<span style="color: #b58900;">int</span> <span style="color: #268bd2;">mul</span>(<span style="color: #b58900;">int</span> <span style="color: #268bd2;">a</span>, <span style="color: #b58900;">int</span> <span style="color: #268bd2;">b</span>, <span style="color: #b58900;">int</span> <span style="color: #268bd2;">c</span> = 0, <span style="color: #b58900;">int</span> <span style="color: #268bd2;">d</span> = 10)
+int mul(int a, int b, int c = 0, int d = 10)
 {
-     <span style="color: #859900;">return</span> 2;
+     return 2;
 }
-<span style="color: #93a1a1; font-style: italic;">/* </span><span style="color: #93a1a1; font-style: italic;">&#19979;&#38754;&#30340;&#20195;&#30721;&#35774;&#32622;&#40664;&#35748;&#20540;&#26159;&#19981;&#34987;&#20801;&#35768;&#30340;,&#21407;&#22240;&#26159;&#21442;&#25968;&#20837;&#26632;&#26102;&#65292;&#27809;&#26377;&#36171;&#20540;&#12290; </span><span style="color: #93a1a1; font-style: italic;">*/</span>
-<span style="color: #b58900;">int</span> <span style="color: #268bd2;">mul</span>(<span style="color: #b58900;">int</span> <span style="color: #268bd2;">a</span>=10, <span style="color: #b58900;">int</span> <span style="color: #268bd2;">b</span>=10, <span style="color: #b58900;">int</span> <span style="color: #268bd2;">c</span> = 0, <span style="color: #b58900;">int</span> <span style="color: #268bd2;">d</span>)
+/* 下面的代码设置默认值是不被允许的,原因是参数入栈时，没有赋值。 */
+int mul(int a=10, int b=10, int c = 0, int d)
 {
-     <span style="color: #859900;">return</span> 2;
+     return 2;
 }
 </pre>
 </div>
@@ -666,8 +662,8 @@ C++:
 
 <div class="org-src-container">
 
-<pre class="src src-C"><span style="color: #b58900;">int</span> * <span style="color: #268bd2;">p</span> = new <span style="color: #b58900;">int</span>;              <span style="color: #93a1a1; font-style: italic;">/* </span><span style="color: #93a1a1; font-style: italic;">&#22312;&#22534;&#19978;&#38754;&#20998;&#37197;&#31354;&#38388;sizeof(int) </span><span style="color: #93a1a1; font-style: italic;">*/</span>
-<span style="color: #b58900;">int</span> * <span style="color: #268bd2;">p</span> = new <span style="color: #b58900;">int</span>();            <span style="color: #93a1a1; font-style: italic;">/* </span><span style="color: #93a1a1; font-style: italic;">&#21021;&#22987;&#21270;&#20026;0&#65288;&#21152;&#19978;()&#65289; </span><span style="color: #93a1a1; font-style: italic;">*/</span>
+<pre class="src src-C">int * p = new int;              /* 在堆上面分配空间sizeof(int) */
+int * p = new int();            /* 初始化为0（加上()） */
 </pre>
 </div>
 </div>
@@ -678,8 +674,8 @@ C++:
 <div class="outline-text-4" id="text-10-1-2">
 <div class="org-src-container">
 
-<pre class="src src-c"><span style="color: #b58900;">int</span> *<span style="color: #268bd2;">p</span> = &amp;num;                  <span style="color: #93a1a1; font-style: italic;">/* </span><span style="color: #93a1a1; font-style: italic;">&#21462;&#22320;&#22336;&#31526; </span><span style="color: #93a1a1; font-style: italic;">*/</span>
-<span style="color: #b58900;">int</span> &amp;p1 = num;                  <span style="color: #93a1a1; font-style: italic;">/* </span><span style="color: #93a1a1; font-style: italic;">&#24341;&#29992; </span><span style="color: #93a1a1; font-style: italic;">*/</span>
+<pre class="src src-c">int *p = &amp;num;                  /* 取地址符 */
+int &amp;p1 = num;                  /* 引用 */
 </pre>
 </div>
 </div>
@@ -742,10 +738,10 @@ class A: virtual public b
 <div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
 <p class="date">2013-04-22</p>
-<p class="export-date">2015-12-28 Mon 11:41</p>
+<p class="export-date">2016-04-07 Thu 16:58</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
-<p class="last-modification-time">2015-12-27 Sun 13:34</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+<p class="last-modification-time">2016-04-06 Wed 15:17</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
 </div>
 </body>
 </html>
