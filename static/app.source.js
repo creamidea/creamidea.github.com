@@ -41,7 +41,7 @@ function changeOctoCat (body) {
       var oBannerWrapper = document.getElementById('banner-wrapper');
       oBannerWrapper.style.background = 'url('+ src +') no-repeat top center fixed';
       oBannerWrapper.style.backgroundSize = '424px 424px';
-      oBannerWrapper.innerHTML = '<p style="display: block;margin:0;position:absolute;bottom:0;left:1%;right:1%;line-height:0.7;"><a href="https://github.com/" alt="Check me out on :octocat:" title="Check me out on :octocat:" style="color:black;font-size:16px;font-family:Georgia1,Georgia,Times New Roman,Times,serif;font-style: italic;">'+octocat.title+'</a></p>';
+      oBannerWrapper.innerHTML = '<p style="display: block;margin:0;position:absolute;bottom:0;left:1%;right:1%;line-height:1;"><a href="https://github.com/" alt="Check me out on :octocat:" title="Check me out on :octocat:" style="color:black;font-size:16px;font-family:Georgia1,Georgia,Times New Roman,Times,serif;font-style: italic;">'+octocat.title+'</a></p>';
       clearInterval(window.blinkTimer);
     };
     img.onerror = function () {
