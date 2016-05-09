@@ -217,7 +217,7 @@ function showTags (body, content, meta) {
   if (keywords && keywords.length > 0) {
     var div = document.createElement('div');
     var footnotes = document.getElementById('footnotes');
-    var searchEngine = 'https://g.forestgump.me/#q=';
+    var searchEngine = 'https://www.laiguge.com/search?hl=en&q=';
     keywords.forEach(function (key) {
       var a = document.createElement('a');
       a.href = searchEngine +
