@@ -18,7 +18,7 @@
 
 * Au9ustine
 贯穿大学时期的学长，一度奉为神的存在。在整个人生道路上起到了巨大的指引作用。\\
-[[http://au9ustine.github.io/][homepage]] 
+[[http://au9ustine.github.io/][homepage]]
 
 * Van9ogh
 大学时期团队成员。太多的话了，今晚暂时不写。\\
@@ -33,10 +33,9 @@
 * JoneWang
 大三的时候在网上认识的，我也不知道怎么认识的。疑？怎么会认识的呢？只记得帮忙买过键盘了。 >_<
 后面想起什么再过来写吧。 \\
-[[http://jone.wang/][homepage]] 
+[[http://jone.wang/][homepage]]
 
 * 尾声
-
 
 #+BEGIN_QUOTE
 去留无意，望天上云卷云舒。

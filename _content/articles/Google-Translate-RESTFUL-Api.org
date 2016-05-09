@@ -1,0 +1,23 @@
+#+TITLE: Google Translate API Analytics
+#+AUTHOR: 冰糖火箭筒(Junjia Ni)
+#+EMAIL: creamidea(AT)gmail.com
+#+DATE: 2016-05-08
+#+CATEGORY: article
+#+DESCRIPTION: Google Translate API Analy
+#+KEYWORDS: google-translate
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t <:t date:t timestamp:t
+#+LINK_HOME: https://creamidea.github.io
+#+STARTUP: showall
+
+
+* 前言
+  这里是测试，我加了几篇文章过来。我还是要移动几篇文章。重新开始测试。测试。
+  获取CPU性能
+
+* TK生成代码
+
+* 尾声
+  这里测试会不会顶到底部的 **tags**
+  #+BEGIN_SRC js
+    alert('h')
+  #+END_SRC

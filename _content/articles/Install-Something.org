@@ -8,40 +8,40 @@
 
 
 * 前言
-这个是我的一个配置环境的wiki，主要记录我这些年安装的软件和配置的一些服务。
-主要是在Windows7上和Linux(现在主要是Ubuntu)上。
-详细记录一些配置过程和安装的软件。方便以后重新安装系统。
+  这个是我的一个配置环境的wiki，主要记录我这些年安装的软件和配置的一些服务。
+  主要是在Windows7上和Linux(现在主要是Ubuntu)上。
+  详细记录一些配置过程和安装的软件。方便以后重新安装系统。
 
 * Node
-#+BEGIN_EXAMPLE
-~/.npm
-/usr/local/bin/node
-/usr/local/bin/npm
-/usr/local/lib/node_modules
-/usr/local/libexec/node_modules
-/usr/local/share/man/man1/node*
-/usr/local/lib/dtrace/node.d
-/usr/local/include/node_modules
-/var/db/receipts/org.nodejs.node.pkg.*
+  #+BEGIN_EXAMPLE
+  ~/.npm
+  /usr/local/bin/node
+  /usr/local/bin/npm
+  /usr/local/lib/node_modules
+  /usr/local/libexec/node_modules
+  /usr/local/share/man/man1/node*
+  /usr/local/lib/dtrace/node.d
+  /usr/local/include/node_modules
+  /var/db/receipts/org.nodejs.node.pkg.*
 
-.node_repl_history
-#+END_EXAMPLE
+  .node_repl_history
+  #+END_EXAMPLE
 
 * Git
 
 ** git lfs error: failed to push some refs to
-#+BEGIN_SRC sh
+   #+BEGIN_SRC sh
   # you should be able to fix your pushes by removing the .git/hooks/pre-push file from your repository. This is where git is trying to run git lfs when you push.
   rm .git/hooks/pre-push
-#+END_SRC
-Reference: https://github.com/github/git-lfs/issues/333
+   #+END_SRC
+   Reference: https://github.com/github/git-lfs/issues/333
 * Emacs
 ** Refile
-#+BEGIN_SRC elisp
+   #+BEGIN_SRC elisp
   ;; http://superuser.com/a/373976
   (setq org-refile-use-outline-path 'file)
   (setq org-refile-targets '((org-agenda-files :level . 1)))
-#+END_SRC
+   #+END_SRC
 
 ** 待阅读：
 1. [[http://stackoverflow.com/questions/4352367/is-it-possible-to-start-emacs-using-a-remote-configuration-file][Is it possible to start emacs using a remote configuration file?]]
@@ -52,51 +52,51 @@ Reference: https://github.com/github/git-lfs/issues/333
 6. [[http://blog.csdn.net/astropeak/article/details/6666527][《Emacs——你不能不用的神级利器》——补全（下）]]
 
 * System Images SHA
-链接 [[https://msdn.microsoft.com/zh-cn/subscriptions/securedownloads/hh442898#searchTerm=&ProductFamilyId=481&Languages=en&PageSize=10&PageIndex=0&FileId=0][microsoft-msdn]]
+  链接 [[https://msdn.microsoft.com/zh-cn/subscriptions/securedownloads/hh442898#searchTerm=&ProductFamilyId=481&Languages=en&PageSize=10&PageIndex=0&FileId=0][microsoft-msdn]]
 
-文件名： cn_windows_8_enterprise_x64_dvd_917570.iso
-SHA1：1280BC3A38A7001FDE981FA2E465DEB341478667
+  文件名： cn_windows_8_enterprise_x64_dvd_917570.iso
+  SHA1：1280BC3A38A7001FDE981FA2E465DEB341478667
 
-文件名： en_windows_8_x64_dvd_915440.iso
-语言： English
-SHA1：1CE53AD5F60419CF04A715CF3233F247E48BEEC4
+  文件名： en_windows_8_x64_dvd_915440.iso
+  语言： English
+  SHA1：1CE53AD5F60419CF04A715CF3233F247E48BEEC4
 
-文件名： cn_windows_8.1_with_update_x64_dvd_4048046.iso
-SHA1：F44B2BBD1F6F243DAAE172FA8C1DB342CB98EDAA
+  文件名： cn_windows_8.1_with_update_x64_dvd_4048046.iso
+  SHA1：F44B2BBD1F6F243DAAE172FA8C1DB342CB98EDAA
 
 * libuv
 
-依赖 *autoconf* *automake* *libtool*
+  依赖 *autoconf* *automake* *libtool*
 
 ** Error: glibtoolize cannot found.
-#+BEGIN_SRC sh
+   #+BEGIN_SRC sh
 if [ "$LIBTOOLIZE" = "" ] && [ "`uname`" = "Darwin" ]; then
   LIBTOOLIZE=libtoolize # 这里的glibtoolize -> libtoolize
 fi
-#+END_SRC
+   #+END_SRC
 
 ** Undefined symbols for architecture x86_64
-#+BEGIN_SRC sh
+   #+BEGIN_SRC sh
 clang -Wall -I/usr/local/libuv/include -L/usr/local/libuv/lib -luv main.c
-#+END_SRC
+   #+END_SRC
 
 * m4
-看完这个文档 [[http://mbreen.com/m4.html][m4-doc]] or [[http://www.gnu.org/software/m4/manual/m4.html][GNU M4 1.4.17 macro processor]] ，感觉m4就是lisp宏的一个翻版嘛~ (逃...
+  看完这个文档 [[http://mbreen.com/m4.html][m4-doc]] or [[http://www.gnu.org/software/m4/manual/m4.html][GNU M4 1.4.17 macro processor]] ，感觉m4就是lisp宏的一个翻版嘛~ (逃...
 
-也可以参考这个[[http://garfileo.is-programmer.com/2011/4/21/interesting-gnu-m4.26282.html][有趣的 M4]] 。
+  也可以参考这个[[http://garfileo.is-programmer.com/2011/4/21/interesting-gnu-m4.26282.html][有趣的 M4]] 。
 
 * Verify the Signature
-#+BEGIN_SRC sh
+  #+BEGIN_SRC sh
   gpg --verify xxx.tar.gz.sig xxx.tar.gz
   # get the key ID
   gpg --recv-keys [key ID]
   # add the key
   gpg --verify --verbose xxx.tar.gz.sig xxx.tar.gz
-#+END_SRC  
-Reference: http://www.cnblogs.com/daemon369/p/3204020.html
+  #+END_SRC
+  Reference: http://www.cnblogs.com/daemon369/p/3204020.html
 
 * Extract Files
-#+BEGIN_SRC sh
+  #+BEGIN_SRC sh
   if [ -f $1 ] ; then
       case $1 in
           ,*.tar.bz2)      tar xvjf $1 && cd $(basename "$1" .tar.bz2) ;;
@@ -116,48 +116,48 @@ Reference: http://www.cnblogs.com/daemon369/p/3204020.html
   else
       echo "'$1' is not a valid file!"
   fi
-#+END_SRC
+  #+END_SRC
 
 * Install Protobuf
 
 ** PKG_CONFIG_PATH unknow
-#+BEGIN_SRC sh
+   #+BEGIN_SRC sh
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
-#+END_SRC
+   #+END_SRC
 
 * Install GnuPG
 ** error: intmax_t unknow when compile
-#+BEGIN_QUOTE
-After upgrading to Apple's Xcode 5.0, gnupg2 2.0.21 would no longer compile.
+   #+BEGIN_QUOTE
+   After upgrading to Apple's Xcode 5.0, gnupg2 2.0.21 would no longer compile.
 
-For some reason or other, sm/stdint.h could not resolve certain typedefs.
-Workaround was to crassly force typedef resolution in sm/stdint.h with these
-lines after #include <stdint.h> :
+   For some reason or other, sm/stdint.h could not resolve certain typedefs.
+   Workaround was to crassly force typedef resolution in sm/stdint.h with these
+   lines after #include <stdint.h> :
 
-typedef long  			intptr_t;
-typedef long long               intmax_t;
-typedef unsigned long   	uintptr_t;
-typedef unsigned long long      uintmax_t;
+   typedef long  			intptr_t;
+   typedef long long               intmax_t;
+   typedef unsigned long   	uintptr_t;
+   typedef unsigned long long      uintmax_t;
 
-After that everything compiled and all make checks passed.
-#+END_QUOTE
-Reference: https://bugs.gnupg.org/gnupg/msg4744
+   After that everything compiled and all make checks passed.
+   #+END_QUOTE
+   Reference: https://bugs.gnupg.org/gnupg/msg4744
 
 ** Install TeX on Mac
-#+BEGIN_SRC sh
+   #+BEGIN_SRC sh
 $ sudo ln -s /Volumes/MyTeXLive/bin/universal-darwin /usr/texbin
-#+END_SRC
+   #+END_SRC
 
-或者 =TeX Live Utility > TeX programs (choose)= 这里修改TeX路径。
+   或者 =TeX Live Utility > TeX programs (choose)= 这里修改TeX路径。
 
-使用清华TUNA: http://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/tlnet
+   使用清华TUNA: http://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/tlnet
 
-Reference: https://www.tug.org/texlive/doc/texlive-en/texlive-en.html#tlportable
+   Reference: https://www.tug.org/texlive/doc/texlive-en/texlive-en.html#tlportable
 
 * iTerm2 GBK编码
-让iTerm2临时变成GBK编码的环境，首先创建一个名为GBK的Profile，然后将其字符编码改成GBK。运行下面的sh即可用。
-#+BEGIN_SRC sh
+  让iTerm2临时变成GBK编码的环境，首先创建一个名为GBK的Profile，然后将其字符编码改成GBK。运行下面的sh即可用。
+  #+BEGIN_SRC sh
   #!/bin/bash
   # 使用GBK Profile
   echo -e "\033]50;SetProfile=GBK\a"
@@ -172,7 +172,7 @@ Reference: https://www.tug.org/texlive/doc/texlive-en/texlive-en.html#tlportable
   echo -e "\033]50;SetProfile=Default\a"
   export LANG=zh_CN.UTF-8
   export LC_ALL=zh_CN.UTF-8
-#+END_SRC
+  #+END_SRC
 
 * Windows
 ** Install Windows7 Ultimate
@@ -182,70 +182,70 @@ Reference: https://www.tug.org/texlive/doc/texlive-en/texlive-en.html#tlportable
       22TKD-F8XX6-YG69F-9M66D-PMJBM
       #+END_EXAMPLE
    2. Install Windows7 Ultimate by DVD/USB:
-      
+
       waiting...
 ** Install Emacs and config her
 *** Change the Home Directory:
 		1. Ctrl + R
     2. Input "regedit"
     3. HKEY\_CURRENT\_USER/Software/GNU/Emacs/HOME=%The Home of Emacs%
-    (New a string value)
+       (New a string value)
 *** Swap the CapsLk && Ctrl\_L
 		1. Modify the regedit
 		   #+BEGIN_EXAMPLE
 		     REGEDIT4
 
-         [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout]
-         "Scancode Map"=hex:00,00,00,00,00,00,00,00,
+                   [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout]
+                   "Scancode Map"=hex:00,00,00,00,00,00,00,00,
                             03,00,00,00,1d,00,3a,00,
                             3a,00,1d,00,00,00,00,00
 		     (New a binary Values)
-		     #+END_EXAMPLE
+		   #+END_EXAMPLE
 		2. Download Software:
           + The script: http://www.cs.umb.edu/~wimiller/stuff/caps2ctrl.exe
           + The source: http://www.cs.umb.edu/~wimiller/stuff/caps2ctrl.ahk
 		3. AutoHotKey:
-			 #+BEGIN_EXAMPLE
+		   #+BEGIN_EXAMPLE
 			   Capslock::Ctrl
-			 #+END_EXAMPLE
+		   #+END_EXAMPLE
 		4. *Reference:*
 		     + http://www.emacswiki.org/emacs/MovingTheCtrlKey
 *** Reference:
 		+ http://www.emacswiki.org/emacs/JonathanArnoldDotEmacs
 ** Install Jekyll
 *** Download:
-		[[http://rubyinstaller.org/downloads/][RubyInstaller && DEVELOPMENT KIT]]
+    [[http://rubyinstaller.org/downloads/][RubyInstaller && DEVELOPMENT KIT]]
 *** Install:
-		Next -> Next -> ... -> Finish
+    Next -> Next -> ... -> Finish
 
-		*Attention:*
-		The path of the installer cannot have space!!!
+    *Attention:*
+    The path of the installer cannot have space!!!
 *** Run:
-		#+BEGIN_SRC sh
+    #+BEGIN_SRC sh
       > jekyll serve
-		#+END_SRC
+    #+END_SRC
 *** Change:
-		http://ruby.taobao.org/
+    http://ruby.taobao.org/
 *** Q&A:
 		1. Liquid Exception: incompatible character encodings: IBM437 and UTF-8
-			 #+BEGIN_SRC sh
+		   #+BEGIN_SRC sh
          # windows:
          > chcp 65001
-         
+
          # Linux
          $ export LC_ALL=en_US.UTF-8
          $ export LANG=en_US.UTF-8
          $ jekyll --server --auto
-         
-			 #+END_SRC
+
+		   #+END_SRC
 		   Reference:
 			 + http://chxt6896.github.io/blog/2012/02/13/blog-jekyll-native.html
 
 		2. Python Django:
-			   {&#37; autoescape off &#37;}
-         Hello {&#123; name &#123;}
-         {&#37; endautoescape &#37;}       
-			 Reference:
+		   {&#37; autoescape off &#37;}
+                Hello {&#123; name &#123;}
+                {&#37; endautoescape &#37;}
+		Reference:
 			 + http://www.ascii.cl/htmlcodes.htm
 ** Install Foobar and config her
 ** Install Win7Code
@@ -260,20 +260,20 @@ Reference: https://www.tug.org/texlive/doc/texlive-en/texlive-en.html#tlportable
 		1. Next->Next->...->Finish
 *** Configure:
 		1. use it in terminal (vs2010):
-			 Please use the : Qt 4.8.4 Command Prompt
+		   Please use the : Qt 4.8.4 Command Prompt
 *** Emacs:
 		+ http://www.emacswiki.org/emacs/QtMode
 		+ http://www.emacswiki.org/emacs/CcMode
 		+ http://alexott.blogspot.it/2009/02/cedet-qt.html
 *** Q && A:
 		1. Makefile.Debug:59: *** missing separator.  Stop.:
-			 #+BEGIN_SRC sh
+		   #+BEGIN_SRC sh
          # Qt 4.8.4 Command Prompt
          > qmake -project
          > qmake
          > nmake
-			 #+END_SRC
-			 Reference:
+		   #+END_SRC
+		   Reference:
 			 + http://stackoverflow.com/questions/12339099/what-does-the-missing-separator-make-error-mean-when-using-qt/16714236#16714236
 			 + http://www.verydemo.com/demo_c92_i131633.html
 			 + http://www.qtforum.org/article/23450/qt4-and-mysql-driver-problem.html
@@ -288,7 +288,7 @@ Reference: https://www.tug.org/texlive/doc/texlive-en/texlive-en.html#tlportable
         $ sudo aptitude install libdbus-1-dev libgconf2-dev libgif-dev libgpm-dev \
           libgtk2.0-dev libjpeg62-dev libm17n-dev libncurses5-dev \
           libotf-dev librsvg2-dev libtiff4-dev libXpm-dev
-        
+
         $ ./configure
         $ make bootstrap
         $ make
@@ -354,11 +354,11 @@ Reference: https://www.tug.org/texlive/doc/texlive-en/texlive-en.html#tlportable
         ### BEGIN /etc/grub.d/05_debian_theme ###
         insmod part_msdos
         insmod ext4
-        # Here you should use (sudo fdisk -l) to see /dev/sda?? 
+        # Here you should use (sudo fdisk -l) to see /dev/sda??
         set root='(hd0,msdos10)'
         search --no-floppy --fs-uuid --set e3a8ca35-417d-4da2-9380-91f08a9e4fb2
         insmod png
-        if background_image /usr/share/backgrounds/spacefun-grub-widescreen.png; 
+        if background_image /usr/share/backgrounds/spacefun-grub-widescreen.png;
         then
           set color_normal=light-gray/black
           set color_highlight=white/black
@@ -383,7 +383,7 @@ Reference: https://www.tug.org/texlive/doc/texlive-en/texlive-en.html#tlportable
 *** lua
     1. Go to [[http://www.lua.org/download.html][here]] to download
     2. Extra it
-    3. =make linux= 
+    3. =make linux=
        (if error: no readline.h. =sudo apt-get install libreadline-dev=)
     4. =sudo make install=
     5. Over~
@@ -405,8 +405,8 @@ Reference: https://www.tug.org/texlive/doc/texlive-en/texlive-en.html#tlportable
       #+END_SRC
    5. Correct the file ownership and the permissions of the executables:(if necessary)
       #+BEGIN_SRC sh
-        sudo chmod a+x /usr/bin/java 
-        sudo chmod a+x /usr/bin/javac 
+        sudo chmod a+x /usr/bin/java
+        sudo chmod a+x /usr/bin/javac
         sudo chmod a+x /usr/bin/javaws
         sudo chown -R root:root /usr/lib/jvm/jdk1.7.0
       #+END_SRC
@@ -426,12 +426,12 @@ Reference: https://www.tug.org/texlive/doc/texlive-en/texlive-en.html#tlportable
    1. Launchers > Key to show the HUD
       =Alt+Alt R=
 
-   2. Windows > Activate the window menu 
+   2. Windows > Activate the window menu
       =Menu=
-      
+
    3. Alt + key to active menu
       Alt+E > Keyboard Shortcuts
-      
+
 ** Make Ubuntu12.04 hibernation
    1. open file
       #+BEGIN_SRC sh

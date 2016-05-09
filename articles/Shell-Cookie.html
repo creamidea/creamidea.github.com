@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Shell Cookies</title>
-<!-- 2016-04-07 Thu 16:58 -->
+<!-- 2016-05-09 Mon 16:57 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="冰糖火箭筒(Junjia Ni)" />
+<meta  name="author" content="Junjia Ni" />
 <meta  name="description" content="记住一些命令"
  />
 <meta  name="keywords" content="shell,emacs,etags" />
@@ -91,7 +91,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" type="text/css" href="/static/style.css"><link rel="stylesheet" type="text/css" href="/static/medium-fonts.css">
+<link rel="stylesheet" type="text/css" href="/static/app.css">
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -181,7 +181,7 @@ for the JavaScript code in this tag.
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 
-<pre class="src src-sh"># -r 指定频率
+<pre class="src src-sh"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">-r &#25351;&#23450;&#39057;&#29575;</span>
 $ ffmpeg -i xxx.mp4 -r 25 xxx.%05d.gif
 </pre>
 </div>
@@ -259,7 +259,7 @@ Reference:
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 
-<pre class="src src-sh">grep -rnw '/path/to/somewhere/' -e "pattern"
+<pre class="src src-sh">grep -rnw <span style="color: #8abeb7;">'/path/to/somewhere/'</span> -e <span style="color: #8abeb7;">"pattern"</span>
 </pre>
 </div>
 <p>
@@ -300,14 +300,14 @@ Reference: <a href="http://stackoverflow.com/a/16957078/1925954">http://stackove
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
 
-<pre class="src src-sh">cd /path/to/my/project
+<pre class="src src-sh"><span style="color: #b294bb;">cd</span> /path/to/my/project
 ctags -e -R *.cpp *.hpp *.h
 
-cd /path/to/my/project
-find . | grep ".*\.\(hh\|hxx\|cc\)" | xargs etags -f TAGS
+<span style="color: #b294bb;">cd</span> /path/to/my/project
+find . | grep <span style="color: #8abeb7;">".*\.\(hh\|hxx\|cc\)"</span> | xargs etags -f TAGS
 
-cd /path/to/my/project
-find . -type f -iname "*.[ch]" | etags -
+<span style="color: #b294bb;">cd</span> /path/to/my/project
+find . -type f -iname <span style="color: #8abeb7;">"*.[ch]"</span> | etags -
 </pre>
 </div>
 <p>
@@ -332,13 +332,13 @@ find . -type f -iname "*.[ch]" | etags -
 </div>
 </div>
 <div id="postamble" class="status">
-<div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
+<div id="meta-article"><p class="author">Junjia Ni</p>
 <p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
 <p class="date">2015-12-27</p>
-<p class="export-date">2016-04-07 Thu 16:58</p>
+<p class="export-date">2016-05-09 Mon 16:57</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
-<p class="last-modification-time">2016-04-06 Wed 15:17</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+<p class="validation"></p>
+<p class="last-modification-time">2016-05-08 Sun 16:57</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

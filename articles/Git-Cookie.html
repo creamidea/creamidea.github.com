@@ -3,14 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>CSS Cookie</title>
-<!-- 2016-04-07 Thu 16:58 -->
+<title>Git Cookie</title>
+<!-- 2016-05-09 Mon 16:54 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="冰糖火箭筒(Junjia Ni)" />
-<meta  name="description" content="一些关于css的小知识"
+<meta  name="author" content="Junjia Ni" />
+<meta  name="description" content="Git Cookie"
  />
-<meta  name="keywords" content="css,cookie,BFC" />
+<meta  name="keywords" content="git" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -91,7 +91,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" type="text/css" href="/static/style.css"><link rel="stylesheet" type="text/css" href="/static/medium-fonts.css">
+<link rel="stylesheet" type="text/css" href="/static/app.css">
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -141,23 +141,14 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">CSS Cookie</h1>
+<h1 class="title">Git Cookie</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#sec-1">1. 前言</a></li>
-<li><a href="#sec-2">2. Jump links and viewport positioning</a>
-<ul>
-<li><a href="#sec-2-1">2.1. A</a></li>
-<li><a href="#sec-2-2">2.2. B</a></li>
-<li><a href="#sec-2-3">2.3. C</a></li>
-<li><a href="#sec-2-4">2.4. D</a></li>
-<li><a href="#sec-2-5">2.5. E</a></li>
-</ul>
-</li>
-<li><a href="#sec-3">3. 动画效果</a></li>
-<li><a href="#sec-4">4. 尾声</a></li>
+<li><a href="#sec-2">2. Rewrite History</a></li>
+<li><a href="#sec-3">3. delete git submodles</a></li>
 </ul>
 </div>
 </div>
@@ -167,153 +158,55 @@ for the JavaScript code in this tag.
 <h2 id="sec-1"><span class="section-number-2">1</span> 前言</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-收集一些css的小内容
+一些关于 <b>git</b> 的小知识。用于git问题收集。
 </p>
 </div>
 </div>
 
 <div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> Jump links and viewport positioning</h2>
+<h2 id="sec-2"><span class="section-number-2">2</span> Rewrite History</h2>
 <div class="outline-text-2" id="text-2">
-</div><div id="outline-container-sec-2-1" class="outline-3">
-<h3 id="sec-2-1"><span class="section-number-3">2.1</span> A</h3>
-<div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 
-<pre class="src src-css">default
+<pre class="src src-sh">git filter-branch --commit-filter <span style="color: #8abeb7;">'</span>
+<span style="color: #8abeb7;">       if [ "$GIT_AUTHOR_EMAIL" = "schacon@localhost" ];</span>
+<span style="color: #8abeb7;">       then</span>
+<span style="color: #8abeb7;">               GIT_AUTHOR_NAME="Scott Chacon";</span>
+<span style="color: #8abeb7;">               GIT_AUTHOR_EMAIL="schacon@example.com";</span>
+<span style="color: #8abeb7;">               git commit-tree "$@";</span>
+<span style="color: #8abeb7;">       else</span>
+<span style="color: #8abeb7;">               git commit-tree "$@";</span>
+<span style="color: #8abeb7;">       fi'</span> HEAD
 </pre>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-2-2" class="outline-3">
-<h3 id="sec-2-2"><span class="section-number-3">2.2</span> B</h3>
-<div class="outline-text-3" id="text-2-2">
-<div class="org-src-container">
-
-<pre class="src src-css">#method-B:before {
-    display: block;
-    content: "";
-    height: 50px;
-    margin: -50px 0 0;
-}
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-2-3" class="outline-3">
-<h3 id="sec-2-3"><span class="section-number-3">2.3</span> C</h3>
-<div class="outline-text-3" id="text-2-3">
-<div class="org-src-container">
-
-<pre class="src src-css">#method-C {
-    padding-top: 50px;
-    margin-top: -50px;
-    \-webkit-background-clip: content-box;
-    background-clip: content-box;
-}
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-2-4" class="outline-3">
-<h3 id="sec-2-4"><span class="section-number-3">2.4</span> D</h3>
-<div class="outline-text-3" id="text-2-4">
-<div class="org-src-container">
-
-<pre class="src src-css">#method-D {
-    border-top: 50px solid transparent;
-    margin-top: -50px;
-    \-webkit-background-clip: padding-box;
-    \-moz-background-clip: padding;
-    background-clip: padding-box;
-}
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-2-5" class="outline-3">
-<h3 id="sec-2-5"><span class="section-number-3">2.5</span> E</h3>
-<div class="outline-text-3" id="text-2-5">
-<div class="org-src-container">
-
-<pre class="src src-css">#method-E {
-    position: relative;
-    padding: 15px;
-    border-top: 52px solid transparent;
-    margin-top: -50px;
-    \-webkit-background-clip: padding-box;
-    \-moz-background-clip: padding;
-    background-clip: padding-box;
-}
-
-#method-E:before {
-    content: "";
-    position: absolute;
-    top: -25px;
-    left: 0;
-    right: 0;
-    border-top: 1px solid #ccc;
-}
-</pre>
-</div>
-<p>
-Reference:
-</p>
-<ul class="org-ul">
-<li><a href="http://nicolasgallagher.com/jump-links-and-viewport-positioning/demo/">http://nicolasgallagher.com/jump-links-and-viewport-positioning/demo/</a>
-</li>
-<li><a href="https://css-tricks.com/hash-tag-links-padding/">https://css-tricks.com/hash-tag-links-padding/</a>
-</li>
-</ul>
 </div>
 </div>
 </div>
 
 <div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> 动画效果</h2>
+<h2 id="sec-3"><span class="section-number-2">3</span> delete git submodles</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-在做一些动画效果，需要隐藏一些元素的时候，如果直接使用 <code>display: none</code> 浏览器就不理我了。于是需要下面这些折衷的办法。
+<a href="http://yuguo.us/weblog/git-submodule/">http://yuguo.us/weblog/git-submodule/</a>
 </p>
 <div class="org-src-container">
 
-<pre class="src src-css">div &gt; ul {
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0s, opacity 0.5s linear;
-}
-div:hover &gt; ul {
-  visibility: visible;
-  opacity: 1;
-  transition-delay: 0s; /*在出现的时候不延迟*/
-}
+<pre class="src src-sh">$ git rm --cached [path]
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#32534;&#36753;.gitmodules&#25991;&#20214;&#65292;&#23558;&#23376;&#27169;&#22359;&#30340;&#30456;&#20851;&#37197;&#32622;&#33410;&#28857;&#21024;&#38500;&#25481;</span>
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#32534;&#36753;.git/config&#25991;&#20214;&#65292;&#23558;&#23376;&#27169;&#22359;&#30340;&#30456;&#20851;&#37197;&#32622;&#33410;&#28857;&#21024;&#38500;&#25481;[&#36825;&#19968;&#27493;&#22909;&#20687;&#24456;&#19981;&#31185;&#23398;&#65292;&#20026;&#20160;&#20040;&#20449;&#24687;&#35201;&#20445;&#23384;&#20004;&#20221;&#65311;]</span>
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#25163;&#21160;&#21024;&#38500;&#23376;&#27169;&#22359;&#27531;&#30041;&#30340;&#30446;&#24405;</span>
 </pre>
 </div>
-<p>
-Reference:
-</p>
-<ul class="org-ul">
-<li><a href="http://stackoverflow.com/questions/3331353/transitions-on-the-display-property">Transitions on the display: property</a>
-</li>
-<li><a href="http://www.greywyvern.com/?post=337">CSS3 transitions using visibility and delay</a>
-</li>
-<li><a href="http://www.css3.info/preview/css3-transitions/">How Transitions Work</a>
-</li>
-</ul>
 </div>
-</div>
-<div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> 尾声</h2>
 </div>
 </div>
 <div id="postamble" class="status">
-<div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
+<div id="meta-article"><p class="author">Junjia Ni</p>
 <p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
 <p class="date">2015-12-27</p>
-<p class="export-date">2016-04-07 Thu 16:58</p>
+<p class="export-date">2016-05-09 Mon 16:54</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
-<p class="last-modification-time">2016-04-06 Wed 15:17</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+<p class="validation"></p>
+<p class="last-modification-time">2016-05-09 Mon 16:51</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

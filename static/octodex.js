@@ -44,6 +44,7 @@ var req = https.request(options, (res) => {
   })
   
 })
+console.log("Start...");
 req.end()
 
 req.on('error', (err) => {

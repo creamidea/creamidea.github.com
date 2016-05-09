@@ -3,14 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>HHKB GET</title>
-<!-- 2016-05-09 Mon 16:25 -->
+<title>CSS Animation: display</title>
+<!-- 2016-05-09 Mon 16:30 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Junjia Ni" />
-<meta  name="description" content="ICECREAM(氷菓)"
+<meta  name="description" content="一些关于css的小知识"
  />
-<meta  name="keywords" content="HHKB,感想" />
+<meta  name="keywords" content="css,animation,display" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -141,13 +141,13 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">HHKB GET</h1>
+<h1 class="title">CSS Animation: display</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#sec-1">1. 前言</a></li>
-<li><a href="#sec-2">2. 购买记录</a></li>
+<li><a href="#sec-2">2. 解决方案</a></li>
 </ul>
 </div>
 </div>
@@ -157,60 +157,53 @@ for the JavaScript code in this tag.
 <h2 id="sec-1"><span class="section-number-2">1</span> 前言</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-我是故意将这篇文章推到第一篇的，实际编写日期为2013-10-25。为何我会将其放到这里呢？
-</p>
-
-<p>
-本来在这个站点不会出现任何关于人类情绪的文字和记述，但是今天实在是太激动了，以至于
-我不得不在这里留下只言片语来记载我心中最开心的时刻。
-</p>
-
-<p>
-现在是<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-10-25 14:16 Fri&gt;</span></span>。入手了一台HHKB Type-S 无刻。我也没有想到会这么快就得到了
-这个神器（其实也不是很快，整整花了我9天的光景）。
-多亏了 <a href="http://blog.jonewang.com/pages/about/">JoneWang</a> 的帮忙，才使我能够顺利的获得这个东西。
-</p>
-
-<p>
-本来以为我可以压制住这种莫名的兴奋感，但是我失败。
-</p>
-
-<p>
-HHKB是如此的优秀（只是我个人的感受，希望不要）,真的让我爱不释手。嗯，决定了，以后本体就是你啦。
-</p>
-
-<p>
-好的，今天就暂时写到这里，明天继续吧。
+元素消失的动画
 </p>
 </div>
 </div>
 
 <div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> 购买记录</h2>
+<h2 id="sec-2"><span class="section-number-2">2</span> 解决方案</h2>
 <div class="outline-text-2" id="text-2">
-<ol class="org-ol">
-<li>2013.10.16下单
+<p>
+在做一些动画效果，需要隐藏一些元素的时候，如果直接使用 <code>display: none</code> 浏览器就不理我了。于是需要下面这些折衷的办法。
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #de935f;">div &gt; ul </span>{
+  <span style="color: #f0c674;">visibility</span>: hidden;
+  <span style="color: #f0c674;">opacity</span>: 0;
+  <span style="color: #f0c674;">transition</span>: visibility 0s, opacity 0.5s linear;
+}
+<span style="color: #de935f;">div:hover &gt; ul </span>{
+  <span style="color: #f0c674;">visibility</span>: visible;
+  <span style="color: #f0c674;">opacity</span>: 1;
+  <span style="color: #f0c674;">transition-delay</span>: 0s; <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">&#22312;&#20986;&#29616;&#30340;&#26102;&#20505;&#19981;&#24310;&#36831;</span><span style="color: #969896; font-style: italic;">*/</span>
+}
+</pre>
+</div>
+<p>
+Reference:
+</p>
+<ul class="org-ul">
+<li><a href="http://stackoverflow.com/questions/3331353/transitions-on-the-display-property">Transitions on the display: property</a>
 </li>
-<li>2013.10.18日到达jshoppers
+<li><a href="http://www.greywyvern.com/?post=337">CSS3 transitions using visibility and delay</a>
 </li>
-<li>2013.10.22日收寄（日本）
+<li><a href="http://www.css3.info/preview/css3-transitions/">How Transitions Work</a>
 </li>
-<li>2013.10.24日到达苏州
-</li>
-<li>2013.10.25日签收
-</li>
-</ol>
+</ul>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <div id="meta-article"><p class="author">Junjia Ni</p>
 <p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
-<p class="date">2013-10-25</p>
-<p class="export-date">2016-05-09 Mon 16:25</p>
+<p class="date">2015-12-27</p>
+<p class="export-date">2016-05-09 Mon 16:30</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"></p>
-<p class="last-modification-time">2016-05-08 Sun 16:57</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+<p class="last-modification-time">2016-05-08 Sun 20:23</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>GWT ABC</title>
-<!-- 2016-04-07 Thu 16:58 -->
+<!-- 2016-05-09 Mon 16:25 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="冰糖火箭筒(Junjia Ni)" />
+<meta  name="author" content="Junjia Ni" />
 <meta  name="description" content="Something about gwt"
  />
 <meta  name="keywords" content="google,gwt,java" />
@@ -91,7 +91,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" type="text/css" href="/static/style.css"><link rel="stylesheet" type="text/css" href="/static/medium-fonts.css">
+<link rel="stylesheet" type="text/css" href="/static/app.css">
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -281,15 +281,15 @@ This application is out of date, please click the refresh button on your browser
 </p>
 <div class="org-src-container">
 
-<pre class="src src-xml">&lt;servlet&gt;
-  &lt;servlet-name&gt;greetServlet&lt;/servlet-name&gt;
-  &lt;servlet-class&gt;com.creamidea.helloworld.server.GreetingServiceImpl&lt;/servlet-class&gt;
-&lt;/servlet&gt;
+<pre class="src src-xml">&lt;<span style="color: #de935f;">servlet</span>&gt;
+  &lt;<span style="color: #de935f;">servlet-name</span>&gt;greetServlet&lt;/<span style="color: #de935f;">servlet-name</span>&gt;
+  &lt;<span style="color: #de935f;">servlet-class</span>&gt;com.creamidea.helloworld.server.GreetingServiceImpl&lt;/<span style="color: #de935f;">servlet-class</span>&gt;
+&lt;/<span style="color: #de935f;">servlet</span>&gt;
 
-&lt;servlet-mapping&gt;
-  &lt;servlet-name&gt;greetServlet&lt;/servlet-name&gt;
-  &lt;url-pattern&gt;/helloworld/greet&lt;/url-pattern&gt;
-&lt;/servlet-mapping&gt;
+&lt;<span style="color: #de935f;">servlet-mapping</span>&gt;
+  &lt;<span style="color: #de935f;">servlet-name</span>&gt;greetServlet&lt;/<span style="color: #de935f;">servlet-name</span>&gt;
+  &lt;<span style="color: #de935f;">url-pattern</span>&gt;/helloworld/greet&lt;/<span style="color: #de935f;">url-pattern</span>&gt;
+&lt;/<span style="color: #de935f;">servlet-mapping</span>&gt;
 </pre>
 </div>
 </div>
@@ -324,20 +324,20 @@ This application is out of date, please click the refresh button on your browser
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java">package com.creamidea.helloworld.client;
+<pre class="src src-java"><span style="color: #b5bd68;">package</span> com.creamidea.helloworld.<span style="color: #81a2be;">client</span>;
 
-import com.google.gwt.user.client.rpc.RemoteService;
-import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+<span style="color: #b5bd68;">import</span> <span style="color: #81a2be;">com</span>.<span style="color: #81a2be;">google</span>.<span style="color: #81a2be;">gwt</span>.<span style="color: #81a2be;">user</span>.<span style="color: #81a2be;">client</span>.<span style="color: #81a2be;">rpc</span>.<span style="color: #81a2be;">RemoteService</span>;
+<span style="color: #b5bd68;">import</span> <span style="color: #81a2be;">com</span>.<span style="color: #81a2be;">google</span>.<span style="color: #81a2be;">gwt</span>.<span style="color: #81a2be;">user</span>.<span style="color: #81a2be;">client</span>.<span style="color: #81a2be;">rpc</span>.<span style="color: #81a2be;">RemoteServiceRelativePath</span>;
 
-/**
- * The client side stub for the RPC service.
- */
-@RemoteServiceRelativePath("greet")
-public interface GreetingService extends RemoteService {
-    // 这个方法就是处理来自客户端的请求的
-    // 参数：name 就是客户端携带的信息啦
-    // 返回：字符串
-    String greetServer(String name) throws IllegalArgumentException;
+<span style="color: #b294bb;">/**</span>
+<span style="color: #b294bb;"> * The client side stub for the RPC service.</span>
+<span style="color: #b294bb;"> */</span>
+<span style="color: #81a2be;">@RemoteServiceRelativePath</span>(<span style="color: #8abeb7;">"greet"</span>)
+<span style="color: #b5bd68;">public</span> <span style="color: #b5bd68;">interface</span> <span style="color: #81a2be;">GreetingService</span> <span style="color: #b5bd68;">extends</span> <span style="color: #81a2be;">RemoteService</span> {
+    <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#36825;&#20010;&#26041;&#27861;&#23601;&#26159;&#22788;&#29702;&#26469;&#33258;&#23458;&#25143;&#31471;&#30340;&#35831;&#27714;&#30340;</span>
+    <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#21442;&#25968;&#65306;name &#23601;&#26159;&#23458;&#25143;&#31471;&#25658;&#24102;&#30340;&#20449;&#24687;&#21862;</span>
+    <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#36820;&#22238;&#65306;&#23383;&#31526;&#20018;</span>
+    <span style="color: #81a2be;">String</span> <span style="color: #de935f;">greetServer</span>(<span style="color: #81a2be;">String</span> <span style="color: #f0c674;">name</span>) <span style="color: #b5bd68;">throws</span> <span style="color: #81a2be;">IllegalArgumentException</span>;
 }
 </pre>
 </div>
@@ -358,19 +358,19 @@ public interface GreetingService extends RemoteService {
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java">package com.creamidea.helloworld.client;
+<pre class="src src-java"><span style="color: #b5bd68;">package</span> com.creamidea.helloworld.<span style="color: #81a2be;">client</span>;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+<span style="color: #b5bd68;">import</span> <span style="color: #81a2be;">com</span>.<span style="color: #81a2be;">google</span>.<span style="color: #81a2be;">gwt</span>.<span style="color: #81a2be;">user</span>.<span style="color: #81a2be;">client</span>.<span style="color: #81a2be;">rpc</span>.<span style="color: #81a2be;">AsyncCallback</span>;
 
-/**
- * The async counterpart of &lt;code&gt;GreetingService&lt;/code&gt;.
- */
-public interface GreetingServiceAsync {
-    // 这个方法有两个参数
-    // 一个是需要向服务器发送什么信息
-    // 另一个是回调，就是服务器成功返回之后客户端需要做的事情
-  void greetServer(String input, AsyncCallback&lt;String&gt; callback)
-      throws IllegalArgumentException;
+<span style="color: #b294bb;">/**</span>
+<span style="color: #b294bb;"> * The async counterpart of </span><span style="color: #81a2be;">&lt;code&gt;</span><span style="color: #b294bb;">GreetingService</span><span style="color: #81a2be;">&lt;/code&gt;</span><span style="color: #b294bb;">.</span>
+<span style="color: #b294bb;"> */</span>
+<span style="color: #b5bd68;">public</span> <span style="color: #b5bd68;">interface</span> <span style="color: #81a2be;">GreetingServiceAsync</span> {
+    <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#36825;&#20010;&#26041;&#27861;&#26377;&#20004;&#20010;&#21442;&#25968;</span>
+    <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#19968;&#20010;&#26159;&#38656;&#35201;&#21521;&#26381;&#21153;&#22120;&#21457;&#36865;&#20160;&#20040;&#20449;&#24687;</span>
+    <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#21478;&#19968;&#20010;&#26159;&#22238;&#35843;&#65292;&#23601;&#26159;&#26381;&#21153;&#22120;&#25104;&#21151;&#36820;&#22238;&#20043;&#21518;&#23458;&#25143;&#31471;&#38656;&#35201;&#20570;&#30340;&#20107;&#24773;</span>
+  <span style="color: #81a2be;">void</span> <span style="color: #de935f;">greetServer</span>(<span style="color: #81a2be;">String</span> <span style="color: #f0c674;">input</span>, <span style="color: #81a2be;">AsyncCallback</span>&lt;<span style="color: #81a2be;">String</span>&gt; <span style="color: #f0c674;">callback</span>)
+      <span style="color: #b5bd68;">throws</span> <span style="color: #81a2be;">IllegalArgumentException</span>;
 }
 </pre>
 </div>
@@ -380,39 +380,39 @@ public interface GreetingServiceAsync {
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java">/**
- * 创建一个用于和远程服务(Greeting Service)进行通信的代理
- * 将客户端的发送器和服务器端的处理器绑定
- */
-private final GreetingServiceAsync greetingService = GWT
-    .create(GreetingService.class);
+<pre class="src src-java"><span style="color: #b294bb;">/**</span>
+<span style="color: #b294bb;"> * &#21019;&#24314;&#19968;&#20010;&#29992;&#20110;&#21644;&#36828;&#31243;&#26381;&#21153;(Greeting Service)&#36827;&#34892;&#36890;&#20449;&#30340;&#20195;&#29702;</span>
+<span style="color: #b294bb;"> * &#23558;&#23458;&#25143;&#31471;&#30340;&#21457;&#36865;&#22120;&#21644;&#26381;&#21153;&#22120;&#31471;&#30340;&#22788;&#29702;&#22120;&#32465;&#23450;</span>
+<span style="color: #b294bb;"> */</span>
+<span style="color: #b5bd68;">private</span> <span style="color: #b5bd68;">final</span> <span style="color: #81a2be;">GreetingServiceAsync</span> <span style="color: #f0c674;">greetingService</span> = GWT
+    .create(GreetingService.<span style="color: #b5bd68;">class</span>);
 
-/**
- * 调用发送信息的方法。
- * 发送需要发送的信息
- * 绑定回调函数
- */
+<span style="color: #b294bb;">/**</span>
+<span style="color: #b294bb;"> * &#35843;&#29992;&#21457;&#36865;&#20449;&#24687;&#30340;&#26041;&#27861;&#12290;</span>
+<span style="color: #b294bb;"> * &#21457;&#36865;&#38656;&#35201;&#21457;&#36865;&#30340;&#20449;&#24687;</span>
+<span style="color: #b294bb;"> * &#32465;&#23450;&#22238;&#35843;&#20989;&#25968;</span>
+<span style="color: #b294bb;"> */</span>
 greetingService.greetServer(
   textToServer,
-  new AsyncCallback&lt;String&gt;() {
-      public void onFailure(Throwable caught) {
-          // Show the RPC error message to the user
+  <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">AsyncCallback</span>&lt;<span style="color: #81a2be;">String</span>&gt;() {
+      <span style="color: #b5bd68;">public</span> <span style="color: #81a2be;">void</span> <span style="color: #de935f;">onFailure</span>(<span style="color: #81a2be;">Throwable</span> <span style="color: #f0c674;">caught</span>) {
+          <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">Show the RPC error message to the user</span>
           dialogBox
-              .setText("Remote Procedure Call - Failure");
+              .setText(<span style="color: #8abeb7;">"Remote Procedure Call - Failure"</span>);
           serverResponseLabel
-              .addStyleName("serverResponseLabelError");
+              .addStyleName(<span style="color: #8abeb7;">"serverResponseLabelError"</span>);
           serverResponseLabel.setHTML(SERVER_ERROR);
           dialogBox.center();
-          closeButton.setFocus(true);
+          closeButton.setFocus(<span style="color: #81a2be;">true</span>);
       }
 
-      public void onSuccess(String result) {
-          dialogBox.setText("Remote Procedure Call");
+      <span style="color: #b5bd68;">public</span> <span style="color: #81a2be;">void</span> <span style="color: #de935f;">onSuccess</span>(<span style="color: #81a2be;">String</span> <span style="color: #f0c674;">result</span>) {
+          dialogBox.setText(<span style="color: #8abeb7;">"Remote Procedure Call"</span>);
           serverResponseLabel
-              .removeStyleName("serverResponseLabelError");
+              .removeStyleName(<span style="color: #8abeb7;">"serverResponseLabelError"</span>);
           serverResponseLabel.setHTML(result);
           dialogBox.center();
-          closeButton.setFocus(true);
+          closeButton.setFocus(<span style="color: #81a2be;">true</span>);
       }
   });
 </pre>
@@ -442,7 +442,7 @@ greetingService.greetServer(
    HelloWorld.html
 <div class="org-src-container">
 
-<pre class="src src-html">&lt;td id="nameFieldContainer"&gt;&lt;/td&gt;
+<pre class="src src-html">&lt;<span style="color: #de935f;">td</span> <span style="color: #f0c674;">id</span>=<span style="color: #8abeb7;">"nameFieldContainer"</span>&gt;&lt;/<span style="color: #de935f;">td</span>&gt;
 </pre>
 </div>
 
@@ -451,7 +451,7 @@ HelloWorld.java
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java">RootPanel.get("nameFieldContainer");
+<pre class="src src-java">RootPanel.get(<span style="color: #8abeb7;">"nameFieldContainer"</span>);
 </pre>
 </div>
 </li>
@@ -460,7 +460,7 @@ HelloWorld.java
    HelloWorld.html
 <div class="org-src-container">
 
-<pre class="src src-html">&lt;td id="sendButtonContainer"&gt;&lt;/td&gt;
+<pre class="src src-html">&lt;<span style="color: #de935f;">td</span> <span style="color: #f0c674;">id</span>=<span style="color: #8abeb7;">"sendButtonContainer"</span>&gt;&lt;/<span style="color: #de935f;">td</span>&gt;
 </pre>
 </div>
 
@@ -469,15 +469,15 @@ HelloWorld.java
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java">final Button closeButton = new Button("Close"); // 这里的Close就是按钮上显示的字符
-// We can set the id of a widget by accessing its Element
-closeButton.getElement().setId("closeButton");
-// Add a handler to close the DialogBox
-closeButton.addClickHandler(new ClickHandler() {
-        public void onClick(ClickEvent event) {
+<pre class="src src-java"><span style="color: #b5bd68;">final</span> <span style="color: #81a2be;">Button</span> <span style="color: #f0c674;">closeButton</span> = <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">Button</span>(<span style="color: #8abeb7;">"Close"</span>); <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#36825;&#37324;&#30340;Close&#23601;&#26159;&#25353;&#38062;&#19978;&#26174;&#31034;&#30340;&#23383;&#31526;</span>
+<span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">We can set the id of a widget by accessing its Element</span>
+closeButton.getElement().setId(<span style="color: #8abeb7;">"closeButton"</span>);
+<span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">Add a handler to close the DialogBox</span>
+closeButton.addClickHandler(<span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">ClickHandler</span>() {
+        <span style="color: #b5bd68;">public</span> <span style="color: #81a2be;">void</span> <span style="color: #de935f;">onClick</span>(<span style="color: #81a2be;">ClickEvent</span> <span style="color: #f0c674;">event</span>) {
             dialogBox.hide();
-            sendButton.setEnabled(true);
-            sendButton.setFocus(true);
+            sendButton.setEnabled(<span style="color: #81a2be;">true</span>);
+            sendButton.setFocus(<span style="color: #81a2be;">true</span>);
         }       
     });
 </pre>
@@ -524,13 +524,13 @@ closeButton.addClickHandler(new ClickHandler() {
 </div>
 </div></div>
 <div id="postamble" class="status">
-<div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
+<div id="meta-article"><p class="author">Junjia Ni</p>
 <p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
 <p class="date">2014-01-29</p>
-<p class="export-date">2016-04-07 Thu 16:58</p>
+<p class="export-date">2016-05-09 Mon 16:25</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
-<p class="last-modification-time">2016-04-06 Wed 15:17</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+<p class="validation"></p>
+<p class="last-modification-time">2016-05-08 Sun 16:57</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

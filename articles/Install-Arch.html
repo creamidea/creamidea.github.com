@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Archlinux With Windows7 (hard disk installation media)</title>
-<!-- 2016-04-07 Thu 16:58 -->
+<!-- 2016-05-09 Mon 16:26 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="冰糖火箭筒(Junjia Ni)" />
@@ -91,7 +91,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" type="text/css" href="/static/style.css"><link rel="stylesheet" type="text/css" href="/static/medium-fonts.css">
+<link rel="stylesheet" type="text/css" href="/static/app.css">
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -237,12 +237,12 @@ for the JavaScript code in this tag.
 
 <div class="org-src-container">
 
-<pre class="src src-sh">&gt; bcdedit /export "D:\BCD-Backup" # 将BCD备份到“D:\BCD-Backup”目录
-# bcdedit /import "D:\BCD-Backup" # 恢复之前的BCD备份
+<pre class="src src-sh">&gt; bcdedit /export <span style="color: #8abeb7;">"D:\BCD-Backup"</span> <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#23558;BCD&#22791;&#20221;&#21040;&#8220;D:\BCD-Backup&#8221;&#30446;&#24405;</span>
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">bcdedit /import "D:\BCD-Backup" # &#24674;&#22797;&#20043;&#21069;&#30340;BCD&#22791;&#20221;</span>
 
-&gt; bcdedit /create /d "Grub4DOS" /application BOOTSECTOR
-# 执行完这步会返回一个 {ID}
-&gt; bcdedit /set {ID} device partition=c:
+&gt; bcdedit /create /d <span style="color: #8abeb7;">"Grub4DOS"</span> /application BOOTSECTOR
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#25191;&#34892;&#23436;&#36825;&#27493;&#20250;&#36820;&#22238;&#19968;&#20010; {ID}</span>
+&gt; bcdedit /set {ID} device <span style="color: #f0c674;">partition</span>=c:
 &gt; bcdedit /set {ID} path \grldr.mbr
 &gt; bcdedit /displayorder {ID} /addlast
 </pre>
@@ -295,7 +295,7 @@ boot
 <div class="org-src-container">
 
 <pre class="src src-text">title  Arch Linux
-root   (hd0,你实际的分区号)
+root   (hd0,&#20320;&#23454;&#38469;&#30340;&#20998;&#21306;&#21495;)
 kernel /boot/vmlinuz-linux root=/dev/sda3 ro
 initrd /boot/initramfs-linux.img
 </pre>
@@ -362,7 +362,7 @@ mount -r -t ntfs /dev/sda1 /tmpmnt
 modprobe loop
 losetup /dev/loop6 /tmpmnt/archlinux.iso
 ln -s /dev/loop6 /dev/disk/by-label/archlinux
-exit
+<span style="color: #b5bd68;">exit</span>
 </pre>
 </div>
 
@@ -386,7 +386,7 @@ exit
 <div class="org-src-container">
 
 <pre class="src src-sh">$ sudo killall dhcpcd
-$ sudo ip link set down # $ sudo ifconfig wlp3s0 down
+$ sudo ip link set down <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">$ sudo ifconfig wlp3s0 down</span>
 $ sudo wifi-menu
 </pre>
 </div>
@@ -397,7 +397,7 @@ $ sudo wifi-menu
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh"># pacman -S iw wpa_supplicant dialog
+<pre class="src src-sh"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">pacman -S iw wpa_supplicant dialog</span>
 </pre>
 </div>
 <p>
@@ -439,7 +439,7 @@ Error constructing proxy for org.gnome.Terminal:/org/gnome/Terminal/Factory0: Er
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">$ sudo vi /etc/locale.gen  # 去掉 en_US.UTF-8 和 zh_CN.UTF-8 注释
+<pre class="src src-sh">$ sudo vi /etc/locale.gen  <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#21435;&#25481; en_US.UTF-8 &#21644; zh_CN.UTF-8 &#27880;&#37322;</span>
 $ locale-gen
 </pre>
 </div>
@@ -461,7 +461,7 @@ $ locale-gen
 </pre>
 </div>
 <p>
-在 @akafeza 的提醒下，添加上一些配置 <b><b>~/.xprofile</b></b> （如果没有这个文件就创建一个，配置文件在 <b><b>/etc/gdm/Xsession</b></b> 被调用）
+在 <a href="https://oao.moe">@akafeza</a> 的提醒下，添加上一些配置 <b><b>~/.xprofile</b></b> （如果没有这个文件就创建一个，配置文件在 <b><b>/etc/gdm/Xsession</b></b> 被调用）
 </p>
 <div class="org-src-container">
 
@@ -495,14 +495,14 @@ export XMODIFIERS=@im=fcitx
 <div class="org-src-container">
 
 <pre class="src src-sh">$ sudo fallocate -l 8192M /swapfile
-$ sudo dd if=/dev/zero of=/swapfile bs=1M count=8192
+$ sudo dd <span style="color: #f0c674;">if</span>=/dev/zero <span style="color: #f0c674;">of</span>=/swapfile <span style="color: #f0c674;">bs</span>=1M <span style="color: #f0c674;">count</span>=8192
 $ sudo chmod 600 /swapfile
 $ sudo mkswap /swapfile
 $ sudo swapon /swapfile
 $ sudo vi /etc/fstab
-  # /swapfile none swap defaults 0 0
-$ free -m # checking tool
-$ swapon -s # watch the swap's status
+  <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">/swapfile none swap defaults 0 0</span>
+$ free -m <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">checking tool</span>
+$ swapon -s <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">watch the swap's status</span>
 </pre>
 </div>
 
@@ -552,10 +552,10 @@ $ swapon -s # watch the swap's status
 <div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
 <p class="date">2016-03-22</p>
-<p class="export-date">2016-04-07 Thu 16:58</p>
+<p class="export-date">2016-05-09 Mon 16:26</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
-<p class="last-modification-time">2016-04-07 Thu 16:00</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+<p class="validation"></p>
+<p class="last-modification-time">2016-05-08 Sun 16:57</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

@@ -62,7 +62,7 @@
 这个语法结构让列表中的元素可以选择性的求解。
 比如这里的 =creamidea= 可以被求解。
 
-#+INCLUDE: "~/.emacs.d/config/org-mode.el" src emacs-lisp
+#+INCLUDE: "~/.emacs.d/lisp/init-local.el" src emacs-lisp
 
 复制完成之后，在.emacs这个buffer下面，按住 =M-x= 调出输入命令的buffer，然后输入 =eval-buffer= 即可。
 可以当场生效，不需要重启Emacs。

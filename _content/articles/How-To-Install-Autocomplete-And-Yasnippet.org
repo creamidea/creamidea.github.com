@@ -4,6 +4,7 @@
 #+KEYWORDS: orgmode,emacs,autocomplete,yanisppet
 #+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
+#+STARTUP: showall
 
 
 * 前言

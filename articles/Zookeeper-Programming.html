@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>［译］Programming With ZooKeeper</title>
-<!-- 2016-04-07 Thu 16:58 -->
+<!-- 2016-05-09 Mon 17:01 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="蜂蜜甜甜圈(Yi Ou)" />
@@ -91,7 +91,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" type="text/css" href="/static/style.css"><link rel="stylesheet" type="text/css" href="/static/medium-fonts.css">
+<link rel="stylesheet" type="text/css" href="/static/app.css">
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -189,21 +189,21 @@ for the JavaScript code in this tag.
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java">static ZooKeeper zk = null;
-static final Object mutex = new Object();
-String root;
+<pre class="src src-java"><span style="color: #b5bd68;">static</span> <span style="color: #81a2be;">ZooKeeper</span> <span style="color: #f0c674;">zk</span> = <span style="color: #81a2be;">null</span>;
+<span style="color: #b5bd68;">static</span> <span style="color: #b5bd68;">final</span> <span style="color: #81a2be;">Object</span> <span style="color: #f0c674;">mutex</span> = <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">Object</span>();
+<span style="color: #81a2be;">String</span> <span style="color: #f0c674;">root</span>;
 
-SyncPrimitive(String address)
-    throws KeeperException, IOException {
-    if(zk == null){
-        System.out.println("Starting ZK:");
-        zk = new ZooKeeper(address, 3000, this);
-        System.out.println("Finished starting ZK: " + zk);
+<span style="color: #de935f;">SyncPrimitive</span>(<span style="color: #81a2be;">String</span> <span style="color: #f0c674;">address</span>)
+    <span style="color: #b5bd68;">throws</span> <span style="color: #81a2be;">KeeperException</span>, <span style="color: #81a2be;">IOException</span> {
+    <span style="color: #b5bd68;">if</span>(zk == <span style="color: #81a2be;">null</span>){
+        System.out.println(<span style="color: #8abeb7;">"Starting ZK:"</span>);
+        zk = <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">ZooKeeper</span>(address, 3000, <span style="color: #b5bd68;">this</span>);
+        System.out.println(<span style="color: #8abeb7;">"Finished starting ZK: "</span> + zk);
     }
 }
 
-public void process(WatcherEvent event) {
-    synchronized (mutex) {
+<span style="color: #b5bd68;">public</span> <span style="color: #81a2be;">void</span> <span style="color: #de935f;">process</span>(<span style="color: #81a2be;">WatcherEvent</span> <span style="color: #f0c674;">event</span>) {
+    <span style="color: #b5bd68;">synchronized</span> (mutex) {
         mutex.notify();
     }
 }
@@ -242,29 +242,29 @@ public void process(WatcherEvent event) {
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java">/**
-******* Barrier constructor
-*******
-******* @param address
-******* @param name
-******* @param size
-****** */
-Barrier(String address, String name, int size)
-    throws KeeperException, InterruptedException, UnknownHostException {
-    super(address);
-    this.root = name;
-    this.size = size;
+<pre class="src src-java"><span style="color: #b294bb;">/**</span>
+<span style="color: #b294bb;">******* Barrier constructor</span>
+<span style="color: #b294bb;">*******</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@param</span><span style="color: #b294bb;"> address</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@param</span><span style="color: #b294bb;"> name</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@param</span><span style="color: #b294bb;"> size</span>
+<span style="color: #b294bb;">****** */</span>
+<span style="color: #de935f;">Barrier</span>(<span style="color: #81a2be;">String</span> <span style="color: #f0c674;">address</span>, <span style="color: #81a2be;">String</span> <span style="color: #f0c674;">name</span>, <span style="color: #81a2be;">int</span> <span style="color: #f0c674;">size</span>)
+    <span style="color: #b5bd68;">throws</span> <span style="color: #81a2be;">KeeperException</span>, <span style="color: #81a2be;">InterruptedException</span>, <span style="color: #81a2be;">UnknownHostException</span> {
+    <span style="color: #b5bd68;">super</span>(address);
+    <span style="color: #b5bd68;">this</span>.root = name;
+    <span style="color: #b5bd68;">this</span>.size = size;
 
-    // Create barrier node
-    if (zk != null) {
-        Stat s = zk.exists(root, false);
-        if (s == null) {
-            zk.create(root, new byte[0], Ids.OPEN_ACL_UNSAFE, 0);
+    <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">Create barrier node</span>
+    <span style="color: #b5bd68;">if</span> (zk != <span style="color: #81a2be;">null</span>) {
+        <span style="color: #81a2be;">Stat</span> <span style="color: #f0c674;">s</span> = zk.exists(root, <span style="color: #81a2be;">false</span>);
+        <span style="color: #b5bd68;">if</span> (s == <span style="color: #81a2be;">null</span>) {
+            zk.create(root, <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">byte</span>[0], <span style="color: #81a2be;">Ids</span>.OPEN_ACL_UNSAFE, 0);
         }
     }
 
-    // My node name
-    name = new String(InetAddress.getLocalHost().getCanonicalHostName().toString());
+    <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">My node name</span>
+    name = <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">String</span>(InetAddress.getLocalHost().getCanonicalHostName().toString());
 }
 </pre>
 </div>
@@ -278,23 +278,23 @@ Barrier(String address, String name, int size)
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java">/**
-******* Join barrier
-*******
-******* @return
-******* @throws KeeperException
-******* @throws InterruptedException
-****** */
-boolean enter() throws KeeperException, InterruptedException{
-    zk.create(root + "/" + name, new byte[0], Ids.OPEN_ACL_UNSAFE,CreateFlags.EPHEMERAL);
-    while (true) {
-        synchronized (mutex) {
-            ArrayList&lt;String&gt; list = zk.getChildren(root, true);
+<pre class="src src-java"><span style="color: #b294bb;">/**</span>
+<span style="color: #b294bb;">******* Join barrier</span>
+<span style="color: #b294bb;">*******</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@return</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@throws</span><span style="color: #b294bb;"> KeeperException</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@throws</span><span style="color: #b294bb;"> InterruptedException</span>
+<span style="color: #b294bb;">****** */</span>
+<span style="color: #81a2be;">boolean</span> <span style="color: #de935f;">enter</span>() <span style="color: #b5bd68;">throws</span> <span style="color: #81a2be;">KeeperException</span>, <span style="color: #81a2be;">InterruptedException</span>{
+    zk.create(root + <span style="color: #8abeb7;">"/"</span> + name, <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">byte</span>[0], <span style="color: #81a2be;">Ids</span>.OPEN_ACL_UNSAFE,<span style="color: #81a2be;">CreateFlags</span>.EPHEMERAL);
+    <span style="color: #b5bd68;">while</span> (<span style="color: #81a2be;">true</span>) {
+        <span style="color: #b5bd68;">synchronized</span> (mutex) {
+            <span style="color: #81a2be;">ArrayList</span>&lt;<span style="color: #81a2be;">String</span>&gt; <span style="color: #f0c674;">list</span> = zk.getChildren(root, <span style="color: #81a2be;">true</span>);
 
-            if (list.size() &lt; size) {
+            <span style="color: #b5bd68;">if</span> (list.size() &lt; size) {
                 mutex.wait();
-            } else {
-                return true;
+            } <span style="color: #b5bd68;">else</span> {
+                <span style="color: #b5bd68;">return</span> <span style="color: #81a2be;">true</span>;
             }
         }
     }
@@ -311,22 +311,22 @@ boolean enter() throws KeeperException, InterruptedException{
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java">/**
-******* Wait until all reach barrier
-*******
-******* @return
-******* @throws KeeperException
-******* @throws InterruptedException
-****** */
-boolean leave() throws KeeperException, InterruptedException{
-    zk.delete(root + "/" + name, 0);
-    while (true) {
-        synchronized (mutex) {
-            ArrayList&lt;String&gt; list = zk.getChildren(root, true);
-            if (list.size() &gt; 0) {
+<pre class="src src-java"><span style="color: #b294bb;">/**</span>
+<span style="color: #b294bb;">******* Wait until all reach barrier</span>
+<span style="color: #b294bb;">*******</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@return</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@throws</span><span style="color: #b294bb;"> KeeperException</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@throws</span><span style="color: #b294bb;"> InterruptedException</span>
+<span style="color: #b294bb;">****** */</span>
+<span style="color: #81a2be;">boolean</span> <span style="color: #de935f;">leave</span>() <span style="color: #b5bd68;">throws</span> <span style="color: #81a2be;">KeeperException</span>, <span style="color: #81a2be;">InterruptedException</span>{
+    zk.delete(root + <span style="color: #8abeb7;">"/"</span> + name, 0);
+    <span style="color: #b5bd68;">while</span> (<span style="color: #81a2be;">true</span>) {
+        <span style="color: #b5bd68;">synchronized</span> (mutex) {
+            <span style="color: #81a2be;">ArrayList</span>&lt;<span style="color: #81a2be;">String</span>&gt; <span style="color: #f0c674;">list</span> = zk.getChildren(root, <span style="color: #81a2be;">true</span>);
+            <span style="color: #b5bd68;">if</span> (list.size() &gt; 0) {
                 mutex.wait();
-            } else {
-                return true;
+            } <span style="color: #b5bd68;">else</span> {
+                <span style="color: #b5bd68;">return</span> <span style="color: #81a2be;">true</span>;
             }
         }
     }
@@ -347,21 +347,21 @@ boolean leave() throws KeeperException, InterruptedException{
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java">/**
-******* Constructor of producer-consumer queue
-*******
-******* @param address
-******* @param name
-****** */
-Queue(String address, String name)
-    throws KeeperException, InterruptedException {
-    super(address);
-    this.root = name;
-    // Create ZK node name
-    if (zk != null) {
-        Stat s = zk.exists(root, false);
-        if (s == null) {
-            zk.create(root, new byte[0], Ids.OPEN_ACL_UNSAFE, 0);
+<pre class="src src-java"><span style="color: #b294bb;">/**</span>
+<span style="color: #b294bb;">******* Constructor of producer-consumer queue</span>
+<span style="color: #b294bb;">*******</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@param</span><span style="color: #b294bb;"> address</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@param</span><span style="color: #b294bb;"> name</span>
+<span style="color: #b294bb;">****** */</span>
+<span style="color: #de935f;">Queue</span>(<span style="color: #81a2be;">String</span> <span style="color: #f0c674;">address</span>, <span style="color: #81a2be;">String</span> <span style="color: #f0c674;">name</span>)
+    <span style="color: #b5bd68;">throws</span> <span style="color: #81a2be;">KeeperException</span>, <span style="color: #81a2be;">InterruptedException</span> {
+    <span style="color: #b5bd68;">super</span>(address);
+    <span style="color: #b5bd68;">this</span>.root = name;
+    <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">Create ZK node name</span>
+    <span style="color: #b5bd68;">if</span> (zk != <span style="color: #81a2be;">null</span>) {
+        <span style="color: #81a2be;">Stat</span> <span style="color: #f0c674;">s</span> = zk.exists(root, <span style="color: #81a2be;">false</span>);
+        <span style="color: #b5bd68;">if</span> (s == <span style="color: #81a2be;">null</span>) {
+            zk.create(root, <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">byte</span>[0], <span style="color: #81a2be;">Ids</span>.OPEN_ACL_UNSAFE, 0);
         }
     }
 }
@@ -375,23 +375,23 @@ Queue(String address, String name)
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java">/**
-******* Add element to the queue.
-*******
-******* @param i
-******* @return
-****** */
-boolean produce(int i) throws KeeperException, InterruptedException{
-    ByteBuffer b = ByteBuffer.allocate(4);
-    byte[] value;
+<pre class="src src-java"><span style="color: #b294bb;">/**</span>
+<span style="color: #b294bb;">******* Add element to the queue.</span>
+<span style="color: #b294bb;">*******</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@param</span><span style="color: #b294bb;"> i</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@return</span>
+<span style="color: #b294bb;">****** */</span>
+<span style="color: #81a2be;">boolean</span> <span style="color: #de935f;">produce</span>(<span style="color: #81a2be;">int</span> <span style="color: #f0c674;">i</span>) <span style="color: #b5bd68;">throws</span> <span style="color: #81a2be;">KeeperException</span>, <span style="color: #81a2be;">InterruptedException</span>{
+    <span style="color: #81a2be;">ByteBuffer</span> <span style="color: #f0c674;">b</span> = ByteBuffer.allocate(4);
+    <span style="color: #81a2be;">byte</span>[] <span style="color: #f0c674;">value</span>;
 
-    // Add child with value i
+    <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">Add child with value i</span>
     b.putInt(i);
     value = b.array();
-    zk.create(root + "/element", value, Ids.OPEN_ACL_UNSAFE,
-              CreateFlags.SEQUENCE);
+    zk.create(root + <span style="color: #8abeb7;">"/element"</span>, value, <span style="color: #81a2be;">Ids</span>.OPEN_ACL_UNSAFE,
+              <span style="color: #81a2be;">CreateFlags</span>.SEQUENCE);
 
-    return true;
+    <span style="color: #b5bd68;">return</span> <span style="color: #81a2be;">true</span>;
 }
 </pre>
 </div>
@@ -404,37 +404,37 @@ boolean produce(int i) throws KeeperException, InterruptedException{
 </p>
 <div class="org-src-container">
 
-<pre class="src src-java">/**
-******* Remove first element from the queue.
-*******
-******* @return
-******* @throws KeeperException
-******* @throws InterruptedException
-****** */
-int consume() throws KeeperException, InterruptedException{
-    int retvalue = -1;
-    Stat stat = null;
+<pre class="src src-java"><span style="color: #b294bb;">/**</span>
+<span style="color: #b294bb;">******* Remove first element from the queue.</span>
+<span style="color: #b294bb;">*******</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@return</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@throws</span><span style="color: #b294bb;"> KeeperException</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@throws</span><span style="color: #b294bb;"> InterruptedException</span>
+<span style="color: #b294bb;">****** */</span>
+<span style="color: #81a2be;">int</span> <span style="color: #de935f;">consume</span>() <span style="color: #b5bd68;">throws</span> <span style="color: #81a2be;">KeeperException</span>, <span style="color: #81a2be;">InterruptedException</span>{
+    <span style="color: #81a2be;">int</span> <span style="color: #f0c674;">retvalue</span> = -1;
+    <span style="color: #81a2be;">Stat</span> <span style="color: #f0c674;">stat</span> = <span style="color: #81a2be;">null</span>;
 
-    // Get the first element available
-    while (true) {
-        synchronized (mutex) {
-            ArrayList&lt;String&gt; list = zk.getChildren(root, true);
-            if (list.isEmpty()) {
-                System.out.println("Going to wait");
+    <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">Get the first element available</span>
+    <span style="color: #b5bd68;">while</span> (<span style="color: #81a2be;">true</span>) {
+        <span style="color: #b5bd68;">synchronized</span> (mutex) {
+            <span style="color: #81a2be;">ArrayList</span>&lt;<span style="color: #81a2be;">String</span>&gt; <span style="color: #f0c674;">list</span> = zk.getChildren(root, <span style="color: #81a2be;">true</span>);
+            <span style="color: #b5bd68;">if</span> (list.isEmpty()) {
+                System.out.println(<span style="color: #8abeb7;">"Going to wait"</span>);
                 mutex.wait();
-            } else {
-                Integer min = new Integer(list.get(0).substring(7));
-                for(String s : list){
-                    Integer tempValue = new Integer(s.substring(7));
-                    if(tempValue &lt; min) min = tempValue;
+            } <span style="color: #b5bd68;">else</span> {
+                <span style="color: #81a2be;">Integer</span> <span style="color: #f0c674;">min</span> = <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">Integer</span>(list.get(0).substring(7));
+                <span style="color: #b5bd68;">for</span>(<span style="color: #81a2be;">String</span> <span style="color: #f0c674;">s</span> : list){
+                    <span style="color: #81a2be;">Integer</span> <span style="color: #f0c674;">tempValue</span> = <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">Integer</span>(s.substring(7));
+                    <span style="color: #b5bd68;">if</span>(tempValue &lt; <span style="color: #81a2be;">min</span>) min = tempValue;
                 }
-                System.out.println("Temporary value: " + root + "/element" + min);
-                byte[] b = zk.getData(root + "/element" + min, false, stat);
-                zk.delete(root + "/element" + min, 0);
-                ByteBuffer buffer = ByteBuffer.wrap(b);
+                System.out.println(<span style="color: #8abeb7;">"Temporary value: "</span> + root + <span style="color: #8abeb7;">"/element"</span> + min);
+                <span style="color: #81a2be;">byte</span>[] <span style="color: #f0c674;">b</span> = zk.getData(root + <span style="color: #8abeb7;">"/element"</span> + min, <span style="color: #81a2be;">false</span>, stat);
+                zk.delete(root + <span style="color: #8abeb7;">"/element"</span> + min, 0);
+                <span style="color: #81a2be;">ByteBuffer</span> <span style="color: #f0c674;">buffer</span> = ByteBuffer.wrap(b);
                 retvalue = buffer.getInt();
 
-                return retvalue;
+                <span style="color: #b5bd68;">return</span> retvalue;
             }
         }
     }
@@ -448,10 +448,10 @@ int consume() throws KeeperException, InterruptedException{
 <div id="meta-article"><p class="author">蜂蜜甜甜圈(Yi Ou)</p>
 <p class="email"><a href="mailto:718413182(AT)qq.com">718413182(AT)qq.com</a></p>
 <p class="date">2016-02-05</p>
-<p class="export-date">2016-04-07 Thu 16:58</p>
+<p class="export-date">2016-05-09 Mon 17:01</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
-<p class="last-modification-time">2016-04-06 Wed 15:17</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+<p class="validation"></p>
+<p class="last-modification-time">2016-05-09 Mon 17:01</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

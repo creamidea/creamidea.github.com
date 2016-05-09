@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>JavaScript Cookie</title>
-<!-- 2016-04-07 Thu 16:58 -->
+<!-- 2016-05-09 Mon 16:30 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="冰糖火箭筒(Junjia Ni)" />
@@ -91,7 +91,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" type="text/css" href="/static/style.css"><link rel="stylesheet" type="text/css" href="/static/medium-fonts.css">
+<link rel="stylesheet" type="text/css" href="/static/app.css">
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -181,16 +181,16 @@ for the JavaScript code in this tag.
 </p>
 <div class="org-src-container">
 
-<pre class="src src-js">// Some code in your deep Library
-Array.prototype.foo = 'S'
+<pre class="src src-js"><span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">Some code in your deep Library</span>
+Array.<span style="color: #81a2be;">prototype</span>.foo = <span style="color: #8abeb7;">'S'</span>
 
-// Here is your code
-var a = [1,2,3,4,5]
-for (var i in a) {
-  console.log(i);
-}
-// 0,1,2,3,4,foo 
-// :P
+<span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">Here is your code</span>
+<span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">a</span> = <span style="color: #c5c8c6;">[</span>1,2,3,4,5<span style="color: #c5c8c6;">]</span>
+<span style="color: #b5bd68;">for</span> <span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">i</span> <span style="color: #b5bd68;">in</span> a<span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+  console.log<span style="color: #8abeb7;">(</span>i<span style="color: #8abeb7;">)</span>;
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">0,1,2,3,4,foo</span>
+<span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">:P</span>
 </pre>
 </div>
 </div>
@@ -200,9 +200,9 @@ for (var i in a) {
 <h2 id="sec-3"><span class="section-number-2">3</span> Generate Function</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-<code>yield</code> 
+<code>yield</code>
 The yield keyword is used to pause and resume a generator function. <br  />
-<code>yield*</code> 
+<code>yield*</code>
 The yield* expression is used to delegate to another generator or iterable object.
 Besides generator objects, yield* can also yield other kinds of iterables, e.g. arrays, strings or arguments objects.
 yield* is an expression, not a statement, so it evaluates to a value. <br  />
@@ -213,17 +213,17 @@ yield* is an expression, not a statement, so it evaluates to a value. <br  />
 </p>
 <div class="org-src-container">
 
-<pre class="src src-js">function * A () {
-  console.log(1)
-  var a1 = yield 1
-  console.log(a1)
-  return 3
-}
-var a = A() // 实际A函数内的代码块并未被执行
-var r = a.next() // 这才开始执行代码，语句被执行到 yield 1。此时yield右侧表达式（这里是1）被求值，并暂停在这里。另外，这个 console.log(1) 将会被执行，你将在终端看到这个1。
-console.log(r) // {value: 1, done: false} value 存放刚刚求出的值，done标志是否执行到代码块底部，也就是“迭代”是否结束。
-r = a.next(2) //代码再次启动，从上次暂停的地方开始，此时，yield左边的代码将被执行。注意这里，如果next带了参数，如next(2)，那么a1将被求值为2。
-console.log(r) // {value: 3, done: true} value 是函数的返回值，如果没有返回则为undefined。
+<pre class="src src-js"><span style="color: #b5bd68;">function</span> * A <span style="color: #c5c8c6;">()</span> <span style="color: #c5c8c6;">{</span>
+  console.log<span style="color: #8abeb7;">(</span>1<span style="color: #8abeb7;">)</span>
+  <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">a1</span> = <span style="color: #b5bd68;">yield</span> 1
+  console.log<span style="color: #8abeb7;">(</span>a1<span style="color: #8abeb7;">)</span>
+  <span style="color: #b5bd68;">return</span> 3
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">a</span> = A<span style="color: #c5c8c6;">()</span> <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#23454;&#38469;A&#20989;&#25968;&#20869;&#30340;&#20195;&#30721;&#22359;&#24182;&#26410;&#34987;&#25191;&#34892;</span>
+<span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">r</span> = a.next<span style="color: #c5c8c6;">()</span> <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#36825;&#25165;&#24320;&#22987;&#25191;&#34892;&#20195;&#30721;&#65292;&#35821;&#21477;&#34987;&#25191;&#34892;&#21040; yield 1&#12290;&#27492;&#26102;yield&#21491;&#20391;&#34920;&#36798;&#24335;&#65288;&#36825;&#37324;&#26159;1&#65289;&#34987;&#27714;&#20540;&#65292;&#24182;&#26242;&#20572;&#22312;&#36825;&#37324;&#12290;&#21478;&#22806;&#65292;&#36825;&#20010; console.log(1) &#23558;&#20250;&#34987;&#25191;&#34892;&#65292;&#20320;&#23558;&#22312;&#32456;&#31471;&#30475;&#21040;&#36825;&#20010;1&#12290;</span>
+console.log<span style="color: #c5c8c6;">(</span>r<span style="color: #c5c8c6;">)</span> <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">{value: 1, done: false} value &#23384;&#25918;&#21018;&#21018;&#27714;&#20986;&#30340;&#20540;&#65292;done&#26631;&#24535;&#26159;&#21542;&#25191;&#34892;&#21040;&#20195;&#30721;&#22359;&#24213;&#37096;&#65292;&#20063;&#23601;&#26159;&#8220;&#36845;&#20195;&#8221;&#26159;&#21542;&#32467;&#26463;&#12290;</span>
+r = a.next<span style="color: #c5c8c6;">(</span>2<span style="color: #c5c8c6;">)</span> <span style="color: #969896; font-style: italic;">//</span><span style="color: #969896; font-style: italic;">&#20195;&#30721;&#20877;&#27425;&#21551;&#21160;&#65292;&#20174;&#19978;&#27425;&#26242;&#20572;&#30340;&#22320;&#26041;&#24320;&#22987;&#65292;&#27492;&#26102;&#65292;yield&#24038;&#36793;&#30340;&#20195;&#30721;&#23558;&#34987;&#25191;&#34892;&#12290;&#27880;&#24847;&#36825;&#37324;&#65292;&#22914;&#26524;next&#24102;&#20102;&#21442;&#25968;&#65292;&#22914;next(2)&#65292;&#37027;&#20040;a1&#23558;&#34987;&#27714;&#20540;&#20026;2&#12290;</span>
+console.log<span style="color: #c5c8c6;">(</span>r<span style="color: #c5c8c6;">)</span> <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">{value: 3, done: true} value &#26159;&#20989;&#25968;&#30340;&#36820;&#22238;&#20540;&#65292;&#22914;&#26524;&#27809;&#26377;&#36820;&#22238;&#21017;&#20026;undefined&#12290;</span>
 </pre>
 </div>
 <p>
@@ -247,16 +247,16 @@ Generator Function 起码需要2次 <code>next()</code> 才能执行完。
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 
-<pre class="src src-js">function co (genFun) {
-  var gen = genFun()
-  function _next (err, res) {
-    if (err) return gen.throw(err)
-    var r = gen.next(res) // 将回调函数中执行的结果传回去（调用yield的地方）
-    if (r.done) return r.value // 如果完成，就返回最后的值，如果没有结束，就把 _next 传到那个回调函数中
-    r.value(_next) // 这里 r.value 就是那个thunk函数
-  }
-  _next()
-}
+<pre class="src src-js"><span style="color: #b5bd68;">function</span> <span style="color: #de935f;">co</span> <span style="color: #c5c8c6;">(</span><span style="color: #f0c674;">genFun</span><span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+  <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">gen</span> = genFun<span style="color: #8abeb7;">()</span>
+  <span style="color: #b5bd68;">function</span> <span style="color: #de935f;">_next</span> <span style="color: #8abeb7;">(</span><span style="color: #f0c674;">err</span>, <span style="color: #f0c674;">res</span><span style="color: #8abeb7;">)</span> <span style="color: #8abeb7;">{</span>
+    <span style="color: #b5bd68;">if</span> <span style="color: #f0c674;">(</span>err<span style="color: #f0c674;">)</span> <span style="color: #b5bd68;">return</span> gen.<span style="color: #b5bd68;">throw</span><span style="color: #f0c674;">(</span>err<span style="color: #f0c674;">)</span>
+    <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">r</span> = gen.next<span style="color: #f0c674;">(</span>res<span style="color: #f0c674;">)</span> <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#23558;&#22238;&#35843;&#20989;&#25968;&#20013;&#25191;&#34892;&#30340;&#32467;&#26524;&#20256;&#22238;&#21435;&#65288;&#35843;&#29992;yield&#30340;&#22320;&#26041;&#65289;</span>
+    <span style="color: #b5bd68;">if</span> <span style="color: #f0c674;">(</span>r.done<span style="color: #f0c674;">)</span> <span style="color: #b5bd68;">return</span> r.value <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#22914;&#26524;&#23436;&#25104;&#65292;&#23601;&#36820;&#22238;&#26368;&#21518;&#30340;&#20540;&#65292;&#22914;&#26524;&#27809;&#26377;&#32467;&#26463;&#65292;&#23601;&#25226; _next &#20256;&#21040;&#37027;&#20010;&#22238;&#35843;&#20989;&#25968;&#20013;</span>
+    r.value<span style="color: #f0c674;">(</span>_next<span style="color: #f0c674;">)</span> <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#36825;&#37324; r.value &#23601;&#26159;&#37027;&#20010;thunk&#20989;&#25968;</span>
+  <span style="color: #8abeb7;">}</span>
+  _next<span style="color: #8abeb7;">()</span>
+<span style="color: #c5c8c6;">}</span>
 </pre>
 </div>
 <p>
@@ -264,12 +264,12 @@ Generator Function 起码需要2次 <code>next()</code> 才能执行完。
 </p>
 <div class="org-src-container">
 
-<pre class="src src-js">function * A () {
-  console.log(1)
-  yield wait(1000)
-  console.log(2)
-  return 3
-}
+<pre class="src src-js"><span style="color: #b5bd68;">function</span> * A <span style="color: #c5c8c6;">()</span> <span style="color: #c5c8c6;">{</span>
+  console.log<span style="color: #8abeb7;">(</span>1<span style="color: #8abeb7;">)</span>
+  <span style="color: #b5bd68;">yield</span> wait<span style="color: #8abeb7;">(</span>1000<span style="color: #8abeb7;">)</span>
+  console.log<span style="color: #8abeb7;">(</span>2<span style="color: #8abeb7;">)</span>
+  <span style="color: #b5bd68;">return</span> 3
+<span style="color: #c5c8c6;">}</span>
 </pre>
 </div>
 <p>
@@ -277,19 +277,19 @@ Generator Function 起码需要2次 <code>next()</code> 才能执行完。
 </p>
 <div class="org-src-container">
 
-<pre class="src src-js">// 实现
-// 包装成thunk函数
-function wait(timeout) {
-  return function (done) {
-    setTimeout(done, timeout)
-  }
-}
+<pre class="src src-js"><span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#23454;&#29616;</span>
+<span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#21253;&#35013;&#25104;thunk&#20989;&#25968;</span>
+<span style="color: #b5bd68;">function</span> <span style="color: #de935f;">wait</span><span style="color: #c5c8c6;">(</span><span style="color: #f0c674;">timeout</span><span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+  <span style="color: #b5bd68;">return</span> <span style="color: #b5bd68;">function</span> <span style="color: #8abeb7;">(</span><span style="color: #f0c674;">done</span><span style="color: #8abeb7;">)</span> <span style="color: #8abeb7;">{</span>
+    setTimeout<span style="color: #f0c674;">(</span>done, timeout<span style="color: #f0c674;">)</span>
+  <span style="color: #8abeb7;">}</span>
+<span style="color: #c5c8c6;">}</span>
 
-// 调用
-co(function * () {
-  var a = yield * A()
-  console.log(a)
-})
+<span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#35843;&#29992;</span>
+co<span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">function</span> * <span style="color: #8abeb7;">()</span> <span style="color: #8abeb7;">{</span>
+  <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">a</span> = <span style="color: #b5bd68;">yield</span> * A<span style="color: #f0c674;">()</span>
+  console.log<span style="color: #f0c674;">(</span>a<span style="color: #f0c674;">)</span>
+<span style="color: #8abeb7;">}</span><span style="color: #c5c8c6;">)</span>
 </pre>
 </div>
 
@@ -318,16 +318,16 @@ co(function * () {
 </p>
 <div class="org-src-container">
 
-<pre class="src src-js">function * B (next) {
-  console.log(3);
-  yield next;
-  console.log(4);
-}
-function * C (next) {
-  console.log(5);
-  yield next;
-  console.log(6);
-}
+<pre class="src src-js"><span style="color: #b5bd68;">function</span> * B <span style="color: #c5c8c6;">(</span>next<span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+  console.log<span style="color: #8abeb7;">(</span>3<span style="color: #8abeb7;">)</span>;
+  <span style="color: #b5bd68;">yield</span> next;
+  console.log<span style="color: #8abeb7;">(</span>4<span style="color: #8abeb7;">)</span>;
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #b5bd68;">function</span> * C <span style="color: #c5c8c6;">(</span>next<span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+  console.log<span style="color: #8abeb7;">(</span>5<span style="color: #8abeb7;">)</span>;
+  <span style="color: #b5bd68;">yield</span> next;
+  console.log<span style="color: #8abeb7;">(</span>6<span style="color: #8abeb7;">)</span>;
+<span style="color: #c5c8c6;">}</span>
 </pre>
 </div>
 
@@ -338,40 +338,40 @@ function * C (next) {
 </p>
 <div class="org-src-container">
 
-<pre class="src src-js">function co (genFun) {
-  var gen
-  if (isGeneratorFunction(genFun)) gen = genFun()
-  else gen = genFun
-  function _next (err, res) {
-    if (err) {
-      console.log('ERROR', err);
-      return gen.throw(err) 
-    }
-    var r = gen.next(res), ctx = this
-    if (r.done) return r.value
+<pre class="src src-js"><span style="color: #b5bd68;">function</span> <span style="color: #de935f;">co</span> <span style="color: #c5c8c6;">(</span><span style="color: #f0c674;">genFun</span><span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+  <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">gen</span>
+  <span style="color: #b5bd68;">if</span> <span style="color: #8abeb7;">(</span>isGeneratorFunction<span style="color: #f0c674;">(</span>genFun<span style="color: #f0c674;">)</span><span style="color: #8abeb7;">)</span> gen = genFun<span style="color: #8abeb7;">()</span>
+  <span style="color: #b5bd68;">else</span> gen = genFun
+  <span style="color: #b5bd68;">function</span> <span style="color: #de935f;">_next</span> <span style="color: #8abeb7;">(</span><span style="color: #f0c674;">err</span>, <span style="color: #f0c674;">res</span><span style="color: #8abeb7;">)</span> <span style="color: #8abeb7;">{</span>
+    <span style="color: #b5bd68;">if</span> <span style="color: #f0c674;">(</span>err<span style="color: #f0c674;">)</span> <span style="color: #f0c674;">{</span>
+      console.log<span style="color: #b5bd68;">(</span><span style="color: #8abeb7;">'ERROR'</span>, err<span style="color: #b5bd68;">)</span>;
+      <span style="color: #b5bd68;">return</span> gen.<span style="color: #b5bd68;">throw</span><span style="color: #b5bd68;">(</span>err<span style="color: #b5bd68;">)</span> 
+    <span style="color: #f0c674;">}</span>
+    <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">r</span> = gen.next<span style="color: #f0c674;">(</span>res<span style="color: #f0c674;">)</span>, <span style="color: #f0c674;">ctx</span> = <span style="color: #81a2be;">this</span>
+    <span style="color: #b5bd68;">if</span> <span style="color: #f0c674;">(</span>r.done<span style="color: #f0c674;">)</span> <span style="color: #b5bd68;">return</span> r.value
 
-    // 主要增加的内容
-    r.value = toTunk(r.value, ctx)
-    if ('function' === typeof r.value) r.value(_next)
-    _next(null, r.value)
-  }
-  _next()
-}
-function isGeneratorFunction (obj) {
-  return (obj &amp;&amp; obj.constructor &amp;&amp; obj.constructor.name === 'GeneratorFunction')
-}
-function isGenerator(obj) {
-  return (obj &amp;&amp; 'function' === typeof obj.next &amp;&amp; 'function' === typeof obj.throw)
-}
-function toTunk(obj, ctx) {
-  if (isGeneratorFunction(obj)) {
-    return co(obj.call(ctx))
-  } if (isGenerator(obj)) {
-    return co(obj)
-  } else {
-    return obj
-  }
-}
+    <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#20027;&#35201;&#22686;&#21152;&#30340;&#20869;&#23481;</span>
+    r.value = toTunk<span style="color: #f0c674;">(</span>r.value, ctx<span style="color: #f0c674;">)</span>
+    <span style="color: #b5bd68;">if</span> <span style="color: #f0c674;">(</span><span style="color: #8abeb7;">'function'</span> === <span style="color: #b5bd68;">typeof</span> r.value<span style="color: #f0c674;">)</span> r.value<span style="color: #f0c674;">(</span>_next<span style="color: #f0c674;">)</span>
+    _next<span style="color: #f0c674;">(</span><span style="color: #81a2be;">null</span>, r.value<span style="color: #f0c674;">)</span>
+  <span style="color: #8abeb7;">}</span>
+  _next<span style="color: #8abeb7;">()</span>
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #b5bd68;">function</span> <span style="color: #de935f;">isGeneratorFunction</span> <span style="color: #c5c8c6;">(</span><span style="color: #f0c674;">obj</span><span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+  <span style="color: #b5bd68;">return</span> <span style="color: #8abeb7;">(</span>obj &amp;&amp; obj.constructor &amp;&amp; obj.constructor.name === <span style="color: #8abeb7;">'GeneratorFunction'</span><span style="color: #8abeb7;">)</span>
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #b5bd68;">function</span> <span style="color: #de935f;">isGenerator</span><span style="color: #c5c8c6;">(</span><span style="color: #f0c674;">obj</span><span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+  <span style="color: #b5bd68;">return</span> <span style="color: #8abeb7;">(</span>obj &amp;&amp; <span style="color: #8abeb7;">'function'</span> === <span style="color: #b5bd68;">typeof</span> obj.next &amp;&amp; <span style="color: #8abeb7;">'function'</span> === <span style="color: #b5bd68;">typeof</span> obj.<span style="color: #b5bd68;">throw</span><span style="color: #8abeb7;">)</span>
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #b5bd68;">function</span> <span style="color: #de935f;">toTunk</span><span style="color: #c5c8c6;">(</span><span style="color: #f0c674;">obj</span>, <span style="color: #f0c674;">ctx</span><span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+  <span style="color: #b5bd68;">if</span> <span style="color: #8abeb7;">(</span>isGeneratorFunction<span style="color: #f0c674;">(</span>obj<span style="color: #f0c674;">)</span><span style="color: #8abeb7;">)</span> <span style="color: #8abeb7;">{</span>
+    <span style="color: #b5bd68;">return</span> co<span style="color: #f0c674;">(</span>obj.call<span style="color: #b5bd68;">(</span>ctx<span style="color: #b5bd68;">)</span><span style="color: #f0c674;">)</span>
+  <span style="color: #8abeb7;">}</span> <span style="color: #b5bd68;">if</span> <span style="color: #8abeb7;">(</span>isGenerator<span style="color: #f0c674;">(</span>obj<span style="color: #f0c674;">)</span><span style="color: #8abeb7;">)</span> <span style="color: #8abeb7;">{</span>
+    <span style="color: #b5bd68;">return</span> co<span style="color: #f0c674;">(</span>obj<span style="color: #f0c674;">)</span>
+  <span style="color: #8abeb7;">}</span> <span style="color: #b5bd68;">else</span> <span style="color: #8abeb7;">{</span>
+    <span style="color: #b5bd68;">return</span> obj
+  <span style="color: #8abeb7;">}</span>
+<span style="color: #c5c8c6;">}</span>
 </pre>
 </div>
 </div>
@@ -382,34 +382,34 @@ function toTunk(obj, ctx) {
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 
-<pre class="src src-js">// 实现
-function Koa () {
-  this.middleware = []
-}
-Koa.prototype.use = function (genFun) {
-  this.middleware.push(genFun)
-  return this
-}
-Koa.prototype.listen = function () {
-  this._start()
-}
-Koa.prototype._start = function () {
-  var ctx = this,
+<pre class="src src-js"><span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#23454;&#29616;</span>
+<span style="color: #b5bd68;">function</span> <span style="color: #de935f;">Koa</span> <span style="color: #c5c8c6;">()</span> <span style="color: #c5c8c6;">{</span>
+  <span style="color: #81a2be;">this</span>.middleware = <span style="color: #8abeb7;">[]</span>
+<span style="color: #c5c8c6;">}</span>
+Koa.<span style="color: #81a2be;">prototype</span>.use = <span style="color: #b5bd68;">function</span> <span style="color: #c5c8c6;">(</span><span style="color: #f0c674;">genFun</span><span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+  <span style="color: #81a2be;">this</span>.middleware.push<span style="color: #8abeb7;">(</span>genFun<span style="color: #8abeb7;">)</span>
+  <span style="color: #b5bd68;">return</span> <span style="color: #81a2be;">this</span>
+<span style="color: #c5c8c6;">}</span>
+Koa.<span style="color: #81a2be;">prototype</span>.listen = <span style="color: #b5bd68;">function</span> <span style="color: #c5c8c6;">()</span> <span style="color: #c5c8c6;">{</span>
+  <span style="color: #81a2be;">this</span>._start<span style="color: #8abeb7;">()</span>
+<span style="color: #c5c8c6;">}</span>
+Koa.<span style="color: #81a2be;">prototype</span>._start = <span style="color: #b5bd68;">function</span> <span style="color: #c5c8c6;">()</span> <span style="color: #c5c8c6;">{</span>
+  <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">ctx</span> = <span style="color: #81a2be;">this</span>,
       middleware = ctx.middleware,
       i = middleware.length,
-      prev = null
-  co(function * () {
-    while(i--){
-      prev = middleware[i].call(ctx, prev)
-    }
-    yield prev
-  })
-}
+      prev = <span style="color: #81a2be;">null</span>
+  co<span style="color: #8abeb7;">(</span><span style="color: #b5bd68;">function</span> * <span style="color: #f0c674;">()</span> <span style="color: #f0c674;">{</span>
+    <span style="color: #b5bd68;">while</span><span style="color: #b5bd68;">(</span>i--<span style="color: #b5bd68;">){</span>
+      prev = middleware<span style="color: #81a2be;">[</span>i<span style="color: #81a2be;">]</span>.call<span style="color: #81a2be;">(</span>ctx, prev<span style="color: #81a2be;">)</span>
+    <span style="color: #b5bd68;">}</span>
+    <span style="color: #b5bd68;">yield</span> prev
+  <span style="color: #f0c674;">}</span><span style="color: #8abeb7;">)</span>
+<span style="color: #c5c8c6;">}</span>
 
-// 调用
-var koa = new Koa
-koa.use(B).use(C)
-koa.listen()
+<span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#35843;&#29992;</span>
+<span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">koa</span> = <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">Koa</span>
+koa.use<span style="color: #c5c8c6;">(</span>B<span style="color: #c5c8c6;">)</span>.use<span style="color: #c5c8c6;">(</span>C<span style="color: #c5c8c6;">)</span>
+koa.listen<span style="color: #c5c8c6;">()</span>
 </pre>
 </div>
 
@@ -442,10 +442,10 @@ Thunk: <a href="https://en.wikipedia.org/wiki/Thunk">https://en.wikipedia.org/wi
 <div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
 <p class="date">2016-01-30</p>
-<p class="export-date">2016-04-07 Thu 16:58</p>
+<p class="export-date">2016-05-09 Mon 16:30</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
-<p class="last-modification-time">2016-04-06 Wed 15:17</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+<p class="validation"></p>
+<p class="last-modification-time">2016-05-08 Sun 18:49</p></div><script src="/static/app.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

@@ -1,6 +1,6 @@
-#+TITLE: Git Cookbook
+#+TITLE: Git Cookie
 #+DATE: 2015-12-27
-#+DESCRIPTION: Git Cookbook
+#+DESCRIPTION: Git Cookie
 #+KEYWORDS: git
 #+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
@@ -9,6 +9,7 @@
 
 * 前言
 一些关于 *git* 的小知识。用于git问题收集。
+
 * Rewrite History
 #+BEGIN_SRC sh
   git filter-branch --commit-filter '
@@ -21,7 +22,7 @@
                  git commit-tree "$@";
          fi' HEAD
 #+END_SRC
-  
+
 * delete git submodles
 http://yuguo.us/weblog/git-submodule/
 #+BEGIN_SRC sh
@@ -30,8 +31,3 @@ http://yuguo.us/weblog/git-submodule/
   # 编辑.git/config文件，将子模块的相关配置节点删除掉[这一步好像很不科学，为什么信息要保存两份？]
   # 手动删除子模块残留的目录
 #+END_SRC
-
-* 尾声
-
-
-   

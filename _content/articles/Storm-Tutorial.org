@@ -71,14 +71,14 @@ Storm 中使用 tuples（元组）作为数据模型。
       }
       @Override
       public void execute(Tuple input) {
-          int val = input.getInteger(0);        
+          int val = input.getInteger(0);
           _collector.emit(input, new Values(val*2, val*3));
           _collector.ack(input);
       }
       @Override
       public void declareOutputFields(OutputFieldsDeclarer declarer) {
           declarer.declare(new Fields("double", "triple"));
-      }    
+      }
   }
 #+END_SRC
 =declareOutputFields= 方法声明了输出域 =["double", "triple"]= . =DoubleAndTripleBolt= 的其余代码会在接下来的章节说明。

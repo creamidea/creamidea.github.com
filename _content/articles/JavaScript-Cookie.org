@@ -28,15 +28,15 @@
   for (var i in a) {
     console.log(i);
   }
-  // 0,1,2,3,4,foo 
+  // 0,1,2,3,4,foo
   // :P
 #+END_SRC
 
 * Generate Function
 
-=yield= 
+=yield=
 The yield keyword is used to pause and resume a generator function. \\
-=yield*= 
+=yield*=
 The yield* expression is used to delegate to another generator or iterable object.
 Besides generator objects, yield* can also yield other kinds of iterables, e.g. arrays, strings or arguments objects.
 yield* is an expression, not a statement, so it evaluates to a value. \\
@@ -211,4 +211,3 @@ function * C (next) {
 * Footnotes
 
 [fn:1] Thunk: https://en.wikipedia.org/wiki/Thunk
-
