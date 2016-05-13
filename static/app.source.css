@@ -49,10 +49,10 @@ h2:hover a,h3:hover a,h4:hover a{visibility: visible;}
 /* .nav-tabs:after {clear: left;} */
 .nav-tabs {text-align: center; font-size: 1.4em; padding-left: 0;}
 .nav-tabs li {border: 0;display: inline-block; text-align: center;margin-left: 6px; margin-right: 6px;}
-.nav-tabs li.active {border: 0;border-bottom: solid 4px #ED462F;}
+/*.nav-tabs li.active {border: 0;border-bottom: solid 4px #ED462F;}*/
 /* .nav-tabs li.active a {border: 0;} */
 /* .nav-tabs li.articles.active {border-bottom: solid #D82C2D 4px;} */
-/* .nav-tabs li.wiki.active {border-bottom: solid #0C77B6 4px;} */
+.nav-tabs li.wiki.active {border-bottom: solid #0C77B6 4px;}
 .nav-tabs a {text-decoration: none; border: 0;}
 /* .nav-tabs a[href="#articles"] { color: #D82C2D; } */
 /* .nav-tabs a[href="#articles"]:hover {border-bottom: solid #D82C2D 4px;} */
@@ -60,7 +60,7 @@ h2:hover a,h3:hover a,h4:hover a{visibility: visible;}
 /* .nav-tabs a[href="#wiki"]:hover {border-bottom: solid #0C77B6 4px;} */
 .tab-content {margin: auto 29px;}
 .tab-content ul {list-style-type: none;font-family: Georgia1, Georgia, serif}
-.tab-content ul li{border-bottom: 1px solid rgba(0,0,0,0.05); padding: 16px;}
+.tab-content ul li{border-bottom: 3px dashed rgba(0,0,0,0.05); padding: 16px;}
 .tab-content ul li .date {font-size: 16px; line-height: 0; color: #A8A8A8;}
 .tab-content ul li .split-symbol {margin: 0 12px;font-family: Times New Roman, Times, serif;font-size: 14px;}
 .tab-content ul li a {text-decoration: none;border-bottom: 0;}

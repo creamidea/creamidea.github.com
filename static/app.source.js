@@ -217,7 +217,8 @@ function showTags (body, content, meta) {
   if (keywords && keywords.length > 0) {
     var div = document.createElement('div');
     var footnotes = document.getElementById('footnotes');
-    var searchEngine = 'https://www.laiguge.com/search?hl=en&q=';
+    // var searchEngine = 'https://www.laiguge.com/search?hl=en&q=';
+    var searchEngine = 'http://0s.o53xo.m5xw6z3mmuxgg33n.erenta.ru/?gws_rd=ssl#hl=en&q=';
     keywords.forEach(function (key) {
       var a = document.createElement('a');
       a.href = searchEngine +
@@ -307,8 +308,9 @@ function genCategories (body, content) {
         _tabContent.push(
           a.innerHTML.replace(
               /(.*) (\d{4}-\d{2}-\d{2})/, // $2 is the Last Modification Time
-            '<li class="link" style="text-align:right;list-style-type: initial;"><p style="margin:0;text-align:left;"><a href="'+ a.getAttribute('href') + '">$1</a></p><span class="date">$2</span></li>'));
+            '<li class="link" style="list-style-type: initial;"><span class="date">$2 &#8594; </span><a href="'+ a.getAttribute('href') + '" style="color:#333333;">$1</a></li>'));
       });
+      // &#8611; http://character-code.com/arrows-html-codes.php
 
       // pagin
       tabContent.push('<div class="tab-pane" id="'+ _name +'">'+paging(_tabContent, content).join(' ')+'</div>');
