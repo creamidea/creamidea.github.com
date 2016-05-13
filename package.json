@@ -1,0 +1,22 @@
+{
+  "name": "creamidea.github.com",
+  "version": "1.0.0",
+  "description": "creamidea-site building tools",
+  "main": "index.js",
+  "scripts": {
+    "uglify-all": "npm run-script uglify-js && npm run-script uglify-css",
+    "uglify-js": "node ./node_modules/uglify-js/bin/uglifyjs static/app.source.js -o static/app.js --source-map",
+    "uglify-css": "node ./node_modules/uglifycss/uglifycss static/app.source.css > static/app.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/creamidea/creamidea.github.com.git"
+  },
+  "author": "creamidea@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/creamidea/creamidea.github.com/issues"
+  },
+  "homepage": "https://github.com/creamidea/creamidea.github.com#readme"
+}
