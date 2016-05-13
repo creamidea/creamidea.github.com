@@ -29,7 +29,7 @@ h2:hover a,h3:hover a,h4:hover a{visibility: visible;}
 
 #avatar-wapper {position: fixed;top: 40px;left: 40px;}
 #avatar-wapper img {border-radius: 60px;width: 60px;height: 60px;}
-#org-div-home-and-up a {color: #7B7B7B;text-decoration: none;font-size: 24px;font-family: Menlo;margin-right: 8px;position: fixed;top: 4px;right: 4px;}
+#org-div-home-and-up a {color: #7B7B7B;text-decoration: none;font-size: 36px;font-family: Menlo;margin-right: 8px;position: fixed;top: 4px;right: 4px;}
 #banner-wrapper {
     margin: 0 auto;
     /* width: 700px; */
