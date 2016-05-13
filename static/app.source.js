@@ -276,7 +276,7 @@ function ImgClickEvent (body, wapper) {
  */
 function genCategories (body, content) {
   var orgUl = content.children[1];
-  var categories = [];
+  // var categories = [];
   var sTitle = {
     articles: "Articles",
     wiki: "Wiki"

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "uglify-all": "npm run-script uglify-js && npm run-script uglify-css",
-    "uglify-js": "node ./node_modules/uglify-js/bin/uglifyjs static/app.source.js -o static/app.js --source-map",
+    "uglify-js": "node ./node_modules/uglify-js/bin/uglifyjs static/app.source.js -o static/app.js -c sequences=true,properties=true,dead_code=true,drop_debugger=true,unsafe=true,unsafe_comps=true,conditionals=true,comparisons=true,evaluate=true,booleans=true,loops=true,unused=true,hoist_funs=true,hoist_vars=false,if_return=true,join_vars=true,cascade=true,side_effects=true,negate_iife=true,screw_ie8=false,warnings=true,global_defs={} -m --source-map",
     "uglify-css": "node ./node_modules/uglifycss/uglifycss static/app.source.css > static/app.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
