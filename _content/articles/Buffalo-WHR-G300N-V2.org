@@ -1,0 +1,80 @@
+#+TITLE: Buffalo WHR-G300N V2
+#+AUTHOR: 冰糖火箭筒(Junjia Ni)
+#+EMAIL: creamidea(AT)gmail.com
+#+DATE: 2016-06-27
+#+CATEGORY: article
+#+DESCRIPTION: Something about OpenWRT&Buffalo
+#+KEYWORDS: router,openwrt,buffalo
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t <:t date:t timestamp:t
+#+LINK_HOME: https://creamidea.github.io
+#+STARTUP: showall
+
+
+* 前言
+想在路由器上面做一些文章的，但是最后还是失败了。感觉投入的时间太多了，要收一下。现在记录之前的探索路程，为后续有时间的时候再来搞起。
+话不多说，直接上步骤。
+
+* 步骤
+** tftp模式
+1. 如果没有安装需要先安装一下，比如 ubuntu
+#+BEGIN_SRC sh
+$ sudo apt-get install tftp
+#+END_SRE
+
+2. 将计算机和路由器通过 **网线** 连接，将路由器断电处理。
+
+3. 设置IP地址，请将地址配置成 **192.168.11.1** ，不要改，就按照这个来。
+#+BEGIN_SRC sh
+$ sudo ifconfig eth0 192.168.11.1 netmask 255.255.255.0
+$ sudo arp -s 192.168.11.1 <MAC Address> # buffalo的是背面的那个[SSID]
+#+END_SRE
+
+4. 开始刷机
+#+BEGIN_SRC sh
+$ tftp
+tftp> verbose # 详细
+tftp> binary
+tftp> trace
+tftp> rexmt 1
+tftp> timeout 60
+tftp> connect 192.168.11.1
+tftp> put xxx.bin
+#+END_SRE
+
+输入完上述命令之后， ** 立即** 将路由器通电。之后耐心等待，在传输完毕之后注意不要立即断电，还需要等待一段时间。
+等红灯熄灭之后，表示刷机完成。
+
+5. 测试
+经过上述步骤之后，应该已经刷入系统。接下来等待无线信号灯亮起，连接上路由器，在地址栏中输入 [[http://192.168.1.1]] 测试。
+
+** ssh模式
+这个模式大部分步骤和上述类似。不同点在于：
+1. 需要自己想办法传输二进制文件到路由器上，可以使用 =scp=
+2. 使用这个命令刷入 =mtd -r write xxx.bin linux=
+
+* 尾声
+本来想自己编译 **shadowsocks-libev** 。但是时间不够和技术不行，于是作罢。下面记录用到的连接。
+
+** shadowsocks-libev
++ [[https://github.com/shadowsocks/shadowsocks-libev][github:shadowsocks-libev]]
+
+** ShadowSocks
++ [[http://www.router008.com/2016/05/09/DD-WRT-ShadowSocks/][DD-WRT-ShadowSocks(arm+?)]]
++ [[https://softwaredownload.gitbooks.io/openwrt-fanqiang/content/index.html][史上最详细的OpenWrt shadowsocks路由器自动翻墙教程]]
++ [[http://www.right.com.cn/forum/thread-158405-1-1.html][分享个R6300V2（DDWRT）s-s教程]]
+
+** brush
++ [[http://www.anywlan.com/forum.php?mod%3Dviewthread&tid%3D121833][WHR-G300N-V2从DDWRT刷回原厂1.82固件详细，刷失败的都进来看]]
++ [[https://www.chiphell.com/thread-1210834-1-1.html][个人编译石像鬼 Buffalo WHR-G300N V2 固件（终结完美版）1.6.2]]
++ [[https://www.lifetyper.com/2014/06/buffalo-wzr-hp-g300nh2-debrick-record.html][Buffalo WZR-HP-G300NH2救砖全记录]]
++ [[http://www.cnblogs.com/meetrice/p/4129901.html][史上最全面的Buffalo WHR-G300N CH v2 刷OpenWrt教程]]
++ [[https://jalena.bcsytv.com/archives/1129][Buffalo WHR-G300N v2 修砖刷OpenWRT]]
+
+** cross compile
++ [[https://blog.bydell.com/posts/cross_complie_shadowsocks_for_dd-wrt__r6300v2/][{DD-WRT} 为 Netgear R6300v2 交叉编译 shadowsocks-libev]]
+
+** sources
++ [[http://www.dd-wrt.com/site/support/other-downloads][dd-wrt-other-download(offical)]]
++ [[https://wiki.openwrt.org/toh/hwdata/buffalo/buffalo_whr-g300n_v2][Techdata: Buffalo WHR-G300N v2]]
+
+小插曲，如何给 VirtualBox 里面的 VM 扩展磁盘空间，可以参考 [[http://derekmolloy.ie/resize-a-virtualbox-disk/][here]] 。
