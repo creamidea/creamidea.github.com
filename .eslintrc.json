@@ -1,0 +1,15 @@
+{
+  "extends": ["standard", "eslint:recommended", "plugin:react/recommended"],
+  "installedESLint": true,
+  "plugins": [
+    "react"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules":{
+    "no-console":0
+  }
+}

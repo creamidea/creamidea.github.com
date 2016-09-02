@@ -42,3 +42,8 @@ desktop.ini
 *.swp
 \#.*\#
 \.\#.*
+
+
+dll.json
+npm-debug.log*
+static/*.hot-update.js*
