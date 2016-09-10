@@ -13,7 +13,7 @@ module.exports = {
     path: path.resolve(__dirname, 'static')
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    // new webpack.HotModuleReplacementPlugin(),
     new webpack.DllReferencePlugin({
       context: '.',
       manifest: require('./dll.json')
@@ -22,12 +22,12 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.jsx$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         include: path.resolve(__dirname, 'web-src'),
         loader: 'babel',
         query: {
-          // plugins: ['transform-runtime', 'transform-react-jsx'],
+          plugins: ['syntax-decorators'],
           cacheDirectory: true,
           presets: ['es2015', 'react']
         }

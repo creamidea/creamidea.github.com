@@ -47,3 +47,4 @@ desktop.ini
 dll.json
 npm-debug.log*
 static/*.hot-update.js*
+static/bundle.js
