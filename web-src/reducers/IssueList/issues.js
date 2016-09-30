@@ -1,6 +1,4 @@
-import {
-  RECEIVE_ISSUES
-} from '../../actions/IssueList/'
+import { RECEIVE_ISSUES } from '../../actions/IssueList/'
 
 const issues = (state = {}, action = {items: []}) => {
   switch (action.type) {

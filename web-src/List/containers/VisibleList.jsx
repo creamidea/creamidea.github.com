@@ -45,12 +45,17 @@ const mapStateToProps = (state = {}, ownProps) => {
   let { issues, issuesByPage } = state
   let { totalCount, incompleteResults, nowPageId } = issuesByPage
   if ( nowPageId && nowPageId > 0) {
+
     return Object.assign({}, state,{
-      totalCount, incompleteResults,
+      totalCount,
+      incompleteResults,
       items: issuesByPage[`page-${nowPageId}`].items.map( id => issues[id] )
     })
+
   } else {
+
     return state
+
   }
 }
 

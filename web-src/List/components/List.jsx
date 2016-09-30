@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import Issue from './issue'
+import Issue from './Issue'
 
 const IssueList = ({ totalCount = 0, incompleteResults = false, items = [] }) => (
   <ul>

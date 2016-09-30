@@ -1,6 +1,4 @@
-import {
-  REQUEST_ISSUES, RECEIVE_ISSUES
-} from '../../actions/IssueList/'
+import { REQUEST_ISSUES, RECEIVE_ISSUES } from '../actions/'
 
 function issuesByPage(state = {}, action) {
   switch (action.type) {

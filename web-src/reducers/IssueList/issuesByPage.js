@@ -1,8 +1,12 @@
 import {
   REQUEST_ISSUES, RECEIVE_ISSUES
 } from '../../actions/IssueList/'
+import { CLICK_PAGE } from '../../actions/Pagination/'
 
-function issuesByPage(state = {}, action) {
+function issuesByPage(state = {
+  isFetching: false,
+  didInvalidate: false
+}, action) {
   switch (action.type) {
 
   case REQUEST_ISSUES:
@@ -13,18 +17,23 @@ function issuesByPage(state = {}, action) {
 
   case RECEIVE_ISSUES: {
     let { pageId } = action.conditions
-    let { total_count, incomplete_results, items } = action.issues
+    let { items } = action.issues
 
     return Object.assign({}, state, {
-      totalCount: total_count,
-      incompleteResults: incomplete_results,
+      isFetching: true,
+      didInvalidate: false,
       nowPageId: pageId,
       [`page-${pageId}`]: {
         id: pageId,
-        isFetching: false,
-        didInvalidate: false,
         items: items.map( item => item.id )
       }
+    })
+  }
+
+  case CLICK_PAGE: {
+    const pageId = action.pageId
+    return Object.assign({}, state, {
+      nowPageId: pageId
     })
   }
 

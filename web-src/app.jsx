@@ -38,12 +38,10 @@ const loggerMiddleware = createLogger()
 const rootReducer = combineReducers(
   Object.assign({}, IssueReducer))
 
-let store = createStore(
-  combineReducers(rootReducer, applyMiddleware(
-    thunkMiddleware,
-    loggerMiddleware
-  ))
-)
+let store = createStore(rootReducer, applyMiddleware(
+  thunkMiddleware,
+  loggerMiddleware
+))
 
 render(
   <Provider store={store}>

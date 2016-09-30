@@ -48,6 +48,18 @@ export function setVisibilityFilter (filter) {
 }
 
 /**
+ * to transfer the issuesByPage is invalid
+ * to fetch new issues
+ */
+export const INVALIDATE_PAGE = 'INVALIDATE_PAGE'
+export function invalidateIssues (pageId) {
+  return {
+    type: INVALIDATE_PAGE,
+    pageId
+  }
+}
+
+/**
  * fetch issues:
  */
 export function fetchIssues (pageId = 1, perPageCount = PERPAGECOUNT) {

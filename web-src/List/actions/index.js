@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import receiveFailed from './receiveFailed'
+import { receiveFailed } from './receiveFailed'
 
 let PERPAGECOUNT = 25
 const PROTOCOL = 'https'
