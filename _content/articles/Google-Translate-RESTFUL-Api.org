@@ -14,9 +14,14 @@
   这几天有空的时候稍微分析了一下Google-Translate网站的前端代码。把提交翻译词和获取语音的API翻了出来。这个我后面有空的时候来写一下。
   主要讲一下我用到的2个接口。再次来试试速度。
 
+  项目迁移测试。
+
 * 测试update-index
 #+BEGIN_SRC sh
   $ git update-index --assume-unchanged FILE_NAME
 #+END_SRC
+
+* 获取音频的2个接口
++ https://ssl.gstatic.com/dictionary/static/sounds/de/0/[your-wordX].mp3
 
 * 尾声
