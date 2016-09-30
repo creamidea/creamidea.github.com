@@ -3,8 +3,10 @@
    + wiki
      + [[file:wiki/friends.org][Friends 2016-05-09]]
    + articles
-     + [[file:articles/Google-Translate-RESTFUL-Api.org][Google Translate API Analytics 2016-05-15]]
-     + [[file:articles/Git-Cookie.org][Git Cookie 2016-05-15]]
+     + [[file:articles/Google-Translate-RESTFUL-Api.org][Google Translate API Analysis 2016-09-29]]
+     + [[file:articles/Browser-and-Server-Sync.org][Browser and Server Sync (Polling, Comet, Long Polling, WebSocket) 2016-09-29]]
+     + [[file:articles/Git-Cookie.org][Git Cookie 2016-09-01]]
+     + [[file:articles/Buffalo-WHR-G300N-V2.org][Buffalo WHR-G300N V2 2016-06-27]]
      + [[file:articles/Zookeeper-Programming.org][［译］Programming With ZooKeeper 2016-05-09]]
      + [[file:articles/Unicode-And-UTF8.org][Unicode and UTF8 2016-05-09]]
      + [[file:articles/This-Site.org][This Site 2016-05-09]]
@@ -13,7 +15,6 @@
      + [[file:articles/JavaScript-Cookie.org][JavaScript Cookie 2016-05-09]]
      + [[file:articles/How-To-Install-Autocomplete-And-Yasnippet.org][How To Install Autocomplete and Yanisppet 2016-05-09]]
      + [[file:articles/C-And-C++-Cookie.org][C And C++ Cookie 2016-05-09]]
-     + [[file:articles/Browser-and-Server-Sync.org][Browser and Server Sync (Polling, Comet, Long Polling, WebSocket) 2016-05-09]]
      + [[file:articles/CSS-Animation.org][CSS Animation: display 2016-05-08]]
      + [[file:articles/Install-Something.org][Install Something 2016-05-08]]
      + [[file:articles/Jump-Links-And-Viewport-Position.org][Jump Links And Viewport Position 2016-05-08]]
@@ -26,4 +27,3 @@
      + [[file:articles/Install-Arch.org][Archlinux With Windows7 (hard disk installation media) 2016-05-08]]
      + [[file:articles/HHKB-GET.org][HHKB GET 2016-05-08]]
      + [[file:articles/GWT-ABC.org][GWT ABC 2016-05-08]]
-   + [[file:index.org][e^(i&#x3c0;)+1=0 2016-05-15]]

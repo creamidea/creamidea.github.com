@@ -48,3 +48,7 @@ dll.json
 npm-debug.log*
 static/*.hot-update.js*
 static/bundle.js
+static/html
+.#-emacs*
+*~
+static/bundle.js.map
