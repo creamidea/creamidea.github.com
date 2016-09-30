@@ -40,11 +40,15 @@ desktop.ini
 
 # Emacs && VIM
 *.swp
-\#.*\#
-\.\#.*
-
+\.\#*.*
+\#*.*\#
+*~
 
 dll.json
 npm-debug.log*
 static/*.hot-update.js*
 static/bundle.js
+
+static/bundle.js.map
+static/html/
+static/libs/dll.lib.js
