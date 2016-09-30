@@ -1,4 +1,4 @@
-import { RECEIVE_ISSUES } from '../../actions/IssueList/'
+import { RECEIVE_ISSUES } from '../actions/'
 
 const issues = (state = {}, action = {items: []}) => {
   switch (action.type) {
@@ -11,9 +11,11 @@ const issues = (state = {}, action = {items: []}) => {
     return Object.assign(
       {}, state, items)
   }
+
   default:
     return state
   }
+
 }
 
 export default issues

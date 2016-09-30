@@ -15,10 +15,18 @@ class ListContainer extends Component {
     dispatch(fetchIssuesIfNeeded(1))
   }
 
+  // componentWillReceiveProps(nextProps) {
+  //   // debugger
+  //   const { dispatch, pagination } = nextProps
+  //   if (pagination && pagination.nowPageId !== this.props.pagination.nowPageId) {
+  //     dispatch(fetchIssuesIfNeeded(pagination.nowPageId))
+  //   }
+  // }
+
   onClick (filter) {
-    const { dispatch } = this.props
-    dispatch(setVisibilityFilter(filter))
-    console.log(filter)
+    // const { dispatch } = this.props
+    // dispatch(setVisibilityFilter(filter))
+    console.log('[VisibleList]' + filter)
   }
 
   render () {
@@ -26,31 +34,28 @@ class ListContainer extends Component {
   }
 }
 
-const getIssueByPage = (issuesByPage, page) => {
-  return issuesByPage[page]
-}
+// const getAllIssues = (issues) => {
+//   return {}
+// }
 
-const getAllIssues = (issues) => {
-  return {}
-}
-
-const setVisibilityFilter = (filter) => {
-  switch(filter) {
-  case "SHOW_BY_PAGE":
-    return getIssueByPage(issuesByPage, issuesByPage.nowPage)
-  }
-}
+// const setVisibilityFilter = (filter) => {
+//   switch(filter) {
+//   case "SHOW_BY_PAGE":
+//     return getIssueByPage(issuesByPage, issuesByPage.nowPage)
+//   }
+// }
 
 const mapStateToProps = (state = {}, ownProps) => {
   let { issues, issuesByPage } = state
-  let { totalCount, incompleteResults, nowPageId } = issuesByPage
-  if ( nowPageId && nowPageId > 0) {
-    return Object.assign({}, state,{
-      totalCount, incompleteResults,
-      items: issuesByPage[`page-${nowPageId}`].items.map( id => issues[id] )
+  let { nowPageId } = issuesByPage
+  let page = issuesByPage[`page-${nowPageId}`]
+
+  if ( page ) {
+    return Object.assign({}, issuesByPage, {
+      items: page.items.map( id => issues[id] )
     })
   } else {
-    return state
+    return issuesByPage
   }
 }
 

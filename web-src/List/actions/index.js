@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import receiveFailed from '../receiveFailed'
+import { receiveFailed } from './receiveFailed'
 
 let PERPAGECOUNT = 25
 const PROTOCOL = 'https'
@@ -44,18 +44,6 @@ export function setVisibilityFilter (filter) {
   return {
     type: SET_VISIBILITY_FILTER,
     filter
-  }
-}
-
-/**
- * to transfer the issuesByPage is invalid
- * to fetch new issues
- */
-export const INVALIDATE_PAGE = 'INVALIDATE_PAGE'
-export function invalidateIssues (pageId) {
-  return {
-    type: INVALIDATE_PAGE,
-    pageId
   }
 }
 
