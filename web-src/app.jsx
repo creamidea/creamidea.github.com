@@ -25,22 +25,26 @@
  */
 
 import React from 'react'
+import { render } from 'react-dom'
+import { createStore, applyMiddleware, combineReducers } from 'redux'
+import { Provider } from 'react-redux'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
-import { render } from 'react-dom'
-import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
 
-import rootReducer from './reducers'
-import IssueListApp from './components/IssueList/'
+import IssueListApp from './List/components/'
+import IssueReducer from './List/reducers/'
 
 const loggerMiddleware = createLogger()
+const rootReducer = combineReducers(
+  Object.assign({}, IssueReducer))
 
 let store = createStore(
-  rootReducer, applyMiddleware(
+  combineReducers(rootReducer, applyMiddleware(
     thunkMiddleware,
     loggerMiddleware
   ))
+)
+
 render(
   <Provider store={store}>
     <IssueListApp />

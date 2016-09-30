@@ -42,9 +42,11 @@ desktop.ini
 *.swp
 \#.*\#
 \.\#.*
-
+*~
 
 dll.json
 npm-debug.log*
 static/*.hot-update.js*
 static/bundle.js
+static/bundle.js.map
+static/html/
