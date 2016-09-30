@@ -308,7 +308,7 @@ function genCategories (body, content) {
         _tabContent.push(
           a.innerHTML.replace(
               /(.*) (\d{4}-\d{2}-\d{2})/, // $2 is the Last Modification Time
-            '<li class="link" style="list-style-type: initial;"><span class="date">$2 &#8594; </span><a href="'+ a.getAttribute('href') + '" style="color:#333333;">$1</a></li>'));
+            '<li class="link"><a href="'+ a.getAttribute('href') + '" style="color:#333333;">$1</a><p class="date">Last Modification Time: $2</p></li>'));
       });
       // &#8611; http://character-code.com/arrows-html-codes.php
 
