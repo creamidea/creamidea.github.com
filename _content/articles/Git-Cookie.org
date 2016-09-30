@@ -23,11 +23,18 @@
          fi' HEAD
 #+END_SRC
 
-* delete git submodles
+* Delete git submodles
 http://yuguo.us/weblog/git-submodule/
 #+BEGIN_SRC sh
   $ git rm --cached [path]
   # 编辑.gitmodules文件，将子模块的相关配置节点删除掉
   # 编辑.git/config文件，将子模块的相关配置节点删除掉[这一步好像很不科学，为什么信息要保存两份？]
   # 手动删除子模块残留的目录
+#+END_SRC
+
+* Update Index
+这个命令可以让git不跟踪指定文件，但同时可以继续保存在项目中。有点类似于 =.gitignore= 的作用。
+#+BEGIN_SRC sh
+  $ git update-index --assume-unchanged FILE_NAME
+  $ git update-index --no-assume-unchanged FILE_NAME
 #+END_SRC
