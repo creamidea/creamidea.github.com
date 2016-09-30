@@ -3,7 +3,7 @@ const webpack = require('webpack')
 
 module.exports = {
   cache: true,
-  devtool: 'eval', // or cheap-module-eval-source-map
+  devtool: 'source-map', // or cheap-module-eval-source-map (eval) https://github.com/reactjs/redux/issues/809
   entry: [
     'babel-polyfill',
     path.resolve(__dirname, 'web-src', 'app.jsx')
@@ -13,6 +13,8 @@ module.exports = {
     path: path.resolve(__dirname, 'static')
   },
   plugins: [
+    // new webpack.optimize.UglifyJsPlugin({minimize: true}),
+    // new webpack.optimize.OccurenceOrderPlugin(),
     // new webpack.HotModuleReplacementPlugin(),
     new webpack.DllReferencePlugin({
       context: '.',
@@ -34,13 +36,17 @@ module.exports = {
       }
     ]
   },
+  // externals: {
+  //   // Use external version of React
+  //   "react": "React",
+  //   "react-dom": "ReactDOM",
+  //   "redux": "redux",
+  //   "react-router": "react-router"
+  //   // "redux-thunk": "redux-thunk",
+  //   // "redux-logger": "redux-logger"
+  // },
   resolve: {
     extensions: ['', '.js', '.jsx'],
     modulesDirectories: ['node_modules', 'bower_components']
   }
-  // externals: {
-  //   // Use external version of React
-  //   "react": "React",
-  //   "react-dom": "ReactDOM"
-  // },
 }

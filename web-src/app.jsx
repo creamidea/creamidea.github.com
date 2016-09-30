@@ -25,11 +25,12 @@
  */
 
 import React from 'react'
-import thunkMiddleware from 'redux-thunk'
-import createLogger from 'redux-logger'
 import { render } from 'react-dom'
+import { Router, Route, Link} from "react-router"
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import createLogger from 'redux-logger'
 
 import rootReducer from './reducers'
 import IssueListApp from './components/IssueList/'
@@ -47,3 +48,7 @@ render(
   </Provider>,
   document.getElementById('app')
 )
+
+    // <Router>
+    //   <Route path="/" component={IssueListApp} />
+    // </Router>
