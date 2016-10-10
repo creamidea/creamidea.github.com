@@ -27,7 +27,7 @@ const CACHEFILE = path.resolve(__dirname, '.org-timestamps', 'export-history.cac
 
 const SPECIALFILE = ["works", "friends"]
 const URLPREFIX = '/static/html/'
-const URLPREFIX2 = 'https://media.githubusercontent.com/media/creamidea/creamidea.github.com/master/'
+const URLPREFIX2 = 'https://media.githubusercontent.com/media/creamidea/creamidea.github.com/master/static/html/'
 
 ///////////
 // Event //
@@ -68,7 +68,7 @@ function genArchiveHtml (data) {
   }).map((fileSym) => {
     const {name, category, mtime, date, tags} = data[fileSym]
     let urlprefix = URLPREFIX
-    if (process.env.NODE_ENV.indexOf('production') >= 0) {
+    if (typeof process.env.NODE_ENV === 'string' && process.env.NODE_ENV.indexOf('production') >= 0) {
       urlprefix = URLPREFIX2
     }
     let _html = `
