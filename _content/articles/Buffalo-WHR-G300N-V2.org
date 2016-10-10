@@ -17,19 +17,22 @@
 * 步骤
 ** tftp模式
 1. 如果没有安装需要先安装一下，比如 ubuntu
+
 #+BEGIN_SRC sh
 $ sudo apt-get install tftp
-#+END_SRE
+#+END_SRC
 
 2. 将计算机和路由器通过 **网线** 连接，将路由器断电处理。
 
 3. 设置IP地址，请将地址配置成 **192.168.11.1** ，不要改，就按照这个来。
+
 #+BEGIN_SRC sh
 $ sudo ifconfig eth0 192.168.11.1 netmask 255.255.255.0
 $ sudo arp -s 192.168.11.1 <MAC Address> # buffalo的是背面的那个[SSID]
-#+END_SRE
+#+END_SRC
 
 4. 开始刷机
+
 #+BEGIN_SRC sh
 $ tftp
 tftp> verbose # 详细
@@ -39,7 +42,7 @@ tftp> rexmt 1
 tftp> timeout 60
 tftp> connect 192.168.11.1
 tftp> put xxx.bin
-#+END_SRE
+#+END_SRC
 
 输入完上述命令之后， ** 立即** 将路由器通电。之后耐心等待，在传输完毕之后注意不要立即断电，还需要等待一段时间。
 等红灯熄灭之后，表示刷机完成。
@@ -48,6 +51,7 @@ tftp> put xxx.bin
 经过上述步骤之后，应该已经刷入系统。接下来等待无线信号灯亮起，连接上路由器，在地址栏中输入 [[http://192.168.1.1]] 测试。
 
 ** ssh模式
+
 这个模式大部分步骤和上述类似。不同点在于：
 1. 需要自己想办法传输二进制文件到路由器上，可以使用 =scp=
 2. 使用这个命令刷入 =mtd -r write xxx.bin linux=

@@ -43,12 +43,16 @@ desktop.ini
 \#.*\#
 \.\#.*
 
-
 dll.json
 npm-debug.log*
 static/*.hot-update.js*
 static/bundle.js
 static/html
+static/article.css
+static/article.js
+static/article.js.map
+static/bundle.js.map
+
 .#-emacs*
 *~
-static/bundle.js.map
+.org-timestamps/*

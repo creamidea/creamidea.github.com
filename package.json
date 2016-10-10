@@ -4,14 +4,17 @@
   "description": "creamidea-site building tools",
   "main": "index.js",
   "scripts": {
-    "uglify": "npm run-script uglify:js && npm run-script uglify:css",
-    "uglify:js": "node ./node_modules/uglify-js/bin/uglifyjs static/app.source.js -o static/app.js -c sequences=true,properties=true,dead_code=true,drop_debugger=true,unsafe=true,unsafe_comps=true,conditionals=true,comparisons=true,evaluate=true,booleans=true,loops=true,unused=true,hoist_funs=true,hoist_vars=false,if_return=true,join_vars=true,cascade=true,side_effects=true,negate_iife=true,screw_ie8=false,warnings=true,global_defs={} -m --source-map",
-    "uglify:css": "node ./node_modules/uglifycss/uglifycss static/app.source.css > static/app.css",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build:dll": "node ./node_modules/webpack/bin/webpack.js --color --cache --profile --progress --config=dll.config.js",
-    "build:webpack": "node ./node_modules/webpack/bin/webpack.js --color --profile --progress --watch --config webpack.config.js",
-    "build": "npm run build:dll && npm run build:webpack",
-    "publish": "emacs --batch -l ./_content/org-publish-setting.el -f load-creamidea-site-publish"
+    "build:archive": "node ./export.js archive",
+
+    "publish:archive": "set NODE_ENV=production && node ./export.js archive",
+    "publish:octocat": "node ./octodex.js",
+    "publish:article-static": "node ./export.js article-static",
+    "publish:index-static": "node ./export.js index-static",
+    "publish:site": "emacs -q -Q -nw --batch -l org-publish-setting.el -f publish-creamidea-site",
+
+    "publish": "npm run publish:octocat && npm run publish:article-static && npm run publish:index-static && npm run publish:archive",
+
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -24,21 +27,11 @@
   },
   "homepage": "https://github.com/creamidea/creamidea.github.com#readme",
   "devDependencies": {
-    "babel-core": "^6.14.0",
-    "babel-loader": "^6.2.5",
-    "babel-plugin-syntax-decorators": "^6.13.0",
-    "babel-polyfill": "^6.13.0",
-    "babel-preset-es2015": "^6.14.0",
-    "babel-preset-react": "^6.11.1",
-    "webpack": "^1.13.2"
+    "babel-preset-es2015": "^6.16.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.0",
+    "uglify-js": "^2.7.3",
+    "uglifycss": "0.0.21"
   },
-  "dependencies": {
-    "react": "^15.3.1",
-    "react-dom": "^15.3.1",
-    "react-redux": "^4.4.5",
-    "react-router": "^2.8.1",
-    "redux": "^3.5.2",
-    "redux-logger": "^2.6.1",
-    "redux-thunk": "^2.1.0"
-  }
+  "dependencies": {}
 }

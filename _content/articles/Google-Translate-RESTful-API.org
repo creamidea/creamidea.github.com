@@ -1,11 +1,11 @@
-#+TITLE: Google Translate API Analysis
+#+TITLE: Google Translation API Analysis
 #+AUTHOR: 冰糖火箭筒(Junjia Ni)
 #+EMAIL: creamidea(AT)gmail.com
 #+DATE: 2016-05-08
 #+CATEGORY: article
 #+DESCRIPTION: Google Translate API Analysis
 #+KEYWORDS: google-translate
-#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t <:t date:t timestamp:t
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:nil email:t <:t date:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
 
@@ -13,21 +13,5 @@
 * 前言
   这几天有空的时候稍微分析了一下Google-Translate网站的前端代码。把提交翻译词和获取语音的API翻了出来。这个我后面有空的时候来写一下。
   主要讲一下我用到的2个接口。再次来试试速度。
-
-测试
-测试2
-测试3
-测试4
-测试5
-测试6
-Test7
-Test8
-Test9
-
-
-* 测试update-index
-#+BEGIN_SRC sh
-  $ git update-index --assume-unchanged FILE_NAME
-#+END_SRC
 
 * 尾声
