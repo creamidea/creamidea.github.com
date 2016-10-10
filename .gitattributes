@@ -1,8 +1,7 @@
 *.png filter=lfs diff=lfs merge=lfs -text
-./static/lfs/* filter=lfs diff=lfs merge=lfs -text
-./static/html/* filter=lfs diff=lfs merge=lfs -text
-./static/article.css filter=lfs diff=lfs merge=lfs -text
-./static/article.js filter=lfs diff=lfs merge=lfs -text
-./static/article.js.map filter=lfs diff=lfs merge=lfs -text
-./static/index.css filter=lfs diff=lfs merge=lfs -text
-./static/index.js filter=lfs diff=lfs merge=lfs -text
+static/lfs/* filter=lfs diff=lfs merge=lfs -text
+static/article.css filter=lfs diff=lfs merge=lfs -text
+static/article.js filter=lfs diff=lfs merge=lfs -text
+static/article.js.map filter=lfs diff=lfs merge=lfs -text
+static/html/articles/*.html filter=lfs diff=lfs merge=lfs -text
+static/html/*.html filter=lfs diff=lfs merge=lfs -text
