@@ -1,11 +1,11 @@
-#+TITLE: Google Translate API Analytics
+#+TITLE: Google Translation API Analysis
 #+AUTHOR: 冰糖火箭筒(Junjia Ni)
 #+EMAIL: creamidea(AT)gmail.com
 #+DATE: 2016-05-08
 #+CATEGORY: article
-#+DESCRIPTION: Google Translate API Analy
+#+DESCRIPTION: Google Translate API Analysis
 #+KEYWORDS: google-translate
-#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t <:t date:t timestamp:t
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:nil email:t <:t date:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
 

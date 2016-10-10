@@ -3,7 +3,7 @@
 #+CATEGORY: article
 #+DESCRIPTION: Unicode and UTF8 的一些学习笔记
 #+KEYWORDS: unicode,utf8,encoding,编码
-#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
+#+OPTIONS: H:4 num:t toc:t \n:nil ::t |:t ^:nil f:t email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
 
@@ -22,7 +22,7 @@
 Unicode provides a unique number for every character,
 no matter what the platform,
 no matter what the program,
-no matter what the language. 
+no matter what the language.
 #+END_QUOTE
 想象一下这是一个扩展的ASCII码的表，当你迷糊的时候，想想这句话。什么是Unicode。
 
@@ -59,7 +59,7 @@ no matter what the language.
 Unicode provides a unique number for every character,
 no matter what the platform,
 no matter what the program,
-no matter what the language. 
+no matter what the language.
 #+END_QUOTE
 希望你已经明白什么是"真"Unicode。为每一个字符提供唯一的数字。
 
@@ -76,7 +76,7 @@ UTF-8是Unicode的具体存储方式。怎么说？就是上面提及的那个�
 0XXXXXXX                              (U+0000~U+007F 0~127)
 110XXXXX 10XXXXXX                     (U+0080~U+07FF 128~2047)
 1110XXXX 10XXXXXX 10XXXXXX            (U+0800~U+FFFF 2048~65535)
-11110XXX 10XXXXXX 10XXXXXX 10XXXXXX   
+11110XXX 10XXXXXX 10XXXXXX 10XXXXXX
 #+END_EXAMPLE
 XXX就是对应的Unicode编码啦。
 
@@ -102,17 +102,20 @@ E6 98 B3 按字节重新转换成16进制
 如果平常看到类似这样每3个字节出现一个E，你应该可以反应过来应该是中文的UTF-8编码了吧。
 
 * Python
+
 #+BEGIN_EXAMPLE
 编码：unicode-->str
 解码：str-->unicode.
 #+END_EXAMPLE
 
-#+BEGIN_EXAMPLE
-str.encode()实际上就等价于str.decode(sys.defaultencoding).encode().而sys.defaultencoding一般是ascii
-#+END_EXAMPLE
+=str.encode()= 实际上就等价于 =str.decode(sys.defaultencoding).encode()= 。
+而 =sys.defaultencoding= 一般是 =ascii= 。
 
 * 正则表达式匹配中文区间
-*\u4E00-\u9FA5* （2万个左右）
+
+#+BEGIN_EXAMPLE
+\u4E00-\u9FA5 （2万个左右）
+#+END_EXAMPLE
 
 * locale
 系统字符编码控制优先级 =LC_ALL>LC_*>LANG=
@@ -120,6 +123,7 @@ str.encode()实际上就等价于str.decode(sys.defaultencoding).encode().而sys
 * 尾声
 基本上，我所理解的Unicode和UTF8就是这个样子了，在Python上面做了很多的实验，希望以后不要再犯一些低级错误。
 希望不会因为我的无知，再痛恨 *Python2.X*
+
 #+BEGIN_SRC python
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
@@ -144,4 +148,3 @@ UnicodeEncodeError: 'ascii' codec can't encode character u'\u6633' in position 0
 14. [[http://wiki.ubuntu.org.cn/Locale][UbuntuWiki-Locale]]
 15. [[https://segmentfault.com/q/1010000002426378][iterm 配置utf8编码，本地终端中文不乱码，ssh远程中文乱码，咋整啊]]
 16. [[https://leohxj.gitbooks.io/a-programmer-prepares/content/software/mac/softwares/iTerm2.html#%25E4%25B8%25AD%25E6%2596%2587%25E4%25B9%25B1%25E7%25A0%2581%25E9%2597%25AE%25E9%25A2%2598][iTerm2-中文乱码问题]]
-

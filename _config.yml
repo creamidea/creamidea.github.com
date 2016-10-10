@@ -1,0 +1,31 @@
+#
+# Blog Settings
+#
+
+
+# Jekyll Settings
+markdown: kramdown
+pygments: true
+paginate: 6
+paginate_path: /page:num
+permalink: /:title
+baseurl: /
+#lsi: true
+
+# Disqus Comments
+disqus_short_name: barretlee
+disqus_show_comment_count: true
+
+# site
+title: C Tone
+url: http://c-tone.github.io
+repo: /.
+# feed: /atom.xml
+
+# color scheme
+highlight: light
+
+# author
+author_name: NekoTrek
+author_email: creamidea@gmail.com
+author_info: <a href="https://creamidea.github.io">creamidea</a>
