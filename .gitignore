@@ -51,10 +51,6 @@ static/libs/
 dll.json
 npm-debug.log*
 static/*.hot-update.js*
-static/html
-static/article.css
-static/article.js
-static/article.js.map
 static/bundle.js.map
 
 .#-emacs*

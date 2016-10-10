@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 2016-10-09 Sun 22:56 -->
+<meta  charset="utf-8">
+<meta  name="viewport" content="width=device-width, initial-scale=1">
+<title>Orgmode And Deckjs</title>
+<meta  name="generator" content="Org-mode">
+<meta  name="author" content="Junjia Ni">
+<meta  name="description" content="一些关于如何用orgmode配合deckjs导出HTML Slider"
+>
+<meta  name="keywords" content="emacs,org-mode,deck.js">
+<link rel="stylesheet" type="text/css" href="/static/article.css">
+</head>
+<body>
+<div id="content">
+<h1 class="title">Orgmode And Deckjs</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">1. 前言</a></li>
+<li><a href="#orgheadline2">2. 正文</a></li>
+<li><a href="#orgheadline3">3. 尾声</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+有一次翻 <b>org-mode</b> 的官方文档，无意中发现了这篇文章 <a href="http://orgmode.org/worg/exporters/ox-overview.html">The New Org-mode Exporter Framework</a> 。看到了deck.js<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>，于是开始觊觎org-mode导出web slide的功能。
+之前一直不知道怎么搞，因为自己当时不会 <b>elisp</b> ，也看不懂deck.js<sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup>。什么都不会。但是我就是想搞出这个。当时的内心是奔腾的。
+</p>
+
+<p>
+最近，由于看了一些elisp的基础知识，对于org-mode的publish的配置也做了一些了解。于是，开始了这次的折腾。
+期间，走了很多的弯路，主要是org-mode的发布模块做了改动，然后ox-deck我找到的是老版本，不匹配，于是跑不起来。还好，最后解决了。
+</p>
+
+<p>
+废话不说了，我们开始吧。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2"><span class="section-number-2">2</span> 正文</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+首先，推荐使用org-mode官方网站的最新包
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">$ git clone git://orgmode.org/org-mode.git
+</pre>
+</div>
+<p>
+下载完成之后，将其加载至emacs中，覆盖掉emacs自带的版本。
+</p>
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #c5c8c6;">(</span>add-to-list <span style="color: #b5bd68;">'</span><span style="color: #81a2be;">load-path</span> <span style="color: #8abeb7;">"~/.emacs.d/package/org-mode"</span><span style="color: #c5c8c6;">)</span>
+<span style="color: #c5c8c6;">(</span>add-to-list <span style="color: #b5bd68;">'</span><span style="color: #81a2be;">load-path</span> <span style="color: #8abeb7;">"~/.emacs.d/package/org-mode/contrib/lisp"</span> t<span style="color: #c5c8c6;">)</span>
+</pre>
+</div>
+
+<p>
+安装完org-mode，开始安装导出deck的功能组件。这一步我也是走了好久，之前一直卡在导出那一步，提示我 <code>invalid format character: %s</code> 。
+后来我发现就是我一开始说的那个问题，版本兼容问题。我找到这篇文章 <a href="http://orgmode.org/worg/org-contrib/#unnumbered-6">org-contrib#Obsolete</a> ，这篇文章中给了我这个解决方案。
+</p>
+<pre class="example">
+For use with the new exporter, ox-s5.el (link to raw file) and ox-deck.el (link to raw file), both by Rick Frankel, are included in the contrib directory. The latest source and documentation for both are at https://github.com/cybercode/org-slides.
+</pre>
+
+<p>
+于是，我找到了新版的 <a href="https://raw.githubusercontent.com/cybercode/org-slides/master/ox-deck.el">ox-deck.el</a> 。把这个文件复制到 <code>/path/to/org-mode/contrib/lisp</code> 下面。复制完成之后，加载至.emacs中（包括一些配置）。
+</p>
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">require</span> <span style="color: #b5bd68;">'</span><span style="color: #81a2be;">ox-deck</span><span style="color: #c5c8c6;">)</span>
+<span style="color: #c5c8c6;">(</span>custom-set-variables
+ <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">neon swiss web-2.0</span>
+ <span style="color: #b5bd68;">'</span><span style="color: #8abeb7;">(</span>org-deck-theme <span style="color: #8abeb7;">"web-2.0.css"</span><span style="color: #8abeb7;">)</span>
+ <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">horizontal-slide vertical-slide fade</span>
+ <span style="color: #b5bd68;">'</span><span style="color: #8abeb7;">(</span>org-deck-transition <span style="color: #8abeb7;">"fade.css"</span><span style="color: #8abeb7;">)</span>
+ <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">'(org-deck-include-extensions '(goto menu navigation scale status))</span>
+ <span style="color: #b5bd68;">'</span><span style="color: #8abeb7;">(</span>org-html-link-home <span style="color: #8abeb7;">"http://creamidea.github.io"</span><span style="color: #8abeb7;">)</span><span style="color: #c5c8c6;">)</span><span style="color: #cc6666;">))</span>
+</pre>
+</div>
+
+<p>
+到这里，deck这个已经安装到我们的emacs中了，之后我们只要 <code>C-c C-e d h</code> 就可以导出成html了。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3"><span class="section-number-2">3</span> 尾声</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+其实我最初写文章是不想写教程类的，但是发现自己也只会做这个。而且我发现，还写不好&gt;_&lt; 。嘛～先这个样子吧，练练手，毕竟好久没有写文章了，而且这个问题我找了好久，牺牲了好多休息时间。
+等有空了，看一下ox-deck.el中写了什么，安装过程中也只是 <code>喵</code> 了一眼。然后再写几篇关于学习elisp的小文章试试 :P
+</p>
+
+<p>
+有什么问题，欢迎留言。
+</p>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="http://imakewebthings.com/deck.js/">http://imakewebthings.com/deck.js/</a>
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<div id="meta-article"><p class="author">Junjia Ni</p>
+<p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
+<p class="date">2015-12-27</p>
+<p class="export-date">2016-10-09 Sun 22:56</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="validation"></p>
+<p class="last-modification-time">2016-05-08 Sun 16:58</p></div><script asyn src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+</div>
+</body>
+</html>

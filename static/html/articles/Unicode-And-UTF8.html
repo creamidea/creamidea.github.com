@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 2016-10-09 Sun 22:56 -->
+<meta  charset="utf-8">
+<meta  name="viewport" content="width=device-width, initial-scale=1">
+<title>Unicode and UTF8</title>
+<meta  name="generator" content="Org-mode">
+<meta  name="author" content="Junjia Ni">
+<meta  name="description" content="Unicode and UTF8 的一些学习笔记"
+>
+<meta  name="keywords" content="unicode,utf8,encoding,编码">
+<link rel="stylesheet" type="text/css" href="/static/article.css">
+</head>
+<body>
+<div id="content">
+<h1 class="title">Unicode and UTF8</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline2">1. 前言</a></li>
+<li><a href="#orgheadline3">2. Unicode</a></li>
+<li><a href="#orgheadline4">3. UTF8</a></li>
+<li><a href="#orgheadline5">4. Python</a></li>
+<li><a href="#orgheadline6">5. 正则表达式匹配中文区间</a></li>
+<li><a href="#orgheadline7">6. locale</a></li>
+<li><a href="#orgheadline8">7. 尾声</a></li>
+<li><a href="#orgheadline1">8. Reference</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2"><span class="section-number-2">1</span> 前言</h2>
+<div class="outline-text-2" id="text-1">
+<blockquote>
+<p>
+终于在杭州看到一场像样子的雪了。<span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-05 Sat&gt;</span></span>
+</p>
+</blockquote>
+
+<p>
+最近明明事情很多，但是就是什么事情都不想干，这个是为什么呢？
+没事干，就去折腾一些并没有什么用的东西。这不，花了一个周末，看了一些关于编码方面的文章。
+下面就是我的一些理解和笔记。很肤浅，只是一个很简单的介绍文章，详细的你可以阅读 <a href="#orgheadline1">8</a> 中前几篇文章。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3"><span class="section-number-2">2</span> Unicode</h2>
+<div class="outline-text-2" id="text-2">
+<blockquote>
+<p>
+Unicode provides a unique number for every character,
+no matter what the platform,
+no matter what the program,
+no matter what the language.
+</p>
+</blockquote>
+<p>
+想象一下这是一个扩展的ASCII码的表，当你迷糊的时候，想想这句话。什么是Unicode。
+</p>
+
+<p>
+举一个例子:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">ord&#26159;unicode ordinal&#30340;&#32553;&#20889;,&#21363;&#32534;&#21495;</span>
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">chr&#26159;character&#30340;&#32553;&#20889;,&#21363;&#23383;&#31526;</span>
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">ord&#21644;chr&#26159;&#20114;&#30456;&#23545;&#24212;&#36716;&#25442;&#30340;.</span>
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#20294;&#26159;&#30001;&#20110;chr&#23616;&#38480;&#20110;ascii,&#38271;&#24230;&#21482;&#26377;256.</span>
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#20110;&#26159;&#21448;&#22810;&#20102;&#20010;unichr.</span>
+&gt;&gt;&gt; <span style="color: #f0c674;">c</span> = u<span style="color: #8abeb7;">'&#26163;'</span>
+&gt;&gt;&gt; c
+u<span style="color: #8abeb7;">'\u6633'</span>
+&gt;&gt;&gt; <span style="color: #b294bb;">ord</span><span style="color: #c5c8c6;">(</span>u<span style="color: #8abeb7;">'\u6633'</span><span style="color: #c5c8c6;">)</span>
+26163
+</pre>
+</div>
+
+<p>
+这里的中文字符 <b>昳</b> Unicode编码是 <code>6633(U+6633)</code> ， <code>6633(U+6633)</code> 这个字面量来表示字符 <b>昳</b> 。
+然后他的编号（数字） <code>26163</code> 来指代这个 <code>6633(U+6633)</code> 。
+</p>
+
+<p>
+用ASCII码表来解释是这个样子的，你要显示字符 <b>a</b> 。
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">&gt;&gt;&gt; <span style="color: #f0c674;">d</span> = u<span style="color: #8abeb7;">'a'</span>
+&gt;&gt;&gt; d
+u<span style="color: #8abeb7;">'a'</span>
+&gt;&gt;&gt; <span style="color: #b294bb;">ord</span><span style="color: #c5c8c6;">(</span>d<span style="color: #c5c8c6;">)</span>
+97
+</pre>
+</div>
+<p>
+然后你这里的字符 <b>a</b> Unicode编码是 <code>a(U+0097)</code>, <code>a(U+0097)</code> 这个字面量来表示字符 <b>a</b> （这里有点绕，希望你能跨过去）。
+然后他的编号（数字） <code>97</code> 来指代这个 <code>a(U+0097)</code> 。
+</p>
+
+<p>
+现在在会过来看这句话
+</p>
+<blockquote>
+<p>
+Unicode provides a unique number for every character,
+no matter what the platform,
+no matter what the program,
+no matter what the language.
+</p>
+</blockquote>
+<p>
+希望你已经明白什么是"真"Unicode。为每一个字符提供唯一的数字。
+</p>
+
+<img src="https://docs.google.com/drawings/d/1ZI9lDMtH1I9i4_vm-aEffr37Q09cBd4Kzl3jpA6yMSQ/pub?w=750&h=390" alt="字符－编号－编码" title="字符－编号－编码"/>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4"><span class="section-number-2">3</span> UTF8</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+好了，在理解了Unicode之后，再来看UTF-8，这个又是什么东东呢？ <br >
+UTF-8是Unicode的具体存储方式。怎么说？就是上面提及的那个编码，如：U+6633，怎么存储呢？
+然后UTF-8跳出来说，用我来存，用我的格式来存。nuo，就是这个样子啦。
+</p>
+
+<pre class="example">
+0XXXXXXX                              (U+0000~U+007F 0~127)
+110XXXXX 10XXXXXX                     (U+0080~U+07FF 128~2047)
+1110XXXX 10XXXXXX 10XXXXXX            (U+0800~U+FFFF 2048~65535)
+11110XXX 10XXXXXX 10XXXXXX 10XXXXXX
+</pre>
+<p>
+XXX就是对应的Unicode编码啦。
+</p>
+
+<p>
+举个栗子
+</p>
+<pre class="example">
+U+6633
+0110 0110 0011 0011  16位二进制形式
+0110 011000 110011   4+6+6位分组
+1110XXXX 10XXXXXX 10XXXXXX UTF-8三字节模版
+11100110 10011000 10110011 替换有效位
+E6 98 B3 按字节重新转换成16进制
+</pre>
+<p>
+结果
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">&gt;&gt;&gt; c
+u<span style="color: #b294bb;">'\u6633'</span>
+&gt;&gt;&gt; c.encode<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">'utf-8'</span><span style="color: #c5c8c6;">)</span>
+<span style="color: #8abeb7;">'\xe6\x98\xb3'</span>
+&gt;&gt;&gt; <span style="color: #b5bd68;">print</span> c
+&#26163;
+</pre>
+</div>
+
+<p>
+如果平常看到类似这样每3个字节出现一个E，你应该可以反应过来应该是中文的UTF-8编码了吧。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5"><span class="section-number-2">4</span> Python</h2>
+<div class="outline-text-2" id="text-4">
+<pre class="example">
+编码：unicode--&gt;str
+解码：str--&gt;unicode.
+</pre>
+
+<p>
+<code>str.encode()</code> 实际上就等价于 <code>str.decode(sys.defaultencoding).encode()</code> 。
+而 <code>sys.defaultencoding</code> 一般是 <code>ascii</code> 。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6"><span class="section-number-2">5</span> 正则表达式匹配中文区间</h2>
+<div class="outline-text-2" id="text-5">
+<pre class="example">
+\u4E00-\u9FA5 （2万个左右）
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7"><span class="section-number-2">6</span> locale</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+系统字符编码控制优先级 <code>LC_ALL&gt;LC_*&gt;LANG</code>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8"><span class="section-number-2">7</span> 尾声</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+基本上，我所理解的Unicode和UTF8就是这个样子了，在Python上面做了很多的实验，希望以后不要再犯一些低级错误。
+希望不会因为我的无知，再痛恨 <b>Python2.X</b>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python">Traceback <span style="color: #c5c8c6;">(</span>most recent call last<span style="color: #c5c8c6;">)</span>:
+  File <span style="color: #8abeb7;">"&lt;stdin&gt;"</span>, line 1, <span style="color: #b5bd68;">in</span> &lt;module&gt;
+<span style="color: #81a2be;">UnicodeEncodeError</span>: <span style="color: #8abeb7;">'ascii'</span> codec can<span style="color: #8abeb7;">'t encode character u'</span>\u6633<span style="color: #8abeb7;">' in position 0: ordinal not in range(128)</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1"><span class="section-number-2">8</span> Reference</h2>
+<div class="outline-text-2" id="text-8">
+<ol class="org-ol">
+<li><a href="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html">字符编码笔记：ASCII，Unicode和UTF-8</a></li>
+<li><a href="http://my.oschina.net/goldenshaw/blog/470946">文本在内存中的编码(1)——乱码探源(4)</a></li>
+<li><a href="http://my.oschina.net/goldenshaw/blog/470948">文本在内存中的编码(2)——乱码探源(5)</a></li>
+<li><a href="http://my.oschina.net/goldenshaw/blog/471370">文本在内存中的编码(3)——乱码探源(6)</a></li>
+<li><a href="http://my.oschina.net/goldenshaw/blog/305805">字符集与编码（二）——编号 vs 编码</a></li>
+<li><a href="http://my.oschina.net/goldenshaw/blog/310331">字符集与编码（四）——Unicode</a></li>
+<li><a href="https://docs.python.org/2/howto/unicode.html">Unicode HOWTO</a></li>
+<li><a href="https://docs.python.org/2/library/functions.html#unichr">unichr</a></li>
+<li><a href="https://docs.python.org/2/library/functions.html#ord">ord</a></li>
+<li><a href="http://blog.csdn.net/trochiluses/article/details/16825269">python 字符编码与解码——unicode、str和中文：UnicodeDecodeError: 'ascii' codec can't decode</a></li>
+<li><a href="http://blog.csdn.net/handsomekang/article/details/39890403">飘逸的python - ord和chr以及unichr</a></li>
+<li><a href="http://www.cnblogs.com/markjiao/archive/2008/05/20/1203316.html">linux系统locale的设定</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Locale_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">ArchWiki-Locale (简体中文)</a></li>
+<li><a href="http://wiki.ubuntu.org.cn/Locale">UbuntuWiki-Locale</a></li>
+<li><a href="https://segmentfault.com/q/1010000002426378">iterm 配置utf8编码，本地终端中文不乱码，ssh远程中文乱码，咋整啊</a></li>
+<li><a href="https://leohxj.gitbooks.io/a-programmer-prepares/content/software/mac/softwares/iTerm2.html#%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98">iTerm2-中文乱码问题</a></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="meta-article"><p class="author">Junjia Ni</p>
+<p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
+<p class="date">2015-12-05</p>
+<p class="export-date">2016-10-09 Sun 22:56</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="validation"></p>
+<p class="last-modification-time">2016-10-09 Sun 22:49</p></div><script asyn src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+</div>
+</body>
+</html>

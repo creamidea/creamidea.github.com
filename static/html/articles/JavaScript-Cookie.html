@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 2016-10-09 Sun 22:56 -->
+<meta  charset="utf-8">
+<meta  name="viewport" content="width=device-width, initial-scale=1">
+<title>JavaScript Cookie</title>
+<meta  name="generator" content="Org-mode">
+<meta  name="author" content="冰糖火箭筒(Junjia Ni)">
+<meta  name="description" content="Learn JavaScript"
+>
+<meta  name="keywords" content="javascript,generate-function,yield,yield*">
+<link rel="stylesheet" type="text/css" href="/static/article.css">
+</head>
+<body>
+<div id="content">
+<h1 class="title">JavaScript Cookie</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">1. 前言</a></li>
+<li><a href="#orgheadline2">2. for&#x2026;in &amp;&amp; for&#x2026;of</a></li>
+<li><a href="#orgheadline5">3. Generate Function</a>
+<ul>
+<li><a href="#orgheadline3">3.1. co repository</a></li>
+<li><a href="#orgheadline4">3.2. koa</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline6">4. 尾声</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+记录一些关于JavaScript有趣的，迷惑的，让人惊叹的功能和陷阱。(⌒▽⌒)
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2"><span class="section-number-2">2</span> for&#x2026;in &amp;&amp; for&#x2026;of</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+这个是最近遇到的一个有趣的问题，问: <code>for...in</code> 和 <code>for...of</code> 有什么区别呢？当时有点凌乱。 &gt;_&lt;
+<code>for...in</code> 和 <code>for...of</code> 都是可以用来迭代的(Array, Object, Map, Set&#x2026;)。
+不过 <code>in</code> 会读取原型链中的属性。这也是很多人觉得会踩坑的地方。
+（当然还有一个地方，就是需要写成 <code>var i in a</code> ，而不是 <code>i in a</code> ，不然 <code>i</code> 要变成 <b>global</b> 啦。）
+试试下面的代码
+</p>
+<div class="org-src-container">
+
+<pre class="src src-js"><span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">Some code in your deep Library</span>
+Array.<span style="color: #81a2be;">prototype</span>.foo = <span style="color: #8abeb7;">'S'</span>
+
+<span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">Here is your code</span>
+<span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">a</span> = <span style="color: #c5c8c6;">[</span>1,2,3,4,5<span style="color: #c5c8c6;">]</span>
+<span style="color: #b5bd68;">for</span> <span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">i</span> <span style="color: #b5bd68;">in</span> a<span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+  console.log<span style="color: #8abeb7;">(</span>i<span style="color: #8abeb7;">)</span>;
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">0,1,2,3,4,foo</span>
+<span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">:P</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5"><span class="section-number-2">3</span> Generate Function</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+<code>yield</code>
+The yield keyword is used to pause and resume a generator function. <br >
+<code>yield*</code>
+The yield* expression is used to delegate to another generator or iterable object.
+Besides generator objects, yield* can also yield other kinds of iterables, e.g. arrays, strings or arguments objects.
+yield* is an expression, not a statement, so it evaluates to a value. <br >
+</p>
+
+<p>
+我的快速理解：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-js"><span style="color: #b5bd68;">function</span> * <span style="color: #de935f;">A</span> <span style="color: #c5c8c6;">()</span> <span style="color: #c5c8c6;">{</span>
+  console.log<span style="color: #8abeb7;">(</span>1<span style="color: #8abeb7;">)</span>
+  <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">a1</span> = <span style="color: #b5bd68;">yield</span> 1
+  console.log<span style="color: #8abeb7;">(</span>a1<span style="color: #8abeb7;">)</span>
+  <span style="color: #b5bd68;">return</span> 3
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">a</span> = A<span style="color: #c5c8c6;">()</span> <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#23454;&#38469;A&#20989;&#25968;&#20869;&#30340;&#20195;&#30721;&#22359;&#24182;&#26410;&#34987;&#25191;&#34892;</span>
+<span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">r</span> = a.next<span style="color: #c5c8c6;">()</span> <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#36825;&#25165;&#24320;&#22987;&#25191;&#34892;&#20195;&#30721;&#65292;&#35821;&#21477;&#34987;&#25191;&#34892;&#21040; yield 1&#12290;&#27492;&#26102;yield&#21491;&#20391;&#34920;&#36798;&#24335;&#65288;&#36825;&#37324;&#26159;1&#65289;&#34987;&#27714;&#20540;&#65292;&#24182;&#26242;&#20572;&#22312;&#36825;&#37324;&#12290;&#21478;&#22806;&#65292;&#36825;&#20010; console.log(1) &#23558;&#20250;&#34987;&#25191;&#34892;&#65292;&#20320;&#23558;&#22312;&#32456;&#31471;&#30475;&#21040;&#36825;&#20010;1&#12290;</span>
+console.log<span style="color: #c5c8c6;">(</span>r<span style="color: #c5c8c6;">)</span> <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">{value: 1, done: false} value &#23384;&#25918;&#21018;&#21018;&#27714;&#20986;&#30340;&#20540;&#65292;done&#26631;&#24535;&#26159;&#21542;&#25191;&#34892;&#21040;&#20195;&#30721;&#22359;&#24213;&#37096;&#65292;&#20063;&#23601;&#26159;&#8220;&#36845;&#20195;&#8221;&#26159;&#21542;&#32467;&#26463;&#12290;</span>
+r = a.next<span style="color: #c5c8c6;">(</span>2<span style="color: #c5c8c6;">)</span> <span style="color: #969896; font-style: italic;">//</span><span style="color: #969896; font-style: italic;">&#20195;&#30721;&#20877;&#27425;&#21551;&#21160;&#65292;&#20174;&#19978;&#27425;&#26242;&#20572;&#30340;&#22320;&#26041;&#24320;&#22987;&#65292;&#27492;&#26102;&#65292;yield&#24038;&#36793;&#30340;&#20195;&#30721;&#23558;&#34987;&#25191;&#34892;&#12290;&#27880;&#24847;&#36825;&#37324;&#65292;&#22914;&#26524;next&#24102;&#20102;&#21442;&#25968;&#65292;&#22914;next(2)&#65292;&#37027;&#20040;a1&#23558;&#34987;&#27714;&#20540;&#20026;2&#12290;</span>
+console.log<span style="color: #c5c8c6;">(</span>r<span style="color: #c5c8c6;">)</span> <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">{value: 3, done: true} value &#26159;&#20989;&#25968;&#30340;&#36820;&#22238;&#20540;&#65292;&#22914;&#26524;&#27809;&#26377;&#36820;&#22238;&#21017;&#20026;undefined&#12290;</span>
+</pre>
+</div>
+<p>
+出现 <code>yield</code> 那条语句相当于被打了一个断点， <code>yield</code> 右边的表达式将在你执行 <code>next()</code> 的时候被求值。
+再下一次 <code>next()</code> 时左侧会被求值，并一直执行到下一次（个） <code>yield</code> 的右侧或者函数体结束的地方。
+Generator Function 起码需要2次 <code>next()</code> 才能执行完。
+</p>
+
+<p>
+对于 <code>yield*</code> ，这个是用来处理 <code>function</code>, <code>array</code>, <code>etc</code>. 如 <code>yield * A()</code>, <code>yield * [1,2,3]</code> 。
+这里的函数 <code>A()</code> 将被求值， <code>[1,2,3]</code> 这个数组将被遍历（求值）等。
+</p>
+
+<p>
+然后，TJ大神利用这个特性并结合他神勇的想法，创造出了强大的co库。其核心思想是，将原先的回调函数包装成高阶函数-Thunk<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>(返回一个函数)，参数是下一次 <code>next</code> 的时机代码。
+</p>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3"><span class="section-number-3">3.1</span> co repository</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+
+<pre class="src src-js"><span style="color: #b5bd68;">function</span> <span style="color: #de935f;">co</span> <span style="color: #c5c8c6;">(</span><span style="color: #f0c674;">genFun</span><span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+  <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">gen</span> = genFun<span style="color: #8abeb7;">()</span>
+  <span style="color: #b5bd68;">function</span> <span style="color: #de935f;">_next</span> <span style="color: #8abeb7;">(</span><span style="color: #f0c674;">err</span>, <span style="color: #f0c674;">res</span><span style="color: #8abeb7;">)</span> <span style="color: #8abeb7;">{</span>
+    <span style="color: #b5bd68;">if</span> <span style="color: #f0c674;">(</span>err<span style="color: #f0c674;">)</span> <span style="color: #b5bd68;">return</span> gen.<span style="color: #b5bd68;">throw</span><span style="color: #f0c674;">(</span>err<span style="color: #f0c674;">)</span>
+    <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">r</span> = gen.next<span style="color: #f0c674;">(</span>res<span style="color: #f0c674;">)</span> <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#23558;&#22238;&#35843;&#20989;&#25968;&#20013;&#25191;&#34892;&#30340;&#32467;&#26524;&#20256;&#22238;&#21435;&#65288;&#35843;&#29992;yield&#30340;&#22320;&#26041;&#65289;</span>
+    <span style="color: #b5bd68;">if</span> <span style="color: #f0c674;">(</span>r.done<span style="color: #f0c674;">)</span> <span style="color: #b5bd68;">return</span> r.value <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#22914;&#26524;&#23436;&#25104;&#65292;&#23601;&#36820;&#22238;&#26368;&#21518;&#30340;&#20540;&#65292;&#22914;&#26524;&#27809;&#26377;&#32467;&#26463;&#65292;&#23601;&#25226; _next &#20256;&#21040;&#37027;&#20010;&#22238;&#35843;&#20989;&#25968;&#20013;</span>
+    r.value<span style="color: #f0c674;">(</span>_next<span style="color: #f0c674;">)</span> <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#36825;&#37324; r.value &#23601;&#26159;&#37027;&#20010;thunk&#20989;&#25968;</span>
+  <span style="color: #8abeb7;">}</span>
+  _next<span style="color: #8abeb7;">()</span>
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div>
+<p>
+不理解？我们看一个有趣的例子，延迟函数的实现。问题如下
+</p>
+<div class="org-src-container">
+
+<pre class="src src-js"><span style="color: #b5bd68;">function</span> * <span style="color: #de935f;">A</span> <span style="color: #c5c8c6;">()</span> <span style="color: #c5c8c6;">{</span>
+  console.log<span style="color: #8abeb7;">(</span>1<span style="color: #8abeb7;">)</span>
+  <span style="color: #b5bd68;">yield</span> wait<span style="color: #8abeb7;">(</span>1000<span style="color: #8abeb7;">)</span>
+  console.log<span style="color: #8abeb7;">(</span>2<span style="color: #8abeb7;">)</span>
+  <span style="color: #b5bd68;">return</span> 3
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div>
+<p>
+需要实现这个 <code>wait</code> 。其实很简单啦，用我们上面自己写的 <code>co</code> ，实现如下
+</p>
+<div class="org-src-container">
+
+<pre class="src src-js"><span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#23454;&#29616;</span>
+<span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#21253;&#35013;&#25104;thunk&#20989;&#25968;</span>
+<span style="color: #b5bd68;">function</span> <span style="color: #de935f;">wait</span><span style="color: #c5c8c6;">(</span><span style="color: #f0c674;">timeout</span><span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+  <span style="color: #b5bd68;">return</span> <span style="color: #b5bd68;">function</span> <span style="color: #8abeb7;">(</span><span style="color: #f0c674;">done</span><span style="color: #8abeb7;">)</span> <span style="color: #8abeb7;">{</span>
+    setTimeout<span style="color: #f0c674;">(</span>done, timeout<span style="color: #f0c674;">)</span>
+  <span style="color: #8abeb7;">}</span>
+<span style="color: #c5c8c6;">}</span>
+
+<span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#35843;&#29992;</span>
+co<span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">function</span> * <span style="color: #8abeb7;">()</span> <span style="color: #8abeb7;">{</span>
+  <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">a</span> = <span style="color: #b5bd68;">yield</span> * A<span style="color: #f0c674;">()</span>
+  console.log<span style="color: #f0c674;">(</span>a<span style="color: #f0c674;">)</span>
+<span style="color: #8abeb7;">}</span><span style="color: #c5c8c6;">)</span>
+</pre>
+</div>
+
+<p>
+将 <code>setTimeout</code> 包装成 <code>thunk</code> 函数，如上。也就是返回一个带参数的函数，这里的参数就是 <code>co</code> 库中 <code>r.value(_next)</code> 中的 <code>_next</code> ，
+这里的 <code>r.value</code> 就是 <code>function(done){...}</code> 。
+那现在再来看这里的意思就是，延迟 <code>timeout</code> 的时间后，执行 <code>done</code> 函数， <code>done</code> 就是那个 <code>_next</code> ，而 <code>_next</code> 中有 <code>gen.next()</code> 执行下面函数的开关，于是整个都连起来了。
+是不是很强大的想法？
+</p>
+
+<p>
+这个样子就把回调的写法，写成了“同步”的形式，避免了回调金字塔的出现。这个样子就把回调的写法，写成了“同步”的形式，避免了回调金字塔的出现。这个样子就把回调的写法，写成了“同步”的形式，避免了回调金字塔的出现。
+</p>
+
+<p>
+那有了这个思路之后，剩下就只需要写一个包装函数啦。包装你想要的一切（开玩笑啦 &gt;_&lt;）。如 <code>Promise/Generator/GeneratorFunction/Object/Array...</code> 。
+具体的实现可以参考 <a href="https://github.com/tj/co/blob/3.1.0/index.js">co@3.1.0</a> 的代码。新的co代码应该是用 <code>Promise</code> 重写了一遍，代码更加的清晰。
+</p>
+
+<p>
+对了，还有各种错误异常的处理，这个不能忘了。
+</p>
+
+<p>
+你以为这样子就完了吗？图样，TJ大神还有一个 <code>koa</code> ，我们也拿来看看。我们现在有一个新的问题，将下面2个函数以 <code>3,5,6,4</code> 的形式输出。
+</p>
+<div class="org-src-container">
+
+<pre class="src src-js"><span style="color: #b5bd68;">function</span> * <span style="color: #de935f;">B</span> <span style="color: #c5c8c6;">(</span>next<span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+  console.log<span style="color: #8abeb7;">(</span>3<span style="color: #8abeb7;">)</span>;
+  <span style="color: #b5bd68;">yield</span> next;
+  console.log<span style="color: #8abeb7;">(</span>4<span style="color: #8abeb7;">)</span>;
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #b5bd68;">function</span> * <span style="color: #de935f;">C</span> <span style="color: #c5c8c6;">(</span>next<span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+  console.log<span style="color: #8abeb7;">(</span>5<span style="color: #8abeb7;">)</span>;
+  <span style="color: #b5bd68;">yield</span> next;
+  console.log<span style="color: #8abeb7;">(</span>6<span style="color: #8abeb7;">)</span>;
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div>
+
+<p>
+其实这个现在看也是很简单，只要 <code>B/C</code> 能够形成 <code>B(C)</code> ，然后我 <code>yield B</code> 即可。
+于是我们可以把 <code>B,C</code> 组成一个数组，然后从后向前遍历，将其“调用”即可啦 :)
+不过在这之前，我们需要稍微改造一下我们写的 <code>co</code> 库，让她能够支持 <code>yield [GeneratorFunction&amp;Generator]</code> 。主要增加 <b>一些判断</b> 和 <b>一个thunk函数转换器</b> 。
+</p>
+<div class="org-src-container">
+
+<pre class="src src-js"><span style="color: #b5bd68;">function</span> <span style="color: #de935f;">co</span> <span style="color: #c5c8c6;">(</span><span style="color: #f0c674;">genFun</span><span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+  <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">gen</span>
+  <span style="color: #b5bd68;">if</span> <span style="color: #8abeb7;">(</span>isGeneratorFunction<span style="color: #f0c674;">(</span>genFun<span style="color: #f0c674;">)</span><span style="color: #8abeb7;">)</span> gen = genFun<span style="color: #8abeb7;">()</span>
+  <span style="color: #b5bd68;">else</span> gen = genFun
+  <span style="color: #b5bd68;">function</span> <span style="color: #de935f;">_next</span> <span style="color: #8abeb7;">(</span><span style="color: #f0c674;">err</span>, <span style="color: #f0c674;">res</span><span style="color: #8abeb7;">)</span> <span style="color: #8abeb7;">{</span>
+    <span style="color: #b5bd68;">if</span> <span style="color: #f0c674;">(</span>err<span style="color: #f0c674;">)</span> <span style="color: #f0c674;">{</span>
+      console.log<span style="color: #b5bd68;">(</span><span style="color: #8abeb7;">'ERROR'</span>, err<span style="color: #b5bd68;">)</span>;
+      <span style="color: #b5bd68;">return</span> gen.<span style="color: #b5bd68;">throw</span><span style="color: #b5bd68;">(</span>err<span style="color: #b5bd68;">)</span> 
+    <span style="color: #f0c674;">}</span>
+    <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">r</span> = gen.next<span style="color: #f0c674;">(</span>res<span style="color: #f0c674;">)</span>, <span style="color: #f0c674;">ctx</span> = <span style="color: #81a2be;">this</span>
+    <span style="color: #b5bd68;">if</span> <span style="color: #f0c674;">(</span>r.done<span style="color: #f0c674;">)</span> <span style="color: #b5bd68;">return</span> r.value
+
+    <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#20027;&#35201;&#22686;&#21152;&#30340;&#20869;&#23481;</span>
+    r.value = toTunk<span style="color: #f0c674;">(</span>r.value, ctx<span style="color: #f0c674;">)</span>
+    <span style="color: #b5bd68;">if</span> <span style="color: #f0c674;">(</span><span style="color: #8abeb7;">'function'</span> === <span style="color: #b5bd68;">typeof</span> r.value<span style="color: #f0c674;">)</span> r.value<span style="color: #f0c674;">(</span>_next<span style="color: #f0c674;">)</span>
+    _next<span style="color: #f0c674;">(</span><span style="color: #81a2be;">null</span>, r.value<span style="color: #f0c674;">)</span>
+  <span style="color: #8abeb7;">}</span>
+  _next<span style="color: #8abeb7;">()</span>
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #b5bd68;">function</span> <span style="color: #de935f;">isGeneratorFunction</span> <span style="color: #c5c8c6;">(</span><span style="color: #f0c674;">obj</span><span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+  <span style="color: #b5bd68;">return</span> <span style="color: #8abeb7;">(</span>obj &amp;&amp; obj.constructor &amp;&amp; obj.constructor.name === <span style="color: #8abeb7;">'GeneratorFunction'</span><span style="color: #8abeb7;">)</span>
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #b5bd68;">function</span> <span style="color: #de935f;">isGenerator</span><span style="color: #c5c8c6;">(</span><span style="color: #f0c674;">obj</span><span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+  <span style="color: #b5bd68;">return</span> <span style="color: #8abeb7;">(</span>obj &amp;&amp; <span style="color: #8abeb7;">'function'</span> === <span style="color: #b5bd68;">typeof</span> obj.next &amp;&amp; <span style="color: #8abeb7;">'function'</span> === <span style="color: #b5bd68;">typeof</span> obj.<span style="color: #b5bd68;">throw</span><span style="color: #8abeb7;">)</span>
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #b5bd68;">function</span> <span style="color: #de935f;">toTunk</span><span style="color: #c5c8c6;">(</span><span style="color: #f0c674;">obj</span>, <span style="color: #f0c674;">ctx</span><span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+  <span style="color: #b5bd68;">if</span> <span style="color: #8abeb7;">(</span>isGeneratorFunction<span style="color: #f0c674;">(</span>obj<span style="color: #f0c674;">)</span><span style="color: #8abeb7;">)</span> <span style="color: #8abeb7;">{</span>
+    <span style="color: #b5bd68;">return</span> co<span style="color: #f0c674;">(</span>obj.call<span style="color: #b5bd68;">(</span>ctx<span style="color: #b5bd68;">)</span><span style="color: #f0c674;">)</span>
+  <span style="color: #8abeb7;">}</span> <span style="color: #b5bd68;">if</span> <span style="color: #8abeb7;">(</span>isGenerator<span style="color: #f0c674;">(</span>obj<span style="color: #f0c674;">)</span><span style="color: #8abeb7;">)</span> <span style="color: #8abeb7;">{</span>
+    <span style="color: #b5bd68;">return</span> co<span style="color: #f0c674;">(</span>obj<span style="color: #f0c674;">)</span>
+  <span style="color: #8abeb7;">}</span> <span style="color: #b5bd68;">else</span> <span style="color: #8abeb7;">{</span>
+    <span style="color: #b5bd68;">return</span> obj
+  <span style="color: #8abeb7;">}</span>
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4"><span class="section-number-3">3.2</span> koa</h3>
+<div class="outline-text-3" id="text-3-2">
+<div class="org-src-container">
+
+<pre class="src src-js"><span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#23454;&#29616;</span>
+<span style="color: #b5bd68;">function</span> <span style="color: #de935f;">Koa</span> <span style="color: #c5c8c6;">()</span> <span style="color: #c5c8c6;">{</span>
+  <span style="color: #81a2be;">this</span>.middleware = <span style="color: #8abeb7;">[]</span>
+<span style="color: #c5c8c6;">}</span>
+Koa.<span style="color: #81a2be;">prototype</span>.use = <span style="color: #b5bd68;">function</span> <span style="color: #c5c8c6;">(</span><span style="color: #f0c674;">genFun</span><span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+  <span style="color: #81a2be;">this</span>.middleware.push<span style="color: #8abeb7;">(</span>genFun<span style="color: #8abeb7;">)</span>
+  <span style="color: #b5bd68;">return</span> <span style="color: #81a2be;">this</span>
+<span style="color: #c5c8c6;">}</span>
+Koa.<span style="color: #81a2be;">prototype</span>.listen = <span style="color: #b5bd68;">function</span> <span style="color: #c5c8c6;">()</span> <span style="color: #c5c8c6;">{</span>
+  <span style="color: #81a2be;">this</span>._start<span style="color: #8abeb7;">()</span>
+<span style="color: #c5c8c6;">}</span>
+Koa.<span style="color: #81a2be;">prototype</span>._start = <span style="color: #b5bd68;">function</span> <span style="color: #c5c8c6;">()</span> <span style="color: #c5c8c6;">{</span>
+  <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">ctx</span> = <span style="color: #81a2be;">this</span>,
+      middleware = ctx.middleware,
+      i = middleware.length,
+      prev = <span style="color: #81a2be;">null</span>
+  co<span style="color: #8abeb7;">(</span><span style="color: #b5bd68;">function</span> * <span style="color: #f0c674;">()</span> <span style="color: #f0c674;">{</span>
+    <span style="color: #b5bd68;">while</span><span style="color: #b5bd68;">(</span>i--<span style="color: #b5bd68;">){</span>
+      prev = middleware<span style="color: #81a2be;">[</span>i<span style="color: #81a2be;">]</span>.call<span style="color: #81a2be;">(</span>ctx, prev<span style="color: #81a2be;">)</span>
+    <span style="color: #b5bd68;">}</span>
+    <span style="color: #b5bd68;">yield</span> prev
+  <span style="color: #f0c674;">}</span><span style="color: #8abeb7;">)</span>
+<span style="color: #c5c8c6;">}</span>
+
+<span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#35843;&#29992;</span>
+<span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">koa</span> = <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">Koa</span>
+koa.use<span style="color: #c5c8c6;">(</span>B<span style="color: #c5c8c6;">)</span>.use<span style="color: #c5c8c6;">(</span>C<span style="color: #c5c8c6;">)</span>
+koa.listen<span style="color: #c5c8c6;">()</span>
+</pre>
+</div>
+
+<p>
+至此，有关 <code>yield</code> 和 <code>yield*</code> 的内容我就讲完了。其实自己还是有点雾里呢！不过，比我之前清晰多了 :)
+</p>
+
+<p>
+(另外，请自动忽略上述代码对异常等各种情况的处理，具体实现可以参考TJ大神的代码。不看真的会遗憾的！)
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6"><span class="section-number-2">4</span> 尾声</h2>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+Thunk: <a href="https://en.wikipedia.org/wiki/Thunk">https://en.wikipedia.org/wiki/Thunk</a>
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
+<p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
+<p class="date">2016-01-30</p>
+<p class="export-date">2016-10-09 Sun 22:56</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="validation"></p>
+<p class="last-modification-time">2016-05-09 Mon 23:22</p></div><script asyn src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+</div>
+</body>
+</html>
