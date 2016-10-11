@@ -208,7 +208,7 @@ function blink () {
 function showBanner (body, content) {
   var div = document.createElement('div');
   div.id = 'banner-wrapper';
-  div.innerHTML = '<p style="text-align: center;font-size: 14em; margin: 0;">&gt;<span class="blink" data-frequency="700">_</span></p>';
+  div.innerHTML = '<p class="blink-wrapper">&gt;<span class="blink" data-frequency="700">_</span></p>';
   body.insertBefore(div, content);
   blink()
   changeOctoCat(body);
@@ -229,7 +229,7 @@ function showBanner (body, content) {
  * Just support method:GET
  */
 function loader(o) {
-  const httpRequest = new XMLHttpRequest()
+  var httpRequest = new XMLHttpRequest()
   if (!httpRequest) {
     console.error('Giving up :( Cannot create an XMLHTTP instance');
     return false;

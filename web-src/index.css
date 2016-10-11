@@ -24,12 +24,18 @@ body {
 #banner-wrapper img {
     width: 424px;
 }
+.blink-wrapper {
+    text-align: center;
+    font-size: 14em;
+    margin: 0;
+}
 
 nav {
     text-align: center;
     margin-top: 14px;
 }
 nav a {
+    font-size: 18px;
     margin: auto 4px;
     color: black;
     text-transform: uppercase;
@@ -189,6 +195,18 @@ nav a {
     #banner-wrapper img {
         width: 50%;
         margin-top: 10%;
+    }
+    nav a {
+        font-size: 16px;
+    }
+    .blink-wrapper {
+        font-size: 10em;
+    }
+}
+@media(max-width: 320px) {
+    nav a {
+        display: block;
+        margin: 6px auto;
     }
 }
 
