@@ -4,6 +4,7 @@
 #+DESCRIPTION: Unicode and UTF8 的一些学习笔记
 #+KEYWORDS: unicode,utf8,encoding,编码
 #+OPTIONS: H:4 num:t toc:t \n:nil ::t |:t ^:nil f:t email:t timestamp:t
+#+OPTIONS: tex:nil
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
 

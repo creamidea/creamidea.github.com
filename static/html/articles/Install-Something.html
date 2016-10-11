@@ -1,3 +1,997 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7106bc1006c1a6cc119ce3a6e3dcbc8262d2443795a6a84439f9741a237e9ab9
-size 45793
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 2016-10-11 Tue 20:44 -->
+<meta  charset="utf-8">
+<meta  name="viewport" content="width=device-width, initial-scale=1">
+<title>Install Something</title>
+<meta  name="generator" content="Org-mode">
+<meta  name="author" content="Junjia Ni">
+<meta  name="description" content="安装一些东西"
+>
+<meta  name="keywords" content="emacs,orgmode,install">
+<link rel="stylesheet" type="text/css" href="/static/article.css">
+</head>
+<body>
+<div id="content">
+<h1 class="title">Install Something</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">1. 前言</a></li>
+<li><a href="#orgheadline2">2. Node</a></li>
+<li><a href="#orgheadline4">3. Git</a>
+<ul>
+<li><a href="#orgheadline3">3.1. git lfs error: failed to push some refs to</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline7">4. Emacs</a>
+<ul>
+<li><a href="#orgheadline5">4.1. Refile</a></li>
+<li><a href="#orgheadline6">4.2. 待阅读：</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline8">5. System Images SHA</a></li>
+<li><a href="#orgheadline11">6. libuv</a>
+<ul>
+<li><a href="#orgheadline9">6.1. Error: glibtoolize cannot found.</a></li>
+<li><a href="#orgheadline10">6.2. Undefined symbols for architecture x86_64</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline12">7. m4</a></li>
+<li><a href="#orgheadline13">8. Verify the Signature</a></li>
+<li><a href="#orgheadline14">9. Extract Files</a></li>
+<li><a href="#orgheadline16">10. Install Protobuf</a>
+<ul>
+<li><a href="#orgheadline15">10.1. PKG_CONFIG_PATH unknow</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline19">11. Install GnuPG</a>
+<ul>
+<li><a href="#orgheadline17">11.1. error: intmax_t unknow when compile</a></li>
+<li><a href="#orgheadline18">11.2. Install TeX on Mac</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline20">12. iTerm2 GBK编码</a></li>
+<li><a href="#orgheadline42">13. Windows</a>
+<ul>
+<li><a href="#orgheadline21">13.1. Install Windows7 Ultimate</a></li>
+<li><a href="#orgheadline25">13.2. Install Emacs and config her</a>
+<ul>
+<li><a href="#orgheadline22">13.2.1. Change the Home Directory:</a></li>
+<li><a href="#orgheadline23">13.2.2. Swap the CapsLk &amp;&amp; Ctrl\_L</a></li>
+<li><a href="#orgheadline24">13.2.3. Reference:</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline31">13.3. Install Jekyll</a>
+<ul>
+<li><a href="#orgheadline26">13.3.1. Download:</a></li>
+<li><a href="#orgheadline27">13.3.2. Install:</a></li>
+<li><a href="#orgheadline28">13.3.3. Run:</a></li>
+<li><a href="#orgheadline29">13.3.4. Change:</a></li>
+<li><a href="#orgheadline30">13.3.5. Q&amp;A:</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline32">13.4. Install Foobar and config her</a></li>
+<li><a href="#orgheadline33">13.5. Install Win7Code</a></li>
+<li><a href="#orgheadline34">13.6. Install mit-scheme and fix some issue</a></li>
+<li><a href="#orgheadline35">13.7. Install Java Development</a></li>
+<li><a href="#orgheadline41">13.8. Install Qt Development</a>
+<ul>
+<li><a href="#orgheadline36">13.8.1. Download:</a></li>
+<li><a href="#orgheadline37">13.8.2. Install:</a></li>
+<li><a href="#orgheadline38">13.8.3. Configure:</a></li>
+<li><a href="#orgheadline39">13.8.4. Emacs:</a></li>
+<li><a href="#orgheadline40">13.8.5. Q &amp;&amp; A:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgheadline57">14. Linux</a>
+<ul>
+<li><a href="#orgheadline43">14.1. Install Emacs and config it</a></li>
+<li><a href="#orgheadline44">14.2. Install Google Chrome</a></li>
+<li><a href="#orgheadline45">14.3. Return to classic gnome for ubuntu12.04+</a></li>
+<li><a href="#orgheadline46">14.4. Install Git (You can find the books. Just click here)</a></li>
+<li><a href="#orgheadline47">14.5. Add the picture when ubuntu boot up</a></li>
+<li><a href="#orgheadline48">14.6. Install Adobe Flash Player</a></li>
+<li><a href="#orgheadline51">14.7. Install Lua and Luarocks</a>
+<ul>
+<li><a href="#orgheadline49">14.7.1. lua</a></li>
+<li><a href="#orgheadline50">14.7.2. Luarocks</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline52">14.8. Install Java</a></li>
+<li><a href="#orgheadline53">14.9. MySQL</a></li>
+<li><a href="#orgheadline54">14.10. Change Some Key Shortcuts</a></li>
+<li><a href="#orgheadline55">14.11. Make Ubuntu12.04 hibernation</a></li>
+<li><a href="#orgheadline56">14.12. Install Ubuntu12.04 black screen</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+这个是我的一个配置环境的wiki，主要记录我这些年安装的软件和配置的一些服务。
+主要是在Windows7上和Linux(现在主要是Ubuntu)上。
+详细记录一些配置过程和安装的软件。方便以后重新安装系统。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2"><span class="section-number-2">2</span> Node</h2>
+<div class="outline-text-2" id="text-2">
+<pre class="example">
+~/.npm
+/usr/local/bin/node
+/usr/local/bin/npm
+/usr/local/lib/node_modules
+/usr/local/libexec/node_modules
+/usr/local/share/man/man1/node*
+/usr/local/lib/dtrace/node.d
+/usr/local/include/node_modules
+/var/db/receipts/org.nodejs.node.pkg.*
+
+.node_repl_history
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4"><span class="section-number-2">3</span> Git</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3"><span class="section-number-3">3.1</span> git lfs error: failed to push some refs to</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">you should be able to fix your pushes by removing the .git/hooks/pre-push file from your repository. This is where git is trying to run git lfs when you push.</span>
+rm .git/hooks/pre-push
+</pre>
+</div>
+<p>
+Reference: <a href="https://github.com/github/git-lfs/issues/333">https://github.com/github/git-lfs/issues/333</a>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7"><span class="section-number-2">4</span> Emacs</h2>
+<div class="outline-text-2" id="text-4">
+</div><div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5"><span class="section-number-3">4.1</span> Refile</h3>
+<div class="outline-text-3" id="text-4-1">
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">http://superuser.com/a/373976</span>
+<span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">setq</span> org-refile-use-outline-path <span style="color: #b5bd68;">'</span><span style="color: #81a2be;">file</span><span style="color: #c5c8c6;">)</span>
+<span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">setq</span> org-refile-targets <span style="color: #b5bd68;">'</span><span style="color: #8abeb7;">(</span><span style="color: #f0c674;">(</span>org-agenda-files <span style="color: #b294bb;">:level</span> . 1<span style="color: #f0c674;">)</span><span style="color: #8abeb7;">)</span><span style="color: #c5c8c6;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6"><span class="section-number-3">4.2</span> 待阅读：</h3>
+<div class="outline-text-3" id="text-4-2">
+<ol class="org-ol">
+<li><a href="http://stackoverflow.com/questions/4352367/is-it-possible-to-start-emacs-using-a-remote-configuration-file">Is it possible to start emacs using a remote configuration file?</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/linux/l-cn-emacs-shell/">当 Shell 遇见 Emacs &#x2013; 大话 Emacs Shell Mode</a></li>
+<li><a href="http://lifegoo.pluskid.org/wiki/EmacsAsFileManger.html">Emacs &#x2013; 强大的文件管理器</a></li>
+<li><a href="http://cx4a.org/software/gccsense/manual.html#Installation">GCCSense User Manual</a></li>
+<li><a href="http://emacser.com/emacs-gccsense.htm">Emacs补全利器：auto-complete+gccsense</a></li>
+<li><a href="http://blog.csdn.net/astropeak/article/details/6666527">《Emacs——你不能不用的神级利器》——补全（下）</a></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8"><span class="section-number-2">5</span> System Images SHA</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+链接 <a href="https://msdn.microsoft.com/zh-cn/subscriptions/securedownloads/hh442898#searchTerm=&amp;ProductFamilyId=481&amp;Languages=en&amp;PageSize=10&amp;PageIndex=0&amp;FileId=0">microsoft-msdn</a>
+</p>
+
+<p>
+文件名： cn_windows_8_enterprise_x64_dvd_917570.iso
+SHA1：1280BC3A38A7001FDE981FA2E465DEB341478667
+</p>
+
+<p>
+文件名： en_windows_8_x64_dvd_915440.iso
+语言： English
+SHA1：1CE53AD5F60419CF04A715CF3233F247E48BEEC4
+</p>
+
+<p>
+文件名： cn_windows_8.1_with_update_x64_dvd_4048046.iso
+SHA1：F44B2BBD1F6F243DAAE172FA8C1DB342CB98EDAA
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-2">
+<h2 id="orgheadline11"><span class="section-number-2">6</span> libuv</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+依赖 <b>autoconf</b> <b>automake</b> <b>libtool</b>
+</p>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9"><span class="section-number-3">6.1</span> Error: glibtoolize cannot found.</h3>
+<div class="outline-text-3" id="text-6-1">
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #b5bd68;">if</span> <span style="color: #c5c8c6;">[</span> <span style="color: #8abeb7;">"$LIBTOOLIZE"</span> = <span style="color: #8abeb7;">""</span> <span style="color: #c5c8c6;">]</span> &amp;&amp; <span style="color: #c5c8c6;">[</span> <span style="color: #8abeb7;">"`uname`"</span> = <span style="color: #8abeb7;">"Darwin"</span> <span style="color: #c5c8c6;">]</span>; <span style="color: #b5bd68;">then</span>
+  <span style="color: #f0c674;">LIBTOOLIZE</span>=libtoolize <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#36825;&#37324;&#30340;glibtoolize -&gt; libtoolize</span>
+<span style="color: #b5bd68;">fi</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10"><span class="section-number-3">6.2</span> Undefined symbols for architecture x86_64</h3>
+<div class="outline-text-3" id="text-6-2">
+<div class="org-src-container">
+
+<pre class="src src-sh">clang -Wall -I/usr/local/libuv/include -L/usr/local/libuv/lib -luv main.c
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline12" class="outline-2">
+<h2 id="orgheadline12"><span class="section-number-2">7</span> m4</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+看完这个文档 <a href="http://mbreen.com/m4.html">m4-doc</a> or <a href="http://www.gnu.org/software/m4/manual/m4.html">GNU M4 1.4.17 macro processor</a> ，感觉m4就是lisp宏的一个翻版嘛~ (逃&#x2026;
+</p>
+
+<p>
+也可以参考这个<a href="http://garfileo.is-programmer.com/2011/4/21/interesting-gnu-m4.26282.html">有趣的 M4</a> 。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline13" class="outline-2">
+<h2 id="orgheadline13"><span class="section-number-2">8</span> Verify the Signature</h2>
+<div class="outline-text-2" id="text-8">
+<div class="org-src-container">
+
+<pre class="src src-sh">gpg --verify xxx.tar.gz.sig xxx.tar.gz
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">get the key ID</span>
+gpg --recv-keys <span style="color: #c5c8c6;">[</span>key ID<span style="color: #c5c8c6;">]</span>
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">add the key</span>
+gpg --verify --verbose xxx.tar.gz.sig xxx.tar.gz
+</pre>
+</div>
+<p>
+Reference: <a href="http://www.cnblogs.com/daemon369/p/3204020.html">http://www.cnblogs.com/daemon369/p/3204020.html</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline14" class="outline-2">
+<h2 id="orgheadline14"><span class="section-number-2">9</span> Extract Files</h2>
+<div class="outline-text-2" id="text-9">
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #b5bd68;">if</span> <span style="color: #c5c8c6;">[</span> -f $<span style="color: #f0c674;">1</span> <span style="color: #c5c8c6;">]</span> ; <span style="color: #b5bd68;">then</span>
+    <span style="color: #b5bd68;">case</span> $<span style="color: #f0c674;">1</span><span style="color: #b5bd68;"> in</span>
+        *.tar.bz2)      tar xvjf $<span style="color: #f0c674;">1</span> &amp;&amp; <span style="color: #b294bb;">cd</span> $<span style="color: #c5c8c6;">(</span>basename <span style="color: #8abeb7;">"$1"</span> .tar.bz2<span style="color: #c5c8c6;">)</span> ;;
+        *.tar.gz)       tar xvzf $<span style="color: #f0c674;">1</span> &amp;&amp; <span style="color: #b294bb;">cd</span> $<span style="color: #c5c8c6;">(</span>basename <span style="color: #8abeb7;">"$1"</span> .tar.gz<span style="color: #c5c8c6;">)</span> ;;
+        *.tar.xz)       tar Jxvf $<span style="color: #f0c674;">1</span> &amp;&amp; <span style="color: #b294bb;">cd</span> $<span style="color: #c5c8c6;">(</span>basename <span style="color: #8abeb7;">"$1"</span> .tar.xz<span style="color: #c5c8c6;">)</span> ;;
+        *.bz2)          bunzip2 $<span style="color: #f0c674;">1</span> &amp;&amp; <span style="color: #b294bb;">cd</span> $<span style="color: #c5c8c6;">(</span>basename <span style="color: #8abeb7;">"$1"</span> /bz2<span style="color: #c5c8c6;">)</span> ;;
+        *.rar)          unrar x $<span style="color: #f0c674;">1</span> &amp;&amp; <span style="color: #b294bb;">cd</span> $<span style="color: #c5c8c6;">(</span>basename <span style="color: #8abeb7;">"$1"</span> .rar<span style="color: #c5c8c6;">)</span> ;;
+        *.gz)           gunzip $<span style="color: #f0c674;">1</span> &amp;&amp; <span style="color: #b294bb;">cd</span> $<span style="color: #c5c8c6;">(</span>basename <span style="color: #8abeb7;">"$1"</span> .gz<span style="color: #c5c8c6;">)</span> ;;
+        *.tar)          tar xvf $<span style="color: #f0c674;">1</span> &amp;&amp; <span style="color: #b294bb;">cd</span> $<span style="color: #c5c8c6;">(</span>basename <span style="color: #8abeb7;">"$1"</span> .tar<span style="color: #c5c8c6;">)</span> ;;
+        *.tbz2)         tar xvjf $<span style="color: #f0c674;">1</span> &amp;&amp; <span style="color: #b294bb;">cd</span> $<span style="color: #c5c8c6;">(</span>basename <span style="color: #8abeb7;">"$1"</span> .tbz2<span style="color: #c5c8c6;">)</span> ;;
+        *.tgz)          tar xvzf $<span style="color: #f0c674;">1</span> &amp;&amp; <span style="color: #b294bb;">cd</span> $<span style="color: #c5c8c6;">(</span>basename <span style="color: #8abeb7;">"$1"</span> .tgz<span style="color: #c5c8c6;">)</span> ;;
+        *.zip)          unzip $<span style="color: #f0c674;">1</span> &amp;&amp; <span style="color: #b294bb;">cd</span> $<span style="color: #c5c8c6;">(</span>basename <span style="color: #8abeb7;">"$1"</span> .zip<span style="color: #c5c8c6;">)</span> ;;
+        *.Z)            uncompress $<span style="color: #f0c674;">1</span> &amp;&amp; <span style="color: #b294bb;">cd</span> $<span style="color: #c5c8c6;">(</span>basename <span style="color: #8abeb7;">"$1"</span> .Z<span style="color: #c5c8c6;">)</span> ;;
+        *.7z)           7z x $<span style="color: #f0c674;">1</span> &amp;&amp; <span style="color: #b294bb;">cd</span> $<span style="color: #c5c8c6;">(</span>basename <span style="color: #8abeb7;">"$1"</span> .7z<span style="color: #c5c8c6;">)</span> ;;
+        *)              <span style="color: #b294bb;">echo</span> <span style="color: #8abeb7;">"don't know how to extract '$1'..."</span> ;;
+    <span style="color: #b5bd68;">esac</span>
+<span style="color: #b5bd68;">else</span>
+    <span style="color: #b294bb;">echo</span> <span style="color: #8abeb7;">"'$1' is not a valid file!"</span>
+<span style="color: #b5bd68;">fi</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline16" class="outline-2">
+<h2 id="orgheadline16"><span class="section-number-2">10</span> Install Protobuf</h2>
+<div class="outline-text-2" id="text-10">
+</div><div id="outline-container-orgheadline15" class="outline-3">
+<h3 id="orgheadline15"><span class="section-number-3">10.1</span> PKG_CONFIG_PATH unknow</h3>
+<div class="outline-text-3" id="text-10-1">
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #b294bb;">export</span> <span style="color: #f0c674;">LD_LIBRARY_PATH</span>=$<span style="color: #f0c674;">LD_LIBRARY_PATH</span>:/usr/local/lib
+<span style="color: #b294bb;">export</span> <span style="color: #f0c674;">PKG_CONFIG_PATH</span>=/usr/local/lib/pkgconfig
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline19" class="outline-2">
+<h2 id="orgheadline19"><span class="section-number-2">11</span> Install GnuPG</h2>
+<div class="outline-text-2" id="text-11">
+</div><div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17"><span class="section-number-3">11.1</span> error: intmax_t unknow when compile</h3>
+<div class="outline-text-3" id="text-11-1">
+<blockquote>
+<p>
+After upgrading to Apple's Xcode 5.0, gnupg2 2.0.21 would no longer compile.
+</p>
+
+<p>
+For some reason or other, sm/stdint.h could not resolve certain typedefs.
+Workaround was to crassly force typedef resolution in sm/stdint.h with these
+lines after #include &lt;stdint.h&gt; :
+</p>
+
+<p>
+typedef long                          intptr_t;
+typedef long long               intmax_t;
+typedef unsigned long           uintptr_t;
+typedef unsigned long long      uintmax_t;
+</p>
+
+<p>
+After that everything compiled and all make checks passed.
+</p>
+</blockquote>
+<p>
+Reference: <a href="https://bugs.gnupg.org/gnupg/msg4744">https://bugs.gnupg.org/gnupg/msg4744</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline18" class="outline-3">
+<h3 id="orgheadline18"><span class="section-number-3">11.2</span> Install TeX on Mac</h3>
+<div class="outline-text-3" id="text-11-2">
+<div class="org-src-container">
+
+<pre class="src src-sh">$ sudo ln -s /Volumes/MyTeXLive/bin/universal-darwin /usr/texbin
+</pre>
+</div>
+
+<p>
+或者 <code>TeX Live Utility &gt; TeX programs (choose)</code> 这里修改TeX路径。
+</p>
+
+<p>
+使用清华TUNA: <a href="http://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/tlnet">http://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/tlnet</a>
+</p>
+
+<p>
+Reference: <a href="https://www.tug.org/texlive/doc/texlive-en/texlive-en.html#tlportable">https://www.tug.org/texlive/doc/texlive-en/texlive-en.html#tlportable</a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline20" class="outline-2">
+<h2 id="orgheadline20"><span class="section-number-2">12</span> iTerm2 GBK编码</h2>
+<div class="outline-text-2" id="text-12">
+<p>
+让iTerm2临时变成GBK编码的环境，首先创建一个名为GBK的Profile，然后将其字符编码改成GBK。运行下面的sh即可用。
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #969896; font-style: italic;">#</span><span style="color: #969896; font-style: italic;">!/bin/</span><span style="color: #b5bd68;">bash</span>
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#20351;&#29992;GBK Profile</span>
+<span style="color: #b294bb;">echo</span> -e <span style="color: #8abeb7;">"\033]50;SetProfile=GBK\a"</span>
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#29615;&#22659;&#32534;&#30721;&#20999;&#25442;&#20026;GBK</span>
+<span style="color: #b294bb;">export</span> <span style="color: #f0c674;">LANG</span>=zh_CN.GBK
+<span style="color: #b294bb;">export</span> <span style="color: #f0c674;">LC_ALL</span>=zh_CN.GBK
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#26356;&#25913;&#24403;&#21069; iTerm2 tab title</span>
+<span style="color: #b294bb;">echo</span> -ne <span style="color: #8abeb7;">"\033]0;"</span>$<span style="color: #f0c674;">@</span><span style="color: #8abeb7;">"\007"</span>
+$<span style="color: #f0c674;">@</span>
+<span style="color: #b294bb;">echo</span> -ne <span style="color: #8abeb7;">"\033]0;"</span>$<span style="color: #c5c8c6;">{</span><span style="color: #f0c674;">PWD</span>/#$<span style="color: #f0c674;">HOME</span>/~<span style="color: #c5c8c6;">}</span><span style="color: #8abeb7;">"\007"</span>
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">GBK&#20219;&#21153;&#23436;&#25104;&#21518;&#65292;&#33258;&#21160;&#20999;&#25442;&#22238;&#40664;&#35748;&#32534;&#30721;&#65288;UTF-8&#65289;</span>
+<span style="color: #b294bb;">echo</span> -e <span style="color: #8abeb7;">"\033]50;SetProfile=Default\a"</span>
+<span style="color: #b294bb;">export</span> <span style="color: #f0c674;">LANG</span>=zh_CN.UTF-8
+<span style="color: #b294bb;">export</span> <span style="color: #f0c674;">LC_ALL</span>=zh_CN.UTF-8
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline42" class="outline-2">
+<h2 id="orgheadline42"><span class="section-number-2">13</span> Windows</h2>
+<div class="outline-text-2" id="text-13">
+</div><div id="outline-container-orgheadline21" class="outline-3">
+<h3 id="orgheadline21"><span class="section-number-3">13.1</span> Install Windows7 Ultimate</h3>
+<div class="outline-text-3" id="text-13-1">
+<ol class="org-ol">
+<li><p>
+From Home basic to Ultimate FOR LenoveY470:
+</p>
+<pre class="example">
+6K2KY-BFH24-PJW6W-9GK29-TMPWP
+22TKD-F8XX6-YG69F-9M66D-PMJBM
+</pre></li>
+<li><p>
+Install Windows7 Ultimate by DVD/USB:
+</p>
+
+<p>
+waiting&#x2026;
+</p></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline25" class="outline-3">
+<h3 id="orgheadline25"><span class="section-number-3">13.2</span> Install Emacs and config her</h3>
+<div class="outline-text-3" id="text-13-2">
+</div><div id="outline-container-orgheadline22" class="outline-4">
+<h4 id="orgheadline22"><span class="section-number-4">13.2.1</span> Change the Home Directory:</h4>
+<div class="outline-text-4" id="text-13-2-1">
+<ol class="org-ol">
+<li>Ctrl + R</li>
+</ol>
+<ol class="org-ol">
+<li>Input "regedit"</li>
+<li>HKEY\_CURRENT\_USER/Software/GNU/Emacs/HOME=%The Home of Emacs%
+(New a string value)</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline23" class="outline-4">
+<h4 id="orgheadline23"><span class="section-number-4">13.2.2</span> Swap the CapsLk &amp;&amp; Ctrl\_L</h4>
+<div class="outline-text-4" id="text-13-2-2">
+<ol class="org-ol">
+<li><p>
+Modify the regedit
+</p>
+<pre class="example">
+  REGEDIT4
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout]
+"Scancode Map"=hex:00,00,00,00,00,00,00,00,
+         03,00,00,00,1d,00,3a,00,
+         3a,00,1d,00,00,00,00,00
+  (New a binary Values)
+</pre></li>
+<li>Download Software:</li>
+</ol>
+<ul class="org-ul">
+<li>The script: <a href="http://www.cs.umb.edu/~wimiller/stuff/caps2ctrl.exe">http://www.cs.umb.edu/~wimiller/stuff/caps2ctrl.exe</a></li>
+<li>The source: <a href="http://www.cs.umb.edu/~wimiller/stuff/caps2ctrl.ahk">http://www.cs.umb.edu/~wimiller/stuff/caps2ctrl.ahk</a>
+<ol class="org-ol">
+<li><p>
+AutoHotKey:
+</p>
+<pre class="example">
+Capslock::Ctrl
+</pre></li>
+<li><b>Reference:</b>
+<ul class="org-ul">
+<li><a href="http://www.emacswiki.org/emacs/MovingTheCtrlKey">http://www.emacswiki.org/emacs/MovingTheCtrlKey</a></li>
+</ul></li>
+</ol></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline24" class="outline-4">
+<h4 id="orgheadline24"><span class="section-number-4">13.2.3</span> Reference:</h4>
+<div class="outline-text-4" id="text-13-2-3">
+<ul class="org-ul">
+<li><a href="http://www.emacswiki.org/emacs/JonathanArnoldDotEmacs">http://www.emacswiki.org/emacs/JonathanArnoldDotEmacs</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline31" class="outline-3">
+<h3 id="orgheadline31"><span class="section-number-3">13.3</span> Install Jekyll</h3>
+<div class="outline-text-3" id="text-13-3">
+</div><div id="outline-container-orgheadline26" class="outline-4">
+<h4 id="orgheadline26"><span class="section-number-4">13.3.1</span> Download:</h4>
+<div class="outline-text-4" id="text-13-3-1">
+<p>
+<a href="http://rubyinstaller.org/downloads/">RubyInstaller &amp;&amp; DEVELOPMENT KIT</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline27" class="outline-4">
+<h4 id="orgheadline27"><span class="section-number-4">13.3.2</span> Install:</h4>
+<div class="outline-text-4" id="text-13-3-2">
+<p>
+Next -&gt; Next -&gt; &#x2026; -&gt; Finish
+</p>
+
+<p>
+<b>Attention:</b>
+The path of the installer cannot have space!!!
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline28" class="outline-4">
+<h4 id="orgheadline28"><span class="section-number-4">13.3.3</span> Run:</h4>
+<div class="outline-text-4" id="text-13-3-3">
+<div class="org-src-container">
+
+<pre class="src src-sh">&gt; jekyll serve
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline29" class="outline-4">
+<h4 id="orgheadline29"><span class="section-number-4">13.3.4</span> Change:</h4>
+<div class="outline-text-4" id="text-13-3-4">
+<p>
+<a href="http://ruby.taobao.org/">http://ruby.taobao.org/</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline30" class="outline-4">
+<h4 id="orgheadline30"><span class="section-number-4">13.3.5</span> Q&amp;A:</h4>
+<div class="outline-text-4" id="text-13-3-5">
+<ol class="org-ol">
+<li><p>
+Liquid Exception: incompatible character encodings: IBM437 and UTF-8
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">windows:</span>
+&gt; chcp 65001
+
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">Linux</span>
+$ export <span style="color: #f0c674;">LC_ALL</span>=en_US.UTF-8
+$ export <span style="color: #f0c674;">LANG</span>=en_US.UTF-8
+$ jekyll --server --auto
+</pre>
+</div>
+<p>
+Reference:
+</p>
+<ul class="org-ul">
+<li><a href="http://chxt6896.github.io/blog/2012/02/13/blog-jekyll-native.html">http://chxt6896.github.io/blog/2012/02/13/blog-jekyll-native.html</a></li>
+</ul></li>
+
+<li>Python Django:
+{&amp;#37; autoescape off &amp;#37;}</li>
+</ol>
+<p>
+Hello {&amp;#123; name &amp;#123;}
+{&amp;#37; endautoescape &amp;#37;}
+Reference:
+</p>
+<ul class="org-ul">
+<li><a href="http://www.ascii.cl/htmlcodes.htm">http://www.ascii.cl/htmlcodes.htm</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline32" class="outline-3">
+<h3 id="orgheadline32"><span class="section-number-3">13.4</span> Install Foobar and config her</h3>
+</div>
+<div id="outline-container-orgheadline33" class="outline-3">
+<h3 id="orgheadline33"><span class="section-number-3">13.5</span> Install Win7Code</h3>
+</div>
+<div id="outline-container-orgheadline34" class="outline-3">
+<h3 id="orgheadline34"><span class="section-number-3">13.6</span> Install mit-scheme and fix some issue</h3>
+</div>
+<div id="outline-container-orgheadline35" class="outline-3">
+<h3 id="orgheadline35"><span class="section-number-3">13.7</span> Install Java Development</h3>
+</div>
+
+<div id="outline-container-orgheadline41" class="outline-3">
+<h3 id="orgheadline41"><span class="section-number-3">13.8</span> Install Qt Development</h3>
+<div class="outline-text-3" id="text-13-8">
+</div><div id="outline-container-orgheadline36" class="outline-4">
+<h4 id="orgheadline36"><span class="section-number-4">13.8.1</span> Download:</h4>
+<div class="outline-text-4" id="text-13-8-1">
+<ol class="org-ol">
+<li>Download Address:  <a href="http://qt-project.org/downloads">http://qt-project.org/downloads</a></li>
+<li>我下载的是：<a href="http://mirrors.ustc.edu.cn/qtproject/official_releases/qt/4.8/4.8.4/qt-win-opensource-4.8.4-vs2010.exe">Qt libraries 4.8.4 for Windows (VS 2010, 234 MB) (Info)</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline37" class="outline-4">
+<h4 id="orgheadline37"><span class="section-number-4">13.8.2</span> Install:</h4>
+<div class="outline-text-4" id="text-13-8-2">
+<ol class="org-ol">
+<li>Next-&gt;Next-&gt;&#x2026;-&gt;Finish</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline38" class="outline-4">
+<h4 id="orgheadline38"><span class="section-number-4">13.8.3</span> Configure:</h4>
+<div class="outline-text-4" id="text-13-8-3">
+<ol class="org-ol">
+<li>use it in terminal (vs2010):
+Please use the : Qt 4.8.4 Command Prompt</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline39" class="outline-4">
+<h4 id="orgheadline39"><span class="section-number-4">13.8.4</span> Emacs:</h4>
+<div class="outline-text-4" id="text-13-8-4">
+<ul class="org-ul">
+<li><a href="http://www.emacswiki.org/emacs/QtMode">http://www.emacswiki.org/emacs/QtMode</a></li>
+<li><a href="http://www.emacswiki.org/emacs/CcMode">http://www.emacswiki.org/emacs/CcMode</a></li>
+<li><a href="http://alexott.blogspot.it/2009/02/cedet-qt.html">http://alexott.blogspot.it/2009/02/cedet-qt.html</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline40" class="outline-4">
+<h4 id="orgheadline40"><span class="section-number-4">13.8.5</span> Q &amp;&amp; A:</h4>
+<div class="outline-text-4" id="text-13-8-5">
+<ol class="org-ol">
+<li><p>
+Makefile.Debug:59: <b>*</b> missing separator.  Stop.:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">Qt 4.8.4 Command Prompt</span>
+&gt; qmake -project
+&gt; qmake
+&gt; nmake
+</pre>
+</div>
+<p>
+Reference:
+</p>
+<ul class="org-ul">
+<li><a href="http://stackoverflow.com/questions/12339099/what-does-the-missing-separator-make-error-mean-when-using-qt/16714236#16714236">http://stackoverflow.com/questions/12339099/what-does-the-missing-separator-make-error-mean-when-using-qt/16714236#16714236</a></li>
+<li><a href="http://www.verydemo.com/demo_c92_i131633.html">http://www.verydemo.com/demo_c92_i131633.html</a></li>
+<li><a href="http://www.qtforum.org/article/23450/qt4-and-mysql-driver-problem.html">http://www.qtforum.org/article/23450/qt4-and-mysql-driver-problem.html</a></li>
+<li><a href="http://superuser.com/questions/375029/make-interrupt-exception-caught">http://superuser.com/questions/375029/make-interrupt-exception-caught</a></li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline57" class="outline-2">
+<h2 id="orgheadline57"><span class="section-number-2">14</span> Linux</h2>
+<div class="outline-text-2" id="text-14">
+</div><div id="outline-container-orgheadline43" class="outline-3">
+<h3 id="orgheadline43"><span class="section-number-3">14.1</span> Install Emacs and config it</h3>
+<div class="outline-text-3" id="text-14-1">
+<ol class="org-ol">
+<li>Go to <a href="http://ftp.gnu.org/gnu/emacs/">here(main GNU ftp)</a> to download the lastest .xz</li>
+<li><p>
+Install the depends below:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">$ sudo apt-get install texinfo build-essential
+$ sudo aptitude install libdbus-1-dev libgconf2-dev libgif-dev libgpm-dev <span style="color: #8abeb7;">\</span>
+  libgtk2.0-dev libjpeg62-dev libm17n-dev libncurses5-dev <span style="color: #8abeb7;">\</span>
+  libotf-dev librsvg2-dev libtiff4-dev libXpm-dev
+
+$ ./configure
+$ make bootstrap
+$ make
+$ src/emacs -q ;; This checks that it built properly
+$ sudo make install
+$ mv /usr/local/bin/emacs-24.0.50 /usr/local/bin/emacs24
+;; Change the number to whatever the version is, I moved it to a more convienent name
+$ emacs24 -q
+</pre>
+</div></li>
+<li>Download this config files!</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline44" class="outline-3">
+<h3 id="orgheadline44"><span class="section-number-3">14.2</span> Install Google Chrome</h3>
+<div class="outline-text-3" id="text-14-2">
+<ol class="org-ol">
+<li>Go to <a href="https://www.google.com/intl/en/chrome/browser/">here</a> to download the leaset google-chrome</li>
+<li>Who can tell me why hwo to solve it:
+<code>Dependency is not satisfiable: libudev0(&gt;=147)</code>
+(I was in Ubuntu13.04 amd64)</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline45" class="outline-3">
+<h3 id="orgheadline45"><span class="section-number-3">14.3</span> Return to classic gnome for ubuntu12.04+</h3>
+<div class="outline-text-3" id="text-14-3">
+<div class="org-src-container">
+
+<pre class="src src-sh">$ sudo apt-get install gnome-session-fallback
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline46" class="outline-3">
+<h3 id="orgheadline46"><span class="section-number-3">14.4</span> Install Git (You can find the books. Just click <a href="https://github.s3.amazonaws.com/media/progit.en.pdf">here</a>)</h3>
+<div class="outline-text-3" id="text-14-4">
+<ol class="org-ol">
+<li>Go to <a href="https://github.com/git/git">here</a> download the lastest git.</li>
+<li><p>
+Follow the <a href="http://git-scm.com/book/en/Getting-Started-Installing-Git">1.4 Getting Started - Installing Git</a>.
+The main steps are:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">$ apt-get install libcurl4-gnutls-dev libexpat1-dev gettext <span style="color: #8abeb7;">\</span>
+  libz-dev libssl-dev
+$ tar -zxf git-1.7.2.2.tar.gz
+$ cd git-1.7.2.2
+$ make <span style="color: #f0c674;">prefix</span>=/usr/local all
+$ sudo make <span style="color: #f0c674;">prefix</span>=/usr/local install
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">Below is options:</span>
+$ git clone git://git.kernel.org/pub/scm/git/git.git
+</pre>
+</div></li>
+<li><p>
+Follow the <a href="http://git-scm.com/book/en/Getting-Started-First-Time-Git-Setup">1.5 Getting Started - First-Time Git Setup</a>.
+The main steps are:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">$ git config --global user.name <span style="color: #8abeb7;">"John Doe"</span>
+$ git config --global user.email johndoe@example.com
+</pre>
+</div></li>
+<li><p>
+Now, you can <a href="https://help.github.com/articles/generating-ssh-keys">Generating SSH Keys</a>.
+The main steps are:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">$ ssh-keygen -t rsa -C <span style="color: #8abeb7;">"your_email@example.com"</span>
+$ sudo apt-get install xclip
+$ xclip -sel clip &lt; ~/.ssh/id_rsa.pub
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline47" class="outline-3">
+<h3 id="orgheadline47"><span class="section-number-3">14.5</span> Add the picture when ubuntu boot up</h3>
+<div class="outline-text-3" id="text-14-5">
+<p>
+<b>Please pay more attenttion to modify this file</b>
+</p>
+<ol class="org-ol">
+<li>Move the picture to the <code>/usr/share/backgrounds</code></li>
+<li><p>
+Replace:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #969896; font-style: italic;">### </span><span style="color: #969896; font-style: italic;">BEGIN /etc/grub.d/05_debian_theme ###</span>
+<span style="color: #b294bb;">set</span> <span style="color: #f0c674;">menu_color_normal</span>=white/black
+<span style="color: #b294bb;">set</span> <span style="color: #f0c674;">menu_color_highlight</span>=black/light-gray
+<span style="color: #b5bd68;">if</span> background_color 44,0,30; <span style="color: #b5bd68;">then</span>
+  clear
+<span style="color: #b5bd68;">fi</span>
+<span style="color: #969896; font-style: italic;">### </span><span style="color: #969896; font-style: italic;">END /etc/grub.d/05_debian_theme ###</span>
+</pre>
+</div>
+
+<p>
+With:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #969896; font-style: italic;">### </span><span style="color: #969896; font-style: italic;">BEGIN /etc/grub.d/05_debian_theme ###</span>
+insmod part_msdos
+insmod ext4
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">Here you should use (sudo fdisk -l) to see /dev/sda??</span>
+<span style="color: #b294bb;">set</span> <span style="color: #f0c674;">root</span>=<span style="color: #8abeb7;">'(hd0,msdos10)'</span>
+search --no-floppy --fs-uuid --set e3a8ca35-417d-4da2-9380-91f08a9e4fb2
+insmod png
+<span style="color: #b5bd68;">if</span> background_image /usr/share/backgrounds/spacefun-grub-widescreen.png;
+<span style="color: #b5bd68;">then</span>
+  <span style="color: #b294bb;">set</span> <span style="color: #f0c674;">color_normal</span>=light-gray/black
+  <span style="color: #b294bb;">set</span> <span style="color: #f0c674;">color_highlight</span>=white/black
+<span style="color: #b5bd68;">else</span>
+  <span style="color: #b294bb;">set</span> <span style="color: #f0c674;">menu_color_normal</span>=cyan/blue
+  <span style="color: #b294bb;">set</span> <span style="color: #f0c674;">menu_color_highlight</span>=white/blue
+<span style="color: #b5bd68;">fi</span>
+<span style="color: #969896; font-style: italic;">### </span><span style="color: #969896; font-style: italic;">END /etc/grub.d/05_debian_theme ###</span>
+</pre>
+</div></li>
+<li>Reboot</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline48" class="outline-3">
+<h3 id="orgheadline48"><span class="section-number-3">14.6</span> Install Adobe Flash Player</h3>
+<div class="outline-text-3" id="text-14-6">
+<ol class="org-ol">
+<li>Go to <a href="http://get.adobe.com/flashplayer/?no_redirect">here</a> to download it.</li>
+<li>Extract it.</li>
+<li><p>
+Follow below:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">Make sure libflashplayer.so with +x</span>
+$ sudo cp libflashplayer.so /usr/lib/firefox/plugins/
+$ sudo cp -r usr/* /usr
+</pre>
+</div></li>
+<li>Open your browser to test!</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline51" class="outline-3">
+<h3 id="orgheadline51"><span class="section-number-3">14.7</span> Install Lua and Luarocks</h3>
+<div class="outline-text-3" id="text-14-7">
+</div><div id="outline-container-orgheadline49" class="outline-4">
+<h4 id="orgheadline49"><span class="section-number-4">14.7.1</span> lua</h4>
+<div class="outline-text-4" id="text-14-7-1">
+<ol class="org-ol">
+<li>Go to <a href="http://www.lua.org/download.html">here</a> to download</li>
+<li>Extra it</li>
+<li><code>make linux</code>
+       (if error: no readline.h. <code>sudo apt-get install libreadline-dev</code>)</li>
+<li><code>sudo make install</code></li>
+<li>Over~</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline50" class="outline-4">
+<h4 id="orgheadline50"><span class="section-number-4">14.7.2</span> Luarocks</h4>
+<div class="outline-text-4" id="text-14-7-2">
+<ol class="org-ol">
+<li>Go to <a href="http://luarocks.org/releases/">here</a> to doanload and the extra it</li>
+<li><code>./configure</code></li>
+<li><code>make</code></li>
+<li><code>sudo make install</code></li>
+<li>Over~</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline52" class="outline-3">
+<h3 id="orgheadline52"><span class="section-number-3">14.8</span> Install Java</h3>
+<div class="outline-text-3" id="text-14-8">
+<ol class="org-ol">
+<li>Download the tar.gz package from official <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">repo</a></li>
+<li>Unzipped</li>
+<li>Copy/Move the unzipped category to <i>usr/lib/jvm</i></li>
+<li><p>
+Now Run
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">update-alternatives --install <span style="color: #8abeb7;">"/usr/bin/java"</span> <span style="color: #8abeb7;">"java"</span> <span style="color: #8abeb7;">"/usr/lib/jvm/jdk1.7.0/bin/java"</span> 1
+sudo update-alternatives --install <span style="color: #8abeb7;">"/usr/bin/javac"</span> <span style="color: #8abeb7;">"javac"</span> <span style="color: #8abeb7;">"/usr/lib/jvm/jdk1.7.0/bin/javac"</span> 1
+sudo update-alternatives --install <span style="color: #8abeb7;">"/usr/bin/javaws"</span> <span style="color: #8abeb7;">"javaws"</span> <span style="color: #8abeb7;">"/usr/lib/jvm/jdk1.7.0/bin/javaws"</span> 1
+</pre>
+</div></li>
+<li><p>
+Correct the file ownership and the permissions of the executables:(if necessary)
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo chmod a+x /usr/bin/java
+sudo chmod a+x /usr/bin/javac
+sudo chmod a+x /usr/bin/javaws
+sudo chown -R root:root /usr/lib/jvm/jdk1.7.0
+</pre>
+</div></li>
+<li><p>
+Test
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">java -version
+</pre>
+</div></li>
+</ol>
+<p>
+<b>Reference:</b>
+</p>
+<ul class="org-ul">
+<li><a href="http://au9ustine.bitbucket.org/blogs/2012-06-08.html">http://au9ustine.bitbucket.org/blogs/2012-06-08.html</a></li>
+<li><a href="http://askubuntu.com/questions/55848/how-do-i-install-oracle-java-jdk-7">http://askubuntu.com/questions/55848/how-do-i-install-oracle-java-jdk-7</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline53" class="outline-3">
+<h3 id="orgheadline53"><span class="section-number-3">14.9</span> MySQL</h3>
+<div class="outline-text-3" id="text-14-9">
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">start on runlevel [2345]</span>
+stop on starting rc <span style="color: #f0c674;">RUNLEVEL</span>=<span style="color: #c5c8c6;">[</span>016<span style="color: #c5c8c6;">]</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline54" class="outline-3">
+<h3 id="orgheadline54"><span class="section-number-3">14.10</span> Change Some Key Shortcuts</h3>
+<div class="outline-text-3" id="text-14-10">
+<ol class="org-ol">
+<li>Launchers &gt; Key to show the HUD
+<code>Alt+Alt R</code></li>
+
+<li>Windows &gt; Activate the window menu
+<code>Menu</code></li>
+
+<li>Alt + key to active menu
+Alt+E &gt; Keyboard Shortcuts</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgheadline55" class="outline-3">
+<h3 id="orgheadline55"><span class="section-number-3">14.11</span> Make Ubuntu12.04 hibernation</h3>
+<div class="outline-text-3" id="text-14-11">
+<ol class="org-ol">
+<li><p>
+open file
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo vi /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla
+</pre>
+</div></li>
+<li><p>
+modify
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #c5c8c6;">[</span>Re-enable hibernate by default<span style="color: #c5c8c6;">]</span>
+<span style="color: #f0c674;">Identity</span>=unix-user:*
+<span style="color: #f0c674;">Action</span>=org.freedesktop.upower.hibernate
+<span style="color: #f0c674;">ResultActive</span>=yes
+</pre>
+</div></li>
+<li>reboot</li>
+</ol>
+
+<p>
+<b>Reference:</b>
+</p>
+<ul class="org-ul">
+<li><a href="http://askubuntu.com/questions/94754/how-to-enable-hibernation">http://askubuntu.com/questions/94754/how-to-enable-hibernation</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline56" class="outline-3">
+<h3 id="orgheadline56"><span class="section-number-3">14.12</span> Install Ubuntu12.04 black screen</h3>
+<div class="outline-text-3" id="text-14-12">
+<p>
+安装ubuntu12.04花屏。
+</p>
+<pre class="example">
+在开机时进入grub编辑程序，在quite splash后面加上nomodeset
+</pre>
+<p>
+<b>Reference:</b>
+</p>
+<ol class="org-ol">
+<li><a href="http://ycool.com/post/brncevj">http://ycool.com/post/brncevj</a></li>
+<li><a href="http://wiki.ubuntu-tw.org/index.php?title=FAQinstall">http://wiki.ubuntu-tw.org/index.php?title=FAQinstall</a></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="meta-article"><p class="author">Junjia Ni</p>
+<p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
+<p class="date">2015-12-27</p>
+<p class="export-date">2016-10-11 Tue 20:44</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="validation"></p>
+<p class="last-modification-time">2016-05-08 Sun 18:38</p></div><script asyn src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+</div>
+</body>
+</html>

@@ -1,3 +1,202 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:0cb4b1b84ca5ed876a5d114a9b10e39734c4ec81847ebb4db55f008ccd54d220
-size 8397
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 2016-10-11 Tue 20:44 -->
+<meta  charset="utf-8">
+<meta  name="viewport" content="width=device-width, initial-scale=1">
+<title>Buffalo WHR-G300N V2</title>
+<meta  name="generator" content="Org-mode">
+<meta  name="author" content="冰糖火箭筒(Junjia Ni)">
+<meta  name="description" content="Something about OpenWRT&amp;Buffalo"
+>
+<meta  name="keywords" content="router,openwrt,buffalo">
+<link rel="stylesheet" type="text/css" href="/static/article.css">
+</head>
+<body>
+<div id="content">
+<h1 class="title">Buffalo WHR-G300N V2</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">1. 前言</a></li>
+<li><a href="#orgheadline4">2. 步骤</a>
+<ul>
+<li><a href="#orgheadline2">2.1. tftp模式</a></li>
+<li><a href="#orgheadline3">2.2. ssh模式</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline10">3. 尾声</a>
+<ul>
+<li><a href="#orgheadline5">3.1. shadowsocks-libev</a></li>
+<li><a href="#orgheadline6">3.2. ShadowSocks</a></li>
+<li><a href="#orgheadline7">3.3. brush</a></li>
+<li><a href="#orgheadline8">3.4. cross compile</a></li>
+<li><a href="#orgheadline9">3.5. sources</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+想在路由器上面做一些文章的，但是最后还是失败了。感觉投入的时间太多了，要收一下。现在记录之前的探索路程，为后续有时间的时候再来搞起。
+话不多说，直接上步骤。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4"><span class="section-number-2">2</span> 步骤</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2"><span class="section-number-3">2.1</span> tftp模式</h3>
+<div class="outline-text-3" id="text-2-1">
+<ol class="org-ol">
+<li>如果没有安装需要先安装一下，比如 ubuntu</li>
+</ol>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">$ sudo apt-get install tftp
+</pre>
+</div>
+
+<ol class="org-ol">
+<li>将计算机和路由器通过 <b><b>网线</b></b> 连接，将路由器断电处理。</li>
+
+<li>设置IP地址，请将地址配置成 <b><b>192.168.11.1</b></b> ，不要改，就按照这个来。</li>
+</ol>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">$ sudo ifconfig eth0 192.168.11.1 netmask 255.255.255.0
+$ sudo arp -s 192.168.11.1 &lt;MAC Address&gt; <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">buffalo&#30340;&#26159;&#32972;&#38754;&#30340;&#37027;&#20010;[SSID]</span>
+</pre>
+</div>
+
+<ol class="org-ol">
+<li>开始刷机</li>
+</ol>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">$ tftp
+tftp&gt; verbose <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#35814;&#32454;</span>
+tftp&gt; binary
+tftp&gt; trace
+tftp&gt; rexmt 1
+tftp&gt; timeout 60
+tftp&gt; connect 192.168.11.1
+tftp&gt; put xxx.bin
+</pre>
+</div>
+
+<p>
+输入完上述命令之后， <b>* 立即*</b> 将路由器通电。之后耐心等待，在传输完毕之后注意不要立即断电，还需要等待一段时间。
+等红灯熄灭之后，表示刷机完成。
+</p>
+
+<ol class="org-ol">
+<li>测试</li>
+</ol>
+<p>
+经过上述步骤之后，应该已经刷入系统。接下来等待无线信号灯亮起，连接上路由器，在地址栏中输入 <a href="http://192.168.1.1">http://192.168.1.1</a> 测试。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3"><span class="section-number-3">2.2</span> ssh模式</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+这个模式大部分步骤和上述类似。不同点在于：
+</p>
+<ol class="org-ol">
+<li>需要自己想办法传输二进制文件到路由器上，可以使用 <code>scp</code></li>
+<li>使用这个命令刷入 <code>mtd -r write xxx.bin linux</code></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-2">
+<h2 id="orgheadline10"><span class="section-number-2">3</span> 尾声</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+本来想自己编译 <b><b>shadowsocks-libev</b></b> 。但是时间不够和技术不行，于是作罢。下面记录用到的连接。
+</p>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5"><span class="section-number-3">3.1</span> shadowsocks-libev</h3>
+<div class="outline-text-3" id="text-3-1">
+<ul class="org-ul">
+<li><a href="https://github.com/shadowsocks/shadowsocks-libev">github:shadowsocks-libev</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6"><span class="section-number-3">3.2</span> ShadowSocks</h3>
+<div class="outline-text-3" id="text-3-2">
+<ul class="org-ul">
+<li><a href="http://www.router008.com/2016/05/09/DD-WRT-ShadowSocks/">DD-WRT-ShadowSocks(arm+?)</a></li>
+<li><a href="https://softwaredownload.gitbooks.io/openwrt-fanqiang/content/index.html">史上最详细的OpenWrt shadowsocks路由器自动翻墙教程</a></li>
+<li><a href="http://www.right.com.cn/forum/thread-158405-1-1.html">分享个R6300V2（DDWRT）s-s教程</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7"><span class="section-number-3">3.3</span> brush</h3>
+<div class="outline-text-3" id="text-3-3">
+<ul class="org-ul">
+<li><a href="http://www.anywlan.com/forum.php?mod=viewthread&amp;tid=121833">WHR-G300N-V2从DDWRT刷回原厂1.82固件详细，刷失败的都进来看</a></li>
+<li><a href="https://www.chiphell.com/thread-1210834-1-1.html">个人编译石像鬼 Buffalo WHR-G300N V2 固件（终结完美版）1.6.2</a></li>
+<li><a href="https://www.lifetyper.com/2014/06/buffalo-wzr-hp-g300nh2-debrick-record.html">Buffalo WZR-HP-G300NH2救砖全记录</a></li>
+<li><a href="http://www.cnblogs.com/meetrice/p/4129901.html">史上最全面的Buffalo WHR-G300N CH v2 刷OpenWrt教程</a></li>
+<li><a href="https://jalena.bcsytv.com/archives/1129">Buffalo WHR-G300N v2 修砖刷OpenWRT</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8"><span class="section-number-3">3.4</span> cross compile</h3>
+<div class="outline-text-3" id="text-3-4">
+<ul class="org-ul">
+<li><a href="https://blog.bydell.com/posts/cross_complie_shadowsocks_for_dd-wrt__r6300v2/">{DD-WRT} 为 Netgear R6300v2 交叉编译 shadowsocks-libev</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9"><span class="section-number-3">3.5</span> sources</h3>
+<div class="outline-text-3" id="text-3-5">
+<ul class="org-ul">
+<li><a href="http://www.dd-wrt.com/site/support/other-downloads">dd-wrt-other-download(offical)</a></li>
+<li><a href="https://wiki.openwrt.org/toh/hwdata/buffalo/buffalo_whr-g300n_v2">Techdata: Buffalo WHR-G300N v2</a></li>
+</ul>
+
+<p>
+小插曲，如何给 VirtualBox 里面的 VM 扩展磁盘空间，可以参考 <a href="http://derekmolloy.ie/resize-a-virtualbox-disk/">here</a> 。
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
+<p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
+<p class="date">2016-06-27</p>
+<p class="export-date">2016-10-11 Tue 20:44</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="validation"></p>
+<p class="last-modification-time">2016-10-10 Mon 13:01</p></div><script asyn src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+</div>
+</body>
+</html>

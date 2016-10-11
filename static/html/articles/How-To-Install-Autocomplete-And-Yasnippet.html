@@ -1,3 +1,253 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:67addef4bcf392ee6b7addfd2a4646d495881fda25766f81a471babf229e58f5
-size 11883
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 2016-10-11 Tue 20:44 -->
+<meta  charset="utf-8">
+<meta  name="viewport" content="width=device-width, initial-scale=1">
+<title>How To Install Autocomplete and Yanisppet</title>
+<meta  name="generator" content="Org-mode">
+<meta  name="author" content="Junjia Ni">
+<meta  name="description" content="install them into emacs in linux and windows"
+>
+<meta  name="keywords" content="orgmode,emacs,autocomplete,yanisppet">
+<link rel="stylesheet" type="text/css" href="/static/article.css">
+</head>
+<body>
+<div id="content">
+<h1 class="title">How To Install Autocomplete and Yanisppet</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">1. 前言</a></li>
+<li><a href="#orgheadline7">2. Auto Complete</a>
+<ul>
+<li><a href="#orgheadline2">2.1. Download Auto Complete</a></li>
+<li><a href="#orgheadline5">2.2. Install Auto Complete</a>
+<ul>
+<li><a href="#orgheadline3">2.2.1. For Linux</a></li>
+<li><a href="#orgheadline4">2.2.2. For Windows</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline6">2.3. Screenshot</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline10">3. Yanisppet</a>
+<ul>
+<li><a href="#orgheadline8">3.1. Download Yanisppet</a></li>
+<li><a href="#orgheadline9">3.2. Install Yanisppet</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline11">4. 尾声</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+写这篇blog主要是测试一些网络服务，如图片服务和音乐链接服务。
+当然写这个还是因为我敬爱的小杰同学的要求。作为刚刚入门的New Emacser，我感觉是时候给他一些好玩的插件了。
+当然我这些步骤google一下全部会出来，但是作为要求还是写这篇blog吧。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7"><span class="section-number-2">2</span> Auto Complete</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+过多的介绍我就不在这里陈述了，具体的可以前往
+Auto Complete官网（<a href="http://cx4a.org/software/auto-complete/">http://cx4a.org/software/auto-complete/</a>) 和 
+Auto Complete所在的EmacsWiki(<a href="http://emacswiki.org/emacs/AutoComplete">http://emacswiki.org/emacs/AutoComplete</a>）。 
+这里只是简单的介绍如何安装。
+</p>
+</div>
+<div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2"><span class="section-number-3">2.1</span> Download Auto Complete</h3>
+<div class="outline-text-3" id="text-2-1">
+<ol class="org-ol">
+<li>Lasest Stable(v1.3.1) <a href="http://cx4a.org/pub/auto-complete/auto-complete-1.3.1.tar.bz2">tar.bz2</a> <a href="http://cx4a.org/pub/auto-complete/auto-complete-1.3.1.zip">zip</a></li>
+<li>Git repositories <a href="http://cx4a.org/repo/auto-complete.git/">cx4a</a>  <a href="https://github.com/m2ym/auto-complete">GitHub-mirror</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5"><span class="section-number-3">2.2</span> Install Auto Complete</h3>
+<div class="outline-text-3" id="text-2-2">
+</div><div id="outline-container-orgheadline3" class="outline-4">
+<h4 id="orgheadline3"><span class="section-number-4">2.2.1</span> For Linux</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<p>
+将下载的文件移动到.emacs.d并将文件解压：(以tar为例)
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">$ mv auto-complete-1.3.1.tar.bz2 ~/.emacs.d
+$ cd ~/.emacs.d
+$ tar -jxvf auto-complete-1.3.1.tar.bz2
+</pre>
+</div>
+<p>
+之后make install安装
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">$ make install
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">or with directory specified</span>
+$ make install <span style="color: #f0c674;">DIR</span>=$<span style="color: #f0c674;">HOME</span>/.emacs.d/
+</pre>
+</div>
+<p>
+然后将这段代码贴到.emacs中：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #c5c8c6;">(</span>add-to-list <span style="color: #b5bd68;">'</span><span style="color: #81a2be;">load-path</span> <span style="color: #8abeb7;">"~/.emacs.d"</span><span style="color: #c5c8c6;">)</span>    <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">This may not be appeared if you have already added.</span>
+<span style="color: #c5c8c6;">(</span>add-to-list <span style="color: #b5bd68;">'</span><span style="color: #81a2be;">ac-dictionary-directories</span> <span style="color: #8abeb7;">"~/.emacs.d/ac-dict"</span><span style="color: #c5c8c6;">)</span>
+<span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">require</span> <span style="color: #b5bd68;">'</span><span style="color: #81a2be;">auto-complete-config</span><span style="color: #c5c8c6;">)</span>
+<span style="color: #c5c8c6;">(</span>ac-config-default<span style="color: #c5c8c6;">)</span>
+</pre>
+</div>
+<p>
+至此重启Emacs应该就可以正常运行了。
+如果还有问题可以去 <a href="http://cx4a.org/software/auto-complete/manual.html#Installation">这里</a> 查询，也可以写电子邮件给我，我们一起讨论。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-4">
+<h4 id="orgheadline4"><span class="section-number-4">2.2.2</span> For Windows</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<p>
+首先第一步也是解压，在windows上我们就不用命令了，直接使用你最爱的解压软件解压吧。
+然后使用组合键 <code>win+R</code> 输入 <code>cmd</code> ，在弹出的对话框中输入以下命令：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">&gt; /path/to/emacs.exe --batch -l /path/to/autocomplete/etc/install.el
+</pre>
+</div>
+<p>
+然后根据提示一步一步往下操作。特别注意选择安装路径
+</p>
+<pre class="example">
+Specify path to install: c:\applications\emacs-24.2\lisp(自行选择)
+...
+</pre>
+<p>
+之后如果提示安装成功，那么就可以将他提示需要粘贴进.emacs中的代码粘贴进去即可。第一次安装emacs插件的话，可能会遇到各种问题，这时你可以继续google，也可以和我交流。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6"><span class="section-number-3">2.3</span> Screenshot</h3>
+<div class="outline-text-3" id="text-2-3">
+
+<div class="figure">
+<p><img src="http://farm9.staticflickr.com/8112/8622523251_32b176270a.jpg" alt="Emacs-autocomplete in windows7" title="Emacs-autocomplete in windows7 by aprilgalaxy, on Flickr" align="center">
+</p>
+<p><span class="figure-number">Figure 1:</span> Auto Complete In Windows 7</p>
+</div>
+
+
+<div class="figure">
+<p><img src="http://farm9.staticflickr.com/8379/8624108132_89fe11ac0c.jpg" alt="Autocomplete in ubuntu" title="Autocomplete in ubuntu by aprilgalaxy, on Flickr" align="center">
+</p>
+<p><span class="figure-number">Figure 2:</span> Auto Complete In Ubuntu 12.04</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-2">
+<h2 id="orgheadline10"><span class="section-number-2">3</span> Yanisppet</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+同样的，过多的介绍我就不在这里陈述了，在Yanisppet项目官网有详细介绍：
+</p>
+<ol class="org-ol">
+<li><a href="http://emacswiki.org/emacs/Yasnippet">EmacsWiki:Yasnippet</a></li>
+<li><a href="http://github.com/capitaomorte/yasnippet">Github:Yasnippet</a></li>
+</ol>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8"><span class="section-number-3">3.1</span> Download Yanisppet</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+
+<pre class="src src-sh">$ git clone https://github.com/capitaomorte/yasnippet.git
+</pre>
+</div>
+<p>
+如果没有安装git的话，那么直接单击 <a href="https://nodeload.github.com/capitaomorte/yasnippet/zip/master">这里(github上master分支zip包)</a> 进行下载。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9"><span class="section-number-3">3.2</span> Install Yanisppet</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+安装说白了就是将文件拷贝到相应的位置（当然有些还需要经过编译）
+下载完之后，解压文件并拷贝进.emacs.d,然后将下面代码复制进.emacs中：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #c5c8c6;">(</span>add-to-list <span style="color: #b5bd68;">'</span><span style="color: #81a2be;">load-path</span> <span style="color: #8abeb7;">"~/.emacs.d/path/to/yasnippet"</span><span style="color: #c5c8c6;">)</span>
+<span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">require</span> <span style="color: #b5bd68;">'</span><span style="color: #81a2be;">yasnippet</span><span style="color: #c5c8c6;">)</span> <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">not yasnippet-bundle</span>
+<span style="color: #c5c8c6;">(</span>yas--initialize<span style="color: #c5c8c6;">)</span>
+<span style="color: #c5c8c6;">(</span>yas/load-directory <span style="color: #8abeb7;">"~/.emacs.d/path/to/yasnippet/snippets"</span><span style="color: #c5c8c6;">)</span>
+</pre>
+</div>
+<p>
+这些步骤在windows和linux都是使用的。所以我在这里只写一份。
+</p>
+
+<p>
+如果还有问题你可以继续google或者看官方文档或者写电子邮件给我，我将尽快回复。
+</p>
+
+<p>
+祝君使用愉快。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-2">
+<h2 id="orgheadline11"><span class="section-number-2">4</span> 尾声</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+这个不过是一个简单的安装介绍而已，具体的使用则是需要看文档之后才能了解，我告诉你的也只能是简单的一些而已。
+如果你有什么问题，当然可以随时联系我，只要写电子邮件，我将尽快回复。没有问题的话也可以写邮件，然后我们就成为朋友啦。
+</p>
+
+<p>
+最后附上献给小杰的一首歌：「あの日見た花の名前を僕達はまだ知らない」ED(顺便测试一下)
+</p>
+
+<embed src="http://www.xiami.com/widget/10429952_1770159571/singlePlayer.swf" type="application/x-shockwave-flash" width="257" height="33" wmode="transparent"></embed>
+
+<p>
+写到这里终于结束了。在ubuntu上使用ibus写中文真是具有挑战性啊。尤其是在Emacs中。(的和到啊)
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="meta-article"><p class="author">Junjia Ni</p>
+<p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
+<p class="date">2013-04-06</p>
+<p class="export-date">2016-10-11 Tue 20:44</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="validation"></p>
+<p class="last-modification-time">2016-05-09 Mon 23:22</p></div><script asyn src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+</div>
+</body>
+</html>

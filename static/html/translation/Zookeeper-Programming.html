@@ -1,3 +1,327 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:2f7db4a8dd337e309e6990dc0007756aa72345277c10b521f8a0f00d6d61c681
-size 30674
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 2016-10-11 Tue 20:44 -->
+<meta  charset="utf-8">
+<meta  name="viewport" content="width=device-width, initial-scale=1">
+<title>［译］Programming With ZooKeeper</title>
+<meta  name="generator" content="Org-mode">
+<meta  name="author" content="蜂蜜甜甜圈(Yi Ou)">
+<meta  name="description" content="Programming with ZooKeeper(A quick tutorial)"
+>
+<meta  name="keywords" content="zookeeper,java,tutorial">
+<link rel="stylesheet" type="text/css" href="/static/article.css">
+</head>
+<body>
+<div id="content">
+<h1 class="title">［译］Programming With ZooKeeper</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">1. 前言</a></li>
+<li><a href="#orgheadline2">2. 正文</a></li>
+<li><a href="#orgheadline3">3. 屏障（Barriers）</a></li>
+<li><a href="#orgheadline4">4. 生产者-消费者队列（Producer-Consumer Queues）</a></li>
+</ul>
+</div>
+</div>
+<pre class="example">
+这是一篇关于快速入门ZooKeeper开发的翻译文章。
+原文: https://cwiki.apache.org/confluence/display/ZOOKEEPER/Tutorial
+参考: http://www.cnblogs.com/haippy/archive/2012/07/23/2604556.html
+     http://ifeve.com/zookeeper-apache/
+</pre>
+
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<code>ZooKeeper</code> 翻译成中文是“动物园管理员”，很有趣是不是，物如其名，它就是来协调管理分布式系统的。
+<code>ZooKeeper</code> 是 <code>Hadoop</code> 分布式系统家族的一员，它是一个集中式的协调管理服务器,支持一系列的通用服务,比如管理配置信息，命名服务，提供分布式的同步,以及提供分组服务等。
+所有这些类型的服务都在分布式应用中以不同形式在使用。
+</p>
+
+<p>
+本文只是 <code>Zookeeper</code> 编程的初体验，让大家能从最最基础简单的例子来感受下，如果你想全面了解 <code>ZooKeeper</code> ，可以参考 <a href="http://ifeve.com/zookeeper-apache/">http://ifeve.com/zookeeper-apache/</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2"><span class="section-number-2">2</span> 正文</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+在本教程中，我们会展示如何利用 <code>ZooKeeper</code> 实现简单的“屏障”和“生产者消费者队列”。我们称这两个类为 <code>Barrier</code> 和 <code>Queue</code> 。
+这些例子运行的前提是你至少有一个 <code>ZooKeeper</code> 服务器。
+</p>
+
+<p>
+这两个原语都用到了下面这段代码 <code>SyncPrimitivep</code> ：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-java"><span style="color: #b5bd68;">static</span> <span style="color: #81a2be;">ZooKeeper</span> <span style="color: #f0c674;">zk</span> = <span style="color: #81a2be;">null</span>;
+<span style="color: #b5bd68;">static</span> <span style="color: #b5bd68;">final</span> <span style="color: #81a2be;">Object</span> <span style="color: #f0c674;">mutex</span> = <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">Object</span><span style="color: #c5c8c6;">()</span>;
+<span style="color: #81a2be;">String</span> <span style="color: #f0c674;">root</span>;
+
+<span style="color: #de935f;">SyncPrimitive</span><span style="color: #c5c8c6;">(</span><span style="color: #81a2be;">String</span> <span style="color: #f0c674;">address</span><span style="color: #c5c8c6;">)</span>
+    <span style="color: #b5bd68;">throws</span> <span style="color: #81a2be;">KeeperException</span>, <span style="color: #81a2be;">IOException</span> <span style="color: #c5c8c6;">{</span>
+    <span style="color: #b5bd68;">if</span><span style="color: #8abeb7;">(</span>zk == <span style="color: #81a2be;">null</span><span style="color: #8abeb7;">){</span>
+        System.out.println<span style="color: #f0c674;">(</span><span style="color: #8abeb7;">"Starting ZK:"</span><span style="color: #f0c674;">)</span>;
+        zk = <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">ZooKeeper</span><span style="color: #f0c674;">(</span>address, 3000, <span style="color: #b5bd68;">this</span><span style="color: #f0c674;">)</span>;
+        System.out.println<span style="color: #f0c674;">(</span><span style="color: #8abeb7;">"Finished starting ZK: "</span> + zk<span style="color: #f0c674;">)</span>;
+    <span style="color: #8abeb7;">}</span>
+<span style="color: #c5c8c6;">}</span>
+
+<span style="color: #b5bd68;">public</span> <span style="color: #81a2be;">void</span> <span style="color: #de935f;">process</span><span style="color: #c5c8c6;">(</span><span style="color: #81a2be;">WatcherEvent</span> <span style="color: #f0c674;">event</span><span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+    <span style="color: #b5bd68;">synchronized</span> <span style="color: #8abeb7;">(</span>mutex<span style="color: #8abeb7;">)</span> <span style="color: #8abeb7;">{</span>
+        mutex.notify<span style="color: #f0c674;">()</span>;
+    <span style="color: #8abeb7;">}</span>
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div>
+
+<p>
+<code>Barrier</code> 和 <code>Queue</code> 都继承自 <code>SyncPrimitive</code> 。这样的话， <code>SyncPrimitive</code> 的构造函数里的步骤就是通用的，所有子类原语都会执行。
+为了让例子简单，在初始化 <code>Barrier</code> 或 <code>Queue</code> 时，我们首先就创建了一个 <code>ZooKeeper</code> 对象，并且声明了一个静态变量 <code>zk</code> 指向这个 <code>ZooKeeper</code> 对象。
+下面 <code>Barrier</code> 和 <code>Queue</code> 的例子中，会检查 <code>ZooKeeper</code> 对象是否存在。
+另外，我们需要一个应用来创建一个 <code>ZooKeeper</code> 对象，并作为参数传递到 <code>Barrier</code> 和 <code>Queue</code> 的构造函数里。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3"><span class="section-number-2">3</span> 屏障（Barriers）</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+屏障原语是阻塞一组进程节点，直到满足特定的条件，该组进程节点才能正常向前推进（开始一次计算or结束一次计算）。
+实现 <code>Barriers</code> 的基本思路是：产生一个 <code>barrier</code> 节点，将其作为所有独立进程的父节点。
+然后，如果 <code>barrier</code> 节点名叫 <code>/b1</code> ，每个进程 <code>p</code> 创建节点 <code>/b1/p</code> 。当足够的进程节点创建出来之后，这组进程节点就可以开始计算了。
+在下面的代码实例化一个 <code>Barrier</code> 对象， <code>Barrier</code> 类的构造函数有3个参数：
+</p>
+<ul class="org-ul">
+<li>address—ZooKeeper 服务器地址</li>
+<li>name —屏障节点在 <code>ZooKeeper</code> 上的路径(例如, /b1=);</li>
+<li>size —这一组进程的数量</li>
+</ul>
+<p>
+<code>Barrier</code> 构造函数将 <code>ZooKeeper</code> 服务器地址传递给父类 <code>SyncPrimitive</code> 构造函数，父类会创建一个 <code>ZooKeeper</code> 实例（如果 <code>ZooKeeper</code> 为空的话）。
+然后 <code>Barrier</code> 构造函数会在 <code>ZooKeeper</code> 对象上创建一个 <code>Barrier</code> 节点，它是所有进程的父节点，我们称之为根节点（注意，并非 <code>ZooKeeper</code> 的根节点）。
+</p>
+<div class="org-src-container">
+
+<pre class="src src-java"><span style="color: #b294bb;">/**</span>
+<span style="color: #b294bb;">******* Barrier constructor</span>
+<span style="color: #b294bb;">*******</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@param</span><span style="color: #b294bb;"> address</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@param</span><span style="color: #b294bb;"> name</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@param</span><span style="color: #b294bb;"> size</span>
+<span style="color: #b294bb;">****** */</span>
+<span style="color: #de935f;">Barrier</span><span style="color: #c5c8c6;">(</span><span style="color: #81a2be;">String</span> <span style="color: #f0c674;">address</span>, <span style="color: #81a2be;">String</span> <span style="color: #f0c674;">name</span>, <span style="color: #81a2be;">int</span> <span style="color: #f0c674;">size</span><span style="color: #c5c8c6;">)</span>
+    <span style="color: #b5bd68;">throws</span> <span style="color: #81a2be;">KeeperException</span>, <span style="color: #81a2be;">InterruptedException</span>, <span style="color: #81a2be;">UnknownHostException</span> <span style="color: #c5c8c6;">{</span>
+    <span style="color: #b5bd68;">super</span><span style="color: #8abeb7;">(</span>address<span style="color: #8abeb7;">)</span>;
+    <span style="color: #b5bd68;">this</span>.root = name;
+    <span style="color: #b5bd68;">this</span>.size = size;
+
+    <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">Create barrier node</span>
+    <span style="color: #b5bd68;">if</span> <span style="color: #8abeb7;">(</span>zk != <span style="color: #81a2be;">null</span><span style="color: #8abeb7;">)</span> <span style="color: #8abeb7;">{</span>
+        <span style="color: #81a2be;">Stat</span> <span style="color: #f0c674;">s</span> = zk.exists<span style="color: #f0c674;">(</span>root, <span style="color: #81a2be;">false</span><span style="color: #f0c674;">)</span>;
+        <span style="color: #b5bd68;">if</span> <span style="color: #f0c674;">(</span>s == <span style="color: #81a2be;">null</span><span style="color: #f0c674;">)</span> <span style="color: #f0c674;">{</span>
+            zk.create<span style="color: #b5bd68;">(</span>root, <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">byte</span><span style="color: #81a2be;">[</span>0<span style="color: #81a2be;">]</span>, <span style="color: #81a2be;">Ids</span>.OPEN_ACL_UNSAFE, 0<span style="color: #b5bd68;">)</span>;
+        <span style="color: #f0c674;">}</span>
+    <span style="color: #8abeb7;">}</span>
+
+    <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">My node name</span>
+    name = <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">String</span><span style="color: #8abeb7;">(</span>InetAddress.getLocalHost<span style="color: #f0c674;">()</span>.getCanonicalHostName<span style="color: #f0c674;">()</span>.toString<span style="color: #f0c674;">()</span><span style="color: #8abeb7;">)</span>;
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div>
+
+<p>
+进程调用 <code>enter()</code> 方法进入屏障。
+进程创建一个节点挂在屏障节点下，用此进程的主机名表示节点名，然后它开始等待，直到足够数量的进程进入这一屏障。
+进程通过 <code>getChildren()</code> 方法检查根节点下挂的子节点数量，并且在数量不足的情况下等待通知( <code>wait</code> )。
+进程必须设置 <code>watch</code> 来接收根节点的变化， <code>getChildren()</code> 就是设置 <code>watch</code> 的方法。这段代码中， <code>getChildren()</code> 有两个参数，
+第一个是被监听的根节点，第二个参数是允许进程设置 <code>watch</code> 的标识.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-java"><span style="color: #b294bb;">/**</span>
+<span style="color: #b294bb;">******* Join barrier</span>
+<span style="color: #b294bb;">*******</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@return</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@throws</span><span style="color: #b294bb;"> KeeperException</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@throws</span><span style="color: #b294bb;"> InterruptedException</span>
+<span style="color: #b294bb;">****** */</span>
+<span style="color: #81a2be;">boolean</span> <span style="color: #de935f;">enter</span><span style="color: #c5c8c6;">()</span> <span style="color: #b5bd68;">throws</span> <span style="color: #81a2be;">KeeperException</span>, <span style="color: #81a2be;">InterruptedException</span><span style="color: #c5c8c6;">{</span>
+    zk.create<span style="color: #8abeb7;">(</span>root + <span style="color: #8abeb7;">"/"</span> + name, <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">byte</span><span style="color: #f0c674;">[</span>0<span style="color: #f0c674;">]</span>, <span style="color: #81a2be;">Ids</span>.OPEN_ACL_UNSAFE,<span style="color: #81a2be;">CreateFlags</span>.EPHEMERAL<span style="color: #8abeb7;">)</span>;
+    <span style="color: #b5bd68;">while</span> <span style="color: #8abeb7;">(</span><span style="color: #81a2be;">true</span><span style="color: #8abeb7;">)</span> <span style="color: #8abeb7;">{</span>
+        <span style="color: #b5bd68;">synchronized</span> <span style="color: #f0c674;">(</span>mutex<span style="color: #f0c674;">)</span> <span style="color: #f0c674;">{</span>
+            <span style="color: #81a2be;">ArrayList</span><span style="color: #b5bd68;">&lt;</span><span style="color: #81a2be;">String</span><span style="color: #b5bd68;">&gt;</span> <span style="color: #f0c674;">list</span> = zk.getChildren<span style="color: #b5bd68;">(</span>root, <span style="color: #81a2be;">true</span><span style="color: #b5bd68;">)</span>;
+
+            <span style="color: #b5bd68;">if</span> <span style="color: #b5bd68;">(</span>list.size<span style="color: #81a2be;">()</span> &lt; size<span style="color: #b5bd68;">)</span> <span style="color: #b5bd68;">{</span>
+                mutex.wait<span style="color: #81a2be;">()</span>;
+            <span style="color: #b5bd68;">}</span> <span style="color: #b5bd68;">else</span> <span style="color: #b5bd68;">{</span>
+                <span style="color: #b5bd68;">return</span> <span style="color: #81a2be;">true</span>;
+            <span style="color: #b5bd68;">}</span>
+        <span style="color: #f0c674;">}</span>
+    <span style="color: #8abeb7;">}</span>
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div>
+
+<p>
+<code>enter()</code> 方法会跑出两个异常 <code>KeeperException</code> 和 <code>InterruptedException</code> ，应用必须捕捉处理这些异常。
+一旦计算完成，进程调用  <code>leave()</code> 方法离开屏障。
+首先删除进程节点，取得根节点的所有子节点，如果子节点数量多于1个，进程 <code>wait</code> 直到收到 <code>notification</code> 
+（注意：  <code>getChildren()</code> 方法的第二个参数为 <code>true</code> ，表示 <code>ZooKeeper</code> 要在根节点上设置 <code>watch</code> 。
+当收到 <code>notification</code> 后，还会在检查一次根节点是否还有子节点。）
+</p>
+<div class="org-src-container">
+
+<pre class="src src-java"><span style="color: #b294bb;">/**</span>
+<span style="color: #b294bb;">******* Wait until all reach barrier</span>
+<span style="color: #b294bb;">*******</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@return</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@throws</span><span style="color: #b294bb;"> KeeperException</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@throws</span><span style="color: #b294bb;"> InterruptedException</span>
+<span style="color: #b294bb;">****** */</span>
+<span style="color: #81a2be;">boolean</span> <span style="color: #de935f;">leave</span><span style="color: #c5c8c6;">()</span> <span style="color: #b5bd68;">throws</span> <span style="color: #81a2be;">KeeperException</span>, <span style="color: #81a2be;">InterruptedException</span><span style="color: #c5c8c6;">{</span>
+    zk.delete<span style="color: #8abeb7;">(</span>root + <span style="color: #8abeb7;">"/"</span> + name, 0<span style="color: #8abeb7;">)</span>;
+    <span style="color: #b5bd68;">while</span> <span style="color: #8abeb7;">(</span><span style="color: #81a2be;">true</span><span style="color: #8abeb7;">)</span> <span style="color: #8abeb7;">{</span>
+        <span style="color: #b5bd68;">synchronized</span> <span style="color: #f0c674;">(</span>mutex<span style="color: #f0c674;">)</span> <span style="color: #f0c674;">{</span>
+            <span style="color: #81a2be;">ArrayList</span><span style="color: #b5bd68;">&lt;</span><span style="color: #81a2be;">String</span><span style="color: #b5bd68;">&gt;</span> <span style="color: #f0c674;">list</span> = zk.getChildren<span style="color: #b5bd68;">(</span>root, <span style="color: #81a2be;">true</span><span style="color: #b5bd68;">)</span>;
+            <span style="color: #b5bd68;">if</span> <span style="color: #b5bd68;">(</span>list.size<span style="color: #81a2be;">()</span> &gt; 0<span style="color: #b5bd68;">)</span> <span style="color: #b5bd68;">{</span>
+                mutex.wait<span style="color: #81a2be;">()</span>;
+            <span style="color: #b5bd68;">}</span> <span style="color: #b5bd68;">else</span> <span style="color: #b5bd68;">{</span>
+                <span style="color: #b5bd68;">return</span> <span style="color: #81a2be;">true</span>;
+            <span style="color: #b5bd68;">}</span>
+        <span style="color: #f0c674;">}</span>
+    <span style="color: #8abeb7;">}</span>
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4"><span class="section-number-2">4</span> 生产者-消费者队列（Producer-Consumer Queues）</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+生产者-消费者队列是一种分布式的数据结构，被一组进程用来生产物品和消费物品。生产者进程创造新元素，加入队列。消费者进程移除元素，拿去执行。
+在下面的实现代码中，元素是简单的整数。一个根节点代表一个队列，生产者进程创造一个新节点，作为子节点，加入队列中。
+下面的代码片段是 <code>Queue</code> 对象的构造函数，就像 <code>Barrier</code> 对象一样，它首先调用父类 <code>SyncPrimitive</code> 的构造函数，创造一个 <code>ZooKeeper</code> 对象如果它不存在的话。
+然后检查 <code>Queue</code> 的根节点是否存在，如果没有就创建一个。
+</p>
+<div class="org-src-container">
+
+<pre class="src src-java"><span style="color: #b294bb;">/**</span>
+<span style="color: #b294bb;">******* Constructor of producer-consumer queue</span>
+<span style="color: #b294bb;">*******</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@param</span><span style="color: #b294bb;"> address</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@param</span><span style="color: #b294bb;"> name</span>
+<span style="color: #b294bb;">****** */</span>
+<span style="color: #de935f;">Queue</span><span style="color: #c5c8c6;">(</span><span style="color: #81a2be;">String</span> <span style="color: #f0c674;">address</span>, <span style="color: #81a2be;">String</span> <span style="color: #f0c674;">name</span><span style="color: #c5c8c6;">)</span>
+    <span style="color: #b5bd68;">throws</span> <span style="color: #81a2be;">KeeperException</span>, <span style="color: #81a2be;">InterruptedException</span> <span style="color: #c5c8c6;">{</span>
+    <span style="color: #b5bd68;">super</span><span style="color: #8abeb7;">(</span>address<span style="color: #8abeb7;">)</span>;
+    <span style="color: #b5bd68;">this</span>.root = name;
+    <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">Create ZK node name</span>
+    <span style="color: #b5bd68;">if</span> <span style="color: #8abeb7;">(</span>zk != <span style="color: #81a2be;">null</span><span style="color: #8abeb7;">)</span> <span style="color: #8abeb7;">{</span>
+        <span style="color: #81a2be;">Stat</span> <span style="color: #f0c674;">s</span> = zk.exists<span style="color: #f0c674;">(</span>root, <span style="color: #81a2be;">false</span><span style="color: #f0c674;">)</span>;
+        <span style="color: #b5bd68;">if</span> <span style="color: #f0c674;">(</span>s == <span style="color: #81a2be;">null</span><span style="color: #f0c674;">)</span> <span style="color: #f0c674;">{</span>
+            zk.create<span style="color: #b5bd68;">(</span>root, <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">byte</span><span style="color: #81a2be;">[</span>0<span style="color: #81a2be;">]</span>, <span style="color: #81a2be;">Ids</span>.OPEN_ACL_UNSAFE, 0<span style="color: #b5bd68;">)</span>;
+        <span style="color: #f0c674;">}</span>
+    <span style="color: #8abeb7;">}</span>
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div>
+
+<p>
+产生一个元素：一个生产者进程调用 <code>produce()</code> 方法加入一个元素到队列里边，同时有一个整形参数。
+本方法调用 <code>create()</code> 方法创建一个新节点，并用 <code>SEQUENCE</code> 标识告知 <code>ZooKeeper</code> ， <code>ZooKeeper</code> 将新节点对应的顺序计数器的值附加到根节点上。
+如此一来，我们在队列的元素上强制维持了一个总顺序，这样就确保了最早加入队列的元素最先被消费（先进先出）。
+</p>
+<div class="org-src-container">
+
+<pre class="src src-java"><span style="color: #b294bb;">/**</span>
+<span style="color: #b294bb;">******* Add element to the queue.</span>
+<span style="color: #b294bb;">*******</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@param</span><span style="color: #b294bb;"> i</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@return</span>
+<span style="color: #b294bb;">****** */</span>
+<span style="color: #81a2be;">boolean</span> <span style="color: #de935f;">produce</span><span style="color: #c5c8c6;">(</span><span style="color: #81a2be;">int</span> <span style="color: #f0c674;">i</span><span style="color: #c5c8c6;">)</span> <span style="color: #b5bd68;">throws</span> <span style="color: #81a2be;">KeeperException</span>, <span style="color: #81a2be;">InterruptedException</span><span style="color: #c5c8c6;">{</span>
+    <span style="color: #81a2be;">ByteBuffer</span> <span style="color: #f0c674;">b</span> = ByteBuffer.allocate<span style="color: #8abeb7;">(</span>4<span style="color: #8abeb7;">)</span>;
+    <span style="color: #81a2be;">byte</span><span style="color: #8abeb7;">[]</span> <span style="color: #f0c674;">value</span>;
+
+    <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">Add child with value i</span>
+    b.putInt<span style="color: #8abeb7;">(</span>i<span style="color: #8abeb7;">)</span>;
+    value = b.array<span style="color: #8abeb7;">()</span>;
+    zk.create<span style="color: #8abeb7;">(</span>root + <span style="color: #8abeb7;">"/element"</span>, value, <span style="color: #81a2be;">Ids</span>.OPEN_ACL_UNSAFE,
+              <span style="color: #81a2be;">CreateFlags</span>.SEQUENCE<span style="color: #8abeb7;">)</span>;
+
+    <span style="color: #b5bd68;">return</span> <span style="color: #81a2be;">true</span>;
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div>
+
+<p>
+消耗一个元素：一个消耗着进程获取根节点的子节点，读取计数器值最小的节点（也就是最先加入队列的节点），返回这个元素。
+注意，如果此处有冲突，只有一个进程能正确执行，另外一个无法删除节点，删除操作会抛出异常。
+调用 <code>getChildren()</code> 方法会返回字典序顺序的子节点列表。字典序不一定按照计数器值的数字顺序来，我们就需要决定哪个元素最小。
+为了决定出拥有最小计数器值的子节点，我们遍历列表，并删除每个节点的前缀 <code>element</code> 。
+</p>
+<div class="org-src-container">
+
+<pre class="src src-java"><span style="color: #b294bb;">/**</span>
+<span style="color: #b294bb;">******* Remove first element from the queue.</span>
+<span style="color: #b294bb;">*******</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@return</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@throws</span><span style="color: #b294bb;"> KeeperException</span>
+<span style="color: #b294bb;">******* </span><span style="color: #81a2be;">@throws</span><span style="color: #b294bb;"> InterruptedException</span>
+<span style="color: #b294bb;">****** */</span>
+<span style="color: #81a2be;">int</span> <span style="color: #de935f;">consume</span><span style="color: #c5c8c6;">()</span> <span style="color: #b5bd68;">throws</span> <span style="color: #81a2be;">KeeperException</span>, <span style="color: #81a2be;">InterruptedException</span><span style="color: #c5c8c6;">{</span>
+    <span style="color: #81a2be;">int</span> <span style="color: #f0c674;">retvalue</span> = -1;
+    <span style="color: #81a2be;">Stat</span> <span style="color: #f0c674;">stat</span> = <span style="color: #81a2be;">null</span>;
+
+    <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">Get the first element available</span>
+    <span style="color: #b5bd68;">while</span> <span style="color: #8abeb7;">(</span><span style="color: #81a2be;">true</span><span style="color: #8abeb7;">)</span> <span style="color: #8abeb7;">{</span>
+        <span style="color: #b5bd68;">synchronized</span> <span style="color: #f0c674;">(</span>mutex<span style="color: #f0c674;">)</span> <span style="color: #f0c674;">{</span>
+            <span style="color: #81a2be;">ArrayList</span><span style="color: #b5bd68;">&lt;</span><span style="color: #81a2be;">String</span><span style="color: #b5bd68;">&gt;</span> <span style="color: #f0c674;">list</span> = zk.getChildren<span style="color: #b5bd68;">(</span>root, <span style="color: #81a2be;">true</span><span style="color: #b5bd68;">)</span>;
+            <span style="color: #b5bd68;">if</span> <span style="color: #b5bd68;">(</span>list.isEmpty<span style="color: #81a2be;">()</span><span style="color: #b5bd68;">)</span> <span style="color: #b5bd68;">{</span>
+                System.out.println<span style="color: #81a2be;">(</span><span style="color: #8abeb7;">"Going to wait"</span><span style="color: #81a2be;">)</span>;
+                mutex.wait<span style="color: #81a2be;">()</span>;
+            <span style="color: #b5bd68;">}</span> <span style="color: #b5bd68;">else</span> <span style="color: #b5bd68;">{</span>
+                <span style="color: #81a2be;">Integer</span> <span style="color: #f0c674;">min</span> = <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">Integer</span><span style="color: #81a2be;">(</span>list.get<span style="color: #c5c8c6;">(</span>0<span style="color: #c5c8c6;">)</span>.substring<span style="color: #c5c8c6;">(</span>7<span style="color: #c5c8c6;">)</span><span style="color: #81a2be;">)</span>;
+                <span style="color: #b5bd68;">for</span><span style="color: #81a2be;">(</span><span style="color: #81a2be;">String</span> <span style="color: #f0c674;">s</span> : list<span style="color: #81a2be;">){</span>
+                    <span style="color: #81a2be;">Integer</span> <span style="color: #f0c674;">tempValue</span> = <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">Integer</span><span style="color: #c5c8c6;">(</span>s.substring<span style="color: #8abeb7;">(</span>7<span style="color: #8abeb7;">)</span><span style="color: #c5c8c6;">)</span>;
+                    <span style="color: #b5bd68;">if</span><span style="color: #c5c8c6;">(</span>tempValue &lt; <span style="color: #81a2be;">min</span><span style="color: #c5c8c6;">)</span> min = tempValue;
+                <span style="color: #81a2be;">}</span>
+                System.out.println<span style="color: #81a2be;">(</span><span style="color: #8abeb7;">"Temporary value: "</span> + root + <span style="color: #8abeb7;">"/element"</span> + min<span style="color: #81a2be;">)</span>;
+                <span style="color: #81a2be;">byte</span><span style="color: #81a2be;">[]</span> <span style="color: #f0c674;">b</span> = zk.getData<span style="color: #81a2be;">(</span>root + <span style="color: #8abeb7;">"/element"</span> + min, <span style="color: #81a2be;">false</span>, stat<span style="color: #81a2be;">)</span>;
+                zk.delete<span style="color: #81a2be;">(</span>root + <span style="color: #8abeb7;">"/element"</span> + min, 0<span style="color: #81a2be;">)</span>;
+                <span style="color: #81a2be;">ByteBuffer</span> <span style="color: #f0c674;">buffer</span> = ByteBuffer.wrap<span style="color: #81a2be;">(</span>b<span style="color: #81a2be;">)</span>;
+                retvalue = buffer.getInt<span style="color: #81a2be;">()</span>;
+
+                <span style="color: #b5bd68;">return</span> retvalue;
+            <span style="color: #b5bd68;">}</span>
+        <span style="color: #f0c674;">}</span>
+    <span style="color: #8abeb7;">}</span>
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="meta-article"><p class="author">蜂蜜甜甜圈(Yi Ou)</p>
+<p class="email"><a href="mailto:718413182(AT)qq.com">718413182(AT)qq.com</a></p>
+<p class="date">2016-02-05</p>
+<p class="export-date">2016-10-11 Tue 20:44</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="validation"></p>
+<p class="last-modification-time">2016-10-10 Mon 13:01</p></div><script asyn src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+</div>
+</body>
+</html>
