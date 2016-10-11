@@ -114,6 +114,46 @@ span[class*=section-number] {
 /*     cursor: pointer; */
 /* } */
 
+.github-badge {
+    position: absolute;
+    right: 39px;
+    top: 4px;
+}
+.octicon-mark-github {
+    overflow: hidden;
+    font-size: 24px;
+    color: #ccc;
+    vertical-align: text-bottom;
+    display: inline-block;
+}
+.return {
+    position: absolute;
+    right: 9px;
+    top: 5px;
+    width: 26px;
+    height: 26px;
+    opacity: 0.3;
+    cursor: pointer;
+    z-index: 9;
+}
+.return:hover {
+  opacity: 1;
+}
+.return:before, .return:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 24px;
+  width: 4px;
+  background-color: #333;
+}
+.return:before {
+  transform: rotate(45deg);
+}
+.return:after {
+  transform: rotate(-45deg);
+}
+
 #avatar-wapper {position: fixed;top: 0px;right: 10px;font-size:2em;font-weight: bolder;}
 #avatar-wapper img {border-radius: 60px;width: 60px;height: 60px;}
 /* #org-div-home-and-up a {color: #7B7B7B;text-decoration: none;font-size: 36px;font-family: Menlo;margin-right: 8px;position: fixed;top: 4px;right: 4px;} */
