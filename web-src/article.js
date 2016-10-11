@@ -233,25 +233,40 @@ function disqus_config () {
   // https://help.disqus.com/customer/portal/articles/472098-javascript-configuration-variables
 }
 
+function changeBodyTopStyle (body) {
+  var head = document.getElementsByTagName('head')[0]
+  var pathname = location.pathname
+  var meta = document.createElement('meta')
+  meta.name = "theme-color"
+  if (pathname.indexOf('articles') >= 0) {
+    body.style.borderTop = '2px solid #191919'
+    meta.content = '#191919'
+  } else if (pathname.indexOf('translation') >= 0) {
+    body.style.borderTop = '2px solid #ED462F'
+    meta.content = '#ED462F'
+  }
+  head.appendChild(meta)
+}
 
 /**
  * entry point
  */
 function main() {
-  var pathname = window.location.pathname;
-  var body = document.getElementsByTagName('body')[0];
-  var content = document.getElementById('content');
-  var meta = getMetaInfo(true);
+  var pathname = window.location.pathname
+  var body = document.getElementsByTagName('body')[0]
+  var content = document.getElementById('content')
+  var meta = getMetaInfo(true)
 
-  showTags(body, content, meta);
-  // showHomeButton(body);
-  // ImgClickEvent(body, initImgWapper(body, content));
-  someArticlesFix(body, content);
-  showMetaInfo(body, content, meta);
-  loadDisqus(body, content);
-  showFooter(body, content, meta);
+  changeBodyTopStyle(body)
+  showTags(body, content, meta)
+  // showHomeButton(body)
+  // ImgClickEvent(body, initImgWapper(body, content))
+  someArticlesFix(body, content)
+  showMetaInfo(body, content, meta)
+  loadDisqus(body, content)
+  showFooter(body, content, meta)
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  main();
+  main()
 }, false)
