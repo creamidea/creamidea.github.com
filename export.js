@@ -37,7 +37,7 @@ const exportEvent = new EventEmitter()
 exportEvent.on('end', (data) => {
   writeCache(JSON.stringify(data))
   const archiveHtml = genArchiveHtml(data)
-  writeFile(ARCHIVEHTMLPATH, archiveHtml)
+  writeFile(ARCHIVEHTMLPATH, archiveHtml.replace(/^$|\r?\n/g, '').replace(/>\s+</g, '><'))
   // fs.writeFile(INDEXHTMLPATH, genHomeHtml(listHtml), (err) => {
   //   if (err) {
   //     console.log(err)
@@ -67,12 +67,12 @@ function genArchiveHtml (data) {
     return data[b].mtime - data[a].mtime
   }).map((fileSym) => {
     const {name, category, mtime, date, tags} = data[fileSym]
-    // let urlprefix = URLPREFIX
-    // if (typeof process.env.NODE_ENV === 'string' && process.env.NODE_ENV.indexOf('production') >= 0) {
-    //   urlprefix = URLPREFIX2
-    // }
+    let urlprefix = URLPREFIX
+    if (typeof process.env.NODE_ENV === 'string' && process.env.NODE_ENV.indexOf('production') >= 0) {
+      urlprefix = URLPREFIX2
+    }
     let _html = `
-<li class="${category}"><a class="title" href="/${category+'/'+name}.html">${name}</a>
+<li class="${category}"><a class="title" href="${urlprefix+category+'/'+name}.html">${name}</a>
 <div class="meta">
 <p class="create-time"><span>Create: </span><date>${date}</date></p>
 <p class="update-time"><span>Update: </span><date>${new Date(mtime).toISOString().replace(/T/, ' ').replace(/\..+/, '')}</date></p>
@@ -370,8 +370,8 @@ const command = {
       .then((data) => {
         let html = data.toString()
         let rlt = html
-            .replace('<link rel="stylesheet" href="/static/index.css" type="text/css"/>', `<style>${css}</style>`)
-            .replace('<script src="/static/index.js"></script>', `<script>${js.code}</script>`)
+            .replace('<link rel="stylesheet" href="/web-src/index.css" type="text/css"/>', `<style>${css}</style>`)
+            .replace('<script src="/web-src/index.js"></script>', `<script>${js.code}</script>`)
             .replace(/^$|\r?\n/g, '').replace(/>\s+</g, '><')
         writeFile(path.resolve(__dirname, 'index.html'), rlt)
       })
