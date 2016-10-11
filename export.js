@@ -7,7 +7,8 @@ const path = require('path')
 const EventEmitter = require('events')
 const zlib = require('zlib')
 
-const UglifyCSS = require('uglifycss');
+// const UglifyHTML = require('html-minifier')
+const UglifyCSS = require('uglifycss')
 const UglifyJS = require("uglify-js")
 
 const CONTENTREGEXP = /<li><a href=(.*)>/gi
@@ -30,6 +31,22 @@ const SPECIALFILE = ["works", "friends"]
 const URLPREFIX = '/static/html/'
 const URLPREFIX2 = 'https://media.githubusercontent.com/media/creamidea/creamidea.github.com/master/static/html/'
 
+const MINIFYHTMLRULES = {
+  collapseBooleanAttributes: true,
+  collapseInlineTagWhitespace: true,
+  decodeEntities: true,
+  minifyCSS: true,
+  minifyJS: true,
+  removeComments: true,
+  removeEmptyAttributes: true,
+  removeEmptyElements: true,
+  removeOptionalTags: true,
+  removeRedundantAttributes: true,
+  removeScriptTypeAttributes: true,
+  removeStyleLinkTypeAttributes: true,
+  trimCustomFragments: true
+}
+
 ///////////
 // Event //
 ///////////
@@ -38,6 +55,7 @@ const exportEvent = new EventEmitter()
 exportEvent.on('end', (data) => {
   writeCache(JSON.stringify(data))
   const archiveHtml = genArchiveHtml(data)
+  // writeFile(ARCHIVEHTMLPATH, UglifyHTML.minify(archiveHtml, MINIFYHTMLRULES))
   writeFile(ARCHIVEHTMLPATH, archiveHtml.replace(/^$|\r?\n/g, '').replace(/>\s+</g, '><'))
   // fs.writeFile(INDEXHTMLPATH, genHomeHtml(listHtml), (err) => {
   //   if (err) {
@@ -377,6 +395,7 @@ const command = {
             .replace('<script src="/web-src/index.js"></script>', `<script>${js.code}</script>`)
             .replace(/^$|\r?\n/g, '').replace(/>\s+</g, '><')
         writeFile(path.resolve(__dirname, 'index.html'), rlt)
+        // writeFile(path.resolve(__dirname, 'index.html'), UglifyHTML.minify(rlt))
       })
     // let rlt = readSource('index', 'html')
     // console.log(rlt)
