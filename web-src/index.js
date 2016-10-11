@@ -65,7 +65,7 @@ function Stage () {
         __map.call(specialList.children, function (item) {
           var t = item.querySelector('.title')
           var name = t.innerHTML
-          if (['friends', 'works'].indexOf(name) >= 0) {
+          if (['friends', 'works'].indexOf(name.toLowerCase()) >= 0) {
             nav.appendChild(createNavDom({
               // href:'#!'+t.getAttribute('href'),
               href: t.getAttribute('href'),
