@@ -12,6 +12,7 @@ const UglifyJS = require("uglify-js")
 
 const CONTENTREGEXP = /<li><a href=(.*)>/gi
 const HREFREGEXP = /href="(.+?)"/i
+const TITLEREGEXP = /#\+TITLE:\s*(.+)/i
 const DATEREGEXP = /#\+DATE:\s*(.+)/i
 const TAGSREGEXP = /#\+KEYWORDS:\s*(.+)/i
 
@@ -66,13 +67,13 @@ function genArchiveHtml (data) {
   let html = Object.keys(data).sort((a, b) => {
     return data[b].mtime - data[a].mtime
   }).map((fileSym) => {
-    const {name, category, mtime, date, tags} = data[fileSym]
+    const {title, name, category, mtime, date, tags} = data[fileSym]
     let urlprefix = URLPREFIX
     if (typeof process.env.NODE_ENV === 'string' && process.env.NODE_ENV.indexOf('production') >= 0) {
       urlprefix = URLPREFIX2
     }
     let _html = `
-<li class="${category}"><a class="title" href="${urlprefix+category+'/'+name}.html">${name}</a>
+<li class="${category}"><a class="title" href="${urlprefix+category+'/'+name}.html">${title}</a>
 <div class="meta">
 <p class="create-time"><span>Create: </span><date>${date}</date></p>
 <p class="update-time"><span>Update: </span><date>${new Date(mtime).toISOString().replace(/T/, ' ').replace(/\..+/, '')}</date></p>
@@ -146,7 +147,9 @@ function readArticle (category, filename, container, callback) {
             const data = buffer.toString("utf8", 0, buffer.length)
             const date = data.match(DATEREGEXP)
             const tags = data.match(TAGSREGEXP)
+            const title = data.match(TITLEREGEXP)
             Object.assign(container[sym], {
+              title: title && title[1],
               date: date && date[1],
               tags: tags && tags[1]
             })
