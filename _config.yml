@@ -2,7 +2,6 @@
 # Blog Settings
 #
 
-
 # Jekyll Settings
 markdown: kramdown
 pygments: true
@@ -13,7 +12,7 @@ baseurl: /
 #lsi: true
 
 # Disqus Comments
-disqus_short_name: barretlee
+disqus_short_name: NekoTrek
 disqus_show_comment_count: true
 
 # site
@@ -23,7 +22,7 @@ repo: /.
 # feed: /atom.xml
 
 # color scheme
-highlight: light
+# highlight: light
 
 # author
 author_name: NekoTrek
