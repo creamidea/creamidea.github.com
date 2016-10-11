@@ -67,12 +67,12 @@ function genArchiveHtml (data) {
     return data[b].mtime - data[a].mtime
   }).map((fileSym) => {
     const {name, category, mtime, date, tags} = data[fileSym]
-    let urlprefix = URLPREFIX
-    if (typeof process.env.NODE_ENV === 'string' && process.env.NODE_ENV.indexOf('production') >= 0) {
-      urlprefix = URLPREFIX2
-    }
+    // let urlprefix = URLPREFIX
+    // if (typeof process.env.NODE_ENV === 'string' && process.env.NODE_ENV.indexOf('production') >= 0) {
+    //   urlprefix = URLPREFIX2
+    // }
     let _html = `
-<li class="${category}"><a class="title" href="${urlprefix+category+'/'+name}.html">${name}</a>
+<li class="${category}"><a class="title" href="/${category+'/'+name}.html">${name}</a>
 <div class="meta">
 <p class="create-time"><span>Create: </span><date>${date}</date></p>
 <p class="update-time"><span>Update: </span><date>${new Date(mtime).toISOString().replace(/T/, ' ').replace(/\..+/, '')}</date></p>

@@ -1,6 +1,8 @@
 @charset "UTF-8";
 
 body {
+    margin: 0;
+    padding: 0;
     // background: #fafafa!important;
     overflow-x: hidden;
     font-family: BlinkMacSystemFont, "PingFang SC", "Segoe UI", "Microsoft YaHei", "Ubuntu","Roboto","Oxygen","Cantarell","Open Sans","Helvetica Neue",sans-serif;
@@ -17,6 +19,9 @@ body {
     position: relative;
     transition: background 1s ease .2s;
 }
+.hidden {
+    display:none;
+}
 
 #banner-wrapper img {
     width: 424px;
@@ -32,12 +37,20 @@ nav a {
     text-transform: uppercase;
 }
 
-article {
+#archive,
+#article {
     position: absolute;
     top: 0;
     width: 100%;
 }
-
+#archive {
+    z-index: 9;
+}
+#article {
+    border: 0;
+    width: 100%;
+    z-index: 10;
+}
 .article-list {
     list-style-type: none;
     padding: 0;
@@ -153,6 +166,7 @@ article {
     height: 32px;
     opacity: 0.3;
     course: cursor;
+    z-index: 9;
 }
 .return:hover {
   opacity: 1;
