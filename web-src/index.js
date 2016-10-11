@@ -275,6 +275,13 @@ function createNavDom (o) {
   return a
 }
 
+function loadAnalyticsJS () {
+  var script = document.createElement('script')
+  script.async = true
+  script.src = '//www.google-analytics.com/analytics.js'
+  document.getElementsByTagName('body')[0].appendChild(script)
+}
+
 // window.onpopstate = function () {
 //   var currentState = history.state
 //   debugger
@@ -314,4 +321,5 @@ window.onload = function () {
   window.onhashchange = function () {
     router.test()
   }
+  loadAnalyticsJS()
 }
