@@ -16,12 +16,13 @@
 ;;   (normal-top-level-add-subdirs-to-load-path))
 ;; (add-to-list 'load-path "~/path/to/orgdir/contrib/lisp " t)
 ;; (add-to-list 'load-path "~/.emacs.d/elpa/org-20161003")
-;; (add-to-list 'load-path "~/.emacs.d/elpa/htmlize-20130207.1202")
+(add-to-list 'load-path "./")
 
 ;; (require 'org)
 (require 'ox-publish)
 ;; (require 'htmlize)
 ;; (require 'ox-rss)
+(require 'ox-rss)
 
 ;; (defun after-publishing (in out)
 ;;   "after-publishing"
@@ -120,19 +121,20 @@ CURRENT-OR-ALL FORCE ASYNC."
              :recursive nil
              :publishing-function org-publish-attachment
              )
-            ("homepage-rss"
+            ("creamidea-rss"
              :base-directory ,(concat creamidea-path "_content/")
              :base-extension "org"
+             :rss-image-url "http://creamidea.github.io/favicon.ico"
+             :html-link-home "http://creamidea.github.io/"
+             :html-link-use-abs-url t
              :publishing-directory ,creamidea-public-path
              :publishing-function (org-rss-publish-to-rss)
-             :html-link-home "http://creamidea.github.io/"
-             :html-link-use-abs-url t)
-            ;; :rss-image-url "http://creamidea.github.io/favicon.ico"
-            ;; :rss-extension "xml"
-            ;; :section-numbers nil
-            ;; :exclude ".*"            ;; To exclude all files...
-            ;; :include "index.org"   ;; ... except index.org.
-            ;; :table-of-contents nil
+             :rss-extension "xml"
+             :section-numbers nil
+             :exclude ".*"            ;; To exclude all files...
+             :include "index.org"   ;; ... except index.org.
+             :table-of-contents nil
+             )
             ("creamidea-site" :components ("creamidea-article"))
             ;; ("creamidea" :components ("creamidea-article" "creamidea-static"))
             ;; http://lujun9972.github.io/emacs/elisp/
