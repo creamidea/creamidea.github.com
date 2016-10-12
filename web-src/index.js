@@ -78,6 +78,10 @@ function Stage () {
         console.log('Stage initialized finished.\nCall function::ready...')
         if (typeof ready === 'function') ready()
         console.log('Function::ready done.')
+
+        // load static tools
+        loadAnalyticsJS()
+        loadCustomSearch(body)
       })
     },
     show: function (drama) {
@@ -284,6 +288,23 @@ function loadAnalyticsJS () {
   document.getElementsByTagName('body')[0].appendChild(script)
 }
 
+function loadCustomSearch (elt) {
+  var cx = '017951989687920165329:0e60irxxe5m';
+  var gcse = document.createElement('script');
+  gcse.type = 'text/javascript';
+  gcse.async = true;
+  gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+  gcse.onload = function () {
+    var div = document.createElement('div');
+    div.id = 'custom-search'
+    div.innerHTML = '<gcse:search></gcse:search>'
+    elt.appendChild(div)
+    console.log('Google Custom Search Engine Loaded Over.')
+  }
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(gcse, s);
+}
+
 // window.onpopstate = function () {
 //   var currentState = history.state
 //   debugger
@@ -319,9 +340,10 @@ window.onload = function () {
       stage.go(url)
     }
   })
-  stage.init(router.test)
+  stage.init(function () {
+    router.test()
+  })
   window.onhashchange = function () {
     router.test()
   }
-  loadAnalyticsJS()
 }

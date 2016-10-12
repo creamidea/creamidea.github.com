@@ -182,6 +182,10 @@ nav a {
 .return:after {
   transform: rotate(-45deg);
 }
+#custom-search {
+    width: 320px;
+    margin: 0 auto;
+}
 
 /* @media(max-width: 900px) { */
 /*     .return { */
@@ -207,6 +211,9 @@ nav a {
     nav a {
         display: block;
         margin: 6px auto;
+    }
+    #custom-search {
+        width: 200px;
     }
 }
 

@@ -449,7 +449,10 @@ hr.section-divider:before {content: '...'; display: inline-block; margin-left: 0
 /* @media (max-width: 896px) { */
 /*     #banner-wrapper img {width: 90%;} */
 /* } */
-
+#custom-search {
+    width: 96%;
+    margin: 0 auto;
+}
 @media (max-width: 767px) {
     /* #banner-wrapper {font-size: 4.5em; width: 100%;} */
     .card .card-content p {display:block;}

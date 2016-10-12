@@ -199,6 +199,26 @@ function someArticlesFix (body, content, isHome) {
 }
 
 /**
+ * load custom search
+ */
+function loadCustomSearch (elt, elt2) {
+  var cx = '017951989687920165329:0e60irxxe5m'
+  var gcse = document.createElement('script')
+  gcse.type = 'text/javascript'
+  gcse.async = true
+  gcse.src = 'https://cse.google.com/cse.js?cx=' + cx
+  gcse.onload = function () {
+    var div = document.createElement('div')
+    div.id = 'custom-search'
+    div.innerHTML = '<gcse:search></gcse:search>'
+    elt.insertBefore(div, elt2)
+    console.log('Google Custom Search Engine Loaded Over.')
+  }
+  var s = document.getElementsByTagName('script')[0]
+  s.parentNode.insertBefore(gcse, s)
+}
+
+/**
  * load disqus
  */
 function loadDisqus(body, content) {
@@ -285,6 +305,7 @@ function main() {
   someArticlesFix(body, content)
   showMetaInfo(body, content, meta)
   loadDisqus(body, content)
+  loadCustomSearch(content, document.querySelector('#outline_disqus_thread'))
   showFooter(body, content, meta)
 }
 
