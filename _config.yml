@@ -4,11 +4,11 @@
 
 # Jekyll Settings
 markdown: kramdown
-pygments: true
-paginate: 6
-paginate_path: /page:num
-permalink: /:title
-baseurl: /
+# pygments: true
+# paginate: 6
+# paginate_path: /page:num
+# permalink: /:title
+# baseurl: /
 #lsi: true
 
 # Disqus Comments
@@ -18,7 +18,7 @@ disqus_show_comment_count: true
 # site
 title: C Tone
 url: http://c-tone.github.io
-repo: /.
+# repo: /.
 # feed: /atom.xml
 
 # color scheme
