@@ -399,6 +399,15 @@ const command = {
       })
     // let rlt = readSource('index', 'html')
     // console.log(rlt)
+  },
+  "about-static": function () {
+    readFile(path.resolve(__dirname, 'web-src', 'about.html'))
+      .then((data) => {
+        let html = data.toString()
+        let rlt = html
+            .replace(/^$|\r?\n/g, '').replace(/>\s+</g, '><')
+        writeFile(path.resolve(__dirname, 'static', 'about.html'), rlt)
+      })
   }
 }
 

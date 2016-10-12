@@ -9,6 +9,7 @@
     "publish:octocat": "node ./octodex.js",
     "publish:article-static": "node ./export.js article-static",
     "publish:index-static": "node ./export.js index-static",
+    "publish:about-static": "node ./export.js about-static",
     "publish:site": "emacs -q -Q -nw --batch -l org-publish-setting.el -f publish-creamidea-site",
     "publish": "npm run publish:octocat && npm run publish:article-static && npm run publish:index-static && npm run publish:archive",
     "test": "echo \"Error: no test specified\" && exit 1"
