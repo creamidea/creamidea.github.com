@@ -246,6 +246,9 @@ function changeBodyTopStyle (body) {
   } else if (pathname.indexOf('translation') >= 0) {
     body.style.borderTop = '2px solid #ED462F'
     meta.content = '#ED462F'
+  } else if (pathname.indexOf('wiki') >= 0) {
+    body.style.borderTop = '2px solid #4285f4'
+    meta.content = '#4285f4'
   }
   head.appendChild(meta)
 

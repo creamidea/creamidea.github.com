@@ -117,12 +117,14 @@ span[class*=section-number] {
 .github-badge {
     position: absolute;
     right: 39px;
-    top: 4px;
+    top: 3px;
+    z-index: 9;
 }
 .octicon-mark-github {
     overflow: hidden;
     font-size: 24px;
     color: #ccc;
+    opacity: 0.3;
     vertical-align: text-bottom;
     display: inline-block;
 }
