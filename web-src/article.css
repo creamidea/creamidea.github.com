@@ -259,6 +259,7 @@ li a {
     letter-spacing: -0.003em;
     /* letter-spacing: .01rem; */
     /* list-style-type: lower-greek; */
+    word-break: break-word;
 }
 #table-of-contents {
     display: none;
