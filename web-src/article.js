@@ -281,7 +281,7 @@ function changeBodyTopStyle (body) {
   // TOP Right
   var btnReturn = document.createElement('a')
   btnReturn.className = 'return'
-  btnReturn.href = '/'
+  btnReturn.href = '/#!/archive'
   body.appendChild(btnReturn)
 
   var githubBadge = document.createElement('a')
