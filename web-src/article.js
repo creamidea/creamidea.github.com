@@ -225,7 +225,7 @@ function loadDisqusComment (target) {
   disqus.id = 'outline_disqus_thread';
   disqus.className = 'outline-2';
   disqus.style.marginBottom = '44px';
-  disqus.innerHTML = '<h2 id="disqus_thread_header">Comments</h2><div id="disqus_thread"><p style="text-align:center;font-family: Georgia1,Georgia,Times New Roman,Times,serif;">Disqus is loding...</p></div>';
+  disqus.innerHTML = '<h2 id="disqus_thread_header">Comments</h2><div id="disqus_thread"><p style="text-align:center;font-family: Georgia1,Georgia,Times New Roman,Times,serif;">Disqus is loading...</p></div>';
   content.appendChild(disqus);
 }
 function disqus_config () {
