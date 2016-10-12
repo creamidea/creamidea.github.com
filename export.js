@@ -74,7 +74,7 @@ function genTagsHtml (tags) {
   var tagsHtml
   if (tags && typeof tags.split === 'function') {
     tagsHtml = tags.split(',').map((tag) => {
-      return `<a title="Go to ${tag}">${tag}</a>`
+      return `<a class="tag-item" href="/search?hl=en&q=${encodeURIComponent(tag)}" title="Go to ${tag}">${tag}</a>`
     })
   }
   return `<div class="tags">${tagsHtml.join('')}</div>`
