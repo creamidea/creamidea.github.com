@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- 2016-10-11 Tue 20:44 -->
+<!-- 2016-10-12 Wed 13:43 -->
 <meta  charset="utf-8">
 <meta  name="viewport" content="width=device-width, initial-scale=1">
 <title>Shell Cookies</title>
 <meta  name="generator" content="Org-mode">
-<meta  name="author" content="Junjia Ni">
+<meta  name="author" content="冰糖火箭筒(Junjia Ni)">
 <meta  name="description" content="记住一些命令"
 >
 <meta  name="keywords" content="shell,emacs,etags">
@@ -34,7 +34,14 @@
 </ul>
 </li>
 <li><a href="#orgheadline9">6. etags &amp; ctags</a></li>
-<li><a href="#orgheadline10">7. 尾声</a></li>
+<li><a href="#orgheadline13">7. 用户篇</a>
+<ul>
+<li><a href="#orgheadline10">7.1. 增加用户：</a></li>
+<li><a href="#orgheadline11">7.2. 批量增加用户:</a></li>
+<li><a href="#orgheadline12">7.3. 增加用户到组:</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline14">8. 尾声</a></li>
 </ul>
 </div>
 </div>
@@ -198,18 +205,104 @@ find . -type f -iname <span style="color: #8abeb7;">"*.[ch]"</span> | etags -
 </div>
 </div>
 
-<div id="outline-container-orgheadline10" class="outline-2">
-<h2 id="orgheadline10"><span class="section-number-2">7</span> 尾声</h2>
+<div id="outline-container-orgheadline13" class="outline-2">
+<h2 id="orgheadline13"><span class="section-number-2">7</span> 用户篇</h2>
+<div class="outline-text-2" id="text-7">
+</div><div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10"><span class="section-number-3">7.1</span> 增加用户：</h3>
+<div class="outline-text-3" id="text-7-1">
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">-s&#25351;&#23450;shell</span>
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">-g&#25351;&#23450;&#32452;&#21517;</span>
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">-G&#25351;&#23450;&#21152;&#20837;&#32452;&#65288;&#38468;&#21152;&#32452;&#65289;</span>
+useradd -s /bin/sh -g group &#8211;G adm,root gem
+</pre>
+</div>
+
+<p>
+<b>Reference:</b>
+</p>
+<ul class="org-ul">
+<li><a href="http://blog.sina.com.cn/s/blog_47051c800100oegn.html">http://blog.sina.com.cn/s/blog_47051c800100oegn.html</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11"><span class="section-number-3">7.2</span> 批量增加用户:</h3>
+<div class="outline-text-3" id="text-7-2">
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #969896; font-style: italic;">#</span><span style="color: #969896; font-style: italic;">!/bin/</span><span style="color: #b5bd68;">bash/</span>
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#21019;&#24314;&#29992;&#25143;</span>
+<span style="color: #b5bd68;">for</span> i<span style="color: #b5bd68;"> in</span> <span style="color: #b294bb;">`cat user.list`</span>
+<span style="color: #b5bd68;">do</span>
+    useradd -d /home/$<span style="color: #f0c674;">i</span> -m $<span style="color: #f0c674;">i</span>
+    useradd -g wsng $<span style="color: #f0c674;">i</span>
+    <span style="color: #b294bb;">echo</span> <span style="color: #8abeb7;">"password"</span> | passwd --stdin $<span style="color: #f0c674;">i</span>
+<span style="color: #b5bd68;">done</span>
+</pre>
+</div>
+
+<pre class="example">
+someone1
+someone2
+someone3
+</pre>
+
+<p>
+<b>Reference:</b>
+</p>
+<ul class="org-ul">
+<li><a href="http://blog.chinaunix.net/uid-26301963-id-3055415.html">http://blog.chinaunix.net/uid-26301963-id-3055415.html</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12"><span class="section-number-3">7.3</span> 增加用户到组:</h3>
+<div class="outline-text-3" id="text-7-3">
+<ol class="org-ol">
+<li><p>
+增加一个新用户到主要用户组：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#22686;&#21152;&#29992;&#25143;icecream&#21040;wsng</span>
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">-g&#23558;&#26032;&#22686;&#21152;&#30340;&#29992;&#25143;&#21021;&#22987;&#21270;&#20026;&#25351;&#23450;&#30331;&#24405;&#32452;&#65292;&#27492;&#21517;&#24517;&#39035;&#23384;&#22312;</span>
+useradd -g wsng icecream
+</pre>
+</div></li>
+<li><p>
+增加一个已有用户到一个已有用户组中
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#29992;&#25143;icecream&#19981;&#24517;&#31163;&#24320;&#21407;&#32452;</span>
+usermod -a -G wsng icecream
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#23558;&#29992;&#25143;&#32452;&#25913;&#20026;wsng</span>
+usermod -g wsng icecream
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline14" class="outline-2">
+<h2 id="orgheadline14"><span class="section-number-2">8</span> 尾声</h2>
 </div>
 </div>
 <div id="postamble" class="status">
-<div id="meta-article"><p class="author">Junjia Ni</p>
-<p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
+<div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
+<p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
 <p class="date">2015-12-27</p>
-<p class="export-date">2016-10-11 Tue 20:44</p>
+<p class="export-date">2016-10-12 Wed 13:43</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
 <p class="validation"></p>
-<p class="last-modification-time">2016-05-08 Sun 16:58</p></div><script asyn src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+<p class="last-modification-time">2016-10-12 Wed 12:47</p></div><script asyn src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 2016-10-12 Wed 14:04 -->
+<meta  charset="utf-8">
+<meta  name="viewport" content="width=device-width, initial-scale=1">
+<title>Learning Django</title>
+<meta  name="generator" content="Org-mode">
+<meta  name="author" content="冰糖火箭筒(Junjia Ni)">
+<meta  name="description" content="学习Django的笔记"
+>
+<meta  name="keywords" content="python,django">
+<link rel="stylesheet" type="text/css" href="/static/article.css">
+</head>
+<body>
+<div id="content">
+<h1 class="title">Learning Django</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">1. 前言</a></li>
+<li><a href="#orgheadline2">2. Install Django</a></li>
+<li><a href="#orgheadline3">3. 第二章 入门 &amp;&amp; 第三章 视图和URL配置</a></li>
+<li><a href="#orgheadline4">4. 第四章 模板</a></li>
+<li><a href="#orgheadline6">5. 第五章 模型</a>
+<ul>
+<li><a href="#orgheadline5">5.1. MTV开发模式</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline7">6. 第六章 Django站点管理</a></li>
+<li><a href="#orgheadline8">7. 第七章 表单</a></li>
+<li><a href="#orgheadline9">8. 第八章 高级视图和URL配置</a></li>
+<li><a href="#orgheadline10">9. 第九章 模板高级进阶</a></li>
+<li><a href="#orgheadline11">10. 第十章 数据模型高级进阶</a></li>
+<li><a href="#orgheadline14">11. 第十二章 部署Django</a>
+<ul>
+<li><a href="#orgheadline13">11.1. Linux</a>
+<ul>
+<li><a href="#orgheadline12">11.1.1. mod<sub>wsgi</sub></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgheadline15">12. Q&amp;A</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+上面分配的新的学习内容，学习这个框架，然后使用的参考书籍是 <b>Django Book 2 中文版</b> 。
+下载地址是：<a href="http://vdisk.weibo.com/s/xy74T">微盘</a>
+</p>
+
+<p>
+无论有任何想法或者我文章中有任何错误，欢迎在下面留言或者通过电子邮件联系我：）
+</p>
+
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-09-28 Sat&gt;</span></span>再次学习
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2"><span class="section-number-2">2</span> Install Django</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+因为安装过程理论上不是很难，我在这里只是写一条命令。（默认已经安装了python）
+</p>
+<ol class="org-ol">
+<li><p>
+Windows:
+以管理员的身份，打开cmd。之后到django文件夹下输入：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">python setup.py install
+</pre>
+</div></li>
+<li><p>
+Linux/Mac OS X:
+前往django所在文件目录，之后输入：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo python setup.py install
+</pre>
+</div></li>
+</ol>
+
+<p>
+<b>参考网站:</b>
+</p>
+<ol class="org-ol">
+<li><a href="https://docs.djangoproject.com/en/1.5/topics/install/#installing-official-release">https://docs.djangoproject.com/en/1.5/topics/install/#installing-official-release</a></li>
+<li><a href="https://docs.djangoproject.com/en/1.5/topics/install/">https://docs.djangoproject.com/en/1.5/topics/install/</a></li>
+<li><a href="https://docs.djangoproject.com/en/1.5/intro/install/">https://docs.djangoproject.com/en/1.5/intro/install/</a></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3"><span class="section-number-2">3</span> 第二章 入门 &amp;&amp; 第三章 视图和URL配置</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+日曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-14 Sun&gt;</span></span>
+</p>
+
+<p>
+只是稍微看了一下，然后写了一个Hello(呵呵，真是经典啊)
+</p>
+<ol class="org-ol">
+<li><p>
+使用 <code>django-admin.py startproject mysite</code>
+(笔者我在Windows7上尝试，估计路径没有加入，所以我直接将Scripts/django-admin.py
+放入了工程文件夹才解决)。
+</p>
+
+<p>
+创建完成之后的目录：
+</p>
+<pre class="example">
+icecream/
+  manage.py
+  icecream/
+     __init__.py
+     settings.py
+     urls.py
+     wsgi.py
+     __init__.pyc
+     settings.pyc
+     urls.pyc
+     wsgi.pyc
+</pre></li>
+
+<li><p>
+创建views.py (注意这个要放在icecream这个目录下，同urls.py在同一目录)
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #b5bd68;">from</span> django.http <span style="color: #b5bd68;">import</span> HttpResponse
+
+<span style="color: #b5bd68;">def</span> <span style="color: #de935f;">hello</span><span style="color: #c5c8c6;">(</span>request<span style="color: #c5c8c6;">)</span>:
+        <span style="color: #b5bd68;">return</span> HttpResponse<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">"Hello, icecream"</span><span style="color: #c5c8c6;">)</span>
+</pre>
+</div></li>
+
+<li><p>
+修改urls.py
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #b5bd68;">from</span> django.conf.urls <span style="color: #b5bd68;">import</span> patterns, include, url
+<span style="color: #b5bd68;">from</span> icecream.views <span style="color: #b5bd68;">import</span> hello
+
+<span style="color: #f0c674;">urlpatterns</span> = patterns<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">''</span>,
+        <span style="color: #8abeb7;">(</span><span style="color: #8abeb7;">'^hello/$'</span>, hello<span style="color: #8abeb7;">)</span>,        <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#22686;&#21152;&#36825;&#21477;&#26144;&#23556;</span>
+<span style="color: #c5c8c6;">)</span>
+</pre>
+</div></li>
+
+<li><p>
+运行
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">python manage.py runserver <span style="color: #c5c8c6;">[</span>0.0.0.0<span style="color: #c5c8c6;">]</span> 8080
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#21152;&#20837; 0.0.0.0 &#21487;&#20197;&#20351;&#24471;&#8220;&#22806;&#32593;&#8221;&#35775;&#38382;&#65292;&#19981;&#20165;&#38480;&#20110;127.0.0.1</span>
+</pre>
+</div></li>
+
+<li>在浏览器中输入：
+<a href="http://127.0.0.1:8080/hello">http://127.0.0.1:8080/hello</a></li>
+</ol>
+
+<p>
+P30
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4"><span class="section-number-2">4</span> 第四章 模板</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+火曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-16 Tue&gt;</span></span>
+</p>
+
+<ol class="org-ol">
+<li><p>
+Template System
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #b5bd68;">from</span> django <span style="color: #b5bd68;">import</span> template
+<span style="color: #f0c674;">t</span> = template.Template<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">'My name is {{ name }}.'</span><span style="color: #c5c8c6;">)</span>
+<span style="color: #f0c674;">c</span> = template.Context<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">{</span><span style="color: #8abeb7;">'name'</span>: <span style="color: #8abeb7;">'Alice'</span><span style="color: #8abeb7;">}</span><span style="color: #c5c8c6;">)</span>
+<span style="color: #b5bd68;">print</span> t.render<span style="color: #c5c8c6;">(</span>c<span style="color: #c5c8c6;">)</span>
+</pre>
+</div></li>
+<li><p>
+给标签增加一个reversed使得该列表被反向迭代：
+</p>
+<pre class="example">
+{% for athlete in athlete_list reversed %}
+...
+{% endfor %}
+</pre></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6"><span class="section-number-2">5</span> 第五章 模型</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+水曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-17 Wed&gt;</span></span>
+</p>
+
+<ol class="org-ol">
+<li><p>
+安装python-mysql：
+</p>
+
+<p>
+在Windows7 64bit上貌似安装不了，它说是64bit的原因。
+(python version:2.7.3 64bit.)
+我想也是。
+</p>
+
+<p>
+我下载的包是：
+<a href="http://nchc.dl.sourceforge.net/project/mysql-python/mysql-python-test/1.2.4b4/MySQL-python-1.2.4b4.win32-py2.7.exe">http://nchc.dl.sourceforge.net/project/mysql-python/mysql-python-test/1.2.4b4/MySQL-python-1.2.4b4.win32-py2.7.exe</a>
+</p>
+
+<p>
+然后我跟着：
+<a href="http://stackoverflow.com/questions/3652625/installing-setuptools-on-64-bit-windows">http://stackoverflow.com/questions/3652625/installing-setuptools-on-64-bit-windows</a>
+修改注册表还是失败了。以后再试吧。
+</p>
+
+<p>
+<b>Update:</b>
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-10-15 Tue&gt;</span></span>更新在Windows7上安装问题：
+今天我感觉已经找到一种解决方式，那就是我重新将python安装在了C盘根目录下，而不是在
+<code>Program Files</code> 下。
+貌似有许多的开发环境必须安装在根目录下，或者目录名称中不能有空格特殊字符等等。只能是字母+数字。 <br >
+以后要记住这点啦。
+</p>
+
+<p>
+在Linux上安装的话就下载源码安装呗。
+我以为直接下载源码，然后：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">python setup.py install
+</pre>
+</div>
+<p>
+就可以了，但是我在ubuntu12.04上貌似失败了，貌似提示没有setuptool。我
+安装了python-setuptool也没有用。有谁会记得告诉我。
+</p>
+
+<p>
+Referencs:
+</p>
+<ol class="org-ol">
+<li><a href="http://stackoverflow.com/questions/5178292/pip-install-mysql-python-fails-with-environmenterror-mysql-config-not-found">http://stackoverflow.com/questions/5178292/pip-install-mysql-python-fails-with-environmenterror-mysql-config-not-found</a></li>
+<li><a href="http://stackoverflow.com/questions/14426491/python-3-importerror-no-module-named-setuptools">http://stackoverflow.com/questions/14426491/python-3-importerror-no-module-named-setuptools</a></li>
+<li><a href="http://stackoverflow.com/questions/2211335/python-setuptools-import-error-using-netbeans">http://stackoverflow.com/questions/2211335/python-setuptools-import-error-using-netbeans</a></li>
+</ol>
+<p>
+于是我改用 <code>pip</code> 安装。一开始我不是这个步骤，不是权限问题，就是没有
+distribute。现在我将步骤整理如下：
+From: <a href="http://codeinthehole.com/writing/how-to-set-up-mysql-for-python-on-ubuntu/">http://codeinthehole.com/writing/how-to-set-up-mysql-for-python-on-ubuntu/</a>
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">$ sudo apt-get install python-pip
+$ sudo apt-get install python-dev libmysqlclient-dev
+$ sudo easy_install -U distribute
+$ sudo pip install MySQL-python
+</pre>
+</div>
+
+<p>
+之后我尝试了一下(一定要保证能够连接到数据库哦，如果真想写进数据库，记得
+别忘了syncdb)：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">$ python manage.py validate     <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#39564;&#35777;&#25968;&#25454;&#27491;&#30830;&#24615;</span>
+$ python manage.py sqlall books
+$ python manage.py syncdb
+</pre>
+</div>
+
+<p>
+RESULTS:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">BEGIN;
+CREATE TABLE <span style="color: #b294bb;">`books_publisher`</span> <span style="color: #c5c8c6;">(</span>
+    <span style="color: #b294bb;">`id`</span> integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    <span style="color: #b294bb;">`name`</span> varchar<span style="color: #8abeb7;">(</span>30<span style="color: #8abeb7;">)</span> NOT NULL,
+    <span style="color: #b294bb;">`address`</span> varchar<span style="color: #8abeb7;">(</span>50<span style="color: #8abeb7;">)</span> NOT NULL,
+    <span style="color: #b294bb;">`city`</span> varchar<span style="color: #8abeb7;">(</span>60<span style="color: #8abeb7;">)</span> NOT NULL,
+    <span style="color: #b294bb;">`state_province`</span> varchar<span style="color: #8abeb7;">(</span>30<span style="color: #8abeb7;">)</span> NOT NULL,
+    <span style="color: #b294bb;">`country`</span> varchar<span style="color: #8abeb7;">(</span>50<span style="color: #8abeb7;">)</span> NOT NULL,
+    <span style="color: #b294bb;">`website`</span> varchar<span style="color: #8abeb7;">(</span>200<span style="color: #8abeb7;">)</span> NOT NULL
+<span style="color: #c5c8c6;">)</span>
+;
+CREATE TABLE <span style="color: #b294bb;">`books_author`</span> <span style="color: #c5c8c6;">(</span>
+    <span style="color: #b294bb;">`id`</span> integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    <span style="color: #b294bb;">`first_name`</span> varchar<span style="color: #8abeb7;">(</span>30<span style="color: #8abeb7;">)</span> NOT NULL,
+    <span style="color: #b294bb;">`last_name`</span> varchar<span style="color: #8abeb7;">(</span>40<span style="color: #8abeb7;">)</span> NOT NULL,
+    <span style="color: #b294bb;">`email`</span> varchar<span style="color: #8abeb7;">(</span>75<span style="color: #8abeb7;">)</span> NOT NULL
+<span style="color: #c5c8c6;">)</span>
+;
+CREATE TABLE <span style="color: #b294bb;">`books_book_authors`</span> <span style="color: #c5c8c6;">(</span>
+    <span style="color: #b294bb;">`id`</span> integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    <span style="color: #b294bb;">`book_id`</span> integer NOT NULL,
+    <span style="color: #b294bb;">`author_id`</span> integer NOT NULL,
+    UNIQUE <span style="color: #8abeb7;">(</span><span style="color: #b294bb;">`book_id`</span>, <span style="color: #b294bb;">`author_id`</span><span style="color: #8abeb7;">)</span>
+<span style="color: #c5c8c6;">)</span>
+;
+ALTER TABLE <span style="color: #b294bb;">`books_book_authors`</span> ADD CONSTRAINT <span style="color: #b294bb;">`author_id_refs_id_1a0a2829`</span> FOREIGN KEY <span style="color: #c5c8c6;">(</span><span style="color: #b294bb;">`author_id`</span><span style="color: #c5c8c6;">)</span> REFERENCES <span style="color: #b294bb;">`books_author`</span> <span style="color: #c5c8c6;">(</span><span style="color: #b294bb;">`id`</span><span style="color: #c5c8c6;">)</span>;
+CREATE TABLE <span style="color: #b294bb;">`books_book`</span> <span style="color: #c5c8c6;">(</span>
+    <span style="color: #b294bb;">`id`</span> integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    <span style="color: #b294bb;">`title`</span> varchar<span style="color: #8abeb7;">(</span>100<span style="color: #8abeb7;">)</span> NOT NULL,
+    <span style="color: #b294bb;">`publisher_id`</span> integer NOT NULL,
+    <span style="color: #b294bb;">`publisher_date`</span> date NOT NULL
+<span style="color: #c5c8c6;">)</span>
+;
+ALTER TABLE <span style="color: #b294bb;">`books_book`</span> ADD CONSTRAINT <span style="color: #b294bb;">`publisher_id_refs_id_974c2a46`</span> FOREIGN KEY <span style="color: #c5c8c6;">(</span><span style="color: #b294bb;">`publisher_id`</span><span style="color: #c5c8c6;">)</span> REFERENCES <span style="color: #b294bb;">`books_publisher`</span> <span style="color: #c5c8c6;">(</span><span style="color: #b294bb;">`id`</span><span style="color: #c5c8c6;">)</span>;
+ALTER TABLE <span style="color: #b294bb;">`books_book_authors`</span> ADD CONSTRAINT <span style="color: #b294bb;">`book_id_refs_id_0a3634f3`</span> FOREIGN KEY <span style="color: #c5c8c6;">(</span><span style="color: #b294bb;">`book_id`</span><span style="color: #c5c8c6;">)</span> REFERENCES <span style="color: #b294bb;">`books_book`</span> <span style="color: #c5c8c6;">(</span><span style="color: #b294bb;">`id`</span><span style="color: #c5c8c6;">)</span>;
+CREATE INDEX <span style="color: #b294bb;">`books_book_81b79144`</span> ON <span style="color: #b294bb;">`books_book`</span> <span style="color: #c5c8c6;">(</span><span style="color: #b294bb;">`publisher_id`</span><span style="color: #c5c8c6;">)</span>;
+
+COMMIT;
+</pre>
+</div></li>
+
+<li><p>
+如果使用Django的数据层，必须创建Django app.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">$ python manage.py startapp books<span style="color: #c5c8c6;">(</span>app name<span style="color: #c5c8c6;">)</span>
+</pre>
+</div></li>
+
+<li><p>
+使用get()方法处理“可能不存在的键”
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">request.META.get<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">'HTTP_USER_AGENT'</span>, <span style="color: #8abeb7;">'unknow'</span><span style="color: #c5c8c6;">)</span>
+</pre>
+</div></li>
+
+<li><p>
+使用Sqlite3 （因为笔者最近在Windows7上开发，又不想安装中大型数据库，于是。。。）:
+</p>
+
+<p>
+For Windows7:
+</p>
+
+<ol class="org-ol">
+<li>下载源代码：sqlite-amalgamation-xxxxxxx.zip,点击这里进入下载页面。</li>
+
+<li><p>
+输入编译代码，前提是安装了 <a href="http://www.mingw.org/">MinGW</a> :
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">gcc -o sqlite3 shell.c sqlite3.c -lpthread
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#36825;&#37324;&#38656;&#35201;&#21435;&#25481;-ldl&#65292;&#19981;&#28982;&#20250;&#20445;&#38169;&#12290;&#19981;&#30693;&#36947;&#20320;&#20204;&#23433;&#35013;&#30340;&#26102;&#20505;&#20250;&#19981;&#20250;&#36935;&#21040;&#27492;&#31867;&#38382;&#39064;.</span>
+</pre>
+</div>
+<p>
+Reference:
+</p>
+<ul class="org-ul">
+<li><a href="http://www.sqlite.org/howtocompile.html">http://www.sqlite.org/howtocompile.html</a></li>
+</ul></li>
+</ol></li>
+</ol>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5"><span class="section-number-3">5.1</span> MTV开发模式</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+<i>Model-View-Controller</i>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7"><span class="section-number-2">6</span> 第六章 Django站点管理</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+火曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-23 Tue&gt;</span></span>
+</p>
+
+<ol class="org-ol">
+<li><p>
+搭建步骤
+</p>
+<pre class="example">
+#INSTALLED_APPS
+1. django.contrib.admin         #enable
+2. django.contrib.auth
+   django.contrib.contenttypes
+   django.contrib.session
+
+#MIDDLEWARE_CLASSES
+1. django.middleware.common.CommonMiddleware
+2. django.contrib.sessons.middleware.SessionMiddleware
+3. django.contrib.auth.middleware.AuthenticationMiddleware
+</pre></li>
+<li><p>
+Some config
+1)Setting.py
+</p>
+<ul class="org-ul">
+<li><p>
+Template paht:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #f0c674;">TEMPLATE_DIRS</span> = <span style="color: #c5c8c6;">(</span>
+    <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".</span>
+    <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">Always use forward slashes, even on Windows.</span>
+    <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">Don't forget to use absolute paths, not relative paths.</span>
+    os.path.join<span style="color: #8abeb7;">(</span>os.path.dirname<span style="color: #f0c674;">(</span>__file__<span style="color: #f0c674;">)</span>, <span style="color: #8abeb7;">'templates'</span><span style="color: #8abeb7;">)</span>.replace<span style="color: #8abeb7;">(</span><span style="color: #8abeb7;">'\\'</span>, <span style="color: #8abeb7;">'/'</span><span style="color: #8abeb7;">)</span>,
+<span style="color: #c5c8c6;">)</span>
+</pre>
+</div></li>
+<li><p>
+Static path
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">Additional locations of static files</span>
+<span style="color: #f0c674;">STATICFILES_DIRS</span> = <span style="color: #c5c8c6;">(</span>
+    <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">Put strings here, like "/home/html/static" or "C:/www/django/static".</span>
+    <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">Always use forward slashes, even on Windows.</span>
+    <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">Don't forget to use absolute paths, not relative paths.</span>
+    os.path.join<span style="color: #8abeb7;">(</span>os.path.dirname<span style="color: #f0c674;">(</span>__file__<span style="color: #f0c674;">)</span>, <span style="color: #8abeb7;">'static'</span><span style="color: #8abeb7;">)</span>.replace<span style="color: #8abeb7;">(</span><span style="color: #8abeb7;">'\\'</span>, <span style="color: #8abeb7;">'/'</span><span style="color: #8abeb7;">)</span>,
+<span style="color: #c5c8c6;">)</span>
+</pre>
+</div></li>
+</ul>
+<p>
+2)一些注意点
+</p>
+<ol class="org-ol">
+<li><p>
+在管理界面显示自己创建的应用程序：
+这点我也是我自己要记住的，记住写的模型需要在当前应用程序下的admin.py中注册，
+代码类似这样：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #b5bd68;">from</span> django.contrib <span style="color: #b5bd68;">import</span> admin
+<span style="color: #b5bd68;">from</span> icecream.register.models <span style="color: #b5bd68;">import</span> User
+
+admin.site.register<span style="color: #c5c8c6;">(</span>User<span style="color: #c5c8c6;">)</span>
+</pre>
+</div></li>
+</ol></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8"><span class="section-number-2">7</span> 第七章 表单</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+木曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-25 Thu&gt;</span></span>
+</p>
+
+<ol class="org-ol">
+<li>在创建contact的时候，我没有使用 <code>python manage.py startapp contact</code>
+     导致在写urls.py的时候老是提示找不到 <code>contact</code></li>
+
+<li><p>
+自定义校验规则
+</p>
+<pre class="example">
+Django的form系统自动寻找匹配的函数方法,
+该方法名称以clean_开头,并以字段名称结束。
+如果有这样的方法,它将在校验时被调用。
+
+特别地,clean_message()方法将在指定字段的默认校验逻辑执行 *之后* 被调用。
+(本例中,在必填CharField这个校验逻辑之后。)
+因为字段数据已经被部分处理,所以它被从self.cleaned_data中提取出来
+了。同样,我们不必担心数据是否为空,因为它已经被校验过了。
+
+我们简单地使用了len()和split()的组合来计算单词的数量。
+如果用户输入字数不足,我们抛出一个forms.ValidationError型异常。
+这个异常的描述会被作为错误列表中的一项显示给用户。
+
+在函数的末尾显式地返回字段的值非常重要。
+我们可以在我们自定义的校验方法中修改它的值(或者把它转换
+成另一种Python类型)。 如果我们忘记了这一步,None值就会返回,
+原始的数据就丢失掉了。
+</pre></li>
+
+<li><p>
+定义Form样式
+</p>
+<pre class="example">
+  每一个字段部件(&lt;input type=”text”&gt;, &lt;select&gt;, &lt;textarea&gt;, 或者类似)都可以通过访问{{form.字段名}}进行单独的渲染。
+</pre></li>
+
+<li>问题解决：
+<ol class="org-ol">
+<li><p>
+CSRF verification failed. Request aborted.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">views.py</span>
+<span style="color: #b5bd68;">from</span> django.template <span style="color: #b5bd68;">import</span> RequestContext
+<span style="color: #b5bd68;">return</span> render_to_response<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">'login.html'</span>, context_instance=RequestContext<span style="color: #8abeb7;">(</span>request<span style="color: #8abeb7;">)</span><span style="color: #c5c8c6;">)</span>
+
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">login.html</span>
+</pre>
+</div>
+
+<p>
+Reference:
+</p>
+<ol class="org-ol">
+<li><a href="http://stackoverflow.com/questions/14848603/django-csrf-cookie-not-setting">http://stackoverflow.com/questions/14848603/django-csrf-cookie-not-setting</a></li>
+
+<li><a href="http://www.5i1y.com/post/8/Django-CSRF/">http://www.5i1y.com/post/8/Django-CSRF/</a></li>
+
+<li><a href="https://docs.djangoproject.com/en/dev/ref/templates/api/#subclassing-context-requestcontext">https://docs.djangoproject.com/en/dev/ref/templates/api/#subclassing-context-requestcontext</a></li>
+</ol></li>
+</ol></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline9" class="outline-2">
+<h2 id="orgheadline9"><span class="section-number-2">8</span> 第八章 高级视图和URL配置</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+木曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-25 Thu&gt;</span></span>
+</p>
+
+<ol class="org-ol">
+<li><p>
+在 Python 正则表达式中,命名的正则表达式组的语法是 <code>(?P&lt;name&gt;pattern)</code> ,
+这里 <code>name</code> 是组的名字,而 <code>pattern</code> 是匹配的某个模式。
+</p>
+
+<p>
+下面使用无名组的URLconf例子：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #b5bd68;">from</span> django.conf.urls.defaults <span style="color: #b5bd68;">import</span> *
+<span style="color: #b5bd68;">from</span> mysite <span style="color: #b5bd68;">import</span> views
+<span style="color: #f0c674;">urlpatterns</span> = patterns<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">''</span>,
+                       <span style="color: #8abeb7;">(</span>r<span style="color: #8abeb7;">'^articles/(\d{4})/$'</span>, views.year_archive<span style="color: #8abeb7;">)</span>,
+                       <span style="color: #8abeb7;">(</span>r<span style="color: #8abeb7;">'^articles/(\d{4})/(\d{2})/$'</span>, views.month_archive<span style="color: #8abeb7;">)</span>,
+<span style="color: #c5c8c6;">)</span>
+</pre>
+</div>
+
+<p>
+下面相同的URLconf:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #b5bd68;">from</span> django.conf.urls.defaults <span style="color: #b5bd68;">import</span> *
+<span style="color: #b5bd68;">from</span> mysite <span style="color: #b5bd68;">import</span> views
+<span style="color: #f0c674;">urlpatterns</span> = patterns<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">''</span>,
+                       <span style="color: #8abeb7;">(</span>r<span style="color: #8abeb7;">'^articles/(?P&lt;year&gt;\d{4})/$'</span>, views.year_archive<span style="color: #8abeb7;">)</span>,
+                       <span style="color: #8abeb7;">(</span>r<span style="color: #8abeb7;">'^articles/(?P&lt;year&gt;\d{4})/(?P&lt;month&gt;\d{2})/$'</span>, views.month_archive<span style="color: #8abeb7;">)</span>,
+<span style="color: #c5c8c6;">)</span>
+</pre>
+</div>
+
+<p>
+例如,如果不带命名组,请求
+<code>/articles/2006/03/</code>
+将会等同于这样的函数调用:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">month_archive<span style="color: #c5c8c6;">(</span>request, <span style="color: #8abeb7;">'2006'</span>, <span style="color: #8abeb7;">'03'</span><span style="color: #c5c8c6;">)</span>
+</pre>
+</div>
+
+<p>
+而带命名组,同样的请求就会变成这样的函数调用:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">month_archive<span style="color: #c5c8c6;">(</span>request, year=<span style="color: #8abeb7;">'2006'</span>, month=<span style="color: #8abeb7;">'03'</span><span style="color: #c5c8c6;">)</span>
+</pre>
+</div></li>
+
+<li><p>
+对一个可选URL配置参数的优雅解决方法:
+URLconf里面的每一个模式都可以包含第三个数据: 一个关键字参数的字典:
+有了这个概念以后,我们就可以把我们现在的例子改写成这样:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">urls.py</span>
+<span style="color: #b5bd68;">from</span> django.conf.urls.defaults <span style="color: #b5bd68;">import</span> *
+<span style="color: #b5bd68;">from</span> mysite <span style="color: #b5bd68;">import</span> views
+<span style="color: #f0c674;">urlpatterns</span> = patterns<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">''</span>,
+    <span style="color: #8abeb7;">(</span>r<span style="color: #8abeb7;">'^foo/$'</span>, views.foobar_view, <span style="color: #f0c674;">{</span><span style="color: #8abeb7;">'template_name'</span>: <span style="color: #8abeb7;">'template1.html'</span><span style="color: #f0c674;">}</span><span style="color: #8abeb7;">)</span>,
+    <span style="color: #8abeb7;">(</span>r<span style="color: #8abeb7;">'^bar/$'</span>, views.foobar_view, <span style="color: #f0c674;">{</span><span style="color: #8abeb7;">'template_name'</span>: <span style="color: #8abeb7;">'template2.html'</span><span style="color: #f0c674;">}</span><span style="color: #8abeb7;">)</span>,
+<span style="color: #c5c8c6;">)</span>
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">views.py</span>
+<span style="color: #b5bd68;">from</span> django.shortcuts <span style="color: #b5bd68;">import</span> render_to_response
+<span style="color: #b5bd68;">from</span> mysite.models <span style="color: #b5bd68;">import</span> MyModel
+<span style="color: #b5bd68;">def</span> <span style="color: #de935f;">foobar_view</span><span style="color: #c5c8c6;">(</span>request, template_name<span style="color: #c5c8c6;">)</span>:
+    <span style="color: #f0c674;">m_list</span> = MyModel.objects.<span style="color: #b294bb;">filter</span><span style="color: #c5c8c6;">(</span>is_new=<span style="color: #81a2be;">True</span><span style="color: #c5c8c6;">)</span>
+    <span style="color: #b5bd68;">return</span> render_to_response<span style="color: #c5c8c6;">(</span>template_name, <span style="color: #8abeb7;">{</span><span style="color: #8abeb7;">'m_list'</span>: m_list<span style="color: #8abeb7;">}</span><span style="color: #c5c8c6;">)</span>
+</pre>
+</div>
+
+<p>
+如你所见,这个例子中,URLconf指定了 template<sub>name</sub> 。 而视图函数会把它当成另一个参数。
+</p></li>
+
+<li><p>
+比如你可能会想增加这样一个URL, <i>mydata/birthday</i>,
+这个URL等价于 <i>mydata/jan/06</i> 。这时你可以这样利用额外URLconf参数:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #f0c674;">urlpatterns</span> = patterns<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">''</span>,
+    <span style="color: #8abeb7;">(</span>r<span style="color: #8abeb7;">'^mydata/birthday/$'</span>, views.my_view, <span style="color: #f0c674;">{</span><span style="color: #8abeb7;">'month'</span>: <span style="color: #8abeb7;">'jan'</span>, <span style="color: #8abeb7;">'day'</span>: <span style="color: #8abeb7;">'06'</span><span style="color: #f0c674;">}</span><span style="color: #8abeb7;">)</span>,
+    <span style="color: #8abeb7;">(</span>r<span style="color: #8abeb7;">'^mydata/(?P&lt;month&gt;\w{3})/(?P&lt;day&gt;\d\d)/$'</span>, views.my_view<span style="color: #8abeb7;">)</span>,
+<span style="color: #c5c8c6;">)</span>
+</pre>
+</div>
+
+<p>
+在这里最帅的地方莫过于你根本不用改变你的视图函数。
+视图函数只会关心它获得了参数,
+它不会去管这些参数到底是捕捉回来的还是被额外提供的。
+month和day
+</p></li>
+
+<li>捕捉值和额外参数直接的优先级
+当冲突发生时， 额外URLconf参数优先于捕捉值。</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-2">
+<h2 id="orgheadline10"><span class="section-number-2">9</span> 第九章 模板高级进阶</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+木曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-05-07 Tue&gt;</span></span>
+</p>
+
+<ol class="org-ol">
+<li>关闭html自动转义
+<ul class="org-ul">
+<li><p>
+对于单独的变量
+</p>
+
+<p>
+用safe过滤器为单独的变量关闭自动转意：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">This will be escaped: <span style="color: #c5c8c6;">{</span><span style="color: #8abeb7;">{</span> data <span style="color: #8abeb7;">}</span><span style="color: #c5c8c6;">}</span>
+This will <span style="color: #b5bd68;">not</span> be escaped: <span style="color: #c5c8c6;">{</span><span style="color: #8abeb7;">{</span> data|safe <span style="color: #8abeb7;">}</span><span style="color: #c5c8c6;">}</span>
+</pre>
+</div>
+
+<p>
+你可以把safe当做safe from further escaping的简写，或者当做可以被直接译成HTML的内容。在这个例子
+里，如果数据包含''，那么输出会变成：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">This will be escaped: &amp;lt;b&amp;gt;
+This will <span style="color: #b5bd68;">not</span> be escaped: &lt;b&gt;
+</pre>
+</div>
+
+<ul class="org-ul">
+<li><p>
+对于模板块
+</p>
+
+<p>
+为了控制模板的自动转意,用标签 <code>autoescape</code> 来包装整个模板(或者模板中常用的部分),就像这样：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&amp;#37; = % &amp;#123; = {</span>
+<span style="color: #c5c8c6;">{</span>&amp;<span style="color: #969896; font-style: italic;">#</span><span style="color: #969896; font-style: italic;">37; autoescape off &amp;#37;}</span>
+Hello <span style="color: #8abeb7;">{</span>&amp;<span style="color: #969896; font-style: italic;">#</span><span style="color: #969896; font-style: italic;">123; name &amp;#123;}</span>
+<span style="color: #f0c674;">{</span>&amp;<span style="color: #969896; font-style: italic;">#</span><span style="color: #969896; font-style: italic;">37; endautoescape &amp;#37;}</span>
+</pre>
+</div></li>
+</ul>
+<p>
+auto-escaping 标签的作用域不仅可以影响到当前模板还可以通过
+include标签作用到其他标签,就像block标签一样。
+</p></li>
+</ul></li>
+
+<li>Django有两种方法加载模板
+<ul class="org-ul">
+<li>django.template.loader.get<sub>template</sub>(template<sub>name</sub>) ：
+get<sub>template</sub> 根据给定的模板名称返回一个
+已编译的模板（一个 Template 对象）。
+如果模板不存在，就触发 TemplateDoesNotExist 的异常。</li>
+<li>django.template.loader.select<sub>template</sub>(template<sub>name</sub><sub>list</sub>) ：
+select<sub>template</sub> 很像get<sub>template</sub> ，不过它是以模板名称的列表作为参数的。
+它会返回列表中存在的第一个模板。 如果模板都不存在，
+将会触发TemplateDoesNotExist异常。</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-2">
+<h2 id="orgheadline11"><span class="section-number-2">10</span> 第十章 数据模型高级进阶</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+土曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-05-11 Sat&gt;</span></span>
+</p>
+<ol class="org-ol">
+<li><p>
+打开Session功能：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #b294bb;">'django.contrib.sessions.middleware.SessionMiddleware'</span>
+
+INSTALLED_APPS &#20013;&#26377; <span style="color: #8abeb7;">'django.contrib.sessions'</span>
+
+<span style="color: #c5c8c6;">(</span>&#21035;&#24536;&#20102;&#36816;&#34892;manage.py syncdb<span style="color: #c5c8c6;">)</span>
+</pre>
+</div></li>
+<li>在视图中使用Session
+<ul class="org-ul">
+<li>SessionMiddleware 激活后，每个传给视图(view)函数的第一个参数``HttpRequest``
+对象都有一个 session 属性，这是一个字典型的对象。</li>
+</ul></li>
+<li>会话密钥(session key)</li>
+<li>设置Cookies:
+<code>request.session.set_test_cookie()</code>
+后续view中：
+<code>request.seesion.test_cookie_worked()</code></li>
+<li>认证(authentication)框架</li>
+<li>注意点：
+<ul class="org-ul">
+<li><code>session</code> 是在 <code>request</code> 中的， <code>set_cookie</code> 是在 <code>response=HttpResponse</code></li>
+
+<li>被设置的 <code>session</code> 并不会在调试工具中的cookie出现</li>
+</ul></li>
+
+<li>疑问点：
+<ul class="org-ul">
+<li>关于这些session属性怎么设置，直接写入setting.py文件么？
+参考地址：<a href="https://docs.djangoproject.com/en/dev/ref/settings/#sessions">https://docs.djangoproject.com/en/dev/ref/settings/#sessions</a></li>
+
+<li>在设计登录表单时，如何判断输入的是合法字符，使得提交按钮生效？</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline14" class="outline-2">
+<h2 id="orgheadline14"><span class="section-number-2">11</span> 第十二章 部署Django</h2>
+<div class="outline-text-2" id="text-11">
+</div><div id="outline-container-orgheadline13" class="outline-3">
+<h3 id="orgheadline13"><span class="section-number-3">11.1</span> Linux</h3>
+<div class="outline-text-3" id="text-11-1">
+</div><div id="outline-container-orgheadline12" class="outline-4">
+<h4 id="orgheadline12"><span class="section-number-4">11.1.1</span> mod<sub>wsgi</sub></h4>
+<div class="outline-text-4" id="text-11-1-1">
+<ol class="org-ol">
+<li><p>
+Install it on Ubuntu12.04
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo aptitude install libapache2-mod-wsgi
+</pre>
+</div></li>
+<li><p>
+Install from source
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">mkdir ~/sources
+<span style="color: #b294bb;">cd</span> ~/sources
+wget http://modwsgi.googlecode.com/files/mod_wsgi-3.3.tar.gz
+tar xvfz mod_wsgi-3.3.tar.gz
+
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">Before continuing further, we will grab two different packages from aptitude.</span>
+sudo aptitude install python-dev apache2-prefork-dev
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline15" class="outline-2">
+<h2 id="orgheadline15"><span class="section-number-2">12</span> Q&amp;A</h2>
+<div class="outline-text-2" id="text-12">
+<ol class="org-ol">
+<li><p>
+Q: Django Models (1054, "Unknown column" XXXX.id in 'field list'") <br >
+A: <code>manage.py sqlall [appname]</code> to get the sql.
+</p>
+<pre class="example">
+ALTER TABLE tb_realtime_data ADD COLUMN id INTEGER FIRST;
+ALTER TABLE software_type DROP COLUMN upid;
+</pre></li>
+<li>Q: Django automatic primary key fields <br >
+A: <a href="https://docs.djangoproject.com/en/1.6/topics/db/models/#automatic-primary-key-fields">Automatic primary key fields</a></li>
+<li><p>
+Q: 1136, "Column count doesn't match value count at row 1" <br >
+A: <b>始终记住，django使用模型时创建数据库会多创建一列，id列，在第一列，这个非常非常的重要。
+无论是否有主键，都有id列的存在。因此在插入数据的时候，必须写明要插入的列。例如：</b>
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sql"><span style="color: #969896; font-style: italic;">-- &#22312;&#31532;&#19968;&#21015;&#26159;id&#21015;&#65292;&#33258;&#22686;&#38271;&#12290;</span>
+<span style="color: #b5bd68;">INSERT</span> <span style="color: #b5bd68;">INTO</span> tb_realtime_data<span style="color: #c5c8c6;">(</span>node_id, sensor_id, <span style="color: #b5bd68;">data</span>, insert_time<span style="color: #c5c8c6;">)</span> <span style="color: #b5bd68;">VALUES</span> <span style="color: #c5c8c6;">(</span>
+    <span style="color: #b5bd68;">new</span>.node_id,
+    <span style="color: #b5bd68;">new</span>.sensor_id,
+    <span style="color: #b5bd68;">new</span>.<span style="color: #b5bd68;">data</span>,
+    <span style="color: #b5bd68;">new</span>.insert_time
+<span style="color: #c5c8c6;">)</span>;
+</pre>
+</div></li>
+<li><p>
+Q: 模板中字典的遍历 <br >
+A: 都是使用 <code>.</code> 运算符，例如：
+</p>
+
+<p>
+Python代码
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #f0c674;">contents</span> = <span style="color: #c5c8c6;">{</span>
+    <span style="color: #8abeb7;">"home"</span>: &#20027;&#39029;,
+    <span style="color: #8abeb7;">"about"</span>: &#20851;&#20110;,
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div>
+
+<p>
+模板
+</p>
+<div class="org-src-container">
+
+<pre class="src src-html">{% for k, v in contents.items %}
+&lt;<span style="color: #de935f;">li</span>&gt;&lt;<span style="color: #de935f;">a</span> <span style="color: #f0c674;">href</span>=<span style="color: #8abeb7;">"/nori/{{ k }}"</span>&gt;{{ v }}&lt;/<span style="color: #de935f;">a</span>&gt;&lt;/<span style="color: #de935f;">li</span>&gt;
+{% endfor %}
+</pre>
+</div>
+
+<p>
+<b>Attetion</b>:
+字典本身是Hash散列的，所以无法指望其按你想要的顺序打印。
+</p></li>
+<li><p>
+Q: 模板中元组的使用 <br >
+A: 使用 <code>.</code> 运算符
+</p>
+
+<p>
+Python代码
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #b294bb;">'contents'</span>: <span style="color: #c5c8c6;">(</span>
+    <span style="color: #8abeb7;">(</span><span style="color: #b294bb;">"home"</span>, <span style="color: #b294bb;">"&#20027;&#39029;"</span><span style="color: #8abeb7;">)</span>,
+    <span style="color: #8abeb7;">(</span><span style="color: #b294bb;">"node"</span>, <span style="color: #b294bb;">"&#33410;&#28857;"</span><span style="color: #8abeb7;">)</span>,
+<span style="color: #c5c8c6;">)</span>,
+</pre>
+</div>
+
+<p>
+模板
+</p>
+<div class="org-src-container">
+
+<pre class="src src-html">{% for v in contents %}
+&lt;<span style="color: #de935f;">li</span>&gt;&lt;<span style="color: #de935f;">a</span> <span style="color: #f0c674;">href</span>=<span style="color: #8abeb7;">"/nori/{{ v.0 }}"</span>&gt;{{ v.1 }}&lt;/<span style="color: #de935f;">a</span>&gt;&lt;/<span style="color: #de935f;">li</span>&gt;
+{% endfor %}
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
+<p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
+<p class="date">2013-04-14</p>
+<p class="export-date">2016-10-12 Wed 14:04</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="validation"></p>
+<p class="last-modification-time">2016-10-12 Wed 14:04</p></div><script asyn src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+</div>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 2016-10-12 Wed 13:44 -->
+<meta  charset="utf-8">
+<meta  name="viewport" content="width=device-width, initial-scale=1">
+<title>My First Article</title>
+<meta  name="generator" content="Org-mode">
+<meta  name="author" content="冰糖火箭筒(Junjia Ni)">
+<meta  name="description" content="第一次自己折腾静态博客系统"
+>
+<meta  name="keywords" content="design,感想">
+<link rel="stylesheet" type="text/css" href="/static/article.css">
+</head>
+<body>
+<div id="content">
+<h1 class="title">My First Article</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">1. 前言</a></li>
+<li><a href="#orgheadline2">2. 搭建此博客的目的</a></li>
+<li><a href="#orgheadline15">3. 此博客的整体设计</a>
+<ul>
+<li><a href="#orgheadline3">3.1. 设计哲学</a></li>
+<li><a href="#orgheadline14">3.2. 设计的局部细节</a>
+<ul>
+<li><a href="#orgheadline4">3.2.1. Jekyll搭建</a></li>
+<li><a href="#orgheadline5">3.2.2. 中文版</a></li>
+<li><a href="#orgheadline6">3.2.3. English Version</a></li>
+<li><a href="#orgheadline7">3.2.4. 我的blog目录</a></li>
+<li><a href="#orgheadline8">3.2.5. blog内容(类别)的设计</a></li>
+<li><a href="#orgheadline9">3.2.6. blog标签系统(Tag-Cloud)的设计</a></li>
+<li><a href="#orgheadline10">3.2.7. blog中使用的Icons</a></li>
+<li><a href="#orgheadline11">3.2.8. blog中搜索引擎</a></li>
+<li><a href="#orgheadline12">3.2.9. blog分享</a></li>
+<li><a href="#orgheadline13">3.2.10. blog中的一些快捷功能</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgheadline17">4. 致Emacser： Markdown-Mode</a>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#orgheadline16">4.0.0.1. Markdonw 参考文档</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgheadline18">5. 结尾</a></li>
+<li><a href="#orgheadline19">6. 更新的地方</a></li>
+</ul>
+</div>
+</div>
+<pre class="example">
+这个是很久之前的文章了，现在静态博客输出方案已经改变。本篇文章仅供参考。
+</pre>
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+很高兴你能看我的第一篇文章，虽然以前也写过一些东西，但是始终觉得只是小打小闹，
+没有任何技术blog的意味，一度让我不知所错。而这次在github上搭建的blog可以说是
+一个时代的结束，一个全新的开始。虽然我现在还是不知道如何写出一篇高质量的blog，
+但是我还是想先写一篇: Hello, world.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2"><span class="section-number-2">2</span> 搭建此博客的目的</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+其实我很早以前就想开始写自己的博客，可是却不知道如何写博客，就算写了一些东西，
+最后给我的感觉是笔记而不是博客，一堆知识的堆叠，没有层次，没有目的。
+于是对于写blog这件很具有挑战性的活动渐渐失去了兴趣。
+然而我看到我的战友<a href="http://forestgump.me">van9ogh</a> 每月坚持写博客，积累了许多的的知识。
+很是羡慕，很想自己写。但是每次都是由于种种原因和自身的懒惰，都只能作罢。
+但是现在是寒假休假时间，在家“无聊”时开始Jekyll静态网站的搭建感觉这个真是一个很有意思的事情。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline15" class="outline-2">
+<h2 id="orgheadline15"><span class="section-number-2">3</span> 此博客的整体设计</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3"><span class="section-number-3">3.1</span> 设计哲学</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+哲学这个词写出来感觉像是在吓唬人，不过请原谅我这么称呼。
+设计的总体上是K.I.S.S<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>(Keep It Simple, Stupid)原则。
+如同这些blog站点：<a href="http://au9ustine.github.com/">au9ustine</a>, <a href="http://forestgump.me">van9ogh</a>, <a href="http://kyle.xlau.org/">Kylexlau</a>, <a href="http://pradeepnayak.in/">Pradeep Nayak</a>, <a href="http://enrmarc.github.com/">Enrmarc</a>, <a href="http://stevelosh.com/">Steve Losh</a>等等。
+但是我感觉最后的成品给人的感觉是很重的。不过看到那些别人精心设计的CSS样式时又不舍得丢弃，
+于是最后就变成这个样子了。这个是现阶段的产物，一种玩的心态吧，看到有趣的就想加入，最后显得很臃肿。
+而且现在这年龄还是不想那么正式，严肃中带着些许幽默，这就是我现在想达到的效果。
+不过我还是让其能够尽量保持简洁。在这其中我更为注重的是**文章**这个版面的设计，
+如果你感觉我这个版面设计的有碍于阅读一定要告诉我。
+提出的意见可以是文章背景色，字体的大小颜色，标题和正文的大小颜色等等，
+总之就是你认为适合阅读的字体颜色大小和对比度的布局设计。谢谢。
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline14" class="outline-3">
+<h3 id="orgheadline14"><span class="section-number-3">3.2</span> 设计的局部细节</h3>
+<div class="outline-text-3" id="text-3-2">
+</div><div id="outline-container-orgheadline4" class="outline-4">
+<h4 id="orgheadline4"><span class="section-number-4">3.2.1</span> Jekyll搭建</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<p>
+我记得我一年前就开始尝试搭建Jekyll的站点，当时想写blog，但是最终也只是尝试了一下，
+使用了<a href="http://octopress.org/"> Octopress</a> 来搭建的。不过现在已经被我删除了。全新的站点如同现在所示。
+Jekyll的搭建过程，网络上已经有许多的高手写的很详细了，我在这里就不再继续累述了，
+只是将我搭建过程中参考的网站地址给出：
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline5" class="outline-4">
+<h4 id="orgheadline5"><span class="section-number-4">3.2.2</span> 中文版</h4>
+<div class="outline-text-4" id="text-3-2-2">
+<ol class="org-ol">
+<li><a href="http://www.soimort.org/posts/101/">像黑客一样写博客——Jekyll入门</a></li>
+<li><a href="http://beiyuu.com/github-pages/">使用Github Pages建独立博客</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline6" class="outline-4">
+<h4 id="orgheadline6"><span class="section-number-4">3.2.3</span> English Version</h4>
+<div class="outline-text-4" id="text-3-2-3">
+<ol class="org-ol">
+<li><a href="https://github.com/mojombo/jekyll/wiki">Jekyll Documents</a></li>
+<li><a href="http://net.tutsplus.com/tutorials/other/building-static-sites-with-jekyll/">Building Static Sites with Jekyll</a></li>
+<li><a href="https://github.com/mojombo/jekyll/wiki/install">Jekyll Install</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline7" class="outline-4">
+<h4 id="orgheadline7"><span class="section-number-4">3.2.4</span> 我的blog目录</h4>
+<div class="outline-text-4" id="text-3-2-4">
+<div class="org-src-container">
+
+<pre class="src src-sh">~ $ tree -L 2
+.
+&#9500;&#9472;&#9472; 404.html
+&#9500;&#9472;&#9472; about
+&#9474;&#160;&#160; &#9492;&#9472;&#9472; index.md
+&#9500;&#9472;&#9472; archive
+&#9474;&#160;&#160; &#9492;&#9472;&#9472; index.html
+&#9500;&#9472;&#9472; categories
+&#9474;&#160;&#160; &#9492;&#9472;&#9472; index.html
+&#9500;&#9472;&#9472; CNAME
+&#9500;&#9472;&#9472; _config.yml
+&#9500;&#9472;&#9472; css
+&#9500;&#9472;&#9472; font
+&#9500;&#9472;&#9472; img
+&#9500;&#9472;&#9472; _includes
+&#9500;&#9472;&#9472; index.html
+&#9500;&#9472;&#9472; js
+&#9500;&#9472;&#9472; _layouts
+&#9500;&#9472;&#9472; _plugins
+&#9500;&#9472;&#9472; _posts             <span style="color: #969896; font-style: italic;">#</span><span style="color: #969896; font-style: italic;">The three categories: blog, documents and note</span>
+&#9474;&#160;&#160; &#9500;&#9472;&#9472; blog
+&#9474;&#160;&#160; &#9500;&#9472;&#9472; docs
+&#9474;&#160;&#160; &#9492;&#9472;&#9472; note
+&#9500;&#9472;&#9472; public
+&#9500;&#9472;&#9472; README.md
+&#9500;&#9472;&#9472; rss
+&#9474;&#160;&#160; &#9492;&#9472;&#9472; index.html
+&#9500;&#9472;&#9472; _site
+&#9500;&#9472;&#9472; tags
+&#9474;&#160;&#160; &#9492;&#9472;&#9472; index.html
+&#9492;&#9472;&#9472; test                <span style="color: #969896; font-style: italic;">#</span><span style="color: #969896; font-style: italic;">Store the test files</span>
+</pre>
+</div>
+<p>
+<b>Linux and Unix <a href="http://www.computerhope.com/unix/tree.htm">tree</a> Command</b>
+</p>
+
+<p>
+<b>You can use below command to list directory tree listing
+(from <a href="http://systembash.com/content/one-line-linux-command-to-print-out-directory-tree-listing/">One Line Linux Command to Print Out Directory Tree Listing</a>)</b>
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">~ $ ls -R | grep <span style="color: #8abeb7;">":$"</span> | sed -e <span style="color: #8abeb7;">'s/:$//'</span> -e <span style="color: #8abeb7;">'s/[^-][^\/]*\//--/g'</span> -e <span style="color: #8abeb7;">'s/^/ /'</span> -e <span style="color: #8abeb7;">'s/-/|/'</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-4">
+<h4 id="orgheadline8"><span class="section-number-4">3.2.5</span> blog内容(类别)的设计</h4>
+<div class="outline-text-4" id="text-3-2-5">
+<p>
+博客在内容上分为3部分，一个是blog，用来存放写的blog，主要是原创或者80%是原创的文章会被定义为blog；一个是note，用来存放写的笔记，如一些练习题目的练习题，翻译的英文文章，有趣的Linux命令使用等等；最后一个是docs，如果有软件开发的话，这里就是存放的该软件的说明文档。
+本来想写一个类别(Categories)的页面，但是赶在农历贰零壹贰年拾贰月廿九日前上传github，所以这个暂时不做了，如果更新了会在本文的末尾写上更新时间。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-4">
+<h4 id="orgheadline9"><span class="section-number-4">3.2.6</span> blog标签系统(Tag-Cloud)的设计</h4>
+<div class="outline-text-4" id="text-3-2-6">
+<p>
+完成了Tag-Cloud(Simple)，在每篇文章的右侧会列出该文章被标记的标签，单击其中一个标签，显示该标签包含的文章。这个标签的来源： <a href="http://enrmarc.github.com/blog/Jekyll-tagcloud/">Jekyll-tagcloud</a>
+不过我设计的页面有些许寒酸，如果你有什么好的建议或者意见可以告诉我，谢谢。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-4">
+<h4 id="orgheadline10"><span class="section-number-4">3.2.7</span> blog中使用的Icons</h4>
+<div class="outline-text-4" id="text-3-2-7">
+<p>
+我本来是想使用Github的全套图标的<a href="https://github.com/styleguide/css/7.0">Github Icons</a>,但是感觉那个字体 <a href="https://github.com/blog/1135-the-making-of-octicons">Octicons-regular</a> 始终无法正常使用，如果你知道如何使用<a href="https://github.com/styleguide/css/7.0">Github Icons</a>的话，希望能够告诉我，不胜感激啊。
+后来找了一个替代的Icons: <a href="http://fortawesome.github.com/Font-Awesome/">Awesome Icons</a>，使用起来相当的简单，而且效果不错。
+当然你也可以使用 <a href="http://twitter.github.com/bootstrap/">Bootstrap</a> 中使用 <a href="http://glyphicons.com/">Glyphicons Icons</a>，设计的也是相当的不错。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-4">
+<h4 id="orgheadline11"><span class="section-number-4">3.2.8</span> blog中搜索引擎</h4>
+<div class="outline-text-4" id="text-3-2-8">
+<p>
+此次blog中搜索的设计的想法是使用 <a href="https://www.google.com/cse/">Google Custom Search Engine</a>，可能受到网络的原因以及其他未知的原因，实际效果可能不是很理想，但是Google搜索是很强大，我还是决定先试用一段时间。还有一个原因就是现在能力有限，实现的搜索引擎也是不尽如人意，所以觉得暂缓搜索引擎的开发，等待时机成熟时再来尝试。
+期间我也看到了一些Jekyll站点使用自己的搜索，比如下面的站点：
+</p>
+<ol class="org-ol">
+<li><a href="http://pradeepnayak.in/technology/2012/06/20/search-for-your-jekyll-site/">Search for your Jekyll Site</a></li>
+<li><a href="http://kingauthur.info/2012/12/03/the-things-about-jekyll/">为Jekyll添加静态搜索</a></li>
+</ol>
+<p>
+有空的时候会自己设计搜索，如果你有什么好的想法或者想和我一起研究的.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline12" class="outline-4">
+<h4 id="orgheadline12"><span class="section-number-4">3.2.9</span> blog分享</h4>
+<div class="outline-text-4" id="text-3-2-9">
+<ol class="org-ol">
+<li><a href="http://www.douban.com/service/badgemakerjs">豆瓣收藏秀</a></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgheadline13" class="outline-4">
+<h4 id="orgheadline13"><span class="section-number-4">3.2.10</span> blog中的一些快捷功能</h4>
+<div class="outline-text-4" id="text-3-2-10">
+<p>
+在阅读文章时可以使用左，右键（或J,j,K,k键）来翻看前一篇，后一篇文章。
+在任何页面的快捷键:
+</p>
+<ul class="org-ul">
+<li>H-&gt;Home</li>
+<li>ESC-&gt;About(ICECREAM:ESC)</li>
+<li>R-&gt;RSS</li>
+<li>A-&gt;Archive</li>
+<li>/-&gt;GCE(Google Custom Search)</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline17" class="outline-2">
+<h2 id="orgheadline17"><span class="section-number-2">4</span> 致Emacser： Markdown-Mode</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+使用Emacs来写blog真的是一件不错的事情，
+当使用 <a href="http://jblevins.org/">Jason Blevins</a> 写的 <a href="http://jblevins.org/projects/markdown-mode/markdown-mode.el">markdown-mode.el</a> 来写Markdown时就更加是如虎添翼。
+其官方文档是 <a href="http://jblevins.org/projects/markdown-mode/">Emacs Markdown Mode</a>  ，EmaceWiki中的文档是 <a href="http://emacswiki.org/emacs/MarkdownMode">MarkdownMode</a>。
+</p>
+</div>
+
+<div id="outline-container-orgheadline16" class="outline-5">
+<h5 id="orgheadline16"><span class="section-number-5">4.0.0.1</span> Markdonw 参考文档</h5>
+<div class="outline-text-5" id="text-4-0-0-1">
+<p>
+<b>繁文版:</b>
+</p>
+<ol class="org-ol">
+<li><a href="http://markdown.tw/#blockquote">Markdown: Syntax</a></li>
+</ol>
+
+<p>
+<b>English Version:</b>
+</p>
+<ol class="org-ol">
+<li><a href="http://daringfireball.net/projects/markdown/syntax">Markdown: Syntax</a></li>
+<li><a href="http://blog.markdownwiki.com/">Improving Wiki Editing with Markdown</a>
+  <b>致Vimer, 不好意思，这里暂时不提供vim的markdown-mode，
+我相信你们也可以自行搜索到，我现在暂时使用Emacs，虽然Vim也是我喜欢的编辑器。</b></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline18" class="outline-2">
+<h2 id="orgheadline18"><span class="section-number-2">5</span> 结尾</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+非常感谢你能够阅读到最后，以上只是我在这次blog设计中考虑到的一些问题，
+如果还有一些细节我没有考虑到，希望你能指出，我将及时修正。
+这里我将记录学习、学术时的文章，主要记录自己在学习人类文化和科技时的部分过程和经历。
+如果想知道我看过哪些书，电影或者听过哪些音乐，了解我的另一面，请移步 <a href="http://www.douban.com/people/creamidea/">我的豆瓣</a>。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline19" class="outline-2">
+<h2 id="orgheadline19"><span class="section-number-2">6</span> 更新的地方</h2>
+<div class="outline-text-2" id="text-6">
+1. <a href="{{ site.url }}{% post_url 2013-02-13-How-to-create-article-contents-by-js-and-css %}">
+      How to create article contents by js and CSS
+   </a>
+</br>
+2. <a href="{{ site.url }}{% post_url 2013-04-05-A-New-Design %}">A New Design</a>
+
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-09-25 Wed&gt;</span></span>
+经过两天的修改，将整个blog更新成现在的模样。不过还有许多需要完善的地方，后期在继续吧。
+这次主要是文章排版和主页的更换以及归档页面和标签页面的初期整合，后期的话将其作为首页，只用一个页面。
+最头疼的地方就是浏览器兼容性问题了。现代浏览器基本都有用。
+</p>
+
+<p>
+刚刚去标注填坑的时候，发现有些标题太深了，估计是自己不会写文章。以后要加强这方面的训练。
+</p>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://en.wikipedia.org/wiki/KISS_principle">https://en.wikipedia.org/wiki/KISS_principle</a>
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
+<p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
+<p class="date">2013-02-07</p>
+<p class="export-date">2016-10-12 Wed 13:44</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="validation"></p>
+<p class="last-modification-time">2016-10-12 Wed 12:39</p></div><script asyn src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+</div>
+</body>
+</html>

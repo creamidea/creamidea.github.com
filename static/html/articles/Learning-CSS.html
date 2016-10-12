@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 2016-10-12 Wed 13:44 -->
+<meta  charset="utf-8">
+<meta  name="viewport" content="width=device-width, initial-scale=1">
+<title>Learning CSS</title>
+<meta  name="generator" content="Org-mode">
+<meta  name="author" content="冰糖火箭筒(Junjia Ni)">
+<meta  name="description" content="学习CSS的笔记"
+>
+<meta  name="keywords" content="CSS,css">
+<link rel="stylesheet" type="text/css" href="/static/article.css">
+</head>
+<body>
+<div id="content">
+<h1 class="title">Learning CSS</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">1. 前言</a></li>
+<li><a href="#orgheadline16">2. CSS权威指南笔记：</a>
+<ul>
+<li><a href="#orgheadline2">2.1. CSS和文档：</a></li>
+<li><a href="#orgheadline3">2.2. 选择器：</a></li>
+<li><a href="#orgheadline4">2.3. 结构和层叠：</a></li>
+<li><a href="#orgheadline5">2.4. 值和单位：</a></li>
+<li><a href="#orgheadline6">2.5. 字体：</a></li>
+<li><a href="#orgheadline7">2.6. 文本属性：</a></li>
+<li><a href="#orgheadline8">2.7. 基本视觉格式化：</a></li>
+<li><a href="#orgheadline9">2.8. 内边距、边框和外边距：</a></li>
+<li><a href="#orgheadline10">2.9. 颜色和背景：</a></li>
+<li><a href="#orgheadline11">2.10. 浮动和定位：</a></li>
+<li><a href="#orgheadline12">2.11. 表布局：</a></li>
+<li><a href="#orgheadline13">2.12. 列表与生成内容：</a></li>
+<li><a href="#orgheadline14">2.13. 用户界面样式：</a></li>
+<li><a href="#orgheadline15">2.14. 非屏幕媒体：</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline26">3. 响应式WEB设计（HTML5和CSS3实战）：</a>
+<ul>
+<li><a href="#orgheadline17">3.1. HTML5、CSS3及响应式设计入门</a></li>
+<li><a href="#orgheadline18">3.2. 媒体查询：支持不同的视口</a></li>
+<li><a href="#orgheadline19">3.3. 拥抱流式布局</a></li>
+<li><a href="#orgheadline20">3.4. 响应式设计中的HTML5</a></li>
+<li><a href="#orgheadline21">3.5. 快速而有效的CSS技巧</a></li>
+<li><a href="#orgheadline22">3.6. 用CSS3创造令人惊艳的美</a></li>
+<li><a href="#orgheadline23">3.7. CSS3过渡、变形和动画</a></li>
+<li><a href="#orgheadline24">3.8. 用HTML5和CSS3征服表单</a></li>
+<li><a href="#orgheadline25">3.9. 解决跨浏览器问题</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline32">4. 2013-05-20学习CSS笔记，稍候整理：</a>
+<ul>
+<li><a href="#orgheadline27">4.1. CSS入门：</a></li>
+<li><a href="#orgheadline28">4.2. padding:</a></li>
+<li><a href="#orgheadline29">4.3. margin:</a></li>
+<li><a href="#orgheadline30">4.4. border-radius:</a></li>
+<li><a href="#orgheadline31">4.5. border-left:</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline34">5. Learn Layout Website:</a>
+<ul>
+<li><a href="#orgheadline33">5.1. Note:</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline37">6. 布局技巧：</a>
+<ul>
+<li><a href="#orgheadline35">6.1. 八个需要掌握的CSS布局技巧:</a></li>
+<li><a href="#orgheadline36">6.2. 详解CSS布局技巧十则:</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline38">7. Sprites， 图片的特定位置选取：</a></li>
+<li><a href="#orgheadline39">8. CSS Hack:</a></li>
+<li><a href="#orgheadline40">9. CSS 特殊字符：</a></li>
+<li><a href="#orgheadline41">10. CSS 开发常用工具：</a></li>
+<li><a href="#orgheadline42">11. CSS Draw Shape:</a></li>
+<li><a href="#orgheadline44">12. CSS Pseudo Class/Elements</a>
+<ul>
+<li><a href="#orgheadline43">12.1. <code>:before</code> &amp;&amp; <code>:after</code></a></li>
+</ul>
+</li>
+<li><a href="#orgheadline45">13. CSS white-space Property</a></li>
+<li><a href="#orgheadline46">14. CSS部分术语解释：</a></li>
+<li><a href="#orgheadline47">15. HTML Useful Character Entities:</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+CSS，现在让我既爱你又恨你啊。
+到现在终于将<a href="http://www.amazon.com/CSS-Definitive-Guide-Eric-Meyer/dp/0596527330">CSS: The Definitive Guide(3rd Edition)</a>初略的浏览了一遍。
+不能说很熟悉，但是感觉对于CSS有了进一步的了解，尤其是对于布局方面。
+虽然我现在仍然不能单独写出很好的CSS布局以及细节的排版等等（这句简直是废话），
+虽然我现在仍然需要借助像<a href="http://twitter.github.io/bootstrap/">Bootstrap</a> 这样的库，
+但是我想……
+</p>
+
+<p>
+实话是我仍然不了解CSS。现在只能稍微梳理一下今天看的书的知识点。但愿可以……
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline16" class="outline-2">
+<h2 id="orgheadline16"><span class="section-number-2">2</span> CSS权威指南笔记：</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2"><span class="section-number-3">2.1</span> CSS和文档：</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+主要讲了CSS的由来，你可以向看小说一样浏览过去，尽情的感受其强大的威力吧。
+</p>
+
+<p>
+感觉值得停留的一页：P16，这页讲到了display，这个有很重要的作用，现在就
+跟他打个招呼吧：）
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3"><span class="section-number-3">2.2</span> 选择器：</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+主要讲了选择器，对于我来说，需要记忆的是：
+</p>
+<ol class="org-ol">
+<li><code>*</code> 通配选择器</li>
+<li>理解 「结合选择器和声明分组」的概念</li>
+<li>属性选择器</li>
+<li>伪类</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4"><span class="section-number-3">2.3</span> 结构和层叠：</h3>
+<div class="outline-text-3" id="text-2-3">
+<ol class="org-ol">
+<li><p>
+特殊性（详细规则：P70）
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">&#23646;&#24615;&#26435;&#37325;&#20381;&#27425;&#22686;&#21152; </span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #de935f;">h1 </span><span style="color: #c5c8c6;">{}</span>                           <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">0,0,0,1</span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #de935f;">p em </span><span style="color: #c5c8c6;">{}</span>                         <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">0,0,0,2</span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #de935f;">.grade </span><span style="color: #c5c8c6;">{}</span>                       <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">0,0,1,0</span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #de935f;">*.bright</span><span style="color: #c5c8c6;">{}</span>                      <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">0,0,1,0</span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #de935f;">p.bright em.dark </span><span style="color: #c5c8c6;">{}</span>             <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">0,0,2,2</span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #de935f;">#id216 </span><span style="color: #c5c8c6;">{}</span>                       <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">0,1,0,0</span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #de935f;">div#sidebar *</span><span style="color: #c5c8c6;">[</span><span style="color: #de935f;">href</span><span style="color: #c5c8c6;">]</span><span style="color: #de935f;"> </span><span style="color: #c5c8c6;">{}</span>          <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">0,1,1,1</span><span style="color: #969896; font-style: italic;">*/</span>
+</pre>
+</div>
+<ol class="org-ol">
+<li>继承：
+<ul class="org-ul">
+<li>有些属性会被继承</li>
+<li>有些则不会：如边框</li>
+</ul></li>
+<li><p>
+权重排序：
+</p>
+<pre class="example">
+1. 读者的重要声明
+2. 创作人员的重要声明
+3. 创作人员的正常声明
+4. 读者的正常声明
+5. 用户代理声明
+</pre></li>
+<li><p>
+LVHA:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css">:link <span style="color: #c5c8c6;">{}</span>
+:hover <span style="color: #c5c8c6;">{}</span>
+:visited <span style="color: #c5c8c6;">{}</span>
+:active <span style="color: #c5c8c6;">{}</span>
+</pre>
+</div></li>
+</ol></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5"><span class="section-number-3">2.4</span> 值和单位：</h3>
+<div class="outline-text-3" id="text-2-4">
+<ol class="org-ol">
+<li><p>
+相对长度：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #de935f;">em </span><span style="color: #c5c8c6;">{}</span>                           <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">&#22312;css&#20013;&#65292;1em&#23450;&#20041;&#20026;&#19968;&#31181;&#32473;&#23450;&#23383;&#20307;&#30340;font-size&#20540;</span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #de935f;">ex </span><span style="color: #c5c8c6;">{}</span>                           <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">ex&#25351;&#25152;&#29992;&#23383;&#20307;&#20013;&#23567;&#20889;x&#30340;&#39640;&#24230; P94</span><span style="color: #969896; font-style: italic;">*/</span>
+</pre>
+</div>
+<ol class="org-ol">
+<li>像素理论 P96</li>
+</ol></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6"><span class="section-number-3">2.5</span> 字体：</h3>
+<div class="outline-text-3" id="text-2-5">
+<p>
+字体的话，的确讲的不错，很细。的确，一个好的文章类的网站，字体是很重要的。（感觉只要是网站，有
+文字，字体的设计和排版就显得尤为的重要了。）
+</p>
+
+<p>
+由于讲的很细，不过大体上的话有以下属性，到时需要什么就查手册：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #de935f;">font-family </span><span style="color: #c5c8c6;">{}</span>                  <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">P103</span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #de935f;">font-weight </span><span style="color: #c5c8c6;">{}</span>                  <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">P107</span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #de935f;">font-size </span><span style="color: #c5c8c6;">{}</span>                    <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">P113</span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #de935f;">font-style </span><span style="color: #c5c8c6;">{}</span>                   <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">P121</span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #de935f;">font-variant </span><span style="color: #c5c8c6;">{}</span>                 <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">P123</span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #de935f;">font-stretch </span><span style="color: #c5c8c6;">{}</span>                 <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">P125</span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #de935f;">font-size-adjust </span><span style="color: #c5c8c6;">{}</span>             <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">P125</span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #de935f;">font </span><span style="color: #c5c8c6;">{}</span>                         <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">127</span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #de935f;">line-height </span><span style="color: #c5c8c6;">{}</span>                  <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">P129 &#31532;6&#31456;&#35814;&#32454;&#35828;&#26126;</span><span style="color: #969896; font-style: italic;">*/</span>
+</pre>
+</div>
+
+<p>
+还有就是系统字体了：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css">caption
+icon
+menu
+message-box
+small-caption
+status-bar
+</pre>
+</div>
+
+<p>
+最后就是 <code>@font-face</code>:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #b294bb;">@font-face</span> <span style="color: #c5c8c6;">{</span>
+    <span style="color: #f0c674;">font-family</span>: <span style="color: #8abeb7;">"Scarborough Fair"</span>;
+    <span style="color: #f0c674;">src</span>: url<span style="color: #c5c8c6; background-color: #1d1f21;">(</span><span style="color: #8abeb7;">http://......</span><span style="color: #c5c8c6; background-color: #1d1f21;">)</span>;
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7"><span class="section-number-3">2.6</span> 文本属性：</h3>
+<div class="outline-text-3" id="text-2-6">
+<ol class="org-ol">
+<li>缩进： <code>text-indent</code>
+<ol class="org-ol">
+<li><code>line-height</code> P141-P142</li>
+<li><code>vertical-align</code> P145</li>
+</ol></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8"><span class="section-number-3">2.7</span> 基本视觉格式化：</h3>
+<div class="outline-text-3" id="text-2-7">
+<p>
+这一章主要理解那个盒子: P165
+</p>
+
+<p>
+还有基线和行高： P197
+</p>
+
+<p>
+<code>display</code>: P 205
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9"><span class="section-number-3">2.8</span> 内边距、边框和外边距：</h3>
+<div class="outline-text-3" id="text-2-8">
+<p>
+排版的重点（个人认为）
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10"><span class="section-number-3">2.9</span> 颜色和背景：</h3>
+<div class="outline-text-3" id="text-2-9">
+<p>
+图片的处理，重复（X,Y）。
+</p>
+
+<p>
+一个「复螺旋变形」的演示：<a href="http://meyerweb.com/eric/css/edge/complexspiral/glassy.html">http://meyerweb.com/eric/css/edge/complexspiral/glassy.html</a>
+其实质就是body设置了一个背景图片（清晰），然后在h2标签中使用background-position定位功能设置
+一张图片（模糊）。用到的属性： <code>0 0</code> 的定位， <code>no-repeat</code>, <code>fixed</code>
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11"><span class="section-number-3">2.10</span> 浮动和定位：</h3>
+<div class="outline-text-3" id="text-2-10">
+<ol class="org-ol">
+<li><p>
+浮动：允许其他内容（如：文本）「围绕」某一容器。
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">P289 </span><span style="color: #969896; font-style: italic;">*/</span>
+float
+left | right | none | inherit
+</pre>
+</div>
+<p>
+<b>Attention:</b>
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">P304 </span><span style="color: #969896; font-style: italic;">*/</span>
+clear
+left | right | both | none | inherit
+</pre>
+</div>
+<ol class="org-ol">
+<li><p>
+定位：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">P309 </span><span style="color: #969896; font-style: italic;">*/</span>
+position
+&lt;length&gt; | &lt;percentage&gt; | auto | inherit
+</pre>
+</div>
+<ul class="org-ul">
+<li>static:</li>
+<li>relative:</li>
+<li>absolute:</li>
+<li>fixed:</li>
+</ul></li>
+<li><p>
+内容溢出和裁剪：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">P315</span><span style="color: #969896; font-style: italic;">*/</span>
+overflow
+visible | hidden | scroll | auto | inherit
+</pre>
+</div></li>
+<li><p>
+其他一些重要的：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">P313 </span><span style="color: #969896; font-style: italic;">*/</span>
+min-width min-height
+
+max-width max-height
+
+<span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">P317 </span><span style="color: #969896; font-style: italic;">*/</span>
+clip
+
+<span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">P321 </span><span style="color: #969896; font-style: italic;">*/</span>
+visibility
+</pre>
+</div></li>
+<li>Z轴上的放置：
+P333</li>
+</ol></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12"><span class="section-number-3">2.11</span> 表布局：</h3>
+<div class="outline-text-3" id="text-2-11">
+<p>
+没有仔细看，因为暂时用不到
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline13" class="outline-3">
+<h3 id="orgheadline13"><span class="section-number-3">2.12</span> 列表与生成内容：</h3>
+<div class="outline-text-3" id="text-2-12">
+<p>
+这章可以看看，知道如何制作列表，更多的还是去网上看看其他人的优秀案例。
+</p>
+
+<p>
+还有就是标题的自动排序，这个很好啊，不需要js生成，css就可完成。而且很方便。
+实例：
+</p>
+
+<p>
+style.css
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #de935f;">body</span><span style="color: #c5c8c6;">{</span>
+    <span style="color: #f0c674;">counter-reset</span>: chapter 0;
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #de935f;">h1</span><span style="color: #c5c8c6;">{</span>
+    <span style="color: #f0c674;">counter-reset</span>: sub-chapter 0;
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #de935f;">h1:before</span><span style="color: #c5c8c6;">{</span>
+    <span style="color: #f0c674;">counter-increment</span>: chapter;
+    <span style="color: #f0c674;">content</span>: <span style="color: #8abeb7;">"Chapter "</span> counter<span style="color: #8abeb7;">(</span>chapter<span style="color: #8abeb7;">)</span> <span style="color: #8abeb7;">". "</span>;
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #de935f;">h2:before</span><span style="color: #c5c8c6;">{</span>
+    <span style="color: #f0c674;">counter-increment</span>: sub-chapter;
+    <span style="color: #f0c674;">content</span>: counter<span style="color: #8abeb7;">(</span>chapter<span style="color: #8abeb7;">)</span> <span style="color: #8abeb7;">"."</span> counter<span style="color: #8abeb7;">(</span>sub-chapter<span style="color: #8abeb7;">)</span> <span style="color: #8abeb7;">": "</span>;
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div>
+<p>
+index.html
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css">&lt;body&gt;
+  &lt;h1&gt;Font Properties&lt;/h1&gt;
+  &lt;h2&gt;font-size&lt;/h2&gt;
+  &lt;h2&gt;font-weight&lt;/h2&gt;
+  &lt;h2&gt;font-family&lt;/h2&gt;
+
+  &lt;h1&gt;Background Properies&lt;/h1&gt;
+  &lt;h2&gt;background-color&lt;/h2&gt;
+  &lt;h2&gt;background-position&lt;/h2&gt;
+  &lt;h2&gt;background-repeat&lt;/h2&gt;
+&lt;/body&gt;
+</pre>
+</div>
+<p>
+参考：
+</p>
+<ul class="org-ul">
+<li><a href="http://www.w3.org/wiki/CSS/Properties/counter-increment">http://www.w3.org/wiki/CSS/Properties/counter-increment</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline14" class="outline-3">
+<h3 id="orgheadline14"><span class="section-number-3">2.13</span> 用户界面样式：</h3>
+<div class="outline-text-3" id="text-2-13">
+<p>
+自定一些部件吧：如光标，轮廓的颜色，page分页等等
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline15" class="outline-3">
+<h3 id="orgheadline15"><span class="section-number-3">2.14</span> 非屏幕媒体：</h3>
+<div class="outline-text-3" id="text-2-14">
+<p>
+读出页面内容，暂时没有仔细看，不过我感觉以后肯定可以用到。来帮助他们。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline26" class="outline-2">
+<h2 id="orgheadline26"><span class="section-number-2">3</span> 响应式WEB设计（HTML5和CSS3实战）：</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+<b>备注:</b>
+</p>
+<ol class="org-ol">
+<li>初步整理</li>
+<li>作者blog： <a href="http://benfrain.com/">http://benfrain.com/</a></li>
+<li>贯穿全文的项目演示地址：<a href="http://andthewinnerisnt.com/">http://andthewinnerisnt.com/</a></li>
+<li>文中提到有名的地址：
+<ul class="org-ul">
+<li><a href="http://css-tricks.com/video-screencasts/126-using-modernizr/">CSS-TRICKS</a></li>
+<li><a href="http://www.w3.org/TR/selectors/#UIstates">Selectors Level 3</a></li>
+<li><a href="http://leaverou.github.io/prefixfree/">-prefix-free</a></li>
+<li><a href="http://fico.lensco.be/">fico</a></li>
+</ul></li>
+</ol>
+</div>
+<div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17"><span class="section-number-3">3.1</span> HTML5、CSS3及响应式设计入门</h3>
+<div class="outline-text-3" id="text-3-1">
+<ol class="org-ol">
+<li>视口调试工具 P4</li>
+<li>一些著名的响应式站点：
+<ul class="org-ul">
+<li><a href="http://www.panic.com/blog/">panic blog</a></li>
+<li><a href="http://blog.teamtreehouse.com/">treehouse blog</a></li>
+<li><a href="http://skinnyties.com/">skinnyties</a></li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline18" class="outline-3">
+<h3 id="orgheadline18"><span class="section-number-3">3.2</span> 媒体查询：支持不同的视口</h3>
+<div class="outline-text-3" id="text-3-2">
+<ol class="org-ol">
+<li><p>
+媒体查询语法：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #b294bb;">@media</span> screen and <span style="color: #c5c8c6;">(</span>max-width: 768px<span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+    ...
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div></li>
+<li><a href="https://github.com/scottjehl/Respond">Respond.js</a>: support IE8-</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline19" class="outline-3">
+<h3 id="orgheadline19"><span class="section-number-3">3.3</span> 拥抱流式布局</h3>
+<div class="outline-text-3" id="text-3-3">
+<ol class="org-ol">
+<li><p>
+公式：
+</p>
+<blockquote>
+<p>
+目标元素宽度 / 上下文宽度 = 百分比宽度
+</p>
+</blockquote></li>
+<li><code>em</code> 替换 <code>px</code></li>
+<li>CSS网格系统
+<ul class="org-ul">
+<li><a href="http://www.columnal.com/">Columnal</a>: A responsive CSS grid system for rapid prototyping.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline20" class="outline-3">
+<h3 id="orgheadline20"><span class="section-number-3">3.4</span> 响应式设计中的HTML5</h3>
+<div class="outline-text-3" id="text-3-4">
+<ol class="org-ol">
+<li>腻子脚本(polyfill)</li>
+<li>HTML5样板文件: <a href="http://html5boilerplate.com/">http://html5boilerplate.com/</a></li>
+<li>HTML5大纲结构算法 P80</li>
+<li>WAI-ARIA无障碍站点</li>
+<li>form用于搜索时使用search</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline21" class="outline-3">
+<h3 id="orgheadline21"><span class="section-number-3">3.5</span> 快速而有效的CSS技巧</h3>
+<div class="outline-text-3" id="text-3-5">
+<ol class="org-ol">
+<li><p>
+CSS3多兰布局 P108
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #de935f;">#main </span><span style="color: #c5c8c6;">{</span>
+    <span style="color: #f0c674;">column-width</span>: 12em;
+    <span style="color: #f0c674;">column-gap</span>: 2em;
+    <span style="color: #f0c674;">column-rule</span>: thin dotted <span style="color: #000000; background-color: #999;">#999</span>;
+    <span style="color: #f0c674;">column-width</span>: 12em;
+<span style="color: #c5c8c6;">}</span>
+
+<span style="color: #de935f;">or</span>
+
+<span style="color: #de935f;">#main </span><span style="color: #c5c8c6;">{</span>
+    <span style="color: #f0c674;">column-width</span>: 4;
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div></li>
+
+<li><p>
+文字换行：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #f0c674;">word-wrap</span>: break-word;
+</pre>
+</div></li>
+
+<li>子字符串匹配 P112</li>
+
+<li>HTML的ID命名方面唯一需要记住的是名字中间不能有空格且保证在页面中唯一</li>
+
+<li>在视口小于768像素时使用 <code>display: inline-block</code></li>
+
+<li><p>
+nth规则：P119
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css">:nth-child<span style="color: #c5c8c6;">(</span>n<span style="color: #c5c8c6;">)</span>
+:nth-last-child<span style="color: #c5c8c6;">(</span>n<span style="color: #c5c8c6;">)</span>
+:nth-of-type<span style="color: #c5c8c6;">(</span>n<span style="color: #c5c8c6;">)</span>
+:nth-last-of-type<span style="color: #c5c8c6;">(</span>n<span style="color: #c5c8c6;">)</span>
+</pre>
+</div></li>
+
+<li>在CSS3中，计数从1开始，所以整数1会匹配第一个元素</li>
+
+<li>CSS3要求对伪类元素使用两个冒号以便与伪类进行区别</li>
+
+<li><code>@font-face</code>:
+<ul class="org-ul">
+<li><a href="https://www.google.com/webfonts">https://www.google.com/webfonts</a></li>
+
+<li><a href="http://www.fontsquirrel.com">fontsquirrel</a></li>
+
+<li><a href="http://www.fontdeck.com">Font Deck</a></li>
+</ul></li>
+
+<li>HSL颜色 P131
+使用HSLA或RGBA则可以仅让元素的某些部分透明效果。
+opacity则会对整个元素产生影响。</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline22" class="outline-3">
+<h3 id="orgheadline22"><span class="section-number-3">3.6</span> 用CSS3创造令人惊艳的美</h3>
+<div class="outline-text-3" id="text-3-6">
+<ol class="org-ol">
+<li><p>
+文字阴影
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">&#31532;&#19968;&#20010;&#20540;&#21491;&#20391;&#38452;&#24433;&#22823;&#23567;&#65292;&#31532;&#20108;&#20010;&#20540;&#19979;&#26041;&#38452;&#24433;&#22823;&#23567;&#65292; </span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">&#31532;&#19977;&#20010;&#20540;&#27169;&#31946;&#36317;&#31163;&#65292;&#31532;&#22235;&#20010;&#20540;&#39068;&#33394;&#12290; </span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #de935f;">.element </span><span style="color: #c5c8c6;">{</span>
+   <span style="color: #f0c674;">text-shadow</span>: 1px 1px 1px <span style="color: #000000; background-color: #CCCCCC;">#CCCCCC</span>;
+<span style="color: #c5c8c6;">}</span>
+
+<span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">text-shadow: none; </span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">&#21462;&#28040;&#38452;&#24433; </span><span style="color: #969896; font-style: italic;">*/</span>
+</pre>
+</div></li>
+
+<li><p>
+内阴影：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #f0c674; font-style: italic;">-ms-box-shadow</span>: inset 0 0 30px <span style="color: #ffffff; background-color: #000000;">hsl(0, 0%, 0%)</span>,
+inset 0 0 70px <span style="color: #ffffff; background-color: #FB1212;">hsla(0, 97%, 53%, 1)</span>;
+<span style="color: #f0c674; font-style: italic;">-moz-box-shadow</span>: inset 0 0 30px <span style="color: #ffffff; background-color: #000000;">hsl(0, 0%, 0%)</span>,
+inset 0 0 70px <span style="color: #ffffff; background-color: #FB1212;">hsla(0, 97%, 53%, 1)</span>;
+<span style="color: #f0c674; font-style: italic;">-webkit-box-shadow</span>: inset 0 0 30px <span style="color: #ffffff; background-color: #000000;">hsl(0, 0%, 0%)</span>,
+inset 0 0 70px <span style="color: #ffffff; background-color: #FB1212;">hsla(0, 97%, 53%, 1)</span>;
+<span style="color: #f0c674;">box-shadow</span>: inset 0 0 30px <span style="color: #ffffff; background-color: #000000;">hsl(0, 0%, 0%)</span>,
+inset 0 0 70px <span style="color: #ffffff; background-color: #FB1212;">hsla(0, 97%, 53%, 1)</span>;
+</pre>
+</div></li>
+
+<li><p>
+线性背景渐变:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">1. &#20351;&#29992;1&#20687;&#32032;&#22270;&#29255;&#21046;&#20316; </span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #de935f;">aside </span><span style="color: #c5c8c6;">{</span>
+   ...
+   <span style="color: #f0c674;">background</span>: url<span style="color: #c5c8c6; background-color: #1d1f21;">(</span><span style="color: #8abeb7;">../img/sidebarBg2.png</span><span style="color: #c5c8c6; background-color: #1d1f21;">)</span> 50% repeat-x;
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #de935f;">2. &#20351;&#29992;linear-gradient</span>
+<span style="color: #de935f;">aside </span><span style="color: #c5c8c6;">{</span>
+   <span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">P145 </span><span style="color: #969896; font-style: italic;">*/</span>
+   <span style="color: #f0c674;">background</span>: linear-gradient<span style="color: #8abeb7;">(</span>90deg, <span style="color: #ffffff; background-color: #b01c20;">#b01c20</span> 0%, <span style="color: #ffffff; background-color: #f15c60;">#f15c60</span> 100%<span style="color: #8abeb7;">)</span>;
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div></li>
+
+<li><p>
+径向背景渐变： P147
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #f0c674;">background</span>: radial-gradient<span style="color: #c5c8c6;">(</span>center, ellipse cover, <span style="color: #000000; background-color: #ffffff;">#ffffff</span> 72%, <span style="color: #000000; background-color: #dddddd;">#dddddd</span> 100%<span style="color: #c5c8c6;">)</span>;
+</pre>
+</div></li>
+
+<li>渐变生成器：
+<a href="http://www.colorzilla.com/gradient-editor">CSS3渐变生成器</a></li>
+
+<li><p>
+重复渐变: P149
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #f0c674;">background</span>: repeat-linear-gradient<span style="color: #c5c8c6;">(</span>90deg, <span style="color: #000000; background-color: #ffffff;">#ffffff</span> 0px, <span style="color: #ffffff; background-color: #807E7E;">hsla(0, 1%, 50%, 0.1)</span> 5px<span style="color: #c5c8c6;">)</span>;
+</pre>
+</div></li>
+
+<li><a href="http://lea.verou.me/css3patterns/">CSS背景渐变图案</a></li>
+
+<li><p>
+多重背景图片
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">&#25490;&#22312;&#26368;&#21069;&#38754;&#30340;&#22270;&#29255;&#22312;&#27983;&#35272;&#22120;&#20013;&#26174;&#31034;&#26159;&#20250;&#35206;&#30422;&#22312;&#26368;&#19978;&#38754; </span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">&#20808;&#22768;&#26126;&#22810;&#37325;&#32972;&#26223;&#22270;&#29255;&#65292;&#28982;&#21518;&#22768;&#26126;&#32972;&#26223;&#22823;&#23567;&#65292;&#26368;&#21518;&#22768;&#26126;&#32972;&#26223;&#20301;&#32622; </span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #f0c674;">background</span>:
+  url<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">'../img/1.png'</span><span style="color: #c5c8c6;">)</span> center,
+  url<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">'../img/2.png'</span><span style="color: #c5c8c6;">)</span>,
+  url<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">'../img/3.png'</span><span style="color: #c5c8c6;">)</span> left bottom, <span style="color: #ffffff; background-color: #000000;">black</span>;
+</pre>
+</div>
+<p>
+Reference: w3c参考资料 P161
+</p></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgheadline23" class="outline-3">
+<h3 id="orgheadline23"><span class="section-number-3">3.7</span> CSS3过渡、变形和动画</h3>
+<div class="outline-text-3" id="text-3-7">
+<ol class="org-ol">
+<li><p>
+过渡：P166
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #f0c674; font-style: italic;">-o-transition</span>: all 1s ease 0s;
+<span style="color: #f0c674; font-style: italic;">-ms-transition</span>: all 1s ease 0s;
+<span style="color: #f0c674; font-style: italic;">-moz-transition</span>: all 1s ease 0s;
+<span style="color: #f0c674; font-style: italic;">-webkit-transition</span>: all 1s ease 0s;
+<span style="color: #f0c674;">transition</span>: all 1s ease 0s;     <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">P166</span><span style="color: #969896; font-style: italic;">*/</span>
+</pre>
+</div>
+<p>
+贝塞尔曲线：<a href="http://cubic-bezier.com/">http://cubic-bezier.com/</a>
+</p></li>
+<li><p>
+CSS3的2D变形： P170
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #f0c674;">transform</span>:
+  scale<span style="color: #c5c8c6;">(</span>1.7<span style="color: #c5c8c6;">)</span>;
+  translate<span style="color: #c5c8c6;">(</span>...<span style="color: #c5c8c6;">)</span>;
+  rotate<span style="color: #c5c8c6;">(</span>...<span style="color: #c5c8c6;">)</span>;
+  skew<span style="color: #c5c8c6;">(</span>...<span style="color: #c5c8c6;">)</span>;
+  matrix<span style="color: #c5c8c6;">(</span>...<span style="color: #c5c8c6;">)</span>;
+</pre>
+</div>
+<p>
+<a href="http://www.useragentman.com/matrix/">矩阵变形工具</a>
+</p></li>
+<li><code>transform-origin</code> : 修改变形效果的起点</li>
+<li>分析3D变形效果： P176</li>
+<li><p>
+CSS3动画效果：动画关键帧技术 P179
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #b294bb;">@keyframes</span> <span style="color: #c5c8c6;">[</span>&#21160;&#30011;&#21517;<span style="color: #c5c8c6;">]</span> <span style="color: #c5c8c6;">{</span>
+    <span style="color: #de935f;">0% </span><span style="color: #8abeb7;">{</span>
+
+    <span style="color: #8abeb7;">}</span>
+    <span style="color: #de935f;">50% </span><span style="color: #8abeb7;">{</span>
+
+    <span style="color: #8abeb7;">}</span>
+    <span style="color: #de935f;">100% </span><span style="color: #8abeb7;">{</span>
+
+    <span style="color: #8abeb7;">}</span>
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div>
+<p>
+使用的话：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #de935f;">.back h5 </span><span style="color: #c5c8c6;">{</span>
+    ...
+    <span style="color: #f0c674;">animation</span>: warning 1.5s infinite ease-in; <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">P180</span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div>
+<p>
+Reference: <a href="http://www.w3.org/TR/css3-transforms/#two-d-transform-functions">CSS Transforms</a>
+</p></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline24" class="outline-3">
+<h3 id="orgheadline24"><span class="section-number-3">3.8</span> 用HTML5和CSS3征服表单</h3>
+<div class="outline-text-3" id="text-3-8">
+<ol class="org-ol">
+<li>email</li>
+<li>number</li>
+<li>url</li>
+<li>search</li>
+<li><p>
+pattern
+</p>
+<div class="org-src-container">
+
+<pre class="src src-html">&lt;<span style="color: #de935f;">input</span> <span style="color: #f0c674;">id</span>=<span style="color: #8abeb7;">"name"</span> <span style="color: #f0c674;">type</span>=<span style="color: #8abeb7;">""</span> <span style="color: #f0c674;">name</span>=<span style="color: #8abeb7;">"name"</span> <span style="color: #f0c674;">value</span>=<span style="color: #8abeb7;">""</span> <span style="color: #f0c674;">pattern</span>=<span style="color: #8abeb7;">"([A-Za-z]{3,30}\s*)+[a-zA-Z]{3, 30}"</span> <span style="color: #f0c674;">placeholder</span>=<span style="color: #8abeb7;">"Dwight Schultz"</span> required aria- <span style="color: #f0c674;">required</span>=<span style="color: #8abeb7;">"true"</span>/&gt;
+</pre>
+</div></li>
+<li>time datetime datetime-local P200</li>
+<li><p>
+针对表单CSS3伪类选择器 P208
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #f0c674;">input</span>:required:
+<span style="color: #f0c674;">input</span>:focus:invalid:
+<span style="color: #f0c674;">input</span>:focus:valid:
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline25" class="outline-3">
+<h3 id="orgheadline25"><span class="section-number-3">3.9</span> 解决跨浏览器问题</h3>
+<div class="outline-text-3" id="text-3-9">
+<ol class="org-ol">
+<li>HTML5验证工具：
+<ul class="org-ul">
+<li><a href="http://validator.nu/">http://validator.nu/</a></li>
+<li><a href="http://validator.w3.org/">http://validator.w3.org/</a></li>
+</ul></li>
+<li>在多个网站测试： P217
+<ul class="org-ul">
+<li>IE Tester</li>
+<li>Smashing Magazine 总结</li>
+</ul></li>
+<li>前端瑞士军刀： <a href="http://modernizr.com/">Modernizr</a></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline32" class="outline-2">
+<h2 id="orgheadline32"><span class="section-number-2">4</span> 2013-05-20学习CSS笔记，稍候整理：</h2>
+<div class="outline-text-2" id="text-4">
+</div><div id="outline-container-orgheadline27" class="outline-3">
+<h3 id="orgheadline27"><span class="section-number-3">4.1</span> CSS入门：</h3>
+<div class="outline-text-3" id="text-4-1">
+<ol class="org-ol">
+<li><a href="http://www.ludou.org/mastering-css-coding-getting-started.html">http://www.ludou.org/mastering-css-coding-getting-started.html</a></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgheadline28" class="outline-3">
+<h3 id="orgheadline28"><span class="section-number-3">4.2</span> padding:</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+内边距
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline29" class="outline-3">
+<h3 id="orgheadline29"><span class="section-number-3">4.3</span> margin:</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+外边距
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline30" class="outline-3">
+<h3 id="orgheadline30"><span class="section-number-3">4.4</span> border-radius:</h3>
+<div class="outline-text-3" id="text-4-4">
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #969896; font-style: italic;">/** </span><span style="color: #969896; font-style: italic;">The Syntax: *</span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #f0c674;">box-shadow</span>: none | &lt;shadow&gt; <span style="color: #c5c8c6;">[</span> , &lt;shadow&gt; <span style="color: #c5c8c6;">]</span>**
+<span style="color: #de935f;">&lt;shadow&gt; = inset? &amp;&amp; </span><span style="color: #c5c8c6;">[</span><span style="color: #de935f;"> &lt;length&gt;</span><span style="color: #8abeb7;">{</span>2,4<span style="color: #8abeb7;">}</span> &amp;&amp; &lt;color&gt;? <span style="color: #c5c8c6;">]</span>
+<span style="color: #969896; font-style: italic;">/**</span><span style="color: #969896; font-style: italic;">Example*</span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #de935f;">#example1 </span><span style="color: #c5c8c6;">{</span>
+    <span style="color: #f0c674; font-style: italic;">-moz-box-shadow</span>: 10px 10px 5px <span style="color: #000000; background-color: #888;">#888</span>;
+    <span style="color: #f0c674; font-style: italic;">-webkit-box-shadow</span>: 10px 10px 5px <span style="color: #000000; background-color: #888;">#888</span>;
+    <span style="color: #f0c674;">box-shadow</span>: 10px 10px 5px <span style="color: #000000; background-color: #888;">#888</span>;
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div>
+<p>
+Reference:
+</p>
+<ul class="org-ul">
+<li><a href="http://www.css3.info/preview/box-shadow/">http://www.css3.info/preview/box-shadow/</a>
+<ul class="org-ul">
+<li><a href="http://www.w3schools.com/cssref/playit.asp?filename=playcss_border-radius">http://www.w3schools.com/cssref/playit.asp?filename=playcss_border-radius</a></li>
+<li><a href="http://www.w3schools.com/cssref/css3_pr_border-radius.asp">http://www.w3schools.com/cssref/css3_pr_border-radius.asp</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline31" class="outline-3">
+<h3 id="orgheadline31"><span class="section-number-3">4.5</span> border-left:</h3>
+<div class="outline-text-3" id="text-4-5">
+<p>
+当使用 <code>border-bottom</code> 时，会和 <code>border-left</code> 自动形成交接线么？
+</p>
+
+<p>
+我的意思是这样可以绘制出三角形：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #de935f;">#triangle-up </span><span style="color: #c5c8c6;">{</span>
+    <span style="color: #f0c674;">width</span>: 0;
+    <span style="color: #f0c674;">height</span>: 0;
+    <span style="color: #f0c674;">border-left</span>: 50px solid transparent;
+    <span style="color: #f0c674;">border-right</span>: 50px solid transparent;
+    <span style="color: #f0c674;">border-bottom</span>: 100px solid <span style="color: #ffffff; background-color: #FF0000;">red</span>;
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">solid &#35980;&#20284;&#26159;&#23454;&#24515;&#32447;&#30340;&#24847;&#24605; </span><span style="color: #969896; font-style: italic;">*/</span>
+</pre>
+</div>
+<p>
+Reference:
+</p>
+<ul class="org-ul">
+<li><a href="http://www.w3schools.com/cssref/pr_border-left.asp">http://www.w3schools.com/cssref/pr_border-left.asp</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline34" class="outline-2">
+<h2 id="orgheadline34"><span class="section-number-2">5</span> Learn Layout Website:</h2>
+<div class="outline-text-2" id="text-5">
+<ol class="org-ol">
+<li>English: <a href="http://learnlayout.com/">http://learnlayout.com/</a></li>
+<li>中文： <a href="http://zh.learnlayout.com/"><a href="http://zh.learnlayout.com">http://zh.learnlayout.com</a></a></li>
+</ol>
+</div>
+<div id="outline-container-orgheadline33" class="outline-3">
+<h3 id="orgheadline33"><span class="section-number-3">5.1</span> Note:</h3>
+<div class="outline-text-3" id="text-5-1">
+<ol class="org-ol">
+<li><p>
+<a href="http://zh.learnlayout.com/clearfix.html">清除浮动(clearfix hack)</a>:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">Modern Browser </span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #de935f;">.clearfix </span><span style="color: #c5c8c6;">{</span>
+        <span style="color: #f0c674;">overflow</span>: auto;
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">IE6 </span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #de935f;">.clearfix </span><span style="color: #c5c8c6;">{</span>
+        <span style="color: #f0c674;">overflow</span>: auto;
+        <span style="color: #f0c674;">zoom</span>: 1;
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">&#27880;&#24847;&#36825;&#20010;&#23646;&#24615; </span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">clear:both </span><span style="color: #969896; font-style: italic;">*/</span>
+</pre>
+</div>
+<p>
+Reference:
+</p>
+<ol class="org-ol">
+<li><a href="http://jsbin.com/eciwev/135/edit">Left-right layout using floats</a></li>
+<li><a href="http://stackoverflow.com/questions/211383/which-method-of-clearfix-is-best">Which method of 'clearfix' is best?</a></li>
+</ol></li>
+<li><p>
+<a href="http://zh.learnlayout.com/media-queries.html">学习CSS布局</a>:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">&#24403;&#20026;&#23631;&#24149;&#65292;&#24182;&#19988;&#22823;&#20110;&#26368;&#26032;&#23485;&#24230;&#26102;&#20351;&#29992;&#20197;&#19979;&#26679;&#24335; </span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">&#36866;&#29992;&#23631;&#24149;&#33539;&#22260;&#65306;600px+ </span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #b294bb;">@media</span> screen and <span style="color: #c5c8c6;">(</span>min-width:600px<span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+        <span style="color: #de935f;">nav </span><span style="color: #8abeb7;">{</span>
+                <span style="color: #f0c674;">float</span>: left;
+                <span style="color: #f0c674;">width</span>: 25%;
+        <span style="color: #8abeb7;">}</span>
+        <span style="color: #de935f;">section </span><span style="color: #8abeb7;">{</span>
+                <span style="color: #f0c674;">margin-left</span>: 25%;
+        <span style="color: #8abeb7;">}</span>
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">&#24403;&#26102;&#23631;&#24149;&#65292;&#24182;&#19988;&#23567;&#20110;&#26368;&#22823;&#23485;&#24230;&#26102;&#20351;&#29992;&#20197;&#19979;&#26679;&#24335; </span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">&#20063;&#23601;&#26159;&#22312;0&#65374;599px&#33539;&#22260;&#20043;&#20869;&#30340;&#23631;&#24149;&#20351;&#29992;&#20197;&#19979;&#26679;&#24335; </span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #b294bb;">@media</span> screen and <span style="color: #c5c8c6;">(</span>max-width:599px<span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+        <span style="color: #de935f;">nav li </span><span style="color: #8abeb7;">{</span>
+                <span style="color: #f0c674;">display</span>: inline;
+        <span style="color: #8abeb7;">}</span>
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div>
+<p>
+Reference:
+</p>
+<ol class="org-ol">
+<li><a href="http://mediaqueri.es/">Media Queries</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Media_queries?redirectlocale=en-US&amp;redirectslug=CSS/Media_queries">CSS media queries</a></li>
+<li><a href="http://dev.opera.com/articles/view/an-introduction-to-meta-viewport-and-viewport/">An introduction to meta viewport and @viewport</a></li>
+</ol></li>
+<li><p>
+<a href="http://zh.learnlayout.com/inline-block.html">inline-block</a>:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #de935f;">.box2 </span><span style="color: #c5c8c6;">{</span>
+                <span style="color: #f0c674;">display</span>: inline-block;
+                <span style="color: #f0c674;">width</span>: 200px;
+                <span style="color: #f0c674;">height</span>: 100px;
+                <span style="color: #f0c674;">margin</span>: 1em;
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">Another layout </span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #de935f;">li </span><span style="color: #c5c8c6;">{</span>
+                <span style="color: #f0c674;">width</span>: 200px;
+                <span style="color: #f0c674;">min-height</span>: 250px;
+                <span style="color: #f0c674;">border</span>: 1px solid <span style="color: #ffffff; background-color: #000;">#000</span>;
+                <span style="color: #f0c674;">display</span>: -moz-inline-stack; <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">&#35299;&#20915;ff</span><span style="color: #969896; font-style: italic;">*/</span>
+                <span style="color: #f0c674;">display</span>: inline-block;      <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">&#26412;&#26469;&#21482;&#35201;&#36825;&#20010;</span><span style="color: #969896; font-style: italic;">*/</span>
+                <span style="color: #f0c674;">vertical-align</span>: top;
+                <span style="color: #f0c674;">margin</span>: 5px;
+                <span style="color: #f0c674;">zoom</span>: 1;                    <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">IE7</span><span style="color: #969896; font-style: italic;">*/</span>
+                *display: inline;           <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">IE7</span><span style="color: #969896; font-style: italic;">*/</span>
+                _height: 250px;             <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">IE6 not support min-height</span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div>
+<p>
+Reference:
+</p>
+<ol class="org-ol">
+<li><a href="http://blog.mozilla.org/webdev/2009/02/20/cross-browser-inline-block/">Cross-Browser Inline-Block</a></li>
+<li><a href="http://www.w3schools.com/cssref/tryit.asp?filename=trycss_vertical-align">vertical-align</a></li>
+<li><a href="http://haslayout.net/haslayout">IE hasLayout</a></li>
+<li><a href="http://www.cnblogs.com/yupeng/archive/2011/04/11/2012996.html">IE hasLayout的问题总结</a></li>
+</ol></li>
+<li><a href="http://zh.learnlayout.com/flexbox.html">flexbox</a>:</li>
+<li><a href="http://zh.learnlayout.com/frameworks.html">css框架</a>:</li>
+<li><p>
+边框颜色（全局）：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #de935f;">.container </span><span style="color: #c5c8c6;">{</span>
+                <span style="color: #f0c674;">outline</span>: solid 3px <span style="color: #000000; background-color: #faa;">#faa</span>;
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div></li>
+<li><a href="http://www.tolearn.com.cn/use_css/css_regard.php">CSS 使用注意事项</a></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline37" class="outline-2">
+<h2 id="orgheadline37"><span class="section-number-2">6</span> 布局技巧：</h2>
+<div class="outline-text-2" id="text-6">
+</div><div id="outline-container-orgheadline35" class="outline-3">
+<h3 id="orgheadline35"><span class="section-number-3">6.1</span> 八个需要掌握的CSS布局技巧:</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+链接地址：<a href="http://g.51cto.com/wangzhanqianduankaifa/49213">http://g.51cto.com/wangzhanqianduankaifa/49213</a>
+</p>
+<ol class="org-ol">
+<li>若有疑问立即检测: <a href="http://csslint.net/">CSS LINT</a></li>
+<li>使用浮动功能时记得适当清除指令: <code>clear</code>
+<ol class="org-ol">
+<li>边界重合时利用padding或border来避免</li>
+<li>尝试避免同时对元素指定padding/border以及高度或宽度</li>
+<li>不要依赖min-width/min-height</li>
+<li>若有疑问，先减少百分比: 50% -&gt; 49.9%</li>
+<li>记住“TRouBLed”写法:border，margin与padding的简写语法有特定顺序，top,right,bottom,left.</li>
+<li>只要不是零的值，都要指定单位: font，margin（唯一的例外是line-height）</li>
+</ol></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline36" class="outline-3">
+<h3 id="orgheadline36"><span class="section-number-3">6.2</span> 详解CSS布局技巧十则:</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+<a href="http://developer.51cto.com/art/201009/223657.htm">详解CSS布局技巧十则</a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline38" class="outline-2">
+<h2 id="orgheadline38"><span class="section-number-2">7</span> Sprites， 图片的特定位置选取：</h2>
+<div class="outline-text-2" id="text-7">
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #f0c674;">position</span>: absolute;
+<span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">&#36825;&#37324;&#35774;&#32622;&#26368;&#32456;&#26174;&#31034;&#20986;&#26469;&#30340;&#22270;&#29255;&#30340;&#22823;&#23567; </span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #f0c674;">width</span>: 64px;
+<span style="color: #f0c674;">height</span>: 64px;
+<span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">&#22270;&#29255;&#20301;&#32622; </span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #f0c674;">background-image</span>: url<span style="color: #c5c8c6; background-color: #1d1f21;">(</span><span style="color: #8abeb7;">file:///D:/Codes/JavaScript/Supercharged%20JavaScript%20Graphics%20Code%20Examples/sprites/cogs.png</span><span style="color: #c5c8c6; background-color: #1d1f21;">)</span>;
+<span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">&#23450;&#20301; </span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #f0c674;">left</span>: 352px;
+<span style="color: #f0c674;">top</span>: 192px;
+<span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">&#36825;&#37324;&#26159;&#30495;&#27491;&#36873;&#21462;&#22270;&#29255;&#30340;&#20301;&#32622;&#21734; </span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">&#31532;&#19968;&#20010;&#21442;&#25968;&#65306;&#36127;&#25968;&#34920;&#31034;&#23558;&#22270;&#29255;&#21521;&#21491;&#31227;&#21160;&#65292;&#35270;&#21475;&#21521;&#24038;&#31227;&#21160; </span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">&#31532;&#20108;&#20010;&#21442;&#25968;&#65306;&#36127;&#25968;&#34920;&#31034;&#23558;&#22270;&#29255;&#21521;&#19978;&#31227;&#21160;&#65292;&#35270;&#21475;&#21521;&#19979;&#31227;&#21160; </span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #f0c674;">background-position</span>: -128px -64px;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline39" class="outline-2">
+<h2 id="orgheadline39"><span class="section-number-2">8</span> CSS Hack:</h2>
+<div class="outline-text-2" id="text-8">
+<ol class="org-ol">
+<li><p>
+区别IE6与Firefox：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #f0c674;">background</span>:<span style="color: #000000; background-color: #FFA500;">orange</span>;*background:<span style="color: #ffffff; background-color: #0000FF;">blue</span>;
+</pre>
+</div></li>
+
+<li><p>
+区别IE6与IE7：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #f0c674;">background</span>:<span style="color: #ffffff; background-color: #008000;">green</span> <span style="color: #b294bb;">!important</span>;<span style="color: #f0c674;">background</span>:<span style="color: #ffffff; background-color: #0000FF;">blue</span>;
+</pre>
+</div></li>
+
+<li><p>
+区别IE7与Firefox：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #f0c674;">background</span>:<span style="color: #000000; background-color: #FFA500;">orange</span>; *background:<span style="color: #ffffff; background-color: #008000;">green</span>;
+</pre>
+</div>
+
+<ol class="org-ol">
+<li><p>
+区别Firefox，IE7，IE6：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #f0c674;">background</span>:<span style="color: #000000; background-color: #FFA500;">orange</span>;*background:<span style="color: #ffffff; background-color: #008000;">green</span> <span style="color: #b294bb;">!important</span>;*background:<span style="color: #ffffff; background-color: #0000FF;">blue</span>; 
+<span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">&#27880;&#65306;IE&#37117;&#33021;&#35782;&#21035;*;&#26631;&#20934;&#27983;&#35272;&#22120;(&#22914;Firefox)&#19981;&#33021;&#35782;&#21035;*&#65307;  </span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #969896; font-style: italic;">/*    </span><span style="color: #969896; font-style: italic;">IE6&#33021;&#35782;&#21035;*&#65292;&#20294;&#19981;&#33021;&#35782;&#21035; !important, </span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #969896; font-style: italic;">/*    </span><span style="color: #969896; font-style: italic;">IE7&#33021;&#35782;&#21035;*&#65292;&#20063;&#33021;&#35782;&#21035;!important;  </span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #969896; font-style: italic;">/*    </span><span style="color: #969896; font-style: italic;">Firefox&#19981;&#33021;&#35782;&#21035;*&#65292;&#20294;&#33021;&#35782;&#21035;!important;      </span><span style="color: #969896; font-style: italic;">*/</span>
+</pre>
+</div></li>
+
+<li>另外再补充一个，下划线"_", IE6支持下划线，IE7和firefox均不支持下划线。</li>
+</ol>
+<p>
+于是大家还可以这样来区分IE6，IE7，firefox:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #f0c674;">background</span>:<span style="color: #000000; background-color: #FFA500;">orange</span>;*background:<span style="color: #ffffff; background-color: #008000;">green</span>;_background:<span style="color: #ffffff; background-color: #0000FF;">blue</span>;
+<span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">&#27880;&#65306;&#19981;&#31649;&#26159;&#20160;&#20040;&#26041;&#27861;&#65292;&#20070;&#20889;&#30340;&#39034;&#24207;&#37117;&#26159;firefox&#30340;&#20889;&#22312;&#21069;&#38754;&#65292;IE7&#30340;&#20889;&#22312;&#20013;&#38388;&#65292;IE6&#30340;&#20889;&#22312;&#26368;&#21518;&#38754;&#12290;      </span><span style="color: #969896; font-style: italic;">*/</span>
+</pre>
+</div>
+<p>
+Reference:
+</p>
+<ul class="org-ul">
+<li><a href="http://www.tolearn.com.cn/use_css/ext/css_hack.php">区别不同浏览器，CSS hack写法</a></li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline40" class="outline-2">
+<h2 id="orgheadline40"><span class="section-number-2">9</span> CSS 特殊字符：</h2>
+<div class="outline-text-2" id="text-9">
+<ol class="org-ol">
+<li>"¶ 6\A0"</li>
+<li>"&gt;&gt; &amp;raquo"</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline41" class="outline-2">
+<h2 id="orgheadline41"><span class="section-number-2">10</span> CSS 开发常用工具：</h2>
+<div class="outline-text-2" id="text-10">
+<ol class="org-ol">
+<li><a href="http://css3generator.com/">CSS3 Generator</a></li>
+<li><a href="http://www.css3.info/">Box-shadow, one of CSS3′s best new features</a></li>
+<li><a href="http://www.w3schools.com/tags/ref_colorpicker.asp">HTML Color Picker</a></li>
+<li><a href="http://csscolorpicker.com/">CSS Color Picker</a></li>
+<li><a href="http://websemantics.co.uk/online_tools/image_to_data_uri_convertor/result/">Image converted to data URI format</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline42" class="outline-2">
+<h2 id="orgheadline42"><span class="section-number-2">11</span> CSS Draw Shape:</h2>
+<div class="outline-text-2" id="text-11">
+<ol class="org-ol">
+<li><p>
+三角形:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #de935f;">.triangle </span><span style="color: #c5c8c6;">{</span>
+    <span style="color: #f0c674;">height</span>: 0px;
+    <span style="color: #f0c674;">width</span>: 0px;
+    <span style="color: #f0c674;">border</span>:100px solid;
+    <span style="color: #969896; font-style: italic;">/*  </span><span style="color: #969896; font-style: italic;">Add color now </span><span style="color: #969896; font-style: italic;">*/</span>
+    <span style="color: #f0c674;">border-color</span>: <span style="color: #ffffff; background-color: #FF0000;">red</span> <span style="color: #ffffff; background-color: #008000;">green</span> <span style="color: #000000; background-color: #FFFF00;">yellow</span> <span style="color: #ffffff; background-color: #0000FF;">blue</span>;
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div>
+<style type="text/css" media="screen">
+.triangle {
+height: 0px;
+width: 0px;
+border:100px solid;
+/*  Add color now */
+border-color: red green yellow blue;
+}
+</style>
+<div class="triangle">
+</div></li>
+
+<li><p>
+Reddit
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #de935f;">&lt;style type=</span><span style="color: #8abeb7;">"text/css"</span><span style="color: #de935f;"> media=</span><span style="color: #8abeb7;">"screen"</span><span style="color: #de935f;">&gt;</span>
+<span style="color: #de935f;">  #reddit-alien </span><span style="color: #c5c8c6;">{</span>
+      <span style="color: #f0c674;">width</span>: 296px;
+      <span style="color: #f0c674;">height</span>: 380px;
+      <span style="color: #f0c674;">position</span>: relative;
+      <span style="color: #f0c674;">margin</span>: 0 auto;
+  <span style="color: #c5c8c6;">}</span>
+  <span style="color: #de935f;">#reddit-alien .antenna </span><span style="color: #c5c8c6;">{</span>
+      <span style="color: #f0c674;">height</span>: 50px;
+      <span style="color: #f0c674;">width</span>: 44px;
+      <span style="color: #f0c674;">top</span>: 40px;
+      <span style="color: #f0c674;">left</span>: 155px;
+      <span style="color: #f0c674;">border</span>: 7px solid <span style="color: #ffffff; background-color: #000000;">black</span>;
+      <span style="color: #f0c674;">border-width</span>: 9px 0 0 9px;
+      <span style="color: #f0c674; font-style: italic;">-webkit-border-radius</span>: 5px 0 0 0;
+      <span style="color: #f0c674; font-style: italic;">-webkit-background-clip</span>: padding-box;
+      <span style="color: #f0c674; font-style: italic;">-moz-border-radius</span>: 5px 0 0 0;
+      <span style="color: #f0c674;">border-radius</span>: 5px 0 0 0;
+      <span style="color: #f0c674; font-style: italic;">-webkit-transform</span>: rotate<span style="color: #8abeb7;">(</span>16deg<span style="color: #8abeb7;">)</span>;
+      <span style="color: #f0c674; font-style: italic;">-moz-transform</span>: rotate<span style="color: #8abeb7;">(</span>16deg<span style="color: #8abeb7;">)</span>;
+      <span style="color: #f0c674; font-style: italic;">-o-transform</span>: rotate<span style="color: #8abeb7;">(</span>16deg<span style="color: #8abeb7;">)</span>;
+  <span style="color: #c5c8c6;">}</span>
+  <span style="color: #de935f;">#reddit-alien div </span><span style="color: #c5c8c6;">{</span>
+      <span style="color: #f0c674;">position</span>: absolute;
+  <span style="color: #c5c8c6;">}</span>
+  <span style="color: #de935f;">#reddit-alien .dot </span><span style="color: #c5c8c6;">{</span>
+      <span style="color: #f0c674;">width</span>: 26px;
+      <span style="color: #f0c674;">height</span>: 26px;
+      <span style="color: #f0c674;">left</span>: 37px;
+      <span style="color: #f0c674;">top</span>: -28px;
+      <span style="color: #f0c674;">border</span>: 8px solid <span style="color: #ffffff; background-color: #000000;">black</span>;
+      <span style="color: #f0c674; font-style: italic;">-webkit-border-radius</span>: 26px;
+      <span style="color: #f0c674; font-style: italic;">-webkit-background-clip</span>: padding-box;
+      <span style="color: #f0c674; font-style: italic;">-moz-border-radius</span>: 26px;
+      <span style="color: #f0c674;">border-radius</span>: 26px;
+      <span style="color: #f0c674;">background</span>: <span style="color: #000000; background-color: #FFFFFF;">white</span>;
+  <span style="color: #c5c8c6;">}</span>
+  <span style="color: #de935f;">#reddit-alien .ear.left </span><span style="color: #c5c8c6;">{</span>
+      <span style="color: #f0c674;">left</span>: 40px;
+  <span style="color: #c5c8c6;">}</span>
+  <span style="color: #de935f;">#reddit-alien .ear.right </span><span style="color: #c5c8c6;">{</span>
+      <span style="color: #f0c674;">left</span>: 216px;
+  <span style="color: #c5c8c6;">}</span>
+  <span style="color: #de935f;">#reddit-alien .ear </span><span style="color: #c5c8c6;">{</span>
+      <span style="color: #f0c674;">width</span>: 32px;
+      <span style="color: #f0c674;">height</span>: 32px;
+      <span style="color: #f0c674;">top</span>: 100px;
+      <span style="color: #f0c674;">border</span>: 8px solid <span style="color: #ffffff; background-color: #000000;">black</span>;
+      <span style="color: #f0c674; font-style: italic;">-webkit-border-radius</span>: 32px;
+      <span style="color: #f0c674; font-style: italic;">-webkit-background-clip</span>: padding-box;
+      <span style="color: #f0c674; font-style: italic;">-moz-border-radius</span>: 32px;
+      <span style="color: #f0c674;">border-radius</span>: 32px;
+      <span style="color: #f0c674;">background</span>: <span style="color: #000000; background-color: #FFFFFF;">white</span>;
+  <span style="color: #c5c8c6;">}</span>
+  <span style="color: #de935f;">#reddit-alien .head </span><span style="color: #c5c8c6;">{</span>
+      <span style="color: #f0c674;">z-index</span>: 2;
+      <span style="color: #f0c674;">top</span>: 88px;
+      <span style="color: #f0c674;">left</span>: 52px;
+      <span style="color: #f0c674;">height</span>: 115px;
+      <span style="color: #f0c674;">width</span>: 182px;
+      <span style="color: #f0c674;">border</span>: 9px solid <span style="color: #ffffff; background-color: #000000;">black</span>;
+      <span style="color: #f0c674; font-style: italic;">-webkit-border-radius</span>: 150px 100px;
+      <span style="color: #f0c674; font-style: italic;">-webkit-background-clip</span>: padding-box;
+      <span style="color: #f0c674; font-style: italic;">-moz-border-radius</span>: 150px / 100px;
+      <span style="color: #f0c674;">border-radius</span>: 150px / 100px;
+      <span style="color: #f0c674;">background</span>: <span style="color: #000000; background-color: #FFFFFF;">white</span>;
+  <span style="color: #c5c8c6;">}</span>
+  <span style="color: #de935f;">#reddit-alien .eye.left </span><span style="color: #c5c8c6;">{</span>
+      <span style="color: #f0c674;">left</span>: 42px;
+  <span style="color: #c5c8c6;">}</span>
+  <span style="color: #de935f;">#reddit-alien .eye.right </span><span style="color: #c5c8c6;">{</span>
+      <span style="color: #f0c674;">left</span>: 110px;
+  <span style="color: #c5c8c6;">}</span>
+  <span style="color: #de935f;">#reddit-alien .eye </span><span style="color: #c5c8c6;">{</span>
+      <span style="color: #f0c674;">z-index</span>: 2;
+      <span style="color: #f0c674;">width</span>: 32px;
+      <span style="color: #f0c674;">height</span>: 32px;
+      <span style="color: #f0c674;">top</span>: 29px;
+      <span style="color: #f0c674; font-style: italic;">-webkit-border-radius</span>: 16px;
+      <span style="color: #f0c674; font-style: italic;">-moz-border-radius</span>: 16px;
+      <span style="color: #f0c674;">border-radius</span>: 16px;
+      <span style="color: #f0c674;">background</span>: <span style="color: #ffffff; background-color: #FF4500;">orangeRed</span>;
+  <span style="color: #c5c8c6;">}</span>
+  <span style="color: #de935f;">#reddit-alien .mouth </span><span style="color: #c5c8c6;">{</span>
+      <span style="color: #f0c674;">z-index</span>: 1;
+      <span style="color: #f0c674;">width</span>: 94px;
+      <span style="color: #f0c674;">height</span>: 80px;
+      <span style="color: #f0c674;">top</span>: 3px;
+      <span style="color: #f0c674;">left</span>: 35px;
+      <span style="color: #f0c674;">border</span>: 9px solid <span style="color: #000000; background-color: #FFFFFF;">white</span>;
+      <span style="color: #f0c674;">border-bottom-color</span>: <span style="color: #ffffff; background-color: #000000;">black</span>;
+      <span style="color: #f0c674; font-style: italic;">-webkit-border-radius</span>: 150px 120px;
+      <span style="color: #f0c674; font-style: italic;">-moz-border-radius</span>: 150px / 120px;
+      <span style="color: #f0c674;">border-radius</span>: 150px / 120px;
+  <span style="color: #c5c8c6;">}</span>
+  <span style="color: #de935f;">#reddit-alien .arm.left </span><span style="color: #c5c8c6;">{</span>
+      <span style="color: #f0c674;">left</span>: 78px;
+      <span style="color: #f0c674; font-style: italic;">-webkit-border-radius</span>: 43px 0 0 43px;
+      <span style="color: #f0c674; font-style: italic;">-moz-border-radius</span>: 80px 0 0 90px;
+      <span style="color: #f0c674;">border-radius</span>: 43px 0 0 43px;
+  <span style="color: #c5c8c6;">}</span>
+  <span style="color: #de935f;">#reddit-alien .arm.right </span><span style="color: #c5c8c6;">{</span>
+      <span style="color: #f0c674;">left</span>: 170px;
+      <span style="color: #f0c674; font-style: italic;">-webkit-border-radius</span>: 0 43px 43px 0;
+      <span style="color: #f0c674; font-style: italic;">-moz-border-radius</span>: 0 80px 90px 0;
+      <span style="color: #f0c674;">border-radius</span>: 0 43px 43px 0;
+  <span style="color: #c5c8c6;">}</span>
+  <span style="color: #de935f;">#reddit-alien .arm </span><span style="color: #c5c8c6;">{</span>
+      <span style="color: #f0c674;">height</span>: 78px;
+      <span style="color: #f0c674;">width</span>: 39px;
+      <span style="color: #f0c674;">top</span>: 210px;
+      <span style="color: #f0c674;">border</span>: 8px solid <span style="color: #ffffff; background-color: #000000;">black</span>;
+      <span style="color: #f0c674;">background</span>: <span style="color: #000000; background-color: #FFFFFF;">white</span>;
+      <span style="color: #f0c674; font-style: italic;">-webkit-background-clip</span>: padding-box;
+  <span style="color: #c5c8c6;">}</span>
+  <span style="color: #de935f;">#reddit-alien .body </span><span style="color: #c5c8c6;">{</span>
+      <span style="color: #f0c674;">z-index</span>: 1;
+      <span style="color: #f0c674;">width</span>: 88px;
+      <span style="color: #f0c674;">height</span>: 178px;
+      <span style="color: #f0c674;">left</span>: 100px;
+      <span style="color: #f0c674;">top</span>: 150px;
+      <span style="color: #f0c674;">border</span>: 8px solid <span style="color: #ffffff; background-color: #000000;">black</span>;
+      <span style="color: #f0c674; font-style: italic;">-webkit-border-radius</span>: 120px 250px;
+      <span style="color: #f0c674; font-style: italic;">-webkit-background-clip</span>: padding-box;
+      <span style="color: #f0c674; font-style: italic;">-moz-border-radius</span>: 120px / 250px;
+      <span style="color: #f0c674;">border-radius</span>: 120px / 250px;
+      <span style="color: #f0c674;">background</span>: <span style="color: #000000; background-color: #FFFFFF;">white</span>;
+  <span style="color: #c5c8c6;">}</span>
+  <span style="color: #de935f;">#reddit-alien .foot.left </span><span style="color: #c5c8c6;">{</span>
+      <span style="color: #f0c674; font-style: italic;">-webkit-border-radius</span>: 24px 24px 0 0;
+      <span style="color: #f0c674; font-style: italic;">-moz-border-radius</span>: 30px 0 0 10px;
+      <span style="color: #f0c674;">border-radius</span>: 24px 24px 0 0;
+      <span style="color: #f0c674;">left</span>: 82px;
+  <span style="color: #c5c8c6;">}</span> 
+  <span style="color: #de935f;">#reddit-alien .foot.right </span><span style="color: #c5c8c6;">{</span>
+      <span style="color: #f0c674; font-style: italic;">-webkit-border-radius</span>: 24px 24px 0 0;
+      <span style="color: #f0c674; font-style: italic;">-moz-border-radius</span>: 0 30px 10px 0;
+      <span style="color: #f0c674;">border-radius</span>: 24px 24px 0 0;
+      <span style="color: #f0c674;">left</span>: 156px;
+  <span style="color: #c5c8c6;">}</span>
+  <span style="color: #de935f;">#reddit-alien .foot </span><span style="color: #c5c8c6;">{</span>
+      <span style="color: #f0c674;">border</span>: 8px solid <span style="color: #ffffff; background-color: #000000;">black</span>;
+      <span style="color: #f0c674;">width</span>: 50px;
+      <span style="color: #f0c674;">height</span>: 16px;
+      <span style="color: #f0c674;">top</span>: 312px;
+      <span style="color: #f0c674;">background</span>: <span style="color: #000000; background-color: #FFFFFF;">white</span>;
+      <span style="color: #f0c674; font-style: italic;">-webkit-background-clip</span>: padding-box;
+  <span style="color: #c5c8c6;">}</span>
+&lt;/style&gt;
+&lt;div id=<span style="color: #8abeb7;">"reddit-alien"</span>&gt;
+  &lt;div class=<span style="color: #8abeb7;">"antenna"</span>&gt;
+    &lt;div class=<span style="color: #8abeb7;">"dot"</span>&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=<span style="color: #8abeb7;">"ear left"</span>&gt;&lt;/div&gt;
+  &lt;div class=<span style="color: #8abeb7;">"ear right"</span>&gt;&lt;/div&gt;
+  &lt;div class=<span style="color: #8abeb7;">"head"</span>&gt;
+    &lt;div class=<span style="color: #8abeb7;">"eye left"</span>&gt;&lt;/div&gt;
+    &lt;div class=<span style="color: #8abeb7;">"eye right"</span>&gt;&lt;/div&gt;
+    &lt;div class=<span style="color: #8abeb7;">"mouth"</span>&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=<span style="color: #8abeb7;">"arm left"</span>&gt;&lt;/div&gt;
+  &lt;div class=<span style="color: #8abeb7;">"arm right"</span>&gt;&lt;/div&gt;
+  &lt;div class=<span style="color: #8abeb7;">"body"</span>&gt;&lt;/div&gt;
+  &lt;div class=<span style="color: #8abeb7;">"foot left"</span>&gt;&lt;/div&gt;
+  &lt;div class=<span style="color: #8abeb7;">"foot right"</span>&gt;&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+</div>
+
+<style type="text/css" media="screen">
+#reddit-alien {
+width: 296px;
+height: 380px;
+position: relative;
+margin: 0 auto;
+}
+#reddit-alien .antenna {
+height: 50px;
+width: 44px;
+top: 40px;
+left: 155px;
+border: 7px solid black;
+border-width: 9px 0 0 9px;
+-webkit-border-radius: 5px 0 0 0;
+-webkit-background-clip: padding-box;
+-moz-border-radius: 5px 0 0 0;
+border-radius: 5px 0 0 0;
+-webkit-transform: rotate(16deg);
+-moz-transform: rotate(16deg);
+-o-transform: rotate(16deg);
+}
+#reddit-alien div {
+position: absolute;
+}
+#reddit-alien .dot {
+width: 26px;
+height: 26px;
+left: 37px;
+top: -28px;
+border: 8px solid black;
+-webkit-border-radius: 26px;
+-webkit-background-clip: padding-box;
+-moz-border-radius: 26px;
+border-radius: 26px;
+background: white;
+}
+#reddit-alien .ear.left {
+left: 40px;
+}
+#reddit-alien .ear.right {
+left: 216px;
+}
+#reddit-alien .ear {
+width: 32px;
+height: 32px;
+top: 100px;
+border: 8px solid black;
+-webkit-border-radius: 32px;
+-webkit-background-clip: padding-box;
+-moz-border-radius: 32px;
+border-radius: 32px;
+background: white;
+}
+#reddit-alien .head {
+z-index: 2;
+top: 88px;
+left: 52px;
+height: 115px;
+width: 182px;
+border: 9px solid black;
+-webkit-border-radius: 150px 100px;
+-webkit-background-clip: padding-box;
+-moz-border-radius: 150px / 100px;
+border-radius: 150px / 100px;
+background: white;
+}
+#reddit-alien .eye.left {
+left: 42px;
+}
+#reddit-alien .eye.right {
+left: 110px;
+}
+#reddit-alien .eye {
+z-index: 2;
+width: 32px;
+height: 32px;
+top: 29px;
+-webkit-border-radius: 16px;
+-moz-border-radius: 16px;
+border-radius: 16px;
+background: orangeRed;
+}
+#reddit-alien .mouth {
+z-index: 1;
+width: 94px;
+height: 80px;
+top: 3px;
+left: 35px;
+border: 9px solid white;
+border-bottom-color: black;
+-webkit-border-radius: 150px 120px;
+-moz-border-radius: 150px / 120px;
+border-radius: 150px / 120px;
+}
+#reddit-alien .arm.left {
+left: 78px;
+-webkit-border-radius: 43px 0 0 43px;
+-moz-border-radius: 80px 0 0 90px;
+border-radius: 43px 0 0 43px;
+}
+#reddit-alien .arm.right {
+left: 170px;
+-webkit-border-radius: 0 43px 43px 0;
+-moz-border-radius: 0 80px 90px 0;
+border-radius: 0 43px 43px 0;
+}
+#reddit-alien .arm {
+height: 78px;
+width: 39px;
+top: 210px;
+border: 8px solid black;
+background: white;
+-webkit-background-clip: padding-box;
+}
+#reddit-alien .body {
+z-index: 1;
+width: 88px;
+height: 178px;
+left: 100px;
+top: 150px;
+border: 8px solid black;
+-webkit-border-radius: 120px 250px;
+-webkit-background-clip: padding-box;
+-moz-border-radius: 120px / 250px;
+border-radius: 120px / 250px;
+background: white;
+}
+#reddit-alien .foot.left {
+-webkit-border-radius: 24px 24px 0 0;
+-moz-border-radius: 30px 0 0 10px;
+border-radius: 24px 24px 0 0;
+left: 82px;
+} 
+#reddit-alien .foot.right {
+-webkit-border-radius: 24px 24px 0 0;
+-moz-border-radius: 0 30px 10px 0;
+border-radius: 24px 24px 0 0;
+left: 156px;
+}
+#reddit-alien .foot {
+border: 8px solid black;
+width: 50px;
+height: 16px;
+top: 312px;
+background: white;
+-webkit-background-clip: padding-box;
+}
+</style>
+<div id="reddit-alien">
+<div class="antenna">
+<div class="dot"></div>
+</div>
+<div class="ear left"></div>
+<div class="ear right"></div>
+<div class="head">
+<div class="eye left"></div>
+<div class="eye right"></div>
+<div class="mouth"></div>
+</div>
+<div class="arm left"></div>
+<div class="arm right"></div>
+<div class="body"></div>
+<div class="foot left"></div>
+<div class="foot right"></div>
+</div></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgheadline44" class="outline-2">
+<h2 id="orgheadline44"><span class="section-number-2">12</span> CSS Pseudo Class/Elements</h2>
+<div class="outline-text-2" id="text-12">
+<pre class="example">
+:link	a:link	Selects all unvisited links
+:visited	a:visited	Selects all visited links
+:active	a:active	Selects the active link
+:hover	a:hover	Selects links on mouse over
+:focus	input:focus	Selects the input element which has focus
+:first-letter	p:first-letter	Selects the first letter of every &lt;p&gt; element
+:first-line	p:first-line	Selects the first line of every &lt;p&gt; element
+:first-child	p:first-child	Selects every &lt;p&gt; elements that is the first child of its parent
+:before	p:before	Insert content before every &lt;p&gt; element
+:after	p:after	Insert content after every &lt;p&gt; element
+:lang(language)	p:lang(it)	Selects every &lt;p&gt; element with a lang attribute value starting with "it"
+</pre>
+</div>
+
+<div id="outline-container-orgheadline43" class="outline-3">
+<h3 id="orgheadline43"><span class="section-number-3">12.1</span> <code>:before</code> &amp;&amp; <code>:after</code></h3>
+<div class="outline-text-3" id="text-12-1">
+<ol class="org-ol">
+<li><a href="http://coding.smashingmagazine.com/2011/07/13/learning-to-use-the-before-and-after-pseudo-elements-in-css/#top">Learning To Use The :before And :after Pseudo-Elements In CSS</a></li>
+<li><p>
+<a href="http://css-tricks.com/css-content/">CSS Content</a>
+</p>
+
+<p>
+<b>Reference</b>
+</p></li>
+<li><a href="http://www.w3schools.com/css/css_pseudo_elements.asp">CSS Pseudo-elements</a></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline45" class="outline-2">
+<h2 id="orgheadline45"><span class="section-number-2">13</span> CSS white-space Property</h2>
+<div class="outline-text-2" id="text-13">
+<p>
+<a href="http://www.w3schools.com/cssref/pr_text_white-space.asp">CSS white-space Property</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline46" class="outline-2">
+<h2 id="orgheadline46"><span class="section-number-2">14</span> CSS部分术语解释：</h2>
+<div class="outline-text-2" id="text-14">
+<ol class="org-ol">
+<li>替换元素(Replaced):
+替换元素就是浏览器根据元素的标签和属性，来决定元素的具体显示内容。
+<ul class="org-ul">
+<li>&lt;img&gt;</li>
+<li>&lt;input&gt;</li>
+<li>&lt;textarea&gt;</li>
+<li>&lt;select&gt;</li>
+<li>&lt;object&gt;</li>
+</ul></li>
+
+<li>不可替换元素(Nonreplaced):
+HTML 的大多数元素是不可替换元素，即其内容直接表现给用户端（例如浏览器）。
+<ul class="org-ul">
+<li><code>&lt;p&gt;&lt;/p&gt;</code></li>
+</ul></li>
+
+<li>块元素(Block-level):
+在视觉上被格式化为块的元素，
+最明显的特征就是它默认在横向充满其父元素的内容区域，
+而且在其左右两边没有其他元素，即块级元素默认是独占一行的。
+<ul class="org-ul">
+<li><code>&lt;div&gt;</code></li>
+<li><code>&lt;p&gt;</code></li>
+<li><code>&lt;h1&gt; - &lt;h6&gt;</code></li>
+</ul></li>
+
+<li>行内/内联函数(Inline):
+行内元素不形成新内容块，即在其左右可以有其他元素
+<ul class="org-ul">
+<li><code>&lt;a&gt;</code></li>
+<li><code>&lt;span&gt;</code></li>
+<li><code>&lt;strong&gt;</code></li>
+</ul></li>
+<li><a href="http://dev.w3.org/csswg/css-inline/#baseline">Baseline alignment</a>:
+Baseline alignment describes the alignment of textual content 
+and based on information contained in  font tables associated 
+with font resources. 
+Additional descriptions for these font tables are 
+provided in the CSS3 Fonts module.</li>
+</ol>
+
+
+<p>
+Reference:
+</p>
+<ol class="org-ol">
+<li><a href="http://blog.sina.com.cn/s/blog_61e439e50100tacn.html">CSS:替换元素(Replaced)、不可替换元素(Nonreplaced)、块元素(Block-level)和行内/内联元素(Inline)</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgheadline47" class="outline-2">
+<h2 id="orgheadline47"><span class="section-number-2">15</span> HTML Useful Character Entities:</h2>
+<div class="outline-text-2" id="text-15">
+<p>
+Reference: <a href="http://www.w3schools.com/html/html_entities.asp">http://www.w3schools.com/html/html_entities.asp</a>
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
+<p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
+<p class="date">2013-05-25</p>
+<p class="export-date">2016-10-12 Wed 13:44</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="validation"></p>
+<p class="last-modification-time">2016-10-12 Wed 13:03</p></div><script asyn src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+</div>
+</body>
+</html>
