@@ -71,7 +71,7 @@ exportEvent.on('end', (data) => {
 ////////////////
 
 function genTagsHtml (tags) {
-  var tagsHtml
+  var tagsHtml = []
   if (tags && typeof tags.split === 'function') {
     tagsHtml = tags.split(',').map((tag) => {
       return `<a class="tag-item" href="/search?hl=en&q=${encodeURIComponent(tag)}" title="Go to ${tag}">${tag}</a>`
@@ -85,7 +85,8 @@ function genArchiveHtml (data) {
   let html = Object.keys(data).sort((a, b) => {
     return data[b].mtime - data[a].mtime
   }).map((fileSym) => {
-    const {title, name, category, mtime, date, tags} = data[fileSym]
+    const {title, name, category, mtime, date, tags, error} = data[fileSym]
+    if (error) return
     let urlprefix = URLPREFIX
     if (typeof process.env.NODE_ENV === 'string' && process.env.NODE_ENV.indexOf('production') >= 0) {
       urlprefix = URLPREFIX2
@@ -149,34 +150,41 @@ function readArticle (category, filename, container, callback) {
     category: category
   })
   fs.stat(baseFullpath, (err, data) => {
+    // test the file and get the basic information of the file
     if (err) {
-      console.log(err)
-    } else {
-      Object.assign(container[sym], {
-        mtime: (new Date(data.mtime)).getTime()
-      })
-      fs.open(baseFullpath, "r", (err, fd) => {
-        let length = 500
-        let buf = new Buffer(length)
-        fs.read(fd, buf, 0, length, null, (err, bytesRead, buffer) => {
-          if (err) {
-            console.log(err)
-          } else {
-            const data = buffer.toString("utf8", 0, buffer.length)
-            const date = data.match(DATEREGEXP)
-            const tags = data.match(TAGSREGEXP)
-            const title = data.match(TITLEREGEXP)
-            Object.assign(container[sym], {
-              title: title && title[1],
-              date: date && date[1],
-              tags: tags && tags[1]
-            })
-          }
-          fs.close(fd)
-          if (typeof callback === 'function') callback(container)
-        })
+      console.log(err.message)
+      return Object.assign(container[sym], {
+        error: err.code
       })
     }
+    Object.assign(container[sym], {
+      mtime: (new Date(data.mtime)).getTime()
+    })
+    fs.open(baseFullpath, "r", (err, fd) => {
+      if (err) {
+        console.log(err)
+        return
+      }
+      let length = 500
+      let buf = new Buffer(length)
+      fs.read(fd, buf, 0, length, null, (err, bytesRead, buffer) => {
+        if (err) {
+          console.log(err)
+        } else {
+          const data = buffer.toString("utf8", 0, buffer.length)
+          const date = data.match(DATEREGEXP)
+          const tags = data.match(TAGSREGEXP)
+          const title = data.match(TITLEREGEXP)
+          Object.assign(container[sym], {
+            title: title && title[1],
+            date: date && date[1],
+            tags: tags && tags[1]
+          })
+        }
+        fs.close(fd)
+        if (typeof callback === 'function') callback(container)
+      })
+    })
   })
 }
 
