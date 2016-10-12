@@ -1,4 +1,6 @@
 #+TITLE: Unicode and UTF8
+#+AUTHOR: 冰糖火箭筒(Junjia Ni)
+#+EMAIL: creamidea(AT)gmail.com
 #+DATE: 2015-12-05
 #+CATEGORY: article
 #+DESCRIPTION: Unicode and UTF8 的一些学习笔记

@@ -35,7 +35,7 @@ tags: linux command
      # -G指定加入组（附加组）
      useradd -s /bin/sh -g group –G adm,root gem
    #+END_SRC
-   
+
    *Reference:*
    - http://blog.sina.com.cn/s/blog_47051c800100oegn.html
 
@@ -56,7 +56,7 @@ tags: linux command
      someone2
      someone3
    #+END_EXAMPLE
-   
+
    *Reference:*
    - http://blog.chinaunix.net/uid-26301963-id-3055415.html
 

@@ -1,0 +1,549 @@
+#+TITLE: Learning Django
+#+AUTHOR: 冰糖火箭筒(Junjia Ni)
+#+EMAIL: creamidea(AT)gmail.com
+#+DATE: 2013-04-14
+#+CATEGORY: article
+#+DESCRIPTION: 学习Django的笔记
+#+KEYWORDS:python,django
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t tex:nil email:t
+#+LINK_HOME: https://creamidea.github.io
+#+STARTUP: showall
+
+* 前言
+  上面分配的新的学习内容，学习这个框架，然后使用的参考书籍是 *Django Book 2 中文版* 。
+  下载地址是：[[http://vdisk.weibo.com/s/xy74T][微盘]]
+
+  无论有任何想法或者我文章中有任何错误，欢迎在下面留言或者通过电子邮件联系我：）
+
+  <2013-09-28 Sat>再次学习
+
+* Install Django
+  因为安装过程理论上不是很难，我在这里只是写一条命令。（默认已经安装了python）
+  1. Windows:
+     以管理员的身份，打开cmd。之后到django文件夹下输入：
+     #+BEGIN_SRC sh
+       python setup.py install
+     #+END_SRC
+  2. Linux/Mac OS X:
+     前往django所在文件目录，之后输入：
+     #+BEGIN_SRC sh
+       sudo python setup.py install
+     #+END_SRC
+
+  *参考网站:*
+  1. [[https://docs.djangoproject.com/en/1.5/topics/install/#installing-official-release]]
+  2. [[https://docs.djangoproject.com/en/1.5/topics/install/]]
+  3. https://docs.djangoproject.com/en/1.5/intro/install/
+
+* 第二章 入门 && 第三章 视图和URL配置
+  日曜日<2013-04-14 Sun>
+
+  只是稍微看了一下，然后写了一个Hello(呵呵，真是经典啊)
+  1. 使用 =django-admin.py startproject mysite=
+     (笔者我在Windows7上尝试，估计路径没有加入，所以我直接将Scripts/django-admin.py
+     放入了工程文件夹才解决)。
+
+     创建完成之后的目录：
+     #+BEGIN_EXAMPLE
+       icecream/
+         manage.py
+         icecream/
+            __init__.py
+            settings.py
+            urls.py
+            wsgi.py
+            __init__.pyc
+            settings.pyc
+            urls.pyc
+            wsgi.pyc
+     #+END_EXAMPLE
+
+  2. 创建views.py (注意这个要放在icecream这个目录下，同urls.py在同一目录)
+     #+BEGIN_SRC python
+       from django.http import HttpResponse
+
+       def hello(request):
+               return HttpResponse("Hello, icecream")
+     #+END_SRC
+
+  3. 修改urls.py
+     #+BEGIN_SRC python
+       from django.conf.urls import patterns, include, url
+       from icecream.views import hello
+
+       urlpatterns = patterns('',
+               ('^hello/$', hello),        # 增加这句映射
+       )
+     #+END_SRC
+
+  4. 运行
+     #+BEGIN_SRC sh
+	   python manage.py runserver [0.0.0.0] 8080
+	   # 加入 0.0.0.0 可以使得“外网”访问，不仅限于127.0.0.1
+     #+END_SRC
+
+  5. 在浏览器中输入：
+     http://127.0.0.1:8080/hello
+
+  P30
+* 第四章 模板
+  火曜日<2013-04-16 Tue>
+
+  1. Template System
+     #+BEGIN_SRC python :results output
+       from django import template
+       t = template.Template('My name is {{ name }}.')
+       c = template.Context({'name': 'Alice'})
+       print t.render(c)
+     #+END_SRC
+  2. 给标签增加一个reversed使得该列表被反向迭代：
+     #+BEGIN_EXAMPLE
+       {% for athlete in athlete_list reversed %}
+       ...
+       {% endfor %}
+     #+END_EXAMPLE
+* 第五章 模型
+  水曜日<2013-04-17 Wed>
+
+  1. 安装python-mysql：
+
+     在Windows7 64bit上貌似安装不了，它说是64bit的原因。
+     (python version:2.7.3 64bit.)
+     我想也是。
+
+     我下载的包是：
+     http://nchc.dl.sourceforge.net/project/mysql-python/mysql-python-test/1.2.4b4/MySQL-python-1.2.4b4.win32-py2.7.exe
+
+     然后我跟着：
+     http://stackoverflow.com/questions/3652625/installing-setuptools-on-64-bit-windows
+     修改注册表还是失败了。以后再试吧。
+
+     *Update:*
+     <2013-10-15 Tue>更新在Windows7上安装问题：
+     今天我感觉已经找到一种解决方式，那就是我重新将python安装在了C盘根目录下，而不是在
+     =Program Files= 下。
+     貌似有许多的开发环境必须安装在根目录下，或者目录名称中不能有空格特殊字符等等。只能是字母+数字。 \\
+     以后要记住这点啦。
+
+     在Linux上安装的话就下载源码安装呗。
+     我以为直接下载源码，然后：
+     #+BEGIN_SRC python
+       python setup.py install
+     #+END_SRC
+     就可以了，但是我在ubuntu12.04上貌似失败了，貌似提示没有setuptool。我
+     安装了python-setuptool也没有用。有谁会记得告诉我。
+
+     Referencs:
+     1. http://stackoverflow.com/questions/5178292/pip-install-mysql-python-fails-with-environmenterror-mysql-config-not-found
+     2. http://stackoverflow.com/questions/14426491/python-3-importerror-no-module-named-setuptools
+     3. http://stackoverflow.com/questions/2211335/python-setuptools-import-error-using-netbeans
+
+     于是我改用 =pip= 安装。一开始我不是这个步骤，不是权限问题，就是没有
+     distribute。现在我将步骤整理如下：
+     From: http://codeinthehole.com/writing/how-to-set-up-mysql-for-python-on-ubuntu/
+     #+BEGIN_SRC sh
+       $ sudo apt-get install python-pip
+       $ sudo apt-get install python-dev libmysqlclient-dev
+       $ sudo easy_install -U distribute
+       $ sudo pip install MySQL-python
+     #+END_SRC
+
+     之后我尝试了一下(一定要保证能够连接到数据库哦，如果真想写进数据库，记得
+     别忘了syncdb)：
+     #+BEGIN_SRC sh
+       $ python manage.py validate     # 验证数据正确性
+       $ python manage.py sqlall books
+       $ python manage.py syncdb
+     #+END_SRC
+
+     RESULTS:
+     #+BEGIN_SRC sh
+       BEGIN;
+       CREATE TABLE `books_publisher` (
+           `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+           `name` varchar(30) NOT NULL,
+           `address` varchar(50) NOT NULL,
+           `city` varchar(60) NOT NULL,
+           `state_province` varchar(30) NOT NULL,
+           `country` varchar(50) NOT NULL,
+           `website` varchar(200) NOT NULL
+       )
+       ;
+       CREATE TABLE `books_author` (
+           `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+           `first_name` varchar(30) NOT NULL,
+           `last_name` varchar(40) NOT NULL,
+           `email` varchar(75) NOT NULL
+       )
+       ;
+       CREATE TABLE `books_book_authors` (
+           `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+           `book_id` integer NOT NULL,
+           `author_id` integer NOT NULL,
+           UNIQUE (`book_id`, `author_id`)
+       )
+       ;
+       ALTER TABLE `books_book_authors` ADD CONSTRAINT `author_id_refs_id_1a0a2829` FOREIGN KEY (`author_id`) REFERENCES `books_author` (`id`);
+       CREATE TABLE `books_book` (
+           `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+           `title` varchar(100) NOT NULL,
+           `publisher_id` integer NOT NULL,
+           `publisher_date` date NOT NULL
+       )
+       ;
+       ALTER TABLE `books_book` ADD CONSTRAINT `publisher_id_refs_id_974c2a46` FOREIGN KEY (`publisher_id`) REFERENCES `books_publisher` (`id`);
+       ALTER TABLE `books_book_authors` ADD CONSTRAINT `book_id_refs_id_0a3634f3` FOREIGN KEY (`book_id`) REFERENCES `books_book` (`id`);
+       CREATE INDEX `books_book_81b79144` ON `books_book` (`publisher_id`);
+
+       COMMIT;
+     #+END_SRC
+
+  2. 如果使用Django的数据层，必须创建Django app.
+     #+BEGIN_SRC sh
+      $ python manage.py startapp books(app name)
+     #+END_SRC
+
+  3. 使用get()方法处理“可能不存在的键”
+     #+BEGIN_SRC python
+       request.META.get('HTTP_USER_AGENT', 'unknow')
+     #+END_SRC
+
+  4. 使用Sqlite3 （因为笔者最近在Windows7上开发，又不想安装中大型数据库，于是。。。）:
+
+     For Windows7:
+
+     1. 下载源代码：sqlite-amalgamation-xxxxxxx.zip,点击这里进入下载页面。
+
+     2. 输入编译代码，前提是安装了 [[http://www.mingw.org/][MinGW]] :
+        #+BEGIN_SRC sh
+      gcc -o sqlite3 shell.c sqlite3.c -lpthread
+      # 这里需要去掉-ldl，不然会保错。不知道你们安装的时候会不会遇到此类问题.
+        #+END_SRC
+        Reference:
+        + http://www.sqlite.org/howtocompile.html
+
+** MTV开发模式
+   /Model-View-Controller/
+
+* 第六章 Django站点管理
+  火曜日<2013-04-23 Tue>
+
+  1. 搭建步骤
+     #+BEGIN_EXAMPLE
+       #INSTALLED_APPS
+       1. django.contrib.admin         #enable
+       2. django.contrib.auth
+          django.contrib.contenttypes
+          django.contrib.session
+
+       #MIDDLEWARE_CLASSES
+       1. django.middleware.common.CommonMiddleware
+       2. django.contrib.sessons.middleware.SessionMiddleware
+       3. django.contrib.auth.middleware.AuthenticationMiddleware
+     #+END_EXAMPLE
+  2. Some config
+     1)Setting.py
+     + Template paht:
+       #+BEGIN_SRC python
+         TEMPLATE_DIRS = (
+             # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+             # Always use forward slashes, even on Windows.
+             # Don't forget to use absolute paths, not relative paths.
+             os.path.join(os.path.dirname(__file__), 'templates').replace('\\', '/'),
+         )
+       #+END_SRC
+     + Static path
+       #+BEGIN_SRC python
+         # Additional locations of static files
+         STATICFILES_DIRS = (
+             # Put strings here, like "/home/html/static" or "C:/www/django/static".
+             # Always use forward slashes, even on Windows.
+             # Don't forget to use absolute paths, not relative paths.
+             os.path.join(os.path.dirname(__file__), 'static').replace('\\', '/'),
+         )
+       #+END_SRC
+     2)一些注意点
+     1. 在管理界面显示自己创建的应用程序：
+        这点我也是我自己要记住的，记住写的模型需要在当前应用程序下的admin.py中注册，
+        代码类似这样：
+        #+BEGIN_SRC python
+      from django.contrib import admin
+      from icecream.register.models import User
+
+      admin.site.register(User)
+        #+END_SRC
+* 第七章 表单
+  木曜日<2013-04-25 Thu>
+
+  1. 在创建contact的时候，我没有使用 =python manage.py startapp contact=
+     导致在写urls.py的时候老是提示找不到 =contact=
+
+  2. 自定义校验规则
+     #+BEGIN_EXAMPLE
+     Django的form系统自动寻找匹配的函数方法,
+     该方法名称以clean_开头,并以字段名称结束。
+     如果有这样的方法,它将在校验时被调用。
+
+     特别地,clean_message()方法将在指定字段的默认校验逻辑执行 *之后* 被调用。
+     (本例中,在必填CharField这个校验逻辑之后。)
+     因为字段数据已经被部分处理,所以它被从self.cleaned_data中提取出来
+     了。同样,我们不必担心数据是否为空,因为它已经被校验过了。
+
+     我们简单地使用了len()和split()的组合来计算单词的数量。
+     如果用户输入字数不足,我们抛出一个forms.ValidationError型异常。
+     这个异常的描述会被作为错误列表中的一项显示给用户。
+
+     在函数的末尾显式地返回字段的值非常重要。
+     我们可以在我们自定义的校验方法中修改它的值(或者把它转换
+     成另一种Python类型)。 如果我们忘记了这一步,None值就会返回,
+     原始的数据就丢失掉了。
+     #+END_EXAMPLE
+
+  3. 定义Form样式
+     #+BEGIN_EXAMPLE
+       每一个字段部件(<input type=”text”>, <select>, <textarea>, 或者类似)都可以通过访问{{form.字段名}}进行单独的渲染。
+     #+END_EXAMPLE
+
+  4. 问题解决：
+     1) CSRF verification failed. Request aborted.
+        #+BEGIN_SRC python
+          # views.py
+          from django.template import RequestContext
+          return render_to_response('login.html', context_instance=RequestContext(request))
+
+          # login.html
+        #+END_SRC
+
+        Reference:
+        1) http://stackoverflow.com/questions/14848603/django-csrf-cookie-not-setting
+
+        2) http://www.5i1y.com/post/8/Django-CSRF/
+
+        3) https://docs.djangoproject.com/en/dev/ref/templates/api/#subclassing-context-requestcontext
+* 第八章 高级视图和URL配置
+  木曜日<2013-04-25 Thu>
+
+  1. 在 Python 正则表达式中,命名的正则表达式组的语法是 =(?P<name>pattern)= ,
+     这里 =name= 是组的名字,而 =pattern= 是匹配的某个模式。
+
+     下面使用无名组的URLconf例子：
+     #+BEGIN_SRC python
+       from django.conf.urls.defaults import *
+       from mysite import views
+       urlpatterns = patterns('',
+                              (r'^articles/(\d{4})/$', views.year_archive),
+                              (r'^articles/(\d{4})/(\d{2})/$', views.month_archive),
+       )
+
+     #+END_SRC
+
+     下面相同的URLconf:
+     #+BEGIN_SRC python
+       from django.conf.urls.defaults import *
+       from mysite import views
+       urlpatterns = patterns('',
+                              (r'^articles/(?P<year>\d{4})/$', views.year_archive),
+                              (r'^articles/(?P<year>\d{4})/(?P<month>\d{2})/$', views.month_archive),
+       )
+     #+END_SRC
+
+     例如,如果不带命名组,请求
+     =/articles/2006/03/=
+     将会等同于这样的函数调用:
+     #+BEGIN_SRC python
+       month_archive(request, '2006', '03')
+     #+END_SRC
+
+     而带命名组,同样的请求就会变成这样的函数调用:
+     #+BEGIN_SRC python
+       month_archive(request, year='2006', month='03')
+     #+END_SRC
+
+  2. 对一个可选URL配置参数的优雅解决方法:
+     URLconf里面的每一个模式都可以包含第三个数据: 一个关键字参数的字典:
+     有了这个概念以后,我们就可以把我们现在的例子改写成这样:
+     #+BEGIN_SRC python
+       # urls.py
+       from django.conf.urls.defaults import *
+       from mysite import views
+       urlpatterns = patterns('',
+           (r'^foo/$', views.foobar_view, {'template_name': 'template1.html'}),
+           (r'^bar/$', views.foobar_view, {'template_name': 'template2.html'}),
+       )
+       # views.py
+       from django.shortcuts import render_to_response
+       from mysite.models import MyModel
+       def foobar_view(request, template_name):
+           m_list = MyModel.objects.filter(is_new=True)
+           return render_to_response(template_name, {'m_list': m_list})
+     #+END_SRC
+
+     如你所见,这个例子中,URLconf指定了 template_name 。 而视图函数会把它当成另一个参数。
+
+  3. 比如你可能会想增加这样一个URL, /mydata/birthday/,
+     这个URL等价于 /mydata/jan/06/ 。这时你可以这样利用额外URLconf参数:
+     #+BEGIN_SRC python
+       urlpatterns = patterns('',
+           (r'^mydata/birthday/$', views.my_view, {'month': 'jan', 'day': '06'}),
+           (r'^mydata/(?P<month>\w{3})/(?P<day>\d\d)/$', views.my_view),
+       )
+     #+END_SRC
+
+     在这里最帅的地方莫过于你根本不用改变你的视图函数。
+     视图函数只会关心它获得了参数,
+     它不会去管这些参数到底是捕捉回来的还是被额外提供的。
+     month和day
+
+  4. 捕捉值和额外参数直接的优先级
+     当冲突发生时， 额外URLconf参数优先于捕捉值。
+
+* 第九章 模板高级进阶
+  木曜日<2013-05-07 Tue>
+
+  1. 关闭html自动转义
+     + 对于单独的变量
+
+       用safe过滤器为单独的变量关闭自动转意：
+       #+BEGIN_SRC python
+         This will be escaped: {{ data }}
+         This will not be escaped: {{ data|safe }}
+       #+END_SRC
+
+       你可以把safe当做safe from further escaping的简写，或者当做可以被直接译成HTML的内容。在这个例子
+       里，如果数据包含''，那么输出会变成：
+       #+BEGIN_SRC python
+         This will be escaped: &lt;b&gt;
+         This will not be escaped: <b>
+       #+END_SRC
+
+       + 对于模板块
+
+         为了控制模板的自动转意,用标签 =autoescape= 来包装整个模板(或者模板中常用的部分),就像这样：
+         #+BEGIN_SRC python
+           # &#37; = % &#123; = {
+           {&#37; autoescape off &#37;}
+           Hello {&#123; name &#123;}
+           {&#37; endautoescape &#37;}
+         #+END_SRC
+
+       auto-escaping 标签的作用域不仅可以影响到当前模板还可以通过
+       include标签作用到其他标签,就像block标签一样。
+
+  2. Django有两种方法加载模板
+     + django.template.loader.get_template(template_name) ：
+       get_template 根据给定的模板名称返回一个
+       已编译的模板（一个 Template 对象）。
+       如果模板不存在，就触发 TemplateDoesNotExist 的异常。
+     + django.template.loader.select_template(template_name_list) ：
+       select_template 很像get_template ，不过它是以模板名称的列表作为参数的。
+       它会返回列表中存在的第一个模板。 如果模板都不存在，
+       将会触发TemplateDoesNotExist异常。
+
+* 第十章 数据模型高级进阶
+  土曜日<2013-05-11 Sat>
+  CLOCK: [2013-05-12 Sun 12:53]
+
+  1. 打开Session功能：
+     #+BEGIN_SRC python
+       'django.contrib.sessions.middleware.SessionMiddleware'
+
+       INSTALLED_APPS 中有 'django.contrib.sessions'
+
+       (别忘了运行manage.py syncdb)
+
+     #+END_SRC
+  2. 在视图中使用Session
+     + SessionMiddleware 激活后，每个传给视图(view)函数的第一个参数``HttpRequest``
+       对象都有一个 session 属性，这是一个字典型的对象。
+  3. 会话密钥(session key)
+  4. 设置Cookies:
+     =request.session.set_test_cookie()=
+     后续view中：
+     =request.seesion.test_cookie_worked()=
+  5. 认证(authentication)框架
+  6. 注意点：
+     + =session= 是在 =request= 中的， =set_cookie= 是在 =response=HttpResponse=
+
+     + 被设置的 =session= 并不会在调试工具中的cookie出现
+
+  7. 疑问点：
+     + 关于这些session属性怎么设置，直接写入setting.py文件么？
+       参考地址：https://docs.djangoproject.com/en/dev/ref/settings/#sessions
+
+     + 在设计登录表单时，如何判断输入的是合法字符，使得提交按钮生效？
+* 第十二章 部署Django
+** Linux
+*** mod_wsgi
+    1. Install it on Ubuntu12.04
+       #+BEGIN_SRC sh
+       sudo aptitude install libapache2-mod-wsgi
+       #+END_SRC
+    2. Install from source
+       #+BEGIN_SRC sh
+         mkdir ~/sources
+         cd ~/sources
+         wget http://modwsgi.googlecode.com/files/mod_wsgi-3.3.tar.gz
+         tar xvfz mod_wsgi-3.3.tar.gz
+
+         # Before continuing further, we will grab two different packages from aptitude.
+         sudo aptitude install python-dev apache2-prefork-dev
+       #+END_SRC
+
+* Q&A
+  1. Q: Django Models (1054, "Unknown column" XXXX.id in 'field list'") \\
+     A: =manage.py sqlall [appname]= to get the sql.
+     #+BEGIN_EXAMPLE
+        ALTER TABLE tb_realtime_data ADD COLUMN id INTEGER FIRST;
+        ALTER TABLE software_type DROP COLUMN upid;
+     #+END_EXAMPLE
+  2. Q: Django automatic primary key fields \\
+     A: [[https://docs.djangoproject.com/en/1.6/topics/db/models/#automatic-primary-key-fields][Automatic primary key fields]]
+  3. Q: 1136, "Column count doesn't match value count at row 1" \\
+     A: *始终记住，django使用模型时创建数据库会多创建一列，id列，在第一列，这个非常非常的重要。
+     无论是否有主键，都有id列的存在。因此在插入数据的时候，必须写明要插入的列。例如：*
+     #+BEGIN_SRC sql
+       -- 在第一列是id列，自增长。
+       INSERT INTO tb_realtime_data(node_id, sensor_id, data, insert_time) VALUES (
+           new.node_id,
+           new.sensor_id,
+           new.data,
+           new.insert_time
+       );
+     #+END_SRC
+  4. Q: 模板中字典的遍历 \\
+     A: 都是使用 =.= 运算符，例如：
+
+     Python代码
+     #+BEGIN_SRC python
+       contents = {
+           "home": 主页,
+           "about": 关于,
+       }
+     #+END_SRC
+
+     模板
+     #+BEGIN_SRC html
+       {% for k, v in contents.items %}
+       <li><a href="/nori/{{ k }}">{{ v }}</a></li>
+       {% endfor %}
+     #+END_SRC
+
+     *Attetion*:
+     字典本身是Hash散列的，所以无法指望其按你想要的顺序打印。
+  5. Q: 模板中元组的使用 \\
+     A: 使用 =.= 运算符
+
+     Python代码
+     #+BEGIN_SRC python
+       'contents': (
+           ("home", "主页"),
+           ("node", "节点"),
+       ),
+     #+END_SRC
+
+     模板
+     #+BEGIN_SRC html
+       {% for v in contents %}
+       <li><a href="/nori/{{ v.0 }}">{{ v.1 }}</a></li>
+       {% endfor %}
+     #+END_SRC

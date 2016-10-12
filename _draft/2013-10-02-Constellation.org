@@ -3,7 +3,7 @@
 #+EMAIL:creamidea(AT)gmail.com
 #+DESCRIPTION:ICECREAM(氷菓)
 #+KEYWORDS:constellation astronomy
-#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t email:t
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t tex:nil email:t
 #+LINK_HOME: https://creamidea.github.io
 #+STYLE:<link rel="stylesheet" type="text/css" href="../css/style.css">
 #+INFOJS_OPT: view: showall toc: nil
@@ -12,7 +12,7 @@
 ---
 layout: doc
 title: 88 Constellation
-subtitle: 88星座简单介绍 
+subtitle: 88星座简单介绍
 categories: note
 tags: constellation astronomy
 ---

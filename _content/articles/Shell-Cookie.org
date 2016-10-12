@@ -1,8 +1,11 @@
 #+TITLE: Shell Cookies
+#+AUTHOR: 冰糖火箭筒(Junjia Ni)
+#+EMAIL: creamidea(AT)gmail.com
 #+DATE: 2015-12-27
+#+CATEGORY: article
 #+DESCRIPTION: 记住一些命令
 #+KEYWORDS: shell,emacs,etags
-#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:nil email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
 
@@ -107,5 +110,54 @@ C-u M-! date
 ‘M-x tags-apropos’ – list all tags in a tags file that match a regexp
 ‘M-x list-tags’ – list all tags defined in a source file
 #+END_EXAMPLE
+
+* 用户篇
+** 增加用户：
+   #+BEGIN_SRC sh
+     # -s指定shell
+     # -g指定组名
+     # -G指定加入组（附加组）
+     useradd -s /bin/sh -g group –G adm,root gem
+   #+END_SRC
+
+   *Reference:*
+   - http://blog.sina.com.cn/s/blog_47051c800100oegn.html
+
+** 批量增加用户:
+   #+BEGIN_SRC sh
+     #!/bin/bash/
+     # 创建用户
+     for i in `cat user.list`
+     do
+         useradd -d /home/$i -m $i
+         useradd -g wsng $i
+         echo "password" | passwd --stdin $i
+     done
+   #+END_SRC
+
+   #+BEGIN_EXAMPLE
+     someone1
+     someone2
+     someone3
+   #+END_EXAMPLE
+
+   *Reference:*
+   - http://blog.chinaunix.net/uid-26301963-id-3055415.html
+
+** 增加用户到组:
+   1. 增加一个新用户到主要用户组：
+      #+BEGIN_SRC sh
+        # 增加用户icecream到wsng
+        # -g将新增加的用户初始化为指定登录组，此名必须存在
+        useradd -g wsng icecream
+      #+END_SRC
+   2. 增加一个已有用户到一个已有用户组中
+      #+BEGIN_SRC sh
+        # 用户icecream不必离开原组
+        usermod -a -G wsng icecream
+        # 将用户组改为wsng
+        usermod -g wsng icecream
+      #+END_SRC
+
 
 * 尾声

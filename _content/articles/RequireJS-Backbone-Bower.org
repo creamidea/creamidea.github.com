@@ -1,0 +1,22 @@
+#+TITLE:A RequireJS, Backbone and Bower Starter Template
+#+AUTHOR: 冰糖火箭筒(Junjia Ni)
+#+EMAIL: creamidea(AT)gmail.com
+#+DATE: 2013-08-14
+#+CATEGORY: article
+#+DESCRIPTION: Requirejs+Backbone+Bower 构建现代前端开发流程
+#+KEYWORDS:javascript,bower,backbone,requirejs
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t tex:nil email:t
+#+LINK_HOME: https://creamidea.github.io
+#+STARTUP: showall
+
+* 前言
+这个是是一篇简单的参考文档，方便以后自己的回忆。
+
+主要参考的是这个视频：A RequireJS, Backbone, and Bower Starter Template[fn:1]，
+来自于这篇文章：[[http://net.tutsplus.com/tutorials/javascript-ajax/a-requirejs-backbone-and-bower-starter-template/][A RequireJS, Backbone, and Bower Starter Template]]
+
+* 等待填坑……
+
+* Footnotes
+
+[fn:1] http://www.youtube.com/watch?v=USk1ie30z5k&feature=share&list=UUd-EhXGbXSozuzsAAdPIn3A

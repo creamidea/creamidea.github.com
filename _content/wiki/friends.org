@@ -36,7 +36,12 @@
 后面想起什么再过来写吧。 \\
 [[http://jone.wang/][homepage]]
 
+* Allen Zhong
+原 *Alibaba-Group* 同事。相当靠谱。热爱喵星人、萝莉控、不折腾会死星人。淘X网社畜现役，Ingress 启示军。 \\
+[[http://atr.me/][homepage]]
+
 * 尾声
+还未结束。
 
 #+BEGIN_QUOTE
 去留无意，望天上云卷云舒。

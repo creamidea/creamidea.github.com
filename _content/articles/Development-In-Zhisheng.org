@@ -1,0 +1,152 @@
+#+TITLE: Development In Zhisheng
+#+AUTHOR: 冰糖火箭筒(Junjia Ni)
+#+EMAIL: creamidea(AT)gmail.com
+#+DATE: 2013-05-09
+#+CATEGORY: article
+#+DESCRIPTION:大学期间在智胜的实习记录
+#+KEYWORDS:javascript,python,django,css,mysql
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t tex:nil email:t
+#+LINK_HOME: https://creamidea.github.io
+#+STARTUP: showall
+
+* 前言
+  开发日志
+
+* 制作登录界面
+  <2013-05-09 Thu>
+
+  *Attention:*
+  1. 在IE中的cookie存储时几个不同项目之间有空格，需要处理掉
+     空格才能正常运行。如 "email" and " email"
+
+     处理函数:
+     #+BEGIN_SRC javascript
+       String.prototype.Trim = function() { // 去掉左右空格
+           return this.replace(/(^\s*)|(\s*$)/g, "");
+       }
+       String.prototype.Ltrim = function() { // 去掉左空格
+           return this.replace(/(^\s*)/g, "");
+       }
+       String.prototype.Rtrim = function() { // 去掉右空格
+           return this.replace(/(\s*$)/g, "");
+       }
+     #+END_SRC
+
+
+* 高级视图和URL配置
+  <2013-05-14 Tue>
+
+  高级视图和URL配置:
+  #+BEGIN_SRC python
+    # urls.py
+    from django.conf.urls.defaults import *
+    from mysite import views
+    urlpatterns = patterns('',
+                           (r'^foo/$', views.foobar_view, {'template_name': 'template1.html'}),
+                           (r'^bar/$', views.foobar_view, {'template_name': 'template2.html'}),
+    )
+    # views.py
+    from django.shortcuts import render_to_response
+    from mysite.models import MyModel
+    def foobar_view(request, template_name):
+                    m_list = MyModel.objects.filter(is_new=True)
+                    return render_to_response(template_name, {'m_list': m_list})
+  #+END_SRC
+* 'NoneType' object has no attribute 'has\_header'
+  A:
+  #+BEGIN_EXAMPLE
+    on if not response.has_header(‘ETag’):
+    This error appears if you don’t return anything from your view.
+            return direct_to_template(request, "template")
+    I wonder if this is a new error message? I recall a more specific error in my previous version of django, something along the lines of “Your view didn’t return anything!”
+  #+END_EXAMPLE
+* locals()小技巧
+  #+BEGIN_SRC python
+    def current_datetime(request):
+        now = datetime.datetime.now()
+        return render_to_response('current_datetime.html', {'current_date': now})
+  #+END_SRC
+  等价于：
+  #+BEGIN_SRC python
+    def current_datetime(request):
+        current_date = datetime.datetime.now()
+        return render_to_response('current_datetime.html', locals())
+  #+END_SRC
+  注意：
+  locals()导致了一点点开销，因为Python不得不动态创建字典
+  如果你手动指定context字典则可以避免这项开销
+
+  Reference：
+  http://hi.baidu.com/javalang/item/2d4e14f7a39e3f16cf9f3236
+* Cross Site Request Forgery protection
+  #+BEGIN_SRC js
+    // using jQuery
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+
+  #+END_SRC
+* login\_required 作下面这些事情：
+        + 如果用户没有登录，那么重定向到／accounts/login/ ，
+          传入当前的绝对URL路径作为 query string next 的值。
+          例如：/accounts/login/?next=/polls/3／。
+
+          + 如果用户已经登录了，那么就正常执行view的代码。
+
+* django.contrib.auth.views.login 的作用是：
+  + 如果通过 ``GET`` 方式调用的话，它显示一个登录表单并通过POST的方式登录。
+  + 如果通过 ``POST`` 方式调用的话，它试图把用户登录进去。
+    如果登录成功， 视图（view）重定向到 ``/accounts/profile/``
+    （目前是硬性编码的，就是写死的。）。如果登录失败，则继续显示登录表单。
+  + 你需要自己提供一个登录表单的模板，默认叫 registration/login.html 。
+    这个模板需要获得3个模板上下文的变量：
+    #+BEGIN_EXAMPLE
+      form：一个 FormWrapper 对象，用来显示登录表单。更多请看``FormWrapper`` 对象的 forms documentation 。
+
+      next：登录成功后重定向的URL。也可能包含一个查询字符串。
+
+      site_name：当前 Site 的名字。根据 SITE_ID 设置的信息获取。参考 site framework docs 。
+      如果你不想使用 registration/login.html 这个模板，你可以为在URLconf中的视图（view）传入一个 template_name 作为扩展的参数。
+
+    #+END_EXAMPLE
+* python Data Structures
+  http://docs.python.org/2/tutorial/datastructures.html
+* django.core.urlresolvers
+  https://docs.djangoproject.com/en/dev/ref/urlresolvers/
+
+  reverse():
+
+  http://stackoverflow.com/questions/5448148/problem-with-django-reverse
+* URL dispatcher
+  https://docs.djangoproject.com/en/dev/topics/http/urls/#django.core.urlresolvers.reverse
+
+* Q&A:
+** 如何快速更改项目的名称？
+** 如何构造优美的URLs？
+** Django Error u“'polls” is not a registered namespace
+   + http://stackoverflow.com/questions/14892462/django-error-upolls-is-not-a-registered-namespace?answertab=active#tab-top
+   + http://djangounchain.wordpress.com/2013/01/05/tutorial-4-writing-first-django-app-part-3/
+       (Below the 'Namespacing URL names')
+
+* Design:
+
+** 用户的分类：
+   + 普通用户
+   + 医生
+   + 系统管理员？？？
+* Django && Ajax:
+  https://docs.djangoproject.com/en/dev/ref/contrib/csrf/#page-uses-ajax-without-any-html-form
+
