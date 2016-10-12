@@ -5,7 +5,8 @@ var __forEach = Array.prototype.forEach
 // var __pop = Array.prototype.pop
 var __shift = Array.prototype.shift
 var parser = new DOMParser()
-var SEARCHER = 'https://www.google.com/?gws_rd=ssl#'
+// var SEARCHER = 'https://www.google.com/?gws_rd=ssl#'
+var SEARCHER = 'https://cse.google.com/cse/publicurl?cx=017951989687920165329:0e60irxxe5m&'
 
 // Router Interface
 function Router (routes) {
@@ -110,7 +111,8 @@ function Stage () {
           var href = target.getAttribute('href')
           if (tagName === 'A' && className === 'tag-item' && typeof href !== undefined) {
             ev.preventDefault()
-            location.href = href.replace(/\/search\?/, SEARCHER) + '+site:' + location.host
+            location.href = href.replace(/\/search\?/, SEARCHER)
+              // + '+site:' + location.host
           }
         }, false)
       }

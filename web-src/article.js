@@ -4,7 +4,9 @@ var __forEach = Array.prototype.forEach
 var __slice = Array.prototype.slice
 // var SEARCHER = 'https://www.laiguge.com/search?hl=en&q='
 // var SEARCHER = 'http://0s.o53xo.m5xw6z3mmuxgg33n.erenta.ru/?gws_rd=ssl#hl=en&q='
-var SEARCHER = 'https://www.google.com/?gws_rd=ssl#hl=en&q='
+// var SEARCHER = 'https://www.google.com/?gws_rd=ssl#hl=en&q='
+var SEARCHER = 'https://cse.google.com/cse/publicurl?cx=017951989687920165329:0e60irxxe5m&hl=en&q='
+
 
 /**
  * 从head头部中的meta以及#meta-author中获取基础信息，并在终端中打印
@@ -131,9 +133,9 @@ function showTags (body, content, meta) {
     var footnotes = document.getElementById('footnotes');
     keywords.forEach(function (key) {
       var a = document.createElement('a');
-      a.href = SEARCHER +
-        encodeURIComponent(key) +
-        '+site:' + location.host;
+      a.href = SEARCHER
+        + encodeURIComponent(key)
+        // + '+site:' + location.host;
       a.title = 'Go to ' + key;
       a.innerHTML = key;
       div.appendChild(a);
