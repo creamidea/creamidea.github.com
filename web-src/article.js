@@ -215,6 +215,13 @@ function loadDisqusComment (target) {
     var parent = target.parentElement;
     parent.style.display = 'none';
   }
+
+  window.disqus_config = function () {
+    // 这里是配置disqus地方，具体可以参考
+    // https://help.disqus.com/customer/portal/articles/472098-javascript-configuration-variables
+    this.page.identifier = location.pathname.split('/').slice(-2).join('/')
+  }
+
   var d = document;
   var s = document.createElement('script');
   s.src = '//creamidea.disqus.com/embed.js';
@@ -228,10 +235,6 @@ function loadDisqusComment (target) {
   disqus.style.marginBottom = '44px';
   disqus.innerHTML = '<h2 id="disqus_thread_header">Comments</h2><div id="disqus_thread"><p style="text-align:center;font-family: Georgia1,Georgia,Times New Roman,Times,serif;">Disqus is loading...</p></div>';
   content.appendChild(disqus);
-}
-function disqus_config () {
-  // 这里是配置disqus地方，具体可以参考
-  // https://help.disqus.com/customer/portal/articles/472098-javascript-configuration-variables
 }
 
 function changeBodyTopStyle (body) {
