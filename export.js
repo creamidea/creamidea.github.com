@@ -13,11 +13,11 @@ const UglifyJS = require("uglify-js")
 
 const CONTENTREGEXP = /<li><a href=(.*)>/gi
 const HREFREGEXP = /href="(.+?)"/i
-const TITLEREGEXP = /#\+TITLE:\s*(.+)/i
+const TITLEREGEXP = /#\+TITLE:\s*?(.+)/i
 const DATEREGEXP = /#\+DATE:\s*(.+)/i
-const TAGSREGEXP = /#\+KEYWORDS:\s*(.+)/i
-const AUTHORREGEXP = /#\+AUTHOR:\s*(.+)/i
-const CATEGORYREGEXP = /#\+CATEGORY:\s*(.+)/i
+const TAGSREGEXP = /#\+KEYWORDS:\s*?(.+)/i
+const AUTHORREGEXP = /#\+AUTHOR:\s*?(.+)/i
+const CATEGORYREGEXP = /#\+CATEGORY:\s*?(.+)/i
 
 const SITEMAPPATH = path.resolve(__dirname, 'static', 'html', 'sitemap.html')
 const PUBPATH = path.resolve(__dirname, 'static', 'html/')
@@ -177,13 +177,18 @@ function readArticle (category, filename, container, callback) {
     fs.open(baseFullpath, "r", (err, fd) => {
       if (err) {
         console.log(err)
-        return
+        return Object.assign(container[sym], {
+          error: err.code
+        })
       }
       let length = 500
       let buf = new Buffer(length)
       fs.read(fd, buf, 0, length, null, (err, bytesRead, buffer) => {
         if (err) {
           console.log(err)
+          return Object.assign(container[sym], {
+            error: err.code
+          })
         } else {
           const data = buffer.toString("utf8", 0, buffer.length)
           const date = data.match(DATEREGEXP)
@@ -193,10 +198,10 @@ function readArticle (category, filename, container, callback) {
           // const category = data.match(CATEGORYREGEXP) // has be defined above
           const description = cutout(data)
           Object.assign(container[sym], {
-            title: title && title[1],
-            date: date && date[1],
-            tags: tags && tags[1],
-            author: author === null  ? '冰糖火箭筒(Junjia Ni)' : author[1],
+            title: title && title[1].trim(),
+            date: date && date[1].trim(),
+            tags: tags && tags[1].trim(),
+            author: author === null  ? '冰糖火箭筒(Junjia Ni)' : author[1].trim(),
             category: category, // dirname
             description: description
           })
