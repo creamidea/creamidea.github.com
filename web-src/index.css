@@ -203,6 +203,9 @@ nav a span {
 .return:after {
   transform: rotate(-45deg);
 }
+#search {
+    display: none;
+}
 #custom-search {
     width: 100%;
     max-width: 960px;

@@ -411,7 +411,12 @@ function main () {
 
 }
 document.addEventListener('DOMContentLoaded', function () {
-  main()
+  if (typeof document.querySelector === 'undefined') {
+    //
+  } else {
+    document.querySelector('#search').style.display = 'block'
+    main()
+  }
 }, false)
 // window.onload = function () {
 //   main()
