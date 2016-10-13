@@ -414,7 +414,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (typeof document.querySelector === 'undefined') {
     //
   } else {
-    document.querySelector('#search').style.display = 'block'
+    document.querySelector('#search').style.display = 'initial'
     main()
   }
 }, false)
