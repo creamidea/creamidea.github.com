@@ -7,6 +7,11 @@ var __shift = Array.prototype.shift
 var parser = new DOMParser()
 // var SEARCHER = 'https://www.google.com/?gws_rd=ssl#'
 var SEARCHER = 'https://cse.google.com/cse/publicurl?cx=017951989687920165329:0e60irxxe5m&'
+var SVG = {
+  'archive':'<svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64.000000 64.000000"><g transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none"><path d="M24 606 c-3 -7 -4 -40 -2 -72 l3 -59 289 -3 c225 -2 291 1 298 10 12 20 9 113 -4 126 -19 19 -577 17 -584 -2z"/><path d="M44 427 c-2 -7 -3 -100 -2 -207 l3 -195 270 0 270 0 3 208 2 207 -270 0 c-211 0 -272 -3 -276 -13z"/></g></svg><span>Archive</span>',
+  'works': '<svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64.000000 64.000000"><g transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none"><path d="M482 628 c-7 -7 -12 -37 -12 -68 l0 -55 -115 -115 c-109 -108 -114 -115 -98 -132 16 -18 22 -14 132 96 l116 115 59 3 c43 2 62 8 70 20 9 15 0 28 -54 83 -67 67 -78 73 -98 53z"/><path d="M77 281 c-86 -88 -90 -103 -64 -205 13 -48 15 -50 63 -63 102 -26 117 -22 205 64 l79 77 -37 38 c-20 21 -41 38 -46 38 -4 0 -29 -14 -53 -31 -25 -17 -48 -29 -51 -26 -3 3 9 26 26 51 17 24 31 49 31 53 0 5 -17 26 -38 46 l-38 37 -77 -79z"/></g></svg><span>Works</span>',
+  'friends': '<svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64.000000 64.000000"><g transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none"><path d="M212 624 c-32 -22 -30 -76 3 -102 l25 -20 -31 -12 c-45 -19 -80 -71 -81 -119 -1 -66 22 -107 55 -102 4 0 7 -34 7 -77 l0 -77 -36 -23 c-45 -29 -43 -58 4 -56 23 2 33 -3 38 -18 4 -13 13 -18 27 -16 18 2 23 11 25 46 2 23 7 42 11 42 4 0 20 11 35 25 26 24 26 25 26 170 l0 145 40 0 c51 0 100 24 100 49 0 25 -21 32 -45 15 -24 -18 -93 -17 -125 1 -22 12 -23 14 -7 20 10 4 24 19 32 34 10 18 14 21 15 9 0 -9 11 -26 25 -36 23 -18 24 -21 8 -25 -12 -3 -8 -5 10 -6 15 0 27 3 27 8 0 5 9 12 19 16 10 3 24 19 31 36 11 27 10 34 -7 57 -11 15 -30 28 -42 30 -28 4 -71 -23 -71 -46 0 -12 -7 -8 -26 16 -28 35 -57 41 -92 16z"/><path d="M443 441 c-12 -10 -43 -22 -68 -25 l-45 -7 0 -200 c0 -169 2 -201 15 -205 8 -4 22 -1 30 6 12 10 18 10 30 0 8 -7 22 -10 30 -6 12 4 15 29 15 136 0 119 2 131 17 128 22 -4 53 54 53 97 0 30 -33 95 -47 95 -5 -1 -18 -9 -30 -19z"/></g></svg><span>Friends</span>'
+}
 
 // Router Interface
 function Router (routes) {
@@ -45,14 +50,47 @@ function Router (routes) {
 // toggle the stage
 function Stage () {
 
+  var cache = {}
   var head = document.querySelector('head')
   var title = head.querySelector('title')
   var body = document.querySelector('body')
   var nav = document.querySelector('nav')
-  var archive = document.querySelector('#archive')
-  var banner = showBanner(body, nav)
+  var playArea = document.querySelector('#play-area')
+  var playAreaTips = document.createElement('div')
+  playAreaTips.className = 'play-area-tips'
+  playArea.appendChild(playAreaTips)
+
   var btnReturn = document.createElement('a')
-  var cache = {}
+  // btnReturn.innerHTML = 'Return'
+  btnReturn.onclick = function (e) {
+    e.preventDefault()
+    location.href = '#!/home'
+  }
+  btnReturn.style.display = 'none'
+  body.appendChild(btnReturn)
+
+
+  var banner = showBanner(body, nav)
+  var Animate = {
+    "show-banner": function () {
+      nav.className="bounceIn animated"
+      banner.className="bounceIn animated"
+    },
+    "hide-banner": function () {
+      nav.className="bounceOut animated"
+      banner.className="bounceOut animated"
+    },
+    "show-article": function () {
+      playArea.style.display = "block"
+      btnReturn.style.display = "block"
+      playArea.className = 'bounceInUp animated'
+      btnReturn.className = 'return bounceInUp animated'
+    },
+    "hide-article": function () {
+      playArea.className = 'bounceOutDown animated'
+      btnReturn.className = 'return bounceOutDown animated'
+    }
+  }
 
   var __interface = {
     init: function (ready) {
@@ -61,7 +99,7 @@ function Stage () {
       loadArchive(body, function (articleList, specialList) {
         cache.articleList = articleList
         var archive = nav.appendChild(createNavDom({
-          text: 'Archive', href: '#!/archive'
+          text: SVG['archive'], href: '#!/archive', id: 'archive', title: 'Archive'
         }))
 
         __map.call(specialList.children, function (item) {
@@ -71,7 +109,9 @@ function Stage () {
             nav.appendChild(createNavDom({
               // href:'#!'+t.getAttribute('href'),
               href: t.getAttribute('href'),
-              text: name
+              text: SVG[name.toLowerCase()],
+              id: name.toLowerCase(),
+              title: name
             }))
           }
         })
@@ -82,28 +122,57 @@ function Stage () {
 
         // load static tools
         loadAnalyticsJS()
-        loadCustomSearch(body)
+        // loadCustomSearch(body)
       })
     },
     show: function (drama) {
+      // clear the play area
+      __forEach.call(playArea.children, function (player) {
+          player.style.display = 'none'
+      })
       console.log('Now, the drama is ' + drama)
+      // hide others
+      Animate["hide-banner"]()
+      // show playAreas
+      Animate["show-article"]()
+      // change body backgroundcolor
+      body.style.background = '#fafafa'
+
+      playAreaTips.innerHTML = 'Preparing Drama - ' + '<span style="color:#4285f4;">' + drama + '</span>'
+      playAreaTips.style.display = 'block'
       try {
-        this[drama]()
+        this[drama](function () {
+          playAreaTips.style.display = 'none'
+        })
       } catch (err) {
+        playAreaTips.innerHTML = 'Drama - ' + '<span style="color:#4285f4;">' + drama + '</span>'
+          + ' happend error: <strong>' + err.message + '</strong>'
         console.log(err)
       }
     },
-    archive: function () {
+    hide: function () {
+      playAreaTips.style.display = 'none'
+      // change body backgroundcolor
+      body.style.background = ''
+
+      // show others
+      Animate["show-banner"]()
+
+      // hide playAreas
+      Animate["hide-article"]()
+
+      setTimeout(function () {
+        playArea.style.display = "none"
+        btnReturn.style.display = "none"
+      }, 1000)
+    },
+
+    archive: function (cb) {
       // show archive-list
-      if (archive.innerHTML === '') {
+      var articleListDOM = playArea.querySelector('.article-list')
+      if (articleListDOM === null) {
         var articleList = cache.articleList
-        // btnReturn.innerHTML = 'Return'
-        btnReturn.onclick = function (e) {
-          e.preventDefault()
-          location.href = '#!/home'
-        }
-        body.appendChild(btnReturn)
-        archive.appendChild(articleList)
+        articleListDOM = playArea.appendChild(articleList)
         articleList.addEventListener('click', function (ev) {
           var target = ev.target
           var tagName = target.tagName
@@ -116,36 +185,20 @@ function Stage () {
           }
         }, false)
       }
-
-      // hide others
-      nav.className="bounceOut animated"
-      banner.className="bounceOut animated"
-
-      // show archives
-      archive.style.display = "block"
-      btnReturn.style.display = "block"
-      archive.className = 'bounceInUp animated'
-      btnReturn.className = 'return bounceInUp animated'
-
-      // change body backgroundcolor
-      body.style.background = '#fafafa'
+      articleListDOM.style.display = 'block'
+      cb()
     },
-    hide: function () {
-      // change body backgroundcolor
-      body.style.background = ''
-
-      // show others
-      nav.className="bounceIn animated"
-      banner.className="bounceIn animated"
-
-      // hide archives
-      archive.className = 'bounceOutDown animated'
-      btnReturn.className = 'return bounceOutDown animated'
-
-      setTimeout(function () {
-        archive.style.display = "none"
-        btnReturn.style.display = "none"
-      }, 1000)
+    search: function (cb) {
+      var customSearchDOM = playArea.querySelector('#custom-search')
+      if (customSearchDOM === null){
+        loadCustomSearch(playArea, function (elt) {
+          elt.style.display = 'block'
+          cb()
+        })
+      } else {
+        customSearchDOM.style.display = 'block'
+        cb()
+      }
     },
     go: function (url) {
       location.href = url
@@ -277,8 +330,10 @@ function loadArchive (body, callback) {
 
 function createNavDom (o) {
   var a = document.createElement('a')
+  a.title = o.title
   a.href = o.href
   a.innerHTML = o.text
+  a.id = o.id
   a.onclick = o.onclick
   return a
 }
@@ -290,21 +345,23 @@ function loadAnalyticsJS () {
   document.getElementsByTagName('body')[0].appendChild(script)
 }
 
-function loadCustomSearch (elt) {
+function loadCustomSearch (elt, callback) {
+  var div = document.createElement('div');
+  div.id = 'custom-search'
+  div.innerHTML = '<gcse:search></gcse:search>'
+  elt.appendChild(div)
+
   var cx = '017951989687920165329:0e60irxxe5m';
   var gcse = document.createElement('script');
+  var s = document.getElementsByTagName('script')[0];
   gcse.type = 'text/javascript';
   gcse.async = true;
-  gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
   gcse.onload = function () {
-    var div = document.createElement('div');
-    div.id = 'custom-search'
-    div.innerHTML = '<gcse:search></gcse:search>'
-    elt.appendChild(div)
+    if (typeof callback === 'function') callback(div)
     console.log('Google Custom Search Engine Loaded Over.')
   }
-  var s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(gcse, s);
+  gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
 }
 
 // window.onpopstate = function () {
@@ -340,6 +397,9 @@ window.onload = function () {
       var file = __shift.call(arguments)
       var url = '/static/html/articles/' + file
       stage.go(url)
+    },
+    "search": function () {
+      stage.show('search')
     }
   })
   stage.init(function () {
