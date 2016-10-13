@@ -453,6 +453,17 @@ hr.section-divider:before {content: '...'; display: inline-block; margin-left: 0
     width: 96%;
     margin: 0 auto;
 }
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.alert-warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+}
 @media (max-width: 767px) {
     /* #banner-wrapper {font-size: 4.5em; width: 100%;} */
     .card .card-content p {display:block;}

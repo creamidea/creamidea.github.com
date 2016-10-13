@@ -295,6 +295,19 @@ function changeBodyTopStyle (body) {
   body.appendChild(githubBadge)
 }
 
+function showWarning (content, meta) {
+  var daysAgo = Math.round((Date.now() - new Date(meta.date)) / 86400000) // (24 * 60 * 60 * 1000)
+  if (daysAgo > 365) {
+    var pg1 = document.getElementById('outline-container-orgheadline1')
+    var elt = document.createElement('div')
+    elt.style.fontSize = '16px'
+    elt.className = 'alert alert-warning'
+    elt.innerHTML = '文章发表于<strong>' + daysAgo + '</strong>天前。日期过于久远，请合理参考。<br />' +
+      'This article was created at <strong>'+ daysAgo +'</strong> days ago. It is too long, so please pay more attention.'
+    content.insertBefore(elt, pg1)
+  }
+}
+
 /**
  * entry point
  */
@@ -305,6 +318,7 @@ function main() {
   var meta = getMetaInfo(true)
 
   changeBodyTopStyle(body)
+  showWarning(content, meta)
   showTags(body, content, meta)
   // showHomeButton(body)
   // ImgClickEvent(body, initImgWapper(body, content))
