@@ -96,7 +96,7 @@ function genArchiveHtml (data) {
       urlprefix = URLPREFIX2
     }
     let _html = `
-<li class="${category}"><a class="title" href="${urlprefix+category+'/'+name}.html">${typeof title === 'undefined' ? '!!!!': title}</a>
+<li class="${category}"><a class="title" href="${urlprefix+category+'/'+name}.html">${title}</a>
 <div class="meta">
 <p class="create-time"><span>Create: </span><date>${date}</date></p>
 <p class="update-time"><span>Update: </span><date>${new Date(mtime).toISOString().replace(/T/, ' ').replace(/\..+/, '')}</date></p>
