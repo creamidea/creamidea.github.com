@@ -378,7 +378,7 @@ function loadCustomSearch (elt, callback) {
 //   }
 // }
 
-window.onload = function () {
+function main () {
   var stage = Stage()
   var router = Router({
     "home": function () {
@@ -408,4 +408,11 @@ window.onload = function () {
   window.onhashchange = function () {
     router.test()
   }
+
 }
+document.addEventListener('DOMContentLoaded', function () {
+  main()
+}, false)
+// window.onload = function () {
+//   main()
+// }
