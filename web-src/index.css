@@ -245,6 +245,10 @@ nav a span {
         color: #191919 !important;
         text-decoration: underline !important;
     }
+    #rss {
+        display: none!important;
+    }
+
     #about div,
     nav a svg {
         display: none !important;
