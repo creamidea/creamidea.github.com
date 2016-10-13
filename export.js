@@ -16,6 +16,8 @@ const HREFREGEXP = /href="(.+?)"/i
 const TITLEREGEXP = /#\+TITLE:\s*(.+)/i
 const DATEREGEXP = /#\+DATE:\s*(.+)/i
 const TAGSREGEXP = /#\+KEYWORDS:\s*(.+)/i
+const AUTHORREGEXP = /#\+AUTHOR:\s*(.+)/i
+const CATEGORYREGEXP = /#\+CATEGORY:\s*(.+)/i
 
 const SITEMAPPATH = path.resolve(__dirname, 'static', 'html', 'sitemap.html')
 const PUBPATH = path.resolve(__dirname, 'static', 'html/')
@@ -26,6 +28,7 @@ const INDEXCSSFILE = path.resolve(__dirname, 'static', 'index.css')
 const INDEXJSFILE = path.resolve(__dirname, 'static', 'index.js')
 const ORGCACHEFILE = path.resolve(__dirname, '.org-timestamps', 'creamidea-article.cache')
 const CACHEFILE = path.resolve(__dirname, '.org-timestamps', 'export-history.cache')
+const RSSFILE = path.resolve(__dirname, 'static', 'rss2.xml')
 
 const SPECIALFILE = ["works", "friends"]
 const URLPREFIX = '/static/html/'
@@ -57,6 +60,7 @@ exportEvent.on('end', (data) => {
   const archiveHtml = genArchiveHtml(data)
   // writeFile(ARCHIVEHTMLPATH, UglifyHTML.minify(archiveHtml, MINIFYHTMLRULES))
   writeFile(ARCHIVEHTMLPATH, archiveHtml.replace(/^$|\r?\n/g, '').replace(/>\s+</g, '><'))
+  command.rss(data)
   // fs.writeFile(INDEXHTMLPATH, genHomeHtml(listHtml), (err) => {
   //   if (err) {
   //     console.log(err)
@@ -92,7 +96,7 @@ function genArchiveHtml (data) {
       urlprefix = URLPREFIX2
     }
     let _html = `
-<li class="${category}"><a class="title" href="${urlprefix+category+'/'+name}.html">${title}</a>
+<li class="${category}"><a class="title" href="${urlprefix+category+'/'+name}.html">${typeof title === 'undefined' ? '!!!!': title}</a>
 <div class="meta">
 <p class="create-time"><span>Create: </span><date>${date}</date></p>
 <p class="update-time"><span>Update: </span><date>${new Date(mtime).toISOString().replace(/T/, ' ').replace(/\..+/, '')}</date></p>
@@ -141,6 +145,16 @@ function attachTimestamp(hashs, files) {
   })
 }
 
+function cutout(data) {
+  return data.slice(0,1000).split(/\r?\n/g).map(function (line) {
+    if (line.search(/\s*#\+/) >= 0) {
+      return ''
+    } else {
+      return line
+    }
+  }).join('')
+}
+
 function readArticle (category, filename, container, callback) {
   let pubFullpath = path.resolve(PUBPATH, category, filename) + '.html'
   let baseFullpath = path.resolve(BASEPATH, category, filename) + '.org'
@@ -175,10 +189,16 @@ function readArticle (category, filename, container, callback) {
           const date = data.match(DATEREGEXP)
           const tags = data.match(TAGSREGEXP)
           const title = data.match(TITLEREGEXP)
+          const author = data.match(AUTHORREGEXP)
+          // const category = data.match(CATEGORYREGEXP) // has be defined above
+          const description = cutout(data)
           Object.assign(container[sym], {
             title: title && title[1],
             date: date && date[1],
-            tags: tags && tags[1]
+            tags: tags && tags[1],
+            author: author === null  ? '冰糖火箭筒(Junjia Ni)' : author[1],
+            category: category, // dirname
+            description: description
           })
         }
         fs.close(fd)
@@ -335,7 +355,8 @@ function parseSitemap(str) {
 function parseOrgCache(cache) {
   let hashs = {}, files = {}, container = {}
 
-  cache.split(/\r?\n/).map( (line) => {
+  cache.split(/\r?\n/).map( (line, index) => {
+    if (index < 3) return
     let record = line.slice(1, -1).split(/\s+/)
     if (record.length < 2) return
     let func = record.shift()
@@ -348,7 +369,6 @@ function parseOrgCache(cache) {
       fullpath = fullpath.slice(1,-1)
       let [category, filename] = getCategoryAndFilename(fullpath, BASEPATH)
       if (category === null || filename === null) return
-
       files[`${category}::${filename}`] = {
         fullpath: fullpath
       }
@@ -416,6 +436,53 @@ const command = {
             .replace(/^$|\r?\n/g, '').replace(/>\s+</g, '><')
         writeFile(path.resolve(__dirname, 'static', 'about.html'), rlt)
       })
+  },
+  "rss": function (files) {
+    // Object.keys(files).map(function (file) => {
+    //   const {title, name, category, mtime, date, tags, error, discription } = file[fileSym]
+    // })
+    // console.log(files)
+    const SITE = 'https://creamidea.github.io/'
+    let itemsHTML = Object.keys(files).map(key => {
+      const file = files[key]
+      if (file.error) return ''
+      const {title, name, category, mtime, date, tags, description, author} = file
+      const url = `${SITE}static/html/${category}/${name}.html`
+      const _d = `Tags: ${tags}\nContent: ${description}`
+      return '<item>'
+        + `<title><![CDATA[${title}]]></title>`
+        + `<author>${author}</author>`
+        + `<category>${tags}</category>`
+        + `<link>${url}</link>`
+        + `<guid>${category}/${name}</guid>`
+        + `<pubDate>${new Date(date).toGMTString()}</pubDate>`
+        + `<lastBuildDate>${new Date(mtime).toGMTString()}</lastBuildDate>`
+        + `<description><![CDATA[${_d}]]></description>`
+        + `<content:encoded xmlns:content="http://purl.org/rss/1.0/modules/content/">${encodeURIComponent(_d)}</content:encoded>`
+        + `<comments>${url}#outline_disqus_thread</comments>`
+        + '</item>'
+    }).join('')
+    const rss = '<?xml version="1.0" encoding="utf-8"?>'
+          + '<rss version=\"2.0\"'
+          + ' xmlns:content=\"http://purl.org/rss/1.0/modules/content/\"'
+          + ' xmlns:wfw=\"http://wellformedweb.org/CommentAPI/\"'
+          + ' xmlns:dc=\"http://purl.org/dc/elements/1.1/\"'
+          + ' xmlns:atom=\"http://www.w3.org/2005/Atom\"'
+          + ' xmlns:sy=\"http://purl.org/rss/1.0/modules/syndication/\"'
+          + ' xmlns:slash=\"http://purl.org/rss/1.0/modules/slash/\"'
+          + ' xmlns:georss=\"http://www.georss.org/georss\"'
+          + ' xmlns:geo=\"http://www.w3.org/2003/01/geo/wgs84_pos#\"'
+          + ' xmlns:media=\"http://search.yahoo.com/mrss/\">'
+          + '<channel>'
+          + `<title><![CDATA[C-Tone Homepage]]></title>`
+          + `<link>${SITE}</link>`
+          // + `<script xmlns="http://www.w3.org/1999/xhtml" src="/public/js/rss.js"></script>`
+          + `<atom:link href="/static/rss2.xml" rel="self" type="application/rss+xml"/>`
+          + `<description><![CDATA[想法，随笔，思考，感叹，笔记，翻译，技术]]></description>`
+          + `<pubDate>${(new Date()).toGMTString()}</pubDate>`
+          + `<generator>http://orgmode.org/</generator>`
+          + itemsHTML + '</channel></rss>'
+    writeFile(RSSFILE, rss)
   }
 }
 
