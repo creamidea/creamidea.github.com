@@ -22,7 +22,7 @@
 (require 'ox-publish)
 ;; (require 'htmlize)
 ;; (require 'ox-rss)
-(require 'ox-rss)
+;; (require 'ox-rss)
 
 ;; (defun after-publishing (in out)
 ;;   "after-publishing"
@@ -36,6 +36,7 @@ CURRENT-OR-ALL FORCE ASYNC."
   (let* ((creamidea-path (expand-file-name "~/Repository/creamidea/"))
          (creamidea-public-path (concat creamidea-path "./static/html/"))
          (author-info "<div id=\"meta-article\"><p class=\"author\">%a</p>\n<p class=\"email\">%e</p>\n<p class=\"date\">%d</p>\n<p class=\"export-date\">%T</p>\n<p class=\"creator\">%c</p>\n<p class=\"validation\">%v</p>\n<p class=\"last-modification-time\">%C</p></div>")
+         (meta-viewport "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">")
          (link-medium-fonts "<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/medium-fonts.css\">")
          (link-style-css "<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/article.css\">")
          (app-js "<script asyn src=\"/static/article.js\"></script>")
@@ -99,7 +100,7 @@ CURRENT-OR-ALL FORCE ASYNC."
              :html-head ,link-style-css
              :auto-preamble t
              ;; :html-preamble ,(concat app-js analytics-js)
-             :html-postamble ,(concat author-info app-js analytics-js)
+             :html-postamble ,(concat meta-viewport author-info app-js analytics-js)
              :html-extension "html"
              :html-head-include-default-style nil
              :html-head-include-scripts nil
