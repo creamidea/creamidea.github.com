@@ -6,6 +6,7 @@ const sha1 = crypto.createHash('sha1')
 const path = require('path')
 const EventEmitter = require('events')
 const zlib = require('zlib')
+const child_process = require('child_process')
 
 // const UglifyHTML = require('html-minifier')
 const UglifyCSS = require('uglifycss')
@@ -488,11 +489,37 @@ const command = {
           + `<generator>http://orgmode.org/</generator>`
           + itemsHTML + '</channel></rss>'
     writeFile(RSSFILE, rss)
+  },
+  "add": function (f, sep) {
+    console.log(f)
+    const [type, file] = f.split(sep || path.sep).slice(-2)
+    const filename = file.split('.')[0]
+    const command = path.resolve('c:\\', 'Program Files', 'Git', 'cmd', 'git')
+    const args = [BASEPATH, PUBPATH].map(function (p, index) {
+      return path.resolve(p, type, filename) + (index === 0 ? '.org' : '.html')
+    })
+    console.log(`--> ${command} add ${args.join(' ')}`)
+    const result = child_process.spawnSync(
+      command,
+      Array.prototype.concat.call(['add', RSSFILE, ARCHIVEHTMLPATH], args),
+      {
+        cwd: path.resolve(__dirname)
+      }
+    )
+    if (result.status !== 0) {
+      console.error('[Error: '+ result.status +'] ' + result.stderr.toString())
+      return
+    }
+    if (result.stdout.length > 0) console.log(result.stdout.toString())
+    // const r2 = child_process.execSync('git push origin master', {cwd: path.resolve(__dirname)})
+    // if (r2.statue !== 0)
+    //   console.error('[Error: '+ r2.status +'] ' + r2.stderr.toString())
+    // console.log('Push over.')
   }
 }
 
 try {
-  command[process.argv[2]]()
+  command[process.argv[2]].apply(command, process.argv.slice(3))
 } catch (err) {
   console.log(`I don't know what to do with ${process.argv[2]}.`)
   console.log(err)

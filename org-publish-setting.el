@@ -160,14 +160,20 @@ CURRENT-OR-ALL FORCE ASYNC."
 (defun build-archive ()
   "Build Archive."
   (interactive)
-  (let ((cmd (concat (expand-file-name "~/Repository/creamidea/") "export.js" )))
+  ;; (call-process "pwd" nil t)
+  (let ((cmd-js (concat (expand-file-name "~/Repository/creamidea/") "export.js" ))
+        (add-file (buffer-file-name (window-buffer (minibuffer-selected-window)))))
     ;; (switch-to-buffer-other-window "*Build Archive Message*")
-    (shell-command-to-string (format "node %s archive" cmd))))
+    (shell-command-to-string (format "node %s archive" cmd-js))
+    (shell-command-to-string (format "node %s add %s /" cmd-js add-file))))
 
 ;; (global-set-key (kbd "C-c x") 'load-creamidea-site-publish)
 (global-set-key
  (kbd "C-c x")
- (lambda () (interactive) (progn (creamidea-site-setting "current") (build-archive))))
+ (lambda ()
+   (interactive)
+   (creamidea-site-setting "current")
+   (build-archive)))
 ;; (global-set-key (kbd "C-c x 2")
 ;;                 (lambda () (interactive) (publish-creamidea-site "all" t)))
 ;; (progn
