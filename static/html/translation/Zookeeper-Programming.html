@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- 2016-10-12 Wed 13:43 -->
+<!-- 2016-10-14 Fri 22:04 -->
 <meta  charset="utf-8">
 <meta  name="viewport" content="width=device-width, initial-scale=1">
 <title>［译］Programming With ZooKeeper</title>
@@ -19,24 +19,35 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. 前言</a></li>
-<li><a href="#orgheadline2">2. 正文</a></li>
-<li><a href="#orgheadline3">3. 屏障（Barriers）</a></li>
-<li><a href="#orgheadline4">4. 生产者-消费者队列（Producer-Consumer Queues）</a></li>
+<li><a href="#orgheadline1">1. 序</a></li>
+<li><a href="#orgheadline2">2. 前言</a></li>
+<li><a href="#orgheadline3">3. 正文</a></li>
+<li><a href="#orgheadline4">4. 屏障（Barriers）</a></li>
+<li><a href="#orgheadline5">5. 生产者-消费者队列（Producer-Consumer Queues）</a></li>
 </ul>
 </div>
 </div>
-<pre class="example">
-这是一篇关于快速入门ZooKeeper开发的翻译文章。
-原文: https://cwiki.apache.org/confluence/display/ZOOKEEPER/Tutorial
-参考: http://www.cnblogs.com/haippy/archive/2012/07/23/2604556.html
-     http://ifeve.com/zookeeper-apache/
-</pre>
-
+<noscript>
+<img alt="Zookeeper" title="Zookeeper"
+     src="/static/img/zoo.jpg"/>
+</noscript>
+<img lazy-load class="lazy-load-img" alt="Zookeeper" title="Zookeeper"
+     data-src="/static/img/zoo.jpg"/>
+<p class="title-picture">题图来自网络</p>
 
 <div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
+<h2 id="orgheadline1"><span class="section-number-2">1</span> 序</h2>
 <div class="outline-text-2" id="text-1">
+<p>
+这是一篇关于快速入门ZooKeeper开发的翻译文章。 <br >
+<a href="https://cwiki.apache.org/confluence/display/ZOOKEEPER/Tutorial">原文</a> <a href="http://www.cnblogs.com/haippy/archive/2012/07/23/2604556.html">参考-1</a> <a href="http://ifeve.com/zookeeper-apache/">参考-2</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2"><span class="section-number-2">2</span> 前言</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 <code>ZooKeeper</code> 翻译成中文是“动物园管理员”，很有趣是不是，物如其名，它就是来协调管理分布式系统的。
 <code>ZooKeeper</code> 是 <code>Hadoop</code> 分布式系统家族的一员，它是一个集中式的协调管理服务器,支持一系列的通用服务,比如管理配置信息，命名服务，提供分布式的同步,以及提供分组服务等。
@@ -49,9 +60,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2"><span class="section-number-2">2</span> 正文</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3"><span class="section-number-2">3</span> 正文</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 在本教程中，我们会展示如何利用 <code>ZooKeeper</code> 实现简单的“屏障”和“生产者消费者队列”。我们称这两个类为 <code>Barrier</code> 和 <code>Queue</code> 。
 这些例子运行的前提是你至少有一个 <code>ZooKeeper</code> 服务器。
@@ -92,9 +103,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3"><span class="section-number-2">3</span> 屏障（Barriers）</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4"><span class="section-number-2">4</span> 屏障（Barriers）</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 屏障原语是阻塞一组进程节点，直到满足特定的条件，该组进程节点才能正常向前推进（开始一次计算or结束一次计算）。
 实现 <code>Barriers</code> 的基本思路是：产生一个 <code>barrier</code> 节点，将其作为所有独立进程的父节点。
@@ -206,9 +217,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-2">
-<h2 id="orgheadline4"><span class="section-number-2">4</span> 生产者-消费者队列（Producer-Consumer Queues）</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5"><span class="section-number-2">5</span> 生产者-消费者队列（Producer-Consumer Queues）</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 生产者-消费者队列是一种分布式的数据结构，被一组进程用来生产物品和消费物品。生产者进程创造新元素，加入队列。消费者进程移除元素，拿去执行。
 在下面的实现代码中，元素是简单的整数。一个根节点代表一个队列，生产者进程创造一个新节点，作为子节点，加入队列中。
@@ -315,13 +326,13 @@
 </div>
 </div>
 <div id="postamble" class="status">
-<div id="meta-article"><p class="author">蜂蜜甜甜圈(Yi Ou)</p>
+<meta name="viewport" content="width=device-width, initial-scale=1"><div id="meta-article"><p class="author">蜂蜜甜甜圈(Yi Ou)</p>
 <p class="email"><a href="mailto:718413182(AT)qq.com">718413182(AT)qq.com</a></p>
 <p class="date">2016-02-05</p>
-<p class="export-date">2016-10-12 Wed 13:43</p>
+<p class="export-date">2016-10-14 Fri 22:04</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
 <p class="validation"></p>
-<p class="last-modification-time">2016-10-10 Mon 13:01</p></div><script asyn src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+<p class="last-modification-time">2016-10-14 Fri 22:04</p></div><script asyn src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

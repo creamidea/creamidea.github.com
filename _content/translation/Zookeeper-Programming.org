@@ -5,18 +5,23 @@
 #+CATEGORY: translation
 #+DESCRIPTION: Programming with ZooKeeper(A quick tutorial)
 #+KEYWORDS: zookeeper,java,tutorial
-#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t <:t date:t timestamp:t
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:nil email:t <:t date:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
 
+#+BEGIN_HTML
+<noscript>
+<img alt="Zookeeper" title="Zookeeper"
+     src="/static/img/zoo.jpg"/>
+</noscript>
+<img lazy-load class="lazy-load-img" alt="Zookeeper" title="Zookeeper"
+     data-src="/static/img/zoo.jpg"/>
+<p class="title-picture">题图来自网络</p>
+#+END_HTML
 
-#+BEGIN_EXAMPLE
-这是一篇关于快速入门ZooKeeper开发的翻译文章。
-原文: https://cwiki.apache.org/confluence/display/ZOOKEEPER/Tutorial
-参考: http://www.cnblogs.com/haippy/archive/2012/07/23/2604556.html
-     http://ifeve.com/zookeeper-apache/
-#+END_EXAMPLE
-
+* 序
+这是一篇关于快速入门ZooKeeper开发的翻译文章。 \\
+[[https://cwiki.apache.org/confluence/display/ZOOKEEPER/Tutorial][原文]] [[http://www.cnblogs.com/haippy/archive/2012/07/23/2604556.html][参考-1]] [[http://ifeve.com/zookeeper-apache/][参考-2]]
 
 * 前言
 =ZooKeeper= 翻译成中文是“动物园管理员”，很有趣是不是，物如其名，它就是来协调管理分布式系统的。
@@ -34,7 +39,7 @@
   static ZooKeeper zk = null;
   static final Object mutex = new Object();
   String root;
-   
+
   SyncPrimitive(String address)
       throws KeeperException, IOException {
       if(zk == null){
