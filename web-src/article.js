@@ -298,7 +298,7 @@ function changeBodyTopStyle (body) {
 function showWarning (content, meta) {
   var daysAgo = Math.round((Date.now() - new Date(meta.date)) / 86400000) // (24 * 60 * 60 * 1000)
   if (daysAgo > 365) {
-    var pg1 = document.getElementById('outline-container-orgheadline1')
+    var pg1 = document.getElementById('table-of-contents')
     var elt = document.createElement('div')
     elt.style.fontSize = '16px'
     elt.className = 'alert alert-warning'
