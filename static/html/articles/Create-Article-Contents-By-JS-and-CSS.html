@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 2016-10-12 Wed 20:40 -->
+<meta  charset="utf-8">
+<meta  name="viewport" content="width=device-width, initial-scale=1">
+<title>How To Create Article Contents By JS And CSS</title>
+<meta  name="generator" content="Org-mode">
+<meta  name="author" content="冰糖火箭筒(Junjia Ni)">
+<meta  name="description" content="如何创建文章目录"
+>
+<meta  name="keywords" content="javascript,css">
+<link rel="stylesheet" type="text/css" href="/static/article.css">
+</head>
+<body>
+<div id="content">
+<h1 class="title">How To Create Article Contents By JS And CSS</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">1. 前言</a></li>
+<li><a href="#orgheadline5">2. 动态生成文章目录过程</a>
+<ul>
+<li><a href="#orgheadline2">2.1. 编程思路</a></li>
+<li><a href="#orgheadline3">2.2. js部分代码</a></li>
+<li><a href="#orgheadline4">2.3. css部分代码</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline6">3. 利用纯CSS实现目录功能</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+在搭建此次博客时，很想用javascript生成文章的目录，方便阅读，本来自己写了一个，
+不过看到 <a href="http://beiyuu.com/">BeiYuu</a> 的文章 <a href="http://beiyuu.com/why-blog/">《我为什么写博客？》</a> 的文章目录时，
+感觉自己写得没有他的好，于是参考他写的，写了下面的文章内容。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5"><span class="section-number-2">2</span> 动态生成文章目录过程</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2"><span class="section-number-3">2.1</span> 编程思路</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+总体上，思路就是你想的那个样子：
+</p>
+
+<ol class="org-ol">
+<li>当页面加载完毕之后，使用js将h1, h2, h3&#x2026;等标签中的内容和id
+（原文作者记录的是标题的位置）提取出来，可以存入数组。</li>
+
+<li>设置相应的目录的容器，说白了就是相应的HTML,CSS。</li>
+
+<li>使用js设置HTML a rel Attribute,不过这里原文作者是直接记录标题的位置，
+而不是使用href="#{id}",不过这点细节没有什么大的影响。
+将数组的内容放入相应的位置。</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3"><span class="section-number-3">2.2</span> js部分代码</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+由于js部分有些许长，这里直接给出我repo中的<a href="https://github.com/creamidea/creamidea.github.com/blob/master/_includes/article_contents.html">生成目录JS代码</a>.
+下面只是贴出如何提取出标题内容的js代码
+</p>
+<div class="org-src-container">
+
+<pre class="src src-js">$.each<span style="color: #c5c8c6;">(</span>$<span style="color: #8abeb7;">(</span><span style="color: #8abeb7;">'h2,h3'</span><span style="color: #8abeb7;">)</span>,<span style="color: #b5bd68;">function</span><span style="color: #8abeb7;">(</span><span style="color: #f0c674;">index</span>,<span style="color: #f0c674;">item</span><span style="color: #8abeb7;">){</span>
+    <span style="color: #b5bd68;">if</span><span style="color: #f0c674;">(</span>item.tagName.toLowerCase<span style="color: #b5bd68;">()</span> == <span style="color: #8abeb7;">'h2'</span><span style="color: #f0c674;">){</span>
+          <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">h2item</span> = <span style="color: #b5bd68;">{}</span>;
+          h2item.name = $<span style="color: #b5bd68;">(</span>item<span style="color: #b5bd68;">)</span>.text<span style="color: #b5bd68;">()</span>;
+          h2item.id = <span style="color: #8abeb7;">'menuIndex'</span>+index;
+          h2.push<span style="color: #b5bd68;">(</span>h2item<span style="color: #b5bd68;">)</span>;
+          h2index++;
+    <span style="color: #f0c674;">}</span><span style="color: #b5bd68;">else</span><span style="color: #f0c674;">{</span>
+          <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">h3item</span> = <span style="color: #b5bd68;">{}</span>;
+          h3item.name = $<span style="color: #b5bd68;">(</span>item<span style="color: #b5bd68;">)</span>.text<span style="color: #b5bd68;">()</span>;
+          h3item.id = <span style="color: #8abeb7;">'menuIndex'</span>+index;
+          <span style="color: #b5bd68;">if</span><span style="color: #b5bd68;">(</span>!h3<span style="color: #81a2be;">[</span>h2index-1<span style="color: #81a2be;">]</span><span style="color: #b5bd68;">){</span>
+            h3<span style="color: #81a2be;">[</span>h2index-1<span style="color: #81a2be;">]</span> = <span style="color: #81a2be;">[]</span>;
+          <span style="color: #b5bd68;">}</span>
+          h3<span style="color: #b5bd68;">[</span>h2index-1<span style="color: #b5bd68;">]</span>.push<span style="color: #b5bd68;">(</span>h3item<span style="color: #b5bd68;">)</span>;
+    <span style="color: #f0c674;">}</span>
+    item.id = <span style="color: #8abeb7;">'menuIndex'</span> + index
+<span style="color: #8abeb7;">}</span><span style="color: #c5c8c6;">)</span>;
+</pre>
+</div>
+
+<p>
+从代码上可以看出，必须要一个二级标题,markdown: "<b>*  *</b>", HTML标签："h2",这点需要记住！
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4"><span class="section-number-3">2.3</span> css部分代码</h3>
+<div class="outline-text-3" id="text-2-3">
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">Article Contents </span><span style="color: #969896; font-style: italic;">*/</span>
+<span style="color: #de935f;">#menuIndex </span><span style="color: #c5c8c6;">{</span>
+    <span style="color: #f0c674;">position</span>: fixed;
+    <span style="color: #f0c674;">bottom</span>: 88px;
+    <span style="color: #f0c674;">right</span>: 20px;
+    <span style="color: #f0c674;">width</span>: 200px;
+    <span style="color: #f0c674;">overflow</span>: auto;
+    <span style="color: #f0c674;">max-height</span>: 602px;
+<span style="color: #c5c8c6;">}</span>
+
+<span style="color: #de935f;">#menuIndex ul </span><span style="color: #c5c8c6;">{</span>
+    <span style="color: #f0c674;">list-style</span>: none;
+<span style="color: #c5c8c6;">}</span>
+
+<span style="color: #de935f;">#menuIndex ul li </span><span style="color: #c5c8c6;">{</span>
+    <span style="color: #f0c674;">font-size</span>: 12px;
+    <span style="color: #f0c674;">margin-bottom</span>: 5px;
+    <span style="color: #f0c674;">word-wrap</span>: break-word;
+    <span style="color: #f0c674;">padding-left</span>: 10px;
+<span style="color: #c5c8c6;">}</span>
+
+<span style="color: #de935f;">#menuIndex li.h1 </span><span style="color: #c5c8c6;">{</span>
+    <span style="color: #f0c674;">font-size</span>: 14px;
+    <span style="color: #f0c674;">font-weight</span>: normal;
+    <span style="color: #f0c674;">padding-left</span>: 0;
+    <span style="color: #f0c674;">margin-bottom</span>: 10px;
+<span style="color: #c5c8c6;">}</span>
+
+<span style="color: #de935f;">#menuIndex li.h3 </span><span style="color: #c5c8c6;">{</span>
+    <span style="color: #f0c674;">padding-left</span>: 25px;
+<span style="color: #c5c8c6;">}</span>
+
+<span style="color: #de935f;">#menuIndex ul li.on </span><span style="color: #c5c8c6;">{</span>
+    <span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">&#36825;&#37324;&#35774;&#32622;&#24403;&#21069;&#30340;&#26631;&#31614;&#30340;&#32972;&#26223;&#39068;&#33394;&#65292;&#35831;&#26681;&#25454;&#33258;&#24049;&#30340;&#21338;&#23458;&#20027;&#33394;&#35843;&#20855;&#20307;&#24773;&#20917;&#20462;&#25913;</span><span style="color: #969896; font-style: italic;">*/</span>
+    <span style="color: #f0c674;">background-color</span>: <span style="color: #ffffff; background-color: #251C1C;">rgb(37, 28, 28)</span>; 
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div>
+
+<p>
+你有任何问题随时可以联系我
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6"><span class="section-number-2">3</span> 利用纯CSS实现目录功能</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+这个也是我最近在学习org-mode的时候看到的。
+</p>
+
+<p>
+org-mode在生成html的时候会自动生成一个目录，html代码（我的第一篇文章）如下：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-html">&lt;<span style="color: #de935f;">div</span> <span style="color: #f0c674;">id</span>=<span style="color: #8abeb7;">"table-of-contents"</span>&gt;
+  &lt;<span style="color: #de935f;">h2</span>&gt;<span style="font-weight: bold; font-style: italic; text-decoration: underline;">Table of Contents</span>&lt;/<span style="color: #de935f;">h2</span>&gt;
+  &lt;<span style="color: #de935f;">div</span> <span style="color: #f0c674;">id</span>=<span style="color: #8abeb7;">"text-table-of-contents"</span>&gt;
+    &lt;<span style="color: #de935f;">ul</span>&gt;
+      &lt;<span style="color: #de935f;">li</span>&gt;&lt;<span style="color: #de935f;">a</span> <span style="color: #f0c674;">href</span>=<span style="color: #8abeb7;">"#sec-1"</span>&gt;1 &#21069;&#35328;&lt;/<span style="color: #de935f;">a</span>&gt;&lt;/<span style="color: #de935f;">li</span>&gt;
+      &lt;<span style="color: #de935f;">li</span>&gt;&lt;<span style="color: #de935f;">a</span> <span style="color: #f0c674;">href</span>=<span style="color: #8abeb7;">"#sec-2"</span>&gt;2 &#25645;&#24314;&#27492;&#21338;&#23458;&#30340;&#30446;&#30340;&lt;/<span style="color: #de935f;">a</span>&gt;&lt;/<span style="color: #de935f;">li</span>&gt;
+      &lt;<span style="color: #de935f;">li</span>&gt;&lt;<span style="color: #de935f;">a</span> <span style="color: #f0c674;">href</span>=<span style="color: #8abeb7;">"#sec-3"</span>&gt;3 &#27492;&#21338;&#23458;&#30340;&#25972;&#20307;&#35774;&#35745;&lt;/<span style="color: #de935f;">a</span>&gt;
+        &lt;<span style="color: #de935f;">ul</span>&gt;
+          &lt;<span style="color: #de935f;">li</span>&gt;&lt;<span style="color: #de935f;">a</span> <span style="color: #f0c674;">href</span>=<span style="color: #8abeb7;">"#sec-3-1"</span>&gt;3.1 &#35774;&#35745;&#21746;&#23398;&lt;/<span style="color: #de935f;">a</span>&gt;&lt;/<span style="color: #de935f;">li</span>&gt;
+          &lt;<span style="color: #de935f;">li</span>&gt;&lt;<span style="color: #de935f;">a</span> <span style="color: #f0c674;">href</span>=<span style="color: #8abeb7;">"#sec-3-2"</span>&gt;3.2 &#35774;&#35745;&#30340;&#23616;&#37096;&#32454;&#33410;&lt;/<span style="color: #de935f;">a</span>&gt;
+            &lt;<span style="color: #de935f;">ul</span>&gt;
+              &lt;<span style="color: #de935f;">li</span>&gt;&lt;<span style="color: #de935f;">a</span> <span style="color: #f0c674;">href</span>=<span style="color: #8abeb7;">"#sec-3-2-1"</span>&gt;3.2.1 Jekyll&#25645;&#24314;&lt;/<span style="color: #de935f;">a</span>&gt;&lt;/<span style="color: #de935f;">li</span>&gt;
+              &lt;<span style="color: #de935f;">li</span>&gt;&lt;<span style="color: #de935f;">a</span> <span style="color: #f0c674;">href</span>=<span style="color: #8abeb7;">"#sec-3-2-2"</span>&gt;3.2.2 &#20013;&#25991;&#29256;&lt;/<span style="color: #de935f;">a</span>&gt;&lt;/<span style="color: #de935f;">li</span>&gt;
+              &lt;<span style="color: #de935f;">li</span>&gt;&lt;<span style="color: #de935f;">a</span> <span style="color: #f0c674;">href</span>=<span style="color: #8abeb7;">"#sec-3-2-3"</span>&gt;3.2.3 English Version&lt;/<span style="color: #de935f;">a</span>&gt;&lt;/<span style="color: #de935f;">li</span>&gt;
+              &lt;<span style="color: #de935f;">li</span>&gt;&lt;<span style="color: #de935f;">a</span> <span style="color: #f0c674;">href</span>=<span style="color: #8abeb7;">"#sec-3-2-4"</span>&gt;3.2.4 &#25105;&#30340;blog&#30446;&#24405;&lt;/<span style="color: #de935f;">a</span>&gt;&lt;/<span style="color: #de935f;">li</span>&gt;
+              &lt;<span style="color: #de935f;">li</span>&gt;&lt;<span style="color: #de935f;">a</span> <span style="color: #f0c674;">href</span>=<span style="color: #8abeb7;">"#sec-3-2-5"</span>&gt;3.2.5 blog&#20869;&#23481;(&#31867;&#21035;)&#30340;&#35774;&#35745;&lt;/<span style="color: #de935f;">a</span>&gt;&lt;/<span style="color: #de935f;">li</span>&gt;
+              &lt;<span style="color: #de935f;">li</span>&gt;&lt;<span style="color: #de935f;">a</span> <span style="color: #f0c674;">href</span>=<span style="color: #8abeb7;">"#sec-3-2-6"</span>&gt;3.2.6 blog&#26631;&#31614;&#31995;&#32479;(Tag-Cloud)&#30340;&#35774;&#35745;&lt;/<span style="color: #de935f;">a</span>&gt;&lt;/<span style="color: #de935f;">li</span>&gt;
+              &lt;<span style="color: #de935f;">li</span>&gt;&lt;<span style="color: #de935f;">a</span> <span style="color: #f0c674;">href</span>=<span style="color: #8abeb7;">"#sec-3-2-7"</span>&gt;3.2.7 blog&#20013;&#20351;&#29992;&#30340;Icons&lt;/<span style="color: #de935f;">a</span>&gt;&lt;/<span style="color: #de935f;">li</span>&gt;
+              &lt;<span style="color: #de935f;">li</span>&gt;&lt;<span style="color: #de935f;">a</span> <span style="color: #f0c674;">href</span>=<span style="color: #8abeb7;">"#sec-3-2-8"</span>&gt;3.2.8 blog&#20013;&#25628;&#32034;&#24341;&#25806;&lt;/<span style="color: #de935f;">a</span>&gt;&lt;/<span style="color: #de935f;">li</span>&gt;
+              &lt;<span style="color: #de935f;">li</span>&gt;&lt;<span style="color: #de935f;">a</span> <span style="color: #f0c674;">href</span>=<span style="color: #8abeb7;">"#sec-3-2-9"</span>&gt;3.2.9 blog&#20998;&#20139;&lt;/<span style="color: #de935f;">a</span>&gt;&lt;/<span style="color: #de935f;">li</span>&gt;
+              &lt;<span style="color: #de935f;">li</span>&gt;&lt;<span style="color: #de935f;">a</span> <span style="color: #f0c674;">href</span>=<span style="color: #8abeb7;">"#sec-3-2-10"</span>&gt;3.2.10 blog&#20013;&#30340;&#19968;&#20123;&#24555;&#25463;&#21151;&#33021;&lt;/<span style="color: #de935f;">a</span>&gt;&lt;/<span style="color: #de935f;">li</span>&gt;
+          &lt;/<span style="color: #de935f;">ul</span>&gt;&lt;/<span style="color: #de935f;">li</span>&gt;
+        &lt;/<span style="color: #de935f;">ul</span>&gt;
+      &lt;/<span style="color: #de935f;">li</span>&gt;
+      &lt;<span style="color: #de935f;">li</span>&gt;&lt;<span style="color: #de935f;">a</span> <span style="color: #f0c674;">href</span>=<span style="color: #8abeb7;">"#sec-4"</span>&gt;4 &#33268;Emacser&#65306; Markdown-Mode&lt;/<span style="color: #de935f;">a</span>&gt;
+        &lt;<span style="color: #de935f;">ul</span>&gt;
+          &lt;<span style="color: #de935f;">li</span>&gt;
+            &lt;<span style="color: #de935f;">ul</span>&gt;
+              &lt;<span style="color: #de935f;">li</span>&gt;
+                &lt;<span style="color: #de935f;">ul</span>&gt;
+                  &lt;<span style="color: #de935f;">li</span>&gt;&lt;<span style="color: #de935f;">a</span> <span style="color: #f0c674;">href</span>=<span style="color: #8abeb7;">"#sec-4-1"</span>&gt;4.1 Markdonw &#21442;&#32771;&#25991;&#26723;&lt;/<span style="color: #de935f;">a</span>&gt;&lt;/<span style="color: #de935f;">li</span>&gt;
+              &lt;/<span style="color: #de935f;">ul</span>&gt;&lt;/<span style="color: #de935f;">li</span>&gt;
+          &lt;/<span style="color: #de935f;">ul</span>&gt;&lt;/<span style="color: #de935f;">li</span>&gt;
+        &lt;/<span style="color: #de935f;">ul</span>&gt;
+      &lt;/<span style="color: #de935f;">li</span>&gt;
+      &lt;<span style="color: #de935f;">li</span>&gt;&lt;<span style="color: #de935f;">a</span> <span style="color: #f0c674;">href</span>=<span style="color: #8abeb7;">"#sec-5"</span>&gt;5 &#32467;&#23614;&lt;/<span style="color: #de935f;">a</span>&gt;&lt;/<span style="color: #de935f;">li</span>&gt;
+      &lt;<span style="color: #de935f;">li</span>&gt;&lt;<span style="color: #de935f;">a</span> <span style="color: #f0c674;">href</span>=<span style="color: #8abeb7;">"#sec-6"</span>&gt;6 &#26356;&#26032;&#30340;&#22320;&#26041;&lt;/<span style="color: #de935f;">a</span>&gt;&lt;/<span style="color: #de935f;">li</span>&gt;
+    &lt;/<span style="color: #de935f;">ul</span>&gt;
+  &lt;/<span style="color: #de935f;">div</span>&gt;
+&lt;/<span style="color: #de935f;">div</span>&gt;
+</pre>
+</div>
+
+<p>
+可以很清楚的知道文章结构，然后利用<a href="http://orgmode.org/org.html">The Org Manual</a>目录CSS，代码如下：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-css"><span style="color: #de935f;">#table-of-contents </span><span style="color: #c5c8c6;">{</span>
+    <span style="color: #f0c674;">font-size</span>: 9pt;
+    <span style="color: #f0c674;">position</span>: fixed;
+    <span style="color: #f0c674;">right</span>: 0em;
+    <span style="color: #f0c674;">top</span>: 0em;
+    <span style="color: #f0c674;">background</span>: <span style="color: #000000; background-color: #FFFFFF;">white</span>;
+    <span style="color: #f0c674; font-style: italic;">-webkit-box-shadow</span>: 0 0 1em <span style="color: #ffffff; background-color: #777777;">#777777</span>;
+    <span style="color: #f0c674; font-style: italic;">-moz-box-shadow</span>: 0 0 1em <span style="color: #ffffff; background-color: #777777;">#777777</span>;
+    <span style="color: #f0c674;">box-shadow</span>: 0 0 1em <span style="color: #ffffff; background-color: #777777;">#777777</span>;
+    <span style="color: #f0c674; font-style: italic;">-webkit-border-bottom-left-radius</span>: 5px;
+    <span style="color: #f0c674; font-style: italic;">-moz-border-radius-bottomleft</span>: 5px;
+    <span style="color: #f0c674;">border-bottom-left-radius</span>: 5px;
+    <span style="color: #f0c674;">text-align</span>: right;
+    <span style="color: #f0c674;">max-height</span>: 80%;
+    <span style="color: #f0c674;">overflow</span>: auto;
+    <span style="color: #f0c674;">z-index</span>: 200;
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #de935f;">#table-of-contents #text-table-of-contents </span><span style="color: #c5c8c6;">{</span>
+    <span style="color: #f0c674;">display</span>: none;
+    <span style="color: #f0c674;">text-align</span>: left;
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #de935f;">#table-of-contents:hover #text-table-of-contents </span><span style="color: #c5c8c6;">{</span>
+    <span style="color: #f0c674;">display</span>: block;
+    <span style="color: #f0c674;">padding</span>: 0.5em;
+    <span style="color: #f0c674;">margin-top</span>: -1.5em; 
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #de935f;">#table-of-contents ul </span><span style="color: #c5c8c6;">{</span>
+    <span style="color: #f0c674;">margin-left</span>: 14pt;
+    <span style="color: #f0c674;">margin-bottom</span>: 10pt;
+    <span style="color: #f0c674;">padding</span>: 0;
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #de935f;">#table-of-contents ul&gt;:first-child </span><span style="color: #c5c8c6;">{</span>
+    <span style="color: #f0c674;">color</span>: <span style="color: #ffffff; background-color: #0000FF;">blue</span>;
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #de935f;">#table-of-contents li </span><span style="color: #c5c8c6;">{</span>
+    <span style="color: #f0c674;">padding</span>: 0;
+    <span style="color: #f0c674;">margin</span>: 1px;
+    <span style="color: #f0c674;">list-style</span>: none;
+<span style="color: #c5c8c6;">}</span>
+<span style="color: #de935f;">#text-table-of-contents li a:hover </span><span style="color: #c5c8c6;">{</span>
+    <span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">font-size: 16px; </span><span style="color: #969896; font-style: italic;">*/</span>
+    <span style="color: #f0c674;">color</span>: <span style="color: #000000; background-color: #9ACD32;">yellowgreen</span>;
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div>
+
+<p>
+当然，我稍微做了一下修改，但是总体上的效果没有多大的区别，只是更改了部分连接的颜色。
+</p>
+
+<p>
+你当然完全可以自己设计。我就在这里偷懒一下啦。
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
+<p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
+<p class="date">2013-02-13</p>
+<p class="export-date">2016-10-12 Wed 20:40</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="validation"></p>
+<p class="last-modification-time">2016-10-12 Wed 13:12</p></div><script asyn src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+</div>
+</body>
+</html>

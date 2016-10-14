@@ -186,7 +186,8 @@ $ sudo ln -s /Volumes/MyTeXLive/bin/universal-darwin /usr/texbin
       waiting...
 ** Install Emacs and config her
 *** Change the Home Directory:
-		1. Ctrl + R
+
+    1. @@html:<kbd> Ctrl + R </kbd>@@
     2. Input "regedit"
     3. HKEY\_CURRENT\_USER/Software/GNU/Emacs/HOME=%The Home of Emacs%
        (New a string value)

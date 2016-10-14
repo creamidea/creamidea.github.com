@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- 2016-10-12 Wed 14:04 -->
+<!-- 2016-10-13 Thu 22:32 -->
 <meta  charset="utf-8">
 <meta  name="viewport" content="width=device-width, initial-scale=1">
 <title>Learning Django</title>
@@ -23,29 +23,25 @@
 <li><a href="#orgheadline2">2. Install Django</a></li>
 <li><a href="#orgheadline3">3. 第二章 入门 &amp;&amp; 第三章 视图和URL配置</a></li>
 <li><a href="#orgheadline4">4. 第四章 模板</a></li>
-<li><a href="#orgheadline6">5. 第五章 模型</a>
+<li><a href="#orgheadline5">5. 第六章 Django站点管理</a></li>
+<li><a href="#orgheadline6">6. 第七章 表单</a></li>
+<li><a href="#orgheadline7">7. 第八章 高级视图和URL配置</a></li>
+<li><a href="#orgheadline8">8. 第九章 模板高级进阶</a></li>
+<li><a href="#orgheadline9">9. 第十章 数据模型高级进阶</a></li>
+<li><a href="#orgheadline12">10. 第十二章 部署Django</a>
 <ul>
-<li><a href="#orgheadline5">5.1. MTV开发模式</a></li>
-</ul>
-</li>
-<li><a href="#orgheadline7">6. 第六章 Django站点管理</a></li>
-<li><a href="#orgheadline8">7. 第七章 表单</a></li>
-<li><a href="#orgheadline9">8. 第八章 高级视图和URL配置</a></li>
-<li><a href="#orgheadline10">9. 第九章 模板高级进阶</a></li>
-<li><a href="#orgheadline11">10. 第十章 数据模型高级进阶</a></li>
-<li><a href="#orgheadline14">11. 第十二章 部署Django</a>
+<li><a href="#orgheadline11">10.1. Linux</a>
 <ul>
-<li><a href="#orgheadline13">11.1. Linux</a>
-<ul>
-<li><a href="#orgheadline12">11.1.1. mod<sub>wsgi</sub></a></li>
+<li><a href="#orgheadline10">10.1.1. mod<sub>wsgi</sub></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgheadline15">12. Q&amp;A</a></li>
+<li><a href="#orgheadline13">11. Q&amp;A</a></li>
 </ul>
 </div>
 </div>
+
 
 <div id="outline-container-orgheadline1" class="outline-2">
 <h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
@@ -60,7 +56,7 @@
 </p>
 
 <p>
-<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-09-28 Sat&gt;</span></span>再次学习
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-09-28 Sat&gt; </span></span> 再次学习
 </p>
 </div>
 </div>
@@ -69,28 +65,26 @@
 <h2 id="orgheadline2"><span class="section-number-2">2</span> Install Django</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-因为安装过程理论上不是很难，我在这里只是写一条命令。（默认已经安装了python）
+因为安装过程理论上不是很难，我在这里只是写一条命令。（默认已经安装了 python）
 </p>
 <ol class="org-ol">
-<li><p>
-Windows:
-以管理员的身份，打开cmd。之后到django文件夹下输入：
-</p>
+<li>Windows:
+以管理员的身份，打开cmd。之后到django文件夹下输入：</li>
+</ol>
 <div class="org-src-container">
 
 <pre class="src src-sh">python setup.py install
 </pre>
-</div></li>
-<li><p>
-Linux/Mac OS X:
-前往django所在文件目录，之后输入：
-</p>
+</div>
+<ol class="org-ol">
+<li>Linux/Mac OS X:
+前往django所在文件目录，之后输入：</li>
+</ol>
 <div class="org-src-container">
 
 <pre class="src src-sh">sudo python setup.py install
 </pre>
-</div></li>
-</ol>
+</div>
 
 <p>
 <b>参考网站:</b>
@@ -107,16 +101,13 @@ Linux/Mac OS X:
 <h2 id="orgheadline3"><span class="section-number-2">3</span> 第二章 入门 &amp;&amp; 第三章 视图和URL配置</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-日曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-14 Sun&gt;</span></span>
+日曜日 <span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-14 Sun&gt;</span></span>
 </p>
 
 <p>
-只是稍微看了一下，然后写了一个Hello(呵呵，真是经典啊)
-</p>
-<ol class="org-ol">
-<li><p>
+只是稍微看了一下，然后写了一个 Hello (呵呵，真是经典啊)
 使用 <code>django-admin.py startproject mysite</code>
-(笔者我在Windows7上尝试，估计路径没有加入，所以我直接将Scripts/django-admin.py
+(笔者我在Windows7上尝试，估计路径没有加入，所以我直接将 <code>Scripts/django-admin.py</code>
 放入了工程文件夹才解决)。
 </p>
 
@@ -125,20 +116,20 @@ Linux/Mac OS X:
 </p>
 <pre class="example">
 icecream/
-  manage.py
-  icecream/
-     __init__.py
-     settings.py
-     urls.py
-     wsgi.py
-     __init__.pyc
-     settings.pyc
-     urls.pyc
-     wsgi.pyc
-</pre></li>
+    manage.py
+    icecream/
+       __init__.py
+       settings.py
+       urls.py
+       wsgi.py
+       __init__.pyc
+       settings.pyc
+       urls.pyc
+       wsgi.pyc
+</pre>
 
-<li><p>
-创建views.py (注意这个要放在icecream这个目录下，同urls.py在同一目录)
+<p>
+创建 <code>views.py</code> (注意这个要放在icecream这个目录下，同 <code>urls.py</code> 在同一目录)
 </p>
 <div class="org-src-container">
 
@@ -147,10 +138,10 @@ icecream/
 <span style="color: #b5bd68;">def</span> <span style="color: #de935f;">hello</span><span style="color: #c5c8c6;">(</span>request<span style="color: #c5c8c6;">)</span>:
         <span style="color: #b5bd68;">return</span> HttpResponse<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">"Hello, icecream"</span><span style="color: #c5c8c6;">)</span>
 </pre>
-</div></li>
+</div>
 
-<li><p>
-修改urls.py
+<p>
+修改 <code>urls.py</code>
 </p>
 <div class="org-src-container">
 
@@ -161,9 +152,9 @@ icecream/
         <span style="color: #8abeb7;">(</span><span style="color: #8abeb7;">'^hello/$'</span>, hello<span style="color: #8abeb7;">)</span>,        <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#22686;&#21152;&#36825;&#21477;&#26144;&#23556;</span>
 <span style="color: #c5c8c6;">)</span>
 </pre>
-</div></li>
+</div>
 
-<li><p>
+<p>
 运行
 </p>
 <div class="org-src-container">
@@ -171,11 +162,12 @@ icecream/
 <pre class="src src-sh">python manage.py runserver <span style="color: #c5c8c6;">[</span>0.0.0.0<span style="color: #c5c8c6;">]</span> 8080
 <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#21152;&#20837; 0.0.0.0 &#21487;&#20197;&#20351;&#24471;&#8220;&#22806;&#32593;&#8221;&#35775;&#38382;&#65292;&#19981;&#20165;&#38480;&#20110;127.0.0.1</span>
 </pre>
-</div></li>
+</div>
 
-<li>在浏览器中输入：
-<a href="http://127.0.0.1:8080/hello">http://127.0.0.1:8080/hello</a></li>
-</ol>
+<p>
+在浏览器中输入：
+<a href="http://127.0.0.1:8080/hello">http://127.0.0.1:8080/hello</a>
+</p>
 
 <p>
 P30
@@ -189,8 +181,7 @@ P30
 火曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-16 Tue&gt;</span></span>
 </p>
 
-<ol class="org-ol">
-<li><p>
+<p>
 Template System
 </p>
 <div class="org-src-container">
@@ -200,219 +191,29 @@ Template System
 <span style="color: #f0c674;">c</span> = template.Context<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">{</span><span style="color: #8abeb7;">'name'</span>: <span style="color: #8abeb7;">'Alice'</span><span style="color: #8abeb7;">}</span><span style="color: #c5c8c6;">)</span>
 <span style="color: #b5bd68;">print</span> t.render<span style="color: #c5c8c6;">(</span>c<span style="color: #c5c8c6;">)</span>
 </pre>
-</div></li>
-<li><p>
+</div>
+
+<p>
 给标签增加一个reversed使得该列表被反向迭代：
 </p>
 <pre class="example">
 {% for athlete in athlete_list reversed %}
 ...
 {% endfor %}
-</pre></li>
-</ol>
+</pre>
 </div>
 </div>
-<div id="outline-container-orgheadline6" class="outline-2">
-<h2 id="orgheadline6"><span class="section-number-2">5</span> 第五章 模型</h2>
+
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5"><span class="section-number-2">5</span> 第六章 Django站点管理</h2>
 <div class="outline-text-2" id="text-5">
-<p>
-水曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-17 Wed&gt;</span></span>
-</p>
-
-<ol class="org-ol">
-<li><p>
-安装python-mysql：
-</p>
-
-<p>
-在Windows7 64bit上貌似安装不了，它说是64bit的原因。
-(python version:2.7.3 64bit.)
-我想也是。
-</p>
-
-<p>
-我下载的包是：
-<a href="http://nchc.dl.sourceforge.net/project/mysql-python/mysql-python-test/1.2.4b4/MySQL-python-1.2.4b4.win32-py2.7.exe">http://nchc.dl.sourceforge.net/project/mysql-python/mysql-python-test/1.2.4b4/MySQL-python-1.2.4b4.win32-py2.7.exe</a>
-</p>
-
-<p>
-然后我跟着：
-<a href="http://stackoverflow.com/questions/3652625/installing-setuptools-on-64-bit-windows">http://stackoverflow.com/questions/3652625/installing-setuptools-on-64-bit-windows</a>
-修改注册表还是失败了。以后再试吧。
-</p>
-
-<p>
-<b>Update:</b>
-<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-10-15 Tue&gt;</span></span>更新在Windows7上安装问题：
-今天我感觉已经找到一种解决方式，那就是我重新将python安装在了C盘根目录下，而不是在
-<code>Program Files</code> 下。
-貌似有许多的开发环境必须安装在根目录下，或者目录名称中不能有空格特殊字符等等。只能是字母+数字。 <br >
-以后要记住这点啦。
-</p>
-
-<p>
-在Linux上安装的话就下载源码安装呗。
-我以为直接下载源码，然后：
-</p>
-<div class="org-src-container">
-
-<pre class="src src-python">python setup.py install
-</pre>
-</div>
-<p>
-就可以了，但是我在ubuntu12.04上貌似失败了，貌似提示没有setuptool。我
-安装了python-setuptool也没有用。有谁会记得告诉我。
-</p>
-
-<p>
-Referencs:
-</p>
-<ol class="org-ol">
-<li><a href="http://stackoverflow.com/questions/5178292/pip-install-mysql-python-fails-with-environmenterror-mysql-config-not-found">http://stackoverflow.com/questions/5178292/pip-install-mysql-python-fails-with-environmenterror-mysql-config-not-found</a></li>
-<li><a href="http://stackoverflow.com/questions/14426491/python-3-importerror-no-module-named-setuptools">http://stackoverflow.com/questions/14426491/python-3-importerror-no-module-named-setuptools</a></li>
-<li><a href="http://stackoverflow.com/questions/2211335/python-setuptools-import-error-using-netbeans">http://stackoverflow.com/questions/2211335/python-setuptools-import-error-using-netbeans</a></li>
-</ol>
-<p>
-于是我改用 <code>pip</code> 安装。一开始我不是这个步骤，不是权限问题，就是没有
-distribute。现在我将步骤整理如下：
-From: <a href="http://codeinthehole.com/writing/how-to-set-up-mysql-for-python-on-ubuntu/">http://codeinthehole.com/writing/how-to-set-up-mysql-for-python-on-ubuntu/</a>
-</p>
-<div class="org-src-container">
-
-<pre class="src src-sh">$ sudo apt-get install python-pip
-$ sudo apt-get install python-dev libmysqlclient-dev
-$ sudo easy_install -U distribute
-$ sudo pip install MySQL-python
-</pre>
-</div>
-
-<p>
-之后我尝试了一下(一定要保证能够连接到数据库哦，如果真想写进数据库，记得
-别忘了syncdb)：
-</p>
-<div class="org-src-container">
-
-<pre class="src src-sh">$ python manage.py validate     <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#39564;&#35777;&#25968;&#25454;&#27491;&#30830;&#24615;</span>
-$ python manage.py sqlall books
-$ python manage.py syncdb
-</pre>
-</div>
-
-<p>
-RESULTS:
-</p>
-<div class="org-src-container">
-
-<pre class="src src-sh">BEGIN;
-CREATE TABLE <span style="color: #b294bb;">`books_publisher`</span> <span style="color: #c5c8c6;">(</span>
-    <span style="color: #b294bb;">`id`</span> integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    <span style="color: #b294bb;">`name`</span> varchar<span style="color: #8abeb7;">(</span>30<span style="color: #8abeb7;">)</span> NOT NULL,
-    <span style="color: #b294bb;">`address`</span> varchar<span style="color: #8abeb7;">(</span>50<span style="color: #8abeb7;">)</span> NOT NULL,
-    <span style="color: #b294bb;">`city`</span> varchar<span style="color: #8abeb7;">(</span>60<span style="color: #8abeb7;">)</span> NOT NULL,
-    <span style="color: #b294bb;">`state_province`</span> varchar<span style="color: #8abeb7;">(</span>30<span style="color: #8abeb7;">)</span> NOT NULL,
-    <span style="color: #b294bb;">`country`</span> varchar<span style="color: #8abeb7;">(</span>50<span style="color: #8abeb7;">)</span> NOT NULL,
-    <span style="color: #b294bb;">`website`</span> varchar<span style="color: #8abeb7;">(</span>200<span style="color: #8abeb7;">)</span> NOT NULL
-<span style="color: #c5c8c6;">)</span>
-;
-CREATE TABLE <span style="color: #b294bb;">`books_author`</span> <span style="color: #c5c8c6;">(</span>
-    <span style="color: #b294bb;">`id`</span> integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    <span style="color: #b294bb;">`first_name`</span> varchar<span style="color: #8abeb7;">(</span>30<span style="color: #8abeb7;">)</span> NOT NULL,
-    <span style="color: #b294bb;">`last_name`</span> varchar<span style="color: #8abeb7;">(</span>40<span style="color: #8abeb7;">)</span> NOT NULL,
-    <span style="color: #b294bb;">`email`</span> varchar<span style="color: #8abeb7;">(</span>75<span style="color: #8abeb7;">)</span> NOT NULL
-<span style="color: #c5c8c6;">)</span>
-;
-CREATE TABLE <span style="color: #b294bb;">`books_book_authors`</span> <span style="color: #c5c8c6;">(</span>
-    <span style="color: #b294bb;">`id`</span> integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    <span style="color: #b294bb;">`book_id`</span> integer NOT NULL,
-    <span style="color: #b294bb;">`author_id`</span> integer NOT NULL,
-    UNIQUE <span style="color: #8abeb7;">(</span><span style="color: #b294bb;">`book_id`</span>, <span style="color: #b294bb;">`author_id`</span><span style="color: #8abeb7;">)</span>
-<span style="color: #c5c8c6;">)</span>
-;
-ALTER TABLE <span style="color: #b294bb;">`books_book_authors`</span> ADD CONSTRAINT <span style="color: #b294bb;">`author_id_refs_id_1a0a2829`</span> FOREIGN KEY <span style="color: #c5c8c6;">(</span><span style="color: #b294bb;">`author_id`</span><span style="color: #c5c8c6;">)</span> REFERENCES <span style="color: #b294bb;">`books_author`</span> <span style="color: #c5c8c6;">(</span><span style="color: #b294bb;">`id`</span><span style="color: #c5c8c6;">)</span>;
-CREATE TABLE <span style="color: #b294bb;">`books_book`</span> <span style="color: #c5c8c6;">(</span>
-    <span style="color: #b294bb;">`id`</span> integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    <span style="color: #b294bb;">`title`</span> varchar<span style="color: #8abeb7;">(</span>100<span style="color: #8abeb7;">)</span> NOT NULL,
-    <span style="color: #b294bb;">`publisher_id`</span> integer NOT NULL,
-    <span style="color: #b294bb;">`publisher_date`</span> date NOT NULL
-<span style="color: #c5c8c6;">)</span>
-;
-ALTER TABLE <span style="color: #b294bb;">`books_book`</span> ADD CONSTRAINT <span style="color: #b294bb;">`publisher_id_refs_id_974c2a46`</span> FOREIGN KEY <span style="color: #c5c8c6;">(</span><span style="color: #b294bb;">`publisher_id`</span><span style="color: #c5c8c6;">)</span> REFERENCES <span style="color: #b294bb;">`books_publisher`</span> <span style="color: #c5c8c6;">(</span><span style="color: #b294bb;">`id`</span><span style="color: #c5c8c6;">)</span>;
-ALTER TABLE <span style="color: #b294bb;">`books_book_authors`</span> ADD CONSTRAINT <span style="color: #b294bb;">`book_id_refs_id_0a3634f3`</span> FOREIGN KEY <span style="color: #c5c8c6;">(</span><span style="color: #b294bb;">`book_id`</span><span style="color: #c5c8c6;">)</span> REFERENCES <span style="color: #b294bb;">`books_book`</span> <span style="color: #c5c8c6;">(</span><span style="color: #b294bb;">`id`</span><span style="color: #c5c8c6;">)</span>;
-CREATE INDEX <span style="color: #b294bb;">`books_book_81b79144`</span> ON <span style="color: #b294bb;">`books_book`</span> <span style="color: #c5c8c6;">(</span><span style="color: #b294bb;">`publisher_id`</span><span style="color: #c5c8c6;">)</span>;
-
-COMMIT;
-</pre>
-</div></li>
-
-<li><p>
-如果使用Django的数据层，必须创建Django app.
-</p>
-<div class="org-src-container">
-
-<pre class="src src-sh">$ python manage.py startapp books<span style="color: #c5c8c6;">(</span>app name<span style="color: #c5c8c6;">)</span>
-</pre>
-</div></li>
-
-<li><p>
-使用get()方法处理“可能不存在的键”
-</p>
-<div class="org-src-container">
-
-<pre class="src src-python">request.META.get<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">'HTTP_USER_AGENT'</span>, <span style="color: #8abeb7;">'unknow'</span><span style="color: #c5c8c6;">)</span>
-</pre>
-</div></li>
-
-<li><p>
-使用Sqlite3 （因为笔者最近在Windows7上开发，又不想安装中大型数据库，于是。。。）:
-</p>
-
-<p>
-For Windows7:
-</p>
-
-<ol class="org-ol">
-<li>下载源代码：sqlite-amalgamation-xxxxxxx.zip,点击这里进入下载页面。</li>
-
-<li><p>
-输入编译代码，前提是安装了 <a href="http://www.mingw.org/">MinGW</a> :
-</p>
-<div class="org-src-container">
-
-<pre class="src src-sh">gcc -o sqlite3 shell.c sqlite3.c -lpthread
-<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#36825;&#37324;&#38656;&#35201;&#21435;&#25481;-ldl&#65292;&#19981;&#28982;&#20250;&#20445;&#38169;&#12290;&#19981;&#30693;&#36947;&#20320;&#20204;&#23433;&#35013;&#30340;&#26102;&#20505;&#20250;&#19981;&#20250;&#36935;&#21040;&#27492;&#31867;&#38382;&#39064;.</span>
-</pre>
-</div>
-<p>
-Reference:
-</p>
-<ul class="org-ul">
-<li><a href="http://www.sqlite.org/howtocompile.html">http://www.sqlite.org/howtocompile.html</a></li>
-</ul></li>
-</ol></li>
-</ol>
-</div>
-
-<div id="outline-container-orgheadline5" class="outline-3">
-<h3 id="orgheadline5"><span class="section-number-3">5.1</span> MTV开发模式</h3>
-<div class="outline-text-3" id="text-5-1">
-<p>
-<i>Model-View-Controller</i>
-</p>
-</div>
-</div>
-</div>
-
-<div id="outline-container-orgheadline7" class="outline-2">
-<h2 id="orgheadline7"><span class="section-number-2">6</span> 第六章 Django站点管理</h2>
-<div class="outline-text-2" id="text-6">
 <p>
 火曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-23 Tue&gt;</span></span>
 </p>
 
-<ol class="org-ol">
-<li><p>
-搭建步骤
-</p>
+<ul class="org-ul">
+<li>搭建步骤</li>
+</ul>
 <pre class="example">
 #INSTALLED_APPS
 1. django.contrib.admin         #enable
@@ -424,11 +225,13 @@ Reference:
 1. django.middleware.common.CommonMiddleware
 2. django.contrib.sessons.middleware.SessionMiddleware
 3. django.contrib.auth.middleware.AuthenticationMiddleware
-</pre></li>
-<li><p>
-Some config
-1)Setting.py
-</p>
+</pre>
+
+<ul class="org-ul">
+<li>Some config
+
+<ol class="org-ol">
+<li>Setting.py
 <ul class="org-ul">
 <li><p>
 Template paht:
@@ -457,12 +260,9 @@ Static path
 <span style="color: #c5c8c6;">)</span>
 </pre>
 </div></li>
-</ul>
-<p>
-2)一些注意点
-</p>
-<ol class="org-ol">
+</ul></li>
 <li><p>
+一些注意点
 在管理界面显示自己创建的应用程序：
 这点我也是我自己要记住的，记住写的模型需要在当前应用程序下的admin.py中注册，
 代码类似这样：
@@ -476,23 +276,23 @@ admin.site.register<span style="color: #c5c8c6;">(</span>User<span style="color:
 </pre>
 </div></li>
 </ol></li>
-</ol>
+</ul>
 </div>
 </div>
-<div id="outline-container-orgheadline8" class="outline-2">
-<h2 id="orgheadline8"><span class="section-number-2">7</span> 第七章 表单</h2>
-<div class="outline-text-2" id="text-7">
+
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6"><span class="section-number-2">6</span> 第七章 表单</h2>
+<div class="outline-text-2" id="text-6">
 <p>
 木曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-25 Thu&gt;</span></span>
 </p>
 
-<ol class="org-ol">
+<ul class="org-ul">
 <li>在创建contact的时候，我没有使用 <code>python manage.py startapp contact</code>
-     导致在写urls.py的时候老是提示找不到 <code>contact</code></li>
+    导致在写urls.py的时候老是提示找不到 <code>contact</code></li>
 
-<li><p>
-自定义校验规则
-</p>
+<li>自定义校验规则</li>
+</ul>
 <pre class="example">
 Django的form系统自动寻找匹配的函数方法,
 该方法名称以clean_开头,并以字段名称结束。
@@ -511,20 +311,23 @@ Django的form系统自动寻找匹配的函数方法,
 我们可以在我们自定义的校验方法中修改它的值(或者把它转换
 成另一种Python类型)。 如果我们忘记了这一步,None值就会返回,
 原始的数据就丢失掉了。
-</pre></li>
+</pre>
 
-<li><p>
-定义Form样式
-</p>
+<ul class="org-ul">
+<li>定义Form样式</li>
+</ul>
 <pre class="example">
-  每一个字段部件(&lt;input type=”text”&gt;, &lt;select&gt;, &lt;textarea&gt;, 或者类似)都可以通过访问{{form.字段名}}进行单独的渲染。
-</pre></li>
+     每一个字段部件(&lt;input type=”text”&gt;, &lt;select&gt;, &lt;textarea&gt;, 或者类似)都可以通过访问{{form.字段名}}进行单独的渲染。
+</pre>
 
-<li>问题解决：
-<ol class="org-ol">
+<ul class="org-ul">
 <li><p>
-CSRF verification failed. Request aborted.
+问题解决：
 </p>
+
+<ol class="org-ol">
+<li>CSRF verification failed. Request aborted.</li>
+</ol>
 <div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">views.py</span>
@@ -534,24 +337,20 @@ CSRF verification failed. Request aborted.
 <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">login.html</span>
 </pre>
 </div>
-
 <p>
 Reference:
 </p>
 <ol class="org-ol">
 <li><a href="http://stackoverflow.com/questions/14848603/django-csrf-cookie-not-setting">http://stackoverflow.com/questions/14848603/django-csrf-cookie-not-setting</a></li>
-
 <li><a href="http://www.5i1y.com/post/8/Django-CSRF/">http://www.5i1y.com/post/8/Django-CSRF/</a></li>
-
 <li><a href="https://docs.djangoproject.com/en/dev/ref/templates/api/#subclassing-context-requestcontext">https://docs.djangoproject.com/en/dev/ref/templates/api/#subclassing-context-requestcontext</a></li>
 </ol></li>
-</ol></li>
-</ol>
+</ul>
 </div>
 </div>
-<div id="outline-container-orgheadline9" class="outline-2">
-<h2 id="orgheadline9"><span class="section-number-2">8</span> 第八章 高级视图和URL配置</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7"><span class="section-number-2">7</span> 第八章 高级视图和URL配置</h2>
+<div class="outline-text-2" id="text-7">
 <p>
 木曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-25 Thu&gt;</span></span>
 </p>
@@ -663,9 +462,9 @@ month和day
 </div>
 </div>
 
-<div id="outline-container-orgheadline10" class="outline-2">
-<h2 id="orgheadline10"><span class="section-number-2">9</span> 第九章 模板高级进阶</h2>
-<div class="outline-text-2" id="text-9">
+<div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8"><span class="section-number-2">8</span> 第九章 模板高级进阶</h2>
+<div class="outline-text-2" id="text-8">
 <p>
 木曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-05-07 Tue&gt;</span></span>
 </p>
@@ -736,9 +535,9 @@ select<sub>template</sub> 很像get<sub>template</sub> ，不过它是以模板�
 </div>
 </div>
 
-<div id="outline-container-orgheadline11" class="outline-2">
-<h2 id="orgheadline11"><span class="section-number-2">10</span> 第十章 数据模型高级进阶</h2>
-<div class="outline-text-2" id="text-10">
+<div id="outline-container-orgheadline9" class="outline-2">
+<h2 id="orgheadline9"><span class="section-number-2">9</span> 第十章 数据模型高级进阶</h2>
+<div class="outline-text-2" id="text-9">
 <p>
 土曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-05-11 Sat&gt;</span></span>
 </p>
@@ -783,15 +582,15 @@ INSTALLED_APPS &#20013;&#26377; <span style="color: #8abeb7;">'django.contrib.se
 </ol>
 </div>
 </div>
-<div id="outline-container-orgheadline14" class="outline-2">
-<h2 id="orgheadline14"><span class="section-number-2">11</span> 第十二章 部署Django</h2>
-<div class="outline-text-2" id="text-11">
-</div><div id="outline-container-orgheadline13" class="outline-3">
-<h3 id="orgheadline13"><span class="section-number-3">11.1</span> Linux</h3>
-<div class="outline-text-3" id="text-11-1">
-</div><div id="outline-container-orgheadline12" class="outline-4">
-<h4 id="orgheadline12"><span class="section-number-4">11.1.1</span> mod<sub>wsgi</sub></h4>
-<div class="outline-text-4" id="text-11-1-1">
+<div id="outline-container-orgheadline12" class="outline-2">
+<h2 id="orgheadline12"><span class="section-number-2">10</span> 第十二章 部署Django</h2>
+<div class="outline-text-2" id="text-10">
+</div><div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11"><span class="section-number-3">10.1</span> Linux</h3>
+<div class="outline-text-3" id="text-10-1">
+</div><div id="outline-container-orgheadline10" class="outline-4">
+<h4 id="orgheadline10"><span class="section-number-4">10.1.1</span> mod<sub>wsgi</sub></h4>
+<div class="outline-text-4" id="text-10-1-1">
 <ol class="org-ol">
 <li><p>
 Install it on Ubuntu12.04
@@ -821,9 +620,9 @@ sudo aptitude install python-dev apache2-prefork-dev
 </div>
 </div>
 
-<div id="outline-container-orgheadline15" class="outline-2">
-<h2 id="orgheadline15"><span class="section-number-2">12</span> Q&amp;A</h2>
-<div class="outline-text-2" id="text-12">
+<div id="outline-container-orgheadline13" class="outline-2">
+<h2 id="orgheadline13"><span class="section-number-2">11</span> Q&amp;A</h2>
+<div class="outline-text-2" id="text-11">
 <ol class="org-ol">
 <li><p>
 Q: Django Models (1054, "Unknown column" XXXX.id in 'field list'") <br >
@@ -915,13 +714,13 @@ Python代码
 </div>
 </div>
 <div id="postamble" class="status">
-<div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
+<meta name="viewport" content="width=device-width, initial-scale=1"><div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
 <p class="date">2013-04-14</p>
-<p class="export-date">2016-10-12 Wed 14:04</p>
+<p class="export-date">2016-10-13 Thu 22:32</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
 <p class="validation"></p>
-<p class="last-modification-time">2016-10-12 Wed 14:04</p></div><script asyn src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+<p class="last-modification-time">2016-10-13 Thu 22:32</p></div><script asyn src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

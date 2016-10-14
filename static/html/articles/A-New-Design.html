@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- 2016-10-12 Wed 13:44 -->
+<!-- 2016-10-13 Thu 20:44 -->
 <meta  charset="utf-8">
 <meta  name="viewport" content="width=device-width, initial-scale=1">
 <title>A New Design</title>
@@ -29,9 +29,6 @@
 </ul>
 </div>
 </div>
-<pre class="example">
-这篇文章发表的时间过于久远，文章内容仅供参考。
-</pre>
 
 
 <div id="outline-container-orgheadline1" class="outline-2">
@@ -88,7 +85,7 @@
 <p>
 根据<a href="http://orgmode.org/worg/org-tutorials/org-jekyll.html">Using org to Blog with Jekyll</a>的介绍。需要在.emacs文件中添加如下的代码：
 </p>
-<script src="https://gist.github.com/creamidea/5319960.js"></script>
+<script async src="https://gist.github.com/creamidea/5319960.js"></script>
 <p>
 我们在这里只需要修改 <code>:base-directory</code> 和 <code>:publishing-directory</code> 这两个变量的值（注意有两处哦）。
 之后就可以使用 <code>C-c C-e P</code> 来生成当前工程了。
@@ -199,12 +196,12 @@ tags: $3
 主要是文章的目录，我这次使用的是css，然后配合js完成平滑滚动的效果。
 css的代码是我从<a href="http://orgmode.org/">orgmode官网</a> 截取下来的：
 </p>
-<script src="https://gist.github.com/creamidea/5320378.js"></script>
+<script async src="https://gist.github.com/creamidea/5320378.js"></script>
 <p>
 主要思路：org-mode在生成html的时候会生成一个目录，而那些html标签是固定，详细的可以看文档。那么这样就可以使用css来使其悬浮于左上角。
 而其平滑的滚动效果则可以使用js来实现，代码如下：
 </p>
-<script src="https://gist.github.com/creamidea/5320431.js"></script>
+<script async src="https://gist.github.com/creamidea/5320431.js"></script>
 <p>
 (使用jQuery，就是这么方便。当然你完全可以纯手工打造，作者我就不在次献丑了)
 </p>
@@ -283,13 +280,13 @@ css的代码是我从<a href="http://orgmode.org/">orgmode官网</a> 截取下�
 </div>
 </div></div>
 <div id="postamble" class="status">
-<div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
+<meta name="viewport" content="width=device-width, initial-scale=1"><div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
 <p class="date">2013-04-05</p>
-<p class="export-date">2016-10-12 Wed 13:44</p>
+<p class="export-date">2016-10-13 Thu 20:44</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
 <p class="validation"></p>
-<p class="last-modification-time">2016-10-12 Wed 12:59</p></div><script asyn src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+<p class="last-modification-time">2016-10-13 Thu 20:44</p></div><script asyn src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
 </div>
 </body>
 </html>
