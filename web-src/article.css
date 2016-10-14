@@ -322,7 +322,7 @@ p.verse {
     font-family: Menlo,Monaco,"Courier New",Courier,monospace;
     font-size: 14px;
     background: rgba(0,0,0,0.05);
-    margin: 0;
+    margin: 10px auto;
     padding: 20px;
     color: rgba(0,0,0,0.6);
     border: none;
