@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- 2016-10-14 Fri 10:08 -->
+<!-- 2016-10-14 Fri 14:54 -->
 <meta  charset="utf-8">
 <meta  name="viewport" content="width=device-width, initial-scale=1">
 <title>Works</title>
@@ -28,7 +28,7 @@
 <li><a href="#orgheadline5">2.4. 难点和收获</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline11">3. 基于 Web 技术的多屏控制系统 (C/S)</a>
+<li><a href="#orgheadline11">3. YoudaoDictionaryEnhancer</a>
 <ul>
 <li><a href="#orgheadline7">3.1. 项目地址</a></li>
 <li><a href="#orgheadline8">3.2. 项目成员</a></li>
@@ -36,7 +36,7 @@
 <li><a href="#orgheadline10">3.4. 难点和收获</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline16">4. 基于 Midway 的报表展示系统 (B/S)</a>
+<li><a href="#orgheadline16">4. 基于 Web 技术的多屏控制系统 (C/S)</a>
 <ul>
 <li><a href="#orgheadline12">4.1. 项目地址</a></li>
 <li><a href="#orgheadline13">4.2. 项目成员</a></li>
@@ -44,7 +44,7 @@
 <li><a href="#orgheadline15">4.4. 难点和收获</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline21">5. 智能⻝⽤菌养殖监控系统</a>
+<li><a href="#orgheadline21">5. 基于 Midway 的报表展示系统 (B/S)</a>
 <ul>
 <li><a href="#orgheadline17">5.1. 项目地址</a></li>
 <li><a href="#orgheadline18">5.2. 项目成员</a></li>
@@ -52,7 +52,15 @@
 <li><a href="#orgheadline20">5.4. 难点和收获</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline22">6. 尾声</a></li>
+<li><a href="#orgheadline26">6. 智能⻝⽤菌养殖监控系统</a>
+<ul>
+<li><a href="#orgheadline22">6.1. 项目地址</a></li>
+<li><a href="#orgheadline23">6.2. 项目成员</a></li>
+<li><a href="#orgheadline24">6.3. 项目描述</a></li>
+<li><a href="#orgheadline25">6.4. 难点和收获</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline27">7. 尾声</a></li>
 </ul>
 </div>
 </div>
@@ -91,7 +99,7 @@
 <div class="outline-text-3" id="text-2-3">
 <p>
 一个用 Javascript 实现的键盘组合键的库。用于实现类似于 Gmail 邮箱内快捷的效果。<a href="https://creamidea.github.io/keyboard-js/">体验地址</a>  <br >
-目前暂时只支持组合键触发的功能。连续按击的功能暂时还没有实现（比如，连续按2次A可以触发页面跳转等。）
+目前暂时只支持组合键触发的功能。连续按击的功能暂时还没有实现（比如，连续按2次 <kbd>A</kbd> 可以触发页面跳转等。）
 </p>
 </div>
 </div>
@@ -118,18 +126,23 @@ That isn't the most readable snippet. Readability's important, so you could try 
 <p>
 这个真是状态机的优美实现之一。
 </p>
+
+<p>
+BTW，这里有一个缺陷。如果使用了 <code>alert/confirm</code> 等函数，并且在弹窗之前用户按着键，弹窗之后松开键，就会触发一个 bug，表现为用户之后按任意键，都会和弹窗之前按的键组合。
+所以，开发者要么不用 <code>alert/confirm</code> 等会使 Tab 失去焦点的函数，要么在 <code>alert/confirm</code> 后面的调用 <code>clearKeys()</code> 函数。推荐前者。
+</p>
 </div>
 </div>
 </div>
 
 <div id="outline-container-orgheadline11" class="outline-2">
-<h2 id="orgheadline11"><span class="section-number-2">3</span> 基于 Web 技术的多屏控制系统 (C/S)</h2>
+<h2 id="orgheadline11"><span class="section-number-2">3</span> YoudaoDictionaryEnhancer</h2>
 <div class="outline-text-2" id="text-3">
 </div><div id="outline-container-orgheadline7" class="outline-3">
 <h3 id="orgheadline7"><span class="section-number-3">3.1</span> 项目地址</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
-<li>Alibaba-Group</li>
+<li><a href="https://github.com/creamidea/YoudaoDictionaryEnhancer">Github</a></li>
 </ul>
 </div>
 </div>
@@ -141,10 +154,77 @@ That isn't the most readable snippet. Readability's important, so you could try 
 </ul>
 </div>
 </div>
-
 <div id="outline-container-orgheadline9" class="outline-3">
 <h3 id="orgheadline9"><span class="section-number-3">3.3</span> 项目描述</h3>
 <div class="outline-text-3" id="text-3-3">
+<p>
+<a href="https://tampermonkey.net/">tampermonkey</a> 小插件 <br >
+增强 <a href="http://dict.youdao.com/">Youdao Dictionary Web版</a> 的功能。 <br >
+增加词源解释，快捷键发音功能。同时去除广告，优化显示等。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10"><span class="section-number-3">3.4</span> 难点和收获</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+写这个项目中，调试最久的就是 <code>iframe</code> 标签的事件透传功能了。
+</p>
+
+<p>
+背景：词源解释这个是从词源网站 HTML 代码中截取的，本身带了外联 CSS 样式，为了不影响有道网站本身的 CSS 样式，所以选择了使用 <code>iframe</code> 标签来包装。
+最后显示的效果很完美，但是点击里面的链接会只显示在 iframe 里面。另外， <code>&lt;a&gt;</code> 标签的 <code>href</code> 如果是相对路径，点击之后会跳转到 Youdao 域下面。
+这个不是我想要的。于是想了一个 Hack 的方法。遍历所有 <code>&lt;a&gt;</code> 标签中的 <code>href</code> ，将其值设置成绝对路径。
+同时在 iframe 外层，也就是主页面注册一个回调函数 <code>window[xxxx]=function () {}</code> ，在 iframe 中调用 <code>parent.xxxx</code> 。
+这里一开始想多了，认为注册到 <code>window</code> 会污染 Youdao 本身的页面，于是我写了一个 <code>makeId</code> ，用于生成随机函数的名字，避免污染。
+但稍微看了一下 tampermonkey 代码，发现其本身在执行 Javascript 代码的时候，创建了一个类似沙盒的机制。所以我之前的担心白担心了，还让代码变的复杂了。
+</p>
+
+<p>
+其实如果 <a href="https://chrome.google.com/webstore/detail/google-translate/aapbdbdomjkkjkaonfhkkikfgjllcleb">Google Translate Extension</a> 能够识别 iframe 中的内容，就没有接下来的问题了。于是，我天真的认为：捕捉 iframe 中的选择事件，
+把选中的单词传递给主页面，一切都能迎刃而解。但事实给了我一记响亮的耳光。最终我还是没有能够实现这个功能，只是曲线救国了一下，自己显示小按钮，点击跳转单词页面。
+而且，我在实现的时候还搞的及其复杂，把 iframe 的事件透传到了主页面处理。我现在觉得最好的方式就是 iframe 自己内部处理。
+</p>
+
+<p>
+在开发的过程中，主要了解和学习了 <code>Event:selectionchange</code> 和 <code>KeyboardEvent</code> 以及 <code>iframe</code> 的一些特性。
+</p>
+
+<p>
+总结，发现自己在开发的过程中缺乏设计和大局观，（就如同自己的人生没有设计，过的一塌糊涂！）。写到哪里算哪里，这样做之后，结果如这个插件一样，烂。
+</p>
+
+<p>
+以上。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline16" class="outline-2">
+<h2 id="orgheadline16"><span class="section-number-2">4</span> 基于 Web 技术的多屏控制系统 (C/S)</h2>
+<div class="outline-text-2" id="text-4">
+</div><div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12"><span class="section-number-3">4.1</span> 项目地址</h3>
+<div class="outline-text-3" id="text-4-1">
+<ul class="org-ul">
+<li>Alibaba-Group</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline13" class="outline-3">
+<h3 id="orgheadline13"><span class="section-number-3">4.2</span> 项目成员</h3>
+<div class="outline-text-3" id="text-4-2">
+<ul class="org-ul">
+<li><a href="https://github.com/creamidea">Junjia Ni</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline14" class="outline-3">
+<h3 id="orgheadline14"><span class="section-number-3">4.3</span> 项目描述</h3>
+<div class="outline-text-3" id="text-4-3">
 <p>
 ⽤户通过管理界⾯，实现对多块屏幕的显示控制系统。
 </p>
@@ -156,9 +236,9 @@ That isn't the most readable snippet. Readability's important, so you could try 
 </div>
 </div>
 
-<div id="outline-container-orgheadline10" class="outline-3">
-<h3 id="orgheadline10"><span class="section-number-3">3.4</span> 难点和收获</h3>
-<div class="outline-text-3" id="text-3-4">
+<div id="outline-container-orgheadline15" class="outline-3">
+<h3 id="orgheadline15"><span class="section-number-3">4.4</span> 难点和收获</h3>
+<div class="outline-text-3" id="text-4-4">
 <p>
 开发这套系统，使用了当时最新的前端开发技术。新手入门，好多坑啊。那段时间几乎每天都要写代码、研究代码到好晚。其实也是自己作。
 现在来看过去，觉得最惨的就是没有用 <a href="https://github.com/babel/babel">babel/babel</a> 编译工具，而是使用了 <a href="https://github.com/google/traceur-compiler">google/traceur-compiler</a> ，浪费了好多时间。
@@ -184,20 +264,20 @@ That isn't the most readable snippet. Readability's important, so you could try 
 </div>
 </div>
 
-<div id="outline-container-orgheadline16" class="outline-2">
-<h2 id="orgheadline16"><span class="section-number-2">4</span> 基于 Midway 的报表展示系统 (B/S)</h2>
-<div class="outline-text-2" id="text-4">
-</div><div id="outline-container-orgheadline12" class="outline-3">
-<h3 id="orgheadline12"><span class="section-number-3">4.1</span> 项目地址</h3>
-<div class="outline-text-3" id="text-4-1">
+<div id="outline-container-orgheadline21" class="outline-2">
+<h2 id="orgheadline21"><span class="section-number-2">5</span> 基于 Midway 的报表展示系统 (B/S)</h2>
+<div class="outline-text-2" id="text-5">
+</div><div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17"><span class="section-number-3">5.1</span> 项目地址</h3>
+<div class="outline-text-3" id="text-5-1">
 <ul class="org-ul">
 <li>Alibaba-Group</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline13" class="outline-3">
-<h3 id="orgheadline13"><span class="section-number-3">4.2</span> 项目成员</h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-orgheadline18" class="outline-3">
+<h3 id="orgheadline18"><span class="section-number-3">5.2</span> 项目成员</h3>
+<div class="outline-text-3" id="text-5-2">
 <ul class="org-ul">
 <li>BeiFeng</li>
 <li>HuanTong</li>
@@ -207,9 +287,9 @@ That isn't the most readable snippet. Readability's important, so you could try 
 </div>
 </div>
 
-<div id="outline-container-orgheadline14" class="outline-3">
-<h3 id="orgheadline14"><span class="section-number-3">4.3</span> 项目描述</h3>
-<div class="outline-text-3" id="text-4-3">
+<div id="outline-container-orgheadline19" class="outline-3">
+<h3 id="orgheadline19"><span class="section-number-3">5.3</span> 项目描述</h3>
+<div class="outline-text-3" id="text-5-3">
 <p>
 ⽤户通过⾃定义数据源、⾃定义图表样式和显示布局，⾃动⽣成报表， 并⽀持订阅、管理等功能的系统。
 前端用 <b>Nodejs</b> 渲染，后端 <b>Java</b> 处理具体的业务逻辑。数据库使用了集团统一的数据库池。
@@ -217,9 +297,9 @@ That isn't the most readable snippet. Readability's important, so you could try 
 </div>
 </div>
 
-<div id="outline-container-orgheadline15" class="outline-3">
-<h3 id="orgheadline15"><span class="section-number-3">4.4</span> 难点和收获</h3>
-<div class="outline-text-3" id="text-4-4">
+<div id="outline-container-orgheadline20" class="outline-3">
+<h3 id="orgheadline20"><span class="section-number-3">5.4</span> 难点和收获</h3>
+<div class="outline-text-3" id="text-5-4">
 <p>
 当时碰到的一个最头疼的问题就是登陆问题，内部所有有页面的应用都要接入 <b>统一接入层</b> （现在怎么样了呢？）。
 理论上来讲，使用其相应的 <b>客户端SDK</b> 就可以很快接入。
@@ -251,21 +331,21 @@ That isn't the most readable snippet. Readability's important, so you could try 
 </div>
 </div>
 
-<div id="outline-container-orgheadline21" class="outline-2">
-<h2 id="orgheadline21"><span class="section-number-2">5</span> 智能⻝⽤菌养殖监控系统</h2>
-<div class="outline-text-2" id="text-5">
-</div><div id="outline-container-orgheadline17" class="outline-3">
-<h3 id="orgheadline17"><span class="section-number-3">5.1</span> 项目地址</h3>
-<div class="outline-text-3" id="text-5-1">
+<div id="outline-container-orgheadline26" class="outline-2">
+<h2 id="orgheadline26"><span class="section-number-2">6</span> 智能⻝⽤菌养殖监控系统</h2>
+<div class="outline-text-2" id="text-6">
+</div><div id="outline-container-orgheadline22" class="outline-3">
+<h3 id="orgheadline22"><span class="section-number-3">6.1</span> 项目地址</h3>
+<div class="outline-text-3" id="text-6-1">
 <ul class="org-ul">
 <li><a href="https://github.com/creamidea/Mushroom/">Source Code</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgheadline18" class="outline-3">
-<h3 id="orgheadline18"><span class="section-number-3">5.2</span> 项目成员</h3>
-<div class="outline-text-3" id="text-5-2">
+<div id="outline-container-orgheadline23" class="outline-3">
+<h3 id="orgheadline23"><span class="section-number-3">6.2</span> 项目成员</h3>
+<div class="outline-text-3" id="text-6-2">
 <ul class="org-ul">
 <li><a href="https://github.com/ahappyforest">Peng Liu</a></li>
 <li><a href="https://github.com/JohnChain">JohnChain</a></li>
@@ -274,9 +354,9 @@ That isn't the most readable snippet. Readability's important, so you could try 
 </div>
 </div>
 
-<div id="outline-container-orgheadline19" class="outline-3">
-<h3 id="orgheadline19"><span class="section-number-3">5.3</span> 项目描述</h3>
-<div class="outline-text-3" id="text-5-3">
+<div id="outline-container-orgheadline24" class="outline-3">
+<h3 id="orgheadline24"><span class="section-number-3">6.3</span> 项目描述</h3>
+<div class="outline-text-3" id="text-6-3">
 <p>
 ⻝⽤菌养殖环境的 <b>控制</b> 、 <b>管理</b> 、 <b>展示</b> 系统。主要分成 <b>硬件层-控制决策层-显示层</b> 。 <br >
 </p>
@@ -291,9 +371,9 @@ That isn't the most readable snippet. Readability's important, so you could try 
 </div>
 </div>
 
-<div id="outline-container-orgheadline20" class="outline-3">
-<h3 id="orgheadline20"><span class="section-number-3">5.4</span> 难点和收获</h3>
-<div class="outline-text-3" id="text-5-4">
+<div id="outline-container-orgheadline25" class="outline-3">
+<h3 id="orgheadline25"><span class="section-number-3">6.4</span> 难点和收获</h3>
+<div class="outline-text-3" id="text-6-4">
 <p>
 (⊙o⊙)？，难点？那就是太年轻了。这个是大学毕设，当时什么都不懂，却又是一副很了不起的样子。嗯，就是这个样子。
 如果说开来，那就是一段好长好长的回忆啦。改天写（嗯，对，这个就是我新挖的坑。）
@@ -307,9 +387,9 @@ That isn't the most readable snippet. Readability's important, so you could try 
 </div>
 </div>
 
-<div id="outline-container-orgheadline22" class="outline-2">
-<h2 id="orgheadline22"><span class="section-number-2">6</span> 尾声</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-orgheadline27" class="outline-2">
+<h2 id="orgheadline27"><span class="section-number-2">7</span> 尾声</h2>
+<div class="outline-text-2" id="text-7">
 <p>
 还未结束。
 </p>
@@ -320,10 +400,10 @@ That isn't the most readable snippet. Readability's important, so you could try 
 <meta name="viewport" content="width=device-width, initial-scale=1"><div id="meta-article"><p class="author">Junjia Ni</p>
 <p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
 <p class="date">2016-10-09</p>
-<p class="export-date">2016-10-14 Fri 10:08</p>
+<p class="export-date">2016-10-14 Fri 14:54</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
 <p class="validation"></p>
-<p class="last-modification-time">2016-10-14 Fri 10:08</p></div><script asyn src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+<p class="last-modification-time">2016-10-14 Fri 14:54</p></div><script asyn src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

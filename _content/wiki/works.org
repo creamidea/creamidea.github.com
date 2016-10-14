@@ -18,7 +18,7 @@
    + [[https://github.com/creamidea][Junjia Ni]]
 ** 项目描述
    一个用 Javascript 实现的键盘组合键的库。用于实现类似于 Gmail 邮箱内快捷的效果。[[https://creamidea.github.io/keyboard-js/][体验地址]]  \\
-   目前暂时只支持组合键触发的功能。连续按击的功能暂时还没有实现（比如，连续按2次A可以触发页面跳转等。）
+   目前暂时只支持组合键触发的功能。连续按击的功能暂时还没有实现（比如，连续按2次 @@html:<kbd>A</kbd>@@ 可以触发页面跳转等。）
 ** 难点和收获
    最初是看到这个 [[http://stackoverflow.com/a/12444641/1925954][答案]] ，萌生了写一个组合键的库，方便任意页面实现组合键的功能。还有一点就是被答主的答题思路给震惊，悄悄地学习了一下。
    #+BEGIN_QUOTE
@@ -30,6 +30,39 @@
    然后这个思路不仅仅被我用在键盘组合键功能的实现上，还用在了一个小型前端路由的实现上。（参考[[https://github.com/creamidea/creamidea.github.com/blob/master/web-src/index.js][代码]]）
 
    这个真是状态机的优美实现之一。
+
+   BTW，这里有一个缺陷。如果使用了 =alert/confirm= 等函数，并且在弹窗之前用户按着键，弹窗之后松开键，就会触发一个 bug，表现为用户之后按任意键，都会和弹窗之前按的键组合。
+   所以，开发者要么不用 =alert/confirm= 等会使 Tab 失去焦点的函数，要么在 =alert/confirm= 后面的调用 =clearKeys()= 函数。推荐前者。
+
+* YoudaoDictionaryEnhancer
+** 项目地址
+   - [[https://github.com/creamidea/YoudaoDictionaryEnhancer][Github]]
+** 项目成员
+   + [[https://github.com/creamidea][Junjia Ni]]
+** 项目描述
+   [[https://tampermonkey.net/][tampermonkey]] 小插件 \\
+   增强 [[http://dict.youdao.com/][Youdao Dictionary Web版]] 的功能。 \\
+   增加词源解释，快捷键发音功能。同时去除广告，优化显示等。
+
+** 难点和收获
+   写这个项目中，调试最久的就是 =iframe= 标签的事件透传功能了。
+
+   背景：词源解释这个是从词源网站 HTML 代码中截取的，本身带了外联 CSS 样式，为了不影响有道网站本身的 CSS 样式，所以选择了使用 =iframe= 标签来包装。
+   最后显示的效果很完美，但是点击里面的链接会只显示在 iframe 里面。另外， =<a>= 标签的 =href= 如果是相对路径，点击之后会跳转到 Youdao 域下面。
+   这个不是我想要的。于是想了一个 Hack 的方法。遍历所有 =<a>= 标签中的 =href= ，将其值设置成绝对路径。
+   同时在 iframe 外层，也就是主页面注册一个回调函数 =window[xxxx]=function () {}= ，在 iframe 中调用 =parent.xxxx= 。
+   这里一开始想多了，认为注册到 =window= 会污染 Youdao 本身的页面，于是我写了一个 =makeId= ，用于生成随机函数的名字，避免污染。
+   但稍微看了一下 tampermonkey 代码，发现其本身在执行 Javascript 代码的时候，创建了一个类似沙盒的机制。所以我之前的担心白担心了，还让代码变的复杂了。
+
+   其实如果 [[https://chrome.google.com/webstore/detail/google-translate/aapbdbdomjkkjkaonfhkkikfgjllcleb][Google Translate Extension]] 能够识别 iframe 中的内容，就没有接下来的问题了。于是，我天真的认为：捕捉 iframe 中的选择事件，
+   把选中的单词传递给主页面，一切都能迎刃而解。但事实给了我一记响亮的耳光。最终我还是没有能够实现这个功能，只是曲线救国了一下，自己显示小按钮，点击跳转单词页面。
+   而且，我在实现的时候还搞的及其复杂，把 iframe 的事件透传到了主页面处理。我现在觉得最好的方式就是 iframe 自己内部处理。
+
+   在开发的过程中，主要了解和学习了 =Event:selectionchange= 和 =KeyboardEvent= 以及 =iframe= 的一些特性。
+
+   总结，发现自己在开发的过程中缺乏设计和大局观，（就如同自己的人生没有设计，过的一塌糊涂！）。写到哪里算哪里，这样做之后，结果如这个插件一样，烂。
+
+   以上。
 
 * 基于 Web 技术的多屏控制系统 (C/S)
 ** 项目地址
