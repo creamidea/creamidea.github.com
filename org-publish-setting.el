@@ -153,13 +153,21 @@ CURRENT-OR-ALL FORCE ASYNC."
     ))
 
 (defun publish-creamidea-site ()
+  "Publish Site."
   (interactive)
   (creamidea-site-setting "all" t))
+
+(defun build-archive ()
+  "Build Archive."
+  (interactive)
+  (let ((cmd (concat (expand-file-name "~/Repository/creamidea/") "export.js" )))
+    ;; (switch-to-buffer-other-window "*Build Archive Message*")
+    (shell-command-to-string (format "node %s archive" cmd))))
 
 ;; (global-set-key (kbd "C-c x") 'load-creamidea-site-publish)
 (global-set-key
  (kbd "C-c x")
- (lambda () (interactive) (creamidea-site-setting "current")))
+ (lambda () (interactive) (progn (creamidea-site-setting "current") (build-archive))))
 ;; (global-set-key (kbd "C-c x 2")
 ;;                 (lambda () (interactive) (publish-creamidea-site "all" t)))
 ;; (progn
