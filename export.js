@@ -146,7 +146,7 @@ function attachTimestamp(hashs, files) {
 }
 
 function cutout(data) {
-  return data.slice(0,1000).split(/\r?\n/g).map(function (line) {
+  return data.split(/\r?\n/g).map(function (line) {
     if (line.search(/\s*#\+/) >= 0) {
       return ''
     } else {
@@ -181,7 +181,7 @@ function readArticle (category, filename, container, callback) {
           error: err.code
         })
       }
-      let length = 500
+      let length = 1000
       let buf = new Buffer(length)
       fs.read(fd, buf, 0, length, null, (err, bytesRead, buffer) => {
         if (err) {
@@ -191,10 +191,10 @@ function readArticle (category, filename, container, callback) {
           })
         } else {
           const data = buffer.toString("utf8", 0, buffer.length)
-          const date = data.match(DATEREGEXP)
-          const tags = data.match(TAGSREGEXP)
           const title = data.match(TITLEREGEXP)
           const author = data.match(AUTHORREGEXP)
+          const tags = data.match(TAGSREGEXP)
+          const date = data.match(DATEREGEXP)
           // const category = data.match(CATEGORYREGEXP) // has be defined above
           const description = cutout(data)
           Object.assign(container[sym], {
