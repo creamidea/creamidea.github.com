@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- 2016-10-12 Wed 13:43 -->
+<!-- 2016-10-14 Fri 23:26 -->
 <meta  charset="utf-8">
 <meta  name="viewport" content="width=device-width, initial-scale=1">
 <title>［译］Storm Tutorial</title>
@@ -19,40 +19,53 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. 预备</a></li>
-<li><a href="#orgheadline2">2. Storm集群</a></li>
-<li><a href="#orgheadline3">3. 拓扑结构</a></li>
-<li><a href="#orgheadline4">4. 流</a></li>
-<li><a href="#orgheadline5">5. 数据模型</a></li>
-<li><a href="#orgheadline6">6. 一个简单的拓扑示例</a></li>
-<li><a href="#orgheadline7">7. 在本地模式下运行上述示例</a></li>
-<li><a href="#orgheadline8">8. 流分组</a></li>
-<li><a href="#orgheadline9">9. 用其它编程语言定义Bolts</a></li>
-<li><a href="#orgheadline10">10. 保证消息处理</a></li>
-<li><a href="#orgheadline11">11. 事务性拓扑</a></li>
-<li><a href="#orgheadline12">12. 分布式RPC</a></li>
-<li><a href="#orgheadline13">13. 结论</a></li>
+<li><a href="#orgheadline1">1. 序</a></li>
+<li><a href="#orgheadline2">2. 预备</a></li>
+<li><a href="#orgheadline3">3. Storm集群</a></li>
+<li><a href="#orgheadline4">4. 拓扑结构</a></li>
+<li><a href="#orgheadline5">5. 流</a></li>
+<li><a href="#orgheadline6">6. 数据模型</a></li>
+<li><a href="#orgheadline7">7. 一个简单的拓扑示例</a></li>
+<li><a href="#orgheadline8">8. 在本地模式下运行上述示例</a></li>
+<li><a href="#orgheadline9">9. 流分组</a></li>
+<li><a href="#orgheadline10">10. 用其它编程语言定义Bolts</a></li>
+<li><a href="#orgheadline11">11. 保证消息处理</a></li>
+<li><a href="#orgheadline12">12. 事务性拓扑</a></li>
+<li><a href="#orgheadline13">13. 分布式RPC</a></li>
+<li><a href="#orgheadline14">14. 结论</a></li>
 </ul>
 </div>
 </div>
-<pre class="example">
-这是一篇关于Storm教程的翻译文章。
-旧原文: http://storm.apache.org/tutorial.html（据此翻译）
-新原文: http://storm.apache.org/releases/current/Tutorial.html
-参考: http://ifeve.com/getting-started-with-stom-index/
-</pre>
+<noscript>
+<img alt="Storm" title="Storm" src="http://static.boredpanda.com/blog/wp-content/uploads/2016/07/dust-storm-microbust-jerry-ferguson-arizona-2.jpg"/>
+</noscript>
+<img lazy-load class="lazy-load-img" alt="Storm" title="Storm"
+     data-src="http://static.boredpanda.com/blog/wp-content/uploads/2016/07/dust-storm-microbust-jerry-ferguson-arizona-2.jpg" />
+<p class="title-picture">题图来自网络</p>
+
 
 <div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> 预备</h2>
+<h2 id="orgheadline1"><span class="section-number-2">1</span> 序</h2>
 <div class="outline-text-2" id="text-1">
+<p>
+这是一篇关于Storm教程的翻译文章。 <br >
+<a href="http://storm.apache.org/tutorial.html">旧原文</a>(据此翻译) <a href="http://storm.apache.org/releases/current/Tutorial.html">新原文</a> <a href="http://ifeve.com/getting-started-with-stom-index/">参考</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2"><span class="section-number-2">2</span> 预备</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 教程中使用的示例来自 <a href="https://github.com/apache/storm/tree/master/examples/storm-starter">storm-starter</a> 项目。推荐克隆这个项目到本地，并跟随这里面的例子学习。
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2"><span class="section-number-2">2</span> Storm集群</h2>
-<div class="outline-text-2" id="text-2">
+
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3"><span class="section-number-2">3</span> Storm集群</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 从表面上看，Storm 集群和 Hadoop 集群很像。在 Hadoop 上运行的是 "MapReduce jobs"，而在 Storm 上运行的是"topologies"。
 "Jobs" 和 "topologies" 差异很大：一个最关键的区别是 MapReduce job 最终会运行完，而 topology 会一直处理（除非你杀掉这个拓扑进程）。
@@ -71,9 +84,9 @@ Nimbus 和 Supervisors 之间的所有协调配合都是 Zookeeper 集群完成�
 </div>
 
 
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3"><span class="section-number-2">3</span> 拓扑结构</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4"><span class="section-number-2">4</span> 拓扑结构</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 在 Storm 上做实时计算，需要创建 "topologies"。一个拓扑结构是一个计算过程图。拓扑结构中的每个节点包含一段处理逻辑，节点之间的连接线显示了数据在节点间如何传递。
 运行一个拓扑结构是非常简单的。首先，将你所有的代码和依赖打包成一个 jar 文件。然后，你运行下面这段命令：
@@ -91,9 +104,9 @@ Nimbus 和 Supervisors 之间的所有协调配合都是 Zookeeper 集群完成�
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-2">
-<h2 id="orgheadline4"><span class="section-number-2">4</span> 流</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5"><span class="section-number-2">5</span> 流</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 Storm 的核心抽象是 "stream"（流<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>）。Stream 是元组 "tuple" 的无限序列。Storm 提供了一系列原语，以分布式和可靠的方式将流转换为一个新的流。例如，你可以将 tweets 流转换成热门话题流。
 Storm 为流转换提供的最基本原语是 "spouts" 和 "bolts"。"spouts" 和 "bolts" 都提供了接口，你可以实现它们来运行自己的特定应用逻辑。
@@ -114,9 +127,9 @@ Spouts 和 bolts 组成的网络结构被封装进 "topology"（拓扑是提交�
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5"><span class="section-number-2">5</span> 数据模型</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6"><span class="section-number-2">6</span> 数据模型</h2>
+<div class="outline-text-2" id="text-6">
 <p>
 Storm 中使用 tuples（元组）作为数据模型。
 元组是 key-value 列表，元组的一个字段可以是任何类型的对象。 开箱即用，Storm 支持所有的基本类型，字符串，字节数组。如果要使用一种新类型，你只需要让它实现 serializer 接口。
@@ -149,9 +162,9 @@ Storm 中使用 tuples（元组）作为数据模型。
 </div>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-2">
-<h2 id="orgheadline6"><span class="section-number-2">6</span> 一个简单的拓扑示例</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7"><span class="section-number-2">7</span> 一个简单的拓扑示例</h2>
+<div class="outline-text-2" id="text-7">
 <p>
 我们来看一个简单的拓扑示例，更加深入的了解概念，看代码是如何成形。下面是来自 storm-starter 项目的例子 ExclamationTopology：
 </p>
@@ -290,9 +303,9 @@ ExclamationBolt 通过继承 BaseRichBolt 会写得更简洁，就像下面这�
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline7" class="outline-2">
-<h2 id="orgheadline7"><span class="section-number-2">7</span> 在本地模式下运行上述示例</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8"><span class="section-number-2">8</span> 在本地模式下运行上述示例</h2>
+<div class="outline-text-2" id="text-8">
 <p>
 我们来看下如何在本地模式运行 <code>ExclamationTopology</code> 类，以及它怎样发挥作用。
 Storm 有两种操作模式：本地模式+分布式模式。
@@ -338,9 +351,9 @@ cluster.shutdown<span style="color: #c5c8c6;">()</span>;
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline8" class="outline-2">
-<h2 id="orgheadline8"><span class="section-number-2">8</span> 流分组</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-orgheadline9" class="outline-2">
+<h2 id="orgheadline9"><span class="section-number-2">9</span> 流分组</h2>
+<div class="outline-text-2" id="text-9">
 <p>
 流分组告诉拓扑怎样在2个组件之间发送元组。记住，spouts 和 bolts 在集群上多任务并行执行。一个拓扑结构在任务级别上执行看起来就像下面这样：
 </p>
@@ -383,9 +396,9 @@ WordCount 订阅了 SplitSentence 的输出流，通过按照"word"字段进行�
 </div>
 </div>
 
-<div id="outline-container-orgheadline9" class="outline-2">
-<h2 id="orgheadline9"><span class="section-number-2">9</span> 用其它编程语言定义Bolts</h2>
-<div class="outline-text-2" id="text-9">
+<div id="outline-container-orgheadline10" class="outline-2">
+<h2 id="orgheadline10"><span class="section-number-2">10</span> 用其它编程语言定义Bolts</h2>
+<div class="outline-text-2" id="text-10">
 <p>
 任何编程语言都可以定义 Bolts。其它语言（非 java ）编写的 Bolts 是以子进程方式执行的，Storm 和子进程通信是基于输入输出之间的 JSON 消息。
 这个通信协议只需要一个100行左右的适配器库支持，而且 Storm 自带了 Ruby, Python, 和 Fancy 的适配器库。
@@ -423,36 +436,36 @@ SplitSentenceBolt<span style="color: #c5c8c6;">()</span>.run<span style="color: 
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline10" class="outline-2">
-<h2 id="orgheadline10"><span class="section-number-2">10</span> 保证消息处理</h2>
-<div class="outline-text-2" id="text-10">
+<div id="outline-container-orgheadline11" class="outline-2">
+<h2 id="orgheadline11"><span class="section-number-2">11</span> 保证消息处理</h2>
+<div class="outline-text-2" id="text-11">
 <p>
 在之前的教程中，我们跳过了发送元组的其他方面问题，这些方面都是 Storm 可靠性API的一部分：
 Storm 如何保证 spout 发出的每一条消息都被执行，以及作为一个用户应该怎样利用Storm可靠性功能的优势，请参考 <a href="http://storm.apache.org/documentation/Guaranteeing-message-processing.html">Guaranteeing message processing</a> 。
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline11" class="outline-2">
-<h2 id="orgheadline11"><span class="section-number-2">11</span> 事务性拓扑</h2>
-<div class="outline-text-2" id="text-11">
+<div id="outline-container-orgheadline12" class="outline-2">
+<h2 id="orgheadline12"><span class="section-number-2">12</span> 事务性拓扑</h2>
+<div class="outline-text-2" id="text-12">
 <p>
 Storm 确保每一条消息在拓扑中至少被处理一次。一个经常被问到的问题是“基于 Storm 如何完成类似于计数的需求”？
 至少处理一次不会造成计数过高么？Storm有一个特征，叫做"transactional topologies"事务性拓扑。它能在多次计算中达到恰好一次的消息语义。更多内容请参考 <a href="http://storm.apache.org/documentation/Guaranteeing-message-processing.html">Guaranteeing Message Processing</a> 。
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline12" class="outline-2">
-<h2 id="orgheadline12"><span class="section-number-2">12</span> 分布式RPC</h2>
-<div class="outline-text-2" id="text-12">
+<div id="outline-container-orgheadline13" class="outline-2">
+<h2 id="orgheadline13"><span class="section-number-2">13</span> 分布式RPC</h2>
+<div class="outline-text-2" id="text-13">
 <p>
 本教程展示了基于 Storm 如何进行基本的流计算。利用 Storm 原语你还可以做很多其他的事情。
 Storm 最有意思的应用之一是 Distributed RPC（分布式RPC），这个应用并行运着密集的计算功能。更多 Distributed RPC 请参考 <a href="http://storm.apache.org/documentation/Distributed-RPC.html">Distributed RPC</a> 。
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline13" class="outline-2">
-<h2 id="orgheadline13"><span class="section-number-2">13</span> 结论</h2>
-<div class="outline-text-2" id="text-13">
+<div id="outline-container-orgheadline14" class="outline-2">
+<h2 id="orgheadline14"><span class="section-number-2">14</span> 结论</h2>
+<div class="outline-text-2" id="text-14">
 <p>
 本教程讲述了开发、测试、部署 Storm 拓扑的宽泛介绍。文档的其它部分深入讲解了试用 Storm 的各个方面。
 </p>
@@ -474,13 +487,13 @@ For scalable cross-language services development, office site: <a href="https://
 </div>
 </div></div>
 <div id="postamble" class="status">
-<div id="meta-article"><p class="author">蜂蜜甜甜圈(Yi Ou)</p>
+<meta name="viewport" content="width=device-width, initial-scale=1"><div id="meta-article"><p class="author">蜂蜜甜甜圈(Yi Ou)</p>
 <p class="email"><a href="mailto:718413182@qq.com">718413182@qq.com</a></p>
 <p class="date">2015-12-22</p>
-<p class="export-date">2016-10-12 Wed 13:43</p>
+<p class="export-date">2016-10-14 Fri 23:26</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
 <p class="validation"></p>
-<p class="last-modification-time">2016-10-11 Tue 20:59</p></div><script asyn src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+<p class="last-modification-time">2016-10-14 Fri 23:25</p></div><script asyn src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

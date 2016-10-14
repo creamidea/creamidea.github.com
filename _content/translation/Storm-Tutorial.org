@@ -9,15 +9,23 @@
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
 
-#+BEGIN_EXAMPLE
-这是一篇关于Storm教程的翻译文章。
-旧原文: http://storm.apache.org/tutorial.html（据此翻译）
-新原文: http://storm.apache.org/releases/current/Tutorial.html
-参考: http://ifeve.com/getting-started-with-stom-index/
-#+END_EXAMPLE
+#+BEGIN_HTML
+<noscript>
+<img alt="Storm" title="Storm" src="http://static.boredpanda.com/blog/wp-content/uploads/2016/07/dust-storm-microbust-jerry-ferguson-arizona-2.jpg"/>
+</noscript>
+<img lazy-load class="lazy-load-img" alt="Storm" title="Storm"
+     data-src="http://static.boredpanda.com/blog/wp-content/uploads/2016/07/dust-storm-microbust-jerry-ferguson-arizona-2.jpg" />
+<p class="title-picture">题图来自网络</p>
+#+END_HTML
+
+
+* 序
+这是一篇关于Storm教程的翻译文章。 \\
+[[http://storm.apache.org/tutorial.html][旧原文]](据此翻译) [[http://storm.apache.org/releases/current/Tutorial.html][新原文]] [[http://ifeve.com/getting-started-with-stom-index/][参考]]
 
 * 预备
 教程中使用的示例来自 [[https://github.com/apache/storm/tree/master/examples/storm-starter][storm-starter]] 项目。推荐克隆这个项目到本地，并跟随这里面的例子学习。
+
 * Storm集群
 从表面上看，Storm 集群和 Hadoop 集群很像。在 Hadoop 上运行的是 "MapReduce jobs"，而在 Storm 上运行的是"topologies"。
 "Jobs" 和 "topologies" 差异很大：一个最关键的区别是 MapReduce job 最终会运行完，而 topology 会一直处理（除非你杀掉这个拓扑进程）。
