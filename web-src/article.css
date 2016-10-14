@@ -137,6 +137,11 @@ kbd {
 /*     cursor: pointer; */
 /* } */
 
+.title-picture {
+    text-align: right;
+    font-size: 14px;
+}
+
 .github-badge {
     position: absolute;
     right: 39px;
@@ -252,8 +257,8 @@ kbd {
 }
 #content img {
     display: block;
-    margin: 0 auto;
-    width: 100%;
+    margin: 4px auto;
+    max-width: 100%;
     z-index: 100;
     box-shadow: 0 0 0 white !important;
     /* box-shadow: 3px 3px 3px #eee; */
@@ -263,6 +268,12 @@ kbd {
     transition: visibility 0s linear 0s,opacity 400ms 0ms;
     cursor: pointer;
     cursor: -webkit-zoom-in;
+}
+.lazy-load-img {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAArwAAAFuAQMAAABZalm5AAAAA1BMVEXz8/ML3eGLAAAANklEQVR4Xu3AMQEAAADCIPunNsReWAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB38+AAH5NJYtAAAAAElFTkSuQmCC");
+    height: 366px;
+    width: 700px;
+    display: none;
 }
 
 li a {
@@ -498,5 +509,8 @@ hr.section-divider:before {content: '...'; display: inline-block; margin-left: 0
         width: auto;
         margin-left: 12px;
         margin-right: 12px;
+    }
+    .lazy-load-img {
+        height: 200px;
     }
 }
