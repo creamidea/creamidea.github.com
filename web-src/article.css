@@ -541,7 +541,7 @@ hr.section-divider:before {content: '...'; display: inline-block; margin-left: 0
         line-height: 1.22;
         letter-spacing: -.018em
     }
-    #content p {
+    #content .outline-2 p {
         font-size: 18px;
         line-height: 1.5;
         letter-spacing: -.004em;
