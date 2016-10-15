@@ -78,6 +78,16 @@
     }
     __t.call(dom, evt, fn)
   }
+  function removeEventListener (dom, evt, fn) {
+    function __t (evt, fn) {
+      window.removeEventListener
+        ? this.removeEventListener(evt, fn, false)
+        : (window.detachEvent)
+        ? this.detachEvent('on' + evt, fn)
+        : null;
+    }
+    __t.call(dom, evt, fn)
+  }
 
   function elementInViewport(el) {
     var rect = el.getBoundingClientRect()
@@ -406,9 +416,16 @@
     showFooter(body, content, meta)
   }
 
-  addEventListener(document, 'DOMContentLoaded', function () {
-    // main.apply(window)
-    main()
-  }, false)
+  var running = false
+  __forEach.call(['DOMContentLoaded', 'load'], function (event) {
+    addEventListener(document, event, function () {
+      // main.apply(window)
+      if (!running) {
+        running = true
+        main()
+        removeEventListener(document, event, function () {})
+      }
+    }, false)
+  })
 
 })(this)
