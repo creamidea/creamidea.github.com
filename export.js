@@ -147,12 +147,12 @@ function attachTimestamp(hashs, files) {
 }
 
 function cutout(data) {
+  let asterisk = 0
   return data.split(/\r?\n/g).map(function (line) {
-    if (line.search(/\s*#\+/) >= 0) {
-      return ''
-    } else {
-      return line
+    if (line.search(/^\*/) === 0) {
+      asterisk += 1
     }
+    if (asterisk === 1) return line
   }).join('')
 }
 
@@ -182,7 +182,7 @@ function readArticle (category, filename, container, callback) {
           error: err.code
         })
       }
-      let length = 1000
+      let length = 4000
       let buf = new Buffer(length)
       fs.read(fd, buf, 0, length, null, (err, bytesRead, buffer) => {
         if (err) {
@@ -464,7 +464,7 @@ const command = {
         + `<pubDate>${new Date(date).toGMTString()}</pubDate>`
         + `<lastBuildDate>${new Date(mtime).toGMTString()}</lastBuildDate>`
         + `<description><![CDATA[${_d}]]></description>`
-        + `<content:encoded xmlns:content="http://purl.org/rss/1.0/modules/content/">${encodeURIComponent(_d)}</content:encoded>`
+        // + `<content:encoded xmlns:content="http://purl.org/rss/1.0/modules/content/">${_d}</content:encoded>`
         + `<comments>${url}#outline_disqus_thread</comments>`
         + '</item>'
     }).join('')
