@@ -267,8 +267,14 @@ nav a span {
     }
 
 }
-/* @media(max-width: 320px) { */
-/* } */
+@media all and (max-width: 320px) {
+    .meta {
+        margin: 6px auto;
+    }
+    .meta p {
+        margin: 0;
+    }
+}
 
 
 /*!
