@@ -1,4 +1,4 @@
-#+TITLE: ［译］Storm Tutorial
+#+TITLE: Storm Tutorial
 #+AUTHOR: 蜂蜜甜甜圈(Yi Ou)
 #+EMAIL: 718413182@qq.com
 #+DATE: 2015-12-22

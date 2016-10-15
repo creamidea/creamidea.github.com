@@ -1,4 +1,4 @@
-#+TITLE: ［译］Programming With ZooKeeper
+#+TITLE: Programming With ZooKeeper
 #+AUTHOR: 蜂蜜甜甜圈(Yi Ou)
 #+EMAIL: 718413182(AT)qq.com
 #+DATE: 2016-02-05
