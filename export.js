@@ -182,7 +182,7 @@ function readArticle (category, filename, container, callback) {
           error: err.code
         })
       }
-      let length = 4000
+      let length = 8000
       let buf = new Buffer(length)
       fs.read(fd, buf, 0, length, null, (err, bytesRead, buffer) => {
         if (err) {
@@ -191,7 +191,8 @@ function readArticle (category, filename, container, callback) {
             error: err.code
           })
         } else {
-          const data = buffer.toString("utf8", 0, buffer.length)
+          const data = buffer.toString("utf8", 0, bytesRead)
+          // const data = buffer.toString("utf8", 0, buffer.length)
           const title = data.match(TITLEREGEXP)
           const author = data.match(AUTHORREGEXP)
           const tags = data.match(TAGSREGEXP)
