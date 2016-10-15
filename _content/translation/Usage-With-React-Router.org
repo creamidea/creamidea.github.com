@@ -1,0 +1,34 @@
+#+TITLE: Usage with React Router
+#+AUTHOR: 冰糖火箭筒(Junjia Ni)
+#+EMAIL: creamidea(AT)gmail.com
+#+DATE: 2016-10-14
+#+CATEGORY: translation
+#+DESCRIPTION: Usage with React Router
+#+KEYWORDS: reactjs,js,react-router
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:nil email:t <:t date:t timestamp:t
+#+LINK_HOME: https://creamidea.github.io
+#+STARTUP: showall
+
+#+BEGIN_HTML
+<noscript>
+<img alt="React" title="React"
+src="http://blog.addthiscdn.com/wp-content/uploads/2014/11/addthis-react-flux-javascript-scaling.png"/>
+</noscript>
+<img lazy-load class="lazy-load-img" alt="React" title="React"
+data-src="http://blog.addthiscdn.com/wp-content/uploads/2014/11/addthis-react-flux-javascript-scaling.png">
+<p class="title-picture">题图来自网络</p>
+#+END_HTML
+
+* 序
+之前看到了一下 [[http://redux.js.org/][官网]] 对于 React 的介绍，感觉写的很好，本来想全文翻译的，但是国人已经翻译过了，而且做的更好。
+所以这里就只贴一下地址。
+
++ [[http://cn.redux.js.org/index.html][Redux 中文文档]]
+
+其中我翻译的
+
++ [[http://cn.redux.js.org/docs/advanced/UsageWithReactRouter.html][搭配 React Router]]
+
+欢迎各位查看指正。也欢迎各位继续为其中文翻译添砖加瓦。
+
+以上。
