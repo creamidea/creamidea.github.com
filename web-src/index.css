@@ -122,11 +122,12 @@ nav a span {
 }
 
 .article-list .meta {
+    margin: 14px auto;
     color: rgba(0,0,0,.44);
     font-size: 14px;
 }
-
 .article-list .meta p {
+    margin: 0;
     display: inline-block;
 }
 .article-list .meta p:first-child {
@@ -237,6 +238,9 @@ nav a span {
     .blink-wrapper {
         font-size: 10em;
     }
+    .article-list .meta {
+        margin: 10px auto;
+    }
 
     nav {
         margin-top: '4px';
@@ -267,14 +271,8 @@ nav a span {
     }
 
 }
-@media all and (max-width: 320px) {
-    .meta {
-        margin: 6px auto;
-    }
-    .meta p {
-        margin: 0;
-    }
-}
+/* @media all and (max-width: 320px) { */
+/* } */
 
 
 /*!
