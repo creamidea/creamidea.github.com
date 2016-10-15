@@ -21,6 +21,9 @@ body {
     display:none;
 }
 
+#banner-wrapper {
+    max-height: 449px;
+}
 #banner-wrapper img {
     width: 424px;
 }
