@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- 2016-10-15 Sat 21:50 -->
+<!-- 2016-10-15 Sat 21:54 -->
 <meta  charset="utf-8">
 <meta  name="viewport" content="width=device-width, initial-scale=1">
 <title>Storm Tutorial</title>
@@ -98,7 +98,7 @@ Nimbus 和 Supervisors 之间的所有协调配合都是 Zookeeper 集群完成�
 </div>
 <p>
 这里运行的是 <code>backtype.storm.MyTopology</code> 这个类，传入了参数 <code>arg1</code> 和 <code>arg2</code> 。这个类的 <code>main</code> 方法定义了拓扑结构，并且将它提交给 Nimbus。Storm jar 负责连接 Nimbus，上传你的 jar 包。
-由于拓扑定义采用的是 Thrift<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> 结构，Nimbus 也是一个 Thrift 服务，所以可以用任意一种编程语言创建并提交拓扑结构。
+由于拓扑定义采用的是 <a href="https://thrift.apache.org/">Thrift</a> 结构，Nimbus 也是一个 Thrift 服务，所以可以用任意一种编程语言创建并提交拓扑结构。
 上面的例子是基于 JVM 语言的最简单方法。更多关于启动停止拓扑结构的信息请参见 <a href="http://storm.apache.org/documentation/Running-topologies-on-a-production-cluster.html">Running topologies on a production cluster</a> 。
 </p>
 </div>
@@ -108,7 +108,7 @@ Nimbus 和 Supervisors 之间的所有协调配合都是 Zookeeper 集群完成�
 <h2 id="orgheadline5"><span class="section-number-2">5</span> 流</h2>
 <div class="outline-text-2" id="text-5">
 <p>
-Storm 的核心抽象是 "stream"（流<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>）。Stream 是元组 "tuple" 的无限序列。Storm 提供了一系列原语，以分布式和可靠的方式将流转换为一个新的流。例如，你可以将 tweets 流转换成热门话题流。
+Storm 的核心抽象是 "stream"（流）。Stream 是元组 "tuple" 的无限序列。Storm 提供了一系列原语，以分布式和可靠的方式将流转换为一个新的流。例如，你可以将 tweets 流转换成热门话题流。
 Storm 为流转换提供的最基本原语是 "spouts" 和 "bolts"。"spouts" 和 "bolts" 都提供了接口，你可以实现它们来运行自己的特定应用逻辑。
 Spout 是流的输入源。例如，一个 spout 会读取一个 Kestrel 队列，然后作为一个新的流发出。或者一个 spout 可以连接到 Twitter API，然后作为tweets流发出。
 Bolt 消耗所有的输入流，处理加工，再形成新的流发出。复杂的流转换，比如说从tweets流中计算出热门话题流，需要多个步骤，因此需要多个bolts。
@@ -471,29 +471,15 @@ Storm 最有意思的应用之一是 Distributed RPC（分布式RPC），这个�
 </p>
 </div>
 </div>
-<div id="footnotes">
-<h2 class="footnotes">Footnotes: </h2>
-<div id="text-footnotes">
-
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
-For scalable cross-language services development, office site: <a href="https://thrift.apache.org/">https://thrift.apache.org/</a>
-</p></div></div>
-
-<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
-流这个概念我的理解：只能以事先规定好的顺序被读取一次的数据的一个序列
-</p></div></div>
-
-
 </div>
-</div></div>
 <div id="postamble" class="status">
 <meta name="viewport" content="width=device-width, initial-scale=1"><div id="meta-article"><p class="author">蜂蜜甜甜圈(Yi Ou)</p>
 <p class="email"><a href="mailto:718413182@qq.com">718413182@qq.com</a></p>
 <p class="date">2015-12-22</p>
-<p class="export-date">2016-10-15 Sat 21:50</p>
+<p class="export-date">2016-10-15 Sat 21:54</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
 <p class="validation"></p>
-<p class="last-modification-time">2016-10-15 Sat 21:50</p></div><script asyn src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+<p class="last-modification-time">2016-10-15 Sat 21:54</p></div><script asyn src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
 </div>
 </body>
 </html>
