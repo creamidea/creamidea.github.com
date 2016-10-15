@@ -12,10 +12,10 @@
 #+BEGIN_HTML
 <noscript>
 <img alt="Zookeeper" title="Zookeeper"
-     src="/static/img/zoo.jpg"/>
+     src="https://media.githubusercontent.com/media/creamidea/creamidea.github.com/master/static/img/zoo.jpg"/>
 </noscript>
 <img lazy-load class="lazy-load-img" alt="Zookeeper" title="Zookeeper"
-     data-src="/static/img/zoo.jpg"/>
+     data-src="https://media.githubusercontent.com/media/creamidea/creamidea.github.com/master/static/img/zoo.jpg"/>
 <p class="title-picture">题图来自网络</p>
 #+END_HTML
 
