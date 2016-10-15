@@ -16,12 +16,10 @@
 ;;   (normal-top-level-add-subdirs-to-load-path))
 ;; (add-to-list 'load-path "~/path/to/orgdir/contrib/lisp " t)
 ;; (add-to-list 'load-path "~/.emacs.d/elpa/org-20161003")
-(add-to-list 'load-path "./")
 
 ;; (require 'org)
 (require 'ox-publish)
 ;; (require 'htmlize)
-;; (require 'ox-rss)
 ;; (require 'ox-rss)
 
 ;; (defun after-publishing (in out)
