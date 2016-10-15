@@ -37,7 +37,7 @@ CURRENT-OR-ALL FORCE ASYNC."
          (meta-viewport "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">")
          (link-medium-fonts "<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/medium-fonts.css\">")
          (link-style-css "<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/article.css\">")
-         (app-js "<script async src=\"/static/article.js\"></script>")
+         (app-js "<script src=\"/static/article.js\"></script>")
          (analytics-js "<!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->")
 
          (org-link-abbrev-alist
