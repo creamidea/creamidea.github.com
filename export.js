@@ -87,6 +87,10 @@ function genTagsHtml (tags) {
 
 function genArchiveHtml (data) {
   let special = []
+  const options = {
+    weekday: 'short', year: 'numeric', month: 'short', day: 'numeric',
+    timeZone: 'UTC', timeZoneName: 'short'
+  }
   let html = Object.keys(data).sort((a, b) => {
     return data[b].mtime - data[a].mtime
   }).map((fileSym) => {
@@ -99,11 +103,15 @@ function genArchiveHtml (data) {
     let _html = `
 <li class="${category}"><a class="title" href="${urlprefix+category+'/'+name}.html">${title}</a>
 <div class="meta">
-<p class="create-time"><span>Create: </span><date>${date}</date></p>
-<p class="update-time"><span>Update: </span><date>${new Date(mtime).toISOString().replace(/T/, ' ').replace(/\..+/, '')}</date></p>
+${Array.prototype.map.call([{key: 'create', value: date}, {key: 'update', value: mtime}], function (o) {
+const {key, value} = o
+return `<p class="${key}-time">`
++ `<span>${key.slice(0, 1).toUpperCase() + key.slice(1)}: </span>`
++ `<date>${(new Date(value)).toLocaleDateString('en-US', options)}</date></p>`
+}).join('')}
 </div>
 ${genTagsHtml(tags)}</li>`
-
+// new Date(mtime).toISOString().replace(/T/, ' ').replace(/\..+/, '')
     if (SPECIALFILE.indexOf(name) >= 0) {
       special.push(_html)
       return
@@ -201,7 +209,11 @@ function readArticle (category, filename, container, callback) {
           const description = cutout(data)
           Object.assign(container[sym], {
             title: title && title[1].trim(),
-            date: date && date[1].trim(),
+            date: (function (date) {
+              let _d = date && date[1].trim()
+              let [year, month, day] = _d.split('-')
+              return (new Date(Date.UTC(year, month, day, 8, 0, 0)).getTime()) // Beijing
+            })(date),
             tags: tags && tags[1].trim(),
             author: author === null  ? '冰糖火箭筒(Junjia Ni)' : author[1].trim(),
             category: category, // dirname
