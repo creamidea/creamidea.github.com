@@ -4,7 +4,7 @@
   var __forEach = Array.prototype.forEach
   // var __pop = Array.prototype.pop
   var __shift = Array.prototype.shift
-  var parser = new DOMParser()
+  // var parser = new DOMParser()
   // var SEARCHER = 'https://www.google.com/?gws_rd=ssl#'
   var SEARCHER = 'https://cse.google.com/cse/publicurl?cx=017951989687920165329:0e60irxxe5m&'
   var SVG = {
@@ -341,7 +341,9 @@
       type: 'GET',
       url: '/static/html/archive.html',
       success: function (txt) {
-        var htmlDoc = parser.parseFromString(txt, "text/html")
+        var htmlDoc = document.createElement('div')
+        htmlDoc.innerHTML = txt
+        // var htmlDoc = parser.parseFromString(txt, "text/html")
         callback(
           htmlDoc.querySelector('.article-list'),
           htmlDoc.querySelector('.special-list')
