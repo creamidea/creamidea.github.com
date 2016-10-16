@@ -1,7 +1,7 @@
-#+TITLE: Learning Django
-#+AUTHOR: 冰糖火箭筒(Junjia Ni)
-#+EMAIL: creamidea(AT)gmail.com
-#+DATE: 2013-04-14
+#+TITLE:Learning Django
+#+AUTHOR:冰糖火箭筒(Junjia Ni)
+#+EMAIL:creamidea(AT)gmail.com
+#+DATE:2013-04-14
 #+CATEGORY: article
 #+DESCRIPTION: 学习Django的笔记
 #+KEYWORDS:python,django

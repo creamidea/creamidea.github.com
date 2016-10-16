@@ -1,12 +1,12 @@
-#+TITLE: A New Design
-#+AUTHOR: 冰糖火箭筒(Junjia Ni)
-#+EMAIL: creamidea(AT)gmail.com
-#+DATE: 2013-04-05
-#+DESCRIPTION: 静态博客输出系统设计
-#+CATEGORY: article
-#+KEYWORDS: jekyll,org-mode,design
+#+TITLE:A New Design
+#+AUTHOR:冰糖火箭筒(Junjia Ni)
+#+EMAIL:creamidea(AT)gmail.com
+#+DATE:2013-04-05
+#+DESCRIPTION:静态博客输出系统设计
+#+CATEGORY:article
+#+KEYWORDS:jekyll,org-mode,design
 #+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t tex:nil email:t
-#+STARTUP: showall
+#+STARTUP:showall
 
 
 * 前言
