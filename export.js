@@ -308,10 +308,11 @@ function compressSource(name, type) {
 function readSource(name, type) {
   switch(type.toLowerCase()) {
   case 'js':
-    const js = path.resolve(__dirname, 'web-src', `${name}.js`)
-    return UglifyJS.minify(js, {
-      outSourceMap: `${name}.js.map`
-    });
+    const jsfile = path.resolve(__dirname, 'web-src', `${name}.js`)
+    const rlt = UglifyJS.minify(jsfile) /*, {
+      outSourceMap: `../static/${name}.js.map`
+    });*/
+    return rlt
     break
   case 'css':
     const css = path.resolve(__dirname, 'web-src', `${name}.css`)
@@ -332,7 +333,7 @@ function writeSource(name, type, rlt) {
   switch(type.toLowerCase()) {
   case 'js':
     writeFile(path.resolve(__dirname, 'static', `${name}.js`), rlt.code)
-    writeFile(path.resolve(__dirname, 'static', `${name}.js.map`), rlt.map)
+    if (rlt.map) writeFile(path.resolve(__dirname, 'static', `${name}.js.map`), rlt.map)
     break
   case 'css':
     writeFile(path.resolve(__dirname, 'static', `${name}.css`), rlt)
