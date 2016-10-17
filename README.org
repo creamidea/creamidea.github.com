@@ -2,8 +2,8 @@
 #+AUTHOR: Junjia Ni
 #+EMAIL: creamidea(AT)gmail.com
 #+DESCRIPTION: 一些关于这里的简单说明
-#+KEYWORDS: emacs orgmode creamidea nekotrek
-#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:t email:t timestamp:t
+#+KEYWORDS: emacs,orgmode,creamidea,nekotrek
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:nil email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
 
@@ -11,8 +11,7 @@
 * Articles Content
 
 - [[http://creamidea.github.io][creamidea.github.io]]
-- [[./_content/articles]]
-- [[./_content/wiki]]
+- [[./_content/]]
 - [[./_draft]]
 
 * LICENSES
@@ -60,7 +59,7 @@
 
   ελληνικά:χρόνος διάστημα
 
-  Elisp MIT-SCHEME C {JavaScript/CoffeeScript CSS HTML} Nodejs Python Django 
+  Elisp MIT-SCHEME C {JavaScript/CoffeeScript CSS HTML} Nodejs Python Django
 
   Ubuntu12.04 Windows7 OS X
 
@@ -68,14 +67,7 @@
 
   Astronomy
 
-* About Me
-
-  Nickname: CREAMDIEA
-
-  没有自我描述，你可以从我的字里行间体会我是一个怎样的人。或者直接[[mailto:%20creamidea%2540gmail.com][Email Me]]
-
-  You can know me from my words or [[mailto:creamidea%2540gmail.com][Email Me]].
-
 * History
 
   + 2015-12-26 蜂蜜甜甜圈加入。
+  + [[https://web.archive.org/web/*/creamidea.github.io][Travel with time machine]]
