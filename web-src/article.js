@@ -4,11 +4,11 @@
    * load custom search
    */
   function loadCustomSearch (elt, elt2) {
+    var s = document.getElementsByTagName('script')[0]
     var cx = '017951989687920165329:0e60irxxe5m'
     var gcse = document.createElement('script')
     gcse.type = 'text/javascript'
     gcse.async = true
-    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx
     gcse.onload = function () {
       var div = document.createElement('div')
       div.id = 'custom-search'
@@ -16,8 +16,8 @@
       elt.insertBefore(div, elt2)
       console.log('Google Custom Search Engine Loaded Over.')
     }
-    var s = document.getElementsByTagName('script')[0]
     s.parentNode.insertBefore(gcse, s)
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx
   }
 
   /**
@@ -60,6 +60,7 @@
   }
 
   //////////////////////////////////////////////////////////////////////////////////////
+
   var __forEach = Array.prototype.forEach
   var __slice = Array.prototype.slice
   var __filter = Array.prototype.filter
@@ -343,10 +344,10 @@
    * Lazy load images
    */
   function loadImage (el, fn) {
-    var img = new Image()
+    var img = document.createElement('img')
     , src = el.getAttribute('data-src')
     img.onerror = function () {
-      console.log('lazy load error')
+      console.log('Lazy load image error.')
     }
     img.onload = function() {
       if (!! el.parent)
@@ -416,16 +417,37 @@
     showFooter(body, content, meta)
   }
 
-  var running = false
-  __forEach.call(['DOMContentLoaded', 'load'], function (event) {
-    addEventListener(document, event, function () {
-      // main.apply(window)
-      if (!running) {
-        running = true
-        main()
-        removeEventListener(document, event, function () {})
-      }
-    }, false)
-  })
+  function hateYou () {
+    var hit = document.createElement('div')
+    hit.innerHTML = '<p>Oops! Your browser is too outmoded. '
+      + 'Would you please try the lastest <a href="https://www.google.com/chrome/">Chrome</a>?</p>'
+    hit.style.textAlign = 'center'
+    hit.style.background = '#ed462f'
+    hit.style.color = 'white'
+    hit.style.padding = '4px'
+    hit.style.fontSize = '20px'
+    document.getElementsByTagName('body')[0].insertBefore(hit, document.getElementById('content'))
+  }
+
+  !function () {
+    var running = false
+    var loadEvent = ['DOMContentLoaded', 'load']
+    for (var i = 0, max = loadEvent.length; i < max; i++) {
+      var event = loadEvent[i]
+      addEventListener(window, event, function () {
+        if (!running) {
+          running = true
+          if (typeof __forEach === 'undefined') {
+            // too old
+            hateYou()
+          } else {
+            main()
+            // main.apply(window)
+          }
+          removeEventListener(window, event, function () {})
+        }
+      }, false)
+    }
+  }()
 
 })(this)

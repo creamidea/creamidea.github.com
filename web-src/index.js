@@ -234,6 +234,7 @@
    */
   function changeOctoCat (body) {
     var s = document.createElement('script');
+    s.async = true
     s.src = '/static/octodex-data.js';
     s.onload = function () {
       var octodex = window.octodex;
@@ -247,7 +248,6 @@
       var src = 'https://octodex.github.com' + octocat.src;
       var img = document.createElement('img');
       img.style.display = 'none';
-      img.src = src;
       img.onload = function () {
         var oBannerWrapper = document.getElementById('banner-wrapper');
         if (!oBannerWrapper) return
@@ -262,6 +262,7 @@
         clearInterval(window.blinkTimer);
       };
       body.appendChild(img);
+      img.src = src;
     };
     body.appendChild(s);
   }
@@ -435,27 +436,36 @@
 
   }
 
-  var running = false
-  __forEach.call(['DOMContentLoaded', 'load'], function (event) {
-    addEventListener(document, event, function () {
-      if (!running) {
-        running = true
-        if (typeof document.querySelector === 'undefined') {
-          // too old
-          var hit = document.createElement('div')
-          hit.innerHTML = '<p>Oops! Your browser is too outmoded. '
-            + 'Would you please try the lastest <a href="https://www.google.com/chrome/">Chrome</a>?</p>'
-            + '<p>Or you can go <a href="https://github.com/creamidea/creamidea.github.com/tree/master/_content">here</a> or <a href="https://github.com/creamidea/creamidea.github.com/tree/master/_draft">here</a></p>'
-          hit.style.textAlign = 'center'
-          document.getElementsByTagName('body')[0].appendChild(hit)
-        } else {
-          document.querySelector('#search').style.display = 'initial'
-          main()
-          // main.apply(window)
+  function hateYou () {
+    var hit = document.createElement('div')
+    hit.innerHTML = '<p>Oops! Your browser is too outmoded. '
+      + 'Would you please try the lastest <a href="https://www.google.com/chrome/">Chrome</a>?</p>'
+      + '<p>Or you can go <a href="https://github.com/creamidea/creamidea.github.com/tree/master/_content">here</a> or <a href="https://github.com/creamidea/creamidea.github.com/tree/master/_draft">here</a></p>'
+    hit.style.textAlign = 'center'
+    document.getElementsByTagName('body')[0].appendChild(hit)
+  }
+
+  // Start....
+  !function () {
+    var running = false
+    var loadEvent = ['DOMContentLoaded', 'load']
+    for (var i = 0, max = loadEvent.length; i < max; i++) {
+      var event = loadEvent[i]
+      addEventListener(window, event, function () {
+        if (!running) {
+          running = true
+          if (typeof __forEach === 'undefined') {
+            // too old
+            hateYou()
+          } else {
+            document.querySelector('#search').style.display = 'initial'
+            main()
+            // main.apply(window)
+          }
+          removeEventListener(window, event, function () {})
         }
-        removeEventListener(document, event, function () {})
-      }
-    }, false)
-  })
+      }, false)
+    }
+  }()
 
 })(this)
