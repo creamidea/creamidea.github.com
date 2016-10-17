@@ -1,0 +1,10 @@
+* Structure
+
++ articles
+  [[./articles][Link]]
+
++ translation
+  [[./translation][Link]]
+
++ wiki
+  [[./wiki][wiki]]
