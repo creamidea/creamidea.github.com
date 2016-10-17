@@ -106,7 +106,8 @@
     var head = document.getElementsByTagName('head')[0];
     var childNodes = head.childNodes;
     var meta = {};
-    __forEach.call(head.children, function (child) {
+    for (var i = 0, iMax = head.children; i < iMax; i++) {
+      var child = head.children[i]
       var name = child.getAttribute('name');
       if (child.nodeName === 'TITLE') {
         meta.title = child.innerText;
@@ -114,9 +115,9 @@
       }
       if (name === null || name === "" || name === undefined) return;
       meta[name] = child.getAttribute('content');
-    });
-    for (var i = 0, max = childNodes.length; i < max; i++) {
-      var cn = childNodes[i];
+    }
+    for (var j = 0, jMax = childNodes.length; j < jMax; j++) {
+      var cn = childNodes[j];
       if (cn.nodeName !== '#comment') continue;
       // TODO: maybe here will wrong
       meta.generatedTime = cn.data.slice(1,-1); // remove the blank symbol
@@ -125,27 +126,37 @@
 
     var dAuthorInfo = document.getElementById('meta-article');
     if (dAuthorInfo && dAuthorInfo.children.length > 0) {
-      __forEach.call(dAuthorInfo.children, function (child) {
-        var key = child.className;
-        if (key === 'email') meta.email = child.children[0].innerHTML;
-        else if (key === 'author') {
-          // 名字特殊处理 e.g. Junjia Ni
-          // 后面用于头像图片链接地址的拼接(author_en) junjia-ni.png
-          var rlt = child.innerHTML.match(/\(.*\)/g);
-          if (rlt) meta.author_en = rlt[0].slice(1,-1);
-          else meta.author_en = "Junjia Ni"; // avoid the null image
-          meta.author = child.innerHTML;
+      (function (meta, dAuthorInfo) {
+        var children = dAuthorInfo.children
+        for (var i = 0, max = children.length; i < max; i++) {
+          var child = children[i]
+          var key = child.className;
+          if (key === 'email') {
+            meta.email = child.children[0].innerHTML;
+          } else if (key === 'author') {
+            // 名字特殊处理 e.g. Junjia Ni
+            // 后面用于头像图片链接地址的拼接(author_en) junjia-ni.png
+            var rlt = child.innerHTML.match(/\(.*\)/g);
+            if (rlt) meta.author_en = rlt[0].slice(1,-1);
+            else meta.author_en = "Junjia Ni"; // avoid the null image
+            meta.author = child.innerHTML;
+          } else {
+            meta[key] = child.innerHTML;
+          }
         }
-        else meta[key] = child.innerHTML;
-      });
+      })(meta, dAuthorInfo)
     }
 
     if (isPrint === true) {
       // Print the Article's meta information
       console.log('Article\'s Meta');
-      __forEach.call(Object.keys(meta), function (name) {
-        console.log(name.toUpperCase() + ': ' + meta[name]);
-      });
+      (function (meta) {
+        var keys = Object.keys(meta)
+        for (var i = 0, max = keys.length; i < max; i++) {
+          var name = meta[i]
+          console.log(name.toUpperCase() + ': ' + meta[name]);
+        }
+      })(meta)
     }
 
     return meta;
@@ -284,11 +295,13 @@
       a.innerHTML = '#';
       return a;
     }
-    ['h2', 'h3', 'h4'].forEach(function (hTag) {
-      __forEach.call(document.getElementsByTagName(hTag), function (h) {
-        h.appendChild(genTagA(h));
-      });
-    });
+    if (__forEach) {
+      __forEach.call(['h2', 'h3', 'h4'], function (hTag) {
+        __forEach.call(document.getElementsByTagName(hTag), function (h) {
+          h.appendChild(genTagA(h));
+        })
+      })
+    }
   }
 
   function changeBodyTopStyle (body) {
@@ -395,28 +408,6 @@
     processScroll(imgs)
   }
 
-  /**
-   * entry point
-   */
-  function main() {
-    var pathname = window.location.pathname
-    var body = document.getElementsByTagName('body')[0]
-    var content = document.getElementById('content')
-    var meta = getMetaInfo(false) // true -> print meta info
-
-    changeBodyTopStyle(body)
-    showWarning(content, meta)
-    loadLazyImage(content)
-    showTags(body, content, meta)
-    // showHomeButton(body)
-    // ImgClickEvent(body, initImgWapper(body, content))
-    someArticlesFix(body, content)
-    showMetaInfo(body, content, meta)
-    loadDisqus(body, content)
-    loadCustomSearch(content, document.querySelector('#outline_disqus_thread'))
-    showFooter(body, content, meta)
-  }
-
   function hateYou () {
     var hit = document.createElement('div')
     hit.innerHTML = '<p>Oops! Your browser is too outmoded. '
@@ -429,21 +420,39 @@
     document.getElementsByTagName('body')[0].insertBefore(hit, document.getElementById('content'))
   }
 
+  /**
+   * entry point
+   */
   !function () {
     var running = false
     var loadEvent = ['DOMContentLoaded', 'load']
+
+    var pathname = window.location.pathname
+    var body = document.getElementsByTagName('body')[0]
+    var content = document.getElementById('content')
+    var meta = getMetaInfo(false) // true -> print meta info
+
     for (var i = 0, max = loadEvent.length; i < max; i++) {
       var event = loadEvent[i]
       addEventListener(window, event, function () {
         if (!running) {
           running = true
+          changeBodyTopStyle(body)
+          showWarning(content, meta)
+          showTags(body, content, meta)
+          showFooter(body, content, meta)
+          someArticlesFix(body, content)
+          showMetaInfo(body, content, meta)
           if (typeof __forEach === 'undefined') {
             // too old
             hateYou()
           } else {
-            main()
-            // main.apply(window)
+            loadLazyImage(content)
+            // showHomeButton(body)
+            // ImgClickEvent(body, initImgWapper(body, content))
+            loadDisqus(body, content)
           }
+          loadCustomSearch(content, document.getElementById('#outline_disqus_thread'))
           removeEventListener(window, event, function () {})
         }
       }, false)
