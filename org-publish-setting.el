@@ -37,6 +37,7 @@ CURRENT-OR-ALL FORCE ASYNC."
          (meta-viewport "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">")
          (link-medium-fonts "<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/medium-fonts.css\">")
          (link-style-css "<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/article.css\">")
+         (html5shiv "<!--[if lt IE 9]>\n<script src=\"/static/libs/html5shiv.min.js\"></script>\n<![endif]-->")
          (app-js "<script src=\"/static/article.js\"></script>")
          (analytics-js "<!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->")
 
@@ -95,7 +96,7 @@ CURRENT-OR-ALL FORCE ASYNC."
              :recursive t
              :publishing-function org-html-publish-to-html
              :headline-levels 4   ; Just the default for this project.
-             :html-head ,link-style-css
+             :html-head ,(concat link-style-css html5shiv)
              :auto-preamble t
              ;; :html-preamble ,(concat app-js analytics-js)
              :html-postamble ,(concat meta-viewport author-info app-js analytics-js)
