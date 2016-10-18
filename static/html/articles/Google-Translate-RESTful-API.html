@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- 2016-10-15 Sat 22:29 -->
+<!-- 2016-10-18 Tue 20:23 -->
 <meta  charset="utf-8">
 <meta  name="viewport" content="width=device-width, initial-scale=1">
 <title>Google Translation API Analysis</title>
@@ -10,7 +10,9 @@
 <meta  name="description" content="Google Translate API Analysis"
 >
 <meta  name="keywords" content="google-translate">
-<link rel="stylesheet" type="text/css" href="/static/article.css">
+<link rel="stylesheet" type="text/css" href="/static/article.css"><!--[if lt IE 9]>
+<script src="/static/libs/html5shiv.min.js"></script>
+<![endif]-->
 </head>
 <body>
 <div id="content">
@@ -20,60 +22,202 @@
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#orgheadline1">1. 前言</a></li>
-<li><a href="#orgheadline2">2. 测试update-index</a></li>
-<li><a href="#orgheadline3">3. 获取音频的2个接口</a></li>
+<li><a href="#orgheadline2">2. 翻译</a></li>
+<li><a href="#orgheadline3">3. 语音</a></li>
 <li><a href="#orgheadline4">4. 尾声</a></li>
 </ul>
 </div>
 </div>
+<noscript>
+<img src="http://www.digitalintervention.com/wp-content/uploads/2015/01/Google-2BTranslate-2Bdigital-2Bintervention.png"
+alt="Google Translate" title="Google Translate"/>
+</noscript>
+<img data-src="http://www.digitalintervention.com/wp-content/uploads/2015/01/Google-2BTranslate-2Bdigital-2Bintervention.png"
+lazy-load class="lazy-load-img" alt="Google Translate" title="Google Translate"/>
+<p class="title-picture">题图来自网络</p>
 
 
 <div id="outline-container-orgheadline1" class="outline-2">
 <h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-这几天有空的时候稍微分析了一下Google-Translate网站的前端代码。把提交翻译词和获取语音的API翻了出来。这个我后面有空的时候来写一下。
-主要讲一下我用到的2个接口。再次来试试速度。
+为了实现一个本地单词测试系统 <a href="https://github.com/creamidea/MemorizingWords">MemorizingWords</a> （大致就是给定单词读音，用户反应出该单词的拼写和意思，然后校验）。
+加之，之前我是一名标准的 Google 脑残粉，遂，研究 Google-Translate 网站的前端代码。分析出翻译和语音 API。
+希望可以获取到相关的数据。
 </p>
 
 <p>
-项目迁移测试。
+Google 的所有页面都是经过压缩的，HTML 页面也不例外。研究的时候异常艰难。
+</p>
+
+<p>
+在研究相关的 JS 代码的时候，也是运气好，被我碰到了。对于这种排查接口的行为我总结出了一个经验，
+可以通过搜索 <code>XMLHttpRequest</code> ，迅速定位到数据入口。之后打断点跟踪。如果当时没有找到这个，我不知道我还能不能找出这些数据。
+</p>
+
+<p>
+还有，Google 在接口方面还是做了一点功课的，比如获取数据接口需要加上一个 <b>Token</b>, 这个 Token 是用 JS 前端生成的。
+没有这个 Token，就无法正常获取数据。这个我后面会详细讲。
+</p>
+
+<p>
+<b>接口随时可能失效，请自行探索或者邮件我协助处理。</b>
+好的，让我们开始吧。
 </p>
 </div>
 </div>
 
 <div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2"><span class="section-number-2">2</span> 测试update-index</h2>
+<h2 id="orgheadline2"><span class="section-number-2">2</span> 翻译</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 
-<pre class="src src-sh">$ git update-index --assume-unchanged FILE_NAME
+<pre class="src src-restful">GET https://translate.google.cn/translate_a/single?client=t&amp;sl=en&amp;tl=${tl}&amp;hl=en&amp;dt=at&amp;dt=bd&amp;dt=ex&amp;dt=ld&amp;dt=md&amp;dt=qca&amp;dt=rw&amp;dt=rm&amp;dt=ss&amp;dt=t&amp;ie=UTF-8&amp;oe=UTF-8&amp;source=btn&amp;rom=1&amp;srcrom=1&amp;ssel=3&amp;tsel=6&amp;kc=0&amp;tk=${tk(word)}&amp;q=${encodeURIComponent(word)}
 </pre>
 </div>
+<p>
+核心参数：
+</p>
+<ul class="org-ul">
+<li>tl=en    // 翻译语言</li>
+<li>hl=en    // 被翻译语言</li>
+<li>ie=UTF-8</li>
+<li>oe=UTF-8</li>
+<li>tk=tk(word)</li>
+<li>q=encodeURIComponent(word)</li>
+</ul>
+
+<p>
+其中生成 <code>tk</code> (Token) 的方法函数如下。详细代码请戳 <a href="https://github.com/creamidea/MemorizingWords/blob/master/libs/goog-utils.js">这里</a>
+</p>
+<div class="org-src-container">
+
+<pre class="src src-js"><span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">oM</span> = <span style="color: #b5bd68;">function</span><span style="color: #c5c8c6;">(</span><span style="color: #f0c674;">a</span><span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+  <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">b</span>;
+  <span style="color: #b5bd68;">if</span> <span style="color: #8abeb7;">(</span><span style="color: #81a2be;">null</span>  !== nM<span style="color: #8abeb7;">)</span>
+    b = nM;
+  <span style="color: #b5bd68;">else</span> <span style="color: #8abeb7;">{</span>
+    b = lM<span style="color: #f0c674;">(</span>String.fromCharCode<span style="color: #b5bd68;">(</span>84<span style="color: #b5bd68;">)</span><span style="color: #f0c674;">)</span>;
+    <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">c</span> = lM<span style="color: #f0c674;">(</span>String.fromCharCode<span style="color: #b5bd68;">(</span>75<span style="color: #b5bd68;">)</span><span style="color: #f0c674;">)</span>;
+    b = <span style="color: #f0c674;">[</span>b<span style="color: #b5bd68;">()</span>, b<span style="color: #b5bd68;">()</span><span style="color: #f0c674;">]</span>;
+    b<span style="color: #f0c674;">[</span>1<span style="color: #f0c674;">]</span> = c<span style="color: #f0c674;">()</span>;
+    b = <span style="color: #f0c674;">(</span>nM = window<span style="color: #b5bd68;">[</span>b.join<span style="color: #81a2be;">(</span>c<span style="color: #c5c8c6;">()</span><span style="color: #81a2be;">)</span><span style="color: #b5bd68;">]</span> || k<span style="color: #f0c674;">)</span> || k
+  <span style="color: #8abeb7;">}</span>
+  <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">d</span> = lM<span style="color: #8abeb7;">(</span>String.fromCharCode<span style="color: #f0c674;">(</span>116<span style="color: #f0c674;">)</span><span style="color: #8abeb7;">)</span>
+  , c = lM<span style="color: #8abeb7;">(</span>String.fromCharCode<span style="color: #f0c674;">(</span>107<span style="color: #f0c674;">)</span><span style="color: #8abeb7;">)</span>
+  , d = <span style="color: #8abeb7;">[</span>d<span style="color: #f0c674;">()</span>, d<span style="color: #f0c674;">()</span><span style="color: #8abeb7;">]</span>;
+  d<span style="color: #8abeb7;">[</span>1<span style="color: #8abeb7;">]</span> = c<span style="color: #8abeb7;">()</span>;
+  c = cb + d.join<span style="color: #8abeb7;">(</span>k<span style="color: #8abeb7;">)</span> +
+    Ff;
+  d = b.split<span style="color: #8abeb7;">(</span>jd<span style="color: #8abeb7;">)</span>;
+  b = Number<span style="color: #8abeb7;">(</span>d<span style="color: #f0c674;">[</span>0<span style="color: #f0c674;">]</span><span style="color: #8abeb7;">)</span> || 0;
+  <span style="color: #b5bd68;">for</span> <span style="color: #8abeb7;">(</span><span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">e</span> = <span style="color: #f0c674;">[]</span>, <span style="color: #f0c674;">f</span> = 0, <span style="color: #f0c674;">g</span> = 0; g &lt; a.length; g++<span style="color: #8abeb7;">)</span> <span style="color: #8abeb7;">{</span>
+    <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">m</span> = a.charCodeAt<span style="color: #f0c674;">(</span>g<span style="color: #f0c674;">)</span>;
+    128 &gt; m ? e<span style="color: #f0c674;">[</span>f++<span style="color: #f0c674;">]</span> = m : <span style="color: #f0c674;">(</span>2048 &gt; m ? e<span style="color: #b5bd68;">[</span>f++<span style="color: #b5bd68;">]</span> = m &gt;&gt; 6 | 192 : <span style="color: #b5bd68;">(</span>55296 == <span style="color: #81a2be;">(</span>m &amp; 64512<span style="color: #81a2be;">)</span> &amp;&amp; g + 1 &lt; a.length &amp;&amp; 56320 == <span style="color: #81a2be;">(</span>a.charCodeAt<span style="color: #c5c8c6;">(</span>g + 1<span style="color: #c5c8c6;">)</span> &amp; 64512<span style="color: #81a2be;">)</span> ? <span style="color: #81a2be;">(</span>m = 65536 + <span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">(</span>m &amp; 1023<span style="color: #8abeb7;">)</span> &lt;&lt; 10<span style="color: #c5c8c6;">)</span> + <span style="color: #c5c8c6;">(</span>a.charCodeAt<span style="color: #8abeb7;">(</span>++g<span style="color: #8abeb7;">)</span> &amp; 1023<span style="color: #c5c8c6;">)</span>,e<span style="color: #c5c8c6;">[</span>f++<span style="color: #c5c8c6;">]</span> = m &gt;&gt; 18 | 240,e<span style="color: #c5c8c6;">[</span>f++<span style="color: #c5c8c6;">]</span> = m &gt;&gt; 12 &amp; 63 | 128<span style="color: #81a2be;">)</span> : e<span style="color: #81a2be;">[</span>f++<span style="color: #81a2be;">]</span> = m &gt;&gt; 12 | 224,e<span style="color: #81a2be;">[</span>f++<span style="color: #81a2be;">]</span> = m &gt;&gt; 6 &amp; 63 | 128<span style="color: #b5bd68;">)</span>,e<span style="color: #b5bd68;">[</span>f++<span style="color: #b5bd68;">]</span> = m &amp; 63 | 128<span style="color: #f0c674;">)</span>
+  <span style="color: #8abeb7;">}</span>
+  a = b;
+  <span style="color: #b5bd68;">for</span> <span style="color: #8abeb7;">(</span>f = 0; f &lt; e.length; f++<span style="color: #8abeb7;">)</span>
+    a += e<span style="color: #8abeb7;">[</span>f<span style="color: #8abeb7;">]</span>,
+  a = mM<span style="color: #8abeb7;">(</span>a, $b<span style="color: #8abeb7;">)</span>;
+  a = mM<span style="color: #8abeb7;">(</span>a, Zb<span style="color: #8abeb7;">)</span>;
+  a ^= Number<span style="color: #8abeb7;">(</span>d<span style="color: #f0c674;">[</span>1<span style="color: #f0c674;">]</span><span style="color: #8abeb7;">)</span> || 0;
+  0 &gt; a &amp;&amp; <span style="color: #8abeb7;">(</span>a = <span style="color: #f0c674;">(</span>a &amp; 2147483647<span style="color: #f0c674;">)</span> + 2147483648<span style="color: #8abeb7;">)</span>;
+  a %= 1E6;
+  <span style="color: #b5bd68;">return</span> c + <span style="color: #8abeb7;">(</span>a.toString<span style="color: #f0c674;">()</span> + jd + <span style="color: #f0c674;">(</span>a ^ b<span style="color: #f0c674;">)</span><span style="color: #8abeb7;">)</span>
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div>
+<p>
+有了获取翻译接口数据的 Token 之后，我以为就可以迅速的获取数据了，但是我失败了。Google 返回的数据不是标准的 JSON 数据格式。需要用特殊的方式转换。
+转换核心是用 <code>eval</code> 函数。这个真是出乎我的意料，真是找了好久。
+</p>
+<div class="org-src-container">
+
+<pre class="src src-js"><span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">Pb</span> = <span style="color: #8abeb7;">"("</span>, <span style="color: #f0c674;">Ub</span> = <span style="color: #8abeb7;">")"</span>
+<span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">TK</span> = <span style="color: #b5bd68;">function</span><span style="color: #c5c8c6;">(</span><span style="color: #f0c674;">a</span><span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
+  <span style="color: #b5bd68;">return</span> eval<span style="color: #8abeb7;">(</span>Pb + a + Ub<span style="color: #8abeb7;">)</span>
+<span style="color: #c5c8c6;">}</span>
+</pre>
+</div>
+<p>
+有了上述 2 个核心函数，你就可以欢快的去写脚本翻译单词啦。
+</p>
 </div>
 </div>
 
 <div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3"><span class="section-number-2">3</span> 获取音频的2个接口</h2>
+<h2 id="orgheadline3"><span class="section-number-2">3</span> 语音</h2>
 <div class="outline-text-2" id="text-3">
+<p>
+相对翻译数据来说，获取语音的接口就相对容易一些了。
+</p>
+
+<p>
+Translate 页面接口
+</p>
+<div class="org-src-container">
+
+<pre class="src src-restful">GET https://translate.google.cn/translate_tts?ie=UTF-8&amp;total=1&amp;idx=0&amp;client=t&amp;tl=en$(tk(word))&amp;q=encodeURIComponent(word)
+</pre>
+</div>
+<p>
+核心参数：
+</p>
 <ul class="org-ul">
-<li><a href="https://ssl.gstatic.com/dictionary/static/sounds/de/0/%5Byour-wordX%5D.mp3">https://ssl.gstatic.com/dictionary/static/sounds/de/0/%5Byour-wordX%5D.mp3</a></li>
+<li>ie=UTF-8</li>
+<li>tl=en    // 发音语言</li>
+<li>tk=tk(word)</li>
+<li>q=encodeURIComponent(word)</li>
 </ul>
+
+<p>
+<code>tk</code> 生成函数参照上一小节。该接口的发音是 Google “实时”计算出的值。所以，你给定任何字母组合，Google 都会返回一段语音数据。
+</p>
+
+<p>
+另外，在 Google 搜索页面也有一个语音接口
+</p>
+<div class="org-src-container">
+
+<pre class="src src-restful">GET https://ssl.gstatic.com/dictionary/static/sounds/de/0/[your-word-x].mp3
+</pre>
+</div>
+<p>
+这个接口唯一的参数就是所查单词。但是有一个限制，就是有些单词可能没有发音文件，或者单词错误也不会有读音（废话）。
+</p>
 </div>
 </div>
 
 <div id="outline-container-orgheadline4" class="outline-2">
 <h2 id="orgheadline4"><span class="section-number-2">4</span> 尾声</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+谷歌翻译页面的源代码被 Google 精心处理过，上述接口我也是花费了一个下午才排查出来。还有就是运气好，让我比较快速的找到了数据入口函数，不然真的很难破解。
+所有 JS 代码都被压缩和混淆过的，所以肉眼不是很好分辨。分析的时候，一定要顶住！当发现一条路无法走通的时候，可以转换一下思路，曲线救国。一定会有出路的！
+</p>
+
+<p>
+对于数据解析，也是颠覆了我之前的看法。原先我的脑海中只有 JSON 或者 XML。通过这次研究 Google 翻译页面的代码，让我的思路又多了一条。
+</p>
+
+<p>
+最后感谢 Google 提供了这么好的服务。另外， <a href="https://translate.google.cn">https://translate.google.cn</a> 不需要 Fan Qiang 也可以访问哦。
+</p>
+
+<p>
+以上。
+</p>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
 <meta name="viewport" content="width=device-width, initial-scale=1"><div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
 <p class="date">2016-05-08</p>
-<p class="export-date">2016-10-15 Sat 22:29</p>
+<p class="export-date">2016-10-18 Tue 20:23</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
 <p class="validation"></p>
-<p class="last-modification-time">2016-10-12 Wed 21:17</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+<p class="last-modification-time">2016-10-18 Tue 20:23</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

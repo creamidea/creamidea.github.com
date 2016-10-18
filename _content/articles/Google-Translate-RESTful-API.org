@@ -9,19 +9,118 @@
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
 
+#+BEGIN_HTML
+<noscript>
+<img src="http://www.digitalintervention.com/wp-content/uploads/2015/01/Google-2BTranslate-2Bdigital-2Bintervention.png"
+alt="Google Translate" title="Google Translate"/>
+</noscript>
+<img data-src="http://www.digitalintervention.com/wp-content/uploads/2015/01/Google-2BTranslate-2Bdigital-2Bintervention.png"
+lazy-load class="lazy-load-img" alt="Google Translate" title="Google Translate"/>
+<p class="title-picture">题图来自网络</p>
+#+END_HTML
+
 
 * 前言
-  这几天有空的时候稍微分析了一下Google-Translate网站的前端代码。把提交翻译词和获取语音的API翻了出来。这个我后面有空的时候来写一下。
-  主要讲一下我用到的2个接口。再次来试试速度。
+  为了实现一个本地单词测试系统 [[https://github.com/creamidea/MemorizingWords][MemorizingWords]] （大致就是给定单词读音，用户反应出该单词的拼写和意思，然后校验）。
+  加之，之前我是一名标准的 Google 脑残粉，遂，研究 Google-Translate 网站的前端代码。分析出翻译和语音 API。
+  希望可以获取到相关的数据。
 
-  项目迁移测试。
+  Google 的所有页面都是经过压缩的，HTML 页面也不例外。研究的时候异常艰难。
 
-* 测试update-index
-#+BEGIN_SRC sh
-  $ git update-index --assume-unchanged FILE_NAME
-#+END_SRC
+  在研究相关的 JS 代码的时候，也是运气好，被我碰到了。对于这种排查接口的行为我总结出了一个经验，
+  可以通过搜索 =XMLHttpRequest= ，迅速定位到数据入口。之后打断点跟踪。如果当时没有找到这个，我不知道我还能不能找出这些数据。
 
-* 获取音频的2个接口
-+ https://ssl.gstatic.com/dictionary/static/sounds/de/0/[your-wordX].mp3
+  还有，Google 在接口方面还是做了一点功课的，比如获取数据接口需要加上一个 *Token*, 这个 Token 是用 JS 前端生成的。
+  没有这个 Token，就无法正常获取数据。这个我后面会详细讲。
+
+  *接口随时可能失效，请自行探索或者邮件我协助处理。*
+  好的，让我们开始吧。
+
+* 翻译
+  #+BEGIN_SRC restful
+  GET https://translate.google.cn/translate_a/single?client=t&sl=en&tl=${tl}&hl=en&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&source=btn&rom=1&srcrom=1&ssel=3&tsel=6&kc=0&tk=${tk(word)}&q=${encodeURIComponent(word)}
+  #+END_SRC
+  核心参数：
+  - tl=en    // 翻译语言
+  - hl=en    // 被翻译语言
+  - ie=UTF-8
+  - oe=UTF-8
+  - tk=tk(word)
+  - q=encodeURIComponent(word)
+
+  其中生成 =tk= (Token) 的方法函数如下。详细代码请戳 [[https://github.com/creamidea/MemorizingWords/blob/master/libs/goog-utils.js][这里]]
+  #+BEGIN_SRC js
+    var oM = function(a) {
+      var b;
+      if (null  !== nM)
+        b = nM;
+      else {
+        b = lM(String.fromCharCode(84));
+        var c = lM(String.fromCharCode(75));
+        b = [b(), b()];
+        b[1] = c();
+        b = (nM = window[b.join(c())] || k) || k
+      }
+      var d = lM(String.fromCharCode(116))
+      , c = lM(String.fromCharCode(107))
+      , d = [d(), d()];
+      d[1] = c();
+      c = cb + d.join(k) +
+        Ff;
+      d = b.split(jd);
+      b = Number(d[0]) || 0;
+      for (var e = [], f = 0, g = 0; g < a.length; g++) {
+        var m = a.charCodeAt(g);
+        128 > m ? e[f++] = m : (2048 > m ? e[f++] = m >> 6 | 192 : (55296 == (m & 64512) && g + 1 < a.length && 56320 == (a.charCodeAt(g + 1) & 64512) ? (m = 65536 + ((m & 1023) << 10) + (a.charCodeAt(++g) & 1023),e[f++] = m >> 18 | 240,e[f++] = m >> 12 & 63 | 128) : e[f++] = m >> 12 | 224,e[f++] = m >> 6 & 63 | 128),e[f++] = m & 63 | 128)
+      }
+      a = b;
+      for (f = 0; f < e.length; f++)
+        a += e[f],
+      a = mM(a, $b);
+      a = mM(a, Zb);
+      a ^= Number(d[1]) || 0;
+      0 > a && (a = (a & 2147483647) + 2147483648);
+      a %= 1E6;
+      return c + (a.toString() + jd + (a ^ b))
+    }
+  #+END_SRC
+  有了获取翻译接口数据的 Token 之后，我以为就可以迅速的获取数据了，但是我失败了。Google 返回的数据不是标准的 JSON 数据格式。需要用特殊的方式转换。
+  转换核心是用 =eval= 函数。这个真是出乎我的意料，真是找了好久。
+  #+BEGIN_SRC js
+    var Pb = "(", Ub = ")"
+    var TK = function(a) {
+      return eval(Pb + a + Ub)
+    }
+  #+END_SRC
+  有了上述 2 个核心函数，你就可以欢快的去写脚本翻译单词啦。
+
+* 语音
+  相对翻译数据来说，获取语音的接口就相对容易一些了。
+
+  Translate 页面接口
+  #+BEGIN_SRC restful
+  GET https://translate.google.cn/translate_tts?ie=UTF-8&total=1&idx=0&client=t&tl=en$(tk(word))&q=encodeURIComponent(word)
+  #+END_SRC
+  核心参数：
+  - ie=UTF-8
+  - tl=en    // 发音语言
+  - tk=tk(word)
+  - q=encodeURIComponent(word)
+
+  =tk= 生成函数参照上一小节。该接口的发音是 Google “实时”计算出的值。所以，你给定任何字母组合，Google 都会返回一段语音数据。
+
+  另外，在 Google 搜索页面也有一个语音接口
+  #+BEGIN_SRC restful
+  GET https://ssl.gstatic.com/dictionary/static/sounds/de/0/[your-word-x].mp3
+  #+END_SRC
+  这个接口唯一的参数就是所查单词。但是有一个限制，就是有些单词可能没有发音文件，或者单词错误也不会有读音（废话）。
 
 * 尾声
+  谷歌翻译页面的源代码被 Google 精心处理过，上述接口我也是花费了一个下午才排查出来。还有就是运气好，让我比较快速的找到了数据入口函数，不然真的很难破解。
+  所有 JS 代码都被压缩和混淆过的，所以肉眼不是很好分辨。分析的时候，一定要顶住！当发现一条路无法走通的时候，可以转换一下思路，曲线救国。一定会有出路的！
+
+  对于数据解析，也是颠覆了我之前的看法。原先我的脑海中只有 JSON 或者 XML。通过这次研究 Google 翻译页面的代码，让我的思路又多了一条。
+
+  最后感谢 Google 提供了这么好的服务。另外， https://translate.google.cn 不需要 Fan Qiang 也可以访问哦。
+
+  以上。
