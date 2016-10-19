@@ -1,7 +1,7 @@
-#+TITLE: Usage with React Router
-#+AUTHOR: 冰糖火箭筒(Junjia Ni)
-#+EMAIL: creamidea(AT)gmail.com
-#+DATE: 2016-10-14
+#+TITLE:Usage with React Router
+#+AUTHOR:冰糖火箭筒(Junjia Ni)
+#+EMAIL:creamidea(AT)gmail.com
+#+DATE:2016-10-14
 #+CATEGORY: translation
 #+DESCRIPTION: Usage with React Router
 #+KEYWORDS: reactjs,js,react-router
