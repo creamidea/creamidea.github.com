@@ -1,0 +1,71 @@
+#+TITLE: HTML5 Video Blob 初探
+#+AUTHOR: 冰糖火箭筒(Junjia Ni)
+#+EMAIL: creamidea(AT)gmail.com
+#+DATE: 2016-10-19
+#+CATEGORY: article
+#+DESCRIPTION: HTML5 Video Blob 初探
+#+KEYWORDS: html5,video,blob,js,MediaSource,createObjectURL,mp4,flv
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:nil email:t <:t date:t timestamp:t
+#+LINK_HOME: https://creamidea.github.io
+#+STARTUP: showall
+
+
+#+BEGIN_HTML
+<div class="lazy-load-img-wrapper">
+<noscript>
+<img src="/static/img/video-blob.jpg"
+alt="Video-Blob" title="Video-Blob"/>
+</noscript>
+<img data-src="/static/img/video-blob.jpg"
+lazy-load class="lazy-load-img" alt="Video-Blob" title="Video-Blob"/>
+<p class="title-picture">题图来自网络</p>
+</div>
+#+END_HTML
+
+* 前言
+现在看到任何我感兴趣的网页都会习惯性的打开调试工具，看看其代码写的怎么样。
+有一天，看到了这句 HTML。
+#+BEGIN_SRC html
+<video src="blob:http://www.bilibili.com/d0823f0f-2b2a-4fd6-a93a-e4c82173c107"></video>
+#+END_SRC
+为何会有一个 blob？这个是什么？然后我点击这个链接，被返回了 404！什么情况？用了什么黑科技？一个个问题从脑海中蹦出来。
+
+于是对此做了一番探索。
+
+* 答案
+直到我找到这个问题的回答 [[http://stackoverflow.com/a/14360868/1925954][Display a video from a Blob Javascript]] 。才开始明白这是怎么一回事。
+
+直接上代码：
+#+BEGIN_SRC js
+  var video = document.querySelector('video');
+  var mediaSource = new MediaSource;
+  video.src = URL.createObjectURL(mediaSource);
+  mediaSource.addEventListener('sourceopen', sourceOpen)
+
+  function sourceOpen () {
+    var mediaSource = this;
+    var sourceBuffer = mediaSource.addSourceBuffer('video/mp4; codecs="avc1.42E01E, mp4a.40.2"');
+    sourceBuffer.addEventListener('updateend', function () {
+      mediaSource.endOfStream();
+      video.play();
+    });
+    sourceBuffer.appendBuffer(buf); // buf is the arraybuffer to store the video data
+  };
+#+END_SRC
+
+首先创建变量名为 =video= 的 DOM 对象。之后，创建变量名为 =mediaSource= 的 =MediaSource= 对象。
+通过函数 =createObjecturl= 来将 =DOM::Video= 对象的属性 =src= 和 =mediaSource= 进行“连接”。
+接下来，通过注册事件 =Event::sourceopen= 来触发当上述“连接”结束之后的回调处理。回调处理就是需要赋值 *视频数据* 的地方。
+调用 =MediaSource::addSourceBuffer= 方法来构建一个存放视屏数据的 Buffer。
+在往 Buffer 中存放数据结束之后会触发事件 =Event::updateend= 。
+通过注册这个事件的回调，可以知晓数据已经加载完毕，然后调用 =Video::play= 函数通知浏览器播放视频。
+至此，整个 Blob 运行机制讲解完毕。详细的技术细节需要花一段时间来查看，暂时停止在这里。我们先知道这个是什么东西。<(￣3￣)>
+
+通过查看 B 站的前端代码，发现其 HTML5 播放器实现原理和这个差不多，主要使用 [[https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL][new MediaSource]] 和 [[https://developer.mozilla.org/en-US/docs/Web/API/MediaSource][createObjectURL]]
+这2个函数。（当然实现不会这么简单，比如异常处理，用户交互等都是需要巨量的代码来覆盖。）
+
+* 尾声
+综上，这个只是 HTML5 提供的新特性，但是截止目前还是处于试验状态。可是，现在已经有许多的厂商开始使用，比如 B 站，比如 YouTube。
+有大厂的支持，心里稍稍安心啦。
+
+为了及时淘汰老旧的浏览器，让她们“安详”的推出历史舞台。需要你我所有人的努力。

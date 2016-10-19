@@ -10,6 +10,7 @@
 #+STARTUP: showall
 
 #+BEGIN_HTML
+<div class="lazy-load-img-wrapper">
 <noscript>
 <img src="http://www.digitalintervention.com/wp-content/uploads/2015/01/Google-2BTranslate-2Bdigital-2Bintervention.png"
 alt="Google Translate" title="Google Translate"/>
@@ -17,6 +18,7 @@ alt="Google Translate" title="Google Translate"/>
 <img data-src="http://www.digitalintervention.com/wp-content/uploads/2015/01/Google-2BTranslate-2Bdigital-2Bintervention.png"
 lazy-load class="lazy-load-img" alt="Google Translate" title="Google Translate"/>
 <p class="title-picture">题图来自网络</p>
+</div>
 #+END_HTML
 
 
