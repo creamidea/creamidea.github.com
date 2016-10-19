@@ -555,7 +555,8 @@ hr.section-divider:before {content: '...'; display: inline-block; margin-left: 0
     .alert,
     .title-picture,
     #content .outline-2,
-    #tags {
+    #tags,
+    #footnotes {
         margin-left: 12px;
         margin-right: 12px;
     }
