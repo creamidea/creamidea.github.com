@@ -14,7 +14,7 @@
       div.id = 'custom-search'
       div.innerHTML = '<gcse:search></gcse:search>'
       elt.insertBefore(div, elt2)
-      console.log('Google Custom Search Engine Loaded Over.')
+      // console.log('Google Custom Search Engine Loaded Over.')
     }
     s.parentNode.insertBefore(gcse, s)
     gcse.src = 'https://cse.google.com/cse.js?cx=' + cx
@@ -103,26 +103,24 @@
    * 从head头部中的meta以及#meta-author中获取基础信息，并在终端中打印
    */
   function getMetaInfo (isPrint) {
-    var head = document.getElementsByTagName('head')[0];
-    var childNodes = head.childNodes;
     var meta = {};
-    for (var i = 0, iMax = head.children; i < iMax; i++) {
-      var child = head.children[i]
-      var name = child.getAttribute('name');
-      if (child.nodeName === 'TITLE') {
-        meta.title = child.innerText;
-        return;
+
+    var head = document.getElementsByTagName('head')[0];
+    // var childNodes = head.childNodes;
+    (function (meta, head) {
+      var children = head.children
+      for (var i = 0, max = children.length; i < max; i++) {
+        var child = head.children[i]
+        var name = child.getAttribute('name');
+        if (child.nodeName === 'TITLE') {
+          meta.title = child.innerText;
+        } else if (child.nodeName === 'META' && name) {
+          meta[name] = child.getAttribute('content');
+        } /* else if (child.nodeName === 'mment' && typeof meta['date'] === 'undefined') {
+             meta['date'] = child.data.slice(1,-1)
+             } */
       }
-      if (name === null || name === "" || name === undefined) return;
-      meta[name] = child.getAttribute('content');
-    }
-    for (var j = 0, jMax = childNodes.length; j < jMax; j++) {
-      var cn = childNodes[j];
-      if (cn.nodeName !== '#comment') continue;
-      // TODO: maybe here will wrong
-      meta.generatedTime = cn.data.slice(1,-1); // remove the blank symbol
-      break;
-    }
+    })(meta, head);
 
     var dAuthorInfo = document.getElementById('meta-article');
     if (dAuthorInfo && dAuthorInfo.children.length > 0) {
@@ -149,11 +147,11 @@
 
     if (isPrint === true) {
       // Print the Article's meta information
-      console.log('Article\'s Meta');
       (function (meta) {
-        var keys = Object.keys(meta)
+        console.log('Article\'s Meta');
+        var keys = typeof Object.keys === 'function' ? Object.keys(meta) : []
         for (var i = 0, max = keys.length; i < max; i++) {
-          var name = meta[i]
+          var name = keys[i]
           console.log(name.toUpperCase() + ': ' + meta[name]);
         }
       })(meta)
@@ -170,6 +168,7 @@
     if (meta.author_en) {
       img = "<img class=author-" + meta.author_en + " src=" + glfs + "/static/img/" + meta.author_en.toLowerCase().replace(/\s/g, '-') + '.png' + "></img>";
     }
+    div.id = "author-card"
     div.innerHTML = "" +
       "<div class=\"card\"> " +
       "<div class=\"card-avatar\">" + img + "</div>" +
@@ -210,8 +209,8 @@
     // TODO: change the email
     var footer = document.createElement('footer')
     var code = '<code class="src src-elisp"><span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">let</span> <span style="color: #8abeb7;">(</span><span style="color: #f0c674;">(</span>editor <span style="color: #8abeb7;"><a href="http://www.gnu.org/software/emacs/">"Emacs"</a></span><span style="color: #f0c674;">)</span>' +
-        '<span style="color: #f0c674;">(</span>generator <span style="color: #b5bd68;">(</span>concat <span style="color: #8abeb7;"> <a href="http://orgmode.org/">"Org-mode"</a></span> <span style="color: #8abeb7;">" &amp; "</span> <span style="color: #8abeb7;"><a href="http://nodejs.org/">"Nodejs"</a></span> <span style="color: #8abeb7;">" &amp; "</span> <span style="color: #8abeb7;"> <a href="https://git-scm.com/">"Git"</a></span><span style="color: #b5bd68;">)</span><span style="color: #f0c674;">)</span>' +
-        '<span style="color: #f0c674;">(</span>hostor <span style="color: #8abeb7;"><a href="https://github.com/">"Github"</a></span><span style="color: #f0c674;">)</span><span style="color: #8abeb7;">)</span><span style="color: #c5c8c6;">)</span></code>'
+      '<span style="color: #f0c674;">(</span>generator <span style="color: #b5bd68;">(</span>concat <span style="color: #8abeb7;"> <a href="http://orgmode.org/">"Org-mode"</a></span> <span style="color: #8abeb7;">" &amp; "</span> <span style="color: #8abeb7;"><a href="http://nodejs.org/">"Nodejs"</a></span> <span style="color: #8abeb7;">" &amp; "</span> <span style="color: #8abeb7;"> <a href="https://git-scm.com/">"Git"</a></span><span style="color: #b5bd68;">)</span><span style="color: #f0c674;">)</span>' +
+      '<span style="color: #f0c674;">(</span>hostor <span style="color: #8abeb7;"><a href="https://github.com/">"Github"</a></span><span style="color: #f0c674;">)</span><span style="color: #8abeb7;">)</span><span style="color: #c5c8c6;">)</span></code>'
     footer.innerHTML =
       '<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Attribution-NonCommercial-ShareAlike 4.0 International License</a>.' +
       '<br />' + code
@@ -232,7 +231,7 @@
     var keywords = meta.keywords.split(',');
     if (keywords && keywords.length > 0) {
       var div = document.createElement('div');
-      var footnotes = document.getElementById('footnotes');
+      var authorCard = document.getElementById('author-card');
       keywords.forEach(function (key) {
         var a = document.createElement('a');
         a.href = SEARCHER
@@ -243,7 +242,7 @@
         div.appendChild(a);
       });
       div.id = 'tags';
-      content.insertBefore(div, footnotes);
+      content.insertBefore(div, authorCard);
     }
   }
 
@@ -411,7 +410,7 @@
   function hateYou () {
     var hit = document.createElement('div')
     hit.innerHTML = '<p>Oops! Your browser is too outmoded. '
-      + 'Would you please try the lastest <a href="https://www.google.com/chrome/">Chrome</a>?</p>'
+        + 'Would you please try the lastest <a href="https://www.google.com/chrome/">Chrome</a>?</p>'
     hit.style.textAlign = 'center'
     hit.style.background = '#ed462f'
     hit.style.color = 'white'
@@ -423,40 +422,44 @@
   /**
    * entry point
    */
-  !function () {
+  (function () {
     var running = false
     var loadEvent = ['DOMContentLoaded', 'load']
 
     var pathname = window.location.pathname
     var body = document.getElementsByTagName('body')[0]
     var content = document.getElementById('content')
-    var meta = getMetaInfo(false) // true -> print meta info
+    var meta = getMetaInfo(true) // true -> print meta info
 
     for (var i = 0, max = loadEvent.length; i < max; i++) {
       var event = loadEvent[i]
       addEventListener(window, event, function () {
         if (!running) {
           running = true
-          changeBodyTopStyle(body)
-          showWarning(content, meta)
-          showTags(body, content, meta)
-          showFooter(body, content, meta)
-          someArticlesFix(body, content)
-          showMetaInfo(body, content, meta)
+
           if (typeof __forEach === 'undefined') {
             // too old
             hateYou()
-          } else {
+          }
+
+          changeBodyTopStyle(body)
+          showWarning(content, meta)
+          showMetaInfo(body, content, meta)
+          showFooter(body, content, meta)
+          someArticlesFix(body, content)
+          loadCustomSearch(content, document.getElementById('#outline_disqus_thread'))
+
+          if (typeof __forEach == 'function') {
+            showTags(body, content, meta)
             loadLazyImage(content)
             // showHomeButton(body)
             // ImgClickEvent(body, initImgWapper(body, content))
             loadDisqus(body, content)
           }
-          loadCustomSearch(content, document.getElementById('#outline_disqus_thread'))
           removeEventListener(window, event, function () {})
         }
       }, false)
     }
-  }()
+  })()
 
 })(this)
