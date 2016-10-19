@@ -63,7 +63,8 @@ nav a span {
 #archive svg,
 #rss svg,
 #search svg {
-    width: 20px;
+    width: 32px;
+    height: 32px;
 }
 
 #play-area {
@@ -207,9 +208,9 @@ nav a span {
 .return:after {
   transform: rotate(-45deg);
 }
-#search {
-    display: none;
-}
+/* #search { */
+/*     display: none; */
+/* } */
 #custom-search {
     width: 100%;
     max-width: 960px;
@@ -239,21 +240,29 @@ nav a span {
         margin-top: 2%;
     }
     .blink-wrapper {
-        font-size: 10em;
+        font-size: 8em;
     }
     .article-list .meta {
         margin: 10px auto;
     }
 
     nav {
-        margin-top: '4px';
+        margin: 0 auto;
+        margin-top: 16px;
+        width: 150px;
     }
     nav a {
         display: block;
         font-size: 16px;
+        font-weight: 500;
         margin: 8px auto;
         color: #191919 !important;
-        text-decoration: underline !important;
+        /* color: white; */
+        /* text-decoration: underline !important; */
+        background: #e6b8b8;
+        box-shadow: 2px 2px 2px #e6b8b8;
+        padding: 12px;
+        border-radius: 4px;
     }
     #rss {
         display: none!important;

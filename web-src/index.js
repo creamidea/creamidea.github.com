@@ -458,10 +458,10 @@
             // too old
             hateYou()
           } else {
-            document.querySelector('#search').style.display = 'initial'
             main()
             // main.apply(window)
           }
+          // document.getElementById('search').style.display = 'initial!important'
           removeEventListener(window, event, function () {})
         }
       }, false)
