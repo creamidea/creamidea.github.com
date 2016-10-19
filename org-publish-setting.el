@@ -98,8 +98,8 @@ CURRENT-OR-ALL FORCE ASYNC."
              :headline-levels 4   ; Just the default for this project.
              :html-head ,(concat link-style-css html5shiv)
              :auto-preamble t
-             ;; :html-preamble ,(concat app-js analytics-js)
-             :html-postamble ,(concat meta-viewport author-info app-js analytics-js)
+             ;; :html-preamble ,meta-viewport
+             :html-postamble ,(concat author-info app-js analytics-js)
              :html-extension "html"
              :html-head-include-default-style nil
              :html-head-include-scripts nil
