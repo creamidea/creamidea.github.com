@@ -14,10 +14,6 @@ const UglifyJS = require("uglify-js")
 
 const CONTENTREGEXP = /<li><a href=(.*)>/gi
 const HREFREGEXP = /href="(.+?)"/i
-const TITLEREGEXP = /#\+TITLE:\s*?(.+)/i
-const DATEREGEXP = /#\+DATE:\s*(.+)/i
-const TAGSREGEXP = /#\+KEYWORDS:\s*?(.+)/i
-const AUTHORREGEXP = /#\+AUTHOR:\s*?(.+)/i
 const CATEGORYREGEXP = /#\+CATEGORY:\s*?(.+)/i
 
 const SITEMAPPATH = path.resolve(__dirname, 'static', 'html', 'sitemap.html')
@@ -155,13 +151,37 @@ function attachTimestamp(hashs, files) {
 }
 
 function cutout(data) {
+  let meta = {}
   let asterisk = 0
-  return data.split(/\r?\n/g).map(function (line) {
+  meta.description = data.split(/\r?\n/g).map(function (line) {
+    if (line.search(/^#\+/) === 0 &&
+        asterisk === 0) {
+      let pos = line.indexOf(':')
+      if (pos < 0) return;
+
+      let name = line.slice(2, pos).toLowerCase()
+      let value = line.slice(pos+1).trim()
+
+      if (name === 'date') {
+        value = (function (date) {
+          let _d = date
+          let [year, month, day] = _d.split('-')
+          return (new Date(Date.UTC(year, month, day, 8, 0, 0)).getTime()) // Beijing
+        })(value)
+      }
+
+      meta[name] = value
+    }
     if (line.search(/^\*/) === 0) {
       asterisk += 1
     }
     if (asterisk === 1) return line
   }).join('')
+
+  if (typeof meta.author === 'undefined')
+    meta.author = '冰糖火箭筒(Junjia Ni)'
+
+  return meta
 }
 
 function readArticle (category, filename, container, callback) {
@@ -201,21 +221,13 @@ function readArticle (category, filename, container, callback) {
         } else {
           const data = buffer.toString("utf8", 0, bytesRead)
           // const data = buffer.toString("utf8", 0, buffer.length)
-          const title = data.match(TITLEREGEXP)
-          const author = data.match(AUTHORREGEXP)
-          const tags = data.match(TAGSREGEXP)
-          const date = data.match(DATEREGEXP)
           // const category = data.match(CATEGORYREGEXP) // has be defined above
-          const description = cutout(data)
+          const { title, author, keywords, date, description } = cutout(data)
           Object.assign(container[sym], {
-            title: title && title[1].trim(),
-            date: (function (date) {
-              let _d = date && date[1].trim()
-              let [year, month, day] = _d.split('-')
-              return (new Date(Date.UTC(year, month, day, 8, 0, 0)).getTime()) // Beijing
-            })(date),
-            tags: tags && tags[1].trim(),
-            author: author === null  ? '冰糖火箭筒(Junjia Ni)' : author[1].trim(),
+            title: title,
+            date: date,
+            tags: keywords,
+            author: author,
             category: category, // dirname
             description: description
           })
