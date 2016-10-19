@@ -6,6 +6,18 @@
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
 
+#+BEGIN_HTML
+<div class="lazy-load-img-wrapper">
+<noscript>
+<img src="http://blog.arcbees.com/wp-content/uploads/Post_GWT_2.8Beta1_Howto_v1-01.png"
+alt="google web toolkit" title="google web toolkit"/>
+</noscript>
+<img data-src="http://blog.arcbees.com/wp-content/uploads/Post_GWT_2.8Beta1_Howto_v1-01.png"
+lazy-load class="lazy-load-img" alt="google web toolkit" title="google web toolkit"/>
+<p class="title-picture">题图来自网络</p>
+</div>
+#+END_HTML
+
 
 * 前言
 又这个样子混过去好多天啦。不过挖的坑始终是要来填的。话说不知道为何对GWT有如此的好感。
@@ -16,8 +28,6 @@
 来开发的，当时就不知所措了。于是就一直搁置在那里了。不过心中还是痒痒的。
 
 这不在寒假学车期间顺便玩了一下这个工具。好有爱啊。
-
-这篇文章实际写于 *2014-01-29*
 
 * 开发环境
 第一步当然是安装开发环境啦。我使用的Java IDE是Eclipse[fn:1]，具体的安装配置过程我在这里就不累述了。
