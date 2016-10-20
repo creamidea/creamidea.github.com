@@ -1,6 +1,7 @@
 "use strict"
 ;(function (window) {
   var __map = Array.prototype.map
+  var __slice = Array.prototype.slice
   var __forEach = Array.prototype.forEach
   // var __pop = Array.prototype.pop
   var __shift = Array.prototype.shift
@@ -128,6 +129,7 @@
 
       show: function (drama) {
         // clear the play area
+        var params = __slice.call(arguments, 1)
         __forEach.call(playArea.children, function (player) {
           player.style.display = 'none'
         })
@@ -142,15 +144,14 @@
         playAreaTips.innerHTML = 'Preparing Drama - ' + '<span style="color:#4285f4;">' + drama + '...</span>'
         playAreaTips.style.display = 'block'
         try {
-          var dom = this[drama](function () {
+          var dom = this[drama].apply(this, [function () {
             playAreaTips.style.display = 'none'
-          })
+          }].concat(params))
 
           if (dom instanceof Element) {
             dom.style.display = 'block'
             playAreaTips.style.display = 'none'
           }
-
         } catch (err) {
           playAreaTips.innerHTML = 'Drama - ' + '<span style="color:#4285f4;">' + drama + '</span>'
             + ' happend error: <strong>' + err.message + '</strong>'
@@ -179,7 +180,13 @@
         // show archive-list
         var articleListDOM = playArea.querySelector('.article-list')
         if (articleListDOM === null) {
-          loadArchive(function (articleList, specialList) {
+          loadStaticFile('/static/html/archive.html', function (txt) {
+            var htmlDoc = document.createElement('div')
+            htmlDoc.innerHTML = txt
+            // var htmlDoc = parser.parseFromString(txt, "text/html")
+            var articleList = htmlDoc.querySelector('.article-list')
+            var specialList = htmlDoc.querySelector('.special-list')
+
             // var articleList = cache.articleList
             articleListDOM = playArea.appendChild(articleList)
             articleList.addEventListener('click', function (ev) {
@@ -189,10 +196,12 @@
               var href = target.getAttribute('href')
               if (tagName === 'A' && className === 'tag-item' && typeof href !== undefined) {
                 ev.preventDefault()
-                location.href = href.replace(/\/search\?/, SEARCHER)
+                // location.href = href.replace(/\/search\?/, SEARCHER) + '&hl=en'
                 // + '+site:' + location.host
+                location.href = '#!/tags?tag=' + href.replace(/\/search\?q=/, '')
               }
             }, false)
+
             articleListDOM.style.display = 'block'
             cb()
           })
@@ -211,11 +220,45 @@
         return customSearchDOM
       },
 
+      tags: function (cb, tag) {
+        var tagsDOM = playArea.querySelector('#tags-cloud')
+        if (tagsDOM === null) {
+          loadStaticFile('/static/html/tags.html', function (txt) {
+            var _t = document.createElement('div')
+            _t.innerHTML = txt
+            _t.id = 'tags-cloud'
+            tagsDOM = playArea.appendChild(_t)
+            showPostsByTag(tagsDOM, tag)
+            tagsDOM.style.display = 'block'
+            cb()
+          })
+        }
+        showPostsByTag(tagsDOM, tag)
+        return tagsDOM
+      },
+
       go: function (url) {
         location.href = url
       }
     }
     return __interface
+  }
+
+  /**
+   * Show posts by tag-name
+   */
+  function showPostsByTag(tagsDOM, tag) {
+    var children = tagsDOM.children[1].children
+    if (tag) {
+      var c = 'tag-' + tag
+      __forEach.call(children, function (ul) {
+        if (ul.className === c) {
+          ul.style.display = 'block'
+        } else if (ul.style.display === 'block') {
+          ul.style.display = 'none'
+        }
+      })
+    }
   }
 
   /**
@@ -326,19 +369,11 @@
     httpRequest.send()
   }
 
-  function loadArchive (callback) {
+  function loadStaticFile(url, callback) {
     loader({
       type: 'GET',
-      url: '/static/html/archive.html',
-      success: function (txt) {
-        var htmlDoc = document.createElement('div')
-        htmlDoc.innerHTML = txt
-        // var htmlDoc = parser.parseFromString(txt, "text/html")
-        callback(
-          htmlDoc.querySelector('.article-list'),
-          htmlDoc.querySelector('.special-list')
-        )
-      }
+      url: url,
+      success: callback
     })
   }
 
@@ -393,7 +428,14 @@
   // }
 
   function main () {
+
     var stage = Stage()
+
+    var me = {
+      "douban": 'https://www.douban.com/people/creamidea/',
+      "github": 'https://github.com/creamidea'
+    }
+
     var router = Router({
       "home": function () {
         stage.hide()
@@ -401,21 +443,34 @@
       "archive": function () {
         stage.show('archive')
       },
-      "wiki/(\.+)": function () {
-        var file = __shift.call(arguments)
+      "wiki/(\.+)": function (file) {
+        // var file = __shift.call(arguments)
         var url = '/static/html/wiki/' + file
         history.pushState({}, '', url)
         stage.go(url)
       },
-      "articles/(\.+)": function () {
-        var file = __shift.call(arguments)
+      "articles/(\.+)": function (file) {
+        // var file = __shift.call(arguments)
         var url = '/static/html/articles/' + file
         stage.go(url)
       },
       "search": function () {
         stage.show('search')
+      },
+      "tags(?:\\?tag=(\.+))?": function (tag) {
+        stage.show('tags', tag)
+      },
+      "go(?:\\?name=(\.+))": function (name) {
+        var url
+        try {
+          url = me[name]
+        } catch (err) {
+          url = '#!/home'
+        }
+        stage.go(url)
       }
     })
+
     stage.init(function () {
       router.test()
     })

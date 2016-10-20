@@ -234,9 +234,10 @@
       var authorCard = document.getElementById('author-card');
       keywords.forEach(function (key) {
         var a = document.createElement('a');
-        a.href = SEARCHER
-          + encodeURIComponent(key)
+        // a.href = SEARCHER
+        //   + encodeURIComponent(key)
         // + '+site:' + location.host;
+        a.href = '/#!/tags?tag=' + encodeURIComponent(key)
         a.title = 'Go to ' + key;
         a.innerHTML = key;
         div.appendChild(a);

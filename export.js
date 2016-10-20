@@ -53,7 +53,7 @@ const exportEvent = new EventEmitter()
 exportEvent.on('end', (posts, tagsResults) => {
   writeCache({posts: posts, tags: tagsResults})
   const archiveHtml = genArchiveHtml(posts)
-  const tagsResultsJson = genTagsResultsJson(tagsResults)
+  const tagsResultsJson = genTagsResultsJson(tagsResults, posts)
   const rss = genRSS(posts)
   // writeFile(ARCHIVEHTMLPATH, UglifyHTML.minify(archiveHtml, MINIFYHTMLRULES))
   writeFile(ARCHIVEHTMLPATH, archiveHtml)
@@ -65,19 +65,26 @@ exportEvent.on('end', (posts, tagsResults) => {
 // DOM Viewer //
 ////////////////
 
-function genTagsResultsJson (tagsResults) {
-  return '<script id="creamide-site-tags" type="application/json">'
-    + Object.getOwnPropertySymbols(tagsResults).map( sym => {
-      let tag = tagsResults[sym]
-      // console.log(tag)
-      return JSON.stringify(tag)
-    }).join('')
-    + '</script>'
+function genTagsResultsJson (tagsResults, posts) {
+  let minFont = 10.0,
+      maxFont = 35.0,
+      diffFont = maxFont - minFont
+  let ups = [], downs = []
+  Object.getOwnPropertySymbols(tagsResults).map( sym => {
+    let tag = tagsResults[sym]
+    // console.log(tag)
+    ups.push(`<li data-weight=${tag.count} style="display:inline"><a href="#!/tags?tag=${encodeURIComponent(tag.name)}" style="font-size:${(Math.log(tag.count) / Math.log(2)) * diffFont / 6 + minFont}px">${tag.name}</a><sup>${tag.count}<sup></li>`)
+    downs.push(`<ul class="tag-${encodeURIComponent(tag.name)}" style="display:none">` + tag.filenames.map(function (filename) {
+      let post = posts[filename]
+      return `<li><a href="${URLPREFIX}${post.category}/${post.name}.html">${post.title}</a></li>`
+    }).join('') + '</ul>')
+  })
+  return `<ul>${ups.join('')}</ul><div>${downs.join('')}</div>`
 }
 
 function genTagsHtml (tags) {
   let tagsHtml = splitTags(tags, tag => {
-    return `<a class="tag-item" href="/search?hl=en&q=${encodeURIComponent(tag)}" `
+    return `<a class="tag-item" href="/search?q=${encodeURIComponent(tag)}"`
       + `title="Go to ${tag}" alt="Go to ${tag}">${tag}</a>`
   })
   return `<div class="tags">${tagsHtml.join('')}</div>`
@@ -184,7 +191,7 @@ function analysisTags (files) {
         }
       }
       _c[sym].count =  _c[sym].count + 1
-      _c[sym].filenames.push(file.name)
+      _c[sym].filenames.push(`${file.category}::${file.name}`)
     })
   })
   return _c
