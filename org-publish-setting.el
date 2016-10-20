@@ -93,6 +93,7 @@ CURRENT-OR-ALL FORCE ASYNC."
              :publishing-directory ,creamidea-public-path
              :base-directory ,(concat creamidea-path "_content/")
              :base-extension "org"
+             :exclude "README.org" ;; regexp
              :recursive t
              :publishing-function org-html-publish-to-html
              :headline-levels 4   ; Just the default for this project.
@@ -154,7 +155,10 @@ CURRENT-OR-ALL FORCE ASYNC."
 (defun publish-creamidea-site ()
   "Publish Site."
   (interactive)
-  (creamidea-site-setting "all" t))
+  (if (yes-or-no-p "Do you want to publish creamidea-site forcely?")
+      (creamidea-site-setting "all" t)
+    (creamidea-site-setting "all"))
+  (build-archive))
 
 (defun build-archive ()
   "Build Archive."
