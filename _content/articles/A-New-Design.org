@@ -56,7 +56,7 @@
 : #+TITLE: A New Design
 : #+AUTHOR:ICECREAM(氷菓)
 : #+EMAIL:creamidea(AT)gmail.com
-: #+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t
+: #+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t tex:nil
 : #+LINK_HOME: https://www.google.com
 : #+STYLE:<link rel="stylesheet" type="text/css" href="../css/style.css">
 : #+INFOJS_OPT:
@@ -99,7 +99,7 @@
 : #+TITLE: $1
 : #+AUTHOR:ICECREAM(氷菓)
 : #+EMAIL:creamidea(AT)gmail.com
-: #+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t TeX:t
+: #+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:t f:t tex:nil
 : #+LINK_HOME: https://www.google.com
 : #+STYLE:<link rel="stylesheet" type="text/css" href="css/style.css">
 : #+INFOJS_OPT:

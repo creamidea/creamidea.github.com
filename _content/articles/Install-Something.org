@@ -2,7 +2,7 @@
 #+DATE: 2015-12-27
 #+DESCRIPTION: 安装一些东西
 #+KEYWORDS: emacs,orgmode,install
-#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:nil email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
 

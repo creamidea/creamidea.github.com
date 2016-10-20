@@ -2,7 +2,7 @@
 #+DATE: 2015-12-27
 #+DESCRIPTION: 一些关于css的小知识
 #+KEYWORDS: css,links,viwport-position
-#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:nil email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
 

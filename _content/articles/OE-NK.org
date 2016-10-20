@@ -2,7 +2,7 @@
 #+DATE: 2015-12-27
 #+DESCRIPTION: 静态博客预览编辑发布工具
 #+KEYWORDS: emacs,orgmode,静态博客,blog,static-blog
-#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:nil TeX:t email:t timestamp:t
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:nil tex:nil email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
 

@@ -3,7 +3,7 @@
 #+CATEGORY: article
 #+DESCRIPTION: 关于本站的一些说明
 #+KEYWORDS: orgmode,emacs,github-page,github,blog,design,jekyll,static-blog
-#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:nil email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 
 

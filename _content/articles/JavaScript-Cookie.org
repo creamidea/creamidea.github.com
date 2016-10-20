@@ -5,9 +5,21 @@
 #+CATEGORY: article
 #+DESCRIPTION: Learn JavaScript
 #+KEYWORDS: javascript,generate-function,yield,yield*
-#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t <:t date:t timestamp:t
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:nil email:t <:t date:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
+
+#+BEGIN_HTML
+<div class="lazy-load-img-wrapper">
+<noscript>
+<img src=""
+alt="Javascript" title="Javascript"/>
+</noscript>
+<img data-src=""
+lazy-load class="lazy-load-img" alt="Javascript" title="Javascript"/>
+<p class="title-picture">题图来自网络</p>
+</div>
+#+END_HTML
 
 
 * 前言

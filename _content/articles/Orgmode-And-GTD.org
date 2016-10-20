@@ -3,7 +3,7 @@
 #+CATEGORY: article
 #+DESCRIPTION: 如何配置orgmode使其变成GTD工具
 #+KEYWORDS: emacs,orgmode,GTD
-#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:nil email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 
 

@@ -2,7 +2,7 @@
 #+DATE: 2013-04-06
 #+DESCRIPTION: install them into emacs in linux and windows 
 #+KEYWORDS: orgmode,emacs,autocomplete,yanisppet
-#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t TeX:t email:t timestamp:t
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:nil email:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
 

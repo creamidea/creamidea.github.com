@@ -3,7 +3,7 @@
 #+CATEGORY: wiki
 #+DESCRIPTION: Works
 #+KEYWORDS: emacs,orgmode
-#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:t email:t <:t date:t timestamp:t
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:nil email:t <:t date:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
 
