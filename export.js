@@ -75,7 +75,8 @@ function genTagsHtml (tags) {
   var tagsHtml = []
   if (tags && typeof tags.split === 'function') {
     tagsHtml = tags.split(',').map((tag) => {
-      return `<a class="tag-item" href="/search?hl=en&q=${encodeURIComponent(tag)}" title="Go to ${tag}">${tag}</a>`
+      return `<a class="tag-item" href="/search?hl=en&q=${encodeURIComponent(tag)}" `
+        + `title="Go to ${tag}" alt="Go to ${tag}">${tag}</a>`
     })
   }
   return `<div class="tags">${tagsHtml.join('')}</div>`
@@ -107,7 +108,7 @@ return `<p class="${key}-time">`
 }).join('')}
 </div>
 ${genTagsHtml(tags)}</li>`
-// new Date(mtime).toISOString().replace(/T/, ' ').replace(/\..+/, '')
+
     if (SPECIALFILE.indexOf(name) >= 0) {
       special.push(_html)
       return
@@ -115,6 +116,7 @@ ${genTagsHtml(tags)}</li>`
       return _html
     }
   })
+
   return `<ul class="article-list">${html.join('')}</ul><ul class="special-list">${special.join('')}</ul>`
 }
 
