@@ -2,7 +2,7 @@
 
 const fs = require('fs')
 const crypto = require('crypto')
-const sha1 = crypto.createHash('sha1')
+// const sha1 = crypto.createHash('sha1')
 const path = require('path')
 const EventEmitter = require('events')
 const zlib = require('zlib')
@@ -19,10 +19,8 @@ const CATEGORYREGEXP = /#\+CATEGORY:\s*?(.+)/i
 const SITEMAPPATH = path.resolve(__dirname, 'static', 'html', 'sitemap.html')
 const PUBPATH = path.resolve(__dirname, 'static', 'html/')
 const BASEPATH = path.resolve(__dirname, '_content/')
-const INDEXHTMLPATH = path.resolve(__dirname, 'index.html')
 const ARCHIVEHTMLPATH = path.resolve(__dirname, 'static', 'html', 'archive.html')
-const INDEXCSSFILE = path.resolve(__dirname, 'static', 'index.css')
-const INDEXJSFILE = path.resolve(__dirname, 'static', 'index.js')
+const TAGSHTMLPATH = path.resolve(__dirname, 'static', 'html', 'tags.html')
 const ORGCACHEFILE = path.resolve(__dirname, '.org-timestamps', 'creamidea-article.cache')
 const CACHEFILE = path.resolve(__dirname, '.org-timestamps', 'export-history.cache')
 const RSSFILE = path.resolve(__dirname, 'static', 'rss2.xml')
@@ -52,33 +50,36 @@ const MINIFYHTMLRULES = {
 ///////////
 
 const exportEvent = new EventEmitter()
-exportEvent.on('end', (data) => {
-  writeCache(data)
-  const archiveHtml = genArchiveHtml(data)
+exportEvent.on('end', (posts, tagsResults) => {
+  writeCache({posts: posts, tags: tagsResults})
+  const archiveHtml = genArchiveHtml(posts)
+  const tagsResultsJson = genTagsResultsJson(tagsResults)
+  const rss = genRSS(posts)
   // writeFile(ARCHIVEHTMLPATH, UglifyHTML.minify(archiveHtml, MINIFYHTMLRULES))
-  writeFile(ARCHIVEHTMLPATH, archiveHtml.replace(/^$|\r?\n/g, '').replace(/>\s+</g, '><'))
-  command.rss(data)
-  // fs.writeFile(INDEXHTMLPATH, genHomeHtml(listHtml), (err) => {
-  //   if (err) {
-  //     console.log(err)
-  //   } else {
-  //     console.log(`Write to: ${INDEXHTMLPATH}`)
-  //   }
-  // })
+  writeFile(ARCHIVEHTMLPATH, archiveHtml)
+  writeFile(TAGSHTMLPATH, tagsResultsJson)
+  writeFile(RSSFILE, rss)
 })
 
 ////////////////
 // DOM Viewer //
 ////////////////
 
+function genTagsResultsJson (tagsResults) {
+  return '<script id="creamide-site-tags" type="application/json">'
+    + Object.getOwnPropertySymbols(tagsResults).map( sym => {
+      let tag = tagsResults[sym]
+      // console.log(tag)
+      return JSON.stringify(tag)
+    }).join('')
+    + '</script>'
+}
+
 function genTagsHtml (tags) {
-  var tagsHtml = []
-  if (tags && typeof tags.split === 'function') {
-    tagsHtml = tags.split(',').map((tag) => {
-      return `<a class="tag-item" href="/search?hl=en&q=${encodeURIComponent(tag)}" `
-        + `title="Go to ${tag}" alt="Go to ${tag}">${tag}</a>`
-    })
-  }
+  let tagsHtml = splitTags(tags, tag => {
+    return `<a class="tag-item" href="/search?hl=en&q=${encodeURIComponent(tag)}" `
+      + `title="Go to ${tag}" alt="Go to ${tag}">${tag}</a>`
+  })
   return `<div class="tags">${tagsHtml.join('')}</div>`
 }
 
@@ -118,6 +119,7 @@ ${genTagsHtml(tags)}</li>`
   })
 
   return `<ul class="article-list">${html.join('')}</ul><ul class="special-list">${special.join('')}</ul>`
+    .replace(/^$|\r?\n/g, '').replace(/>\s+</g, '><')
 }
 
 function genRSS (files) {
@@ -166,6 +168,31 @@ function genRSS (files) {
 ///////////
 // Utils //
 ///////////
+
+function analysisTags (files) {
+  let _c = {}
+  Object.keys(files).map( key => {
+    let file = files[key]
+    if (!file.tags) return
+    splitTags(file.tags, tag => {
+      let sym = Symbol.for(tag)
+      if (typeof _c[sym] === 'undefined') {
+        _c[sym] = {
+          count: 0,
+          filenames: [],
+          name: tag
+        }
+      }
+      _c[sym].count =  _c[sym].count + 1
+      _c[sym].filenames.push(file.name)
+    })
+  })
+  return _c
+}
+
+function splitTags (tags, cb) {
+  return tags.split(',').map(cb)
+}
 
 function splitByLine (data, cb) {
   return data.split(/\r?\n/).map(cb)
@@ -300,6 +327,8 @@ function readAllArticles(files, force=false) {
   let sFiles = Object.keys(files)
   let max = sFiles.length
 
+  let tagsResults = analysisTags(files)
+
   sFiles.map((sFile, index) => {
     let file = files[sFile]
     let [category, filename] = getCategoryAndFilename(file.fullpath, BASEPATH)
@@ -311,7 +340,7 @@ function readAllArticles(files, force=false) {
     if (index === max - 1) {
       // the end
       readArticle(category, filename, files, (data) => {
-        exportEvent.emit('end', Object.assign({}, data))
+        exportEvent.emit('end', Object.assign({}, data), tagsResults)
       })
     } else {
       readArticle(category, filename, files)
@@ -362,19 +391,51 @@ function writeFile(filename, data) {
   })
 }
 
-function writeCache(data) {
-  Object.keys(data).map( key => {
-    data[key].isModified = false
-  })
-  writeFile(CACHEFILE, JSON.stringify(data))
+function writeCache({posts, tags}) {
+  writeFile(CACHEFILE, JSON.stringify({
+
+    posts: Object.keys(posts).map( key => {
+      posts[key].isModified = false
+      return posts[key]
+    }),
+
+    tags: Object.getOwnPropertySymbols(tags).map( sym => {
+      return tags[sym]
+    })
+
+  }))
 }
 
 function readCache() {
-  return readFile(CACHEFILE)
+  return new Promise((resolve, reject) => {
+    let _posts = {}, _tags = {}
+    readFile(CACHEFILE).then( (cache) => {
+      const {posts, tags} = JSON.parse(cache.toString('utf8'))
+      posts.map( file => {
+        _posts[`${file.category}::${file.name}`] = file
+      })
+      tags.map( tag => {
+        _tags[Symbol.for(tag.name)] = tag
+      })
+      resolve.call(this, {posts: _posts, tags: _tags})
+    }).catch( err => {
+      if (err.code === 'ENOENT') {
+        resolve.call(this, {posts: _posts, tags: _tags})
+      } else {
+        reject.call(this, err)
+      }
+    })
+  })
 }
 
 function readOrgCache () {
-  return readFile(ORGCACHEFILE)
+  return new Promise( (resolve, reject) => {
+    readFile(ORGCACHEFILE).then( cache => {
+      resolve.call(this, cache.toString('utf8'))
+    }).catch( err => {
+      reject.call(this, err)
+    })
+  })
 }
 
 function compressSource(name, type) {
@@ -448,12 +509,12 @@ function parseSitemap(str) {
   }
 }
 
-function mergeCache (orgCache, exportCache) {
+function mergeCache (orgCache="", exportCache={}) {
   return new Promise( (resolve, reject) => {
     try {
-      let files = JSON.parse(exportCache.toString('utf8'))
+      let files = exportCache.posts
       let hashs = {}
-      splitByLine(orgCache.toString('utf8'), (line, index) => {
+      splitByLine(orgCache, (line, index) => {
         if (index < 3) return
         let record = line.slice(1, -1).split(/\s+/)
         if (record.length < 2) return
@@ -510,8 +571,8 @@ function loadSitemap () {
 const command = {
   archive: (force) => {
     Promise.all([readOrgCache(), readCache()]).then( values => {
-      let [orgCache, cache] = values
-      mergeCache(orgCache, cache).then(
+      let [orgCache, exportCache] = values
+      mergeCache(orgCache, exportCache).then(
         d => {
           attachTimestamp(d.hashs, d.files)
           readAllArticles(d.files, force)
@@ -548,10 +609,6 @@ const command = {
             .replace(/^$|\r?\n/g, '').replace(/>\s+</g, '><')
         writeFile(path.resolve(__dirname, 'static', 'about.html'), rlt)
       })
-  },
-  "rss": function (files) {
-    let rss = genRSS(files)
-    writeFile(RSSFILE, rss)
   },
   "add": function (f, sep) {
     console.log(f)
