@@ -90,6 +90,11 @@ nav a span {
     word-break: break-word;
     opacity: 0.96;
 }
+#go-tips .close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+}
 /* #search { */
 /*     display: none; */
 /* } */

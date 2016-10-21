@@ -98,6 +98,7 @@ window.console = window.console || (function(){
   function Stage () {
 
     var cache = {}
+    var specialNav = ['about', 'rss', 'works', 'friends']
     var head = document.querySelector('head')
     var title = head.querySelector('title')
     var body = document.querySelector('body')
@@ -148,12 +149,11 @@ window.console = window.console || (function(){
         // load archive (articles list)
         console.log('Stage initializing...')
         addEventListener(nav, 'click', (function (e) {
-          var target = e.target.parentElement
-          if (['about', 'rss', 'works', 'friends'].indexOf(target.id) >= 0
-              && target.nodeName === 'A'
-              && target.href) {
+          var target = e.target
+          if (specialNav.indexOf(target.id) >= 0 ||
+              specialNav.indexOf(target.parentElement.id) >=0) {
             e.preventDefault()
-            this.go(target.href)
+            this.go(target.href || target.parentElement.href)
           }
         }).bind(this))
         addEventListener(playArea, 'click', (function (e) {
@@ -293,7 +293,7 @@ window.console = window.console || (function(){
         if (url) {
           goTips('<p>You will go to</p><p><strong>' + url + '</strong></p>',
                  {timeout: 60, action: 'timeout'})
-          location.href = url
+          // location.href = url
         } else {
           goTips('<p>I don\'t know where to go.</p>')
         }
@@ -313,21 +313,26 @@ window.console = window.console || (function(){
   function IntervalTimer (interval) {
     var timer, count = 0
     if (!interval) interval = 1000
-    return function (o) {
-      if (isNaN(o.count) && o.count > 0) {
-        console.log('[IntervalTimer] The count is invalid. Count: ', o.count)
-        return
-      }
-      timer = setInterval(function () {
-        count = count + 1
-        if (count > o.count) {
-          clearInterval(timer)
-          count = 0
-          if (typeof o.end === 'function') o.end()
-        } else {
-          if (typeof o.every === 'function') o.every()
+    return {
+      start:function (o) {
+        if (isNaN(o.count) && o.count > 0) {
+          console.log('[IntervalTimer] The count is invalid. Count: ', o.count)
+          return
         }
-      }, interval)
+        timer = setInterval((function () {
+          count = count + 1
+          if (count > o.count) {
+            this.stop()
+            if (typeof o.end === 'function') o.end()
+          } else {
+            if (typeof o.every === 'function') o.every()
+          }
+        }).bind(this), interval)
+      },
+      stop: function (){
+        clearInterval(timer)
+        count = 0
+      }
     }
   }
 
@@ -347,7 +352,14 @@ window.console = window.console || (function(){
     var msgDOM = goDOM.children[0]
     var timeoutDOM = goDOM.children[1]
     var toolsDOM = goDOM.children[2]
+    var closeDOM = goDOM.children[3]
     var intervalTimer = IntervalTimer(1000)
+
+    addEventListener(closeDOM, 'click', function (e) {
+      e.preventDefault()
+      intervalTimer.stop()
+      goDOM.style.display = 'none'
+    })
 
     return function (message, _o) {
       var opt = _o || {}
@@ -358,7 +370,7 @@ window.console = window.console || (function(){
       timeoutDOM.innerHTML = timeout + 's...'
       toolsDOM.querySelector('.reload').style.display = 'none'
 
-      intervalTimer({
+      intervalTimer.start({
         every: function () {
           timeout = timeout - 1
           timeoutDOM.innerHTML = timeout + 's...'
