@@ -293,7 +293,7 @@ window.console = window.console || (function(){
         if (url) {
           goTips('<p>You will go to</p><p><strong>' + url + '</strong></p>',
                  {timeout: 60, action: 'timeout'})
-          // location.href = url
+          setTimeout(function () {location.href = url}, 24)
         } else {
           goTips('<p>I don\'t know where to go.</p>')
         }
