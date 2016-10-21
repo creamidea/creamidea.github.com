@@ -473,15 +473,9 @@ window.console = window.console || (function(){
    * 增加首页背景图片的容器
    */
   function showBanner (body, content) {
-    var div = document.createElement('div');
-    div.id = 'banner-wrapper';
-    // >(&gt;) lambda(&#411;)
-    div.innerHTML = '<p class="blink-wrapper">&#955;<span class="blink" data-frequency="800">I</span></p>'
-      +'<p style="margin:0;text-align:center">Octocat is on the way...</p>';
-    body.insertBefore(div, content);
     blink()
     changeOctoCat(body);
-    return div
+    return document.querySelector('#banner-wrapper')
   }
 
   /**
