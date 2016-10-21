@@ -102,6 +102,9 @@ window.console = window.console || (function(){
     var title = head.querySelector('title')
     var body = document.querySelector('body')
     var nav = document.querySelector('nav')
+
+    var goTips = GoTips(body)
+
     var playArea = document.querySelector('#play-area')
     var playAreaTips = document.createElement('div')
     playAreaTips.className = 'play-area-tips'
@@ -143,7 +146,25 @@ window.console = window.console || (function(){
     var __interface = {
       init: function (ready) {
         // load archive (articles list)
-        // console.log('Stage initializing...')
+        console.log('Stage initializing...')
+        addEventListener(nav, 'click', (function (e) {
+          var target = e.target.parentElement
+          if (['about', 'rss', 'works', 'friends'].indexOf(target.id) >= 0
+              && target.nodeName === 'A'
+              && target.href) {
+            e.preventDefault()
+            this.go(target.href)
+          }
+        }).bind(this))
+        addEventListener(playArea, 'click', (function (e) {
+          var target = e.target
+          if (target.className === 'title'
+              && target.nodeName === 'A'
+              && target.href) {
+            e.preventDefault()
+            this.go(target.href)
+          }
+        }).bind(this))
         console.log('Stage initialized finished.\nCall function::ready...')
         if (typeof ready === 'function') ready()
         console.log('Function::ready done.')
@@ -268,10 +289,94 @@ window.console = window.console || (function(){
       },
 
       go: function (url) {
-        location.href = url
+        if (url) {
+          goTips('<p>You will go to</p><p><strong>' + url + '</strong></p>',
+                 {timeout: 60, action: 'timeout'})
+          location.href = url
+        } else {
+          goTips('<p>I don\'t know where to go.</p>')
+        }
       }
+
     }
     return __interface
+  }
+
+  /**
+   * Timer
+   * interval @param number default:1s
+   *
+   * return @param function
+   * o @param object
+   */
+  function IntervalTimer (interval) {
+    var timer, count = 0
+    if (!interval) interval = 1000
+    return function (o) {
+      if (isNaN(o.count) && o.count > 0) {
+        console.log('[IntervalTimer] The count is invalid. Count: ', o.count)
+        return
+      }
+      timer = setInterval(function () {
+        count = count + 1
+        if (count > o.count) {
+          clearInterval(timer)
+          count = 0
+          if (typeof o.end === 'function') o.end()
+        } else {
+          if (typeof o.every === 'function') o.every()
+        }
+      }, interval)
+    }
+  }
+
+  /**
+   * Go Tips
+   * body @param Element
+   *
+   * return @param function
+   * message @param string
+   * _o @param object
+   *  + timeout number > 1
+   *  + action string
+   *  + end object
+   */
+  function GoTips (body) {
+    var goDOM = body.querySelector('#go-tips')
+    var msgDOM = goDOM.children[0]
+    var timeoutDOM = goDOM.children[1]
+    var toolsDOM = goDOM.children[2]
+    var intervalTimer = IntervalTimer(1000)
+
+    return function (message, _o) {
+      var opt = _o || {}
+      var timeout = opt.timeout || 3
+      var action = opt.action || 'disappear'
+      goDOM.style.display = 'block'
+      msgDOM.innerHTML = message
+      timeoutDOM.innerHTML = timeout + 's...'
+      toolsDOM.querySelector('.reload').style.display = 'none'
+
+      intervalTimer({
+        every: function () {
+          timeout = timeout - 1
+          timeoutDOM.innerHTML = timeout + 's...'
+        },
+        end:function () {
+          switch (action) {
+          case "timeout":
+            toolsDOM.querySelector('.reload').style.display = 'block'
+            break
+          case "disappear":
+          default:
+            goDOM.style.display = 'none'
+            if(typeof opt.end === 'function') opt.end()
+            break
+          }
+        },
+        count: timeout
+      })
+    }
   }
 
   /**
@@ -466,7 +571,13 @@ window.console = window.console || (function(){
 
     var me = {
       "douban": 'https://www.douban.com/people/creamidea/',
-      "github": 'https://github.com/creamidea'
+      "github": 'https://github.com/creamidea',
+      "zhihu": 'https://www.zhihu.com/people/nekotrek',
+      "twitter": 'https://twitter.com/creamidea',
+      "facebook": '',
+      "google-plus": 'https://plus.google.com/u/0/106145678677607887880',
+      "about": 'https://about.me/ice.cream',
+      "flickr": 'https://www.flickr.com/people/85376793@N04/'
     }
 
     var router = Router({
@@ -498,7 +609,7 @@ window.console = window.console || (function(){
         try {
           url = me[name]
         } catch (err) {
-          url = '#!/home'
+          console.log('Don\'t know where to go. \n', err)
         }
         stage.go(url)
       }
