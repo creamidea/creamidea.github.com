@@ -463,8 +463,8 @@ window.console = window.console || (function(){
   function showBanner (body, content) {
     var div = document.createElement('div');
     div.id = 'banner-wrapper';
-    // &gt; >
-    div.innerHTML = '<p class="blink-wrapper">&#411;<span class="blink" data-frequency="800">I</span></p>'
+    // >(&gt;) lambda(&#411;)
+    div.innerHTML = '<p class="blink-wrapper">&#955;<span class="blink" data-frequency="800">I</span></p>'
       +'<p style="margin:0;text-align:center">Octocat is on the way...</p>';
     body.insertBefore(div, content);
     blink()
