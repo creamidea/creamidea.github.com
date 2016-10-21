@@ -1,4 +1,12 @@
 "use strict"
+
+// fuck the IE
+//Ensures there will be no 'console is undefined' errors
+window.console = window.console || (function(){
+  var c = {}; c.log = c.warn = c.debug = c.info = c.error = c.time = c.dir = c.profile = c.clear = c.exception = c.trace = c.assert = function(){};
+  return c;
+})();
+
 ;(function (window) {
   var __map = Array.prototype.map
   var __slice = Array.prototype.slice
@@ -8,11 +16,27 @@
   // var parser = new DOMParser()
   // var SEARCHER = 'https://www.google.com/?gws_rd=ssl#'
   var SEARCHER = 'https://cse.google.com/cse/publicurl?cx=017951989687920165329:0e60irxxe5m&'
-  var SVG = {
-    'archive':'',
-    'works': '',
-    'friends': ''
-  }
+  // var isMobile = {
+  //   Android: function() {
+  //     return navigator.userAgent.match(/Android/i);
+  //   },
+  //   BlackBerry: function() {
+  //     return navigator.userAgent.match(/BlackBerry/i);
+  //   },
+  //   iOS: function() {
+  //     return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+  //   },
+  //   Opera: function() {
+  //     return navigator.userAgent.match(/Opera Mini/i);
+  //   },
+  //   Windows: function() {
+  //     return navigator.userAgent.match(/IEMobile/i);
+  //   },
+  //   any: function() {
+  //     return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+  //   }
+  // };
+  // console.log(isMobile.any())
 
   function addEventListener (dom, evt, fn) {
     function __t (evt, fn) {
@@ -103,12 +127,14 @@
         banner.className="bounceOut animated"
       },
       "show-article": function () {
+        playArea.style.backgroundColor = '#fafafa'
         playArea.style.display = "block"
         btnReturn.style.display = "block"
         playArea.className = 'bounceInUp animated'
         btnReturn.className = 'return bounceInUp animated'
       },
       "hide-article": function () {
+        playArea.style.backgroundColor = ''
         playArea.className = 'bounceOutDown animated'
         btnReturn.className = 'return bounceOutDown animated'
       }
@@ -222,19 +248,23 @@
 
       tags: function (cb, tag) {
         var tagsDOM = playArea.querySelector('#tags-cloud')
+        var _cb = (function () {
+          tagsDOM.style.display = 'block'
+          showPostsByTag(tagsDOM, tag)
+          cb()
+        }).bind(this)
+
         if (tagsDOM === null) {
           loadStaticFile('/static/html/tags.html', function (txt) {
             var _t = document.createElement('div')
             _t.innerHTML = txt
             _t.id = 'tags-cloud'
             tagsDOM = playArea.appendChild(_t)
-            showPostsByTag(tagsDOM, tag)
-            tagsDOM.style.display = 'block'
-            cb()
+            _cb()
           })
+        } else {
+          _cb()
         }
-        showPostsByTag(tagsDOM, tag)
-        return tagsDOM
       },
 
       go: function (url) {
@@ -248,8 +278,8 @@
    * Show posts by tag-name
    */
   function showPostsByTag(tagsDOM, tag) {
-    var children = tagsDOM.children[1].children
-    if (tag) {
+    if (tagsDOM && tagsDOM.children && tag) {
+      var children = tagsDOM.children[1].children
       var c = 'tag-' + tag
       __forEach.call(children, function (ul) {
         if (ul.className === c) {
@@ -258,6 +288,9 @@
           ul.style.display = 'none'
         }
       })
+      setTimeout(function () {
+        window.scrollTo(0, tagsDOM.children[0].getBoundingClientRect().height)
+      }, 300)
     }
   }
 

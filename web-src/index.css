@@ -70,7 +70,9 @@ nav a span {
 #play-area {
     position: absolute;
     top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
     z-index: 9;
 }
 .article-list {
@@ -216,6 +218,11 @@ nav a span {
     max-width: 960px;
     margin: 0 auto;
     margin-top: 30px;
+}
+#tags-cloud {
+    max-width: 700px;
+    margin: 0px auto;
+    word-break: break-word;
 }
 .play-area-tips {
     display: block;
