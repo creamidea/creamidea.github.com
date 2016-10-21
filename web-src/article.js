@@ -7,68 +7,67 @@ window.console = window.console || (function(){
   return c;
 })();
 
+/**
+ * load disqus
+ */
+function loadDisqus(body, content) {
+  if (content) {
+    var div = document.createElement('div');
+    div.className = 'comm';
+    // div.innerHTML = '<div class="comm_open_btn" comment="copy from bilibili.com :P" onclick="loadDisqusComment(this)"></div>';
+    div.innerHTML = '<div comment="copy from bilibili.com :P" onclick="loadDisqusComment(this)" style="text-align: center; padding: 12px 12px; width: 200px; background: #e6b8b8; border-radius: 4px; margin: 0 auto; cursor: pointer;">Load Comments</div>'
+    content.appendChild(div);
+    // setTimeout(loadDisqusComment, 1314);
+  }
+}
+function loadDisqusComment (target) {
+  if (target) {
+    var parent = target.parentElement;
+    parent.style.display = 'none';
+  }
+
+  window.disqus_config = function () {
+    // 这里是配置disqus地方，具体可以参考
+    // https://help.disqus.com/customer/portal/articles/472098-javascript-configuration-variables
+    this.page.identifier = location.pathname.split('/').slice(-2).join('/')
+  }
+
+  var d = document;
+  var s = document.createElement('script');
+  s.src = '//creamidea.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+
+  var content = document.getElementById('content');
+  var disqus = document.createElement('div');
+  disqus.id = 'outline_disqus_thread';
+  disqus.className = 'outline-2';
+  disqus.style.marginBottom = '44px';
+  disqus.innerHTML = '<h2 id="disqus_thread_header">Comments</h2><div id="disqus_thread"><p style="text-align:center;font-family: Georgia1,Georgia,Times New Roman,Times,serif;">Disqus is on the way...</p></div>';
+  content.appendChild(disqus);
+}
+
+/**
+ * load custom search
+ */
+// function loadCustomSearch (elt, elt2) {
+//   var s = document.getElementsByTagName('script')[0]
+//   var cx = '017951989687920165329:0e60irxxe5m'
+//   var gcse = document.createElement('script')
+//   gcse.type = 'text/javascript'
+//   gcse.async = true
+//   gcse.onload = function () {
+//     var div = document.createElement('div')
+//     div.id = 'custom-search'
+//     div.innerHTML = '<gcse:search></gcse:search>'
+//     elt.insertBefore(div, elt2)
+//     // console.log('Google Custom Search Engine Loaded Over.')
+//   }
+//   s.parentNode.insertBefore(gcse, s)
+//   gcse.src = 'https://cse.google.com/cse.js?cx=' + cx
+// }
+
 ;(function (window) {
-  /**
-   * load custom search
-   */
-  function loadCustomSearch (elt, elt2) {
-    var s = document.getElementsByTagName('script')[0]
-    var cx = '017951989687920165329:0e60irxxe5m'
-    var gcse = document.createElement('script')
-    gcse.type = 'text/javascript'
-    gcse.async = true
-    gcse.onload = function () {
-      var div = document.createElement('div')
-      div.id = 'custom-search'
-      div.innerHTML = '<gcse:search></gcse:search>'
-      elt.insertBefore(div, elt2)
-      // console.log('Google Custom Search Engine Loaded Over.')
-    }
-    s.parentNode.insertBefore(gcse, s)
-    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx
-  }
-
-  /**
-   * load disqus
-   */
-  function loadDisqus(body, content) {
-    if (content) {
-      // var div = document.createElement('div');
-      // div.className = 'comm';
-      // div.innerHTML = '<div class="comm_open_btn" comment="copy from bilibili.com :P" onclick="loadDisqusComment(this)"></div>';
-      // content.appendChild(div);
-      setTimeout(loadDisqusComment, 1314);
-    }
-  }
-  function loadDisqusComment (target) {
-    if (target) {
-      var parent = target.parentElement;
-      parent.style.display = 'none';
-    }
-
-    window.disqus_config = function () {
-      // 这里是配置disqus地方，具体可以参考
-      // https://help.disqus.com/customer/portal/articles/472098-javascript-configuration-variables
-      this.page.identifier = location.pathname.split('/').slice(-2).join('/')
-    }
-
-    var d = document;
-    var s = document.createElement('script');
-    s.src = '//creamidea.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-
-    var content = document.getElementById('content');
-    var disqus = document.createElement('div');
-    disqus.id = 'outline_disqus_thread';
-    disqus.className = 'outline-2';
-    disqus.style.marginBottom = '44px';
-    disqus.innerHTML = '<h2 id="disqus_thread_header">Comments</h2><div id="disqus_thread"><p style="text-align:center;font-family: Georgia1,Georgia,Times New Roman,Times,serif;">Disqus is loading...</p></div>';
-    content.appendChild(disqus);
-  }
-
-  //////////////////////////////////////////////////////////////////////////////////////
-
   var __forEach = Array.prototype.forEach
   var __slice = Array.prototype.slice
   var __filter = Array.prototype.filter
@@ -456,7 +455,7 @@ window.console = window.console || (function(){
           showMetaInfo(body, content, meta)
           showFooter(body, content, meta)
           someArticlesFix(body, content)
-          loadCustomSearch(content, document.getElementById('#outline_disqus_thread'))
+          // loadCustomSearch(content, document.getElementById('#outline_disqus_thread'))
 
           if (typeof __forEach == 'function') {
             showTags(body, content, meta)
