@@ -82,9 +82,10 @@ window.console = window.console || (function(){
       test: function () {
         // testing...
         var rlts = _router.map(function (r) {
-          if (r.test.test(location.hash)) {
+          var hash = location.hash.slice(2)
+          if (r.test.test(hash)) {
             console.log('Router hited the target: ' + r.test.toString() + '. Go, Go, Go!')
-            r.cb.apply(r, r.test.exec(location.hash).slice(1))
+            r.cb.apply(r, r.test.exec(hash).slice(1))
             return true
           }
           return false
@@ -287,6 +288,23 @@ window.console = window.console || (function(){
         } else {
           _cb()
         }
+      },
+
+      me: function (cb, me) {
+        var tableDOM = document.querySelector('#links-table')
+        if (tableDOM === null) {
+          var table = document.createElement('table')
+          var links = __map.call(Object.keys(me), function (key) {
+            return '<tr><td>'+ key +'</td><td><a href="/#!/go?name='+key+'">'+ me[key] +'</a></td></tr>'
+          }).join('')
+          table.id = 'links-table'
+          table.innerHTML = '<table border="1"><caption><a href="/static/about.html">About</a> me</caption>'
+            + '<thead><tr><th>Name</th><th>Link</th></tr></thead>'+links+'</table>'
+          tableDOM = playArea.appendChild(table)
+          tableDOM.style.display = 'block'
+          cb()
+        }
+        return tableDOM
       },
 
       go: function (url) {
@@ -583,37 +601,41 @@ window.console = window.console || (function(){
       "github": 'https://github.com/creamidea',
       "zhihu": 'https://www.zhihu.com/people/nekotrek',
       "twitter": 'https://twitter.com/creamidea',
-      "facebook": '',
+      "facebook": 'https://www.facebook.com/creamidea',
       "google-plus": 'https://plus.google.com/u/0/106145678677607887880',
       "about": 'https://about.me/ice.cream',
-      "flickr": 'https://www.flickr.com/people/85376793@N04/'
+      "flickr": 'https://www.flickr.com/people/85376793@N04/',
+      "xiami": 'http://www.xiami.com/u/10429952'
     }
 
     var router = Router({
-      "home": function () {
+      "^/home$": function () {
         stage.hide()
       },
-      "archive": function () {
+      "^/archive$": function () {
         stage.show('archive')
       },
-      "wiki/(\.+)": function (file) {
+      "^/wiki/(\.+)": function (file) {
         // var file = __shift.call(arguments)
         var url = '/static/html/wiki/' + file
         history.pushState({}, '', url)
         stage.go(url)
       },
-      "articles/(\.+)": function (file) {
+      "^/articles/(\.+)": function (file) {
         // var file = __shift.call(arguments)
         var url = '/static/html/articles/' + file
         stage.go(url)
       },
-      "search": function () {
+      "^/search$": function () {
         stage.show('search')
       },
-      "tags(?:\\?tag=(\.+))?": function (tag) {
+      "^/tags(?:\\?tag=(\.+))?": function (tag) {
         stage.show('tags', tag)
       },
-      "go(?:\\?name=(\.+))": function (name) {
+      "^/me$": function () {
+        stage.show('me', me)
+      },
+      "^/go(?:\\?name=(\.+))": function (name) {
         var url
         try {
           url = me[name]

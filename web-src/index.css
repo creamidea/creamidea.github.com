@@ -109,6 +109,11 @@ nav a span {
     margin: 0px auto;
     word-break: break-word;
 }
+#links-table {
+    margin: 12px auto;
+    width: 700px;
+    word-break: break-word;
+}
 .play-area-tips {
     display: block;
     text-align: center;
