@@ -35,7 +35,8 @@ body {
 
 nav {
     text-align: center;
-    margin-top: 14px;
+    width: 767px;
+    margin: 0 auto;
 }
 nav a {
     font-size: 18px;
