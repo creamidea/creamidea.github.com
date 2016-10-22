@@ -2,7 +2,6 @@
 
 // fuck the IE
 //Ensures there will be no 'console is undefined' errors
-typeof history === 'undefined' ? (window.history = {}, window.history.pushState = function () {}) : null
 window.console = window.console || (function(){
   var c = {}; c.log = c.warn = c.debug = c.info = c.error = c.time = c.dir = c.profile = c.clear = c.exception = c.trace = c.assert = function(){};
   return c;
@@ -14,6 +13,19 @@ window.console = window.console || (function(){
   var __forEach = Array.prototype.forEach
   // var __pop = Array.prototype.pop
   var __shift = Array.prototype.shift
+  var __closestNodeA = function (dom) {
+    if (typeof dom.closest === 'function') {
+      return dom.closest('a')
+    } else {
+      if (dom.tagName === 'A') {
+        return dom
+      } else if (dom.tagName === 'BODY') {
+        return null
+      } else{
+        return __closestNodeA(dom.parentNode)
+      }
+    }
+  }
   // var parser = new DOMParser()
   // var SEARCHER = 'https://www.google.com/?gws_rd=ssl#'
   var SEARCHER = 'https://cse.google.com/cse/publicurl?cx=017951989687920165329:0e60irxxe5m&'
@@ -155,11 +167,10 @@ window.console = window.console || (function(){
         // load archive (articles list)
         console.log('Stage initializing...')
         addEventListener(nav, 'click', (function (e) {
-          var target = e.target
-          if (specialNav.indexOf(target.id) >= 0 ||
-              specialNav.indexOf(target.parentElement.id) >=0) {
+          var target = __closestNodeA(e.target)
+          if (specialNav.indexOf(target.id) >= 0) {
             e.preventDefault()
-            this.go(target.href || target.parentElement.href)
+            this.go(target.href)
           }
         }).bind(this))
         addEventListener(playArea, 'click', (function (e) {
@@ -284,10 +295,9 @@ window.console = window.console || (function(){
 
         if (tagsDOM === null) {
           loadStaticFile('/static/html/tags.html', function (txt) {
-            var _t = document.createElement('div')
-            _t.innerHTML = txt
-            _t.id = 'tags-cloud'
-            tagsDOM = playArea.appendChild(_t)
+            tagsDOM = playArea.appendChild(document.createElement('div'))
+            tagsDOM.innerHTML = txt
+            tagsDOM.id = 'tags-cloud'
             _cb()
           })
         } else {
@@ -298,14 +308,13 @@ window.console = window.console || (function(){
       me: function (cb, me) {
         var tableDOM = document.querySelector('#links-table')
         if (tableDOM === null) {
-          var table = document.createElement('table')
           var links = __map.call(Object.keys(me), function (key) {
-            return '<tr><td>'+ key +'</td><td><a href="/#!/go?name='+key+'">'+ me[key] +'</a></td></tr>'
+            return '<tr><td>'+ key +'</td><td><a href="#!/go?name='+key+'">'+ me[key] +'</a></td></tr>'
           }).join('')
-          table.id = 'links-table'
-          table.innerHTML = '<table border="1"><caption><a href="/static/about.html">About</a> me</caption>'
-            + '<thead><tr><th>Name</th><th>Link</th></tr></thead>'+links+'</table>'
-          tableDOM = playArea.appendChild(table)
+          tableDOM = playArea.appendChild(document.createElement('div'))
+          tableDOM.id = 'links-table'
+          tableDOM.innerHTML = '<table><caption><a href="/static/about.html">About</a> me</caption>'
+            + '<thead><tr><th>Name</th><th>Link</th></tr></thead><tbody>'+links+'</tbody></table>'
           tableDOM.style.display = 'block'
           cb()
         }
@@ -316,7 +325,7 @@ window.console = window.console || (function(){
         if (url) {
           goTips('<p>You will go to</p><p><strong>' + url + '</strong></p>',
                  {timeout: 60, action: 'timeout'})
-          setTimeout(function () {location.href = url; history.pushState({from: previous, to: url}, '', previous);}, 24)
+          setTimeout(function () {location.href = url;}, 24)
         } else {
           goTips('<p>I don\'t know where to go.</p>')
         }
