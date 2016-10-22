@@ -2,6 +2,7 @@
 
 // fuck the IE
 //Ensures there will be no 'console is undefined' errors
+typeof history === 'undefined' ? (window.history = {}, window.history.pushState = function () {}) : null
 window.console = window.console || (function(){
   var c = {}; c.log = c.warn = c.debug = c.info = c.error = c.time = c.dir = c.profile = c.clear = c.exception = c.trace = c.assert = function(){};
   return c;
@@ -79,13 +80,17 @@ window.console = window.console || (function(){
     compile()
 
     return {
-      test: function () {
+      test: function (oldURL) {
         // testing...
+        // var previous = oldURL, index
+        // if ((index = oldURL.indexOf('#!')) >= 0) {
+        //   previous = oldURL.slice(index + 2)
+        // }
         var rlts = _router.map(function (r) {
           var hash = location.hash.slice(2)
           if (r.test.test(hash)) {
             console.log('Router hited the target: ' + r.test.toString() + '. Go, Go, Go!')
-            r.cb.apply(r, r.test.exec(hash).slice(1))
+            r.cb.apply(r, [].concat(r.test.exec(hash).slice(1), [oldURL]))
             return true
           }
           return false
@@ -307,11 +312,11 @@ window.console = window.console || (function(){
         return tableDOM
       },
 
-      go: function (url) {
+      go: function (url, previous) {
         if (url) {
           goTips('<p>You will go to</p><p><strong>' + url + '</strong></p>',
                  {timeout: 60, action: 'timeout'})
-          setTimeout(function () {location.href = url}, 24)
+          setTimeout(function () {location.href = url; history.pushState({from: previous, to: url}, '', previous);}, 24)
         } else {
           goTips('<p>I don\'t know where to go.</p>')
         }
@@ -616,13 +621,11 @@ window.console = window.console || (function(){
         stage.show('archive')
       },
       "^/wiki/(\.+)": function (file) {
-        // var file = __shift.call(arguments)
         var url = '/static/html/wiki/' + file
         history.pushState({}, '', url)
         stage.go(url)
       },
       "^/articles/(\.+)": function (file) {
-        // var file = __shift.call(arguments)
         var url = '/static/html/articles/' + file
         stage.go(url)
       },
@@ -635,23 +638,24 @@ window.console = window.console || (function(){
       "^/me$": function () {
         stage.show('me', me)
       },
-      "^/go(?:\\?name=(\.+))": function (name) {
+      "^/go(?:\\?name=(\.+))": function (name, previous) {
         var url
         try {
           url = me[name]
         } catch (err) {
           console.log('Don\'t know where to go. \n', err)
         }
-        stage.go(url)
+        stage.go(url, previous)
       }
     })
 
     stage.init(function () {
       router.test()
+      addEventListener(window, 'hashchange', function (e) {
+        // console.log('from: ' + e.oldURL)
+        router.test(e.oldURL)
+      })
     })
-    window.onhashchange = function () {
-      router.test()
-    }
 
   }
 
