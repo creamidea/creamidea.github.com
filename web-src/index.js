@@ -56,7 +56,7 @@ window.console = window.console || (function(){
         ? this.detachEvent('on' + evt, fn)
         : null;
     }
-    __t.call(dom, evt, fn)
+    __t.call(dom, evt, fn || function () {})
   }
 
 
@@ -442,7 +442,7 @@ window.console = window.console || (function(){
       if (!octodex) return;
       var max = octodex.length;
       var octocat = octodex[Math.round(Math.random(max) * 10000 % max)];
-      if (!octocat.src) {
+      if (!octocat || !octocat.src) {
         console.log('Now, I want to load ', octocat, '. But failed!');
         return;
       }
@@ -681,7 +681,7 @@ window.console = window.console || (function(){
             // main.apply(window)
           }
           // document.getElementById('search').style.display = 'initial!important'
-          removeEventListener(window, event, function () {})
+          removeEventListener(window, event)
         }
       }, false)
     }
