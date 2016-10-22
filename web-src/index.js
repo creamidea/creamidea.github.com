@@ -447,12 +447,14 @@ window.console = window.console || (function(){
       if (!octodex) return;
       var max = octodex.length;
       var octocat = octodex[Math.round(Math.random(max) * 10000 % max)];
-      if (!octocat || !octocat.src) {
+      if (!octocat) {
         console.log('Now, I want to load ', octocat, '. But failed!');
         return;
       }
-      var src = 'https://octodex.github.com' + octocat.src;
-      var img = document.createElement('img');
+      var title = octocat.t
+      var filename = octocat.f
+      var src = 'https://octodex.github.com/images/' + filename
+      var img = document.createElement('img')
       img.style.display = 'none';
       img.onload = function () {
         var oBannerWrapper = document.getElementById('banner-wrapper');
@@ -460,7 +462,7 @@ window.console = window.console || (function(){
         // oBannerWrapper.style.background = 'url('+ src +') no-repeat top center fixed';
         // oBannerWrapper.style.backgroundSize = '424px 424px';
         oBannerWrapper.style.textAlign = 'center';
-        oBannerWrapper.innerHTML = '<img src="'+src+'" alt="'+octocat.title+'"/><p style="display: block;margin:0;bottom:0;left:1%;right:1%;line-height:1;"><a href="https://github.com/" alt="Check me out on :octocat:" title="Check me out on :octocat:" style="color:black;font-size:16px;font-family:Georgia1,Georgia,Times New Roman,Times,serif;font-style: italic;">'+octocat.title+'</a></p>';
+        oBannerWrapper.innerHTML = '<img src="'+src+'" alt="'+title+'"/><p style="display: block;margin:0;bottom:0;left:1%;right:1%;line-height:1;"><a href="https://github.com/" alt="Check me out on :octocat:" title="Check me out on :octocat:" style="color:black;font-size:16px;font-family:Georgia1,Georgia,Times New Roman,Times,serif;font-style: italic;">'+title+'</a></p>';
         clearInterval(window.blinkTimer);
       };
       img.onerror = function () {

@@ -1,4 +1,5 @@
 // -*- coding: utf-8 -*-
+// 9KB
 'use strict'
 
 const https = require('https')
@@ -35,8 +36,8 @@ const req = https.request(options, (res) => {
     __forEach.call(chunks.match(/<img height="424" width="424".*?>/g), function (i) {
       let img = i.match(/data-src="(.*?)" alt="(.*?)"/)
       pics.push({
-	'src': img[1],
-	'title': img[2]
+	'f': img[1].split('/').pop(), // filename: xxx.png
+	't': img[2] // title (caption)
       })
     })
     __forEach.call(chunks.match(/<p class="number">.*?<\/p>/g), function (n, index) {
