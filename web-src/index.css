@@ -21,16 +21,27 @@ body {
     display:none;
 }
 
-#banner-wrapper {
-    max-height: 449px;
-}
 #banner-wrapper img {
-    width: 424px;
+    max-width: 424px;
 }
+#banner-wrapper p {
+    margin:0;
+}
+#banner-wrapper a {
+    color:black;
+    font-size:16px;
+    font-family:Georgia1,Georgia,Times New Roman,Times,serif;
+    font-style:italic;
+}
+
+/* http://stackoverflow.com/questions/16056591/font-scaling-based-on-width-of-container */
 .blink-wrapper {
     text-align: center;
-    font-size: 14em;
+    font-size: 16px;
+    font-size: 26vw;            /* 424 / 16 = 26.5 | 335 -> 26.5 | 424 -> 32 */
     margin: 0;
+    max-height: 449px;
+    line-height: 1;
 }
 
 nav {
@@ -274,7 +285,8 @@ nav a span {
         margin-top: 2%;
     }
     .blink-wrapper {
-        font-size: 8em;
+        line-height: 1.4;
+        /* font-size: 8em; */
     }
     .article-list .meta {
         margin: 10px auto;

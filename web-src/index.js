@@ -476,7 +476,11 @@ window.console = window.console || (function(){
         // oBannerWrapper.style.background = 'url('+ src +') no-repeat top center fixed';
         // oBannerWrapper.style.backgroundSize = '424px 424px';
         oBannerWrapper.style.textAlign = 'center';
-        oBannerWrapper.innerHTML = '<img src="'+src+'" alt="'+title+'"/><p style="display: block;margin:0;bottom:0;left:1%;right:1%;line-height:1;"><a href="https://github.com/" alt="Check me out on :octocat:" title="Check me out on :octocat:" style="color:black;font-size:16px;font-family:Georgia1,Georgia,Times New Roman,Times,serif;font-style: italic;">'+title+'</a></p>';
+        oBannerWrapper.innerHTML = '<img src="'+src+'" alt="'+title+'" '
+          // + 'style="width:' + oBannerWrapper.querySelector('.blink-wrapper').getBoundingClientRect().height +'px"'
+          + '/>'
+          + '<p><a href="https://github.com/" alt="Check me out on :octocat:" title="Check me out on :octocat:">'
+          + title + '</a></p>';
         clearInterval(window.blinkTimer);
       };
       img.onerror = function () {
@@ -512,7 +516,7 @@ window.console = window.console || (function(){
    * 增加首页背景图片的容器
    */
   function showBanner (body, content) {
-    blink()
+    setTimeout(blink, 2000)
     changeOctoCat(body);
     return document.querySelector('#banner-wrapper')
   }
