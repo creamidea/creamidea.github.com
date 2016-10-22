@@ -469,6 +469,18 @@ footer a {
     padding-top: 10px;
     zoom: 1;
 }
+.comm div {
+    font-style: italic;
+    font-family: Georgia1,Georgia,Times New Roman,Times,serif;
+    text-align: center;
+    color: black;
+    background: #e6b8b8;
+    width: 200px;
+    margin: 0 auto;
+    padding: 12px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
 .comm_open_btn {
     margin: 30px auto 50px;
     display: block;
@@ -477,6 +489,8 @@ footer a {
     background: url(morecomm.gif) no-repeat;
     cursor: pointer;
 }
+
+
 .section-divider {margin-top: 52px;margin-bottom: 42px; display: block; border: 0; text-align: center;box-sizing: content-box; height: 0;}
 hr.section-divider:before {font-family: Georgia,Cambria,"Times New Roman",Times,serif; font-weight: 400; font-style: italic; font-size: 28px; letter-spacing: 0.6em;}
 hr.section-divider:before {content: '...'; display: inline-block; margin-left: 0.6em; color: rgba(0,0,0,0.6); position: relative; top: -30px;}

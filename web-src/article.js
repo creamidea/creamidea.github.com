@@ -15,7 +15,7 @@ function loadDisqus(body, content) {
     var div = document.createElement('div');
     div.className = 'comm';
     // div.innerHTML = '<div class="comm_open_btn" comment="copy from bilibili.com :P" onclick="loadDisqusComment(this)"></div>';
-    div.innerHTML = '<div comment="copy from bilibili.com :P" onclick="loadDisqusComment(this)" style="text-align: center; padding: 12px 12px; width: 200px; background: #e6b8b8; border-radius: 4px; margin: 0 auto; cursor: pointer;">Load Comments</div>'
+    div.innerHTML = '<div comment="copy from bilibili.com :P" onclick="loadDisqusComment(this)">Load Comments</div>'
     content.appendChild(div);
     // setTimeout(loadDisqusComment, 1314);
   }
