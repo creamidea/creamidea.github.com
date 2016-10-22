@@ -465,14 +465,13 @@ window.console = window.console || (function(){
         console.log('Now, I want to load ', octocat, '. But failed!');
         return;
       }
+      var oBannerWrapper = document.getElementById('banner-wrapper')
       var title = octocat.t
       var filename = octocat.f
       var src = 'https://octodex.github.com/images/' + filename
       var img = document.createElement('img')
-      img.style.display = 'none';
+      img.style.display = 'none'
       img.onload = function () {
-        var oBannerWrapper = document.getElementById('banner-wrapper');
-        if (!oBannerWrapper) return
         // oBannerWrapper.style.background = 'url('+ src +') no-repeat top center fixed';
         // oBannerWrapper.style.backgroundSize = '424px 424px';
         oBannerWrapper.style.textAlign = 'center';
@@ -484,8 +483,9 @@ window.console = window.console || (function(){
         clearInterval(window.blinkTimer);
       };
       img.onerror = function () {
-        console.log('Load the image of octocat failed!');
-        clearInterval(window.blinkTimer);
+        oBannerWrapper.children[1].innerHTML = 'Octocat may be taken by aliens. Sad :('
+        console.log('Load the image of octocat failed!')
+        clearInterval(window.blinkTimer)
       };
       body.appendChild(img);
       img.src = src;
@@ -516,7 +516,7 @@ window.console = window.console || (function(){
    * 增加首页背景图片的容器
    */
   function showBanner (body, content) {
-    setTimeout(blink, 2000)
+    blink()
     changeOctoCat(body);
     return document.querySelector('#banner-wrapper')
   }
