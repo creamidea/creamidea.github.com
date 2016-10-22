@@ -209,6 +209,9 @@ window.console = window.console || (function(){
         playAreaTips.innerHTML = 'Preparing Drama - ' + '<span style="color:#4285f4;">' + drama + '...</span>'
         playAreaTips.style.display = 'block'
         try {
+
+          head.querySelector('title').innerHTML = 'C-Tone | ' + drama.slice(0,1).toUpperCase() + drama.slice(1)
+
           var dom = this[drama].apply(this, [function () {
             playAreaTips.style.display = 'none'
           }].concat(params))
@@ -228,6 +231,8 @@ window.console = window.console || (function(){
         playAreaTips.style.display = 'none'
         // change body backgroundcolor
         body.style.background = ''
+
+        head.querySelector('title').innerHTML = 'C-Tone Homepage'
 
         // show others
         Animate["show-banner"]()
