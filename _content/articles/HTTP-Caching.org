@@ -1,0 +1,58 @@
+#+TITLE:HTTP Caching
+#+AUTHOR: 冰糖火箭筒(Junjia Ni)
+#+EMAIL: creamidea(AT)gmail.com
+#+DATE:2016-10-23
+#+CATEGORY:article
+#+DESCRIPTION:HTTP Caching
+#+KEYWORDS:http,cache,cache-control,etag
+#+OPTIONS:H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:nil email:t <:t date:t timestamp:t
+#+LINK_HOME:https://creamidea.github.io
+#+STARTUP:showall
+
+* 前言
+最近重新设计和实现了个人站点的博客，主要侧重提升舒适度上（加载速度，渲染速度，文字排版等）。
+在一期完成之后，用 Google 提供的测试工具 [[https://developers.google.com/speed/pagespeed/insights/][Insights]] 测试了一下，提示 *Leverage browser caching* 。
+于是看到了这篇文章 [[https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching][HTTP Caching]] （[[https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching?hl=zh-cn][中文翻译]]） 。
+
+个人感觉是自己看过最好的一篇介绍缓存的文章，而且内容不是很多。当然前提是你有一定的缓存知识储备。
+
+* 一图胜千言(Cache-Control)
+
+#+CAPTION: http-cache-decision-tree-cn
+#+ATTR_HTML: :alt http-cache-decision-tree(translation from google) :title 原图片来自 Google Developers 网站
+[[static-img:http-cache-decision-tree-cn.png]]
+
+原图可以点击 [[https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/images/http-cache-decision-tree.png][这里]] 查看。
+
+上图主要是 HTTP 头部字段 =Cache-Control= 各个值的理解（详细解释可以看 [[https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching?hl=zh-cn#cache-control][这里]] ）：
++ no-store 不允许缓存响应，每个请求必须获取完整的响应。
++ no-cache 先与服务器确认返回的响应是否被更改（请求会带上 ETag），然后才能使用该响应来满足后续对同一个网址的请求。
++ public 响应可被缓存，该值常用 =max-age= 替代。
++ private 相对 public 来说，通常只为单个用户缓存。比如：浏览器可以缓存，但 CDN 不可以。
++ max-age 该指令指定从当前请求开始，允许获取的响应被重用的最长时间（单位为秒）
+
+图中部分翻译的解释：
+- 是否可重用响应，意思是服务器响应是否可以被重复使用？使用该值的场景，比如：你的银行信息等个人信息。
+- 是否每次重新生效，指的是与服务器协商的过程，资源是每次服务器重新发送还是从缓存中提取。
+
+* 其他头部字段
+
+** Last-Modified & If-Modified-Since
+=Last-Modified= 标示资源的最后修改时间。 =If-Modified-Since= 这个字段是相对 =Last-Modified= 来说的，
+当资源过期，浏览器会去服务器协商，此时如果有 =Last-Modified= 字段，就会将其值填充到 =If-Modified-Since= 字段并发送给服务器进行校验计算。
+
+** ETag & If-None-Match
+=ETag= 是 *服务器* 生成的资源唯一标识符（浏览器不需要关心起生成算法）。 =If-None-Match= 这个字段则是相对 =ETag= 来说的，
+当资源过期，浏览器在和服务器协商时，如果发现有 =ETag= 这个字段，则会带上 =If-None-Match= 这个字段，其值就是 =ETag= 的值。
+
+* 尾声
+HTTP 头部字段 =Expires= 是 HTTP/1.0 中的定义。
+而当前的所有浏览器都支持 =Cache-Control= (HTTP/1.1)。
+所以，个人认为，只要使用 =Cache-Control= 就够了， =Expires= 可以忽略了。
+
+如果读完此文，觉得还不爽的话，可以看看 [[Reference][Reference]] 中的两篇文章以及 [[https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching][HTTP Caching]] 。
+
+* Reference
+
++ [[http://www.cnblogs.com/skynet/archive/2012/11/28/2792503.html][浏览器缓存机制（吴秦 Tyler）]]
++ [[http://www.cnblogs.com/lyzg/p/5125934.html][浏览器缓存知识小结及应用(流云诸葛)]]
