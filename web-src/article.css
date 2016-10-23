@@ -266,7 +266,7 @@ figcaption {
     display: block;
     margin: 4px auto;
     max-width: 100%;
-    z-index: 100;
+    /* z-index: 100; */
     box-shadow: 0 0 0 white !important;
     /* box-shadow: 3px 3px 3px #eee; */
     visibility: visible;
@@ -282,6 +282,9 @@ img[lazy-load] {
     display: none;
     height: 366px;
     width: 100%;
+}
+figure {
+    margin: 0;
 }
 .title-img-p {
     text-align: right;
@@ -536,7 +539,8 @@ hr.section-divider:before {content: '...'; display: inline-block; margin-left: 0
         margin-left: 12px;
         margin-right: 12px;
     }
-    .title-img-wrapper img {
+    /* .title-img-wrapper img { */
+    img[lazy-load] {
         height: 200px;
     }
     #content h1 {
