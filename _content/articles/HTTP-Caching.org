@@ -20,7 +20,7 @@
 
 #+CAPTION: http-cache-decision-tree-cn
 #+ATTR_HTML: :alt http-cache-decision-tree(translation from google) :title 原图片来自 Google Developers 网站
-[[static-img:http-cache-decision-tree-cn.png]]
+[[glfs-img:http-cache-decision-tree-cn.png]]
 
 原图可以点击 [[https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/images/http-cache-decision-tree.png][这里]] 查看。
 
