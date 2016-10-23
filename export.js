@@ -19,8 +19,8 @@ const CATEGORYREGEXP = /#\+CATEGORY:\s*?(.+)/i
 const SITEMAPPATH = path.resolve(__dirname, 'static', 'html', 'sitemap.html')
 const PUBPATH = path.resolve(__dirname, 'static', 'html/')
 const BASEPATH = path.resolve(__dirname, '_content/')
-const ARCHIVEHTMLPATH = path.resolve(__dirname, 'static', 'html', 'archive.html')
-const TAGSHTMLPATH = path.resolve(__dirname, 'static', 'html', 'tags.html')
+const ARCHIVEHTMLFILE = path.resolve(__dirname, 'static', 'html', 'archive.html')
+const TAGSHTMLFILE = path.resolve(__dirname, 'static', 'html', 'tags.html')
 const ORGCACHEFILE = path.resolve(__dirname, '.org-timestamps', 'creamidea-article.cache')
 const CACHEFILE = path.resolve(__dirname, '.org-timestamps', 'export-history.cache')
 const RSSFILE = path.resolve(__dirname, 'static', 'rss2.xml')
@@ -55,9 +55,9 @@ exportEvent.on('end', (posts, tagsResults) => {
   const archiveHtml = genArchiveHtml(posts)
   const tagsResultsJson = genTagsResultsJson(tagsResults, posts)
   const rss = genRSS(posts)
-  // writeFile(ARCHIVEHTMLPATH, UglifyHTML.minify(archiveHtml, MINIFYHTMLRULES))
-  writeFile(ARCHIVEHTMLPATH, archiveHtml)
-  writeFile(TAGSHTMLPATH, tagsResultsJson)
+  // writeFile(ARCHIVEHTMLFILE, UglifyHTML.minify(archiveHtml, MINIFYHTMLRULES))
+  writeFile(ARCHIVEHTMLFILE, archiveHtml)
+  writeFile(TAGSHTMLFILE, tagsResultsJson)
   writeFile(RSSFILE, rss)
 })
 
@@ -73,7 +73,7 @@ function genTagsResultsJson (tagsResults, posts) {
   Object.getOwnPropertySymbols(tagsResults).map( sym => {
     let tag = tagsResults[sym]
     // console.log(tag)
-    ups.push(`<li data-weight=${tag.count} style="display:inline"><a href="#!/tags?tag=${encodeURIComponent(tag.name)}" style="font-size:${(Math.log(tag.count) / Math.log(2)) * diffFont / 6 + minFont}px">${tag.name}</a><sup>${tag.count}</sup></li>`)
+    ups.push(`<li data-weight=${tag.count} style="display:inline"><a href="#!/tags?tag=${encodeURIComponent(tag.name)}" style="font-size:${((Math.log(tag.count) / Math.log(2)) * diffFont / 6 + minFont).toFixed(2)}px">${tag.name}</a><sup>${tag.count}</sup></li>`)
     downs.push(`<ul class="tag-${encodeURIComponent(tag.name)}" style="display:none;">` + tag.filenames.map(function (filename) {
       let post = posts[filename]
       return `<li><a class="title" href="${URLPREFIX}${post.category}/${post.name}.html">${post.title}</a></li>`
@@ -291,6 +291,7 @@ function readArticle (category, filename, container, callback) {
       })
     }
     Object.assign(container[sym], {
+      ctime: (new Date(data.ctime)).getTime(),
       mtime: (new Date(data.mtime)).getTime()
     })
     fs.open(baseFullpath, "r", (err, fd) => {
@@ -628,7 +629,7 @@ const command = {
     console.log(`--> ${command} add ${args.join(' ')}`)
     const result = child_process.spawnSync(
       command,
-      Array.prototype.concat.call(['add', RSSFILE, ARCHIVEHTMLPATH], args),
+      Array.prototype.concat.call(['add', RSSFILE, ARCHIVEHTMLFILE, TAGSHTMLFILE], args),
       {
         cwd: path.resolve(__dirname)
       }
