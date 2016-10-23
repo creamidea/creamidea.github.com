@@ -522,16 +522,6 @@ window.console = window.console || (function(){
   }
 
   /**
-   * 初始化首页banner图片
-   */
-  // function initImgWapper (body) {
-  //   var div = document.createElement('div');
-  //   div.id = 'img-wapper';
-  //   body.appendChild(div);
-  //   return div;
-  // }
-
-  /**
    * Just support method:GET
    */
   function loader(o) {

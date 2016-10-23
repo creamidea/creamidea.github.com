@@ -442,8 +442,10 @@ p.verse {
 }
 #img-wapper img {
     opacity: 1;
-    margin-top: 11%;
+    /* margin-top: 11%; */
     transition: transform 300ms cubic-bezier(.2, 0, .2, 1);
+    cursor: pointer;
+    cursor: -webkit-zoom-out;
 }
 
 /*==============================*/
@@ -527,6 +529,7 @@ hr.section-divider:before {content: '...'; display: inline-block; margin-left: 0
     background-color: #fcf8e3;
     border-color: #faebcc;
 }
+
 @media all and (max-width: 767px) {
     /* #banner-wrapper {font-size: 4.5em; width: 100%;} */
     .card .card-content p {display:block;}

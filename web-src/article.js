@@ -254,35 +254,47 @@ function loadDisqusComment (target) {
     }
   }
 
+
+  /**
+   * 初始化首页banner图片
+   */
+  function initImgWapper (body) {
+    var div = document.createElement('div');
+    div.id = 'img-wapper';
+    body.appendChild(div);
+    return div;
+  }
   /**
    * 图片点击处理
    */
   function ImgClickEvent (body, wapper) {
     function fun (e) {
-      var img = wapper.getElementsByTagName('img');
       var target = e.target;
       if (target.nodeName === 'IMG' || target.id === 'img-wapper') {
-        if (img.length > 0 || target.id === 'img-wapper') {
+        var img = wapper.getElementsByTagName('img')[0]
+        // if (target.parentNode.id === 'img-wapper' || target.id === 'img-wapper') {
+        if (img) {
           // hide image
-          wapper.style.opacity = 0;
-          body.style.overflow = null;
+          //1.25977
+          img.style.transform = 'scale(0.8) translateY(-50px)'
           setTimeout(function(){
-            for (var i = 0, max = img.length; i < max; i++) {
-              img[i].style.transform = 'scale(1.25977) translateZ(0)';
-              wapper.removeChild(img[i]);
-            }
+            wapper.removeChild(img);
+            wapper.style.opacity = 0;
             wapper.style.display = 'none';
-          }, 100);
-        } else if (img.length === 0) {
+            body.style.overflow = null;
+          }, 150);
+        } else {
           // show image
-          var img = document.createElement('img');
-          img.src = e.target.src;
-          wapper.appendChild(img);
+          var _img = document.createElement('img');
+          _img.src = e.target.src;
+          wapper.appendChild(_img);
           wapper.style.display = 'block';
-          setTimeout(function () {
-            wapper.style.opacity = 1;
-            img.style.transform = 'scale(1.25977) translateZ(0)';
-          }, 100);
+          wapper.style.opacity = 1;
+          var wapperW = wapper.getBoundingClientRect().height
+          var imgW = _img.getBoundingClientRect().height || 366
+          var scale = (imgW > wapperW) ? 1 : (wapperW + imgW) / 2 / imgW
+          var distance = (wapperW - imgW * scale) / 2
+          _img.style.transform = 'scale('+ scale +') translateY('+ distance +'px)';
           body.style.overflow = 'hidden';
         }
       }
@@ -461,7 +473,7 @@ function loadDisqusComment (target) {
             showTags(body, content, meta)
             loadLazyImage(content)
             // showHomeButton(body)
-            // ImgClickEvent(body, initImgWapper(body, content))
+            ImgClickEvent(body, initImgWapper(body))
             loadDisqus(body, content)
           }
           removeEventListener(window, event, function () {})
