@@ -44,6 +44,7 @@ CURRENT-OR-ALL FORCE ASYNC."
          (org-link-abbrev-alist
           '(("static-img"  . "../../img/%s")
             ("glfs" . "https://media.githubusercontent.com/media/creamidea/creamidea.github.com/master/static/lfs/%s")
+            ("glfs-img" . "https://media.githubusercontent.com/media/creamidea/creamidea.github.com/master/static/img/%s")
             ("gdraw". "https://docs.google.com/drawings/d/")
             ("url-to-ja" . "http://translate.google.fr/translate?sl=en&tl=ja&u=%h")
             ("google"    . "http://www.google.com/search?q=")
