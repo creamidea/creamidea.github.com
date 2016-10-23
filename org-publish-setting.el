@@ -42,7 +42,7 @@ CURRENT-OR-ALL FORCE ASYNC."
          (analytics-js "<!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->")
 
          (org-link-abbrev-alist
-          '(("static-img"  . "../static/img/reference/%s")
+          '(("static-img"  . "../../img/%s")
             ("glfs" . "https://media.githubusercontent.com/media/creamidea/creamidea.github.com/master/static/lfs/%s")
             ("gdraw". "https://docs.google.com/drawings/d/")
             ("url-to-ja" . "http://translate.google.fr/translate?sl=en&tl=ja&u=%h")
@@ -52,6 +52,7 @@ CURRENT-OR-ALL FORCE ASYNC."
             ("ads"       . "http://adsabs.harvard.edu/cgi-bin/nph-abs_connect?author=%s&db_key=AST")))
 
          (org-html-doctype "html5")
+         (org-html-html5-fancy t)
          (org-export-html-coding-system "utf-8")
          (org-html-with-latex "mathjax")
          (org-src-fontify-natively t)
@@ -104,6 +105,7 @@ CURRENT-OR-ALL FORCE ASYNC."
              :html-extension "html"
              :html-head-include-default-style nil
              :html-head-include-scripts nil
+             :html-image-lazy-load t
              :section-numbers t
              ;; :body-only: t
              ;; :author "冰糖火箭筒(Junjia Ni)"
