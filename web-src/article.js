@@ -374,7 +374,7 @@ function loadDisqusComment (target) {
         el.parent.replaceChild(img, el)
       else
         el.src = src;
-      el.className = ''
+      el.removeAttribute('lazy-load')
       fn ? fn() : null
     }
     img.src = src;

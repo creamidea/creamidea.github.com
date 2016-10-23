@@ -144,10 +144,9 @@ kbd {
 /*     color: #4285F4; */
 /*     cursor: pointer; */
 /* } */
-
-.title-picture {
-    text-align: right;
-    font-size: 14px;
+figcaption {
+    text-align: center;
+    font-size: 16px;
 }
 
 .github-badge {
@@ -277,11 +276,16 @@ kbd {
     cursor: pointer;
     cursor: -webkit-zoom-in;
 }
-.lazy-load-img {
+
+img[lazy-load] {
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAArwAAAFuAQMAAABZalm5AAAAA1BMVEXz8/ML3eGLAAAANklEQVR4Xu3AMQEAAADCIPunNsReWAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB38+AAH5NJYtAAAAAElFTkSuQmCC");
-    height: 366px;
-    width: 700px;
     display: none;
+    height: 366px;
+    width: 100%;
+}
+.title-img-p {
+    text-align: right;
+    font-size: 14px;
 }
 
 li a {
@@ -532,7 +536,7 @@ hr.section-divider:before {content: '...'; display: inline-block; margin-left: 0
         margin-left: 12px;
         margin-right: 12px;
     }
-    .lazy-load-img {
+    .title-img-wrapper img {
         height: 200px;
     }
     #content h1 {
@@ -563,11 +567,13 @@ hr.section-divider:before {content: '...'; display: inline-block; margin-left: 0
 }
 
 @media all and (max-width: 700px) {
+
     #content {
         margin: 0;
     }
+
     .alert,
-    .title-picture,
+    .title-img-p,
     #content .outline-2,
     #tags,
     #footnotes {
