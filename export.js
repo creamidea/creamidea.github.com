@@ -76,7 +76,11 @@ function genTagsResultsJson (tagsResults, posts) {
     ups.push(`<li data-weight=${tag.count} style="display:inline"><a href="#!/tags?tag=${encodeURIComponent(tag.name)}" style="font-size:${((Math.log(tag.count) / Math.log(2)) * diffFont / 6 + minFont).toFixed(2)}px">${tag.name}</a><sup>${tag.count}</sup></li>`)
     downs.push(`<ul class="tag-${encodeURIComponent(tag.name)}" style="display:none;">` + tag.filenames.map(function (filename) {
       let post = posts[filename]
-      return `<li><a class="title" href="${URLPREFIX}${post.category}/${post.name}.html">${post.title}</a></li>`
+      if (post.error) {
+        return ''
+      } else {
+        return `<li><a class="title" href="${URLPREFIX}${post.category}/${post.name}.html">${post.title}</a></li>`
+      }
     }).join('') + '</ul>')
   })
   return `<ul style="padding:0 12px;">${ups.join('')}</ul><div>${downs.join('')}</div>`
