@@ -97,7 +97,7 @@ function genArchiveHtml (data) {
     timeZone: 'UTC', timeZoneName: 'short'
   }
   let html = Object.keys(data).sort((a, b) => {
-    return data[b].mtime - data[a].mtime
+    return data[b].date - data[a].date
   }).map((fileSym) => {
     const {title, name, category, mtime, date, tags, error} = data[fileSym]
     if (error) return
