@@ -10,14 +10,14 @@
 #+STARTUP: showall
 
 #+BEGIN_HTML
-<div class="lazy-load-img-wrapper">
+<div class="lazy-load-img-wrapper title-img-wrapper">
 <noscript>
 <img src="http://www.techstricks.com/wp-content/uploads/2015/03/django-allauth.png"
 alt="Django" title="Django"/>
 </noscript>
 <img data-src="http://www.techstricks.com/wp-content/uploads/2015/03/django-allauth.png"
-lazy-load class="lazy-load-img" alt="Django" title="Django"/>
-<p class="title-picture">题图来自网络</p>
+lazy-load alt="Django" title="Django"/>
+<p class="title-img-p">题图来自网络</p>
 </div>
 #+END_HTML
 

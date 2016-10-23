@@ -10,16 +10,17 @@
 #+STARTUP: showall
 
 #+BEGIN_HTML
-<div class="lazy-load-img-wrapper">
+<div class="lazy-load-img-wrapper title-img-wrapper">
 <noscript>
 <img alt="Zookeeper" title="Zookeeper"
      src="https://media.githubusercontent.com/media/creamidea/creamidea.github.com/master/static/img/zoo.jpg"/>
 </noscript>
-<img lazy-load class="lazy-load-img" alt="Zookeeper" title="Zookeeper"
+<img lazy-load alt="Zookeeper" title="Zookeeper"
      data-src="https://media.githubusercontent.com/media/creamidea/creamidea.github.com/master/static/img/zoo.jpg"/>
-<p class="title-picture">题图来自网络</p>
+<p class="title-img-p">题图来自网络</p>
 </div>
 #+END_HTML
+
 
 * 序
 这是一篇关于快速入门ZooKeeper开发的翻译文章。 \\

@@ -7,14 +7,14 @@
 #+STARTUP: showall
 
 #+BEGIN_HTML
-<div class="lazy-load-img-wrapper">
+<div class="lazy-load-img-wrapper title-img-wrapper">
 <noscript>
 <img src="http://blog.arcbees.com/wp-content/uploads/Post_GWT_2.8Beta1_Howto_v1-01.png"
 alt="google web toolkit" title="google web toolkit"/>
 </noscript>
 <img data-src="http://blog.arcbees.com/wp-content/uploads/Post_GWT_2.8Beta1_Howto_v1-01.png"
-lazy-load class="lazy-load-img" alt="google web toolkit" title="google web toolkit"/>
-<p class="title-picture">题图来自网络</p>
+lazy-load alt="google web toolkit" title="google web toolkit"/>
+<p class="title-img-p">题图来自网络</p>
 </div>
 #+END_HTML
 
