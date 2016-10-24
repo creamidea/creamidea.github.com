@@ -278,10 +278,10 @@ function loadDisqusComment (target) {
           //1.25977
           img.style.transform = 'scale(0.8) translateY(-50px)'
           setTimeout(function(){
-            wapper.removeChild(img);
-            wapper.style.opacity = 0;
-            wapper.style.display = 'none';
-            body.style.overflow = null;
+            wapper.removeChild(img)
+            wapper.style.opacity = 0
+            wapper.style.display = 'none'
+            body.style.overflowY = 'scroll'
           }, 150);
         } else {
           // show image
@@ -297,7 +297,7 @@ function loadDisqusComment (target) {
           if (scale > 1) scale = 0.98
           var distance = (wapperW - imgW * scale) / 2
           _img.style.transform = 'scale('+ scale +') translateY('+ distance +'px)';
-          body.style.overflow = 'hidden';
+          body.style.overflowY = 'hidden';
         }
       }
     }
