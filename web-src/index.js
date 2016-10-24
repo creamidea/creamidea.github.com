@@ -213,12 +213,12 @@ window.console = window.console || (function(){
           head.querySelector('title').innerHTML = 'C-Tone | ' + drama.slice(0,1).toUpperCase() + drama.slice(1)
 
           var dom = this[drama].apply(this, [function () {
-            playAreaTips.style.display = 'none'
+            // playAreaTips.style.display = 'none'
           }].concat(params))
 
           if (dom instanceof Element) {
             dom.style.display = 'block'
-            playAreaTips.style.display = 'none'
+            // playAreaTips.style.display = 'none'
           }
         } catch (err) {
           playAreaTips.innerHTML = 'Drama - ' + '<span style="color:#4285f4;">' + drama + '</span>'
@@ -330,7 +330,8 @@ window.console = window.console || (function(){
         if (url) {
           goTips('<p>You will go to</p><p><strong>' + url + '</strong></p>',
                  {timeout: 60, action: 'timeout'})
-          setTimeout(function () {location.href = url;}, 24)
+          location.href = url
+          // setTimeout(function () {location.href = url;}, 24)
         } else {
           goTips('<p>I don\'t know where to go.</p>')
         }
@@ -513,7 +514,7 @@ window.console = window.console || (function(){
   }
 
   /**
-   * 增加首页背景图片的容器
+   * 显示 Banner
    */
   function showBanner (body, content) {
     blink()

@@ -107,6 +107,7 @@ nav a span {
     top: 16px;
     right: 20px;
 }
+
 /* #search { */
 /*     display: none; */
 /* } */
@@ -117,9 +118,12 @@ nav a span {
     margin-top: 30px;
 }
 #tags-cloud {
+    background: #fafafa;
     max-width: 700px;
     margin: 0px auto;
+    word-break: break-all;
     word-break: break-word;
+    padding: 10px 0px;
 }
 #links-table {
     margin: 12px auto;
@@ -129,10 +133,12 @@ nav a span {
 .play-area-tips {
     display: block;
     text-align: center;
-    margin-top: 20%;
+    // margin-top: 20%;
+    margin-top: 30px;
     position: absolute;
     width: 100%;
     font-size: 30px;
+    z-index: -1;
 }
 
 .article-list {
@@ -330,7 +336,8 @@ nav a span {
         display: block;
     }
     .play-area-tips {
-        margin-top: 45%;
+        margin-top: 30px;
+        /* margin-top: 45%; */
         font-size: 24px;
     }
 
