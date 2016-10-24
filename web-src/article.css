@@ -448,6 +448,28 @@ p.verse {
     cursor: -webkit-zoom-out;
 }
 
+.js-flowchart-diagram,
+.js-sequence-diagram {
+    text-align: center;
+    // background: #ccc;
+    font-size: 14px;
+    padding: 10px 0;
+    overflow-x: auto;
+}
+.js-flowchart-diagram button,
+.js-sequence-diagram button {
+    display: block;
+    width: 200px;
+    padding: 12px 0;
+    margin: 10px auto;
+    color: black;
+    background: #e6b8b8;
+    border: 0;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
 /*==============================*/
 
 footer {

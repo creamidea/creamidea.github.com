@@ -305,6 +305,144 @@ function loadDisqusComment (target) {
   }
 
   /**
+   * XMLHttpRequest
+   */
+  function loader (o) {
+    var httpRequest = new XMLHttpRequest()
+    if (!httpRequest) {
+      console.error('Giving up :( Cannot create an XMLHTTP instance');
+      return false;
+    }
+    httpRequest.onreadystatechange = function () {
+      try {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+          if (httpRequest.status === 200) {
+            if (typeof o.success === 'function') o.success(httpRequest.responseText)
+          } else {
+            if (typeof o.fail === 'function') o.fail(httpRequest)
+          }
+        }
+      }
+      catch( e ) {
+        if (typeof o.error === 'function') o.error(httpRequest, e)
+        console.log(e)
+      }
+    }
+    httpRequest.open(o.type || 'GET', o.url)
+    httpRequest.send()
+    // console.log('loading url: ' + o.url + '....')
+  }
+
+  /**
+   * loadJS
+   */
+  function LoadJSSeq () {
+    var hasLoaded = {} // Cache Problem! If no refresh.
+    return function (sources, success, fail) {
+      var count = 0
+      var sourcesTXT = []
+      var max = sources.length
+
+      function _successCallback () {
+        count += 1
+        if (count === max) {
+          if (typeof success === 'function') success.apply(this, sourcesTXT)
+        }
+      }
+      for(var i = 0; i < max; i++) {
+        var url = sources[i]
+        if (typeof hasLoaded[url] !== 'undefined') {
+          sourcesTXT[i] = hasLoaded[url]
+          _successCallback (count, max, sourcesTXT, success)
+        } else {
+          !function __loader (i, url, success, fail) {
+            loader({
+              url: url,
+              success: function (txt) {
+                sourcesTXT[i] = txt
+                hasLoaded[url] = txt
+                _successCallback (count, max, sourcesTXT, success)
+              },
+              fail: function (h, e) {
+                count -= 1
+                if (typeof fail === 'function') fail(h, e)
+              }
+            })
+          }(i, url, success, fail)
+        }
+      }
+    }
+  }
+  /**
+   * Diagram
+   */
+  function loadDiagram (sources, loadJSSeq, body) {
+    return function (success, fail) {
+      loadJSSeq(sources, function (raphael, _, seq) {
+        // console.log('load over.')
+        __forEach.call(arguments, function (src) {
+          var script = document.createElement('script')
+          script.innerHTML = src
+          body.appendChild(script)
+          body.removeChild(script)
+        })
+        if (typeof success === 'function') success()
+      }, function () {
+        if (typeof fail === 'function') fail()
+      })
+    }
+  }
+  /**
+   * diagram: sequence & flowchart
+   */
+  function drawDiagram (btnDOM, config, loadJSSeq, body) {
+    var parent = btnDOM ? btnDOM.parentNode : this.parentNode
+    var target = parent.childNodes[0]
+    btnDOM.innerHTML = 'Loaded...'
+    loadDiagram(config.sources, loadJSSeq, body)(function () {
+      var diagram = window[config.func].parse.call(window[config.func], target.data)
+      parent.innerHTML = ''
+      diagram.drawSVG(parent, {theme: 'simple'});
+    }, function () {
+      btnDOM.innerHTML = 'Loaded failed. Try again?'
+    })
+  }
+
+  function initDiagram (body, diagrams, loadJSSeq) {
+    var config = {
+      sequence: {
+        sources: [
+          "//cdn.bootcss.com/raphael/2.2.6/raphael.min.js",
+          "//cdn.bootcss.com/underscore.js/1.8.3/underscore-min.js",
+          "//cdn.bootcss.com/js-sequence-diagrams/1.0.6/sequence-diagram-min.js"
+        ],
+        func: "Diagram"
+      },
+      flowchart: {
+        sources: [
+          "//cdn.bootcss.com/raphael/2.2.6/raphael.min.js",
+          "//cdn.bootcss.com/flowchart/1.6.3/flowchart.min.js"
+        ],
+        func: "flowchart"
+      }
+    }
+    __forEach.call(diagrams, function (elt) {
+      var btn = document.createElement('button')
+      btn.className = 'btn'+elt.className
+      btn.onclick = function (e) {
+        e.stopPropagation()
+        if (this.className.indexOf('sequence') > 0) {
+          drawDiagram(this, config['sequence'], loadJSSeq, body)
+        } else if (this.className.indexOf('flowchart') > 0) {
+          drawDiagram(this, config['flowchart'], loadJSSeq, body)
+        }
+      }
+      btn.innerHTML = 'Draw Diagram'
+      elt.appendChild(btn)
+    })
+  }
+
+  /**
    * 为h2 h3 h4标题类型后面增加#符号
    */
   function someArticlesFix (body, content, isHome) {
@@ -474,6 +612,15 @@ function loadDisqusComment (target) {
           if (typeof __forEach == 'function') {
             showTags(body, content, meta)
             loadLazyImage(content)
+
+            __forEach.call(
+              [
+                document.getElementsByClassName('js-sequence-diagram'),
+                document.getElementsByClassName('js-flowchart-diagram')
+              ], function (elt) {
+                initDiagram(body, elt, LoadJSSeq())
+              })
+
             // showHomeButton(body)
             ImgClickEvent(body, initImgWapper(body))
             loadDisqus(body, content)
