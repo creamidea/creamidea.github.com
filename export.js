@@ -114,6 +114,7 @@ function genArchiveHtml (data) {
 <div class="meta">
 ${Array.prototype.map.call([{key: 'create', value: date}, {key: 'update', value: mtime}], function (o) {
 const {key, value} = o
+// console.log(key, new Date(value))
 return `<p class="${key}-time">`
 + `<span>${key.slice(0, 1).toUpperCase() + key.slice(1)}: </span>`
 + `<date>${(new Date(value)).toLocaleDateString('en-US', options)}</date></p>`
@@ -260,7 +261,7 @@ function cutout(data) {
         value = (function (date) {
           let _d = date
           let [year, month, day] = _d.split('-')
-          return (new Date(Date.UTC(year, month, day, 8, 0, 0)).getTime()) // Beijing
+          return (new Date(Date.UTC(year, (+month) - 1, day, 8, 0, 0)).getTime()) // Beijing
         })(value)
       }
 
@@ -295,7 +296,6 @@ function readArticle (category, filename, container, callback) {
       })
     }
     Object.assign(container[sym], {
-      ctime: (new Date(data.ctime)).getTime(),
       mtime: (new Date(data.mtime)).getTime()
     })
     fs.open(baseFullpath, "r", (err, fd) => {
@@ -422,6 +422,7 @@ function readCache() {
   return new Promise((resolve, reject) => {
     let _posts = {}, _tags = {}
     readFile(CACHEFILE).then( (cache) => {
+      if (cache.length === 0) throw {code: 'ENOENT'}
       const {posts, tags} = JSON.parse(cache.toString('utf8'))
       posts.map( file => {
         _posts[`${file.category}::${file.name}`] = file
