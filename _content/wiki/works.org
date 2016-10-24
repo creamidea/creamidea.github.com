@@ -114,8 +114,29 @@
    于是，我开启了我的作死技能。研究统一接入层的协议，自己模拟这个过程。来欺骗后端的 java。顺带看完了 java-sdk 的实现。
    由于是公司内部系统，具体细节不能透露。我只能给一个通用的流程图。
 
-   #+CAPTION: User Login
-   [[glfs:user-login.png]]
+   #+BEGIN_HTML
+      <div class="js-sequence-diagram">
+   Title: User Login
+   User->>Nodejs: 请求A
+   Nodejs->>Java: 透传请求A
+   Java->>OAuth: 认证请求A
+   OAuth-->>Java: 请求A需要登录
+   Java-->>Nodejs: 请求A需要登录
+   Nodejs-->>User: 请求A需要登入（修改跳转地址）
+
+   User->>OAuth: 跳转登录页面
+   OAuth-->>User: 返回登录页面
+   User->>OAuth: 提交登录信息
+   OAuth-->User: 返回登录结果
+
+   User->>Nodejs: 登录成功跳转
+   Nodejs->>Java: 透传登录成功信息
+   Java-->>Nodejs: 返回成功登录信息(Cookie)
+   Nodejs->>Java: 请求A（带上Cookie）
+   Java-->>Nodejs: 请求A结果
+   Nodejs-->>User: 请求A结果
+      </div>
+   #+END_HTML
 
    另外，差点死在了 Koajs 的异步上，不过最后明白了 co-yield 的实现，也就没有什么问题了。
 
