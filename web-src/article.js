@@ -286,13 +286,15 @@ function loadDisqusComment (target) {
         } else {
           // show image
           var _img = document.createElement('img');
-          _img.src = e.target.src;
+          _img.src = e.target.src
+          _img.style.maxWidth = '100%'
           wapper.appendChild(_img);
           wapper.style.display = 'block';
           wapper.style.opacity = 1;
           var wapperW = wapper.getBoundingClientRect().height
           var imgW = _img.getBoundingClientRect().height || 366
-          var scale = (imgW > wapperW) ? 1 : (wapperW + imgW) / 2 / imgW
+          var scale = (wapperW + imgW) / 2 / imgW
+          if (scale > 1) scale = 0.98
           var distance = (wapperW - imgW * scale) / 2
           _img.style.transform = 'scale('+ scale +') translateY('+ distance +'px)';
           body.style.overflow = 'hidden';
