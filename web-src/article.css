@@ -458,7 +458,6 @@ p.verse {
 }
 .js-flowchart-diagram button,
 .js-sequence-diagram button {
-    display: block;
     width: 200px;
     padding: 12px 0;
     margin: 10px auto;
@@ -469,6 +468,14 @@ p.verse {
     font-size: 16px;
     cursor: pointer;
 }
+.js-diagram-p p {
+    text-align: left;
+    margin: 0;
+}
+.js-diagram-p p:first-child {
+    text-align: center;
+}
+
 
 /*==============================*/
 

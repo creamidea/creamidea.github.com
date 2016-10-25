@@ -69,6 +69,7 @@ function loadDisqusComment (target) {
 
 ;(function (window) {
   var __forEach = Array.prototype.forEach
+  var __map = Array.prototype.map
   var __slice = Array.prototype.slice
   var __filter = Array.prototype.filter
   // var SEARCHER = 'https://www.laiguge.com/search?hl=en&q='
@@ -337,7 +338,8 @@ function loadDisqusComment (target) {
    * loadJS
    */
   function LoadJSSeq () {
-    var hasLoaded = {} // Cache Problem! If no refresh.
+    // TODO: Cache timeout Problem! If no refresh.
+    var hasLoaded = {}
     return function (sources, success, fail) {
       var count = 0
       var sourcesTXT = []
@@ -396,11 +398,17 @@ function loadDisqusComment (target) {
    * diagram: sequence & flowchart
    */
   function drawDiagram (btnDOM, config, loadJSSeq, body) {
-    var parent = btnDOM ? btnDOM.parentNode : this.parentNode
-    var target = parent.childNodes[0]
+
     btnDOM.innerHTML = 'Loaded...'
+
+    var parent = btnDOM ? btnDOM.parentNode : this.parentNode
+    var data = __map.call(parent.firstChild.childNodes, function (child) {
+      if (child.tagName !== 'P') return
+      else return child.childNodes[0].data
+    }).join('\n')
+
     loadDiagram(config.sources, loadJSSeq, body)(function () {
-      var diagram = window[config.func].parse.call(window[config.func], target.data)
+      var diagram = window[config.func].parse.call(window[config.func], data)
       parent.innerHTML = ''
       diagram.drawSVG(parent, {theme: 'simple'});
     }, function () {
@@ -428,7 +436,16 @@ function loadDisqusComment (target) {
       }
     }
     __forEach.call(diagrams, function (elt) {
+      var div = document.createElement('div')
       var btn = document.createElement('button')
+      var data = elt.childNodes[0].data
+
+      div.className = 'js-diagram-p'
+      div.innerHTML = __map.call(data.split(/\r?\n/), function (d) {
+        if (d === "") return
+        return '<p>' + d + '</p>'
+      }).join('')
+
       btn.className = 'btn'+elt.className
       btn.onclick = function (e) {
         e.stopPropagation()
@@ -440,6 +457,9 @@ function loadDisqusComment (target) {
         }
       }
       btn.innerHTML = 'Draw Diagram'
+
+      elt.innerHTML = ''
+      elt.appendChild(div)
       elt.appendChild(btn)
     })
   }
