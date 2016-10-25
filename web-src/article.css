@@ -351,6 +351,7 @@ blockquote p {
 /*     border: 0 !important; */
 /* } */
 
+.js-diagram-p,
 code,
 pre.src,
 pre.example,
@@ -460,7 +461,7 @@ p.verse {
 .js-sequence-diagram button {
     width: 200px;
     padding: 12px 0;
-    margin: 10px auto;
+    margin: 0 auto;
     color: black;
     background: #e6b8b8;
     border: 0;
@@ -468,12 +469,14 @@ p.verse {
     font-size: 16px;
     cursor: pointer;
 }
+.js-diagram-p {
+    margin-top: 0;
+}
 .js-diagram-p p {
     text-align: left;
     margin: 0;
 }
 .js-diagram-p p:first-child {
-    font-weight: 500;
     text-align: center;
 }
 
