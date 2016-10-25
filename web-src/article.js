@@ -468,7 +468,7 @@ function loadDisqusComment (target) {
 
       div.className = 'js-diagram-p'
       div.innerHTML = __map.call(data.split(/\r?\n/), function (d) {
-        if (d === "") return
+        if (/^\s*$/.test(d)) return
         return '<p>' + d + '</p>'
       }).join('')
 
