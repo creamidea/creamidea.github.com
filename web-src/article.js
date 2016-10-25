@@ -404,6 +404,7 @@ function loadDisqusComment (target) {
       parent.innerHTML = ''
       diagram.drawSVG(parent, {theme: 'simple'});
     }, function () {
+      btnDOM.disabled = false
       btnDOM.innerHTML = 'Loaded failed. Try again?'
     })
   }
@@ -431,6 +432,7 @@ function loadDisqusComment (target) {
       btn.className = 'btn'+elt.className
       btn.onclick = function (e) {
         e.stopPropagation()
+        this.disabled = true
         if (this.className.indexOf('sequence') > 0) {
           drawDiagram(this, config['sequence'], loadJSSeq, body)
         } else if (this.className.indexOf('flowchart') > 0) {
