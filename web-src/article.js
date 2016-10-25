@@ -6,6 +6,30 @@ window.console = window.console || (function(){
   var c = {}; c.log = c.warn = c.debug = c.info = c.error = c.time = c.dir = c.profile = c.clear = c.exception = c.trace = c.assert = function(){};
   return c;
 })();
+if (typeof Object.assign != 'function') {
+  (function () {
+    Object.assign = function (target) {
+      'use strict';
+      // We must check against these specific cases.
+      if (target === undefined || target === null) {
+        throw new TypeError('Cannot convert undefined or null to object');
+      }
+
+      var output = Object(target);
+      for (var index = 1; index < arguments.length; index++) {
+        var source = arguments[index];
+        if (source !== undefined && source !== null) {
+          for (var nextKey in source) {
+            if (source.hasOwnProperty(nextKey)) {
+              output[nextKey] = source[nextKey];
+            }
+          }
+        }
+      }
+      return output;
+    };
+  })();
+}
 
 /**
  * load disqus
@@ -397,20 +421,16 @@ function loadDisqusComment (target) {
   /**
    * diagram: sequence & flowchart
    */
-  function drawDiagram (btnDOM, config, loadJSSeq, body) {
+  function drawDiagram (btnDOM, config, loadJSSeq, body, options) {
 
     btnDOM.innerHTML = 'Loaded...'
 
     var parent = btnDOM ? btnDOM.parentNode : this.parentNode
-    var data = __map.call(parent.firstChild.childNodes, function (child) {
-      if (child.tagName !== 'P') return
-      else return child.childNodes[0].data
-    }).join('\n')
 
     loadDiagram(config.sources, loadJSSeq, body)(function () {
-      var diagram = window[config.func].parse.call(window[config.func], data)
+      var diagram = window[config.func].parse.call(window[config.func], config.data)
       parent.innerHTML = ''
-      diagram.drawSVG(parent, {theme: 'simple'});
+      diagram.drawSVG(parent, config.options);
     }, function () {
       btnDOM.disabled = false
       btnDOM.innerHTML = 'Loaded failed. Try again?'
@@ -425,20 +445,26 @@ function loadDisqusComment (target) {
           "//cdn.bootcss.com/underscore.js/1.8.3/underscore-min.js",
           "//cdn.bootcss.com/js-sequence-diagrams/1.0.6/sequence-diagram-min.js"
         ],
-        func: "Diagram"
+        func: "Diagram",
+        options: {
+          theme: 'simple'
+        }
       },
       flowchart: {
         sources: [
           "//cdn.bootcss.com/raphael/2.2.6/raphael.min.js",
           "//cdn.bootcss.com/flowchart/1.6.3/flowchart.min.js"
         ],
-        func: "flowchart"
+        func: "flowchart",
+        options: {}
       }
     }
     __forEach.call(diagrams, function (elt) {
       var div = document.createElement('div')
       var btn = document.createElement('button')
       var data = elt.childNodes[0].data
+      var scriptJson = elt.childNodes[elt.childElementCount].firstChild
+      var options = scriptJson ? scriptJson.data : '{}'
 
       div.className = 'js-diagram-p'
       div.innerHTML = __map.call(data.split(/\r?\n/), function (d) {
@@ -450,10 +476,14 @@ function loadDisqusComment (target) {
       btn.onclick = function (e) {
         e.stopPropagation()
         this.disabled = true
-        if (this.className.indexOf('sequence') > 0) {
-          drawDiagram(this, config['sequence'], loadJSSeq, body)
-        } else if (this.className.indexOf('flowchart') > 0) {
-          drawDiagram(this, config['flowchart'], loadJSSeq, body)
+        try {
+          var _config = config[this.className.split('-')[1]]
+          _config.data = data
+          Object.assign(_config.options, JSON.parse(options))
+          drawDiagram(this, _config, loadJSSeq, body)
+        } catch (err) {
+          console.log('[Draw Diagram] ', err)
+          this.innerHTML = 'Draw Error!'
         }
       }
       btn.innerHTML = 'Draw Diagram'
