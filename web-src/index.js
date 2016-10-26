@@ -238,17 +238,19 @@ window.console = window.console || (function(){
 
         playAreaTips.innerHTML = 'Preparing Drama - ' + '<span style="color:#4285f4;">' + drama + '...</span>'
         playAreaTips.style.display = 'block'
+        head.querySelector('title').innerHTML = 'C-Tone | ' + drama.slice(0,1).toUpperCase() + drama.slice(1)
+
+        function curtainCall (_dom) {
+          _dom.style.display = 'block'
+          playAreaTips.style.display = 'none'
+        }
+
         try {
 
-          head.querySelector('title').innerHTML = 'C-Tone | ' + drama.slice(0,1).toUpperCase() + drama.slice(1)
-
-          var dom = this[drama].apply(this, [function () {
-            // playAreaTips.style.display = 'none'
-          }].concat(params))
+          var dom = this[drama].apply(this, [curtainCall].concat(params))
 
           if (dom instanceof Element) {
-            dom.style.display = 'block'
-            // playAreaTips.style.display = 'none'
+            curtainCall(dom)
           }
         } catch (err) {
           playAreaTips.innerHTML = 'Drama - ' + '<span style="color:#4285f4;">' + drama + '</span>'
@@ -308,8 +310,7 @@ window.console = window.console || (function(){
               }
             }, false)
 
-            articleListDOM.style.display = 'block'
-            cb()
+            cb(articleListDOM)
           })
         }
         return articleListDOM
@@ -322,8 +323,7 @@ window.console = window.console || (function(){
         var customSearchDOM = playArea.querySelector('#custom-search')
         if (customSearchDOM === null){
           loadCustomSearch(playArea, function (elt) {
-            elt.style.display = 'block'
-            cb()
+            cb(elt)
           })
         }
         return customSearchDOM
@@ -334,10 +334,9 @@ window.console = window.console || (function(){
        */
       tags: function (cb, tag) {
         var tagsDOM = playArea.querySelector('#tags-cloud')
-        var _cb = (function () {
-          tagsDOM.style.display = 'block'
+        var _cb = (function (dom) {
           showPostsByTag(tagsDOM, tag)
-          cb()
+          cb(dom)
         }).bind(this)
 
         if (tagsDOM === null) {
@@ -345,10 +344,10 @@ window.console = window.console || (function(){
             tagsDOM = playArea.appendChild(document.createElement('div'))
             tagsDOM.innerHTML = txt
             tagsDOM.id = 'tags-cloud'
-            _cb()
+            _cb(tagsDOM)
           })
         } else {
-          _cb()
+          _cb(tagsDOM)
         }
       },
 
@@ -365,21 +364,12 @@ window.console = window.console || (function(){
           tableDOM.id = 'links-table'
           tableDOM.innerHTML = '<table><caption><a href="/static/about.html">About</a> me</caption>'
             + '<thead><tr><th>Name</th><th>Link</th></tr></thead><tbody>'+links+'</tbody></table>'
-          tableDOM.style.display = 'block'
-          cb()
+
+          cb(tableDOM)
         }
         return tableDOM
       },
 
-      /**
-       * eggshell :)
-       */
-      eggshell: function () {
-        var lambda = document.querySelector('#banner-wrapper a')
-        lambda.href = 'javascript: void(0)'
-        lambda.style.cursor = 'default'
-        changeOctoCat(body)
-      },
       formula: function (cb) {
         var qDOM = document.querySelector('#question')
         if (qDOM === null) {
@@ -400,8 +390,7 @@ window.console = window.console || (function(){
             }
             qDOM = playArea.appendChild(dom.firstChild)
 
-            qDOM.style.display = 'block'
-            cb()
+            cb(qDOM)
           }).bind(this))
         }
         return qDOM
@@ -419,9 +408,19 @@ window.console = window.console || (function(){
         } else {
           goTips('<p>I don\'t know where to go.</p>')
         }
-      }
+      },
 
+      /**
+       * eggshell :)
+       */
+      eggshell: function () {
+        var lambda = document.querySelector('#banner-wrapper a')
+        lambda.href = 'javascript: void(0)'
+        lambda.style.cursor = 'default'
+        changeOctoCat(body)
+      }
     }
+
     return __interface
   }
 
@@ -753,22 +752,30 @@ window.console = window.console || (function(){
 
   // ==============================================================================
   // Load external resources
-
+  // https://developers.google.com/custom-search/docs/element
   function loadCustomSearch (elt, callback) {
     var div = document.createElement('div');
     div.id = 'custom-search'
     div.innerHTML = '<gcse:search></gcse:search>'
     elt.appendChild(div)
 
+    window.__gcse = {
+      parsetags: 'explicit',
+      callback: function () {
+        console.log('[GCSE] Google Custom Search Engine Loaded Over.')
+        google.search.cse.element.render({
+          div: "custom-search",
+          tag: 'search'
+        })
+        if (typeof callback === 'function') callback(div)
+      }
+    }
+
     var cx = '017951989687920165329:0e60irxxe5m';
     var gcse = document.createElement('script');
     var s = document.getElementsByTagName('script')[0];
     gcse.type = 'text/javascript';
     gcse.async = true;
-    gcse.onload = function () {
-      if (typeof callback === 'function') callback(div)
-      console.log('[GCSE] Google Custom Search Engine Loaded Over.')
-    }
     s.parentNode.insertBefore(gcse, s);
     gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
   }
