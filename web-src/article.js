@@ -481,19 +481,22 @@ function loadDisqusComment (target) {
       var data = elt.childNodes[0].data
       var scriptJson = elt.childNodes[elt.childElementCount].firstChild
       var options = scriptJson ? scriptJson.data : '{}'
+      var title
 
       div.className = 'js-diagram-p'
       div.innerHTML = __map.call(data.split(/\r?\n/), function (d) {
         if (/^\s*$/.test(d)) return
+        if (!title && d.search(/title/i) >= 0) title = d // title = d.match(/title:\s*?([^\s].*)$/i)[1]
         return '<p>' + d + '</p>'
       }).join('')
 
-      btn.className = 'btn'+elt.className
+      btn.className = 'btn '+elt.className
       btn.onclick = function (e) {
         e.stopPropagation()
         this.disabled = true
         try {
-          var _config = config[this.className.split('-')[1]]
+          var type = this.className.split('-')[1]
+          var _config = config[type]
           _config.data = data
           Object.assign(_config.options, JSON.parse(options))
           drawDiagram(this, _config, loadJSSeq, body)
@@ -501,6 +504,11 @@ function loadDisqusComment (target) {
           console.log('[Draw Diagram] ', err)
           this.innerHTML = 'Draw Error!'
         }
+        ga('send', 'event', {
+          eventCategory: 'Diagram',
+          eventAction: 'click',
+          eventLabel: title + ', Type: ' + type
+        });
       }
       btn.innerHTML = 'Draw Diagram'
 
