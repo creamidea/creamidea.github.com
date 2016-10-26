@@ -1,351 +1,5 @@
 @charset "UTF-8";
 
-body {
-    // background: #fafafa!important;
-    overflow-x: hidden;
-    font-family: BlinkMacSystemFont, "PingFang SC", "Segoe UI", "Microsoft YaHei", "Ubuntu","Roboto","Oxygen","Cantarell","Open Sans","Helvetica Neue",sans-serif;
-    letter-spacing: 0;
-    font-weight: 400;
-    font-style: normal;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -moz-font-feature-settings: "liga" on;
-    color: rgba(0,0,0,.8);
-    font-size: 18px;
-    line-height: 1.4;
-    position: relative;
-    transition: background 1s ease .2s;
-}
-.hidden {
-    display:none;
-}
-
-#banner-wrapper img {
-    max-width: 424px;
-}
-#banner-wrapper p {
-    margin:0;
-}
-#banner-wrapper a {
-    color:black;
-    font-size:16px;
-    font-family:Georgia1,Georgia,Times New Roman,Times,serif;
-    font-style:italic;
-}
-
-/* http://stackoverflow.com/questions/16056591/font-scaling-based-on-width-of-container */
-.blink-wrapper {
-    text-align: center;
-    font-size: 16px;
-    font-size: 26vw;            /* 424 / 16 = 26.5 | 335 -> 26.5 | 424 -> 32 */
-    margin: 0;
-    max-height: 449px;
-    line-height: 1;
-}
-
-nav {
-    text-align: center;
-    width: 767px;
-    margin: 0 auto;
-}
-nav a {
-    font-size: 18px;
-    margin: auto 10px;
-    color: black;
-    text-transform: uppercase;
-    font-family: Georgia, Times New Roman, Times, serif;
-}
-
-#about p,
-nav a span {
-    display: none;
-}
-
-#about,
-#friends,
-#works,
-#archive,
-#rss,
-#search {
-    text-decoration: none;
-}
-#friends svg,
-#works svg,
-#archive svg,
-#rss svg,
-#search svg {
-    width: 32px;
-    height: 32px;
-}
-
-#play-area {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9;
-}
-#go-tips {
-    display: none;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    position: fixed;
-    z-index: 12;
-    top: 0;
-    left: 0;
-    margin: 0 auto;
-    padding-top: 15%;
-    background: #e6b8b8;
-    word-break: break-word;
-    opacity: 0.96;
-}
-#go-tips .close {
-    position: absolute;
-    top: 16px;
-    right: 20px;
-}
-
-/* #search { */
-/*     display: none; */
-/* } */
-#custom-search {
-    width: 100%;
-    max-width: 960px;
-    margin: 0 auto;
-    margin-top: 30px;
-}
-#tags-cloud {
-    background: #fafafa;
-    max-width: 700px;
-    margin: 0px auto;
-    word-break: break-all;
-    word-break: break-word;
-    padding: 10px 0px;
-}
-#links-table {
-    margin: 12px auto;
-    width: 700px;
-    word-break: break-word;
-}
-.play-area-tips {
-    display: block;
-    text-align: center;
-    // margin-top: 20%;
-    margin-top: 30px;
-    position: absolute;
-    width: 100%;
-    font-size: 30px;
-    z-index: -1;
-}
-
-.article-list {
-    list-style-type: none;
-    padding: 0;
-}
-.article-list li{
-    background: #fff;
-    box-shadow: 0 1px 4px rgba(0,0,0,.04);
-    border: 1px solid rgba(0,0,0,.09);
-    border-radius: 3px;
-    border-bottom: none;
-    margin-bottom: 10px;
-    margin-right: auto;
-    margin-left: auto;
-    padding-right: 20px;
-    padding-left: 20px;
-    padding-top: 10px;
-    padding-bottom: 15px;
-    max-width: 660px;
-    position: relative;
-}
-.article-list li.articles {
-    border-left: 4px solid #191919;
-}
-.article-list li.articles:after {
-    content: "文";
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    font-size: 16px;
-    color: gainsboro;
-}
-.article-list li.translation{
-    border-left: 4px solid #ED462F; //#54A650
-}
-.article-list li.translation:after {
-    content: "譯";
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    font-size: 16px;
-    color: gainsboro;
-}
-
-.article-list .title {
-    text-decoration: none;
-    color: rgba(0,0,0,.8);
-    font-size: 29px;
-    margin-left: -1.81px;
-    line-height: 1.04;
-    letter-spacing: -.028em;
-}
-
-.article-list .meta {
-    margin: 14px auto;
-    color: rgba(0,0,0,.44);
-    font-size: 14px;
-}
-.article-list .meta p {
-    margin: 0;
-    display: inline-block;
-}
-.article-list .meta p:first-child {
-    margin-right: 16px;
-}
-
-.tags {
-    font-size: 12px;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Open Sans","Helvetica Neue",sans-serif;
-    letter-spacing: 0;
-    font-weight: 400;
-    font-style: normal;
-}
-.tags a {
-    border: none;
-    color: rgba(0,0,0,0.6);
-    background: rgba(0,0,0,0.05);
-    /*font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Open Sans","Helvetica Neue",sans-serif;*/
-    font-weight: 400;
-    font-style: normal;
-    color: rgba(0,0,0,0.44);
-    font-size: 13px;
-    letter-spacing: 0;
-    line-height: 22px;
-    text-decoration: none;
-    background: #fafafa;
-    border-radius: 3px;
-    border: 1px solid #f0f0f0;
-    padding: 5px 10px;
-    display: inline-block;
-
-    margin-right: 8px;
-    margin-bottom: 8px;
-}
-.tags a:hover {
-    background: rgba(0,0,0,0.1);
-    color: rgba(0,0,0,0.6);
-    border-color: rgba(0,0,0,0.15);
-    text-decoration: none;
-    cursor: pointer
-}
-/* .return { */
-/*     position: fixed; */
-/*     top: 10px; */
-/*     left: 3%; */
-/*     font-weight: 500; */
-/*     background: #4285f4; */
-/*     color: white; */
-/* } */
-.return {
-    position: fixed;
-    right: 20px;
-    top: 10px;
-    width: 32px;
-    height: 32px;
-    opacity: 0.3;
-    cursor: pointer;
-    z-index: 9;
-}
-.return:hover {
-  opacity: 1;
-}
-.return:before, .return:after {
-  position: absolute;
-  left: 15px;
-  content: ' ';
-  height: 24px;
-  width: 4px;
-  background-color: #333;
-}
-.return:before {
-  transform: rotate(45deg);
-}
-.return:after {
-  transform: rotate(-45deg);
-}
-
-/* @media(max-width: 900px) { */
-/*     .return { */
-/*         top: initial; */
-/*         left: initial; */
-/*         bottom: 10px; */
-/*         right: 10px; */
-/*     } */
-/* } */
-@media(max-width: 767px) {
-    #banner-wrapper img {
-        width: 50%;
-        margin-top: 2%;
-    }
-    .blink-wrapper {
-        line-height: 1.4;
-        /* font-size: 8em; */
-    }
-    .article-list .meta {
-        margin: 10px auto;
-    }
-
-    nav {
-        margin: 0 auto;
-        margin-top: 16px;
-        width: 150px;
-    }
-    nav a {
-        display: block;
-        font-size: 16px;
-        font-weight: 500;
-        margin: 8px auto;
-        color: #191919 !important;
-        /* color: white; */
-        /* text-decoration: underline !important; */
-        background: #e6b8b8;
-        box-shadow: 2px 2px 2px #e6b8b8;
-        padding: 12px;
-        border-radius: 4px;
-    }
-    nav a:active {
-        background-color: #e6b8b8;
-        box-shadow: inset 0 0 #e6b8b8;
-        border: solid 1px white;
-        transform: translateY(1px);
-    }
-    #rss {
-        display: none!important;
-    }
-
-    #about div,
-    nav a svg {
-        display: none !important;
-    }
-
-    #about p,
-    nav a span {
-        display: block;
-    }
-    .play-area-tips {
-        margin-top: 30px;
-        /* margin-top: 45%; */
-        font-size: 24px;
-    }
-
-}
-/* @media all and (max-width: 320px) { */
-/* } */
-
-
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -379,6 +33,41 @@ button {
     border: 1px solid transparent;
     border-radius: 4px;
 }
+.btn-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+/* form start */
+.form-horizontal {
+    display: block;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+/* form end*/
+
+/* utils css start*/
+.hidden {
+    display:none;
+}
+/* utils css end*/
 
 
 /*!
@@ -643,3 +332,395 @@ button {
   -webkit-animation-name: bounceOut;
   animation-name: bounceOut;
 }
+
+
+body {
+    // background: #fafafa!important;
+    overflow-x: hidden;
+    font-family: BlinkMacSystemFont, "PingFang SC", "Segoe UI", "Microsoft YaHei", "Ubuntu","Roboto","Oxygen","Cantarell","Open Sans","Helvetica Neue",sans-serif;
+    letter-spacing: 0;
+    font-weight: 400;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-font-feature-settings: "liga" on;
+    color: rgba(0,0,0,.8);
+    font-size: 16px;
+    line-height: 1.4;
+    position: relative;
+    transition: background 1s ease .2s;
+}
+
+a {
+    font-size: 1.125em;
+    font-family: "Courier New, Courier, monospace"
+}
+
+nav {
+    text-align: center;
+    width: 767px;
+    margin: 0 auto;
+}
+nav a {
+    margin: auto 10px;
+    text-transform: uppercase;
+    font-family: Georgia, Times New Roman, Times, serif;
+}
+
+.formula {
+    font-family: Georgia, Times New Roman, Times, serif;
+    font-style:italic;
+}
+
+/* ======================================== */
+
+/* banner start */
+#banner-wrapper img {
+    max-width: 424px;
+}
+#banner-wrapper p {
+    text-align:center;
+    margin:0;
+}
+#banner-wrapper .lambda {
+    color: rgba(0,0,0,.8);
+    text-decoration: none;
+}
+
+/* http://stackoverflow.com/questions/16056591/font-scaling-based-on-width-of-container */
+.blink-wrapper {
+    text-align: center;
+    font-size: 16px;
+    font-size: 26vw;            /* 424 / 16 = 26.5 | 335 -> 26.5 | 424 -> 32 */
+    margin: 0;
+    max-height: 449px;
+    line-height: 1;
+}
+/* banner end */
+
+/* question start*/
+#question {
+    text-align: center;
+    font-size: 16px;
+    margin: 20px auto;
+}
+#question p {
+    font-size: 4em;
+    margin: 10px 0;
+}
+#question .formula a {
+    color: #191919;
+    text-decoration: none;
+    font-family: inherit;
+}
+#question form input,
+#question form button {
+    font-size: 2em;
+    width: 50%;
+    text-align: center;
+}
+#question form input {
+    padding: 12px 10px;
+    margin: 10px auto;
+}
+/* question end*/
+
+/* my nav setting start */
+#about p,
+nav a span {
+    display: none;
+}
+
+nav a{
+    text-decoration: none;
+}
+
+nav a svg {
+    width: 32px;
+    height: 32px;
+}
+/* my nav setting end */
+
+/* play area start */
+#play-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+}
+.play-area-tips {
+    display: block;
+    text-align: center;
+    // margin-top: 20%;
+    margin-top: 30px;
+    position: absolute;
+    width: 100%;
+    font-size: 30px;
+    z-index: -1;
+}
+
+/* play area: custom-search page */
+/* #search { */
+/*     display: none; */
+/* } */
+#custom-search {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+/* play area: tags page */
+#tags-cloud {
+    background: #fafafa;
+    max-width: 700px;
+    margin: 0px auto;
+    word-break: break-all;
+    word-break: break-word;
+    padding: 10px 0px;
+}
+
+/* play area: me page */
+#links-table {
+    margin: 12px auto;
+    width: 700px;
+    word-break: break-word;
+}
+
+/* play area: archive page*/
+.article-list {
+    list-style-type: none;
+    padding: 0;
+}
+.article-list .title {
+    text-decoration: none;
+    color: rgba(0,0,0,.8);
+    font-size: 29px;
+    margin-left: -1.81px;
+    line-height: 1.04;
+    letter-spacing: -.028em;
+}
+
+.article-list .meta {
+    margin: 14px auto;
+    color: rgba(0,0,0,.44);
+    font-size: 14px;
+}
+.article-list .meta p {
+    margin: 0;
+    display: inline-block;
+}
+.article-list .meta p:first-child {
+    margin-right: 16px;
+}
+
+.article-list li{
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,.04);
+    border: 1px solid rgba(0,0,0,.09);
+    border-radius: 3px;
+    border-bottom: none;
+    margin-bottom: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    max-width: 660px;
+    position: relative;
+}
+.article-list li.articles {
+    border-left: 4px solid #191919;
+}
+.article-list li.articles:after {
+    content: "文";
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    font-size: 16px;
+    color: gainsboro;
+}
+.article-list li.translation{
+    border-left: 4px solid #ED462F; //#54A650
+}
+.article-list li.translation:after {
+    content: "譯";
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    font-size: 16px;
+    color: gainsboro;
+}
+/* play area: archive page -> tags start */
+.tags {
+    font-size: 12px;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Open Sans","Helvetica Neue",sans-serif;
+    letter-spacing: 0;
+    font-weight: 400;
+    font-style: normal;
+}
+.tags a {
+    border: none;
+    color: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.05);
+    /*font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Open Sans","Helvetica Neue",sans-serif;*/
+    font-weight: 400;
+    font-style: normal;
+    color: rgba(0,0,0,0.44);
+    font-size: 13px;
+    letter-spacing: 0;
+    line-height: 22px;
+    text-decoration: none;
+    background: #fafafa;
+    border-radius: 3px;
+    border: 1px solid #f0f0f0;
+    padding: 5px 10px;
+    display: inline-block;
+
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+.tags a:hover {
+    background: rgba(0,0,0,0.1);
+    color: rgba(0,0,0,0.6);
+    border-color: rgba(0,0,0,0.15);
+    text-decoration: none;
+    cursor: pointer
+}
+/* tags end */
+
+/* go tips start */
+#go-tips {
+    display: none;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    position: fixed;
+    z-index: 12;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    padding-top: 15%;
+    background: #e6b8b8;
+    word-break: break-word;
+    opacity: 0.96;
+}
+#go-tips .close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+}
+/* go tips end */
+
+/* return start */
+.return {
+    /*     position: fixed; */
+    /*     top: 10px; */
+    /*     left: 3%; */
+    /*     font-weight: 500; */
+    /*     background: #4285f4; */
+    /*     color: white; */
+
+    position: fixed;
+    right: 20px;
+    top: 10px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+    cursor: pointer;
+    z-index: 9;
+}
+.return:hover {
+  opacity: 1;
+}
+.return:before, .return:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 24px;
+  width: 4px;
+  background-color: #333;
+}
+.return:before {
+  transform: rotate(45deg);
+}
+.return:after {
+  transform: rotate(-45deg);
+}
+/* return end */
+
+/* @media all and (max-width: 900px) { */
+/*     .return { */
+/*         top: initial; */
+/*         left: initial; */
+/*         bottom: 10px; */
+/*         right: 10px; */
+/*     } */
+/* } */
+
+@media all and (max-width: 767px) {
+
+    /* banner start */
+    #banner-wrapper img {
+        width: 50%;
+        margin-top: 2%;
+    }
+    .blink-wrapper {
+        line-height: 1.4;
+        /* font-size: 8em; */
+    }
+    /* banner end */
+
+    /* nav start*/
+    nav {
+        margin-top: 16px;
+        width: 150px;
+    }
+    nav a {
+        display: block;
+        font-size: 1em;
+        font-weight: 500;
+        margin: 8px auto;
+        color: #191919 !important;
+        /* color: white; */
+        /* text-decoration: underline !important; */
+        background: #e6b8b8;
+        box-shadow: 2px 2px 2px #e6b8b8;
+        padding: 12px;
+        border-radius: 4px;
+    }
+    nav a:active {
+        background-color: #e6b8b8;
+        box-shadow: inset 0 0 #e6b8b8;
+        border: solid 1px white;
+        transform: translateY(1px);
+    }
+    #rss {
+        display: none!important;
+    }
+    #about div,
+    nav a svg {
+        display: none !important;
+    }
+    #about p,
+    nav a span {
+        display: block;
+    }
+    /* nav end*/
+
+    .play-area-tips {
+        margin-top: 30px;
+        /* margin-top: 45%; */
+        font-size: 24px;
+    }
+
+    .article-list .meta {
+        margin: 10px auto;
+    }
+}
+/* @media all and (max-width: 320px) { */
+/* } */

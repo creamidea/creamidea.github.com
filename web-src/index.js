@@ -7,8 +7,25 @@ window.console = window.console || (function(){
   return c;
 })();
 
+// Google Analysis
+;(function () {
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-38213594-1', 'auto');
+  ga('send', 'pageview');
+  ga(function(tracker) {
+    console.log('cliendId:', tracker.get('clientId'));
+  });
+  !function loadAnalyticsJS () {
+    var script = document.createElement('script')
+    script.async = true
+    script.src = '//www.google-analytics.com/analytics.js'
+    document.getElementsByTagName('body')[0].appendChild(script)
+  }()
+})()
+
 ;(function (window) {
   var __map = Array.prototype.map
+  var __filter = Array.prototype.filter
   var __slice = Array.prototype.slice
   var __forEach = Array.prototype.forEach
   // var __pop = Array.prototype.pop
@@ -26,7 +43,10 @@ window.console = window.console || (function(){
       }
     }
   }
+
   // var parser = new DOMParser()
+  var storage = Storage()
+
   // var SEARCHER = 'https://www.google.com/?gws_rd=ssl#'
   var SEARCHER = 'https://cse.google.com/cse/publicurl?cx=017951989687920165329:0e60irxxe5m&'
   // var isMobile = {
@@ -61,6 +81,7 @@ window.console = window.console || (function(){
     }
     __t.call(dom, evt, fn)
   }
+
   function removeEventListener (dom, evt, fn) {
     function __t (evt, fn) {
       window.removeEventListener
@@ -101,13 +122,13 @@ window.console = window.console || (function(){
         var rlts = _router.map(function (r) {
           var hash = location.hash.slice(2)
           if (r.test.test(hash)) {
-            console.log('Router hited the target: ' + r.test.toString() + '. Go, Go, Go!')
+            console.log('[Router] Hited the target: ' + r.test.toString() + '. Go, Go, Go!')
             r.cb.apply(r, [].concat(r.test.exec(hash).slice(1), [oldURL]))
             return true
           }
           return false
         })
-        if (rlts.indexOf(true) < 0) console.log('Router cannot find the target: ' + location.hash + '.')
+        if (rlts.indexOf(true) < 0) console.log('[Router] Error: cannot find the target: ' + location.hash + '.')
       }
     }
   }
@@ -163,12 +184,17 @@ window.console = window.console || (function(){
     }
 
     var __interface = {
+
+      /**
+       * init handler
+       */
       init: function (ready) {
         // load archive (articles list)
-        console.log('Stage initializing...')
+        console.log('[Stage] Initializing...')
         addEventListener(nav, 'click', (function (e) {
           var target = __closestNodeA(e.target)
-          if (specialNav.indexOf(target.id) >= 0) {
+          var id = target ? target.id : null
+          if (specialNav.indexOf(id) >= 0) {
             e.preventDefault()
             this.go(target.href)
           }
@@ -182,9 +208,9 @@ window.console = window.console || (function(){
             this.go(target.href)
           }
         }).bind(this))
-        console.log('Stage initialized finished.\nCall function::ready...')
+        console.log('[Stage] Initialized finished. Call function::ready...')
         if (typeof ready === 'function') ready()
-        console.log('Function::ready done.')
+        console.log('[Stage] Function::ready done.')
 
         // load static tools
         // loadAnalyticsJS()
@@ -192,13 +218,17 @@ window.console = window.console || (function(){
         // loadCustomSearch(body)
       },
 
+      /**
+       * play area show handler
+       * drama dispatcher
+       */
       show: function (drama) {
         // clear the play area
         var params = __slice.call(arguments, 1)
         __forEach.call(playArea.children, function (player) {
           player.style.display = 'none'
         })
-        console.log('Now, the drama is ' + drama)
+        console.log('[Stage] Now, the drama is ' + drama)
         // hide others
         Animate["hide-banner"]()
         // show playAreas
@@ -223,10 +253,13 @@ window.console = window.console || (function(){
         } catch (err) {
           playAreaTips.innerHTML = 'Drama - ' + '<span style="color:#4285f4;">' + drama + '</span>'
             + ' happend error: <strong>' + err.message + '</strong>'
-          console.log(err)
+          console.log('[Stage] when show the area: \n', err)
         }
       },
 
+      /**
+       * play area hide handler
+       */
       hide: function () {
         playAreaTips.style.display = 'none'
         // change body backgroundcolor
@@ -246,6 +279,9 @@ window.console = window.console || (function(){
         }, 1000)
       },
 
+      /**
+       * show article list
+       */
       archive: function (cb) {
         // show archive-list
         var articleListDOM = playArea.querySelector('.article-list')
@@ -279,6 +315,9 @@ window.console = window.console || (function(){
         return articleListDOM
       },
 
+      /**
+       * show google custom search engine
+       */
       search: function (cb) {
         var customSearchDOM = playArea.querySelector('#custom-search')
         if (customSearchDOM === null){
@@ -290,6 +329,9 @@ window.console = window.console || (function(){
         return customSearchDOM
       },
 
+      /**
+       * show tages page
+       */
       tags: function (cb, tag) {
         var tagsDOM = playArea.querySelector('#tags-cloud')
         var _cb = (function () {
@@ -310,6 +352,9 @@ window.console = window.console || (function(){
         }
       },
 
+      /**
+       * show some urls about me
+       */
       me: function (cb, me) {
         var tableDOM = document.querySelector('#links-table')
         if (tableDOM === null) {
@@ -326,6 +371,45 @@ window.console = window.console || (function(){
         return tableDOM
       },
 
+      /**
+       * eggshell :)
+       */
+      eggshell: function () {
+        var lambda = document.querySelector('#banner-wrapper a')
+        lambda.href = 'javascript: void(0)'
+        lambda.style.cursor = 'default'
+        changeOctoCat(body)
+      },
+      formula: function (cb) {
+        var qDOM = document.querySelector('#question')
+        if (qDOM === null) {
+          loadStaticFile('/static/question.html', (function (content) {
+            var dom = document.createElement('div')
+            dom.innerHTML = content
+            var AAAA = dom.querySelector('script').firstChild.data
+            dom.querySelector('form').onsubmit = function (e) {
+              e.preventDefault()
+              var A = this.elements.answer.value
+              if (eval(eval(AAAA))) {
+                // answer right
+                storage.set('answer', true)
+                location.href = '#!/home'
+              } else {
+                storage.set('answer', false)
+              }
+            }
+            qDOM = playArea.appendChild(dom.firstChild)
+
+            qDOM.style.display = 'block'
+            cb()
+          }).bind(this))
+        }
+        return qDOM
+      },
+
+      /**
+       * handle the direct url
+       */
       go: function (url, previous) {
         if (url) {
           goTips('<p>You will go to</p><p><strong>' + url + '</strong></p>',
@@ -339,6 +423,17 @@ window.console = window.console || (function(){
 
     }
     return __interface
+  }
+
+  function makeId(len) {
+    if (isNaN(parseInt(len))) len = 8;
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i = 0; i < len; i++)
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
   }
 
   /**
@@ -451,84 +546,171 @@ window.console = window.console || (function(){
   }
 
   /**
-   * 变换首页octocat图片 本地预处理(提前加载到本地缓存中)
+   * Read and Write Cookie
+   * Perfermance?
    */
-  function changeOctoCat (body) {
-    var s = document.createElement('script');
-    s.async = true
-    s.src = '/static/octodex-data.js';
-    s.onload = function () {
-      var octodex = window.octodex;
-      if (!octodex) return;
-      var max = octodex.length;
-      var octocat = octodex[Math.round(Math.random(max) * 10000 % max)];
-      if (!octocat) {
-        console.log('Now, I want to load ', octocat, '. But failed!');
-        return;
+  // function readCookie (name) {
+  //   var _cookies = document.cookie.split(';').map(function (entry) {
+  //     var a = entry.split('=')
+  //     return {
+  //       name: a[0].replace(/^\s+|\s+$/mg, ""),
+  //       value: a[1]
+  //     }
+  //   })
+  //   if (name === undefined) {
+  //     return _cookies
+  //   } else {
+  //     return _cookies.filter(function (c) {
+  //       if (c.name === name) return true
+  //       else return false
+  //     })
+  //   }
+  // }
+  // function writeCookie (name, value, exdays) {
+  //   var d = new Date()
+  //   d.setTime(d.getTime() + exdays * 86400000) // default 1d
+  //   var expirs = 'expires='+d.toUTCString()
+  //   document.cookie = name.replace(/^\s+|\s+$/mg, "")+'='+value+';'+expirs+';path=/'
+  // }
+  function Storage () {
+    return {
+      get: function (name) {
+        var value = localStorage.getItem(name)
+        try {
+          return JSON.parse(value)
+        } catch (err) {
+          return value
+        }
+      },
+      set: function (name, value) {
+        if (typeof value === 'object') {
+          value = JSON.stringify(value)
+        }
+        localStorage.setItem(name, value)
       }
-      var oBannerWrapper = document.getElementById('banner-wrapper')
-      var title = octocat.t
-      var filename = octocat.f
-      var src = 'https://octodex.github.com/images/' + filename
-      var img = document.createElement('img')
-      img.style.display = 'none'
-      img.onload = function () {
-        // oBannerWrapper.style.background = 'url('+ src +') no-repeat top center fixed';
-        // oBannerWrapper.style.backgroundSize = '424px 424px';
-        oBannerWrapper.style.textAlign = 'center';
-        oBannerWrapper.innerHTML = '<img src="'+src+'" alt="'+title+'" '
-          // + 'style="width:' + oBannerWrapper.querySelector('.blink-wrapper').getBoundingClientRect().height +'px"'
-          + '/>'
-          + '<p><a href="https://github.com/" alt="Check me out on :octocat:" title="Check me out on :octocat:">'
-          + title + '</a></p>';
-        clearInterval(window.blinkTimer);
-      };
-      img.onerror = function () {
-        oBannerWrapper.children[1].innerHTML = 'Octocat may be taken by aliens. Sad :('
-        console.log('Load the image of octocat failed!')
-        clearInterval(window.blinkTimer)
-      };
-      body.appendChild(img);
-      img.src = src;
-    };
-    body.appendChild(s);
+    }
   }
 
   /**
-   * 闪烁 >_
+   * load the image of the octocat
+   * find octocat and then load the image of the specify octocat
+   */
+  function loadOctocat (body, oBannerWrapper, octocat) {
+
+    var title = octocat.t
+    var filename = octocat.f
+    var src = 'https://octodex.github.com/images/' + filename
+    var img = document.createElement('img')
+    img.style.display = 'none'
+    img.onload = function () {
+      // oBannerWrapper.style.background = 'url('+ src +') no-repeat top center fixed';
+      // oBannerWrapper.style.backgroundSize = '424px 424px';
+      oBannerWrapper.style.textAlign = 'center';
+      oBannerWrapper.innerHTML = '<img src="'+src+'" alt="'+title+'" '
+      // + 'style="width:' + oBannerWrapper.querySelector('.blink-wrapper').getBoundingClientRect().height +'px"'
+        + '/>'
+        + '<p><a href="https://github.com/" alt="Check me out on :octocat:" title="Check me out on :octocat:">'
+        + title + '</a></p>';
+      clearInterval(window.blinkTimer)
+    };
+    img.onerror = function () {
+      oBannerWrapper.children[1].innerHTML = 'Octocat may be taken by aliens. Sad :('
+      console.log('[Octocat] Load the image of octocat failed!')
+      clearInterval(window.blinkTimer)
+    };
+    body.appendChild(img)
+    img.src = src;
+  }
+
+  /**
+   * change the image of the octocat (load the image to the local cache)
+   * fisrt, check the local storage
+   * if no, load from remote
+   */
+  function changeOctoCat (body) {
+
+    blink()
+
+    var saveOctocat
+    var oBannerWrapper = document.getElementById('banner-wrapper')
+
+    if (storage && typeof storage.get === 'function')
+      saveOctocat = storage.get('octocat')
+
+    oBannerWrapper.children[1].style.display = 'block'
+
+    if (saveOctocat) {
+
+      loadOctocat(body, oBannerWrapper, saveOctocat)
+
+    } else {
+
+      var s = document.createElement('script')
+      s.async = true
+      s.onload = function () {
+        // select octocat from remote DB File
+        var octodex = window.octodex;
+        if (!octodex) {
+          oBannerWrapper.children[1].innerHTML = 'I cannot load the octodex db.'
+          return
+        }
+        var max = octodex.length;
+        var octocat = octodex[Math.round(Math.random(max) * 10000 % max)];
+
+        // load failed: if not find octocat
+        if (!octocat) {
+          oBannerWrapper.children[1].innerHTML = 'Now, I want to load ', octocat, '. But failed!'
+          return
+        } else {
+          // save the octocat
+          storage.set('octocat', octocat)
+        }
+        loadOctocat(body, oBannerWrapper, octocat)
+      }
+      body.appendChild(s)
+      s.src = '/static/octodex-data.js'
+    }
+  }
+
+  /**
+   * blink the element
    */
   function blink () {
     __forEach.call(document.getElementsByClassName('blink'), function (blink) {
-      var oldColor = blink.getAttribute('data-old-color');
-      if (!oldColor)
-        blink.setAttribute('data-old-color', blink.style.color);
-      var frequency = parseInt(blink.getAttribute('data-frequency'), 10);
+      var frequency = parseInt(blink.getAttribute('data-frequency'), 10)
+      // blink.style.display = 'initial'
       if (frequency > 0)
-        window.blinkTimer = setInterval(function(_blink, _oldColor) {
-          if (!_blink) _blink = blink;
-          if (!_oldColor) _oldColor = oldColor;
-          if (blink)
-            blink.style.color = blink.style.color === 'white' ? oldColor : 'white';
-        }, frequency, blink, oldColor);
+        window.blinkTimer = setInterval(function(_blink) {
+          if (_blink.style.visibility === '' ||
+              _blink.style.visibility === 'visible') {
+            // hide
+            _blink.style.visibility = 'hidden'
+          } else {
+            // show
+            _blink.style.visibility = 'visible'
+          }
+        }, frequency, blink);
     });
   }
 
   /**
-   * 显示 Banner
+   * show Banner
    */
   function showBanner (body, content) {
-    blink()
-    changeOctoCat(body);
+    // blink()
+    // changeOctoCat(body);
     return document.querySelector('#banner-wrapper')
   }
 
+  // ==============================================================================
+  // Loader
   /**
    * Just support method:GET
    */
   function loader(o) {
     var httpRequest = new XMLHttpRequest()
     if (!httpRequest) {
-      console.error('Giving up :( Cannot create an XMLHTTP instance');
+      console.error('[Loader] Giving up :( Cannot create an XMLHTTP instance');
       return false;
     }
     httpRequest.onreadystatechange = function () {
@@ -557,6 +739,7 @@ window.console = window.console || (function(){
       success: callback
     })
   }
+  // ==============================================================================
 
   function createNavDom (o) {
     var a = document.createElement('a')
@@ -568,12 +751,8 @@ window.console = window.console || (function(){
     return a
   }
 
-  function loadAnalyticsJS () {
-    var script = document.createElement('script')
-    script.async = true
-    script.src = '//www.google-analytics.com/analytics.js'
-    document.getElementsByTagName('body')[0].appendChild(script)
-  }
+  // ==============================================================================
+  // Load external resources
 
   function loadCustomSearch (elt, callback) {
     var div = document.createElement('div');
@@ -588,11 +767,12 @@ window.console = window.console || (function(){
     gcse.async = true;
     gcse.onload = function () {
       if (typeof callback === 'function') callback(div)
-      console.log('Google Custom Search Engine Loaded Over.')
+      console.log('[GCSE] Google Custom Search Engine Loaded Over.')
     }
     s.parentNode.insertBefore(gcse, s);
     gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
   }
+  // ==============================================================================
 
   // window.onpopstate = function () {
   //   var currentState = history.state
@@ -625,7 +805,10 @@ window.console = window.console || (function(){
     }
 
     var router = Router({
-      "^/home$": function () {
+      "^/?$|^/home$": function () {
+        if (storage && storage.get('answer') === true) {
+          stage.eggshell()
+        }
         stage.hide()
       },
       "^/archive$": function () {
@@ -654,9 +837,12 @@ window.console = window.console || (function(){
         try {
           url = me[name]
         } catch (err) {
-          console.log('Don\'t know where to go. \n', err)
+          console.log('[Go] Don\'t know where to go. \n', err)
         }
         stage.go(url, previous)
+      },
+      "^/answer$": function (previous) {
+        stage.show('formula')
       }
     })
 
