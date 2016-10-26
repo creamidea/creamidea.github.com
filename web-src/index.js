@@ -474,12 +474,16 @@ function IntervalTimer (interval) {
           goTips('<p>You will go to</p><p><strong>' + url + '</strong></p>',
                  {timeout: 60, action: 'timeout'})
 
-          ga('send', 'event', {
-            eventCategory: 'Outbound Link',
-            eventAction: 'click',
-            eventLabel: url,
-            transport: 'beacon'
-          })
+          var parser = document.createElement('a')
+          parser.href = url
+          if (parser.hostname && parser.hostname !== location.hostname) {
+            ga('send', 'event', {
+              eventCategory: 'Outbound Link',
+              eventAction: 'click',
+              eventLabel: url,
+              transport: 'beacon'
+            })
+          }
 
           location.href = url
           // setTimeout(function () {location.href = url;}, 24)
