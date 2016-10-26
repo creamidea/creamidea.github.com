@@ -372,27 +372,53 @@ window.console = window.console || (function(){
 
       formula: function (cb) {
         var qDOM = document.querySelector('#question')
-        if (qDOM === null) {
-          loadStaticFile('/static/question.html', (function (content) {
-            var dom = document.createElement('div')
-            dom.innerHTML = content
-            var AAAA = dom.querySelector('script').firstChild.data
-            dom.querySelector('form').onsubmit = function (e) {
-              e.preventDefault()
-              var A = this.elements.answer.value
-              if (eval(eval(AAAA))) {
-                // answer right
-                storage.set('answer', true)
-                location.href = '#!/home'
-              } else {
-                storage.set('answer', false)
+        var dom = document.createElement('div')
+        if (storage && storage.get('answer')) {
+          // true
+          dom.id = 'question'
+          dom.innerHTML = '<div style="margin-top: 20%;font-weight: 600;">'
+            +'<p style="font-size: 26px;">&#127881;Congratulation&#127881;</p>'
+            +'<p style="font-size: inherit;">There is no exam now :)</p>'
+            +'<p style="font-size: inherit;">Please wait...</p></div>'
+          qDOM = playArea.appendChild(dom)
+        } else {
+          // false
+          if (qDOM === null) {
+            loadStaticFile('/static/questions/1.html', (function (content) {
+              dom.innerHTML = content
+              var AAAA = dom.querySelector('script').firstChild.data
+              var form = dom.querySelector('form')
+              form.onsubmit = function (e) {
+                e.preventDefault()
+                var answerElement = this.elements.answer
+                var nextElement = this.nextElementSibling
+                var A = answerElement.value
+                removeEventListener(answerElement, 'input')
+                addEventListener(answerElement, 'input', function () {
+                  nextElement.firstChild.innerHTML = '&#128565;'
+                })
+                try {
+                  var answer = eval(eval(';'+AAAA+';'))
+                  if (answer) {
+                    // answer right
+                    storage.set('answer', true)
+                    location.href = '#!/home'
+                  } else {
+                    nextElement.firstChild.innerHTML = '<strong style="color:#ED462F;">Oops! Wrong.</strong>'
+                    storage.set('answer', false)
+                  }
+                } catch (err) {
+                  nextElement.firstChild.innerHTML =
+                    '<strong style="color:#ED462F;font-size: 20px;">I am crashed because of your browser. XD</strong>'
+                }
               }
-            }
-            qDOM = playArea.appendChild(dom.firstChild)
+              qDOM = playArea.appendChild(dom.firstChild)
 
-            cb(qDOM)
-          }).bind(this))
+              cb(qDOM)
+            }).bind(this))
+          }
         }
+
         return qDOM
       },
 
@@ -627,16 +653,20 @@ window.console = window.console || (function(){
    * if no, load from remote
    */
   function changeOctoCat (body) {
+    var oBannerWrapper = document.getElementById('banner-wrapper')
+    var hitElement = oBannerWrapper.children[1]
+    hitElement.style.display = 'block'
+    hitElement.className = 'blink'
+    hitElement.setAttribute('data-frequency', 700)
 
     blink()
 
     var saveOctocat
-    var oBannerWrapper = document.getElementById('banner-wrapper')
 
     if (storage && typeof storage.get === 'function')
       saveOctocat = storage.get('octocat')
 
-    oBannerWrapper.children[1].style.display = 'block'
+
 
     if (saveOctocat) {
 
@@ -648,9 +678,10 @@ window.console = window.console || (function(){
       s.async = true
       s.onload = function () {
         // select octocat from remote DB File
+        hitElement.className = ''
         var octodex = window.octodex;
         if (!octodex) {
-          oBannerWrapper.children[1].innerHTML = 'I cannot load the octodex db.'
+          hitElement.innerHTML = 'I cannot load the octodex db.'
           return
         }
         var max = octodex.length;
@@ -658,7 +689,7 @@ window.console = window.console || (function(){
 
         // load failed: if not find octocat
         if (!octocat) {
-          oBannerWrapper.children[1].innerHTML = 'Now, I want to load ', octocat, '. But failed!'
+          hitElement.innerHTML = 'Now, I want to load ', octocat, '. But failed!'
           return
         } else {
           // save the octocat

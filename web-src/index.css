@@ -354,7 +354,8 @@ body {
 
 a {
     font-size: 1.125em;
-    font-family: "Courier New, Courier, monospace"
+    font-family: inherit;
+    /* font-family: Courier New, Courier, monospace */
 }
 
 nav {
