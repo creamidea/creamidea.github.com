@@ -40,6 +40,14 @@ function IntervalTimer (interval) {
   }
 }
 
+function sendTiming (a, b) {
+  ga('send', {
+    hitType: 'timing',
+    timingCategory: 'homepage',
+    timingVar: a,
+    timingValue: b
+  })
+}
 ;(function () {
   window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
   ga('create', 'UA-38213594-1', 'auto');
@@ -248,6 +256,13 @@ function IntervalTimer (interval) {
         if (typeof ready === 'function') ready()
         console.log('[Stage] Function::ready done.')
 
+        if (window.performance) {
+          __timing.inited = performance.now()
+          __forEach.call(Object.keys(__timing), function (type) {
+            sendTiming(type, __timing[type])
+          })
+        }
+
         // load static tools
         // loadAnalyticsJS()
         // setTimeout(loadAnalyticsJS, 2000)
@@ -276,9 +291,15 @@ function IntervalTimer (interval) {
         playAreaTips.style.display = 'block'
         head.querySelector('title').innerHTML = 'C-Tone | ' + drama.slice(0,1).toUpperCase() + drama.slice(1)
 
+        var startTime = (new Date()).getTime()
         function curtainCall (_dom) {
+          var endTime = (new Date()).getTime()
           _dom.style.display = 'block'
           playAreaTips.style.display = 'none'
+          if (!__timing[drama]) {
+            __timing[drama] = endTime - startTime
+            sendTiming(drama+'-success', __timing[drama])
+          }
         }
 
         try {
@@ -289,9 +310,14 @@ function IntervalTimer (interval) {
             curtainCall(dom)
           }
         } catch (err) {
+          var endTime = (new Date()).getTime()
+          __timing[drama] = endTime - startTime
+
           playAreaTips.innerHTML = 'Drama - ' + '<span style="color:#4285f4;">' + drama + '</span>'
             + ' happend error: <strong>' + err.message + '</strong>'
           console.log('[Stage] when show the area: \n', err)
+
+          sendTiming(drama+'-failed', __timing[drama])
         }
       },
 
@@ -652,12 +678,16 @@ function IntervalTimer (interval) {
    */
   function loadOctocat (body, oBannerWrapper, octocat) {
 
+    var startTime = (new Date()).getTime()
     var title = octocat.t
     var filename = octocat.f
     var src = 'https://octodex.github.com/images/' + filename
     var img = document.createElement('img')
     img.style.display = 'none'
     img.onload = function () {
+      var endTime = (new Date()).getTime()
+      __timing.octocat = endTime - startTime
+
       // oBannerWrapper.style.background = 'url('+ src +') no-repeat top center fixed';
       // oBannerWrapper.style.backgroundSize = '424px 424px';
       oBannerWrapper.style.textAlign = 'center';
@@ -667,11 +697,18 @@ function IntervalTimer (interval) {
         + '<p><a href="https://github.com/" alt="Check me out on :octocat:" title="Check me out on :octocat:">'
         + title + '</a></p>';
       clearInterval(window.blinkTimer)
+
+      sendTiming('octocat-success', __timing.octocat)
     };
     img.onerror = function () {
+      var endTime = (new Date()).getTime()
+      __timing.octocat = endTime - startTime
+
       oBannerWrapper.children[1].innerHTML = 'Octocat may be taken by aliens. Sad :('
       console.log('[Octocat] Load the image of octocat failed!')
       clearInterval(window.blinkTimer)
+
+      sendTiming('octocat-failed', __timing.octocat)
     };
     body.appendChild(img)
     img.src = src;
@@ -702,9 +739,12 @@ function IntervalTimer (interval) {
 
     } else {
 
+      var startTime = (new Date()).getTime()
       var s = document.createElement('script')
       s.async = true
       s.onload = function () {
+        var endTime = (new Date()).getTime()
+        __timing.octodex = endTime - startTime
         // select octocat from remote DB File
         hitElement.className = ''
         var octodex = window.octodex;
@@ -724,6 +764,12 @@ function IntervalTimer (interval) {
           storage.set('octocat', octocat)
         }
         loadOctocat(body, oBannerWrapper, octocat)
+        sendTiming('octodex-success', __timing.octodex)
+      }
+      s.onerror = function () {
+        var endTime = (new Date()).getTime()
+        __timing.octodex = endTime - startTime
+        sendTiming('octodex-failed', __timing.octodex)
       }
       body.appendChild(s)
       s.src = '/static/octodex-data.js'
@@ -784,6 +830,7 @@ function IntervalTimer (interval) {
       catch( e ) {
         if (typeof o.error === 'function') o.error(httpRequest, e)
         console.error(e)
+        throw e
       }
     }
     httpRequest.open(o.type, o.url)
@@ -933,24 +980,39 @@ function IntervalTimer (interval) {
 
   // Start....
   !function () {
+    window.__timing = {}
+    if (window.performance) {
+      __timing.start = performance.now()
+    }
+
     var running = false
     var loadEvent = ['DOMContentLoaded', 'load']
     for (var i = 0, max = loadEvent.length; i < max; i++) {
       var event = loadEvent[i]
-      addEventListener(window, event, function () {
-        if (!running) {
-          running = true
-          if (typeof __forEach === 'undefined') {
-            // too old
-            hateYou()
-          } else {
-            main()
-            // main.apply(window)
+      !function (event) {
+
+        addEventListener(window, event, function () {
+          if (window.performance) {
+            __timing[event] = performance.now()
           }
-          // document.getElementById('search').style.display = 'initial!important'
-          removeEventListener(window, event)
-        }
-      }, false)
+          if (event === 'load') {
+            sendTiming('load', __timing.load)
+          }
+          if (!running) {
+            running = true
+            if (typeof __forEach === 'undefined') {
+              // too old
+              hateYou()
+            } else {
+              main()
+              // main.apply(window)
+            }
+            // document.getElementById('search').style.display = 'initial!important'
+            removeEventListener(window, event)
+          }
+        }, false)
+
+      }(event)
     }
   }()
 
