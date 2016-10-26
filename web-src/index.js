@@ -7,17 +7,51 @@ window.console = window.console || (function(){
   return c;
 })();
 
-// Google Analysis
+/**
+ * Timer
+ * interval @param number default:1s
+ *
+ * return @param function
+ * o @param object
+ */
+function IntervalTimer (interval) {
+  var timer, count = 0
+  if (!interval) interval = 1000
+  return {
+    start:function (o) {
+      if (isNaN(o.count) && o.count > 0) {
+        console.log('[IntervalTimer] The count is invalid. Count: ', o.count)
+        return
+      }
+      timer = setInterval((function () {
+        count = count + 1
+        if (count > o.count) {
+          this.stop()
+          if (typeof o.end === 'function') o.end()
+        } else {
+          if (typeof o.every === 'function') o.every()
+        }
+      }).bind(this), interval)
+    },
+    stop: function (){
+      clearInterval(timer)
+      count = 0
+    }
+  }
+}
+
 ;(function () {
   window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
   ga('create', 'UA-38213594-1', 'auto');
-  ga('send', 'pageview');
   ga(function(tracker) {
-    console.log('cliendId:', tracker.get('clientId'));
+    var clientId = tracker.get('clientId')
+    console.log('Hi, you have connected with Google successfully.')
+    console.log('Your CLIENT ID: ' + clientId)
   });
   !function loadAnalyticsJS () {
     var script = document.createElement('script')
     script.async = true
+    // script.src = '/static/libs/analytics.js'
     script.src = '//www.google-analytics.com/analytics.js'
     document.getElementsByTagName('body')[0].appendChild(script)
   }()
@@ -124,6 +158,8 @@ window.console = window.console || (function(){
           if (r.test.test(hash)) {
             console.log('[Router] Hited the target: ' + r.test.toString() + '. Go, Go, Go!')
             r.cb.apply(r, [].concat(r.test.exec(hash).slice(1), [oldURL]))
+            ga('set', 'page', hash)
+            ga('send', 'pageview')
             return true
           }
           return false
@@ -344,6 +380,7 @@ window.console = window.console || (function(){
             tagsDOM = playArea.appendChild(document.createElement('div'))
             tagsDOM.innerHTML = txt
             tagsDOM.id = 'tags-cloud'
+
             _cb(tagsDOM)
           })
         } else {
@@ -411,6 +448,13 @@ window.console = window.console || (function(){
                   nextElement.firstChild.innerHTML =
                     '<strong style="color:#ED462F;font-size: 20px;">I am crashed because of your browser. XD</strong>'
                 }
+
+                ga('send', 'event', {
+                  eventCategory: 'Answer the Question',
+                  eventAction: 'submit',
+                  eventLabel: 'Eggshell'
+                })
+
               }
               qDOM = playArea.appendChild(dom.firstChild)
 
@@ -429,6 +473,14 @@ window.console = window.console || (function(){
         if (url) {
           goTips('<p>You will go to</p><p><strong>' + url + '</strong></p>',
                  {timeout: 60, action: 'timeout'})
+
+          ga('send', 'event', {
+            eventCategory: 'Outbound Link',
+            eventAction: 'click',
+            eventLabel: url,
+            transport: 'beacon'
+          })
+
           location.href = url
           // setTimeout(function () {location.href = url;}, 24)
         } else {
@@ -459,39 +511,6 @@ window.console = window.console || (function(){
       text += possible.charAt(Math.floor(Math.random() * possible.length));
 
     return text;
-  }
-
-  /**
-   * Timer
-   * interval @param number default:1s
-   *
-   * return @param function
-   * o @param object
-   */
-  function IntervalTimer (interval) {
-    var timer, count = 0
-    if (!interval) interval = 1000
-    return {
-      start:function (o) {
-        if (isNaN(o.count) && o.count > 0) {
-          console.log('[IntervalTimer] The count is invalid. Count: ', o.count)
-          return
-        }
-        timer = setInterval((function () {
-          count = count + 1
-          if (count > o.count) {
-            this.stop()
-            if (typeof o.end === 'function') o.end()
-          } else {
-            if (typeof o.every === 'function') o.every()
-          }
-        }).bind(this), interval)
-      },
-      stop: function (){
-        clearInterval(timer)
-        count = 0
-      }
-    }
   }
 
   /**
@@ -564,6 +583,13 @@ window.console = window.console || (function(){
           ul.style.display = 'none'
         }
       })
+
+      ga('send', 'event', {
+        eventCategory: 'Tags',
+        eventAction: 'click',
+        eventLabel: tag
+      })
+
       setTimeout(function () {
         window.scrollTo(0, tagsDOM.children[0].getBoundingClientRect().height)
       }, 300)
@@ -665,8 +691,6 @@ window.console = window.console || (function(){
 
     if (storage && typeof storage.get === 'function')
       saveOctocat = storage.get('octocat')
-
-
 
     if (saveOctocat) {
 

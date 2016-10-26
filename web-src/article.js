@@ -49,11 +49,12 @@ function loadDisqusComment (target) {
     var parent = target.parentElement;
     parent.style.display = 'none';
   }
+  var identifier = location.pathname.split('/').slice(-2).join('/')
 
   window.disqus_config = function () {
     // 这里是配置disqus地方，具体可以参考
     // https://help.disqus.com/customer/portal/articles/472098-javascript-configuration-variables
-    this.page.identifier = location.pathname.split('/').slice(-2).join('/')
+    this.page.identifier = identifier
   }
 
   var d = document;
@@ -69,6 +70,13 @@ function loadDisqusComment (target) {
   disqus.style.marginBottom = '44px';
   disqus.innerHTML = '<h2 id="disqus_thread_header">Comments</h2><div id="disqus_thread"><p style="text-align:center;font-family: Georgia1,Georgia,Times New Roman,Times,serif;">Disqus is on the way...</p></div>';
   content.appendChild(disqus);
+
+  ga('send', 'event', {
+    eventCategory: 'Comment',
+    eventAction: 'click',
+    eventLabel: identifier
+  })
+
 }
 
 /**
@@ -100,6 +108,14 @@ function loadDisqusComment (target) {
   // var SEARCHER = 'http://0s.o53xo.m5xw6z3mmuxgg33n.erenta.ru/?gws_rd=ssl#hl=en&q='
   // var SEARCHER = 'https://www.google.com/?gws_rd=ssl#hl=en&q='
   var SEARCHER = 'https://cse.google.com/cse/publicurl?cx=017951989687920165329:0e60irxxe5m&hl=en&q='
+
+  // http://stackoverflow.com/a/5717133/1925954
+  // var URLPATTERN = new RegExp('^(https?:\/\/)?'+ // protocol
+  //   '((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|'+ // domain name
+  //   '((\d{1,3}\.){3}\d{1,3}))'+ // OR ip (v4) address
+  //   '(\:\d+)?(\/[-a-z\d%_.~+]*)*'+ // port and path
+  //   '(\?[;&a-z\d%_.~+=-]*)?'+ // query string
+  //   '(\#[-a-z\d_]*)?$','i'); // fragment locater
 
   function addEventListener (dom, evt, fn) {
     function __t (evt, fn) {
@@ -500,6 +516,8 @@ function loadDisqusComment (target) {
   function someArticlesFix (body, content, isHome) {
     // var tableOfContents = document.getElementById('table-of-contents')
     // tableOfContents.style.display = 'none'
+
+    // add # after the header
     function genTagA (h) {
       var a = document.createElement('a');
       a.href = '#' + h.id;
@@ -513,6 +531,46 @@ function loadDisqusComment (target) {
         })
       })
     }
+
+    // listen all <a>
+    var aNodes = document.getElementsByTagName('a')
+    var parser = document.createElement('a')
+    var aHostname = location.hostname
+    for (var i = 0, max = aNodes.length - 1; i < max; i++) {
+      aNodes[i].onclick = function (e) {
+        var href = this.getAttribute('href')
+        var bHostname
+        var ec
+        parser.href = href
+        bHostname = parser.hostname
+        if (parser.protocol === 'mailto:') {
+          ec = 'Email'
+        } else if (bHostname === aHostname) {
+          ec = 'Internal Link'
+        } else {
+          ec = 'Outbound Link'
+        }
+        ga('send', 'event', {
+          eventCategory: ec,
+          eventAction: 'click',
+          eventLabel: this.href,
+          transport: 'beacon'
+        });
+      }
+    }
+
+    var imgNodes = document.getElementsByTagName('img')
+    for (var j = 0, len = imgNodes.length - 1; j < len; j++) {
+      imgNodes[j].onclick = function (e) {
+        ga('send', 'event', {
+          eventCategory: 'Image',
+          eventAction: 'click',
+          eventLabel: this.getAttribute('alt') || this.getAttribute('title') || this.src || this.getAttribute('data-src'),
+          transport: 'beacon'
+        });
+      }
+    }
+
   }
 
   function changeBodyTopStyle (body) {
