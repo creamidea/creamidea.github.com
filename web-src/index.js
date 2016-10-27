@@ -1,7 +1,7 @@
 "use strict"
 
 // fuck the IE
-//Ensures there will be no 'console is undefined' errors
+// Ensures there will be no 'console is undefined' errors
 window.console = window.console || (function(){
   var c = {}; c.log = c.warn = c.debug = c.info = c.error = c.time = c.dir = c.profile = c.clear = c.exception = c.trace = c.assert = function(){};
   return c;
@@ -42,6 +42,12 @@ function IntervalTimer (interval) {
 
 function sendTiming (a, b) {
   ga('send', 'timing', 'homepage', a, b)
+}
+function sendException (msg, fatal) {
+  ga('send', 'exception', {
+    exDescription: msg,
+    exFatal: fatal || false
+  })
 }
 
 ;(function () {
@@ -312,14 +318,14 @@ function sendTiming (a, b) {
             curtainCall(dom)
           }
         } catch (err) {
-          var endTime = (new Date()).getTime()
-          __timing[drama] = endTime - startTime
+          // var endTime = (new Date()).getTime()
+          // __timing[drama] = endTime - startTime
 
           playAreaTips.innerHTML = 'Drama - ' + '<span style="color:#4285f4;">' + drama + '</span>'
             + ' happend error: <strong>' + err.message + '</strong>'
           console.log('[Stage] when show the area: \n', err)
-
-          sendTiming(drama+'-failed', __timing[drama])
+          sendException('[Stage] Show: ' + err.message)
+          // sendTiming(drama+'-failed', __timing[drama])
         }
       },
 
@@ -487,7 +493,7 @@ function sendTiming (a, b) {
                 nextElement.innerHTML =
                   '<strong style="color:#ED462F;font-size: 20px;">I am crashed because of your browser. XD</strong>'
                 console.log('[Question] Worker: ' + e.message)
-                sendAnswer('error:'+e.message)
+                sendException('[Question] Worker:' + e.message)
               }
               addEventListener(answerElement, 'input', function () {
                 nextElement.innerHTML = '<span>&#128565;</span>'
@@ -677,6 +683,7 @@ function sendTiming (a, b) {
         try {
           return JSON.parse(value)
         } catch (err) {
+          sendException('[Storage] Get:' + err.message)
           return value
         }
       },
@@ -718,14 +725,15 @@ function sendTiming (a, b) {
       sendTiming('octocat-success', __timing.octocat)
     };
     img.onerror = function () {
-      var endTime = (new Date()).getTime()
-      __timing.octocat = endTime - startTime
+      // var endTime = (new Date()).getTime()
+      // __timing.octocat = endTime - startTime
 
       oBannerWrapper.children[1].innerHTML = 'Octocat may be taken by aliens. Sad :('
       console.log('[Octocat] Load the image of octocat failed!')
       clearInterval(window.blinkTimer)
 
-      sendTiming('octocat-failed', __timing.octocat)
+      sendException('[Octocat] Load: Display the image of octocat failed.')
+      // sendTiming('octocat-failed', __timing.octocat)
     };
     body.appendChild(img)
     img.src = src;
@@ -784,9 +792,10 @@ function sendTiming (a, b) {
         sendTiming('octodex-success', __timing.octodex)
       }
       s.onerror = function () {
-        var endTime = (new Date()).getTime()
-        __timing.octodex = endTime - startTime
-        sendTiming('octodex-failed', __timing.octodex)
+        // var endTime = (new Date()).getTime()
+        // __timing.octodex = endTime - startTime
+        // sendTiming('octodex-failed', __timing.octodex)
+        sendException('[Octodex] Load: Get the octodex file failed.')
       }
       body.appendChild(s)
       s.src = '/static/octodex-data.js'
@@ -847,6 +856,7 @@ function sendTiming (a, b) {
       catch( e ) {
         if (typeof o.error === 'function') o.error(httpRequest, e)
         console.error(e)
+        sendException('[HTTP Request] Readystatechange: ' + e.message)
         throw e
       }
     }
