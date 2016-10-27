@@ -41,13 +41,9 @@ function IntervalTimer (interval) {
 }
 
 function sendTiming (a, b) {
-  ga('send', {
-    hitType: 'timing',
-    timingCategory: 'homepage',
-    timingVar: a,
-    timingValue: b
-  })
+  ga('send', 'timing', 'homepage', a, b)
 }
+
 ;(function () {
   window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
   ga('create', 'UA-38213594-1', 'auto');
@@ -453,40 +449,55 @@ function sendTiming (a, b) {
         } else {
           // false
           if (qDOM === null) {
-            loadStaticFile('/static/questions/1.html', (function (content) {
+            var prefix = '/static/questions/'
+            var id = 1
+            function sendAnswer(label) {
+              ga('send', 'event', 'Question:'+id, 'answer', label)
+            }
+
+            loadStaticFile(prefix+id+'.html', (function (content) {
               dom.innerHTML = content
-              var AAAA = dom.querySelector('script').firstChild.data
               var form = dom.querySelector('form')
+              var nextElement = form.nextElementSibling
+              var worker = new Worker(prefix+id+'.js')
+              var answerElement = form.elements.answer
+              var submitElement = form.elements.submit
+
+              function toggleSubmit() {
+                var status = answerElement.disabled
+                answerElement.disabled = status ? false : true
+                submitElement.disabled = status ? false : true
+                submitElement.innerHTML = status ? 'Submit' : 'Calculating...'
+              }
+
+              worker.onmessage = function (oEvent) {
+                if (oEvent.data.result === true) {
+                  // answer right
+                  storage.set('answer', true)
+                  location.href = '#!/home'
+                  sendAnswer('true')
+                } else {
+                  nextElement.innerHTML = '<strong style="color:#ED462F;">Oops! Wrong.</strong>'
+                  storage.set('answer', false)
+                  sendAnswer('false:'+oEvent.data.answer)
+                }
+                toggleSubmit()
+              }
+              worker.onerror = function (e) {
+                nextElement.innerHTML =
+                  '<strong style="color:#ED462F;font-size: 20px;">I am crashed because of your browser. XD</strong>'
+                console.log('[Formula] Worker: ' + e.message)
+                sendAnswer('error:'+e.message)
+              }
+              addEventListener(answerElement, 'input', function () {
+                nextElement.innerHTML = '<span>&#128565;</span>'
+              })
               form.onsubmit = function (e) {
                 e.preventDefault()
-                var answerElement = this.elements.answer
-                var nextElement = this.nextElementSibling
-                var A = answerElement.value
-                removeEventListener(answerElement, 'input')
-                addEventListener(answerElement, 'input', function () {
-                  nextElement.firstChild.innerHTML = '&#128565;'
+                toggleSubmit()
+                worker.postMessage({
+                  answer: answerElement.value
                 })
-                try {
-                  var answer = eval(eval(';'+AAAA+';'))
-                  if (answer) {
-                    // answer right
-                    storage.set('answer', true)
-                    location.href = '#!/home'
-                  } else {
-                    nextElement.firstChild.innerHTML = '<strong style="color:#ED462F;">Oops! Wrong.</strong>'
-                    storage.set('answer', false)
-                  }
-                } catch (err) {
-                  nextElement.firstChild.innerHTML =
-                    '<strong style="color:#ED462F;font-size: 20px;">I am crashed because of your browser. XD</strong>'
-                }
-
-                ga('send', 'event', {
-                  eventCategory: 'Answer the Question',
-                  eventAction: 'submit',
-                  eventLabel: 'Eggshell'
-                })
-
               }
               qDOM = playArea.appendChild(dom.firstChild)
 
@@ -961,7 +972,7 @@ function sendTiming (a, b) {
         stage.go(url, previous)
       },
       "^/answer$": function (previous) {
-        if (previous) {
+        if (previous && window.Worker) {
           var a = document.createElement('a')
           a.href = previous
           if (a.hash === '')
