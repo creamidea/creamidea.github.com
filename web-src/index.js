@@ -435,7 +435,7 @@ function sendTiming (a, b) {
         return tableDOM
       },
 
-      formula: function (cb) {
+      question: function (cb) {
         var qDOM = document.querySelector('#question')
         var dom = document.createElement('div')
         if (storage && storage.get('answer')) {
@@ -486,7 +486,7 @@ function sendTiming (a, b) {
               worker.onerror = function (e) {
                 nextElement.innerHTML =
                   '<strong style="color:#ED462F;font-size: 20px;">I am crashed because of your browser. XD</strong>'
-                console.log('[Formula] Worker: ' + e.message)
+                console.log('[Question] Worker: ' + e.message)
                 sendAnswer('error:'+e.message)
               }
               addEventListener(answerElement, 'input', function () {
@@ -976,7 +976,7 @@ function sendTiming (a, b) {
           var a = document.createElement('a')
           a.href = previous
           if (a.hash === '')
-            stage.show('formula')
+            stage.show('question')
         }
       }
     })
