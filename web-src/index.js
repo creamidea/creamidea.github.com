@@ -235,6 +235,11 @@ function sendTiming (a, b) {
       init: function (ready) {
         // load archive (articles list)
         console.log('[Stage] Initializing...')
+
+        addEventListener(banner.querySelector('.lambda'), 'dblclick', function (e) {
+          e.preventDefault()
+          location.href = '#!/answer'
+        })
         addEventListener(nav, 'click', (function (e) {
           var target = __closestNodeA(e.target)
           var id = target ? target.id : null
@@ -252,6 +257,7 @@ function sendTiming (a, b) {
             this.go(target.href)
           }
         }).bind(this))
+
         console.log('[Stage] Initialized finished. Call function::ready...')
         if (typeof ready === 'function') ready()
         console.log('[Stage] Function::ready done.')
@@ -955,7 +961,12 @@ function sendTiming (a, b) {
         stage.go(url, previous)
       },
       "^/answer$": function (previous) {
-        stage.show('formula')
+        if (previous) {
+          var a = document.createElement('a')
+          a.href = previous
+          if (a.hash === '')
+            stage.show('formula')
+        }
       }
     })
 

@@ -387,6 +387,7 @@ nav a {
 #banner-wrapper .lambda {
     color: rgba(0,0,0,.8);
     text-decoration: none;
+    cursor: default;
 }
 
 /* http://stackoverflow.com/questions/16056591/font-scaling-based-on-width-of-container */
