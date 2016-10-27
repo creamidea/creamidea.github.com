@@ -52,7 +52,7 @@ function sendException (msg, fatal) {
 
 ;(function () {
   window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-  ga('create', 'UA-38213594-1', 'auto');
+  ga('create', 'UA-38213594-1', 'auto', {'siteSpeedSampleRate': 100});
   ga(function(tracker) {
     var clientId = tracker.get('clientId')
     console.log('Hi, you have connected with Google successfully.')
@@ -267,7 +267,9 @@ function sendException (msg, fatal) {
         if (window.performance) {
           __timing.inited = performance.now()
           __forEach.call(Object.keys(__timing), function (type) {
-            sendTiming(type, __timing[type])
+            setTimeout(function () {
+              sendTiming(type, __timing[type])
+            }, 1000)
           })
         }
 
@@ -306,7 +308,7 @@ function sendException (msg, fatal) {
           playAreaTips.style.display = 'none'
           if (!__timing[drama]) {
             __timing[drama] = endTime - startTime
-            sendTiming(drama+'-success', __timing[drama])
+            sendTiming(drama, __timing[drama])
           }
         }
 
@@ -722,7 +724,7 @@ function sendException (msg, fatal) {
         + title + '</a></p>';
       clearInterval(window.blinkTimer)
 
-      sendTiming('octocat-success', __timing.octocat)
+      sendTiming('octocat', __timing.octocat)
     };
     img.onerror = function () {
       // var endTime = (new Date()).getTime()
@@ -789,7 +791,7 @@ function sendException (msg, fatal) {
           storage.set('octocat', octocat)
         }
         loadOctocat(body, oBannerWrapper, octocat)
-        sendTiming('octodex-success', __timing.octodex)
+        sendTiming('octodex', __timing.octodex)
       }
       s.onerror = function () {
         // var endTime = (new Date()).getTime()
