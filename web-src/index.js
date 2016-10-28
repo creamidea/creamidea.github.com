@@ -1073,8 +1073,7 @@ function sendException (msg, fatal) {
     for (var i = 0, max = loadEvent.length; i < max; i++) {
       var event = loadEvent[i]
       !function (event) {
-
-        addEventListener(window, event, function () {
+        function handler () {
           if (window.performance) {
             __timing[event] = performance.now()
           }
@@ -1091,10 +1090,10 @@ function sendException (msg, fatal) {
               // main.apply(window)
             }
             // document.getElementById('search').style.display = 'initial!important'
-            // removeEventListener(window, event)
+            removeEventListener(window, event, handler)
           }
-        }, false)
-
+        }
+        addEventListener(window, event, handler, false)
       }(event)
     }
   }()
