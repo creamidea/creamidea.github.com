@@ -6,6 +6,7 @@ window.console = window.console || (function(){
   var c = {}; c.log = c.warn = c.debug = c.info = c.error = c.time = c.dir = c.profile = c.clear = c.exception = c.trace = c.assert = function(){};
   return c;
 })();
+window.performance = window.performance || (function(){return {}})()
 
 /**
  * Timer
@@ -49,6 +50,10 @@ function sendException (msg, fatal) {
     exFatal: fatal || false
   })
 }
+function sendAnswer(id, label) {
+  ga('send', 'event', 'Question:'+id, 'answer', label)
+}
+
 
 ;(function () {
   window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
@@ -266,7 +271,7 @@ function sendException (msg, fatal) {
         if (typeof ready === 'function') ready()
         console.log('[Stage] Function::ready done.')
 
-        if (window.performance) {
+        if (performance.now) {
           __timing.inited = performance.now()
           __forEach.call(Object.keys(__timing), function (type) {
             setTimeout(function () {
@@ -303,9 +308,9 @@ function sendException (msg, fatal) {
         playAreaTips.style.display = 'block'
         head.querySelector('title').innerHTML = 'C-Tone | ' + drama.slice(0,1).toUpperCase() + drama.slice(1)
 
-        var startTime = (new Date()).getTime()
+        var startTime = performance.now ? performance.now() : (new Date()).getTime()
         function curtainCall (_dom) {
-          var endTime = (new Date()).getTime()
+          var endTime = performance.now ? performance.now() : (new Date()).getTime()
           _dom.style.display = 'block'
           playAreaTips.style.display = 'none'
           if (!__timing[drama]) {
@@ -462,10 +467,6 @@ function sendException (msg, fatal) {
           var prefix = '/static/questions/'
           var id = 1
 
-          function sendAnswer(label) {
-            ga('send', 'event', 'Question:'+id, 'answer', label)
-          }
-
           loadStaticFile(prefix+id+'.html', (function (content) {
             var dom = document.createElement('div')
             dom.id = 'question'
@@ -488,11 +489,11 @@ function sendException (msg, fatal) {
                 // answer right
                 storage.set('answer', true)
                 location.href = '#!/home'
-                sendAnswer('true')
+                sendAnswer(id, 'true')
               } else {
                 nextElement.innerHTML = '<strong style="color:#ED462F; font-size: 20px;">Oops! Wrong.</strong>'
                 storage.set('answer', false)
-                sendAnswer('false:'+oEvent.data.answer)
+                sendAnswer(id, 'false:'+oEvent.data.answer)
               }
               toggleSubmit()
             }
@@ -757,7 +758,6 @@ function sendException (msg, fatal) {
    */
   function loadOctocat (body, oBannerWrapper, octocat) {
 
-    var startTime = (new Date()).getTime()
     var title = octocat.t
     var filename = octocat.f
 
@@ -765,10 +765,14 @@ function sendException (msg, fatal) {
 
     var src = 'https://octodex.github.com/images/' + filename
     var img = document.createElement('img')
+    if (performance.now) var startTime = performance.now()
     img.style.display = 'none'
     img.onload = function () {
-      var endTime = (new Date()).getTime()
-      __timing.octocat = endTime - startTime
+
+      if (performance.now) {
+        var endTime = performance.now()
+        __timing.octocat = endTime - startTime
+      }
 
       // oBannerWrapper.style.background = 'url('+ src +') no-repeat top center fixed';
       // oBannerWrapper.style.backgroundSize = '424px 424px';
@@ -809,7 +813,7 @@ function sendException (msg, fatal) {
     hitElement.className = 'blink'
     hitElement.setAttribute('data-frequency', 700)
 
-    blink()
+    blink(oBannerWrapper.getElementsByClassName('blink')[0])
 
     var saveOctocat
 
@@ -822,11 +826,13 @@ function sendException (msg, fatal) {
 
     } else {
 
-      var startTime = (new Date()).getTime()
+      // TODO: performace IE10+
+      var startTime = performance.now()
       var s = document.createElement('script')
       s.async = true
       s.onload = function () {
-        var endTime = (new Date()).getTime()
+        // TODO: IE10+
+        var endTime = performance.now()
         __timing.octodex = endTime - startTime
         // select octocat from remote DB File
         hitElement.className = ''
@@ -845,6 +851,7 @@ function sendException (msg, fatal) {
         } else {
           // save the octocat
           storage.set('octocat', octocat)
+          ga('send', 'event', 'Random', 'octocat', octocat.f.split('.')[0])
         }
         loadOctocat(body, oBannerWrapper, octocat)
         sendTiming('octodex', __timing.octodex)
@@ -864,23 +871,25 @@ function sendException (msg, fatal) {
   /**
    * blink the element
    */
-  function blink () {
-    __forEach.call(document.getElementsByClassName('blink'), function (blink) {
-      var frequency = parseInt(blink.getAttribute('data-frequency'), 10)
-      // blink.style.display = 'initial'
-      if (frequency > 0)
-        if (window.blinkTimer) clearInterval(window.blinkTimer)
-      window.blinkTimer = setInterval(function(_blink) {
-        if (_blink.style.visibility === '' ||
-            _blink.style.visibility === 'visible') {
-          // hide
-          _blink.style.visibility = 'hidden'
-        } else {
-          // show
-          _blink.style.visibility = 'visible'
-        }
-      }, frequency, blink);
-    });
+  function blink (elt) {
+    var frequency = parseInt(elt.getAttribute('data-frequency'), 10)
+    // blink.style.display = 'initial'
+    if (frequency > 0)
+      if (window.blinkTimer) clearInterval(window.blinkTimer)
+    window.blinkTimer = setInterval(function(_blink) {
+      if (!_blink) {
+        clearInterval(window.blinkTimer)
+        return
+      }
+      if (_blink.style.visibility === '' ||
+          _blink.style.visibility === 'visible') {
+        // hide
+        _blink.style.visibility = 'hidden'
+      } else {
+        // show
+        _blink.style.visibility = 'visible'
+      }
+    }, frequency, elt);
   }
 
   /**
@@ -1079,7 +1088,7 @@ function sendException (msg, fatal) {
   // Start....
   !function () {
     window.__timing = {}
-    if (window.performance) {
+    if (performance.now) {
       __timing.start = performance.now()
     }
 
@@ -1089,7 +1098,7 @@ function sendException (msg, fatal) {
       var event = loadEvent[i]
       !function (event) {
         function handler () {
-          if (window.performance) {
+          if (performance.now) {
             __timing[event] = performance.now()
           }
           if (event === 'load') {
