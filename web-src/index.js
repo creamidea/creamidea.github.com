@@ -447,75 +447,75 @@ function sendException (msg, fatal) {
 
       question: function (cb) {
         var qDOM = document.querySelector('#question')
-        var dom = document.createElement('div')
-        if (storage && storage.get('answer')) {
-          // true
+        if (qDOM === null) {
+          var dom = document.createElement('div')
           dom.id = 'question'
-          dom.innerHTML = '<div style="margin-top: 20%;font-weight: 600;">'
-            +'<p style="font-size: 26px;">&#127881;Congratulation&#127881;</p>'
-            +'<p style="font-size: inherit;">There is no exam now :)</p>'
-            +'<p style="font-size: inherit;">Please wait...</p></div>'
           qDOM = playArea.appendChild(dom)
+        }
+        if (storage.get('answer') === true) {
+          // true
+          qDOM.innerHTML = '<div style="margin-top: 20%;font-weight: 600;">'
+            +'<p style="font-size: 26px;">&#127881;Congratulation&#127881;</p>'
+            +'<p style="font-size: inherit;">You have had an octocat :)</p>'
+            +'<p style="font-size: inherit; font-weight: 400;"><a href="#!/question?action=change">Chnage?</a></p></div>'
         } else {
-          // false
-          if (qDOM === null) {
-            var prefix = '/static/questions/'
-            var id = 1
-            function sendAnswer(label) {
-              ga('send', 'event', 'Question:'+id, 'answer', label)
+          var prefix = '/static/questions/'
+          var id = 1
+
+          function sendAnswer(label) {
+            ga('send', 'event', 'Question:'+id, 'answer', label)
+          }
+
+          loadStaticFile(prefix+id+'.html', (function (content) {
+            var dom = document.createElement('div')
+            dom.id = 'question'
+            dom.innerHTML = content
+            var form = dom.querySelector('form')
+            var nextElement = form.nextElementSibling
+            var worker = new Worker(prefix+id+'.js')
+            var answerElement = form.elements.answer
+            var submitElement = form.elements.submit
+
+            function toggleSubmit() {
+              var status = answerElement.disabled
+              answerElement.disabled = status ? false : true
+              submitElement.disabled = status ? false : true
+              submitElement.innerHTML = status ? 'Submit' : 'Calculating...'
             }
 
-            loadStaticFile(prefix+id+'.html', (function (content) {
-              dom.innerHTML = content
-              var form = dom.querySelector('form')
-              var nextElement = form.nextElementSibling
-              var worker = new Worker(prefix+id+'.js')
-              var answerElement = form.elements.answer
-              var submitElement = form.elements.submit
-
-              function toggleSubmit() {
-                var status = answerElement.disabled
-                answerElement.disabled = status ? false : true
-                submitElement.disabled = status ? false : true
-                submitElement.innerHTML = status ? 'Submit' : 'Calculating...'
+            worker.onmessage = function (oEvent) {
+              if (oEvent.data.result === true) {
+                // answer right
+                storage.set('answer', true)
+                location.href = '#!/home'
+                sendAnswer('true')
+              } else {
+                nextElement.innerHTML = '<strong style="color:#ED462F; font-size: 20px;">Oops! Wrong.</strong>'
+                storage.set('answer', false)
+                sendAnswer('false:'+oEvent.data.answer)
               }
-
-              worker.onmessage = function (oEvent) {
-                if (oEvent.data.result === true) {
-                  // answer right
-                  storage.set('answer', true)
-                  location.href = '#!/home'
-                  sendAnswer('true')
-                } else {
-                  nextElement.innerHTML = '<strong style="color:#ED462F;">Oops! Wrong.</strong>'
-                  storage.set('answer', false)
-                  sendAnswer('false:'+oEvent.data.answer)
-                }
-                toggleSubmit()
-              }
-              worker.onerror = function (e) {
-                nextElement.innerHTML =
-                  '<strong style="color:#ED462F;font-size: 20px;">I am crashed because of your browser. XD</strong>'
-                console.log('[Question] Worker: ' + e.message)
-                sendException('[Question] Worker:' + e.message)
-              }
-              addEventListener(answerElement, 'input', function () {
-                nextElement.innerHTML = '<span>&#128565;</span>'
+              toggleSubmit()
+            }
+            worker.onerror = function (e) {
+              nextElement.innerHTML =
+                '<strong style="color:#ED462F;font-size: 20px;">I am crashed because of your browser. XD</strong>'
+              console.log('[Question] Worker: ' + e.message)
+              sendException('[Question] Worker:' + e.message)
+            }
+            addEventListener(answerElement, 'input', function () {
+              nextElement.innerHTML = '<span>&#128565;</span>'
+            })
+            form.onsubmit = function (e) {
+              e.preventDefault()
+              toggleSubmit()
+              worker.postMessage({
+                answer: answerElement.value
               })
-              form.onsubmit = function (e) {
-                e.preventDefault()
-                toggleSubmit()
-                worker.postMessage({
-                  answer: answerElement.value
-                })
-              }
-              qDOM = playArea.appendChild(dom.firstChild)
-
-              cb(qDOM)
-            }).bind(this))
-          }
+            }
+            playArea.replaceChild(dom, qDOM)
+            cb(dom)
+          }).bind(this))
         }
-
         return qDOM
       },
 
@@ -547,8 +547,10 @@ function sendException (msg, fatal) {
        */
       eggshell: function () {
         var lambda = document.querySelector('#banner-wrapper a')
-        lambda.href = 'javascript: void(0)'
-        lambda.style.cursor = 'default'
+        if (lambda) {
+          lambda.href = 'javascript: void(0)'
+          lambda.style.cursor = 'default'
+        }
         changeOctoCat(body)
       }
     }
@@ -582,8 +584,8 @@ function sendException (msg, fatal) {
       var sc = startColor.split(',').map(function (c) {return +c;})
       var ec = endColor.split(',').map(function (c) {return +c;})
       var sR = +((ec[0] - sc[0]) / step).toFixed(0),
-          sG = +((ec[1] - sc[1]) / step).toFixed(0),
-          sB = +((ec[2] - sc[2]) / step).toFixed(0)
+      sG = +((ec[1] - sc[1]) / step).toFixed(0),
+      sB = +((ec[2] - sc[2]) / step).toFixed(0)
       for (var i = 0; i < step; i++) {
         colors.push('rgba(' + [sR*i+sc[0], sG*i+sc[1], sB*i+sc[2]].join(',') + ', 0.8)')
       }
@@ -601,7 +603,7 @@ function sendException (msg, fatal) {
         count += 1
         animate(this, elt, count, count < colors.length ? colors[count] : colors[colors.length - 1])
       } else {
-        location.href='#!/answer'
+        location.href='#!/question'
         __interface.stop()
       }
     }
@@ -731,21 +733,20 @@ function sendException (msg, fatal) {
   //   document.cookie = name.replace(/^\s+|\s+$/mg, "")+'='+value+';'+expirs+';path=/'
   // }
   function Storage () {
+    var __store
+    try {
+      __store = JSON.parse(localStorage.getItem('c-tone')) || {}
+    } catch(err) {
+      __store = {}
+    }
     return {
       get: function (name) {
-        var value = localStorage.getItem(name)
-        try {
-          return JSON.parse(value)
-        } catch (err) {
-          sendException('[Storage] Get:' + err.message)
-          return value
-        }
+        var value = __store[name]
+        return value
       },
       set: function (name, value) {
-        if (typeof value === 'object') {
-          value = JSON.stringify(value)
-        }
-        localStorage.setItem(name, value)
+        __store[name] = value
+        localStorage.setItem('c-tone', JSON.stringify(__store))
       }
     }
   }
@@ -759,6 +760,9 @@ function sendException (msg, fatal) {
     var startTime = (new Date()).getTime()
     var title = octocat.t
     var filename = octocat.f
+
+    if (title === undefined || filename === undefined) return
+
     var src = 'https://octodex.github.com/images/' + filename
     var img = document.createElement('img')
     img.style.display = 'none'
@@ -849,6 +853,7 @@ function sendException (msg, fatal) {
         // var endTime = (new Date()).getTime()
         // __timing.octodex = endTime - startTime
         // sendTiming('octodex-failed', __timing.octodex)
+        clearInterval(window.blinkTimer)
         sendException('[Octodex] Load: Get the octodex file failed.')
       }
       body.appendChild(s)
@@ -864,16 +869,17 @@ function sendException (msg, fatal) {
       var frequency = parseInt(blink.getAttribute('data-frequency'), 10)
       // blink.style.display = 'initial'
       if (frequency > 0)
-        window.blinkTimer = setInterval(function(_blink) {
-          if (_blink.style.visibility === '' ||
-              _blink.style.visibility === 'visible') {
-            // hide
-            _blink.style.visibility = 'hidden'
-          } else {
-            // show
-            _blink.style.visibility = 'visible'
-          }
-        }, frequency, blink);
+        if (window.blinkTimer) clearInterval(window.blinkTimer)
+      window.blinkTimer = setInterval(function(_blink) {
+        if (_blink.style.visibility === '' ||
+            _blink.style.visibility === 'visible') {
+          // hide
+          _blink.style.visibility = 'hidden'
+        } else {
+          // show
+          _blink.style.visibility = 'visible'
+        }
+      }, frequency, blink);
     });
   }
 
@@ -1035,12 +1041,18 @@ function sendException (msg, fatal) {
         }
         stage.go(url, previous)
       },
-      "^/answer/?$": function (previous) {
-        if (previous && window.Worker) {
-          var a = document.createElement('a')
-          a.href = previous
-          if (a.hash === '')
-            stage.show('question')
+      "^/question(?:\\?action=(\.+))?": function (action, previous) {
+        if (action === 'change') {
+          storage.set('answer', false)
+          storage.set('octocat', null)
+          location.href = '#!/question'
+          return
+        }
+        if (/*previous &&*/ window.Worker) {
+          // var a = document.createElement('a')
+          // a.href = previous
+          // if (a.hash === '')
+          stage.show('question')
         }
       }
     })

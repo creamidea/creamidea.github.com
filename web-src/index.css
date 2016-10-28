@@ -414,9 +414,13 @@ nav a {
     font-size: 16px;
     margin: 20px auto;
 }
+#question .formula,
 #question p {
-    font-size: 4em;
+    font-size: 3em;
     margin: 10px 0;
+}
+#question p:nth-child(4) {
+    font-size: 2em;
 }
 #question .formula a {
     color: #191919;
