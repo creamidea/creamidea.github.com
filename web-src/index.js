@@ -174,7 +174,10 @@ function sendException (msg, fatal) {
           }
           return false
         })
-        if (rlts.indexOf(true) < 0) console.log('[Router] Error: cannot find the target: ' + location.hash + '.')
+        if (rlts.indexOf(true) < 0) {
+          console.log('[Router] Error: cannot find the target: ' + location.hash + '.')
+          location.href = '/404.html'
+        }
       }
     }
   }
@@ -996,31 +999,31 @@ function sendException (msg, fatal) {
     }
 
     var router = Router({
-      "^/?$|^/home$": function () {
+      "^/?$|^/home/?$": function () {
         if (storage && storage.get('answer') === true) {
           stage.eggshell()
         }
         stage.hide()
       },
-      "^/archive$": function () {
+      "^/archive/?$": function () {
         stage.show('archive')
       },
-      "^/wiki/(\.+)": function (file) {
+      "^/wiki/(\.+)/?": function (file) {
         var url = '/static/html/wiki/' + file
         history.pushState({}, '', url)
         stage.go(url)
       },
-      "^/articles/(\.+)": function (file) {
+      "^/articles/(\.+)/?": function (file) {
         var url = '/static/html/articles/' + file
         stage.go(url)
       },
-      "^/search$": function () {
+      "^/search/?$": function () {
         stage.show('search')
       },
       "^/tags(?:\\?tag=(\.+))?": function (tag) {
         stage.show('tags', tag)
       },
-      "^/me$": function () {
+      "^/me/?$": function () {
         stage.show('me', me)
       },
       "^/go(?:\\?name=(\.+))": function (name, previous) {
@@ -1032,7 +1035,7 @@ function sendException (msg, fatal) {
         }
         stage.go(url, previous)
       },
-      "^/answer$": function (previous) {
+      "^/answer/?$": function (previous) {
         if (previous && window.Worker) {
           var a = document.createElement('a')
           a.href = previous
