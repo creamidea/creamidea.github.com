@@ -206,6 +206,7 @@ function sendException (msg, fatal) {
     body.appendChild(btnReturn)
 
     var banner = showBanner(body, nav)
+
     var Animate = {
       "show-banner": function () {
         nav.className="bounceIn animated"
@@ -238,10 +239,6 @@ function sendException (msg, fatal) {
         // load archive (articles list)
         console.log('[Stage] Initializing...')
 
-        addEventListener(banner.querySelector('.lambda'), 'dblclick', function (e) {
-          e.preventDefault()
-          location.href = '#!/answer'
-        })
         addEventListener(nav, 'click', (function (e) {
           var target = __closestNodeA(e.target)
           var id = target ? target.id : null
@@ -259,6 +256,8 @@ function sendException (msg, fatal) {
             this.go(target.href)
           }
         }).bind(this))
+
+        ClickLambda(banner.querySelector('.lambda')).start()
 
         console.log('[Stage] Initialized finished. Call function::ready...')
         if (typeof ready === 'function') ready()
@@ -528,10 +527,7 @@ function sendException (msg, fatal) {
           var parser = document.createElement('a')
           parser.href = url
           if (parser.hostname && parser.hostname !== location.hostname) {
-            ga('send', 'event', {
-              eventCategory: 'Outbound Link',
-              eventAction: 'click',
-              eventLabel: url,
+            ga('send', 'event', 'Outbound Link', 'click', url, {
               transport: 'beacon'
             })
           }
@@ -566,6 +562,63 @@ function sendException (msg, fatal) {
       text += possible.charAt(Math.floor(Math.random() * possible.length));
 
     return text;
+  }
+
+  function ClickLambda (lambdaElt) {
+    var elt
+    var count = 0
+    var threshold = +(Math.random()*100%12+4).toFixed(0)
+    var startColor = '0,0,0'
+    var endColor = '53,122,232'
+    var colors = []
+    elt = lambdaElt.appendChild(document.createElement('span'))
+    var style = elt.style
+    style.position = 'absolute', style.fontSize = '0.5em', elt.setAttribute('data-origin-color', style.color)
+
+    !function (startColor, endColor, step, colors) {
+      var sc = startColor.split(',').map(function (c) {return +c;})
+      var ec = endColor.split(',').map(function (c) {return +c;})
+      var sR = +((ec[0] - sc[0]) / step).toFixed(0),
+          sG = +((ec[1] - sc[1]) / step).toFixed(0),
+          sB = +((ec[2] - sc[2]) / step).toFixed(0)
+      for (var i = 0; i < step; i++) {
+        colors.push('rgba(' + [sR*i+sc[0], sG*i+sc[1], sB*i+sc[2]].join(',') + ', 0.8)')
+      }
+    }(startColor, endColor, threshold, colors)
+
+    function animate (lambdaElt, numberElt, count, color) {
+      numberElt.innerHTML = count
+      numberElt.style.color = color
+      lambdaElt.style.color = color
+    }
+
+    function __click (e) {
+      e.preventDefault()
+      if (count < threshold) {
+        count += 1
+        animate(this, elt, count, count < colors.length ? colors[count] : colors[colors.length - 1])
+      } else {
+        location.href='#!/answer'
+        __interface.stop()
+      }
+    }
+
+    var __interface = {
+      start: function () {
+        // removeEventListener(lambdaElt, 'click')
+        addEventListener(lambdaElt, 'click', __click)
+      },
+      stop: function () {
+        removeEventListener(lambdaElt, 'click', __click)
+        __interface.clear()
+      },
+      clear: function () {
+        animate(lambdaElt, elt, count, elt.getAttribute('data-origin-color'))
+        ga('send', 'event', 'Lambda', 'click', count)
+        count = 0
+      }
+    }
+    return __interface
   }
 
   /**
@@ -639,11 +692,7 @@ function sendException (msg, fatal) {
         }
       })
 
-      ga('send', 'event', {
-        eventCategory: 'Tags',
-        eventAction: 'click',
-        eventLabel: tag
-      })
+      ga('send', 'event', 'Tags', 'click', tag)
 
       setTimeout(function () {
         window.scrollTo(0, tagsDOM.children[0].getBoundingClientRect().height)
@@ -1042,7 +1091,7 @@ function sendException (msg, fatal) {
               // main.apply(window)
             }
             // document.getElementById('search').style.display = 'initial!important'
-            removeEventListener(window, event)
+            // removeEventListener(window, event)
           }
         }, false)
 
