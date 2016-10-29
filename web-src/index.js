@@ -794,7 +794,7 @@ function sendAnswer(id, label) {
       console.log('[Octocat] Load the image of octocat failed!')
       clearInterval(window.blinkTimer)
 
-      sendException('[Octocat] Load: Display the image of octocat failed.')
+      sendException('[Octocat] Load: the image of octocat::'+ title +' was failed.')
       // sendTiming('octocat-failed', __timing.octocat)
     };
     body.appendChild(img)
