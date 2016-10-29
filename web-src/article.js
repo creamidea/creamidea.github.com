@@ -393,9 +393,10 @@ function loadDisqusComment (target) {
       }
       for(var i = 0; i < max; i++) {
         var url = sources[i]
+
         if (typeof hasLoaded[url] !== 'undefined') {
           sourcesTXT[i] = hasLoaded[url]
-          _successCallback (count, max, sourcesTXT, success)
+          _successCallback ()
         } else {
           !function __loader (i, url, success, fail) {
             loader({
@@ -403,7 +404,7 @@ function loadDisqusComment (target) {
               success: function (txt) {
                 sourcesTXT[i] = txt
                 hasLoaded[url] = txt
-                _successCallback (count, max, sourcesTXT, success)
+                _successCallback ()
               },
               fail: function (h, e) {
                 count -= 1
@@ -421,13 +422,12 @@ function loadDisqusComment (target) {
   function loadDiagram (sources, loadJSSeq, body) {
     return function (success, fail) {
       loadJSSeq(sources, function (raphael, _, seq) {
-        // console.log('load over.')
-        __forEach.call(arguments, function (src) {
-          var script = document.createElement('script')
-          script.innerHTML = src
-          body.appendChild(script)
-          body.removeChild(script)
-        })
+        var script = document.createElement('script')
+        var text = document.createTextNode([].join.call(arguments, ';\n;'))
+        script.appendChild(text)
+        script.type = 'text/javascript'
+        body.appendChild(script)
+        setTimeout(function () {body.removeChild(script);}, 10000)
         if (typeof success === 'function') success()
       }, function () {
         if (typeof fail === 'function') fail()
