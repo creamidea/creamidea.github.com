@@ -96,6 +96,7 @@ function genTagsHtml (tags) {
 
 function genArchiveHtml (data) {
   let special = []
+  let years = []
   const options = {
     weekday: 'short', year: 'numeric', month: 'short', day: 'numeric',
     timeZone: 'UTC', timeZoneName: 'short'
@@ -122,10 +123,16 @@ return `<p class="${key}-time">`
 </div>
 ${genTagsHtml(tags)}</li>`
 
+    // select the special files(works, friends)
     if (SPECIALFILE.indexOf(name) >= 0) {
       special.push(_html)
       return
     } else {
+      let year = (new Date(date)).getFullYear()
+      if (years.indexOf(year) < 0) {
+        years.push(year)
+        _html = `<li class="year-split"><span>${year}</span></li>${_html}`
+      }
       return _html
     }
   })

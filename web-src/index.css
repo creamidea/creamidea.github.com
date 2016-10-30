@@ -545,10 +545,23 @@ nav a svg {
     max-width: 660px;
     position: relative;
 }
-.article-list li.articles {
+
+.article-list .year-split {
+    font-size: 2em;
+    color: black;
+    /* border: 4px dashed black; */
+    text-align: center;
+    background: #fafafa;
+    border: 0;
+    box-shadow: 0 0 #fafafa;
+}
+.article-list .year-split span {
+    border-bottom: 4px solid black;
+}
+.article-list .articles {
     border-left: 4px solid #191919;
 }
-.article-list li.articles:after {
+.article-list .articles:after {
     content: "文";
     position: absolute;
     top: 4px;
@@ -556,10 +569,10 @@ nav a svg {
     font-size: 16px;
     color: gainsboro;
 }
-.article-list li.translation{
+.article-list .translation{
     border-left: 4px solid #ED462F; //#54A650
 }
-.article-list li.translation:after {
+.article-list .translation:after {
     content: "譯";
     position: absolute;
     top: 4px;
