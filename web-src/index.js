@@ -286,6 +286,37 @@ function sendAnswer(id, label) {
         // loadCustomSearch(body)
       },
 
+      createElementWrapper: function (drama) {
+        var eltWrapper = document.createElement('div')
+        eltWrapper.id = drama
+        eltWrapper.innerHTML = '<p class="play-area-tips">Preparing Drama - '
+          + '<span style="color:#4285f4;">' + drama + '...</span></p>'
+
+        // insert the element
+        eltWrapper.flush = function (dom) {
+          this.replaceChild(dom, this.firstChild)
+        }
+
+        // when the drama is ready, call this funciton to show it.
+        eltWrapper.finish = function (dom) {
+          if (this.getAttribute('data-status') === 'loading') {
+            this.flush(dom)
+            // this.replaceChild(dom, this.firstChild)
+            this.setAttribute('data-status', 'loaded')
+            var endTime = performance.now ? performance.now() : (new Date()).getTime()
+            if (!__timing[drama]) {
+              __timing[drama] = endTime - (+this.getAttribute('data-start-time'))
+              sendTiming(drama, __timing[drama])
+            }
+          }
+        }
+        playArea.appendChild(eltWrapper)
+        var startTime = performance.now ? performance.now() : (new Date()).getTime()
+        eltWrapper.setAttribute('data-start-time', startTime)
+        eltWrapper.setAttribute('data-status', 'loading')
+        return eltWrapper
+      },
+
       /**
        * play area show handler
        * drama dispatcher
@@ -304,34 +335,18 @@ function sendAnswer(id, label) {
         // change body backgroundcolor
         body.style.background = '#fafafa'
 
-        playAreaTips.innerHTML = 'Preparing Drama - ' + '<span style="color:#4285f4;">' + drama + '...</span>'
-        playAreaTips.style.display = 'block'
         head.querySelector('title').innerHTML = 'C-Tone | ' + drama.slice(0,1).toUpperCase() + drama.slice(1)
 
-        var startTime = performance.now ? performance.now() : (new Date()).getTime()
-        function curtainCall (_dom) {
-          var endTime = performance.now ? performance.now() : (new Date()).getTime()
-          _dom.style.display = 'block'
-          playAreaTips.style.display = 'none'
-          if (!__timing[drama]) {
-            __timing[drama] = endTime - startTime
-            sendTiming(drama, __timing[drama])
-          }
+        var eltWrapper = playArea.querySelector('#'+drama)
+        if (eltWrapper === null) {
+          eltWrapper = this.createElementWrapper(drama)
         }
-
+        eltWrapper.style.display = 'block'
         try {
-
-          var dom = this[drama].apply(this, [curtainCall].concat(params))
-
-          if (dom instanceof Element) {
-            curtainCall(dom)
-          }
+          this[drama].apply(this, [eltWrapper].concat(params))
         } catch (err) {
-          // var endTime = (new Date()).getTime()
-          // __timing[drama] = endTime - startTime
-
-          playAreaTips.innerHTML = 'Drama - ' + '<span style="color:#4285f4;">' + drama + '</span>'
-            + ' happend error: <strong>' + err.message + '</strong>'
+          eltWrapper.innerHTML = '<p>Drama - ' + '<span style="color:#4285f4;">' + drama + '</span>'
+            + ' happend error: <strong>' + err.message + '</strong></p>'
           console.log('[Stage] when show the area: \n', err)
           sendException('[Stage] Show: ' + err.message)
           // sendTiming(drama+'-failed', __timing[drama])
@@ -363,113 +378,85 @@ function sendAnswer(id, label) {
       /**
        * show article list
        */
-      archive: function (cb) {
-        // show archive-list
-        var articleListDOM = playArea.querySelector('.article-list')
-        if (articleListDOM === null) {
-          loadStaticFile('/static/html/archive.html', function (txt) {
-            var htmlDoc = document.createElement('div')
-            htmlDoc.innerHTML = txt
-            // var htmlDoc = parser.parseFromString(txt, "text/html")
-            var articleList = htmlDoc.querySelector('.article-list')
-            var specialList = htmlDoc.querySelector('.special-list')
+      archive: function (elt) {
+        loadStaticFile('/static/html/archive.html', function (txt) {
+          var htmlDoc = document.createElement('div')
+          htmlDoc.innerHTML = txt
+          // var htmlDoc = parser.parseFromString(txt, "text/html")
+          var articleList = htmlDoc.querySelector('.article-list')
+          var specialList = htmlDoc.querySelector('.special-list')
 
-            // var articleList = cache.articleList
-            articleListDOM = playArea.appendChild(articleList)
-            articleList.addEventListener('click', function (ev) {
-              var target = ev.target
-              var tagName = target.tagName
-              var className = target.className
-              var href = target.getAttribute('href')
-              if (tagName === 'A' && className === 'tag-item' && typeof href !== undefined) {
-                ev.preventDefault()
-                // location.href = href.replace(/\/search\?/, SEARCHER) + '&hl=en'
-                // + '+site:' + location.host
-                location.href = '#!/tags?tag=' + href.replace(/\/search\?q=/, '')
-              }
-            }, false)
-
-            cb(articleListDOM)
-          })
-        }
-        return articleListDOM
+          elt.finish(articleList)
+          articleList.addEventListener('click', function (ev) {
+            var target = ev.target
+            var tagName = target.tagName
+            var className = target.className
+            var href = target.getAttribute('href')
+            if (tagName === 'A' && className === 'tag-item' && typeof href !== undefined) {
+              ev.preventDefault()
+              // location.href = href.replace(/\/search\?/, SEARCHER) + '&hl=en'
+              // + '+site:' + location.host
+              location.href = '#!/tags?tag=' + href.replace(/\/search\?q=/, '')
+            }
+          }, false)
+        })
       },
 
       /**
        * show google custom search engine
        */
-      search: function (cb) {
-        var customSearchDOM = playArea.querySelector('#custom-search')
-        if (customSearchDOM === null){
-          loadCustomSearch(playArea, function (elt) {
-            cb(elt)
-          })
-        }
-        return customSearchDOM
+      search: function (elt) {
+        loadCustomSearch(elt, function (searchElt) {
+          elt.finish(searchElt)
+        })
       },
 
       /**
        * show tages page
        */
-      tags: function (cb, tag) {
-        var tagsDOM = playArea.querySelector('#tags-cloud')
-        var _cb = (function (dom) {
-          showPostsByTag(tagsDOM, tag)
-          cb(dom)
-        }).bind(this)
-
-        if (tagsDOM === null) {
+      tags: function (elt, tag) {
+        if (elt.getAttribute('data-status') === 'loading') {
           loadStaticFile('/static/html/tags.html', function (txt) {
-            tagsDOM = playArea.appendChild(document.createElement('div'))
-            tagsDOM.innerHTML = txt
-            tagsDOM.id = 'tags-cloud'
-
-            _cb(tagsDOM)
+            var div = document.createElement('div')
+            div.id = 'tags-cloud'
+            div.innerHTML = txt
+            showPostsByTag(div, tag)
+            elt.finish(div)
           })
         } else {
-          _cb(tagsDOM)
+            showPostsByTag(elt.firstChild, tag)
         }
       },
 
       /**
        * show some urls about me
        */
-      me: function (cb, me) {
-        var tableDOM = document.querySelector('#links-table')
-        if (tableDOM === null) {
-          var links = __map.call(Object.keys(me), function (key) {
-            return '<tr><td>'+ key +'</td><td><a href="#!/go?name='+key+'">'+ me[key] +'</a></td></tr>'
-          }).join('')
-          tableDOM = playArea.appendChild(document.createElement('div'))
-          tableDOM.id = 'links-table'
-          tableDOM.innerHTML = '<table><caption><a href="/static/about.html">About</a> me</caption>'
+      me: function (elt, me) {
+        var tableDOM = document.createElement('table')
+        var links = __map.call(Object.keys(me), function (key) {
+          return '<tr><td>'+ key +'</td><td><a href="#!/go?name='+key+'">'+ me[key] +'</a></td></tr>'
+        }).join('')
+        tableDOM.id = 'links-table'
+        tableDOM.innerHTML = '<table><caption><a href="/static/about.html">About</a> me</caption>'
             + '<thead><tr><th>Name</th><th>Link</th></tr></thead><tbody>'+links+'</tbody></table>'
-
-          cb(tableDOM)
-        }
-        return tableDOM
+        elt.finish(tableDOM)
       },
 
-      question: function (cb) {
-        var qDOM = document.querySelector('#question')
-        if (qDOM === null) {
-          var dom = document.createElement('div')
-          dom.id = 'question'
-          qDOM = playArea.appendChild(dom)
-        }
+      question: function (elt) {
+        var dom = document.createElement('div')
         if (storage.get('answer') === true) {
           // true
-          qDOM.innerHTML = '<div style="margin-top: 20%;font-weight: 600;">'
+          dom.innerHTML = '<div style="margin-top: 20%;font-weight: 600;">'
             +'<p style="font-size: 26px;">&#127881;Congratulation&#127881;</p>'
             +'<p style="font-size: inherit;">You have had an octocat :)</p>'
             +'<p style="font-size: inherit; font-weight: 400;"><a href="#!/question?action=change">Chnage?</a></p></div>'
+          if (elt.getAttribute('data-status') === 'loading') elt.finish(dom)
+          else elt.flush(dom)
         } else {
           var prefix = '/static/questions/'
           var id = 1
 
           loadStaticFile(prefix+id+'.html', (function (content) {
-            var dom = document.createElement('div')
-            dom.id = 'question'
             dom.innerHTML = content
             var form = dom.querySelector('form')
             var nextElement = form.nextElementSibling
@@ -513,11 +500,10 @@ function sendAnswer(id, label) {
                 answer: answerElement.value
               })
             }
-            playArea.replaceChild(dom, qDOM)
-            cb(dom)
+            if (elt.getAttribute('data-status') === 'loading') elt.finish(dom)
+            else elt.flush(dom)
           }).bind(this))
         }
-        return qDOM
       },
 
       /**
