@@ -1,0 +1,142 @@
+#+TITLE: Preload Javascript
+#+AUTHOR: 冰糖火箭筒(Junjia Ni)
+#+EMAIL: creamidea(AT)gmail.com
+#+DATE: 2016-10-29
+#+CATEGORY: article
+#+DESCRIPTION: Preload-Javascript
+#+KEYWORDS: js,javascript,preload,fetch,XMLHttpRequest,defer,prerender,prefetch
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:nil email:t <:t date:t timestamp:t
+#+LINK_HOME: https://creamidea.github.io
+#+STARTUP: showall
+
+#+BEGIN_HTML
+<div class="lazy-load-img-wrapper">
+<noscript>
+<img src="https://www.bram.us/wordpress/wp-content/uploads/2016/06/javascript-logo-banner.jpg"
+alt="Javascript" title="Javascript"/>
+</noscript>
+<img data-src="https://www.bram.us/wordpress/wp-content/uploads/2016/06/javascript-logo-banner.jpg"
+lazy-load class="lazy-load-img" alt="Javascript" title="Javascript"/>
+<p class="title-img-p">题图来自网络</p>
+</div>
+#+END_HTML
+
+
+* 前言
+主要介绍几种解决预加载 JS 文件的方案：异步请求 JS 文件，顺序执行 JS 代码。
+首先，让我们美好的设想一下：
+#+BEGIN_SRC js
+var script = document.createElement("script")
+script.noexecute = true
+script.src = "xxxx.js"
+document.body.appendChild(script)
+script.execute()
+#+END_SRC
+
+但这个梦想有一个残酷的现实：
+如果你使用 =script= 引入的 JS 代码，那么，一旦浏览器下载完成，就会立即 *执行* 。不过留给你任何犹豫的时间。
+
+所以，上面只是一个美好的设想，无法将JS的加载和执行的过程割裂开来（通过 =script= 标签引入）。
+况且，现实中不存在这个 =noexecute= 和 =execute= 。
+
+不过，我们可以使用现有的一些技术组合创造出这种效果来。
+
+* 解决
+整体解决方案的思路大致分成2个部分：下载和执行。
+
+** 下载
+
+*** script 标签
+ 通过 =<script>= 标签及其属性 =src= 引入 JS 文件是常规的做法。无论是“静态”的插入 HTML 中，
+ 还是“动态”的使用 JS 代码插入，根据浏览器的原理[fn:1]，是没有办法达到我们想要的效果的。
+ 在这里，我们排除这种方式。
+
+*** Ajax 技术
+ 使用 Ajax 技术加载 JS 文件。通过发送一个单独的请求获取 JS 文本，
+ 亦可做到精细度的下载过程控制，配合定时器，还可以做出下载进度的 UI，简直就是前端开发的美梦啊。
+ 目前浏览器主要提供了以下API：
+  + XMLHttpRequest
+  + fetch([[https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#Browser_compatibility][Browser compatibility]])
+
+这里可以稍微了解一下浏览器并发请求的知识，以及跨域请求（CROS）的限制。
+并发请求的技术细节可以参考这个回答：[[https://www.zhihu.com/question/20474326][知乎#20474326]]。
+跨域请求的技术细节，我推荐阅读一下阮一峰老师的这两篇文章：[[http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html][浏览器同源政策及其规避方法(阮一峰)]]和[[http://www.ruanyifeng.com/blog/2016/04/cors.html][跨域资源共享 CORS 详解(阮一峰)]]。
+掌握这些技术细节有助于你后面更好的代码实现。
+
+*** jQuery.getScript
+最简单方式，使用 =jQuery.getScript= 函数，可以获取一个 JS 文件。但是这个效果和使用 =<script>= 标签的效果一致。
+
+*** Prerender and Prefetch
+=prefetch= 属性是微软针对 IE11 浏览器开发的黑科技，主要用于预先下载部分资源，提升后续操作效率和体验。
+具体的技术细节可以看[[https://msdn.microsoft.com/en-us/library/dn265039(v=vs.85).aspx][Prerender and prefetch support(MSDN)]]。因为和本文的关联性不是很大，在此不详细说明。
+
+说到 Prerender and Prefetch 顺带提一下 IE 的 =<script>= 标签专有属性 =defer= 和现代浏览器支持的 =async= 属性（[[http://caniuse.com/#search=script-async][caniuse]]），
+=defer= 属性是用来告诉 IE 浏览器，即将获取的 JS 脚本代码没有 DOM 操作，因此 IE 浏览器在碰到这类 =<script>= 标签时不会阻塞后续DOM的的渲染。
+=async= 作用是告诉浏览器异步获取 JS 文件，因此在下载的过程中也不会阻塞 DOM 渲染。不过一旦下载完成，会立即执行。
+所以，如果我们只是使用了 async 属性，只是达到了异步下载的目的，并不能实际控制其执行的时期。
+
+*** 非常规方式
+非常规方式指使用一些比较 Hack 的方式解决问题。比如上面我提到 =<script>= 标签用来引入 JS 文件，但是我这里偏不，
+我这里就用 =<object>= 标签来引入 JS 文件。 [[http://www.w3schools.com/tags/tag_object.asp][<object>]] 标签原本的作用是嵌入多媒体资源，比如：视频，音频，PDF之类的。
+或者使用 =<img>= 标签来引入 JS 文件。这些 Hack 的思路是想利用这些标签先获取一遍资源，然后期待浏览器能够将请求来的 JS 文件缓存进浏览器，
+那么下次（就是使用 =<script>= 设置 =src= 属性引入资源）再次请求的时候，就没有网路开销了。
+不过我们测试下来，这个跟浏览器的实现很有关系。在 Chrome(Version 54.0.2840.71 m (64-bit))
+，我们并没有测试成功。使用 =<object>= 的表现是资源依然会被下载，并不是从缓存中获取； =<img>= 标签则是直接拒绝引入 JS 文件。
+所以，我们不知道Javascript装载和执行[fn:1]一文中最后使用 =<object>= 这个实验究竟正确性如何，欢迎各位探索一下。
+
+** 执行
+*** eval
+通过 =eval= 函数运行字符级的 JS 代码，动态添加执行代码。不过使用 =eval= 函数，我的直觉是存在严重的性能和安全问题。
+但究竟影响多少？为何会影响？等问题却不知道答案。那我凭什么要说这个不好？于是我找了一些文章，想看看具体情况是什么样子的。
+看完这些文章之后，发现 =eval= 并不 =evil= 。（eval 的中文翻译：重新运算求出参数的内容，我之前一直以为是邪恶！）
++ [[http://blog.zhaojie.me/2012/08/js-code-from-eval-benchmark.html][由eval生成的代码效率真的很差吗？(老赵)]]
++ [[http://otakustay.com/eval-performance-profile/%5D%5Bhttp://otakustay.com/eval-performance-profile/][浅谈eval的影响(otakustay)]]
++ [[http://www.cnblogs.com/_franky/archive/2012/08/16/2641100.html][凑凑热闹,给eval做个科普(Franky)]]
+
+*** script 文本
+这种方式是将 JS 代码插入 =<script type=text/javascript></script>= 之间。让浏览器去执行。
+这种方式我推荐如下代码实现：
+#+BEGIN_SRC js
+  var script = document.createElement('script')
+  var text = document.createTextNode(/*your code*/)
+  script.appendChild(text)
+  script.type = 'text/javascript'
+  document.body.appendChild(script)
+  // delete the script element to keep the DOM Tree clean
+  setTimeout(function () {document.body.removeChild(script);}, 10000)
+#+END_SRC
+
+创建一个 =textNode= ，以去除 JS Code 中可能存在的特殊字符。然后使用 =appendChild= 将其插入到 DOM 树中，
+交给浏览器去执行。
+
+* 尾声
+通过2天时间不停的查资料，分析，测试，然后否定，重新查资料，分析，测试，然后否定的循环，最终确定了一个折中的方案：
+通过 Ajax 技术异步获取 JS 文本代码，然后通过一个计数器确定最终调用回调的时机。之后把所获取到的 JS 文本代码 =join= 一下，
+创建 textNode 节点，一次性全部插入到 DOM 树中执行，延迟几秒（目前设定是10秒）后将其删除。其实，这里可以优化一下，
+最好能够做成：没有依赖的 JS 代码，或者是基础的 JS 代码能先执行的就让浏览器去先执行，然后需要依赖的等待依赖执行完成之后执行。
+而不是等到所有代码全部下载完成之后再执行。
+这样可以充分利用好所有的时间片。但是这个想法目前还没有写代码论证，是否对于提升 JS 整体运行效率有什么帮助还未得知。
+
+这个过程中对于之前的一些错误观点进行了批判；对于浏览器底层对于 JS 的处理过程有了一个初步的了解。
+同时，对于解决问题的思路又多了一些，尤其是看到不通过常规的方式下载 JS 代码时，更加的被其吸引。
+
+在开发的过程中也遇到了一些以前没有碰到的 bug（或者叫做 feature）更加的合适？
+IE系列浏览器对于 =load= 事件（资源加载完成之后浏览器发出的 =load= 事件）的处理比较的繁琐。
+常规的注册方式我在这里就不提了，主要是你发现你注册了回调事件，但是并没有执行时，你可以试试这个样子：
+#+BEGIN_SRC js
+  element.setAttribute('load', your_callback_function_name)
+  element.setAttribute('onreadystatechange', your_callback_function_name)
+#+END_SRC
+
+* Other Reference
++ [[https://github.com/jquery/jquery/blob/f18ca7bfe0f5e3184bf1ed55daf1668702c5577a/src/ajax.js][jQuery-ajax souce code]]
++ [[https://github.com/requirejs/requirejs/blob/master/require.js][requirejs source code]]
++ [[https://github.com/CreateJS/PreloadJS/blob/23f20e04e13829388417499385c3085f7202871d/src/preloadjs/net/TagRequest.js][PreloadJS-TagRequest source code]]
++ [[http://coolshell.cn/articles/9666.html][浏览器的渲染原理简介(陈皓)]]
++ [[http://www.jianshu.com/p/e141d1543143][浏览器~加载，解析，渲染(Miss____Du)]]
++ [[http://stackoverflow.com/questions/17907445/how-to-detect-ie11][How to detect IE11?(stackoverflow)]]
++ [[http://stackoverflow.com/questions/11102625/preload-script-without-execute][Preload script without execute(stackoverflow)]]
+
+* Footnotes
+
+[fn:1] [[http://coolshell.cn/articles/9749.html][Javascript 装载和执行]] (陈皓)

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 2016-10-30 Sun 18:52 -->
+<meta  charset="utf-8">
+<meta  name="viewport" content="width=device-width, initial-scale=1">
+<title>Preload Javascript</title>
+<meta  name="generator" content="Org-mode">
+<meta  name="author" content="冰糖火箭筒(Junjia Ni)">
+<meta  name="description" content="Preload-Javascript"
+>
+<meta  name="keywords" content="js,javascript,preload,fetch,XMLHttpRequest,defer,prerender,prefetch">
+<link rel="stylesheet" type="text/css" href="/static/article.css"><!--[if lt IE 9]>
+<script src="/static/libs/html5shiv.min.js"></script>
+<![endif]-->
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">Preload Javascript</h1>
+</header><nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">1. 前言</a></li>
+<li><a href="#orgheadline11">2. 解决</a>
+<ul>
+<li><a href="#orgheadline7">2.1. 下载</a>
+<ul>
+<li><a href="#orgheadline2">2.1.1. script 标签</a></li>
+<li><a href="#orgheadline3">2.1.2. Ajax 技术</a></li>
+<li><a href="#orgheadline4">2.1.3. jQuery.getScript</a></li>
+<li><a href="#orgheadline5">2.1.4. Prerender and Prefetch</a></li>
+<li><a href="#orgheadline6">2.1.5. 非常规方式</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline10">2.2. 执行</a>
+<ul>
+<li><a href="#orgheadline8">2.2.1. eval</a></li>
+<li><a href="#orgheadline9">2.2.2. script 文本</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgheadline12">3. 尾声</a></li>
+<li><a href="#orgheadline13">4. Other Reference</a></li>
+</ul>
+</div>
+</nav>
+<div class="lazy-load-img-wrapper">
+<noscript>
+<img src="https://www.bram.us/wordpress/wp-content/uploads/2016/06/javascript-logo-banner.jpg"
+alt="Javascript" title="Javascript"/>
+</noscript>
+<img data-src="https://www.bram.us/wordpress/wp-content/uploads/2016/06/javascript-logo-banner.jpg"
+lazy-load class="lazy-load-img" alt="Javascript" title="Javascript"/>
+<p class="title-img-p">题图来自网络</p>
+</div>
+
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+主要介绍几种解决预加载 JS 文件的方案：异步请求 JS 文件，顺序执行 JS 代码。
+首先，让我们美好的设想一下：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-js"><span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">script</span> = document.createElement<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">"script"</span><span style="color: #c5c8c6;">)</span>
+script.noexecute = <span style="color: #81a2be;">true</span>
+script.src = <span style="color: #8abeb7;">"xxxx.js"</span>
+document.body.appendChild<span style="color: #c5c8c6;">(</span>script<span style="color: #c5c8c6;">)</span>
+script.execute<span style="color: #c5c8c6;">()</span>
+</pre>
+</div>
+
+<p>
+但这个梦想有一个残酷的现实：
+如果你使用 <code>script</code> 引入的 JS 代码，那么，一旦浏览器下载完成，就会立即 <b>执行</b> 。不过留给你任何犹豫的时间。
+</p>
+
+<p>
+所以，上面只是一个美好的设想，无法将JS的加载和执行的过程割裂开来（通过 <code>script</code> 标签引入）。
+况且，现实中不存在这个 <code>noexecute</code> 和 <code>execute</code> 。
+</p>
+
+<p>
+不过，我们可以使用现有的一些技术组合创造出这种效果来。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-2">
+<h2 id="orgheadline11"><span class="section-number-2">2</span> 解决</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+整体解决方案的思路大致分成2个部分：下载和执行。
+</p>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7"><span class="section-number-3">2.1</span> 下载</h3>
+<div class="outline-text-3" id="text-2-1">
+</div><div id="outline-container-orgheadline2" class="outline-4">
+<h4 id="orgheadline2"><span class="section-number-4">2.1.1</span> script 标签</h4>
+<div class="outline-text-4" id="text-2-1-1">
+<p>
+通过 <code>&lt;script&gt;</code> 标签及其属性 <code>src</code> 引入 JS 文件是常规的做法。无论是“静态”的插入 HTML 中，
+还是“动态”的使用 JS 代码插入，根据浏览器的原理<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>，是没有办法达到我们想要的效果的。
+在这里，我们排除这种方式。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-4">
+<h4 id="orgheadline3"><span class="section-number-4">2.1.2</span> Ajax 技术</h4>
+<div class="outline-text-4" id="text-2-1-2">
+<p>
+使用 Ajax 技术加载 JS 文件。通过发送一个单独的请求获取 JS 文本，
+亦可做到精细度的下载过程控制，配合定时器，还可以做出下载进度的 UI，简直就是前端开发的美梦啊。
+目前浏览器主要提供了以下API：
+</p>
+<ul class="org-ul">
+<li>XMLHttpRequest</li>
+<li>fetch(<a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#Browser_compatibility">Browser compatibility</a>)</li>
+</ul>
+
+<p>
+这里可以稍微了解一下浏览器并发请求的知识，以及跨域请求（CROS）的限制。
+并发请求的技术细节可以参考这个回答：<a href="https://www.zhihu.com/question/20474326">知乎#20474326</a>。
+跨域请求的技术细节，我推荐阅读一下阮一峰老师的这两篇文章：<a href="http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html">浏览器同源政策及其规避方法(阮一峰)</a>和<a href="http://www.ruanyifeng.com/blog/2016/04/cors.html">跨域资源共享 CORS 详解(阮一峰)</a>。
+掌握这些技术细节有助于你后面更好的代码实现。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-4">
+<h4 id="orgheadline4"><span class="section-number-4">2.1.3</span> jQuery.getScript</h4>
+<div class="outline-text-4" id="text-2-1-3">
+<p>
+最简单方式，使用 <code>jQuery.getScript</code> 函数，可以获取一个 JS 文件。但是这个效果和使用 <code>&lt;script&gt;</code> 标签的效果一致。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-4">
+<h4 id="orgheadline5"><span class="section-number-4">2.1.4</span> Prerender and Prefetch</h4>
+<div class="outline-text-4" id="text-2-1-4">
+<p>
+<code>prefetch</code> 属性是微软针对 IE11 浏览器开发的黑科技，主要用于预先下载部分资源，提升后续操作效率和体验。
+具体的技术细节可以看<a href="https://msdn.microsoft.com/en-us/library/dn265039(v=vs.85).aspx">Prerender and prefetch support(MSDN)</a>。因为和本文的关联性不是很大，在此不详细说明。
+</p>
+
+<p>
+说到 Prerender and Prefetch 顺带提一下 IE 的 <code>&lt;script&gt;</code> 标签专有属性 <code>defer</code> 和现代浏览器支持的 <code>async</code> 属性（<a href="http://caniuse.com/#search=script-async">caniuse</a>），
+<code>defer</code> 属性是用来告诉 IE 浏览器，即将获取的 JS 脚本代码没有 DOM 操作，因此 IE 浏览器在碰到这类 <code>&lt;script&gt;</code> 标签时不会阻塞后续DOM的的渲染。
+<code>async</code> 作用是告诉浏览器异步获取 JS 文件，因此在下载的过程中也不会阻塞 DOM 渲染。不过一旦下载完成，会立即执行。
+所以，如果我们只是使用了 async 属性，只是达到了异步下载的目的，并不能实际控制其执行的时期。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-4">
+<h4 id="orgheadline6"><span class="section-number-4">2.1.5</span> 非常规方式</h4>
+<div class="outline-text-4" id="text-2-1-5">
+<p>
+非常规方式指使用一些比较 Hack 的方式解决问题。比如上面我提到 <code>&lt;script&gt;</code> 标签用来引入 JS 文件，但是我这里偏不，
+我这里就用 <code>&lt;object&gt;</code> 标签来引入 JS 文件。 <a href="http://www.w3schools.com/tags/tag_object.asp">&lt;object&gt;</a> 标签原本的作用是嵌入多媒体资源，比如：视频，音频，PDF之类的。
+或者使用 <code>&lt;img&gt;</code> 标签来引入 JS 文件。这些 Hack 的思路是想利用这些标签先获取一遍资源，然后期待浏览器能够将请求来的 JS 文件缓存进浏览器，
+那么下次（就是使用 <code>&lt;script&gt;</code> 设置 <code>src</code> 属性引入资源）再次请求的时候，就没有网路开销了。
+不过我们测试下来，这个跟浏览器的实现很有关系。在 Chrome(Version 54.0.2840.71 m (64-bit))
+，我们并没有测试成功。使用 <code>&lt;object&gt;</code> 的表现是资源依然会被下载，并不是从缓存中获取； <code>&lt;img&gt;</code> 标签则是直接拒绝引入 JS 文件。
+所以，我们不知道Javascript装载和执行<sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup>一文中最后使用 <code>&lt;object&gt;</code> 这个实验究竟正确性如何，欢迎各位探索一下。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10"><span class="section-number-3">2.2</span> 执行</h3>
+<div class="outline-text-3" id="text-2-2">
+</div><div id="outline-container-orgheadline8" class="outline-4">
+<h4 id="orgheadline8"><span class="section-number-4">2.2.1</span> eval</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<p>
+通过 <code>eval</code> 函数运行字符级的 JS 代码，动态添加执行代码。不过使用 <code>eval</code> 函数，我的直觉是存在严重的性能和安全问题。
+但究竟影响多少？为何会影响？等问题却不知道答案。那我凭什么要说这个不好？于是我找了一些文章，想看看具体情况是什么样子的。
+看完这些文章之后，发现 <code>eval</code> 并不 <code>evil</code> 。（eval 的中文翻译：重新运算求出参数的内容，我之前一直以为是邪恶！）
+</p>
+<ul class="org-ul">
+<li><a href="http://blog.zhaojie.me/2012/08/js-code-from-eval-benchmark.html">由eval生成的代码效率真的很差吗？(老赵)</a></li>
+<li><a href="http://otakustay.com/eval-performance-profile/%5D%5Bhttp://otakustay.com/eval-performance-profile/">浅谈eval的影响(otakustay)</a></li>
+<li><a href="http://www.cnblogs.com/_franky/archive/2012/08/16/2641100.html">凑凑热闹,给eval做个科普(Franky)</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-4">
+<h4 id="orgheadline9"><span class="section-number-4">2.2.2</span> script 文本</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<p>
+这种方式是将 JS 代码插入 <code>&lt;script type=text/javascript&gt;&lt;/script&gt;</code> 之间。让浏览器去执行。
+这种方式我推荐如下代码实现：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-js"><span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">script</span> = document.createElement<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">'script'</span><span style="color: #c5c8c6;">)</span>
+<span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">text</span> = document.createTextNode<span style="color: #c5c8c6;">(</span><span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">your code*/</span><span style="color: #c5c8c6;">)</span>
+script.appendChild<span style="color: #c5c8c6;">(</span>text<span style="color: #c5c8c6;">)</span>
+script.type = <span style="color: #8abeb7;">'text/javascript'</span>
+document.body.appendChild<span style="color: #c5c8c6;">(</span>script<span style="color: #c5c8c6;">)</span>
+<span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">delete the script element to keep the DOM Tree clean</span>
+setTimeout<span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">function</span> <span style="color: #8abeb7;">()</span> <span style="color: #8abeb7;">{</span>document.body.removeChild<span style="color: #f0c674;">(</span>script<span style="color: #f0c674;">)</span>;<span style="color: #8abeb7;">}</span>, 10000<span style="color: #c5c8c6;">)</span>
+</pre>
+</div>
+
+<p>
+创建一个 <code>textNode</code> ，以去除 JS Code 中可能存在的特殊字符。然后使用 <code>appendChild</code> 将其插入到 DOM 树中，
+交给浏览器去执行。
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline12" class="outline-2">
+<h2 id="orgheadline12"><span class="section-number-2">3</span> 尾声</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+通过2天时间不停的查资料，分析，测试，然后否定，重新查资料，分析，测试，然后否定的循环，最终确定了一个折中的方案：
+通过 Ajax 技术异步获取 JS 文本代码，然后通过一个计数器确定最终调用回调的时机。之后把所获取到的 JS 文本代码 <code>join</code> 一下，
+创建 textNode 节点，一次性全部插入到 DOM 树中执行，延迟几秒（目前设定是10秒）后将其删除。其实，这里可以优化一下，
+最好能够做成：没有依赖的 JS 代码，或者是基础的 JS 代码能先执行的就让浏览器去先执行，然后需要依赖的等待依赖执行完成之后执行。
+而不是等到所有代码全部下载完成之后再执行。
+这样可以充分利用好所有的时间片。但是这个想法目前还没有写代码论证，是否对于提升 JS 整体运行效率有什么帮助还未得知。
+</p>
+
+<p>
+这个过程中对于之前的一些错误观点进行了批判；对于浏览器底层对于 JS 的处理过程有了一个初步的了解。
+同时，对于解决问题的思路又多了一些，尤其是看到不通过常规的方式下载 JS 代码时，更加的被其吸引。
+</p>
+
+<p>
+在开发的过程中也遇到了一些以前没有碰到的 bug（或者叫做 feature）更加的合适？
+IE系列浏览器对于 <code>load</code> 事件（资源加载完成之后浏览器发出的 <code>load</code> 事件）的处理比较的繁琐。
+常规的注册方式我在这里就不提了，主要是你发现你注册了回调事件，但是并没有执行时，你可以试试这个样子：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-js">element.setAttribute<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">'load'</span>, your_callback_function_name<span style="color: #c5c8c6;">)</span>
+element.setAttribute<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">'onreadystatechange'</span>, your_callback_function_name<span style="color: #c5c8c6;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline13" class="outline-2">
+<h2 id="orgheadline13"><span class="section-number-2">4</span> Other Reference</h2>
+<div class="outline-text-2" id="text-4">
+<ul class="org-ul">
+<li><a href="https://github.com/jquery/jquery/blob/f18ca7bfe0f5e3184bf1ed55daf1668702c5577a/src/ajax.js">jQuery-ajax souce code</a></li>
+<li><a href="https://github.com/requirejs/requirejs/blob/master/require.js">requirejs source code</a></li>
+<li><a href="https://github.com/CreateJS/PreloadJS/blob/23f20e04e13829388417499385c3085f7202871d/src/preloadjs/net/TagRequest.js">PreloadJS-TagRequest source code</a></li>
+<li><a href="http://coolshell.cn/articles/9666.html">浏览器的渲染原理简介(陈皓)</a></li>
+<li><a href="http://www.jianshu.com/p/e141d1543143">浏览器~加载，解析，渲染(Miss____Du)</a></li>
+<li><a href="http://stackoverflow.com/questions/17907445/how-to-detect-ie11">How to detect IE11?(stackoverflow)</a></li>
+<li><a href="http://stackoverflow.com/questions/11102625/preload-script-without-execute">Preload script without execute(stackoverflow)</a></li>
+</ul>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="http://coolshell.cn/articles/9749.html">Javascript 装载和执行</a> (陈皓)
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
+<p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
+<p class="date">2016-10-29</p>
+<p class="export-date">2016-10-30 Sun 18:52</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="validation"></p>
+<p class="last-modification-time">2016-10-30 Sun 18:52</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
+</div>
+</body>
+</html>
