@@ -684,7 +684,7 @@ function sendAnswer(id, label) {
         }
       })
 
-      ga('send', 'event', 'Tags', 'click', tag)
+      // ga('send', 'event', 'Tags', 'click', tag)
 
       setTimeout(function () {
         window.scrollTo(0, tagsDOM.children[0].getBoundingClientRect().height)
