@@ -997,7 +997,8 @@ function sendAnswer(id, label) {
     }
 
     var router = Router({
-      "^/?$|^/home/?$": function () {
+      "^/?$|^/home/?$": function (preivous) {
+        if (!preivous) return
         if (storage && storage.get('answer') === true) {
           stage.eggshell()
         }
