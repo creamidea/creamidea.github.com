@@ -415,7 +415,7 @@ nav a {
     margin: 20px auto;
 }
 #question .formula,
-#question p {
+#question p:not(.play-area-tips) {
     font-size: 3em;
     margin: 10px 0;
 }
@@ -467,7 +467,7 @@ nav a svg {
 .play-area-tips {
     display: block;
     text-align: center;
-    margin-top: 20%;
+    margin-top: 15%;
     position: absolute;
     width: 100%;
     font-size: 30px;
