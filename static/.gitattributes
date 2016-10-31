@@ -1,6 +1,4 @@
-junjia-njj.png filter=lfs diff=lfs merge=lfs -text
-img/*.png filter=lfs diff=lfs merge=lfs -text
 *.svg filter=lfs diff=lfs merge=lfs -text
 *.pdf filter=lfs diff=lfs merge=lfs -text
-img/*.jpg filter=lfs diff=lfs merge=lfs -text
+junjia-njj.png filter=lfs diff=lfs merge=lfs -text
 lfs/* filter=lfs diff=lfs merge=lfs -text
