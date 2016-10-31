@@ -672,23 +672,20 @@ function sendAnswer(id, label) {
   /**
    * Show posts by tag-name
    */
-  function showPostsByTag(tagsDOM, tag) {
-    if (tagsDOM && tagsDOM.children && tag) {
-      var children = tagsDOM.children[1].children
-      var c = 'tag-' + tag
-      __forEach.call(children, function (ul) {
-        if (ul.className === c) {
-          ul.style.display = 'block'
-        } else if (ul.style.display === 'block') {
-          ul.style.display = 'none'
+  function showPostsByTag(tagsElt, tag) {
+    var postListElt = tagsElt.children[1]
+    if (tag) {
+      postListElt.style.display = 'block'
+      __forEach.call(postListElt.children, function (c) {
+        var _tags = c.getAttribute('data-tags')
+        if (_tags.indexOf(decodeURIComponent(tag)) >= 0) {
+          c.style.display = ''
+        } else {
+          c.style.display = 'none'
         }
       })
-
-      // ga('send', 'event', 'Tags', 'click', tag)
-
-      setTimeout(function () {
-        window.scrollTo(0, tagsDOM.children[0].getBoundingClientRect().height)
-      }, 300)
+    } else {
+      postListElt.style.display = 'none'
     }
   }
 

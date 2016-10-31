@@ -74,16 +74,25 @@ function genTagsResultsJson (tagsResults, posts) {
     let tag = tagsResults[sym]
     // console.log(tag)
     ups.push(`<li data-weight=${tag.count} style="display:inline"><a href="#!/tags?tag=${encodeURIComponent(tag.name)}" style="font-size:${((Math.log(tag.count) / Math.log(2)) * diffFont / 6 + minFont).toFixed(2)}px">${tag.name}</a><sup>${tag.count}</sup></li>`)
-    downs.push(`<ul class="tag-${encodeURIComponent(tag.name)}" style="display:none;">` + tag.filenames.map(function (filename) {
-      let post = posts[filename]
-      if (post.error) {
-        return ''
-      } else {
-        return `<li><a class="title" href="${URLPREFIX}${post.category}/${post.name}.html">${post.title}</a></li>`
-      }
-    }).join('') + '</ul>')
+    // downs.push(`<ul class="tag-${encodeURIComponent(tag.name)}" style="display:none;">` + tag.filenames.map(function (filename) {
+    //   let post = posts[filename]
+    //   if (post.error) {
+    //     return ''
+    //   } else {
+    //     return `<li><a class="title" href="${URLPREFIX}${post.category}/${post.name}.html">${post.title}</a></li>`
+    //   }
+    // }).join('') + '</ul>')
   })
-  return `<ul style="padding:0 12px;">${ups.join('')}</ul><div>${downs.join('')}</div>`
+  downs = Object.keys(posts).map(name => {
+    let post = posts[name]
+    if (post.error) {
+      return ''
+    } else {
+      return `<li data-tags="${post.tags}"><a class="title" href="${URLPREFIX}${post.category}/${post.name}.html">${post.title}</a></li>`
+    }
+    console.log(post)
+  })
+  return `<ul class="tag-list" style="padding:0 12px;">${ups.join('')}</ul><ul class="post-list" style="display:none">${downs.join('')}</ul>`
 }
 
 function genTagsHtml (tags) {
