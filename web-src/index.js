@@ -451,7 +451,7 @@ function sendAnswer(id, label) {
           dom.innerHTML = '<div style="margin-top: 20%;font-weight: 600;">'
             +'<p style="font-size: 26px;">&#127881;Congratulation&#127881;</p>'
             +'<p style="font-size: inherit;">You have had an octocat :)</p>'
-            +'<p style="font-size: inherit; font-weight: 400;"><a href="#!/question?action=change">Chnage?</a></p></div>'
+            +'<p style="font-size: inherit; font-weight: 400;"><a href="#!/question?action=change">Change?</a></p></div>'
           if (elt.getAttribute('data-status') === 'loading') elt.finish(dom)
           else elt.flush(dom)
         } else {
