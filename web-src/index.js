@@ -146,6 +146,7 @@ function sendAnswer(id, label) {
   // Router Interface
   function Router (routes) {
     var _router
+    var _oldURL
     function compile (r) {
       if (r) {
 
@@ -162,7 +163,7 @@ function sendAnswer(id, label) {
     compile()
 
     return {
-      test: function (oldURL) {
+      test: function () {
         // testing...
         // var previous = oldURL, index
         // if ((index = oldURL.indexOf('#!')) >= 0) {
@@ -172,7 +173,8 @@ function sendAnswer(id, label) {
           var hash = location.hash.slice(2)
           if (r.test.test(hash)) {
             console.log('[Router] Hited the target: ' + r.test.toString() + '. Go, Go, Go!')
-            r.cb.apply(r, [].concat(r.test.exec(hash).slice(1), [oldURL]))
+            r.cb.apply(r, [].concat(r.test.exec(hash).slice(1), [_oldURL]))
+            _oldURL = location.href
             ga('set', 'page', hash)
             ga('send', 'pageview')
             return true
@@ -997,8 +999,8 @@ function sendAnswer(id, label) {
     }
 
     var router = Router({
-      "^/?$|^/home/?$": function (preivous) {
-        if (!preivous) return
+      "^/?$|^/home/?$": function (previous) {
+        if (!previous) return
         if (storage && storage.get('answer') === true) {
           stage.eggshell()
         }
@@ -1053,8 +1055,8 @@ function sendAnswer(id, label) {
     stage.init(function () {
       router.test()
       addEventListener(window, 'hashchange', function (e) {
-        // console.log('from: ' + e.oldURL)
-        router.test(e.oldURL)
+        // console.log('from: ' + e.oldURL, e)
+        router.test()
       })
     })
 
