@@ -255,6 +255,9 @@ function sendAnswer(id, label) {
           if (specialNav.indexOf(id) >= 0) {
             e.preventDefault()
             this.go(target.href)
+          } else if (id === 'archive-nav') {
+            e.preventDefault()
+            location.href='#!/archive'
           }
         }).bind(this))
         addEventListener(playArea, 'click', (function (e) {
