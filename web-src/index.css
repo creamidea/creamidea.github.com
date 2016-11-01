@@ -484,6 +484,9 @@ nav a svg {
     margin: 0 auto;
     margin-top: 30px;
 }
+#custom-search .gsc-table-result b {
+    background-color: yellow;
+}
 
 /* play area: tags page */
 #tags-cloud {

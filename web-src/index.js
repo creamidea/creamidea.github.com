@@ -255,9 +255,10 @@ function sendAnswer(id, label) {
           if (specialNav.indexOf(id) >= 0) {
             e.preventDefault()
             this.go(target.href)
-          } else if (id === 'archive-nav') {
+          } else {
             e.preventDefault()
-            location.href='#!/archive'
+            var dataSrc = target.getAttribute('data-src')
+            dataSrc ? location.href = dataSrc : null
           }
         }).bind(this))
         addEventListener(playArea, 'click', (function (e) {
@@ -410,10 +411,15 @@ function sendAnswer(id, label) {
       /**
        * show google custom search engine
        */
-      search: function (elt) {
-        loadCustomSearch(elt, function (searchElt) {
-          elt.finish(searchElt)
-        })
+      search: function (elt, query) {
+        if (elt.getAttribute('data-status') === 'loading') {
+          loadCustomSearch(elt, function (searchElt, g) {
+            g.execute(query)
+            elt.finish(searchElt)
+          })
+        } else {
+          google.search.cse.element.getElement('standard0').execute(query)
+        }
       },
 
       /**
@@ -946,18 +952,18 @@ function sendAnswer(id, label) {
   function loadCustomSearch (elt, callback) {
     var div = document.createElement('div');
     div.id = 'custom-search'
-    div.innerHTML = '<gcse:search></gcse:search>'
+    // div.innerHTML = '<gcse:search></gcse:search>'
     elt.appendChild(div)
 
     window.__gcse = {
       parsetags: 'explicit',
       callback: function () {
         console.log('[GCSE] Google Custom Search Engine Loaded Over.')
-        google.search.cse.element.render({
+        var g = google.search.cse.element.render({
           div: "custom-search",
           tag: 'search'
         })
-        if (typeof callback === 'function') callback(div)
+        if (typeof callback === 'function') callback(div, g)
       }
     }
 
@@ -1021,8 +1027,8 @@ function sendAnswer(id, label) {
         var url = '/static/html/articles/' + file
         stage.go(url)
       },
-      "^/search/?$": function () {
-        stage.show('search')
+      "^/search(?:\\?q=(\.+))?$": function (query) {
+        stage.show('search', query)
       },
       "^/tags(?:\\?tag=(\.+))?": function (tag) {
         stage.show('tags', tag)
