@@ -42,7 +42,7 @@ function IntervalTimer (interval) {
 }
 
 function sendTiming (a, b) {
-  ga('send', 'timing', 'homepage', a, b)
+  ga('send', 'timing', 'homepage', a, b.toFixed(2))
 }
 function sendException (msg, fatal) {
   ga('send', 'exception', {
@@ -55,7 +55,7 @@ function sendAnswer(id, label) {
 }
 
 
-;(function () {
+!function loadAnalyticsJS () {
   window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
   ga('create', 'UA-38213594-1', 'auto', {'siteSpeedSampleRate': 100});
   ga(function(tracker) {
@@ -63,14 +63,12 @@ function sendAnswer(id, label) {
     console.log('Hi, you have connected with Google successfully.')
     console.log('Your CLIENT ID: ' + clientId)
   });
-  !function loadAnalyticsJS () {
-    var script = document.createElement('script')
-    script.async = true
-    // script.src = '/static/libs/analytics.js'
-    script.src = '//www.google-analytics.com/analytics.js'
-    document.getElementsByTagName('body')[0].appendChild(script)
-  }()
-})()
+  var script = document.createElement('script')
+  script.async = true
+  // script.src = '/static/libs/analytics.js'
+  script.src = '//www.google-analytics.com/analytics.js'
+  document.getElementsByTagName('body')[0].appendChild(script)
+}()
 
 ;(function (window) {
   var __map = Array.prototype.map
@@ -257,7 +255,7 @@ function sendAnswer(id, label) {
             this.go(target.href)
           } else {
             e.preventDefault()
-            var dataSrc = target.getAttribute('data-src')
+            var dataSrc = target instanceof Element && target.getAttribute('data-src')
             dataSrc ? location.href = dataSrc : null
           }
         }).bind(this))
@@ -279,11 +277,12 @@ function sendAnswer(id, label) {
 
         if (performance.now) {
           __timing.inited = performance.now()
-          __forEach.call(Object.keys(__timing), function (type) {
-            setTimeout(function () {
-              sendTiming(type, __timing[type])
-            }, 1000)
-          })
+          sendTiming('DOMContentLoaded', __timing.DOMContentLoaded)
+          // __forEach.call(Object.keys(__timing), function (type) {
+          //   setTimeout(function () {
+          //     sendTiming(type, __timing[type])
+          //   }, 1000)
+          // })
         }
 
         // load static tools
@@ -355,7 +354,6 @@ function sendAnswer(id, label) {
             + ' happend error: <strong>' + err.message + '</strong></p>'
           console.log('[Stage] when show the area: \n', err)
           sendException('[Stage] Show: ' + err.message)
-          // sendTiming(drama+'-failed', __timing[drama])
         }
       },
 
@@ -1097,7 +1095,8 @@ function sendAnswer(id, label) {
             __timing[event] = performance.now()
           }
           if (event === 'load') {
-            sendTiming('load', __timing.load)
+            // sendTiming('load', __timing.load)
+            console.log(__timing)
           }
           if (!running) {
             running = true
