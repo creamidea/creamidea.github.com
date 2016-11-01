@@ -10,13 +10,17 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon-precomposed" href="/static/img/eular_format_128.png">
     <style>
-      body {background-color:#fafafa}
-      #custom-search {max-width:700px;margin:10px auto;}
-      #custom-search .gsc-table-result b {background-color: yellow;}
+body {background-color:#fafafa}
+.content {max-width:960px;margin:10px auto;}
+.link a {text-decoration:none;border-bottom:2px solid black;color:black;font-size: 24px;}
+.gsc-table-result b {background-color: yellow;}
     </style>
   </head>
   <body>
-    <div id="custom-search"><gcse:search>C-Tone | Search loading...</gcse:search></div>
+    <div class="content">
+      <p class="link"><a href="/">&#8629;Home</a></p>
+      <div id="custom-search"><gcse:search>C-Tone | Search loading...</gcse:search></div>
+    </div>
     <script async type="text/javascript"
             src="https://cse.google.com/cse.js?cx=017951989687920165329:0e60irxxe5m"></script>
     <!-- Google Analytics -->
