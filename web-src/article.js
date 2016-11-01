@@ -306,6 +306,28 @@ function loadDisqusComment (target) {
     return div;
   }
   /**
+   * Table of contents
+   */
+  function showTableOfContents (body, content) {
+    var tableOfContents = document.getElementById('table-of-contents')
+    var btn = document.createElement('button')
+    btn.innerHTML = '&#9824;' // '&#9776;'
+    btn.className = 'btn btn-primary btn-content'
+    btn.onclick = function () {
+      var content$ = this.parentNode.children[1]
+      if (content$.style.display === 'block')
+        content$.style.display = 'none'
+      else
+        content$.style.display = 'block'
+    }
+    body.insertBefore(btn, content)
+    body.insertBefore(tableOfContents, content)
+    addEventListener(window, 'scroll', function (e) {
+      // console.log(this, e)
+    });  // Mouse
+  }
+
+  /**
    * 图片点击处理
    */
   function ImgClickEvent (body, wapper) {
@@ -579,6 +601,7 @@ function loadDisqusComment (target) {
       }
     }
 
+    // showTableOfContents(body, content)
   }
 
   function changeBodyTopStyle (body) {

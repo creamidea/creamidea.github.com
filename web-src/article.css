@@ -299,8 +299,7 @@ li a {
 }
 
 .org-ul,
-.org-ol,
-#text-table-of-contents ul{
+.org-ol {
     font-family: Cambria,Georgia,"Times New Roman",Times,serif;
     font-weight: 400;
     font-style: normal;
@@ -311,20 +310,46 @@ li a {
     /* list-style-type: lower-greek; */
     word-break: break-word;
 }
+
+/* #text-table-of-contents ul */
+/* .btn-content { */
+/*     position: fixed; */
+/*     left: 10px; */
+/*     top: 12px; */
+/*     background: #f3f3f3; */
+/*     border: 1px solid gray; */
+/*     /\* color: #4285f4; *\/ */
+/*     cursor: pointer; */
+/*     width: 32px; */
+/*     height: 32px; */
+/*     border-radius: 32px; */
+/*     font-size: 1.6em; */
+/*     line-height: 0; */
+/* } */
 #table-of-contents {
     display: none;
+/*     width: 300px; */
+/*     position: fixed; */
+/*     top: 48px; */
+/*     /\* background: black; *\/ */
+/*     /\* color: white; *\/ */
+/*     height: 100%; */
+/*     /\* right: 0; *\/ */
 }
-#text-table-of-contents {
-    font-size: 1.625em;
-}
-#text-table-of-contents ul {
-    /* font-family: Cambria,"Times New Roman",Times,serif; */
-    list-style-type: none;
-}
-#text-table-of-contents ul a {
-    text-decoration: none;
-}
-
+/* #table-of-contents>h2 { */
+/*     display: none; */
+/* } */
+/* #text-table-of-contents { */
+/*     font-size: 0.9em; */
+/* } */
+/* #text-table-of-contents ul { */
+/*     /\* font-family: Cambria,"Times New Roman",Times,serif; *\/ */
+/*     list-style-type: none; */
+/*     padding-left: 10px; */
+/* } */
+/* #text-table-of-contents ul a { */
+/*     text-decoration: none; */
+/* } */
 /*==============================*/
 
 blockquote {
@@ -625,9 +650,44 @@ hr.section-divider:before {content: '...'; display: inline-block; margin-left: 0
         margin-right: 12px;
     }
 }
+
 @media all and (max-width: 320px) {
     body {
         font-size: 16px;
         line-height: 1;
     }
-}
+
+/* @media all and (min-width: 900px) { */
+/*     #table-of-contents { */
+/*         display: block; */
+/*         position: fixed; */
+/*         top: 90px; */
+/*         width: 300px; */
+/*     } */
+/*     #table-of-contents h2 { */
+/*         display: none; */
+/*     } */
+/*     #text-table-of-contents ul { */
+/*         /\* font-family: Cambria,"Times New Roman",Times,serif; *\/ */
+/*         list-style-type: none; */
+/*     } */
+/*     #text-table-of-contents li { */
+/*         line-height: 1; */
+/*     } */
+/*     #text-table-of-contents ul a { */
+/*         font-size: 16px; */
+/*         text-decoration: none; */
+/*     } */
+/*     #text-table-of-contents ul a.active { */
+/*         color: #563d7c; */
+/*         background-color: gainsboro; */
+/*         border-left: 2px solid #563d7c; */
+/*         padding-left: 10px; */
+/*     } */
+/*     #text-table-of-contents ul a:hover { */
+/*         color: #563d7c; */
+/*         background-color: gainsboro; */
+/*         border-left: 2px solid #563d7c; */
+/*         padding-left: 10px; */
+/*     } */
+/* } */
