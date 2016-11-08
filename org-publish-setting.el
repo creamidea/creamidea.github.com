@@ -31,7 +31,7 @@
   "Configure for Creamidea-Site.
 CURRENT-OR-ALL FORCE ASYNC."
   (interactive)
-  (let* ((creamidea-path (expand-file-name "~/Repository/creamidea/"))
+  (let* ((creamidea-path (expand-file-name "~/Repository/creamidea.github.io/"))
          (creamidea-public-path (concat creamidea-path "./static/html/"))
          (author-info "<div id=\"meta-article\"><p class=\"author\">%a</p>\n<p class=\"email\">%e</p>\n<p class=\"date\">%d</p>\n<p class=\"export-date\">%T</p>\n<p class=\"creator\">%c</p>\n<p class=\"validation\">%v</p>\n<p class=\"last-modification-time\">%C</p></div>")
          (meta-viewport "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">")
