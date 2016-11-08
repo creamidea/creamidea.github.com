@@ -561,10 +561,10 @@ nav a svg {
 .article-list .year-split span {
     border-bottom: 4px solid black;
 }
-.article-list .articles {
+.article-list .article {
     border-left: 4px solid #191919;
 }
-.article-list .articles:after {
+.article-list .article:after {
     content: "文";
     position: absolute;
     top: 4px;
