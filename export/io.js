@@ -3,11 +3,34 @@
 // Read && Write the File //
 ////////////////////////////
 const fs = require('fs')
+const path = require('path')
+
+const UglifyHTML = require('html-minifier')
+const UglifyCSS = require('uglifycss')
+const UglifyJS = require("uglify-js")
+const zlib = require('zlib')
+
+const MINIFYHTMLRULES = {
+  collapseBooleanAttributes: true,
+  collapseInlineTagWhitespace: true,
+  decodeEntities: true,
+  minifyCSS: true,
+  minifyJS: true,
+  removeComments: true,
+  removeEmptyAttributes: true,
+  // removeEmptyElements: true, // change the this?
+  // removeOptionalTags: true, // HTML HEAD BODY THEAD TBODY
+  removeRedundantAttributes: true,
+  removeScriptTypeAttributes: true,
+  removeStyleLinkTypeAttributes: true,
+  trimCustomFragments: true
+}
 
 module.exports = {
   read,
   stat,
-  write
+  write,
+  compressSource
 }
 
 function stat(path) {
@@ -92,44 +115,87 @@ function write(filename, data) {
   })
 }
 
-function compressSource(name, type) {
-  writeSource(name, type, readSource(name, type))
-}
-
-function readSource(name, type) {
-  switch (type.toLowerCase()) {
-    case 'js':
-      const jsfile = path.resolve(__dirname, 'web-src', `${name}.js`)
-      const rlt = UglifyJS.minify(jsfile)
-      return rlt
+function compressSource({
+  file,
+  target,
+  base
+}) {
+  const {
+    name,
+    ext
+  } = path.parse(file)
+  switch (ext.toLowerCase()) {
+    case '.js':
+      writeSource({
+        ext,
+        name,
+        data: UglifyJS.minify(file),
+        target
+      })
       break
-    case 'css':
-      const css = path.resolve(__dirname, 'web-src', `${name}.css`)
-      return UglifyCSS.processFiles([css], {
-        maxLineLen: 500,
-        expandVars: true
-      });
-    case 'html':
-      fs.createReadStream(path.resolve(__dirname, 'web-src', `${name}.html`))
-        .pipe(zlib.createGzip())
-        .pipe(fs.createWriteStream(path.resolve(__dirname, `${name}.html`)))
+    case '.css':
+      writeSource({
+        ext,
+        name,
+        data: UglifyCSS.processFiles([file], {
+          maxLineLen: 500,
+          expandVars: true
+        }),
+        target
+      })
+      break
+    case '.html':
+      read(file).then(html => {
+        const uglifed = html.toString('utf8').replace(
+          /<(?:link|script).*?(?:href|src)="\/web-src\/.*\/?>/gi,
+          rpl => {
+            const url = rpl.match(/(?:src|href)="\/web-src\/(.*?)"/)[1]
+            const resFilePath = path.resolve(path.parse(file).dir, url.replace(/^\//, ''))
+              // console.log('>>> ', rpl, url)
+              // console.log('>>>', resFilePath, url.split('.')[1])
+            const text = fs.readFileSync(
+              resFilePath,
+              (err) => {
+                if (err) throw err
+              })
+            return url.split('.')[1] === 'css' ?
+              `<style>${text}</style>` :
+              `<script>${text}</script>`
+          })
+        writeSource({
+          name,
+          ext,
+          data: UglifyHTML.minify(uglifed, MINIFYHTMLRULES),
+          target
+        })
+      }).catch(err => {
+        console.log(err)
+      })
       break
     default:
-      throw new Error('Read Source Error: Don\'t know the type.')
+      throw new Error('[IO] Compress Source Error: Don\'t know the type.')
   }
 }
 
-function writeSource(name, type, rlt) {
-  switch (type.toLowerCase()) {
-    case 'js':
-      writeFile(path.resolve(__dirname, 'static', `${name}.js`), rlt.code)
-      if (rlt.map) writeFile(path.resolve(__dirname, 'static', `${name}.js.map`), rlt.map)
+function writeSource({
+  name,
+  ext,
+  data,
+  target
+}) {
+  switch (ext.toLowerCase()) {
+    case '.js':
+      write(path.resolve(target, `${name}.js`), data.code)
+      if (data.map) write(path.resolve(target, `${name}.js.map`), data.map)
       break
-    case 'css':
-      writeFile(path.resolve(__dirname, 'static', `${name}.css`), rlt)
+    case '.css':
+    case '.html':
+      write(
+        path.resolve(target, `${name}${ext}`),
+        data.replace(/^$|\r?\n/g, '').replace(/>\s+</g, '><')
+      )
       break
     default:
-      console.log('Write Source Error: Don\'t know the type.')
-      break
+      throw new Error('[IO] Write Source Error: Don\'t know the type.')
   }
 }

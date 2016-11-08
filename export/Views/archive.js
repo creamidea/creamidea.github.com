@@ -9,22 +9,6 @@ const SPECIALFILE = ["works", "friends"]
 const URLPREFIX2 = 'https://media.githubusercontent.com' +
   '/media/creamidea' + '/creamidea.github.com/master/static/html/'
 
-const MINIFYHTMLRULES = {
-  collapseBooleanAttributes: true,
-  collapseInlineTagWhitespace: true,
-  decodeEntities: true,
-  minifyCSS: true,
-  minifyJS: true,
-  removeComments: true,
-  removeEmptyAttributes: true,
-  removeEmptyElements: true,
-  removeOptionalTags: true,
-  removeRedundantAttributes: true,
-  removeScriptTypeAttributes: true,
-  removeStyleLinkTypeAttributes: true,
-  trimCustomFragments: true
-}
-
 function genTagsHtml(tags) {
   let tagsHtml = splitTags(tags).map(tag => {
     return `<a class="tag-item" href="/search?q=${encodeURIComponent(tag)}"` +
