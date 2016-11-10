@@ -5,7 +5,7 @@ const {
   convertToURL,
   splitTags
 } = require('../Utils')
-const SPECIALFILE = ["works", "friends"]
+const SPECIALTITLE = ["Works", "Friends"]
 const URLPREFIX2 = 'https://media.githubusercontent.com' +
   '/media/creamidea' + '/creamidea.github.com/master/static/html/'
 
@@ -34,7 +34,6 @@ module.exports = (data, params) => {
     const {
       fullpath,
       title,
-      name,
       category,
       mtime,
       date,
@@ -68,8 +67,8 @@ module.exports = (data, params) => {
           `<date>${(new Date(value)).toLocaleDateString('en-US', options)}</date></p>`
       }).join('') + `</div>${genTagsHtml(keywords)}</li>`
 
-    // select the special files(works, friends)
-    if (SPECIALFILE.indexOf(name) >= 0) {
+    // select the special files(Works, Friends)
+    if (SPECIALTITLE.indexOf(title) >= 0) {
       special.push(_html)
       return
     } else {
