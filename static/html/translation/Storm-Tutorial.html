@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- 2016-10-20 Thu 15:24 -->
+<!-- 2016-11-07 Mon 15:59 -->
 <meta  charset="utf-8">
 <meta  name="viewport" content="width=device-width, initial-scale=1">
 <title>Storm Tutorial</title>
@@ -16,8 +16,9 @@
 </head>
 <body>
 <div id="content">
+<header>
 <h1 class="title">Storm Tutorial</h1>
-<div id="table-of-contents">
+</header><nav id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
@@ -37,7 +38,7 @@
 <li><a href="#orgheadline14">14. 结论</a></li>
 </ul>
 </div>
-</div>
+</nav>
 <div class="lazy-load-img-wrapper title-img-wrapper">
 <noscript>
 <img alt="Storm" title="Storm" src="http://static.boredpanda.com/blog/wp-content/uploads/2016/07/dust-storm-microbust-jerry-ferguson-arizona-2.jpg"/>
@@ -122,7 +123,7 @@ Spouts 和 bolts 组成的网络结构被封装进 "topology"（拓扑是提交�
 当一个 spout 或者 bolt 发出一个元组到 stream，这个元组就会被发送到所有订阅了这个流的 bolts。
 </p>
 <p>
-<img src="https://media.githubusercontent.com/media/creamidea/creamidea.github.com/master/static/lfs/Storm-Topologies.png" alt="Storm-Topologies.png">
+<noscript><img src="https://media.githubusercontent.com/media/creamidea/creamidea.github.com/master/static/lfs/Storm-Topologies.png" alt="Storm-Topologies.png"></noscript><img lazy-load data-src="https://media.githubusercontent.com/media/creamidea/creamidea.github.com/master/static/lfs/Storm-Topologies.png" alt="Storm-Topologies.png">
 节点之间的链接展示了元组是如何传递的。例如，Spout A 和 Bolt B 之间有一个链接， Spout A 到 Bolt C 有一个链接， Bolt B 到Bolt C 有一个链接，
 每当 Spout A 发出一个元组，这个元组就会被发送到 Bolt B 和 Bolt C。所有 Bolt B 的输出也都会发送到 Bolt C 。
 一个 Storm 拓扑结构中的每个节点都是并行执行的。在你的拓扑中，你可以指定每个节点的并行度，然后 Storm 会在整个集群中产生指定数量的线程去执行。
@@ -480,10 +481,10 @@ Storm 最有意思的应用之一是 Distributed RPC（分布式RPC），这个�
 <div id="meta-article"><p class="author">蜂蜜甜甜圈(Yi Ou)</p>
 <p class="email"><a href="mailto:718413182@qq.com">718413182@qq.com</a></p>
 <p class="date">2015-12-22</p>
-<p class="export-date">2016-10-20 Thu 15:24</p>
+<p class="export-date">2016-11-07 Mon 15:59</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
 <p class="validation"></p>
-<p class="last-modification-time">2016-10-20 Thu 15:13</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><script async src='//www.google-analytics.com/analytics.js'></script><!-- End Google Analytics -->
+<p class="last-modification-time">2016-11-03 Thu 14:37</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

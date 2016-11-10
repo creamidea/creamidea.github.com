@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2016-11-09 Wed 17:27 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orgmode HTML-Export Settings</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="冰糖火箭筒(Junjia Ni)">
+<meta name="description" content="Orgmode HTML-Export Settings to Support Github Page"
+>
+<meta name="keywords" content="emacs,orgmode,lazy-load,image,mathjax,html-export">
+<link rel="stylesheet" type="text/css" href="/static/article.css"><!--[if lt IE 9]>
+<script src="/static/libs/html5shiv.min.js"></script>
+<![endif]-->
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">Orgmode HTML-Export Settings</h1>
+</header><nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org814be41">1. 前言</a></li>
+<li><a href="#org59ba8f7">2. Lazy Load Image</a></li>
+<li><a href="#org033ba50">3. Mathjax</a></li>
+<li><a href="#org0a28895">4. 尾声</a></li>
+</ul>
+</div>
+</nav>
+<div class="lazy-load-img-wrapper">
+<noscript>
+<img src="http://orgmode.org/img/main.jpg"
+alt="orgmode" title="orgmode"/>
+</noscript>
+<img data-src="http://orgmode.org/img/main.jpg"
+lazy-load class="lazy-load-img" alt="orgmode" title=""/>
+<p class="title-img-p">题图来自网络</p>
+</div>
+
+<div id="outline-container-org814be41" class="outline-2">
+<h2 id="org814be41"><span class="section-number-2">1</span> 前言</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+配置 org-mode，使其成为静态 HTML 生成工具。实现类似于 <a href="http://jekyllrb.com/">Jekyll</a> 的效果。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org59ba8f7" class="outline-2">
+<h2 id="org59ba8f7"><span class="section-number-2">2</span> Lazy Load Image</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+在某次写文章的时候，萌生了为自己的站点提供图片延迟加载的技术。
+在改造的过程中，体会到了 Lisp “动态语言”的特性，在“外部”直接写方法覆盖其“内部”方法，
+改变数据的形态，使其符合自己的实际需求。
+</p>
+
+<p>
+Org-mode 生成 HTML 的代码都在 <a href="http://orgmode.org/w/?p=org-mode.git;a=blob;f=lisp/ox-html.el;hb=d9070419119cf6b19f2f471aa2eb81ec3d9b0d0f">ox-html.el</a> 中，其中涉及到图片 HTML 生成代码主要是这几个函数
+<code>org-html--wrap-image</code> 和 <code>org-html--format-image</code> (注：这个是9.0版本的函数，
+如果是8.0的版本，是这2个函数： <code>org-html--make-attribute-string</code> 和 <code>org-html--format-image</code>)
+</p>
+
+<p>
+由于之前并不知道 elisp 的动态特性，傻傻的在源文件中修改代码，之后使用 elpa 升级 org-mode 包之后，全部没有了。
+后来知道了这个特性之后。哈哈。就方便很多了(当然，你要小心的坑也多了，一不小心，你写的东西就没了)。最终我需要做的的就是在一个新的文件中写入如下代码。
+其核心思想就是让 <code>&lt;img&gt;</code> 标签增加 <code>lazy-load</code> 和 <code>data-src</code> 属性，便于前端 JS 读取相关信息，然后做出对其进行延迟加载。
+关于 JS 部分的代码可以看 <a href="https://github.com/creamidea/creamidea.github.com/blob/master/web-src/article.js">这里</a> (Lazy load images)。
+</p>
+
+<p>
+首先是对于 <code>&lt;img&gt;</code> 标签的改造， 核心代码在 <code>org-html--format-image</code> 函数中，
+将下面的代码
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #c5c8c6;">(</span>org-html-close-tag
+ <span style="color: #8abeb7;">"img"</span>
+ <span style="color: #8abeb7;">(</span>org-html--make-attribute-string
+  <span style="color: #f0c674;">(</span>org-combine-plists
+   <span style="color: #b5bd68;">(</span>list <span style="color: #b294bb;">:src</span> source
+         <span style="color: #b294bb;">:alt</span> <span style="color: #81a2be;">(</span><span style="color: #b5bd68;">if</span> <span style="color: #c5c8c6;">(</span>string-match-p <span style="color: #8abeb7;">"^ltxpng/"</span> source<span style="color: #c5c8c6;">)</span>
+                  <span style="color: #c5c8c6;">(</span>org-html-encode-plain-text
+                   <span style="color: #8abeb7;">(</span>org-find-text-property-in-string <span style="color: #b5bd68;">'</span><span style="color: #81a2be;">org-latex-src</span> source<span style="color: #8abeb7;">)</span><span style="color: #c5c8c6;">)</span>
+                <span style="color: #c5c8c6;">(</span>file-name-nondirectory source<span style="color: #c5c8c6;">)</span><span style="color: #81a2be;">)</span><span style="color: #b5bd68;">)</span>
+   attributes<span style="color: #f0c674;">)</span><span style="color: #8abeb7;">)</span>
+ info<span style="color: #c5c8c6;">)</span>
+</pre>
+</div>
+<p>
+替换成
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">let</span> <span style="color: #8abeb7;">(</span><span style="color: #f0c674;">(</span>normal-img-attr <span style="color: #b5bd68;">(</span><span style="color: #b5bd68;">org-html-make-attribute-macro</span> <span style="color: #b294bb;">:src</span><span style="color: #b5bd68;">)</span><span style="color: #f0c674;">)</span>
+      <span style="color: #f0c674;">(</span>lazy-load-img-attr
+       <span style="color: #b5bd68;">(</span>format <span style="color: #8abeb7;">"lazy-load %s"</span>
+               <span style="color: #81a2be;">(</span><span style="color: #b5bd68;">org-html-make-attribute-macro</span> <span style="color: #b294bb;">:data-src</span><span style="color: #81a2be;">)</span><span style="color: #b5bd68;">)</span><span style="color: #f0c674;">)</span><span style="color: #8abeb7;">)</span>
+  <span style="color: #8abeb7;">(</span><span style="color: #b5bd68;">if</span> <span style="color: #f0c674;">(</span>plist-get info <span style="color: #b294bb;">:html-image-lazy-load</span><span style="color: #f0c674;">)</span>
+      <span style="color: #f0c674;">(</span>format
+       <span style="color: #8abeb7;">"&lt;noscript&gt;%s&lt;/noscript&gt;%s"</span>
+       <span style="color: #b5bd68;">(</span><span style="color: #b5bd68;">org-html-close-tag-img-macro</span> normal-img-attr<span style="color: #b5bd68;">)</span>
+       <span style="color: #b5bd68;">(</span><span style="color: #b5bd68;">org-html-close-tag-img-macro</span> lazy-load-img-attr<span style="color: #b5bd68;">)</span><span style="color: #f0c674;">)</span>
+    <span style="color: #f0c674;">(</span><span style="color: #b5bd68;">org-html-close-tag-img-macro</span> normal-img-attr<span style="color: #f0c674;">)</span><span style="color: #8abeb7;">)</span><span style="color: #c5c8c6;">)</span>
+</pre>
+</div>
+
+<p>
+其中，宏 <code>org-html-make-attribute-macro</code> 和 <code>org-html-close-tag-img-macro</code>
+分别实现对 HTML 标签属性和 <code>&lt;img&gt;</code> 标签的自定义扩展。
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">defmacro</span> <span style="color: #de935f;">org-html-make-attribute-macro</span> <span style="color: #8abeb7;">(</span>src<span style="color: #8abeb7;">)</span>
+  <span style="color: #b294bb;">"Return macro org-html--make-attribute-string.</span>
+<span style="color: #b294bb;">SRC."</span>
+  <span style="color: #b5bd68;">`</span><span style="color: #8abeb7;">(</span>org-html--make-attribute-string
+    <span style="color: #f0c674;">(</span>org-combine-plists
+     <span style="color: #b5bd68;">(</span>list ,src source
+           <span style="color: #b294bb;">:alt</span> <span style="color: #81a2be;">(</span><span style="color: #b5bd68;">if</span> <span style="color: #c5c8c6;">(</span>string-match-p <span style="color: #8abeb7;">"^ltxpng/"</span> source<span style="color: #c5c8c6;">)</span>
+                    <span style="color: #c5c8c6;">(</span>org-html-encode-plain-text
+                     <span style="color: #8abeb7;">(</span>org-find-text-property-in-string <span style="color: #b5bd68;">'</span><span style="color: #81a2be;">org-latex-src</span> source<span style="color: #8abeb7;">)</span><span style="color: #c5c8c6;">)</span>
+                  <span style="color: #c5c8c6;">(</span>file-name-nondirectory source<span style="color: #c5c8c6;">)</span><span style="color: #81a2be;">)</span><span style="color: #b5bd68;">)</span>
+     attributes<span style="color: #f0c674;">)</span><span style="color: #8abeb7;">)</span><span style="color: #c5c8c6;">)</span>
+<span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">defmacro</span> <span style="color: #de935f;">org-html-close-tag-img-macro</span> <span style="color: #8abeb7;">(</span>attr<span style="color: #8abeb7;">)</span>
+  <span style="color: #b294bb;">"Return.</span>
+<span style="color: #b294bb;">ATTR."</span>
+  <span style="color: #b5bd68;">`</span><span style="color: #8abeb7;">(</span>org-html-close-tag
+    <span style="color: #8abeb7;">"img"</span>
+    ,attr
+    info<span style="color: #8abeb7;">)</span><span style="color: #c5c8c6;">)</span>
+</pre>
+</div>
+
+<p>
+上述过程对 <code>&lt;img&gt;</code> 标签自身属性进行了改造，并增加了对禁用 Javascript 情况下的支持（就是增加了 <code>&lt;noscript&gt;</code> 标签）。
+但是外围的标签没有改动，如果想对其有一个更加深入的定制，
+还需要将包裹 <code>&lt;img&gt;</code> 标签的父标签进行改造。在9.0版本中，需要改动的是 <code>org-html--wrap-image</code> 函数，
+如果你是8.0版本，需要改动 <code>org-html--make-attribute-string</code> 函数。改动主要是将
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #c5c8c6;">(</span>format <span style="color: #8abeb7;">"</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">n</span><span style="color: #8abeb7;">&lt;p&gt;%s&lt;/p&gt;"</span> contents<span style="color: #c5c8c6;">)</span>
+</pre>
+</div>
+<p>
+改成
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">if</span> <span style="color: #8abeb7;">(</span>plist-get info <span style="color: #b294bb;">:html-image-lazy-load</span><span style="color: #8abeb7;">)</span>
+    <span style="color: #8abeb7;">(</span>format <span style="color: #8abeb7;">"</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">n</span><span style="color: #8abeb7;">&lt;p class=</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;">lazy-load-img-wrapper</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;">&gt;%s&lt;/p&gt;"</span> contents<span style="color: #8abeb7;">)</span>
+  <span style="color: #8abeb7;">(</span>format <span style="color: #8abeb7;">"</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">n</span><span style="color: #8abeb7;">&lt;p&gt;%s&lt;/p&gt;"</span> contents<span style="color: #8abeb7;">)</span><span style="color: #c5c8c6;">)</span>
+</pre>
+</div>
+
+<p>
+至此，对于 org-mode 内置的图片导出功能改造完毕。
+主要效果是给 <code>&lt;img&gt;</code> 标签增加了 <code>data-src</code> 和 <code>lazy-load</code> 属性，增加了 <code>&lt;noscript&gt;</code> 标签的支持。
+并为其父标签增加了 <code>class: lazy-load-img-wrapper</code> 。
+</p>
+
+<p>
+后面就是写 JS 来实现加载图片的功能啦。可以参考 <a href="https://css-tricks.com/snippets/javascript/lazy-loading-images/">这个</a> 。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org033ba50" class="outline-2">
+<h2 id="org033ba50"><span class="section-number-2">3</span> Mathjax</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+对 Mathjax 模板的定制，重写 <code>org-html-mathjax-template</code> 即可。
+这里我主要是为其 <code>&lt;script&gt;</code> 标签增加了 <code>async</code> 的支持。使其能够异步加载
+（不过在不支持的浏览器中会退化成同步加载，所以还是存在阻塞的风险）。
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #c5c8c6;">(</span>org-html-mathjax-template
+ <span style="color: #8abeb7;">"&lt;script type=</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;">text/x-mathjax-config</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;">&gt;</span>
+<span style="color: #8abeb7;">          MathJax.Hub.Config({</span>
+<span style="color: #8abeb7;">            displayAlign: </span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;">%ALIGN</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;">,</span>
+<span style="color: #8abeb7;">            displayIndent: </span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;">%INDENT</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;">,</span>
+
+<span style="color: #8abeb7;">            </span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;">HTML-CSS</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;">: { scale: %SCALE,</span>
+<span style="color: #8abeb7;">                        linebreaks: { automatic: </span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;">%LINEBREAKS</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;"> },</span>
+<span style="color: #8abeb7;">                        webFont: </span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;">%FONT</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span>
+<span style="color: #8abeb7;">                          },</span>
+<span style="color: #8abeb7;">            SVG: {scale: %SCALE,</span>
+<span style="color: #8abeb7;">              linebreaks: { automatic: </span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;">%LINEBREAKS</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;"> },</span>
+<span style="color: #8abeb7;">              font: </span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;">%FONT</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;">},</span>
+<span style="color: #8abeb7;">            NativeMML: {scale: %SCALE},</span>
+<span style="color: #8abeb7;">            TeX: { equationNumbers: {autoNumber: </span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;">%AUTONUMBER</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;">},</span>
+<span style="color: #8abeb7;">               MultLineWidth: </span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;">%MULTLINEWIDTH</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;">,</span>
+<span style="color: #8abeb7;">               TagSide: </span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;">%TAGSIDE</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;">,</span>
+<span style="color: #8abeb7;">               TagIndent: </span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;">%TAGINDENT</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span>
+<span style="color: #8abeb7;">                 }</span>
+<span style="color: #8abeb7;">          });&lt;/script&gt;&lt;script async type=</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;">text/javascript</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;"> src=</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;">%PATH</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">"</span><span style="color: #8abeb7;">&gt;&lt;/script&gt;"</span><span style="color: #c5c8c6;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0a28895" class="outline-2">
+<h2 id="org0a28895"><span class="section-number-2">4</span> 尾声</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+期待更多有意思的“改造”。
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
+<p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
+<p class="date">2016-10-28</p>
+<p class="export-date">2016-11-09 Wed 17:27</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.0)</p>
+<p class="validation"></p>
+<p class="last-modification-time">2016-11-09 Wed 17:27</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
+</div>
+</body>
+</html>
