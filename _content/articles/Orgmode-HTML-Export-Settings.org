@@ -1,0 +1,143 @@
+#+TITLE: Orgmode HTML-Export Settings
+#+AUTHOR: 冰糖火箭筒(Junjia Ni)
+#+EMAIL: creamidea(AT)gmail.com
+#+DATE: 2016-10-28
+#+CATEGORY: article
+#+DESCRIPTION: Orgmode HTML-Export Settings to Support Github Page
+#+KEYWORDS: emacs,orgmode,lazy-load,image,mathjax,html-export
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:nil email:t <:t date:t timestamp:t
+#+LINK_HOME: https://creamidea.github.io
+#+STARTUP: showall
+
+
+#+BEGIN_EXPORT html
+<div class="lazy-load-img-wrapper">
+<noscript>
+<img src="http://orgmode.org/img/main.jpg"
+alt="orgmode" title="orgmode"/>
+</noscript>
+<img data-src="http://orgmode.org/img/main.jpg"
+lazy-load class="lazy-load-img" alt="orgmode" title=""/>
+<p class="title-img-p">题图来自网络</p>
+</div>
+#+END_EXPORT
+
+* 前言
+配置 org-mode，使其成为静态 HTML 生成工具。实现类似于 [[http://jekyllrb.com/][Jekyll]] 的效果。
+
+* Lazy Load Image
+在某次写文章的时候，萌生了为自己的站点提供图片延迟加载的技术。
+在改造的过程中，体会到了 Lisp “动态语言”的特性，在“外部”直接写方法覆盖其“内部”方法，
+改变数据的形态，使其符合自己的实际需求。
+
+Org-mode 生成 HTML 的代码都在 [[http://orgmode.org/w/?p=org-mode.git;a=blob;f=lisp/ox-html.el;hb=d9070419119cf6b19f2f471aa2eb81ec3d9b0d0f][ox-html.el]] 中，其中涉及到图片 HTML 生成代码主要是这几个函数
+=org-html--wrap-image= 和 =org-html--format-image= (注：这个是9.0版本的函数，
+如果是8.0的版本，是这2个函数： =org-html--make-attribute-string= 和 =org-html--format-image=)
+
+由于之前并不知道 elisp 的动态特性，傻傻的在源文件中修改代码，之后使用 elpa 升级 org-mode 包之后，全部没有了。
+后来知道了这个特性之后。哈哈。就方便很多了(当然，你要小心的坑也多了，一不小心，你写的东西就没了)。最终我需要做的的就是在一个新的文件中写入如下代码。
+其核心思想就是让 =<img>= 标签增加 =lazy-load= 和 =data-src= 属性，便于前端 JS 读取相关信息，然后做出对其进行延迟加载。
+关于 JS 部分的代码可以看 [[https://github.com/creamidea/creamidea.github.com/blob/master/web-src/article.js][这里]] (Lazy load images)。
+
+首先是对于 =<img>= 标签的改造， 核心代码在 =org-html--format-image= 函数中，
+将下面的代码
+#+BEGIN_SRC elisp
+  (org-html-close-tag
+   "img"
+   (org-html--make-attribute-string
+    (org-combine-plists
+     (list :src source
+           :alt (if (string-match-p "^ltxpng/" source)
+                    (org-html-encode-plain-text
+                     (org-find-text-property-in-string 'org-latex-src source))
+                  (file-name-nondirectory source)))
+     attributes))
+   info)
+#+END_SRC
+替换成
+#+BEGIN_SRC elisp
+  (let ((normal-img-attr (org-html-make-attribute-macro :src))
+        (lazy-load-img-attr
+         (format "lazy-load %s"
+                 (org-html-make-attribute-macro :data-src))))
+    (if (plist-get info :html-image-lazy-load)
+        (format
+         "<noscript>%s</noscript>%s"
+         (org-html-close-tag-img-macro normal-img-attr)
+         (org-html-close-tag-img-macro lazy-load-img-attr))
+      (org-html-close-tag-img-macro normal-img-attr)))
+#+END_SRC
+
+其中，宏 =org-html-make-attribute-macro= 和 =org-html-close-tag-img-macro=
+分别实现对 HTML 标签属性和 =<img>= 标签的自定义扩展。
+#+BEGIN_SRC elisp
+  (defmacro org-html-make-attribute-macro (src)
+    "Return macro org-html--make-attribute-string.
+  SRC."
+    `(org-html--make-attribute-string
+      (org-combine-plists
+       (list ,src source
+             :alt (if (string-match-p "^ltxpng/" source)
+                      (org-html-encode-plain-text
+                       (org-find-text-property-in-string 'org-latex-src source))
+                    (file-name-nondirectory source)))
+       attributes)))
+  (defmacro org-html-close-tag-img-macro (attr)
+    "Return.
+  ATTR."
+    `(org-html-close-tag
+      "img"
+      ,attr
+      info))
+#+END_SRC
+
+上述过程对 =<img>= 标签自身属性进行了改造，并增加了对禁用 Javascript 情况下的支持（就是增加了 =<noscript>= 标签）。
+但是外围的标签没有改动，如果想对其有一个更加深入的定制，
+还需要将包裹 =<img>= 标签的父标签进行改造。在9.0版本中，需要改动的是 =org-html--wrap-image= 函数，
+如果你是8.0版本，需要改动 =org-html--make-attribute-string= 函数。改动主要是将
+#+BEGIN_SRC elisp
+(format "\n<p>%s</p>" contents)
+#+END_SRC
+改成
+#+BEGIN_SRC elisp
+  (if (plist-get info :html-image-lazy-load)
+      (format "\n<p class=\"lazy-load-img-wrapper\">%s</p>" contents)
+    (format "\n<p>%s</p>" contents))
+#+END_SRC
+
+至此，对于 org-mode 内置的图片导出功能改造完毕。
+主要效果是给 =<img>= 标签增加了 =data-src= 和 =lazy-load= 属性，增加了 =<noscript>= 标签的支持。
+并为其父标签增加了 =class: lazy-load-img-wrapper= 。
+
+后面就是写 JS 来实现加载图片的功能啦。可以参考 [[https://css-tricks.com/snippets/javascript/lazy-loading-images/][这个]] 。
+
+* Mathjax
+对 Mathjax 模板的定制，重写 =org-html-mathjax-template= 即可。
+这里我主要是为其 =<script>= 标签增加了 =async= 的支持。使其能够异步加载
+（不过在不支持的浏览器中会退化成同步加载，所以还是存在阻塞的风险）。
+#+BEGIN_SRC elisp
+  (org-html-mathjax-template
+   "<script type=\"text/x-mathjax-config\">
+            MathJax.Hub.Config({
+              displayAlign: \"%ALIGN\",
+              displayIndent: \"%INDENT\",
+
+              \"HTML-CSS\": { scale: %SCALE,
+                          linebreaks: { automatic: \"%LINEBREAKS\" },
+                          webFont: \"%FONT\"
+                            },
+              SVG: {scale: %SCALE,
+                linebreaks: { automatic: \"%LINEBREAKS\" },
+                font: \"%FONT\"},
+              NativeMML: {scale: %SCALE},
+              TeX: { equationNumbers: {autoNumber: \"%AUTONUMBER\"},
+                 MultLineWidth: \"%MULTLINEWIDTH\",
+                 TagSide: \"%TAGSIDE\",
+                 TagIndent: \"%TAGINDENT\"
+                   }
+            });</script><script async type=\"text/javascript\" src=\"%PATH\"></script>")
+
+#+END_SRC
+
+* 尾声
+期待更多有意思的“改造”。
