@@ -7,7 +7,6 @@
 #+KEYWORDS: emacs,orgmode,lazy-load,image,mathjax,html-export
 #+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:nil email:t <:t date:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
-#+STARTUP: showall
 
 
 #+BEGIN_EXPORT html
@@ -24,6 +23,9 @@ lazy-load class="lazy-load-img" alt="orgmode" title=""/>
 
 * 前言
 配置 org-mode，使其成为静态 HTML 生成工具。实现类似于 [[http://jekyllrb.com/][Jekyll]] 的效果。
+
+关于基础配置部分，我觉得没有必要赘述，可以直接查看我这个文件 [[https://github.com/creamidea/creamidea.github.com/blob/master/org-publish-setting.el][org-publish-setting.el]] 就好了。
+有什么问题，欢迎随时交流沟通。
 
 * Lazy Load Image
 在某次写文章的时候，萌生了为自己的站点提供图片延迟加载的技术。
@@ -137,6 +139,67 @@ Org-mode 生成 HTML 的代码都在 [[http://orgmode.org/w/?p=org-mode.git;a=bl
                    }
             });</script><script async type=\"text/javascript\" src=\"%PATH\"></script>")
 
+#+END_SRC
+
+* Update from Version 8.0 to Version 9.0
+
+[[http://orgmode.org/Changes.html][Changes]]
+
+这次升级应该是一个比较大的升级，其中修改了一个声明，将
+#+BEGIN_SRC org
+  ,#+BEGIN_backend
+  ...
+  ,#+END_backend
+#+END_SRC
+替换成了
+#+BEGIN_SRC org
+  ,#+BEGIN_EXPORT backend
+  ...
+  ,#+END_EXPORT
+#+END_SRC
+于是乎，之前如果用到了这些声明，也就意味着你需要更改到新的版本，才能正常导出。
+还好，官方比较良心，给了一段替换之前 BLOCK 声明的代码，
+我在其基础上增加了遍历项目中所有 org 文件并将其修改的功能，
+大致代码如下（如果没有给代码，我准备用 =sed= 搞一下了）：
+#+BEGIN_SRC elisp
+  (defun org-repair-export-blocks (dirname)
+    "Repair export blocks and INCLUDE keywords in current buffer.
+  DIRNAME."
+    (interactive)
+    (let ((files (directory-files-recursively dirname ".org")))
+      (dolist (file files)
+        (progn
+          (find-file file)
+          (when (eq major-mode 'org-mode)
+            (let ((case-fold-search t)
+                  (back-end-re (regexp-opt
+                                '("HTML" "ASCII" "LATEX" "ODT" "MARKDOWN" "MD" "ORG"
+                                  "MAN" "BEAMER" "TEXINFO" "GROFF" "KOMA-LETTER")
+                                t)))
+              (org-with-wide-buffer
+               (goto-char (point-min))
+               (let ((block-re (concat "^[ \t]*#\\+BEGIN_" back-end-re)))
+                 (save-excursion
+                   (while (re-search-forward block-re nil t)
+                     (let ((element (save-match-data (org-element-at-point))))
+                       (when (eq (org-element-type element) 'special-block)
+                         (save-excursion
+                           (goto-char (org-element-property :end element))
+                           (save-match-data (search-backward "_"))
+                           (forward-char)
+                           (insert "EXPORT")
+                           (delete-region (point) (line-end-position)))
+                         (replace-match "EXPORT \\1" nil nil nil 1))))))
+               (let ((include-re
+                      (format "^[ \t]*#\\+INCLUDE: .*?%s[ \t]*$" back-end-re)))
+                 (while (re-search-forward include-re nil t)
+                   (let ((element (save-match-data (org-element-at-point))))
+                     (when (and (eq (org-element-type element) 'keyword)
+                                (string= (org-element-property :key element) "INCLUDE"))
+                       (replace-match "EXPORT \\1" nil nil nil 1))))))))
+          (save-buffer (buffer-name))
+          (kill-buffer (buffer-name))))))
+  ;; (org-repair-export-blocks "_content")
 #+END_SRC
 
 * 尾声
