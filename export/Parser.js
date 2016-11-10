@@ -41,12 +41,8 @@ class Parser {
   exportMode(exportCache) {
     exportCache = exportCache.toString('utf8')
     if (exportCache) exportCache = JSON.parse(exportCache)
-    else exportCache = {}
-    const {
-      posts,
-      tags
-    } = exportCache
-    this.__container.load(posts)
+    else exportCache = []
+    this.__container.load(exportCache)
   }
 }
 

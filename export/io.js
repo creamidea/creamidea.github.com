@@ -37,7 +37,7 @@ function stat(path) {
   // console.log(path)
   return new Promise((resolve, reject) => {
     fs.stat(path, (err, fd) => {
-      if (err) resolve(err)
+      if (err) reject(err)
       else resolve(fd)
     })
   })
@@ -67,7 +67,7 @@ function __readLimit(path, length) {
               buffer
             })
           }
-          fs.close(fd, err => reject(err))
+          fs.close(fd, err => {if (err) reject(err)})
         })
       }
     })

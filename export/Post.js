@@ -26,32 +26,46 @@ class Post {
     Object.assign(this.__props, props)
   }
 
-  update(cb) {
-    if (!this.get('fullpath')) console.log(this.getAll())
+  update(end) {
+    // if (!this.get('fullpath')) console.log(this.getAll())
     const __this = this,
-      fullpath = this.get('fullpath')
+      fullpath = this.get('fullpath'),
+      error = this.get('error')
+
+    // Attention:
+    // If you have the same filename, it will not be updated.
+    // exclude the error files
+    if (error) { // ENOENT
+      if (typeof end === 'function') end()
+      return
+    }
 
     io.stat(fullpath).then(file => {
+      const mtime = (new Date(file.mtime)).getTime()
+
+      // exclude the non-modified file
+      if (__this.get('mtime') === mtime) {
+        if (typeof end === 'function') end()
+        return
+      }
+
       __this.set({
-          mtime: (new Date(file.mtime)).getTime()
-        })
-        // TODO: expire (compare the time)
-        // if (__this.get('mtime') - __this.get('timestamp') > 1000) {
-        // expire
-      io.read(fullpath, 8000).then(({
-          bytesRead,
-          buffer
-        }) => {
-          const data = buffer.toString("utf8", 0, bytesRead)
-          __this.set(cutout(data))
-          if (typeof cb === 'function') cb()
-        })
-        // }
+        mtime
+      })
+      io.read(fullpath, 8000 /*how many bytes do you want to read*/ ).then(({
+        bytesRead,
+        buffer
+      }) => {
+        const data = buffer.toString("utf8", 0, bytesRead)
+        __this.set(cutout(data))
+        if (typeof end === 'function') end()
+      })
     }).catch(err => {
       console.log('[Post] update: ', err)
       __this.set({
         error: err.code
       })
+      if (typeof end === 'function') end()
     })
   }
 
@@ -98,7 +112,6 @@ const Posts = {
     const posts = Posts.getAll()
     io.write(this.getConfig('CACHEFILE'), Object.keys(posts).map(key => {
       let post = posts[key]
-      post.isModified = false
       return post.getAll()
     }))
   },
@@ -112,27 +125,22 @@ const Posts = {
   //////////////////////////////////////////////
   __update() {
     const posts = Posts.getAll(),
-      event = new EventEmitter,
       total = Posts.length,
+      event = new EventEmitter,
       channel = 'end' + Math.random(),
-      end = ((event, channel) => {
-        return function() {
-          event.emit(channel)
-        }
-      })(event, channel),
-      countIt = ((posts, total, __this) => {
-        let counter = 0
-        return function() {
-          counter += 1
-          if (counter === total) {
-            __this.save()
-            __this.__event.emit('end', posts)
-          }
-        }
-      })(posts, total, this)
+      end = ((event, channel) => () => event.emit(channel))(event, channel)
 
     // listen
-    event.on(channel, countIt)
+    event.on(channel, ((posts, total, __this) => {
+      let counter = 0
+      return () => {
+        counter += 1
+        if (counter === total) {
+          __this.save()
+          __this.__event.emit('end', posts)
+        }
+      }
+    })(posts, total, this))
 
     // start...
     for (var i in posts) {

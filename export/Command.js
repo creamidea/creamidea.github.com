@@ -51,7 +51,6 @@ class Command {
       PUBPATH,
       CACHEFILE
     })
-    Posts.update()
     Posts.on('end', () => {
       Posts.export(archiveView, {
         path: ARCHIVEHTMLFILE,
@@ -66,6 +65,7 @@ class Command {
         urlprefix: URLPREFIX.slice(1)
       })
     })
+    Posts.update()
   }
 
   "article-static" () {
