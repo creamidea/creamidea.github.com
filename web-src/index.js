@@ -865,7 +865,8 @@ function sendAnswer(id, label) {
    */
   function blink (elt) {
     var frequency = parseInt(elt.getAttribute('data-frequency'), 10)
-    // blink.style.display = 'initial'
+    if (isNaN(frequency)) frequency = 700
+    elt.style.display = ''
     if (frequency > 0)
       if (window.blinkTimer) clearInterval(window.blinkTimer)
     window.blinkTimer = setInterval(function(_blink) {
@@ -888,9 +889,13 @@ function sendAnswer(id, label) {
    * show Banner
    */
   function showBanner (body, content) {
-    // blink()
-    // changeOctoCat(body);
-    return document.querySelector('#banner-wrapper')
+    var octocat,
+        bannerElt = document.querySelector('#banner-wrapper')
+    if (storage && (octocat = storage.get('octocat'))) {
+      blink(bannerElt.getElementsByClassName('blink')[0])
+      loadOctocat(body, bannerElt, octocat)
+    }
+    return bannerElt
   }
 
   // ==============================================================================
