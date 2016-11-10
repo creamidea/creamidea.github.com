@@ -17,10 +17,70 @@
 ;; (add-to-list 'load-path "~/path/to/orgdir/contrib/lisp " t)
 ;; (add-to-list 'load-path "~/.emacs.d/elpa/org-20161003")
 
-;; (require 'org)
+(require 'org)
 (require 'ox-publish)
 ;; (require 'htmlize)
 ;; (require 'ox-rss)
+
+(setq site-project-path (expand-file-name "~/Repository/creamidea.github.io/"))
+
+(defun org-html--wrap-image (contents info &optional caption label)
+  "Wrap CONTENTS string within an appropriate environment for images.
+INFO is a plist used as a communication channel.  When optional
+arguments CAPTION and LABEL are given, use them for caption and
+\"id\" attribute."
+  (let ((html5-fancy (org-html--html5-fancy-p info)))
+    (format (if html5-fancy "\n<figure%s>%s%s\n</figure>"
+	      "\n<div%s class=\"figure\">%s%s\n</div>")
+	    ;; ID.
+	    (if (org-string-nw-p label) (format " id=\"%s\"" label) "")
+	    ;; Contents.
+            (if (plist-get info :html-image-lazy-load)
+                (format "\n<p class=\"lazy-load-img-wrapper\">%s</p>" contents)
+              (format "\n<p>%s</p>" contents))
+	    ;; Caption.
+	    (if (not (org-string-nw-p caption)) ""
+	      (format (if html5-fancy "\n<figcaption>%s</figcaption>"
+			"\n<p>%s</p>")
+		      caption)))))
+
+(defmacro org-html-make-attribute-macro (src)
+  "Return macro org-html--make-attribute-string.
+SRC."
+  `(org-html--make-attribute-string
+    (org-combine-plists
+     (list ,src source
+           :alt (if (string-match-p "^ltxpng/" source)
+                    (org-html-encode-plain-text
+                     (org-find-text-property-in-string 'org-latex-src source))
+                  (file-name-nondirectory source)))
+     attributes)))
+(defmacro org-html-close-tag-img-macro (attr)
+  "Return.
+ATTR."
+  `(org-html-close-tag
+    "img"
+    ,attr
+    info))
+
+(defun org-html--format-image (source attributes info)
+  "Return \"img\" tag with given SOURCE and ATTRIBUTES.
+SOURCE is a string specifying the location of the image.
+ATTRIBUTES is a plist, as returned by
+`org-export-read-attribute'.  INFO is a plist used as
+a communication channel."
+  (if (string= "svg" (file-name-extension source))
+      (org-html--svg-image source attributes info)
+    (let ((normal-img-attr (org-html-make-attribute-macro :src))
+          (lazy-load-img-attr
+           (format "lazy-load %s"
+                   (org-html-make-attribute-macro :data-src))))
+      (if (plist-get info :html-image-lazy-load)
+          (format
+           "<noscript>%s</noscript>%s"
+           (org-html-close-tag-img-macro normal-img-attr)
+           (org-html-close-tag-img-macro lazy-load-img-attr))
+        (org-html-close-tag-img-macro normal-img-attr)))))
 
 ;; (defun after-publishing (in out)
 ;;   "after-publishing"
@@ -31,7 +91,7 @@
   "Configure for Creamidea-Site.
 CURRENT-OR-ALL FORCE ASYNC."
   (interactive)
-  (let* ((creamidea-path (expand-file-name "~/Repository/creamidea.github.io/"))
+  (let* ((creamidea-path site-project-path)
          (creamidea-public-path (concat creamidea-path "./static/html/"))
          (author-info "<div id=\"meta-article\"><p class=\"author\">%a</p>\n<p class=\"email\">%e</p>\n<p class=\"date\">%d</p>\n<p class=\"export-date\">%T</p>\n<p class=\"creator\">%c</p>\n<p class=\"validation\">%v</p>\n<p class=\"last-modification-time\">%C</p></div>")
          (meta-viewport "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">")
@@ -167,7 +227,7 @@ CURRENT-OR-ALL FORCE ASYNC."
   "Build Archive."
   (interactive)
   ;; (call-process "pwd" nil t)
-  (let ((cmd-js (concat (expand-file-name "~/Repository/creamidea/") "export.js" ))
+  (let ((cmd-js (concat site-project-path "export.js" ))
         (add-file (buffer-file-name (window-buffer (minibuffer-selected-window)))))
     ;; (switch-to-buffer-other-window "*Build Archive Message*")
     (shell-command-to-string (format "node %s archive" cmd-js))

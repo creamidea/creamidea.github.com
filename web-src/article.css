@@ -1,14 +1,20 @@
 /* Org mode start */
-.title  { text-align: center; }
+.title  { text-align: center;
+          margin-bottom: .2em; }
+.subtitle { text-align: center;
+            font-size: medium;
+            font-weight: bold;
+            margin-top:0; }
 .todo   { font-family: monospace; color: red; }
-.done   { color: green; }
+.done   { font-family: monospace; color: green; }
+.priority { font-family: monospace; color: orange; }
 .tag    { background-color: #eee; font-family: monospace;
           padding: 2px; font-size: 80%; font-weight: normal; }
 .timestamp { color: #bebebe; }
 .timestamp-kwd { color: #5f9ea0; }
-.right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-.left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-.center { margin-left: auto; margin-right: auto; text-align: center; }
+.org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+.org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+.org-center { margin-left: auto; margin-right: auto; text-align: center; }
 .underline { text-decoration: underline; }
 #postamble p, #preamble p { font-size: 90%; margin: .2em; }
 p.verse { margin-left: 3%; }
@@ -35,31 +41,111 @@ pre.src:before {
     border: 1px solid black;
 }
 pre.src:hover:before { display: inline;}
-pre.src-sh:before    { content: 'sh'; }
-pre.src-bash:before  { content: 'sh'; }
+/* Languages per Org manual */
+pre.src-asymptote:before { content: 'Asymptote'; }
+pre.src-awk:before { content: 'Awk'; }
+pre.src-C:before { content: 'C'; }
+/* pre.src-C++ doesn't work in CSS */
+pre.src-clojure:before { content: 'Clojure'; }
+pre.src-css:before { content: 'CSS'; }
+pre.src-D:before { content: 'D'; }
+pre.src-ditaa:before { content: 'ditaa'; }
+pre.src-dot:before { content: 'Graphviz'; }
+pre.src-calc:before { content: 'Emacs Calc'; }
 pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-pre.src-R:before     { content: 'R'; }
-pre.src-perl:before  { content: 'Perl'; }
-pre.src-java:before  { content: 'Java'; }
-pre.src-sql:before   { content: 'SQL'; }
+pre.src-fortran:before { content: 'Fortran'; }
+pre.src-gnuplot:before { content: 'gnuplot'; }
+pre.src-haskell:before { content: 'Haskell'; }
+pre.src-java:before { content: 'Java'; }
+pre.src-js:before { content: 'Javascript'; }
+pre.src-latex:before { content: 'LaTeX'; }
+pre.src-ledger:before { content: 'Ledger'; }
+pre.src-lisp:before { content: 'Lisp'; }
+pre.src-lilypond:before { content: 'Lilypond'; }
+pre.src-lua:before { content: 'Lua'; }
+pre.src-matlab:before { content: 'MATLAB'; }
+pre.src-mscgen:before { content: 'Mscgen'; }
+pre.src-ocaml:before { content: 'Objective Caml'; }
+pre.src-octave:before { content: 'Octave'; }
+pre.src-org:before { content: 'Org mode'; }
+pre.src-oz:before { content: 'OZ'; }
+pre.src-plantuml:before { content: 'Plantuml'; }
+pre.src-processing:before { content: 'Processing.js'; }
+pre.src-python:before { content: 'Python'; }
+pre.src-R:before { content: 'R'; }
+pre.src-ruby:before { content: 'Ruby'; }
+pre.src-sass:before { content: 'Sass'; }
+pre.src-scheme:before { content: 'Scheme'; }
+pre.src-screen:before { content: 'Gnu Screen'; }
+pre.src-sed:before { content: 'Sed'; }
+pre.src-sh:before { content: 'shell'; }
+pre.src-sql:before { content: 'SQL'; }
+pre.src-sqlite:before { content: 'SQLite'; }
+/* additional languages in org.el's org-babel-load-languages alist */
+pre.src-forth:before { content: 'Forth'; }
+pre.src-io:before { content: 'IO'; }
+pre.src-J:before { content: 'J'; }
+pre.src-makefile:before { content: 'Makefile'; }
+pre.src-maxima:before { content: 'Maxima'; }
+pre.src-perl:before { content: 'Perl'; }
+pre.src-picolisp:before { content: 'Pico Lisp'; }
+pre.src-scala:before { content: 'Scala'; }
+pre.src-shell:before { content: 'Shell Script'; }
+pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+/* additional language identifiers per \"defun org-babel-execute\"
+       in ob-*.el */
+pre.src-cpp:before  { content: 'C++'; }
+pre.src-abc:before  { content: 'ABC'; }
+pre.src-coq:before  { content: 'Coq'; }
+pre.src-groovy:before  { content: 'Groovy'; }
+/* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+pre.src-bash:before  { content: 'bash'; }
+pre.src-csh:before  { content: 'csh'; }
+pre.src-ash:before  { content: 'ash'; }
+pre.src-dash:before  { content: 'dash'; }
+pre.src-ksh:before  { content: 'ksh'; }
+pre.src-mksh:before  { content: 'mksh'; }
+pre.src-posh:before  { content: 'posh'; }
+/* Additional Emacs modes also supported by the LaTeX listings package */
+pre.src-ada:before { content: 'Ada'; }
+pre.src-asm:before { content: 'Assembler'; }
+pre.src-caml:before { content: 'Caml'; }
+pre.src-delphi:before { content: 'Delphi'; }
+pre.src-html:before { content: 'HTML'; }
+pre.src-idl:before { content: 'IDL'; }
+pre.src-mercury:before { content: 'Mercury'; }
+pre.src-metapost:before { content: 'MetaPost'; }
+pre.src-modula-2:before { content: 'Modula-2'; }
+pre.src-pascal:before { content: 'Pascal'; }
+pre.src-ps:before { content: 'PostScript'; }
+pre.src-prolog:before { content: 'Prolog'; }
+pre.src-simula:before { content: 'Simula'; }
+pre.src-tcl:before { content: 'tcl'; }
+pre.src-tex:before { content: 'TeX'; }
+pre.src-plain-tex:before { content: 'Plain TeX'; }
+pre.src-verilog:before { content: 'Verilog'; }
+pre.src-vhdl:before { content: 'VHDL'; }
+pre.src-xml:before { content: 'XML'; }
+pre.src-nxml:before { content: 'XML'; }
+/* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf \" \")) in .emacs */
+pre.src-conf:before { content: 'Configuration File'; }
 
 table { border-collapse:collapse; }
 caption.t-above { caption-side: top; }
 caption.t-bottom { caption-side: bottom; }
 td, th { vertical-align:top;  }
-th.right  { text-align: center;  }
-th.left   { text-align: center;   }
-th.center { text-align: center; }
-td.right  { text-align: right;  }
-td.left   { text-align: left;   }
-td.center { text-align: center; }
+th.org-right  { text-align: center;  }
+th.org-left   { text-align: center;   }
+th.org-center { text-align: center; }
+td.org-right  { text-align: right;  }
+td.org-left   { text-align: left;   }
+td.org-center { text-align: center; }
 dt { font-weight: bold; }
-.footpara:nth-child(2) { display: inline-block; }
-#footnotes p { font-size: 16px; }
-.footpara { display: block; }
+.footpara { display: inline; }
 .footdef  { margin-bottom: 1em; }
-.footdef sup:before { content: '['}
-.footdef sup:after { content: ']'}
 .figure { padding: 1em; }
 .figure p { text-align: center; }
 .inlinetask {
@@ -78,7 +164,7 @@ textarea { overflow-x: auto; }
 { font-size: 10px; font-weight: bold; white-space: nowrap; }
 .org-info-js_search-highlight
 { background-color: #ffff00; color: #000000; font-weight: bold; }
-/*]]>*/-->
+.org-svg { width: 90%; }
 /* Org mode end */
 
 
@@ -175,21 +261,21 @@ figcaption {
     z-index: 9;
 }
 .return:hover {
-  opacity: 1;
+    opacity: 1;
 }
 .return:before, .return:after {
-  position: absolute;
-  left: 15px;
-  content: ' ';
-  height: 24px;
-  width: 4px;
-  background-color: #333;
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 24px;
+    width: 4px;
+    background-color: #333;
 }
 .return:before {
-  transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 .return:after {
-  transform: rotate(-45deg);
+    transform: rotate(-45deg);
 }
 
 #avatar-wapper {position: fixed;top: 0px;right: 10px;font-size:2em;font-weight: bolder;}
@@ -328,13 +414,13 @@ li a {
 /* } */
 #table-of-contents {
     display: none;
-/*     width: 300px; */
-/*     position: fixed; */
-/*     top: 48px; */
-/*     /\* background: black; *\/ */
-/*     /\* color: white; *\/ */
-/*     height: 100%; */
-/*     /\* right: 0; *\/ */
+    /* width: 300px; */
+    /* position: fixed; */
+    /* top: 48px; */
+    /* /\* background: black; *\/ */
+    /* /\* color: white; *\/ */
+    /* height: 100%; */
+    /* /\* right: 0; *\/ */
 }
 /* #table-of-contents>h2 { */
 /*     display: none; */
@@ -656,6 +742,7 @@ hr.section-divider:before {content: '...'; display: inline-block; margin-left: 0
         font-size: 16px;
         line-height: 1;
     }
+}
 
 /* @media all and (min-width: 900px) { */
 /*     #table-of-contents { */
