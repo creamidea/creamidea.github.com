@@ -55,9 +55,9 @@
 * Long Polling
   长轮询方式。
   代码：
-  #+BEGIN_HTML
+  #+BEGIN_EXPORT HTML
   <script src="https://gist.github.com/creamidea/6114508.js"></script>
-  #+END_HTML
+  #+END_EXPORT
 * WebSocket
   等待填坑……
 * Socket.IO
@@ -67,9 +67,9 @@
   然后下面的代码都是按照官方的步骤做的，只是稍微修改了一下。具体的可以参照 [[http://socket.io/#how-to-use][这里]]
   
   代码：
-  #+BEGIN_HTML
+  #+BEGIN_EXPORT HTML
   <script src="https://gist.github.com/creamidea/6114473.js"></script>
-  #+END_HTML
+  #+END_EXPORT
   
 * 后记
   然后接下来需要思考的是数据库更新，如何通知web服务器发送更新数据？

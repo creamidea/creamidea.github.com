@@ -6,7 +6,7 @@
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
 
-#+BEGIN_HTML
+#+BEGIN_EXPORT HTML
 <div class="lazy-load-img-wrapper title-img-wrapper">
 <noscript>
 <img src="http://blog.arcbees.com/wp-content/uploads/Post_GWT_2.8Beta1_Howto_v1-01.png"
@@ -16,7 +16,7 @@ alt="google web toolkit" title="google web toolkit"/>
 lazy-load alt="google web toolkit" title="google web toolkit"/>
 <p class="title-img-p">题图来自网络</p>
 </div>
-#+END_HTML
+#+END_EXPORT
 
 
 * 前言

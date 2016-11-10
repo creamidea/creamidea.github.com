@@ -10,7 +10,7 @@
 #+STARTUP: showall
 
 
-#+BEGIN_HTML
+#+BEGIN_EXPORT HTML
 <div class="lazy-load-img-wrapper title-img-wrapper">
 <noscript>
 <img src="https://media.githubusercontent.com/media/creamidea/creamidea.github.com/master/static/img/video-blob.jpg"
@@ -20,7 +20,7 @@ alt="Video-Blob" title="Video-Blob"/>
 lazy-load alt="Video-Blob" title="Video-Blob"/>
 <p class="title-img-p">题图来自网络</p>
 </div>
-#+END_HTML
+#+END_EXPORT
 
 * 前言
 现在看到任何我感兴趣的网页都会习惯性的打开调试工具，看看其代码写的怎么样。

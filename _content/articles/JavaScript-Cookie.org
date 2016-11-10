@@ -9,7 +9,7 @@
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
 
-#+BEGIN_HTML
+#+BEGIN_EXPORT HTML
 <div class="lazy-load-img-wrapper title-img-wrapper">
 <noscript>
 <img src="https://d2sis3lil8ndrq.cloudfront.net/screencasts/35c738d7-bdf0-4f29-8408-84fbf86a7ae2.png"
@@ -19,7 +19,7 @@ alt="Javascript" title="Javascript"/>
 lazy-load alt="Javascript" title="Javascript"/>
 <p class="title-img-p">题图来自网络</p>
 </div>
-#+END_HTML
+#+END_EXPORT
 
 
 * 前言

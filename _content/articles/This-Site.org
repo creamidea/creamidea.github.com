@@ -69,7 +69,7 @@
 
 *** 固定开头(snippet)
 我使用的是 [[http://emacswiki.org/emacs/Yasnippet][Yasnippet]] 这个自动“填充”工具。然后写了一个这个 *Snippet*
-#+INCLUDE: "~/.emacs.d/snippets/org-mode/blog" src org
+#+INCLUDE: "~/.emacs.d/snippets/org-mode/blog" src EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT EXPORT org
 
 稍作修改即可，然后打开.emacs文件。在.emacs这个buffer下面，按住 =M-x= 调出输入命令的buffer，然后输入 =eval-buffer= 即可。
 可以当场生效，不需要重启Emacs。

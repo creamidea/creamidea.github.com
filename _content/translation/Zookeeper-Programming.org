@@ -9,7 +9,7 @@
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
 
-#+BEGIN_HTML
+#+BEGIN_EXPORT HTML
 <div class="lazy-load-img-wrapper title-img-wrapper">
 <noscript>
 <img alt="Zookeeper" title="Zookeeper"
@@ -19,7 +19,7 @@
      data-src="https://media.githubusercontent.com/media/creamidea/creamidea.github.com/master/static/img/zoo.jpg"/>
 <p class="title-img-p">题图来自网络</p>
 </div>
-#+END_HTML
+#+END_EXPORT
 
 
 * 序

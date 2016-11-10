@@ -647,7 +647,7 @@
 }
 
      #+END_SRC
-     #+BEGIN_HTML
+     #+BEGIN_EXPORT HTML
      <style type="text/css" media="screen">
      .triangle {
      height: 0px;
@@ -659,7 +659,7 @@
      </style>
      <div class="triangle">
      </div>
-     #+END_HTML
+     #+END_EXPORT
 
   2. Reddit
      #+BEGIN_SRC css
@@ -831,7 +831,7 @@
  </div>
      #+END_SRC
 
-     #+BEGIN_HTML
+     #+BEGIN_EXPORT HTML
      <style type="text/css" media="screen">
      #reddit-alien {
      width: 296px;
@@ -998,7 +998,7 @@
      <div class="foot left"></div>
      <div class="foot right"></div>
      </div>
-     #+END_HTML
+     #+END_EXPORT
 
 * CSS Pseudo Class/Elements
   #+BEGIN_EXAMPLE

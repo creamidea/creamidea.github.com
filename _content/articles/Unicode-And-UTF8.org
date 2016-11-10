@@ -66,9 +66,9 @@ no matter what the language.
 #+END_QUOTE
 希望你已经明白什么是"真"Unicode。为每一个字符提供唯一的数字。
 
-#+BEGIN_HTML
+#+BEGIN_EXPORT HTML
 <img src="https://docs.google.com/drawings/d/1ZI9lDMtH1I9i4_vm-aEffr37Q09cBd4Kzl3jpA6yMSQ/pub?w=750&h=390" alt="字符－编号－编码" title="字符－编号－编码"/>
-#+END_HTML
+#+END_EXPORT
 
 * UTF8
 好了，在理解了Unicode之后，再来看UTF-8，这个又是什么东东呢？ \\

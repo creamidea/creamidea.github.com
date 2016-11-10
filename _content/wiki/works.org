@@ -114,7 +114,7 @@
    于是，我开启了我的作死技能。研究统一接入层的协议，自己模拟这个过程。来欺骗后端的 java。顺带看完了 java-sdk 的实现。
    由于是公司内部系统，具体细节不能透露。我只能给一个通用的流程图。
 
-   #+BEGIN_HTML
+   #+BEGIN_EXPORT HTML
       <div class="js-sequence-diagram">
    Title: User Login
    User->>Nodejs: 请求A
@@ -136,7 +136,7 @@
    Java-->>Nodejs: 请求A结果
    Nodejs-->>User: 请求A结果
       </div>
-   #+END_HTML
+   #+END_EXPORT
 
    另外，差点死在了 Koajs 的异步上，不过最后明白了 co-yield 的实现，也就没有什么问题了。
 

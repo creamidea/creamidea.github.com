@@ -36,9 +36,9 @@
   接下来顺着日历的时间顺序拿出任务执行。很自然的形成Next Action。
   到一定阶段，回顾之前的任务，整理消化进入下一个循环。
   
-  #+BEGIN_HTML
+  #+BEGIN_EXPORT HTML
   <img src="https://docs.google.com/drawings/d/1q5WHnEIakxT7uYIrUrIHRZjzO1FJDaFExNIVd-PvDD0/pub?w=738&amp;h=100" />
-  #+END_HTML
+  #+END_EXPORT
   
   上面这个循环就是一个很标准的GTD循环。所以，你看，善于利用现有的工具就可以管理起来你的时间。
   
@@ -122,9 +122,9 @@
     
 ** 操作流
    
-   #+BEGIN_HTML
+   #+BEGIN_EXPORT HTML
    <img src="https://docs.google.com/drawings/d/1RgIgUqMHdnEHPQp4WQ_qY0H7AVZeGt9pyD31oADmBDA/pub?w=371&amp;h=340" alt="GTD-任务类型" title="GTD-任务类型"/>
-   #+END_HTML
+   #+END_EXPORT
    
    任务被我分成4类：重要紧急、重要不紧急、不重要不紧急、不重要但紧急。查阅相关资料( [[http://www.zhihu.com/question/20247508][zhihu:20247508]] )之后理解成这个，仅供参考：
 + 重要紧急：救火

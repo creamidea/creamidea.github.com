@@ -147,13 +147,13 @@ Jekyll的搭建过程，网络上已经有许多的高手写的很详细了，�
 如果想知道我看过哪些书，电影或者听过哪些音乐，了解我的另一面，请移步 [[http://www.douban.com/people/creamidea/][我的豆瓣]]。
 
 * 更新的地方
-#+BEGIN_HTML
+#+BEGIN_EXPORT HTML
 1. <a href="{{ site.url }}{% post_url 2013-02-13-How-to-create-article-contents-by-js-and-css %}">
       How to create article contents by js and CSS
    </a>
 </br>
 2. <a href="{{ site.url }}{% post_url 2013-04-05-A-New-Design %}">A New Design</a>
-#+END_HTML
+#+END_EXPORT
 
 <2013-09-25 Wed>
 经过两天的修改，将整个blog更新成现在的模样。不过还有许多需要完善的地方，后期在继续吧。

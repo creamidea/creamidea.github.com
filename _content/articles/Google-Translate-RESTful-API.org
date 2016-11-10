@@ -9,7 +9,7 @@
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
 
-#+BEGIN_HTML
+#+BEGIN_EXPORT HTML
 <div class="lazy-load-img-wrapper title-img-wrapper">
 <noscript>
 <img src="http://www.digitalintervention.com/wp-content/uploads/2015/01/Google-2BTranslate-2Bdigital-2Bintervention.png"
@@ -19,7 +19,7 @@ alt="Google Translate" title="Google Translate"/>
 lazy-load alt="Google Translate" title="Google Translate"/>
 <p class="title-img-p">题图来自网络</p>
 </div>
-#+END_HTML
+#+END_EXPORT
 
 
 * 前言

@@ -97,8 +97,8 @@ Auto Complete所在的EmacsWiki(http://emacswiki.org/emacs/AutoComplete）。
 
 最后附上献给小杰的一首歌：「あの日見た花の名前を僕達はまだ知らない」ED(顺便测试一下)
 
-#+BEGIN_HTML
+#+BEGIN_EXPORT HTML
 <embed src="http://www.xiami.com/widget/10429952_1770159571/singlePlayer.swf" type="application/x-shockwave-flash" width="257" height="33" wmode="transparent"></embed>
-#+END_HTML
+#+END_EXPORT
 
 写到这里终于结束了。在ubuntu上使用ibus写中文真是具有挑战性啊。尤其是在Emacs中。(的和到啊)

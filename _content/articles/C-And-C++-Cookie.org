@@ -76,9 +76,9 @@ ClassName(const ClassName &cn);
 ** const_cast
    这种类型转换对常量const 进行设置或取消操作
    
-   #+BEGIN_HTML
+   #+BEGIN_EXPORT HTML
    <img src="http://blog.fishc.com/wp-content/uploads/2012/08/%E5%9B%BE%E7%89%871.gif" alt="引用fishc图，侵删" title="引用fishc图，侵删"/>
-   #+END_HTML
+   #+END_EXPORT
    
    Reference:
 1. http://blog.fishc.com/479.html

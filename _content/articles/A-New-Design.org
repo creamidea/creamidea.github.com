@@ -32,16 +32,16 @@
 
 * Jekyll博客的基础搭建
 这个我已经在
-#+BEGIN_HTML
+#+BEGIN_EXPORT HTML
 <a href="{{site.url}}{%post_url 2013-02-07-My-First-Article%}">My First Article</a>
-#+END_HTML
+#+END_EXPORT
 做了比较详细的介绍，我在这里就不再做过多的讲述了。如果有什么疑问随时可以联系我。
 
 * Emacs配置
 根据[[http://orgmode.org/worg/org-tutorials/org-jekyll.html][Using org to Blog with Jekyll]]的介绍。需要在.emacs文件中添加如下的代码：
-#+BEGIN_HTML
+#+BEGIN_EXPORT HTML
 <script async src="https://gist.github.com/creamidea/5319960.js"></script>
-#+END_HTML
+#+END_EXPORT
 我们在这里只需要修改 =:base-directory= 和 =:publishing-directory= 这两个变量的值（注意有两处哦）。
 之后就可以使用 =C-c C-e P= 来生成当前工程了。
 当然你也可以使用 =C-c C-e X= 来生成。
@@ -86,9 +86,9 @@
 * 配合yasnippet使用便捷输入
 这里的设置也是很简单，只要安装好yasnippet之后，
 如果不知道如何安装Yasnippet的话，可以参考我写的这个简单的教程:
-#+BEGIN_HTML
+#+BEGIN_EXPORT HTML
 <a href="{{ site.url }}{% post_url 2013-04-06-How-To-Install-Autocomplete-And-Yasnippet %}">How To Install Autocomplete And Yasnippet</a>
-#+END_HTML
+#+END_EXPORT
 , 在/path/to/yasnippet/snippets下
 新建一个叫做org-mode的文件夹（貌似现在的yasnippet会自己识别了），然后创建一个
 叫做blog的文件，将下面的代码复制即可（当然你可以根据实际情况稍作修改）：
@@ -118,14 +118,14 @@
 * 本次其他改进点
 主要是文章的目录，我这次使用的是css，然后配合js完成平滑滚动的效果。
 css的代码是我从[[http://orgmode.org/][orgmode官网]] 截取下来的：
-#+BEGIN_HTML
+#+BEGIN_EXPORT HTML
 <script async src="https://gist.github.com/creamidea/5320378.js"></script>
-#+END_HTML
+#+END_EXPORT
 主要思路：org-mode在生成html的时候会生成一个目录，而那些html标签是固定，详细的可以看文档。那么这样就可以使用css来使其悬浮于左上角。
 而其平滑的滚动效果则可以使用js来实现，代码如下：
-#+BEGIN_HTML
+#+BEGIN_EXPORT HTML
 <script async src="https://gist.github.com/creamidea/5320431.js"></script>
-#+END_HTML
+#+END_EXPORT
 (使用jQuery，就是这么方便。当然你完全可以纯手工打造，作者我就不在次献丑了)
 
 综合测试下来，感觉兼容性表现不错。几乎所有主流的浏览器都可以正常显示。

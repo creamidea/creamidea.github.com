@@ -58,9 +58,9 @@ http://www.math.zju.edu.cn/ligangliu/latexforum/tex_cjk.htm
 弹出如果所示对话框：
 #+CAPTION: P1. TeX Live Manager 2011
 
-#+BEGIN_HTML
+#+BEGIN_EXPORT HTML
 <img src="http://farm8.staticflickr.com/7385/9089198961_99cb1d2ab3.jpg" alt="Tex Live Manager 2011" title="Tex Live Manager 2011"/>
-#+END_HTML
+#+END_EXPORT
 #+BEGIN_CENTER
 P1. TeX Live Manager 2011
 #+END_CENTER

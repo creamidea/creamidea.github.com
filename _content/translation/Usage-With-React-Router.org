@@ -9,7 +9,7 @@
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
 
-#+BEGIN_HTML
+#+BEGIN_EXPORT HTML
 <div class="lazy-load-img-wrapper title-img-wrapper">
 <noscript>
 <img alt="React" title="React"
@@ -19,7 +19,7 @@ src="http://blog.addthiscdn.com/wp-content/uploads/2014/11/addthis-react-flux-ja
 data-src="http://blog.addthiscdn.com/wp-content/uploads/2014/11/addthis-react-flux-javascript-scaling.png">
 <p class="title-img-p">题图来自网络</p>
 </div>
-#+END_HTML
+#+END_EXPORT
 
 * 序
 之前看到了一下 [[http://redux.js.org/][官网]] 对于 React 的介绍，感觉写的很好，本来想全文翻译的，但是国人已经翻译过了，而且做的更好。

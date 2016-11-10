@@ -9,7 +9,7 @@
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
 
-#+BEGIN_HTML
+#+BEGIN_EXPORT HTML
 <div class="lazy-load-img-wrapper title-img-wrapper">
 <noscript>
 <img alt="Storm" title="Storm" src="http://static.boredpanda.com/blog/wp-content/uploads/2016/07/dust-storm-microbust-jerry-ferguson-arizona-2.jpg"/>
@@ -18,7 +18,7 @@
      data-src="http://static.boredpanda.com/blog/wp-content/uploads/2016/07/dust-storm-microbust-jerry-ferguson-arizona-2.jpg" />
 <p class="title-img-p">题图来自网络</p>
 </div>
-#+END_HTML
+#+END_EXPORT
 
 
 * 序
@@ -40,9 +40,9 @@ Nimbus 和 Supervisors 之间的所有协调配合都是 Zookeeper 集群完成�
 此外，Nimbus 守护进程 和 Supervisor 守护进程是快速失败且无状态的，所有的状态信息都由Zookeeper或者本地磁盘保存。
 这意味着当你杀掉 =-9 Nimbus= 或者 =Supervisors= ，他们会立即开始重启，就像什么也没有发生过一样，这种设计使得 Storm 集群相当稳定。
 
-#+BEGIN_HTML
+#+BEGIN_EXPORT HTML
 <img src="http://storm.apache.org/images/storm-cluster.png" alt="storm-cluster" title="storm-cluster"/>
-#+END_HTML
+#+END_EXPORT
 
 
 * 拓扑结构
@@ -233,9 +233,9 @@ Storm 有两种操作模式：本地模式+分布式模式。
 学习搭建开发环境，在本地模式下运行你的拓扑，请参看 [[http://storm.apache.org/documentation/Creating-a-new-Storm-project.html][Creating a new Storm project]] 。
 * 流分组
 流分组告诉拓扑怎样在2个组件之间发送元组。记住，spouts 和 bolts 在集群上多任务并行执行。一个拓扑结构在任务级别上执行看起来就像下面这样：
-#+BEGIN_HTML
+#+BEGIN_EXPORT HTML
 <img src="https://farm6.staticflickr.com/5810/23858906462_86acd4a394_o.png" alt="流分组示意图" title="流分组示意图"/>
-#+END_HTML
+#+END_EXPORT
 当工作节点 Bolt A 的一个任务（线程）发出元组给工作节点 Bolt B，它到底要发送元组到 Bolt B 的哪个任务（线程）？
 "stream grouping" 回答了这个问题：告诉Storm怎样在任务集合之间发送元组。
 在我们深入探究流分组的不同类型之前，我们先看看storm-starter项目里面的另一个拓扑。
