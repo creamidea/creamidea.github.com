@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<!-- 2016-11-07 Mon 15:59 -->
-<meta  charset="utf-8">
-<meta  name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2016-11-10 Thu 13:03 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Orgmode And Deckjs</title>
-<meta  name="generator" content="Org-mode">
-<meta  name="author" content="Junjia Ni">
-<meta  name="description" content="一些关于如何用orgmode配合deckjs导出HTML Slider"
+<meta name="generator" content="Org mode">
+<meta name="author" content="Junjia Ni">
+<meta name="description" content="一些关于如何用orgmode配合deckjs导出HTML Slider"
 >
-<meta  name="keywords" content="emacs,org-mode,deck.js">
+<meta name="keywords" content="emacs,org-mode,deck.js">
 <link rel="stylesheet" type="text/css" href="/static/article.css"><!--[if lt IE 9]>
 <script src="/static/libs/html5shiv.min.js"></script>
 <![endif]-->
@@ -22,16 +22,16 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. 前言</a></li>
-<li><a href="#orgheadline2">2. 正文</a></li>
-<li><a href="#orgheadline3">3. 尾声</a></li>
+<li><a href="#orgd28fa3d">1. 前言</a></li>
+<li><a href="#org7d3ef71">2. 正文</a></li>
+<li><a href="#org5745fd2">3. 尾声</a></li>
 </ul>
 </div>
 </nav>
 
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
+<div id="outline-container-orgd28fa3d" class="outline-2">
+<h2 id="orgd28fa3d"><span class="section-number-2">1</span> 前言</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 有一次翻 <b>org-mode</b> 的官方文档，无意中发现了这篇文章 <a href="http://orgmode.org/worg/exporters/ox-overview.html">The New Org-mode Exporter Framework</a> 。看到了deck.js<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>，于是开始觊觎org-mode导出web slide的功能。
@@ -49,14 +49,13 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2"><span class="section-number-2">2</span> 正文</h2>
+<div id="outline-container-org7d3ef71" class="outline-2">
+<h2 id="org7d3ef71"><span class="section-number-2">2</span> 正文</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 首先，推荐使用org-mode官方网站的最新包
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">$ git clone git://orgmode.org/org-mode.git
 </pre>
 </div>
@@ -64,7 +63,6 @@
 下载完成之后，将其加载至emacs中，覆盖掉emacs自带的版本。
 </p>
 <div class="org-src-container">
-
 <pre class="src src-elisp"><span style="color: #c5c8c6;">(</span>add-to-list <span style="color: #b5bd68;">'</span><span style="color: #81a2be;">load-path</span> <span style="color: #8abeb7;">"~/.emacs.d/package/org-mode"</span><span style="color: #c5c8c6;">)</span>
 <span style="color: #c5c8c6;">(</span>add-to-list <span style="color: #b5bd68;">'</span><span style="color: #81a2be;">load-path</span> <span style="color: #8abeb7;">"~/.emacs.d/package/org-mode/contrib/lisp"</span> t<span style="color: #c5c8c6;">)</span>
 </pre>
@@ -82,7 +80,6 @@ For use with the new exporter, ox-s5.el (link to raw file) and ox-deck.el (link 
 于是，我找到了新版的 <a href="https://raw.githubusercontent.com/cybercode/org-slides/master/ox-deck.el">ox-deck.el</a> 。把这个文件复制到 <code>/path/to/org-mode/contrib/lisp</code> 下面。复制完成之后，加载至.emacs中（包括一些配置）。
 </p>
 <div class="org-src-container">
-
 <pre class="src src-elisp"><span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">require</span> <span style="color: #b5bd68;">'</span><span style="color: #81a2be;">ox-deck</span><span style="color: #c5c8c6;">)</span>
 <span style="color: #c5c8c6;">(</span>custom-set-variables
  <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">neon swiss web-2.0</span>
@@ -100,8 +97,8 @@ For use with the new exporter, ox-s5.el (link to raw file) and ox-deck.el (link 
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3"><span class="section-number-2">3</span> 尾声</h2>
+<div id="outline-container-org5745fd2" class="outline-2">
+<h2 id="org5745fd2"><span class="section-number-2">3</span> 尾声</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 其实我最初写文章是不想写教程类的，但是发现自己也只会做这个。而且我发现，还写不好&gt;_&lt; 。嘛～先这个样子吧，练练手，毕竟好久没有写文章了，而且这个问题我找了好久，牺牲了好多休息时间。
@@ -128,8 +125,8 @@ For use with the new exporter, ox-s5.el (link to raw file) and ox-deck.el (link 
 <div id="meta-article"><p class="author">Junjia Ni</p>
 <p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
 <p class="date">2015-12-27</p>
-<p class="export-date">2016-11-07 Mon 15:59</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="export-date">2016-11-10 Thu 13:03</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.0)</p>
 <p class="validation"></p>
 <p class="last-modification-time">2016-10-23 Sun 23:09</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
 </div>

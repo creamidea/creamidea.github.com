@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<!-- 2016-11-07 Mon 15:59 -->
-<meta  charset="utf-8">
-<meta  name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2016-11-10 Thu 13:03 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Learning Django</title>
-<meta  name="generator" content="Org-mode">
-<meta  name="author" content="冰糖火箭筒(Junjia Ni)">
-<meta  name="description" content="学习Django的笔记"
+<meta name="generator" content="Org mode">
+<meta name="author" content="冰糖火箭筒(Junjia Ni)">
+<meta name="description" content="学习Django的笔记"
 >
-<meta  name="keywords" content="python,django">
+<meta name="keywords" content="python,django">
 <link rel="stylesheet" type="text/css" href="/static/article.css"><!--[if lt IE 9]>
 <script src="/static/libs/html5shiv.min.js"></script>
 <![endif]-->
@@ -22,25 +22,25 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. 前言</a></li>
-<li><a href="#orgheadline2">2. Install Django</a></li>
-<li><a href="#orgheadline3">3. 第二章 入门 &amp;&amp; 第三章 视图和URL配置</a></li>
-<li><a href="#orgheadline4">4. 第四章 模板</a></li>
-<li><a href="#orgheadline5">5. 第六章 Django站点管理</a></li>
-<li><a href="#orgheadline6">6. 第七章 表单</a></li>
-<li><a href="#orgheadline7">7. 第八章 高级视图和URL配置</a></li>
-<li><a href="#orgheadline8">8. 第九章 模板高级进阶</a></li>
-<li><a href="#orgheadline9">9. 第十章 数据模型高级进阶</a></li>
-<li><a href="#orgheadline12">10. 第十二章 部署Django</a>
+<li><a href="#orge124ac4">1. 前言</a></li>
+<li><a href="#org2a4667f">2. Install Django</a></li>
+<li><a href="#orgab37b0f">3. 第二章 入门 &amp;&amp; 第三章 视图和URL配置</a></li>
+<li><a href="#orgbb132f4">4. 第四章 模板</a></li>
+<li><a href="#orgf834933">5. 第六章 Django站点管理</a></li>
+<li><a href="#org8d711a2">6. 第七章 表单</a></li>
+<li><a href="#org91c85d0">7. 第八章 高级视图和URL配置</a></li>
+<li><a href="#org6b2da58">8. 第九章 模板高级进阶</a></li>
+<li><a href="#org3e0f00c">9. 第十章 数据模型高级进阶</a></li>
+<li><a href="#org313ba3f">10. 第十二章 部署Django</a>
 <ul>
-<li><a href="#orgheadline11">10.1. Linux</a>
+<li><a href="#org551d2eb">10.1. Linux</a>
 <ul>
-<li><a href="#orgheadline10">10.1.1. mod<sub>wsgi</sub></a></li>
+<li><a href="#orgcb8026f">10.1.1. mod<sub>wsgi</sub></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgheadline13">11. Q&amp;A</a></li>
+<li><a href="#org97b71c1">11. Q&amp;A</a></li>
 </ul>
 </div>
 </nav>
@@ -55,8 +55,8 @@ lazy-load alt="Django" title="Django"/>
 </div>
 
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
+<div id="outline-container-orge124ac4" class="outline-2">
+<h2 id="orge124ac4"><span class="section-number-2">1</span> 前言</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 上面分配的新的学习内容，学习这个框架，然后使用的参考书籍是 <b>Django Book 2 中文版</b> 。
@@ -73,8 +73,8 @@ lazy-load alt="Django" title="Django"/>
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2"><span class="section-number-2">2</span> Install Django</h2>
+<div id="outline-container-org2a4667f" class="outline-2">
+<h2 id="org2a4667f"><span class="section-number-2">2</span> Install Django</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 因为安装过程理论上不是很难，我在这里只是写一条命令。（默认已经安装了 python）
@@ -84,7 +84,6 @@ lazy-load alt="Django" title="Django"/>
 以管理员的身份，打开cmd。之后到django文件夹下输入：</li>
 </ol>
 <div class="org-src-container">
-
 <pre class="src src-sh">python setup.py install
 </pre>
 </div>
@@ -93,7 +92,6 @@ lazy-load alt="Django" title="Django"/>
 前往django所在文件目录，之后输入：</li>
 </ol>
 <div class="org-src-container">
-
 <pre class="src src-sh">sudo python setup.py install
 </pre>
 </div>
@@ -109,8 +107,8 @@ lazy-load alt="Django" title="Django"/>
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3"><span class="section-number-2">3</span> 第二章 入门 &amp;&amp; 第三章 视图和URL配置</h2>
+<div id="outline-container-orgab37b0f" class="outline-2">
+<h2 id="orgab37b0f"><span class="section-number-2">3</span> 第二章 入门 &amp;&amp; 第三章 视图和URL配置</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 日曜日 <span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-14 Sun&gt;</span></span>
@@ -144,7 +142,6 @@ icecream/
 创建 <code>views.py</code> (注意这个要放在icecream这个目录下，同 <code>urls.py</code> 在同一目录)
 </p>
 <div class="org-src-container">
-
 <pre class="src src-python"><span style="color: #b5bd68;">from</span> django.http <span style="color: #b5bd68;">import</span> HttpResponse
 
 <span style="color: #b5bd68;">def</span> <span style="color: #de935f;">hello</span><span style="color: #c5c8c6;">(</span>request<span style="color: #c5c8c6;">)</span>:
@@ -156,7 +153,6 @@ icecream/
 修改 <code>urls.py</code>
 </p>
 <div class="org-src-container">
-
 <pre class="src src-python"><span style="color: #b5bd68;">from</span> django.conf.urls <span style="color: #b5bd68;">import</span> patterns, include, url
 <span style="color: #b5bd68;">from</span> icecream.views <span style="color: #b5bd68;">import</span> hello
 
@@ -170,7 +166,6 @@ icecream/
 运行
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">python manage.py runserver <span style="color: #c5c8c6;">[</span>0.0.0.0<span style="color: #c5c8c6;">]</span> 8080
 <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#21152;&#20837; 0.0.0.0 &#21487;&#20197;&#20351;&#24471;&#8220;&#22806;&#32593;&#8221;&#35775;&#38382;&#65292;&#19981;&#20165;&#38480;&#20110;127.0.0.1</span>
 </pre>
@@ -186,8 +181,8 @@ P30
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline4" class="outline-2">
-<h2 id="orgheadline4"><span class="section-number-2">4</span> 第四章 模板</h2>
+<div id="outline-container-orgbb132f4" class="outline-2">
+<h2 id="orgbb132f4"><span class="section-number-2">4</span> 第四章 模板</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 火曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-16 Tue&gt;</span></span>
@@ -197,7 +192,6 @@ P30
 Template System
 </p>
 <div class="org-src-container">
-
 <pre class="src src-python"><span style="color: #b5bd68;">from</span> django <span style="color: #b5bd68;">import</span> template
 <span style="color: #f0c674;">t</span> = template.Template<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">'My name is {{ name }}.'</span><span style="color: #c5c8c6;">)</span>
 <span style="color: #f0c674;">c</span> = template.Context<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">{</span><span style="color: #8abeb7;">'name'</span>: <span style="color: #8abeb7;">'Alice'</span><span style="color: #8abeb7;">}</span><span style="color: #c5c8c6;">)</span>
@@ -216,8 +210,8 @@ Template System
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5"><span class="section-number-2">5</span> 第六章 Django站点管理</h2>
+<div id="outline-container-orgf834933" class="outline-2">
+<h2 id="orgf834933"><span class="section-number-2">5</span> 第六章 Django站点管理</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 火曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-23 Tue&gt;</span></span>
@@ -249,7 +243,6 @@ Template System
 Template paht:
 </p>
 <div class="org-src-container">
-
 <pre class="src src-python"><span style="color: #f0c674;">TEMPLATE_DIRS</span> = <span style="color: #c5c8c6;">(</span>
     <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".</span>
     <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">Always use forward slashes, even on Windows.</span>
@@ -262,7 +255,6 @@ Template paht:
 Static path
 </p>
 <div class="org-src-container">
-
 <pre class="src src-python"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">Additional locations of static files</span>
 <span style="color: #f0c674;">STATICFILES_DIRS</span> = <span style="color: #c5c8c6;">(</span>
     <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">Put strings here, like "/home/html/static" or "C:/www/django/static".</span>
@@ -280,7 +272,6 @@ Static path
 代码类似这样：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-python"><span style="color: #b5bd68;">from</span> django.contrib <span style="color: #b5bd68;">import</span> admin
 <span style="color: #b5bd68;">from</span> icecream.register.models <span style="color: #b5bd68;">import</span> User
 
@@ -292,8 +283,8 @@ admin.site.register<span style="color: #c5c8c6;">(</span>User<span style="color:
 </div>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-2">
-<h2 id="orgheadline6"><span class="section-number-2">6</span> 第七章 表单</h2>
+<div id="outline-container-org8d711a2" class="outline-2">
+<h2 id="org8d711a2"><span class="section-number-2">6</span> 第七章 表单</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 木曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-25 Thu&gt;</span></span>
@@ -301,7 +292,7 @@ admin.site.register<span style="color: #c5c8c6;">(</span>User<span style="color:
 
 <ul class="org-ul">
 <li>在创建contact的时候，我没有使用 <code>python manage.py startapp contact</code>
-    导致在写urls.py的时候老是提示找不到 <code>contact</code></li>
+导致在写urls.py的时候老是提示找不到 <code>contact</code></li>
 
 <li>自定义校验规则</li>
 </ul>
@@ -329,7 +320,7 @@ Django的form系统自动寻找匹配的函数方法,
 <li>定义Form样式</li>
 </ul>
 <pre class="example">
-     每一个字段部件(&lt;input type=”text”&gt;, &lt;select&gt;, &lt;textarea&gt;, 或者类似)都可以通过访问{{form.字段名}}进行单独的渲染。
+       每一个字段部件(&lt;input type=”text”&gt;, &lt;select&gt;, &lt;textarea&gt;, 或者类似)都可以通过访问{{form.字段名}}进行单独的渲染。
 </pre>
 
 <ul class="org-ul">
@@ -341,7 +332,6 @@ Django的form系统自动寻找匹配的函数方法,
 <li>CSRF verification failed. Request aborted.</li>
 </ol>
 <div class="org-src-container">
-
 <pre class="src src-python"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">views.py</span>
 <span style="color: #b5bd68;">from</span> django.template <span style="color: #b5bd68;">import</span> RequestContext
 <span style="color: #b5bd68;">return</span> render_to_response<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">'login.html'</span>, context_instance=RequestContext<span style="color: #8abeb7;">(</span>request<span style="color: #8abeb7;">)</span><span style="color: #c5c8c6;">)</span>
@@ -360,8 +350,8 @@ Reference:
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline7" class="outline-2">
-<h2 id="orgheadline7"><span class="section-number-2">7</span> 第八章 高级视图和URL配置</h2>
+<div id="outline-container-org91c85d0" class="outline-2">
+<h2 id="org91c85d0"><span class="section-number-2">7</span> 第八章 高级视图和URL配置</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 木曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-25 Thu&gt;</span></span>
@@ -377,7 +367,6 @@ Reference:
 下面使用无名组的URLconf例子：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-python"><span style="color: #b5bd68;">from</span> django.conf.urls.defaults <span style="color: #b5bd68;">import</span> *
 <span style="color: #b5bd68;">from</span> mysite <span style="color: #b5bd68;">import</span> views
 <span style="color: #f0c674;">urlpatterns</span> = patterns<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">''</span>,
@@ -391,7 +380,6 @@ Reference:
 下面相同的URLconf:
 </p>
 <div class="org-src-container">
-
 <pre class="src src-python"><span style="color: #b5bd68;">from</span> django.conf.urls.defaults <span style="color: #b5bd68;">import</span> *
 <span style="color: #b5bd68;">from</span> mysite <span style="color: #b5bd68;">import</span> views
 <span style="color: #f0c674;">urlpatterns</span> = patterns<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">''</span>,
@@ -407,7 +395,6 @@ Reference:
 将会等同于这样的函数调用:
 </p>
 <div class="org-src-container">
-
 <pre class="src src-python">month_archive<span style="color: #c5c8c6;">(</span>request, <span style="color: #8abeb7;">'2006'</span>, <span style="color: #8abeb7;">'03'</span><span style="color: #c5c8c6;">)</span>
 </pre>
 </div>
@@ -416,7 +403,6 @@ Reference:
 而带命名组,同样的请求就会变成这样的函数调用:
 </p>
 <div class="org-src-container">
-
 <pre class="src src-python">month_archive<span style="color: #c5c8c6;">(</span>request, year=<span style="color: #8abeb7;">'2006'</span>, month=<span style="color: #8abeb7;">'03'</span><span style="color: #c5c8c6;">)</span>
 </pre>
 </div></li>
@@ -427,7 +413,6 @@ URLconf里面的每一个模式都可以包含第三个数据: 一个关键字�
 有了这个概念以后,我们就可以把我们现在的例子改写成这样:
 </p>
 <div class="org-src-container">
-
 <pre class="src src-python"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">urls.py</span>
 <span style="color: #b5bd68;">from</span> django.conf.urls.defaults <span style="color: #b5bd68;">import</span> *
 <span style="color: #b5bd68;">from</span> mysite <span style="color: #b5bd68;">import</span> views
@@ -453,7 +438,6 @@ URLconf里面的每一个模式都可以包含第三个数据: 一个关键字�
 这个URL等价于 <i>mydata/jan/06</i> 。这时你可以这样利用额外URLconf参数:
 </p>
 <div class="org-src-container">
-
 <pre class="src src-python"><span style="color: #f0c674;">urlpatterns</span> = patterns<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">''</span>,
     <span style="color: #8abeb7;">(</span>r<span style="color: #8abeb7;">'^mydata/birthday/$'</span>, views.my_view, <span style="color: #f0c674;">{</span><span style="color: #8abeb7;">'month'</span>: <span style="color: #8abeb7;">'jan'</span>, <span style="color: #8abeb7;">'day'</span>: <span style="color: #8abeb7;">'06'</span><span style="color: #f0c674;">}</span><span style="color: #8abeb7;">)</span>,
     <span style="color: #8abeb7;">(</span>r<span style="color: #8abeb7;">'^mydata/(?P&lt;month&gt;\w{3})/(?P&lt;day&gt;\d\d)/$'</span>, views.my_view<span style="color: #8abeb7;">)</span>,
@@ -474,8 +458,8 @@ month和day
 </div>
 </div>
 
-<div id="outline-container-orgheadline8" class="outline-2">
-<h2 id="orgheadline8"><span class="section-number-2">8</span> 第九章 模板高级进阶</h2>
+<div id="outline-container-org6b2da58" class="outline-2">
+<h2 id="org6b2da58"><span class="section-number-2">8</span> 第九章 模板高级进阶</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 木曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-05-07 Tue&gt;</span></span>
@@ -492,7 +476,6 @@ month和day
 用safe过滤器为单独的变量关闭自动转意：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-python">This will be escaped: <span style="color: #c5c8c6;">{</span><span style="color: #8abeb7;">{</span> data <span style="color: #8abeb7;">}</span><span style="color: #c5c8c6;">}</span>
 This will <span style="color: #b5bd68;">not</span> be escaped: <span style="color: #c5c8c6;">{</span><span style="color: #8abeb7;">{</span> data|safe <span style="color: #8abeb7;">}</span><span style="color: #c5c8c6;">}</span>
 </pre>
@@ -503,7 +486,6 @@ This will <span style="color: #b5bd68;">not</span> be escaped: <span style="colo
 里，如果数据包含''，那么输出会变成：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-python">This will be escaped: &amp;lt;b&amp;gt;
 This will <span style="color: #b5bd68;">not</span> be escaped: &lt;b&gt;
 </pre>
@@ -518,7 +500,6 @@ This will <span style="color: #b5bd68;">not</span> be escaped: &lt;b&gt;
 为了控制模板的自动转意,用标签 <code>autoescape</code> 来包装整个模板(或者模板中常用的部分),就像这样：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-python"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&amp;#37; = % &amp;#123; = {</span>
 <span style="color: #c5c8c6;">{</span>&amp;<span style="color: #969896; font-style: italic;">#</span><span style="color: #969896; font-style: italic;">37; autoescape off &amp;#37;}</span>
 Hello <span style="color: #8abeb7;">{</span>&amp;<span style="color: #969896; font-style: italic;">#</span><span style="color: #969896; font-style: italic;">123; name &amp;#123;}</span>
@@ -547,8 +528,8 @@ select<sub>template</sub> 很像get<sub>template</sub> ，不过它是以模板�
 </div>
 </div>
 
-<div id="outline-container-orgheadline9" class="outline-2">
-<h2 id="orgheadline9"><span class="section-number-2">9</span> 第十章 数据模型高级进阶</h2>
+<div id="outline-container-org3e0f00c" class="outline-2">
+<h2 id="org3e0f00c"><span class="section-number-2">9</span> 第十章 数据模型高级进阶</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 土曜日<span class="timestamp-wrapper"><span class="timestamp">&lt;2013-05-11 Sat&gt;</span></span>
@@ -558,7 +539,6 @@ select<sub>template</sub> 很像get<sub>template</sub> ，不过它是以模板�
 打开Session功能：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-python"><span style="color: #b294bb;">'django.contrib.sessions.middleware.SessionMiddleware'</span>
 
 INSTALLED_APPS &#20013;&#26377; <span style="color: #8abeb7;">'django.contrib.sessions'</span>
@@ -594,21 +574,20 @@ INSTALLED_APPS &#20013;&#26377; <span style="color: #8abeb7;">'django.contrib.se
 </ol>
 </div>
 </div>
-<div id="outline-container-orgheadline12" class="outline-2">
-<h2 id="orgheadline12"><span class="section-number-2">10</span> 第十二章 部署Django</h2>
+<div id="outline-container-org313ba3f" class="outline-2">
+<h2 id="org313ba3f"><span class="section-number-2">10</span> 第十二章 部署Django</h2>
 <div class="outline-text-2" id="text-10">
-</div><div id="outline-container-orgheadline11" class="outline-3">
-<h3 id="orgheadline11"><span class="section-number-3">10.1</span> Linux</h3>
+</div><div id="outline-container-org551d2eb" class="outline-3">
+<h3 id="org551d2eb"><span class="section-number-3">10.1</span> Linux</h3>
 <div class="outline-text-3" id="text-10-1">
-</div><div id="outline-container-orgheadline10" class="outline-4">
-<h4 id="orgheadline10"><span class="section-number-4">10.1.1</span> mod<sub>wsgi</sub></h4>
+</div><div id="outline-container-orgcb8026f" class="outline-4">
+<h4 id="orgcb8026f"><span class="section-number-4">10.1.1</span> mod<sub>wsgi</sub></h4>
 <div class="outline-text-4" id="text-10-1-1">
 <ol class="org-ol">
 <li><p>
 Install it on Ubuntu12.04
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">sudo aptitude install libapache2-mod-wsgi
 </pre>
 </div></li>
@@ -616,7 +595,6 @@ Install it on Ubuntu12.04
 Install from source
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">mkdir ~/sources
 <span style="color: #b294bb;">cd</span> ~/sources
 wget http://modwsgi.googlecode.com/files/mod_wsgi-3.3.tar.gz
@@ -632,8 +610,8 @@ sudo aptitude install python-dev apache2-prefork-dev
 </div>
 </div>
 
-<div id="outline-container-orgheadline13" class="outline-2">
-<h2 id="orgheadline13"><span class="section-number-2">11</span> Q&amp;A</h2>
+<div id="outline-container-org97b71c1" class="outline-2">
+<h2 id="org97b71c1"><span class="section-number-2">11</span> Q&amp;A</h2>
 <div class="outline-text-2" id="text-11">
 <ol class="org-ol">
 <li><p>
@@ -652,7 +630,6 @@ A: <b>始终记住，django使用模型时创建数据库会多创建一列，id
 无论是否有主键，都有id列的存在。因此在插入数据的时候，必须写明要插入的列。例如：</b>
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sql"><span style="color: #969896; font-style: italic;">-- &#22312;&#31532;&#19968;&#21015;&#26159;id&#21015;&#65292;&#33258;&#22686;&#38271;&#12290;</span>
 <span style="color: #b5bd68;">INSERT</span> <span style="color: #b5bd68;">INTO</span> tb_realtime_data<span style="color: #c5c8c6;">(</span>node_id, sensor_id, <span style="color: #b5bd68;">data</span>, insert_time<span style="color: #c5c8c6;">)</span> <span style="color: #b5bd68;">VALUES</span> <span style="color: #c5c8c6;">(</span>
     <span style="color: #b5bd68;">new</span>.node_id,
@@ -671,7 +648,6 @@ A: 都是使用 <code>.</code> 运算符，例如：
 Python代码
 </p>
 <div class="org-src-container">
-
 <pre class="src src-python"><span style="color: #f0c674;">contents</span> = <span style="color: #c5c8c6;">{</span>
     <span style="color: #8abeb7;">"home"</span>: &#20027;&#39029;,
     <span style="color: #8abeb7;">"about"</span>: &#20851;&#20110;,
@@ -683,7 +659,6 @@ Python代码
 模板
 </p>
 <div class="org-src-container">
-
 <pre class="src src-html">{% for k, v in contents.items %}
 &lt;<span style="color: #de935f;">li</span>&gt;&lt;<span style="color: #de935f;">a</span> <span style="color: #f0c674;">href</span>=<span style="color: #8abeb7;">"/nori/{{ k }}"</span>&gt;{{ v }}&lt;/<span style="color: #de935f;">a</span>&gt;&lt;/<span style="color: #de935f;">li</span>&gt;
 {% endfor %}
@@ -703,7 +678,6 @@ A: 使用 <code>.</code> 运算符
 Python代码
 </p>
 <div class="org-src-container">
-
 <pre class="src src-python"><span style="color: #b294bb;">'contents'</span>: <span style="color: #c5c8c6;">(</span>
     <span style="color: #8abeb7;">(</span><span style="color: #b294bb;">"home"</span>, <span style="color: #b294bb;">"&#20027;&#39029;"</span><span style="color: #8abeb7;">)</span>,
     <span style="color: #8abeb7;">(</span><span style="color: #b294bb;">"node"</span>, <span style="color: #b294bb;">"&#33410;&#28857;"</span><span style="color: #8abeb7;">)</span>,
@@ -715,7 +689,6 @@ Python代码
 模板
 </p>
 <div class="org-src-container">
-
 <pre class="src src-html">{% for v in contents %}
 &lt;<span style="color: #de935f;">li</span>&gt;&lt;<span style="color: #de935f;">a</span> <span style="color: #f0c674;">href</span>=<span style="color: #8abeb7;">"/nori/{{ v.0 }}"</span>&gt;{{ v.1 }}&lt;/<span style="color: #de935f;">a</span>&gt;&lt;/<span style="color: #de935f;">li</span>&gt;
 {% endfor %}
@@ -729,10 +702,10 @@ Python代码
 <div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
 <p class="date">2013-04-14</p>
-<p class="export-date">2016-11-07 Mon 15:59</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="export-date">2016-11-10 Thu 13:03</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.0)</p>
 <p class="validation"></p>
-<p class="last-modification-time">2016-11-03 Thu 14:37</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
+<p class="last-modification-time">2016-11-10 Thu 12:43</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

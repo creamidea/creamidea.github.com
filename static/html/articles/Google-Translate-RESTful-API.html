@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<!-- 2016-11-07 Mon 15:59 -->
-<meta  charset="utf-8">
-<meta  name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2016-11-10 Thu 13:03 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Google Translation API Analysis</title>
-<meta  name="generator" content="Org-mode">
-<meta  name="author" content="冰糖火箭筒(Junjia Ni)">
-<meta  name="description" content="Google Translate API Analysis"
+<meta name="generator" content="Org mode">
+<meta name="author" content="冰糖火箭筒(Junjia Ni)">
+<meta name="description" content="Google Translate API Analysis"
 >
-<meta  name="keywords" content="google-translate">
+<meta name="keywords" content="google-translate">
 <link rel="stylesheet" type="text/css" href="/static/article.css"><!--[if lt IE 9]>
 <script src="/static/libs/html5shiv.min.js"></script>
 <![endif]-->
@@ -22,10 +22,10 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. 前言</a></li>
-<li><a href="#orgheadline2">2. 翻译</a></li>
-<li><a href="#orgheadline3">3. 语音</a></li>
-<li><a href="#orgheadline4">4. 尾声</a></li>
+<li><a href="#org65235b7">1. 前言</a></li>
+<li><a href="#org98ef4a2">2. 翻译</a></li>
+<li><a href="#org1ae3e47">3. 语音</a></li>
+<li><a href="#org95757f2">4. 尾声</a></li>
 </ul>
 </div>
 </nav>
@@ -40,8 +40,8 @@ lazy-load alt="Google Translate" title="Google Translate"/>
 </div>
 
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
+<div id="outline-container-org65235b7" class="outline-2">
+<h2 id="org65235b7"><span class="section-number-2">1</span> 前言</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 为了实现一个本地单词测试系统 <a href="https://github.com/creamidea/MemorizingWords">MemorizingWords</a> （大致就是给定单词读音，用户反应出该单词的拼写和意思，然后校验）。
@@ -70,11 +70,10 @@ Google 的所有页面都是经过压缩的，HTML 页面也不例外。研究�
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2"><span class="section-number-2">2</span> 翻译</h2>
+<div id="outline-container-org98ef4a2" class="outline-2">
+<h2 id="org98ef4a2"><span class="section-number-2">2</span> 翻译</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
-
 <pre class="src src-restful">GET https://translate.google.cn/translate_a/single?client=t&amp;sl=en&amp;tl=${tl}&amp;hl=en&amp;dt=at&amp;dt=bd&amp;dt=ex&amp;dt=ld&amp;dt=md&amp;dt=qca&amp;dt=rw&amp;dt=rm&amp;dt=ss&amp;dt=t&amp;ie=UTF-8&amp;oe=UTF-8&amp;source=btn&amp;rom=1&amp;srcrom=1&amp;ssel=3&amp;tsel=6&amp;kc=0&amp;tk=${tk(word)}&amp;q=${encodeURIComponent(word)}
 </pre>
 </div>
@@ -94,7 +93,6 @@ Google 的所有页面都是经过压缩的，HTML 页面也不例外。研究�
 其中生成 <code>tk</code> (Token) 的方法函数如下。详细代码请戳 <a href="https://github.com/creamidea/MemorizingWords/blob/master/libs/goog-utils.js">这里</a>
 </p>
 <div class="org-src-container">
-
 <pre class="src src-js"><span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">oM</span> = <span style="color: #b5bd68;">function</span><span style="color: #c5c8c6;">(</span><span style="color: #f0c674;">a</span><span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
   <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">b</span>;
   <span style="color: #b5bd68;">if</span> <span style="color: #8abeb7;">(</span><span style="color: #81a2be;">null</span>  !== nM<span style="color: #8abeb7;">)</span>
@@ -135,7 +133,6 @@ Google 的所有页面都是经过压缩的，HTML 页面也不例外。研究�
 转换核心是用 <code>eval</code> 函数。这个真是出乎我的意料，真是找了好久。
 </p>
 <div class="org-src-container">
-
 <pre class="src src-js"><span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">Pb</span> = <span style="color: #8abeb7;">"("</span>, <span style="color: #f0c674;">Ub</span> = <span style="color: #8abeb7;">")"</span>
 <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">TK</span> = <span style="color: #b5bd68;">function</span><span style="color: #c5c8c6;">(</span><span style="color: #f0c674;">a</span><span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
   <span style="color: #b5bd68;">return</span> eval<span style="color: #8abeb7;">(</span>Pb + a + Ub<span style="color: #8abeb7;">)</span>
@@ -148,8 +145,8 @@ Google 的所有页面都是经过压缩的，HTML 页面也不例外。研究�
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3"><span class="section-number-2">3</span> 语音</h2>
+<div id="outline-container-org1ae3e47" class="outline-2">
+<h2 id="org1ae3e47"><span class="section-number-2">3</span> 语音</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 相对翻译数据来说，获取语音的接口就相对容易一些了。
@@ -159,7 +156,6 @@ Google 的所有页面都是经过压缩的，HTML 页面也不例外。研究�
 Translate 页面接口
 </p>
 <div class="org-src-container">
-
 <pre class="src src-restful">GET https://translate.google.cn/translate_tts?ie=UTF-8&amp;total=1&amp;idx=0&amp;client=t&amp;tl=en$(tk(word))&amp;q=encodeURIComponent(word)
 </pre>
 </div>
@@ -181,7 +177,6 @@ Translate 页面接口
 另外，在 Google 搜索页面也有一个语音接口
 </p>
 <div class="org-src-container">
-
 <pre class="src src-restful">GET https://ssl.gstatic.com/dictionary/static/sounds/de/0/[your-word-x].mp3
 </pre>
 </div>
@@ -191,8 +186,8 @@ Translate 页面接口
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-2">
-<h2 id="orgheadline4"><span class="section-number-2">4</span> 尾声</h2>
+<div id="outline-container-org95757f2" class="outline-2">
+<h2 id="org95757f2"><span class="section-number-2">4</span> 尾声</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 谷歌翻译页面的源代码被 Google 精心处理过，上述接口我也是花费了一个下午才排查出来。还有就是运气好，让我比较快速的找到了数据入口函数，不然真的很难破解。
@@ -217,10 +212,10 @@ Translate 页面接口
 <div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
 <p class="date">2016-05-08</p>
-<p class="export-date">2016-11-07 Mon 15:59</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="export-date">2016-11-10 Thu 13:03</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.0)</p>
 <p class="validation"></p>
-<p class="last-modification-time">2016-11-03 Thu 14:37</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
+<p class="last-modification-time">2016-11-10 Thu 12:43</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

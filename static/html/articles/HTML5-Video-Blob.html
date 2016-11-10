@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<!-- 2016-11-07 Mon 15:59 -->
-<meta  charset="utf-8">
-<meta  name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2016-11-10 Thu 13:03 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HTML5 Video Blob 初探</title>
-<meta  name="generator" content="Org-mode">
-<meta  name="author" content="冰糖火箭筒(Junjia Ni)">
-<meta  name="description" content="HTML5 Video Blob 初探"
+<meta name="generator" content="Org mode">
+<meta name="author" content="冰糖火箭筒(Junjia Ni)">
+<meta name="description" content="HTML5 Video Blob 初探"
 >
-<meta  name="keywords" content="html5,video,blob,js,MediaSource,createObjectURL,mp4,flv">
+<meta name="keywords" content="html5,video,blob,js,MediaSource,createObjectURL,mp4,flv">
 <link rel="stylesheet" type="text/css" href="/static/article.css"><!--[if lt IE 9]>
 <script src="/static/libs/html5shiv.min.js"></script>
 <![endif]-->
@@ -22,9 +22,9 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. 前言</a></li>
-<li><a href="#orgheadline2">2. 答案</a></li>
-<li><a href="#orgheadline3">3. 尾声</a></li>
+<li><a href="#org6e7e49b">1. 前言</a></li>
+<li><a href="#org1cef0cf">2. 答案</a></li>
+<li><a href="#orge6046a1">3. 尾声</a></li>
 </ul>
 </div>
 </nav>
@@ -38,15 +38,14 @@ lazy-load alt="Video-Blob" title="Video-Blob"/>
 <p class="title-img-p">题图来自网络</p>
 </div>
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
+<div id="outline-container-org6e7e49b" class="outline-2">
+<h2 id="org6e7e49b"><span class="section-number-2">1</span> 前言</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 现在看到任何我感兴趣的网页都会习惯性的打开调试工具，看看其代码写的怎么样。
 有一天，看到了这句 HTML。
 </p>
 <div class="org-src-container">
-
 <pre class="src src-html">&lt;<span style="color: #de935f;">video</span> <span style="color: #f0c674;">src</span>=<span style="color: #8abeb7;">"blob:http://www.bilibili.com/d0823f0f-2b2a-4fd6-a93a-e4c82173c107"</span>&gt;&lt;/<span style="color: #de935f;">video</span>&gt;
 </pre>
 </div>
@@ -60,8 +59,8 @@ lazy-load alt="Video-Blob" title="Video-Blob"/>
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2"><span class="section-number-2">2</span> 答案</h2>
+<div id="outline-container-org1cef0cf" class="outline-2">
+<h2 id="org1cef0cf"><span class="section-number-2">2</span> 答案</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 直到我找到这个问题的回答 <a href="http://stackoverflow.com/a/14360868/1925954">Display a video from a Blob Javascript</a> 。才开始明白这是怎么一回事。
@@ -71,7 +70,6 @@ lazy-load alt="Video-Blob" title="Video-Blob"/>
 直接上代码：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-js"><span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">video</span> = document.querySelector<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">'video'</span><span style="color: #c5c8c6;">)</span>;
 <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">mediaSource</span> = <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">MediaSource</span>;
 video.src = URL.createObjectURL<span style="color: #c5c8c6;">(</span>mediaSource<span style="color: #c5c8c6;">)</span>;
@@ -106,8 +104,8 @@ mediaSource.addEventListener<span style="color: #c5c8c6;">(</span><span style="c
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3"><span class="section-number-2">3</span> 尾声</h2>
+<div id="outline-container-orge6046a1" class="outline-2">
+<h2 id="orge6046a1"><span class="section-number-2">3</span> 尾声</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 综上，这个只是 HTML5 提供的新特性，但是截止目前还是处于试验状态。可是，现在已经有许多的厂商开始使用，比如 B 站，比如 YouTube。
@@ -124,10 +122,10 @@ mediaSource.addEventListener<span style="color: #c5c8c6;">(</span><span style="c
 <div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
 <p class="date">2016-10-19</p>
-<p class="export-date">2016-11-07 Mon 15:59</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="export-date">2016-11-10 Thu 13:03</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.0)</p>
 <p class="validation"></p>
-<p class="last-modification-time">2016-11-03 Thu 14:37</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
+<p class="last-modification-time">2016-11-10 Thu 12:43</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

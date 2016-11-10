@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<!-- 2016-11-07 Mon 15:59 -->
-<meta  charset="utf-8">
-<meta  name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2016-11-10 Thu 13:03 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Browser and Server Sync (Polling, Comet, Long Polling, WebSocket)</title>
-<meta  name="generator" content="Org-mode">
-<meta  name="author" content="Junjia Ni">
-<meta  name="keywords" content="polling,commet,long-polling,websocket,nodejs,javascript,coffeescript,python">
+<meta name="generator" content="Org mode">
+<meta name="author" content="Junjia Ni">
+<meta name="keywords" content="polling,commet,long-polling,websocket,nodejs,javascript,coffeescript,python">
 <link rel="stylesheet" type="text/css" href="/static/article.css"><!--[if lt IE 9]>
 <script src="/static/libs/html5shiv.min.js"></script>
 <![endif]-->
@@ -20,26 +20,26 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. 前言</a></li>
-<li><a href="#orgheadline4">2. 环境的搭建</a>
+<li><a href="#orgf3db64c">1. 前言</a></li>
+<li><a href="#orgc01b4e0">2. 环境的搭建</a>
 <ul>
-<li><a href="#orgheadline2">2.1. Flask</a></li>
-<li><a href="#orgheadline3">2.2. Nodejs</a></li>
+<li><a href="#org464c08b">2.1. Flask</a></li>
+<li><a href="#org9ef97e8">2.2. Nodejs</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline5">3. Polling</a></li>
-<li><a href="#orgheadline6">4. Comet</a></li>
-<li><a href="#orgheadline7">5. Long Polling</a></li>
-<li><a href="#orgheadline8">6. WebSocket</a></li>
-<li><a href="#orgheadline9">7. Socket.IO</a></li>
-<li><a href="#orgheadline10">8. 后记</a></li>
+<li><a href="#org5b534ad">3. Polling</a></li>
+<li><a href="#org101c684">4. Comet</a></li>
+<li><a href="#orgb01d522">5. Long Polling</a></li>
+<li><a href="#org5d265cf">6. WebSocket</a></li>
+<li><a href="#orga3f426d">7. Socket.IO</a></li>
+<li><a href="#org644a0a0">8. 后记</a></li>
 </ul>
 </div>
 </nav>
 
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
+<div id="outline-container-orgf3db64c" class="outline-2">
+<h2 id="orgf3db64c"><span class="section-number-2">1</span> 前言</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 这只是一篇简单介绍浏览器与服务器之间的实时数据交换的方法。
@@ -59,11 +59,11 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-2">
-<h2 id="orgheadline4"><span class="section-number-2">2</span> 环境的搭建</h2>
+<div id="outline-container-orgc01b4e0" class="outline-2">
+<h2 id="orgc01b4e0"><span class="section-number-2">2</span> 环境的搭建</h2>
 <div class="outline-text-2" id="text-2">
-</div><div id="outline-container-orgheadline2" class="outline-3">
-<h3 id="orgheadline2"><span class="section-number-3">2.1</span> Flask</h3>
+</div><div id="outline-container-org464c08b" class="outline-3">
+<h3 id="org464c08b"><span class="section-number-3">2.1</span> Flask</h3>
 <div class="outline-text-3" id="text-2-1">
 <ol class="org-ol">
 <li>Install
@@ -75,8 +75,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3"><span class="section-number-3">2.2</span> Nodejs</h3>
+<div id="outline-container-org9ef97e8" class="outline-3">
+<h3 id="org9ef97e8"><span class="section-number-3">2.2</span> Nodejs</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 关于如何安装 <a href="http://nodejs.org/">nodejs</a> 以及如何使用我在此不多累述。官方文档写的很详细。
@@ -92,7 +92,6 @@
 我的做法只是用来其中的一条命令：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">$ sudo npm install -g js2coffee
 </pre>
 </div>
@@ -100,7 +99,6 @@
 将express生成的app.js转成了app.coffee，然后将 package.json 中的
 </p>
 <div class="org-src-container">
-
 <pre class="src src-js"><span style="color: #8abeb7;">"start"</span>: <span style="color: #8abeb7;">"node app.js"</span>
 </pre>
 </div>
@@ -108,7 +106,6 @@
 变成了：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-js"><span style="color: #8abeb7;">"start"</span>: <span style="color: #8abeb7;">"coffee app.coffee"</span>
 </pre>
 </div>
@@ -120,8 +117,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5"><span class="section-number-2">3</span> Polling</h2>
+<div id="outline-container-org5b534ad" class="outline-2">
+<h2 id="org5b534ad"><span class="section-number-2">3</span> Polling</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 这是轮询的方式，是一种很常见的解决方案。然后我这里没有写代码。
@@ -129,16 +126,16 @@
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline6" class="outline-2">
-<h2 id="orgheadline6"><span class="section-number-2">4</span> Comet</h2>
+<div id="outline-container-org101c684" class="outline-2">
+<h2 id="org101c684"><span class="section-number-2">4</span> Comet</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 等待填坑……
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline7" class="outline-2">
-<h2 id="orgheadline7"><span class="section-number-2">5</span> Long Polling</h2>
+<div id="outline-container-orgb01d522" class="outline-2">
+<h2 id="orgb01d522"><span class="section-number-2">5</span> Long Polling</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 长轮询方式。
@@ -147,16 +144,16 @@
 <script src="https://gist.github.com/creamidea/6114508.js"></script>
 </div>
 </div>
-<div id="outline-container-orgheadline8" class="outline-2">
-<h2 id="orgheadline8"><span class="section-number-2">6</span> WebSocket</h2>
+<div id="outline-container-org5d265cf" class="outline-2">
+<h2 id="org5d265cf"><span class="section-number-2">6</span> WebSocket</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 等待填坑……
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline9" class="outline-2">
-<h2 id="orgheadline9"><span class="section-number-2">7</span> Socket.IO</h2>
+<div id="outline-container-orga3f426d" class="outline-2">
+<h2 id="orga3f426d"><span class="section-number-2">7</span> Socket.IO</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 <b><b>Socket.IO</b></b> 这个我个人感觉不错，支持的浏览器也很多，然后使用的是nodejs。
@@ -174,8 +171,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline10" class="outline-2">
-<h2 id="orgheadline10"><span class="section-number-2">8</span> 后记</h2>
+<div id="outline-container-org644a0a0" class="outline-2">
+<h2 id="org644a0a0"><span class="section-number-2">8</span> 后记</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 然后接下来需要思考的是数据库更新，如何通知web服务器发送更新数据？
@@ -188,10 +185,10 @@
 <div id="meta-article"><p class="author">Junjia Ni</p>
 <p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
 <p class="date">2013-07-30</p>
-<p class="export-date">2016-11-07 Mon 15:59</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="export-date">2016-11-10 Thu 13:03</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.0)</p>
 <p class="validation"></p>
-<p class="last-modification-time">2016-10-23 Sun 23:09</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
+<p class="last-modification-time">2016-11-10 Thu 12:43</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

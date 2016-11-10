@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<!-- 2016-11-07 Mon 15:59 -->
-<meta  charset="utf-8">
-<meta  name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2016-11-10 Thu 13:03 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How To Create Article Contents By JS And CSS</title>
-<meta  name="generator" content="Org-mode">
-<meta  name="author" content="冰糖火箭筒(Junjia Ni)">
-<meta  name="description" content="如何创建文章目录"
+<meta name="generator" content="Org mode">
+<meta name="author" content="冰糖火箭筒(Junjia Ni)">
+<meta name="description" content="如何创建文章目录"
 >
-<meta  name="keywords" content="javascript,css">
+<meta name="keywords" content="javascript,css">
 <link rel="stylesheet" type="text/css" href="/static/article.css"><!--[if lt IE 9]>
 <script src="/static/libs/html5shiv.min.js"></script>
 <![endif]-->
@@ -22,21 +22,21 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. 前言</a></li>
-<li><a href="#orgheadline5">2. 动态生成文章目录过程</a>
+<li><a href="#orge3004f9">1. 前言</a></li>
+<li><a href="#org66c7fb7">2. 动态生成文章目录过程</a>
 <ul>
-<li><a href="#orgheadline2">2.1. 编程思路</a></li>
-<li><a href="#orgheadline3">2.2. js部分代码</a></li>
-<li><a href="#orgheadline4">2.3. css部分代码</a></li>
+<li><a href="#orga77428b">2.1. 编程思路</a></li>
+<li><a href="#orga135b43">2.2. js部分代码</a></li>
+<li><a href="#org8c60f36">2.3. css部分代码</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline6">3. 利用纯CSS实现目录功能</a></li>
+<li><a href="#org2666597">3. 利用纯CSS实现目录功能</a></li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
+<div id="outline-container-orge3004f9" class="outline-2">
+<h2 id="orge3004f9"><span class="section-number-2">1</span> 前言</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 在搭建此次博客时，很想用javascript生成文章的目录，方便阅读，本来自己写了一个，
@@ -46,11 +46,11 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5"><span class="section-number-2">2</span> 动态生成文章目录过程</h2>
+<div id="outline-container-org66c7fb7" class="outline-2">
+<h2 id="org66c7fb7"><span class="section-number-2">2</span> 动态生成文章目录过程</h2>
 <div class="outline-text-2" id="text-2">
-</div><div id="outline-container-orgheadline2" class="outline-3">
-<h3 id="orgheadline2"><span class="section-number-3">2.1</span> 编程思路</h3>
+</div><div id="outline-container-orga77428b" class="outline-3">
+<h3 id="orga77428b"><span class="section-number-3">2.1</span> 编程思路</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 总体上，思路就是你想的那个样子：
@@ -69,15 +69,14 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3"><span class="section-number-3">2.2</span> js部分代码</h3>
+<div id="outline-container-orga135b43" class="outline-3">
+<h3 id="orga135b43"><span class="section-number-3">2.2</span> js部分代码</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 由于js部分有些许长，这里直接给出我repo中的<a href="https://github.com/creamidea/creamidea.github.com/blob/master/_includes/article_contents.html">生成目录JS代码</a>.
 下面只是贴出如何提取出标题内容的js代码
 </p>
 <div class="org-src-container">
-
 <pre class="src src-js">$.each<span style="color: #c5c8c6;">(</span>$<span style="color: #8abeb7;">(</span><span style="color: #8abeb7;">'h2,h3'</span><span style="color: #8abeb7;">)</span>,<span style="color: #b5bd68;">function</span><span style="color: #8abeb7;">(</span><span style="color: #f0c674;">index</span>,<span style="color: #f0c674;">item</span><span style="color: #8abeb7;">){</span>
     <span style="color: #b5bd68;">if</span><span style="color: #f0c674;">(</span>item.tagName.toLowerCase<span style="color: #b5bd68;">()</span> == <span style="color: #8abeb7;">'h2'</span><span style="color: #f0c674;">){</span>
           <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">h2item</span> = <span style="color: #b5bd68;">{}</span>;
@@ -105,11 +104,10 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4"><span class="section-number-3">2.3</span> css部分代码</h3>
+<div id="outline-container-org8c60f36" class="outline-3">
+<h3 id="org8c60f36"><span class="section-number-3">2.3</span> css部分代码</h3>
 <div class="outline-text-3" id="text-2-3">
 <div class="org-src-container">
-
 <pre class="src src-css"><span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">Article Contents </span><span style="color: #969896; font-style: italic;">*/</span>
 <span style="color: #de935f;">#menuIndex </span><span style="color: #c5c8c6;">{</span>
     <span style="color: #f0c674;">position</span>: fixed;
@@ -156,8 +154,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-2">
-<h2 id="orgheadline6"><span class="section-number-2">3</span> 利用纯CSS实现目录功能</h2>
+<div id="outline-container-org2666597" class="outline-2">
+<h2 id="org2666597"><span class="section-number-2">3</span> 利用纯CSS实现目录功能</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 这个也是我最近在学习org-mode的时候看到的。
@@ -167,7 +165,6 @@
 org-mode在生成html的时候会自动生成一个目录，html代码（我的第一篇文章）如下：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-html">&lt;<span style="color: #de935f;">div</span> <span style="color: #f0c674;">id</span>=<span style="color: #8abeb7;">"table-of-contents"</span>&gt;
   &lt;<span style="color: #de935f;">h2</span>&gt;<span style="font-weight: bold; font-style: italic; text-decoration: underline;">Table of Contents</span>&lt;/<span style="color: #de935f;">h2</span>&gt;
   &lt;<span style="color: #de935f;">div</span> <span style="color: #f0c674;">id</span>=<span style="color: #8abeb7;">"text-table-of-contents"</span>&gt;
@@ -215,7 +212,6 @@ org-mode在生成html的时候会自动生成一个目录，html代码（我的�
 可以很清楚的知道文章结构，然后利用<a href="http://orgmode.org/org.html">The Org Manual</a>目录CSS，代码如下：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-css"><span style="color: #de935f;">#table-of-contents </span><span style="color: #c5c8c6;">{</span>
     <span style="color: #f0c674;">font-size</span>: 9pt;
     <span style="color: #f0c674;">position</span>: fixed;
@@ -276,8 +272,8 @@ org-mode在生成html的时候会自动生成一个目录，html代码（我的�
 <div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
 <p class="date">2013-02-13</p>
-<p class="export-date">2016-11-07 Mon 15:59</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="export-date">2016-11-10 Thu 13:03</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.0)</p>
 <p class="validation"></p>
 <p class="last-modification-time">2016-10-23 Sun 23:09</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
 </div>

@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<!-- 2016-11-07 Mon 15:59 -->
-<meta  charset="utf-8">
-<meta  name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2016-11-10 Thu 13:03 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Storm Tutorial</title>
-<meta  name="generator" content="Org-mode">
-<meta  name="author" content="蜂蜜甜甜圈(Yi Ou)">
-<meta  name="description" content="Storm手册翻译"
+<meta name="generator" content="Org mode">
+<meta name="author" content="蜂蜜甜甜圈(Yi Ou)">
+<meta name="description" content="Storm手册翻译"
 >
-<meta  name="keywords" content="storm,tutorial,java">
+<meta name="keywords" content="storm,tutorial,java">
 <link rel="stylesheet" type="text/css" href="/static/article.css"><!--[if lt IE 9]>
 <script src="/static/libs/html5shiv.min.js"></script>
 <![endif]-->
@@ -22,20 +22,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. 序</a></li>
-<li><a href="#orgheadline2">2. 预备</a></li>
-<li><a href="#orgheadline3">3. Storm集群</a></li>
-<li><a href="#orgheadline4">4. 拓扑结构</a></li>
-<li><a href="#orgheadline5">5. 流</a></li>
-<li><a href="#orgheadline6">6. 数据模型</a></li>
-<li><a href="#orgheadline7">7. 一个简单的拓扑示例</a></li>
-<li><a href="#orgheadline8">8. 在本地模式下运行上述示例</a></li>
-<li><a href="#orgheadline9">9. 流分组</a></li>
-<li><a href="#orgheadline10">10. 用其它编程语言定义Bolts</a></li>
-<li><a href="#orgheadline11">11. 保证消息处理</a></li>
-<li><a href="#orgheadline12">12. 事务性拓扑</a></li>
-<li><a href="#orgheadline13">13. 分布式RPC</a></li>
-<li><a href="#orgheadline14">14. 结论</a></li>
+<li><a href="#org3c41ca8">1. 序</a></li>
+<li><a href="#org7edfbde">2. 预备</a></li>
+<li><a href="#org0047e8e">3. Storm集群</a></li>
+<li><a href="#org989e338">4. 拓扑结构</a></li>
+<li><a href="#org8151324">5. 流</a></li>
+<li><a href="#org4679bdd">6. 数据模型</a></li>
+<li><a href="#org254ff21">7. 一个简单的拓扑示例</a></li>
+<li><a href="#org09c3284">8. 在本地模式下运行上述示例</a></li>
+<li><a href="#orgc4ce4e8">9. 流分组</a></li>
+<li><a href="#org87b74ee">10. 用其它编程语言定义Bolts</a></li>
+<li><a href="#orgcbe7758">11. 保证消息处理</a></li>
+<li><a href="#org86052c5">12. 事务性拓扑</a></li>
+<li><a href="#orgbf6f5f2">13. 分布式RPC</a></li>
+<li><a href="#org37a7e56">14. 结论</a></li>
 </ul>
 </div>
 </nav>
@@ -49,8 +49,8 @@
 </div>
 
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> 序</h2>
+<div id="outline-container-org3c41ca8" class="outline-2">
+<h2 id="org3c41ca8"><span class="section-number-2">1</span> 序</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 这是一篇关于Storm教程的翻译文章。 <br >
@@ -59,8 +59,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2"><span class="section-number-2">2</span> 预备</h2>
+<div id="outline-container-org7edfbde" class="outline-2">
+<h2 id="org7edfbde"><span class="section-number-2">2</span> 预备</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 教程中使用的示例来自 <a href="https://github.com/apache/storm/tree/master/examples/storm-starter">storm-starter</a> 项目。推荐克隆这个项目到本地，并跟随这里面的例子学习。
@@ -68,8 +68,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3"><span class="section-number-2">3</span> Storm集群</h2>
+<div id="outline-container-org0047e8e" class="outline-2">
+<h2 id="org0047e8e"><span class="section-number-2">3</span> Storm集群</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 从表面上看，Storm 集群和 Hadoop 集群很像。在 Hadoop 上运行的是 "MapReduce jobs"，而在 Storm 上运行的是"topologies"。
@@ -89,15 +89,14 @@ Nimbus 和 Supervisors 之间的所有协调配合都是 Zookeeper 集群完成�
 </div>
 
 
-<div id="outline-container-orgheadline4" class="outline-2">
-<h2 id="orgheadline4"><span class="section-number-2">4</span> 拓扑结构</h2>
+<div id="outline-container-org989e338" class="outline-2">
+<h2 id="org989e338"><span class="section-number-2">4</span> 拓扑结构</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 在 Storm 上做实时计算，需要创建 "topologies"。一个拓扑结构是一个计算过程图。拓扑结构中的每个节点包含一段处理逻辑，节点之间的连接线显示了数据在节点间如何传递。
 运行一个拓扑结构是非常简单的。首先，将你所有的代码和依赖打包成一个 jar 文件。然后，你运行下面这段命令：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">storm jar all-my-code.jar backtype.storm.MyTopology arg1 arg2
 </pre>
 </div>
@@ -109,8 +108,8 @@ Nimbus 和 Supervisors 之间的所有协调配合都是 Zookeeper 集群完成�
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5"><span class="section-number-2">5</span> 流</h2>
+<div id="outline-container-org8151324" class="outline-2">
+<h2 id="org8151324"><span class="section-number-2">5</span> 流</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Storm 的核心抽象是 "stream"（流）。Stream 是元组 "tuple" 的无限序列。Storm 提供了一系列原语，以分布式和可靠的方式将流转换为一个新的流。例如，你可以将 tweets 流转换成热门话题流。
@@ -132,8 +131,8 @@ Spouts 和 bolts 组成的网络结构被封装进 "topology"（拓扑是提交�
 </div>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-2">
-<h2 id="orgheadline6"><span class="section-number-2">6</span> 数据模型</h2>
+<div id="outline-container-org4679bdd" class="outline-2">
+<h2 id="org4679bdd"><span class="section-number-2">6</span> 数据模型</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Storm 中使用 tuples（元组）作为数据模型。
@@ -141,7 +140,6 @@ Storm 中使用 tuples（元组）作为数据模型。
 拓扑中的每个节点都必须声明它发出元组的输出域。例如，下面的 bolt 发出了2元组到域 "double" 和 "triple"：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-java"><span style="color: #b5bd68;">public</span> <span style="color: #b5bd68;">class</span> <span style="color: #81a2be;">DoubleAndTripleBolt</span> <span style="color: #b5bd68;">extends</span> <span style="color: #81a2be;">BaseRichBolt</span> <span style="color: #c5c8c6;">{</span>
     <span style="color: #b5bd68;">private</span> <span style="color: #81a2be;">OutputCollectorBase</span> <span style="color: #f0c674;">_collector</span>;
     <span style="color: #81a2be;">@Override</span>
@@ -167,14 +165,13 @@ Storm 中使用 tuples（元组）作为数据模型。
 </div>
 </div>
 
-<div id="outline-container-orgheadline7" class="outline-2">
-<h2 id="orgheadline7"><span class="section-number-2">7</span> 一个简单的拓扑示例</h2>
+<div id="outline-container-org254ff21" class="outline-2">
+<h2 id="org254ff21"><span class="section-number-2">7</span> 一个简单的拓扑示例</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 我们来看一个简单的拓扑示例，更加深入的了解概念，看代码是如何成形。下面是来自 storm-starter 项目的例子 ExclamationTopology：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-java"><span style="color: #81a2be;">TopologyBuilder</span> <span style="color: #f0c674;">builder</span> = <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">TopologyBuilder</span><span style="color: #c5c8c6;">()</span>; 
 builder.setSpout<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">"words"</span>, <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">TestWordSpout</span><span style="color: #8abeb7;">()</span>, 10<span style="color: #c5c8c6;">)</span>; 
 builder.setBolt<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">"exclaim1"</span>, <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">ExclamationBolt</span><span style="color: #8abeb7;">()</span>, 3<span style="color: #c5c8c6;">)</span>.shuffleGrouping<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">"words"</span><span style="color: #c5c8c6;">)</span>;
@@ -203,7 +200,6 @@ setBolt 返回一个 <code>InputDeclarer</code> 对象，用来定义 bolt 的�
 如果你想让组件 "exclaim2" 读取所有 "exclaim1" 和 "words" 组件发出的元组，你可以像下面这样定义 "exclaim2" 组件：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-java">builder.setBolt<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">"exclaim2"</span>, <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">ExclamationBolt</span><span style="color: #8abeb7;">()</span>, 5<span style="color: #c5c8c6;">)</span>
             .shuffleGrouping<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">"words"</span><span style="color: #c5c8c6;">)</span>
             .shuffleGrouping<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">"exclaim1"</span><span style="color: #c5c8c6;">)</span>;
@@ -216,7 +212,6 @@ Spouts 负责向拓扑结构中发出新消息。TestWordSpout 从字符串列�
 <code>TestWordSpout</code> 类 <code>nextTuple()</code> 方法的实现如下：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-java"><span style="color: #b5bd68;">public</span> <span style="color: #81a2be;">void</span> <span style="color: #de935f;">nextTuple</span><span style="color: #c5c8c6;">()</span> <span style="color: #c5c8c6;">{</span>
     Utils.sleep<span style="color: #8abeb7;">(</span>100<span style="color: #8abeb7;">)</span>;
     <span style="color: #b5bd68;">final</span> <span style="color: #81a2be;">String</span><span style="color: #8abeb7;">[]</span> <span style="color: #f0c674;">words</span> = <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">String</span><span style="color: #8abeb7;">[]</span> <span style="color: #8abeb7;">{</span><span style="color: #8abeb7;">"nathan"</span>, <span style="color: #8abeb7;">"mike"</span>, <span style="color: #8abeb7;">"jackson"</span>, <span style="color: #8abeb7;">"golda"</span>, <span style="color: #8abeb7;">"bertels"</span><span style="color: #8abeb7;">}</span>;
@@ -231,7 +226,6 @@ Spouts 负责向拓扑结构中发出新消息。TestWordSpout 从字符串列�
 <code>ExclamationBolt</code> 类在输入单词后边追加字符串"!!!"。让我们看下ExclamationBolt的完整实现代码：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-java"><span style="color: #b5bd68;">public</span> <span style="color: #b5bd68;">static</span> <span style="color: #b5bd68;">class</span> <span style="color: #81a2be;">ExclamationBolt</span> <span style="color: #b5bd68;">implements</span> <span style="color: #81a2be;">IRichBolt</span> <span style="color: #c5c8c6;">{</span>
     <span style="color: #81a2be;">OutputCollector</span> <span style="color: #f0c674;">_collector</span>;
     <span style="color: #81a2be;">@Override</span>
@@ -287,7 +281,6 @@ Spouts 负责向拓扑结构中发出新消息。TestWordSpout 从字符串列�
 ExclamationBolt 通过继承 BaseRichBolt 会写得更简洁，就像下面这样：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-java"><span style="color: #b5bd68;">public</span> <span style="color: #b5bd68;">static</span> <span style="color: #b5bd68;">class</span> <span style="color: #81a2be;">ExclamationBolt</span> <span style="color: #b5bd68;">extends</span> <span style="color: #81a2be;">BaseRichBolt</span> <span style="color: #c5c8c6;">{</span>
     <span style="color: #81a2be;">OutputCollector</span> <span style="color: #f0c674;">_collector</span>;
     <span style="color: #81a2be;">@Override</span>
@@ -308,8 +301,8 @@ ExclamationBolt 通过继承 BaseRichBolt 会写得更简洁，就像下面这�
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline8" class="outline-2">
-<h2 id="orgheadline8"><span class="section-number-2">8</span> 在本地模式下运行上述示例</h2>
+<div id="outline-container-org09c3284" class="outline-2">
+<h2 id="org09c3284"><span class="section-number-2">8</span> 在本地模式下运行上述示例</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 我们来看下如何在本地模式运行 <code>ExclamationTopology</code> 类，以及它怎样发挥作用。
@@ -327,7 +320,6 @@ Storm 有两种操作模式：本地模式+分布式模式。
 下面是一个本地模式下运行ExclamationTopology 类的例子：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-java"><span style="color: #81a2be;">Config</span> <span style="color: #f0c674;">conf</span> = <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">Config</span><span style="color: #c5c8c6;">()</span>;
 conf.setDebug<span style="color: #c5c8c6;">(</span><span style="color: #81a2be;">true</span><span style="color: #c5c8c6;">)</span>;
 conf.setNumWorkers<span style="color: #c5c8c6;">(</span>2<span style="color: #c5c8c6;">)</span>;
@@ -356,8 +348,8 @@ cluster.shutdown<span style="color: #c5c8c6;">()</span>;
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline9" class="outline-2">
-<h2 id="orgheadline9"><span class="section-number-2">9</span> 流分组</h2>
+<div id="outline-container-orgc4ce4e8" class="outline-2">
+<h2 id="orgc4ce4e8"><span class="section-number-2">9</span> 流分组</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 流分组告诉拓扑怎样在2个组件之间发送元组。记住，spouts 和 bolts 在集群上多任务并行执行。一个拓扑结构在任务级别上执行看起来就像下面这样：
@@ -370,7 +362,6 @@ cluster.shutdown<span style="color: #c5c8c6;">()</span>;
 WordCountTopology 读取一个 spout 给出的句子，再从 WordCountBolt 流出每个单词已经出现的次数。
 </p>
 <div class="org-src-container">
-
 <pre class="src src-java"><span style="color: #81a2be;">TopologyBuilder</span> <span style="color: #f0c674;">builder</span> = <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">TopologyBuilder</span><span style="color: #c5c8c6;">()</span>;
 builder.setSpout<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">"sentences"</span>, <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">RandomSentenceSpout</span><span style="color: #8abeb7;">()</span>, 5<span style="color: #c5c8c6;">)</span>;        
 builder.setBolt<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">"split"</span>, <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">SplitSentence</span><span style="color: #8abeb7;">()</span>, 8<span style="color: #c5c8c6;">)</span>.shuffleGrouping<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">"sentences"</span><span style="color: #c5c8c6;">)</span>;
@@ -401,8 +392,8 @@ WordCount 订阅了 SplitSentence 的输出流，通过按照"word"字段进行�
 </div>
 </div>
 
-<div id="outline-container-orgheadline10" class="outline-2">
-<h2 id="orgheadline10"><span class="section-number-2">10</span> 用其它编程语言定义Bolts</h2>
+<div id="outline-container-org87b74ee" class="outline-2">
+<h2 id="org87b74ee"><span class="section-number-2">10</span> 用其它编程语言定义Bolts</h2>
 <div class="outline-text-2" id="text-10">
 <p>
 任何编程语言都可以定义 Bolts。其它语言（非 java ）编写的 Bolts 是以子进程方式执行的，Storm 和子进程通信是基于输入输出之间的 JSON 消息。
@@ -410,7 +401,6 @@ WordCount 订阅了 SplitSentence 的输出流，通过按照"word"字段进行�
 下面是一个出自 <code>WordCountTopology</code> 类的 SplitSentence bolt 定义：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-java"><span style="color: #b5bd68;">public</span> <span style="color: #b5bd68;">static</span> <span style="color: #b5bd68;">class</span> <span style="color: #81a2be;">SplitSentence</span> <span style="color: #b5bd68;">extends</span> <span style="color: #81a2be;">ShellBolt</span> <span style="color: #b5bd68;">implements</span> <span style="color: #81a2be;">IRichBolt</span> <span style="color: #c5c8c6;">{</span>
     <span style="color: #b5bd68;">public</span> <span style="color: #de935f;">SplitSentence</span><span style="color: #8abeb7;">()</span> <span style="color: #8abeb7;">{</span>
         <span style="color: #b5bd68;">super</span><span style="color: #f0c674;">(</span><span style="color: #8abeb7;">"python"</span>, <span style="color: #8abeb7;">"splitsentence.py"</span><span style="color: #f0c674;">)</span>;
@@ -425,7 +415,6 @@ WordCount 订阅了 SplitSentence 的输出流，通过按照"word"字段进行�
 SplitSentence 覆盖了 <code>ShellBolt</code> ，构造函数传入 splitsentence.py 参数，声明了会用 python 语言运行。下面是 splitsentence.py 的代码实现：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-python"><span style="color: #b5bd68;">import</span> storm
 <span style="color: #b5bd68;">class</span> <span style="color: #81a2be;">SplitSentenceBolt</span><span style="color: #c5c8c6;">(</span>storm.BasicBolt<span style="color: #c5c8c6;">)</span>:
     <span style="color: #b5bd68;">def</span> <span style="color: #de935f;">process</span><span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">self</span>, tup<span style="color: #c5c8c6;">)</span>:
@@ -441,8 +430,8 @@ SplitSentenceBolt<span style="color: #c5c8c6;">()</span>.run<span style="color: 
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline11" class="outline-2">
-<h2 id="orgheadline11"><span class="section-number-2">11</span> 保证消息处理</h2>
+<div id="outline-container-orgcbe7758" class="outline-2">
+<h2 id="orgcbe7758"><span class="section-number-2">11</span> 保证消息处理</h2>
 <div class="outline-text-2" id="text-11">
 <p>
 在之前的教程中，我们跳过了发送元组的其他方面问题，这些方面都是 Storm 可靠性API的一部分：
@@ -450,8 +439,8 @@ Storm 如何保证 spout 发出的每一条消息都被执行，以及作为一�
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline12" class="outline-2">
-<h2 id="orgheadline12"><span class="section-number-2">12</span> 事务性拓扑</h2>
+<div id="outline-container-org86052c5" class="outline-2">
+<h2 id="org86052c5"><span class="section-number-2">12</span> 事务性拓扑</h2>
 <div class="outline-text-2" id="text-12">
 <p>
 Storm 确保每一条消息在拓扑中至少被处理一次。一个经常被问到的问题是“基于 Storm 如何完成类似于计数的需求”？
@@ -459,8 +448,8 @@ Storm 确保每一条消息在拓扑中至少被处理一次。一个经常被�
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline13" class="outline-2">
-<h2 id="orgheadline13"><span class="section-number-2">13</span> 分布式RPC</h2>
+<div id="outline-container-orgbf6f5f2" class="outline-2">
+<h2 id="orgbf6f5f2"><span class="section-number-2">13</span> 分布式RPC</h2>
 <div class="outline-text-2" id="text-13">
 <p>
 本教程展示了基于 Storm 如何进行基本的流计算。利用 Storm 原语你还可以做很多其他的事情。
@@ -468,8 +457,8 @@ Storm 最有意思的应用之一是 Distributed RPC（分布式RPC），这个�
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline14" class="outline-2">
-<h2 id="orgheadline14"><span class="section-number-2">14</span> 结论</h2>
+<div id="outline-container-org37a7e56" class="outline-2">
+<h2 id="org37a7e56"><span class="section-number-2">14</span> 结论</h2>
 <div class="outline-text-2" id="text-14">
 <p>
 本教程讲述了开发、测试、部署 Storm 拓扑的宽泛介绍。文档的其它部分深入讲解了试用 Storm 的各个方面。
@@ -481,10 +470,10 @@ Storm 最有意思的应用之一是 Distributed RPC（分布式RPC），这个�
 <div id="meta-article"><p class="author">蜂蜜甜甜圈(Yi Ou)</p>
 <p class="email"><a href="mailto:718413182@qq.com">718413182@qq.com</a></p>
 <p class="date">2015-12-22</p>
-<p class="export-date">2016-11-07 Mon 15:59</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="export-date">2016-11-10 Thu 13:03</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.0)</p>
 <p class="validation"></p>
-<p class="last-modification-time">2016-11-03 Thu 14:37</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
+<p class="last-modification-time">2016-11-10 Thu 12:43</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

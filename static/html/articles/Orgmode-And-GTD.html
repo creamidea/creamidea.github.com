@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<!-- 2016-11-07 Mon 15:59 -->
-<meta  charset="utf-8">
-<meta  name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2016-11-10 Thu 13:03 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Org-mode And GTD</title>
-<meta  name="generator" content="Org-mode">
-<meta  name="author" content="Junjia Ni">
-<meta  name="description" content="如何配置orgmode使其变成GTD工具"
+<meta name="generator" content="Org mode">
+<meta name="author" content="Junjia Ni">
+<meta name="description" content="如何配置orgmode使其变成GTD工具"
 >
-<meta  name="keywords" content="emacs,orgmode,GTD">
+<meta name="keywords" content="emacs,orgmode,GTD">
 <link rel="stylesheet" type="text/css" href="/static/article.css"><!--[if lt IE 9]>
 <script src="/static/libs/html5shiv.min.js"></script>
 <![endif]-->
@@ -22,32 +22,32 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. 序章</a></li>
-<li><a href="#orgheadline2">2. 最简单的方式</a></li>
-<li><a href="#orgheadline3">3. 加点高级功能</a></li>
-<li><a href="#orgheadline10">4. 我的方案</a>
+<li><a href="#orgf95e1e4">1. 序章</a></li>
+<li><a href="#org833f515">2. 最简单的方式</a></li>
+<li><a href="#org7685549">3. 加点高级功能</a></li>
+<li><a href="#orgc910e9a">4. 我的方案</a>
 <ul>
-<li><a href="#orgheadline4">4.1. 文件结构</a></li>
-<li><a href="#orgheadline8">4.2. 一些配置</a>
+<li><a href="#orgfce3e43">4.1. 文件结构</a></li>
+<li><a href="#orgd93c77d">4.2. 一些配置</a>
 <ul>
-<li><a href="#orgheadline5">4.2.1. 主要的Tags（情景）</a></li>
-<li><a href="#orgheadline6">4.2.2. 任务的状态</a></li>
-<li><a href="#orgheadline7">4.2.3. 常用操作</a></li>
+<li><a href="#org728537f">4.2.1. 主要的Tags（情景）</a></li>
+<li><a href="#org24920d8">4.2.2. 任务的状态</a></li>
+<li><a href="#orgd8d0b90">4.2.3. 常用操作</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline9">4.3. 操作流</a></li>
+<li><a href="#orgb338520">4.3. 操作流</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline11">5. 其他工具</a></li>
-<li><a href="#orgheadline12">6. 尾声</a></li>
-<li><a href="#orgheadline13">7. Reference</a></li>
+<li><a href="#org4050b0d">5. 其他工具</a></li>
+<li><a href="#org986d51a">6. 尾声</a></li>
+<li><a href="#org807140e">7. Reference</a></li>
 </ul>
 </div>
 </nav>
 
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> 序章</h2>
+<div id="outline-container-orgf95e1e4" class="outline-2">
+<h2 id="orgf95e1e4"><span class="section-number-2">1</span> 序章</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Getting Things Done 中文翻译本《尽管去做：无压工作的艺术》是美国的商业顾问David Allen提倡的一种提高生产效率的系统。
@@ -82,8 +82,8 @@ David Allen的第二部著作Ready for Anything 中文翻译本《结果第一�
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2"><span class="section-number-2">2</span> 最简单的方式</h2>
+<div id="outline-container-org833f515" class="outline-2">
+<h2 id="org833f515"><span class="section-number-2">2</span> 最简单的方式</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 邮箱＋日历，其实就是最简单的GTD工具。
@@ -101,8 +101,8 @@ David Allen的第二部著作Ready for Anything 中文翻译本《结果第一�
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3"><span class="section-number-2">3</span> 加点高级功能</h2>
+<div id="outline-container-org7685549" class="outline-2">
+<h2 id="org7685549"><span class="section-number-2">3</span> 加点高级功能</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 在GTD的概念中还有一个概念，情景(Contexts)。那这个我们怎么来实现呢？这个可以使用Tags的方式实现，创建这些标签：
@@ -136,8 +136,8 @@ David Allen的第二部著作Ready for Anything 中文翻译本《结果第一�
 </div>
 </div>
 
-<div id="outline-container-orgheadline10" class="outline-2">
-<h2 id="orgheadline10"><span class="section-number-2">4</span> 我的方案</h2>
+<div id="outline-container-orgc910e9a" class="outline-2">
+<h2 id="orgc910e9a"><span class="section-number-2">4</span> 我的方案</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 我的方案的话还是一如既往的Emacs了。Emacs有一个强大的模式 <b>Org-mode</b> (本文的主角之一)。
@@ -154,8 +154,8 @@ David Allen的第二部著作Ready for Anything 中文翻译本《结果第一�
 </p>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4"><span class="section-number-3">4.1</span> 文件结构</h3>
+<div id="outline-container-orgfce3e43" class="outline-3">
+<h3 id="orgfce3e43"><span class="section-number-3">4.1</span> 文件结构</h3>
 <div class="outline-text-3" id="text-4-1">
 <pre class="example">
 /GTD
@@ -170,14 +170,13 @@ David Allen的第二部著作Ready for Anything 中文翻译本《结果第一�
 </div>
 </div>
 
-<div id="outline-container-orgheadline8" class="outline-3">
-<h3 id="orgheadline8"><span class="section-number-3">4.2</span> 一些配置</h3>
+<div id="outline-container-orgd93c77d" class="outline-3">
+<h3 id="orgd93c77d"><span class="section-number-3">4.2</span> 一些配置</h3>
 <div class="outline-text-3" id="text-4-2">
-</div><div id="outline-container-orgheadline5" class="outline-4">
-<h4 id="orgheadline5"><span class="section-number-4">4.2.1</span> 主要的Tags（情景）</h4>
+</div><div id="outline-container-org728537f" class="outline-4">
+<h4 id="org728537f"><span class="section-number-4">4.2.1</span> 主要的Tags（情景）</h4>
 <div class="outline-text-4" id="text-4-2-1">
 <div class="org-src-container">
-
 <pre class="src src-elisp"><span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">setq</span> org-tag-alist <span style="color: #b5bd68;">'</span><span style="color: #8abeb7;">(</span><span style="color: #f0c674;">(</span><span style="color: #8abeb7;">"STUDIO"</span> . ?s<span style="color: #f0c674;">)</span> <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">company studio office</span>
                       <span style="color: #f0c674;">(</span><span style="color: #8abeb7;">"PROJECT"</span> . ?p<span style="color: #f0c674;">)</span> <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">difference task at company</span>
                       <span style="color: #f0c674;">(</span><span style="color: #8abeb7;">"HOME"</span> . ?h<span style="color: #f0c674;">)</span> <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">home</span>
@@ -192,11 +191,10 @@ David Allen的第二部著作Ready for Anything 中文翻译本《结果第一�
 </div>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-4">
-<h4 id="orgheadline6"><span class="section-number-4">4.2.2</span> 任务的状态</h4>
+<div id="outline-container-org24920d8" class="outline-4">
+<h4 id="org24920d8"><span class="section-number-4">4.2.2</span> 任务的状态</h4>
 <div class="outline-text-4" id="text-4-2-2">
 <div class="org-src-container">
-
 <pre class="src src-elisp"><span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">setf</span> org-todo-keyword-faces
       <span style="color: #b5bd68;">'</span><span style="color: #8abeb7;">(</span><span style="color: #f0c674;">(</span><span style="color: #8abeb7;">"NEXT"</span> . <span style="color: #b5bd68;">(</span><span style="color: #b294bb;">:foreground</span> <span style="color: #8abeb7;">"yellow"</span> <span style="color: #b294bb;">:background</span> <span style="color: #8abeb7;">"red"</span> <span style="color: #b294bb;">:bold</span> t <span style="color: #b294bb;">:weight</span> bold<span style="color: #b5bd68;">)</span><span style="color: #f0c674;">)</span>
         <span style="color: #f0c674;">(</span><span style="color: #8abeb7;">"TODO"</span> . <span style="color: #b5bd68;">(</span><span style="color: #b294bb;">:foreground</span> <span style="color: #8abeb7;">"cyan"</span> <span style="color: #b294bb;">:bold</span> t <span style="color: #b294bb;">:weight</span> bold<span style="color: #b5bd68;">)</span><span style="color: #f0c674;">)</span>
@@ -210,11 +208,10 @@ David Allen的第二部著作Ready for Anything 中文翻译本《结果第一�
 </div>
 </div>
 
-<div id="outline-container-orgheadline7" class="outline-4">
-<h4 id="orgheadline7"><span class="section-number-4">4.2.3</span> 常用操作</h4>
+<div id="outline-container-orgd8d0b90" class="outline-4">
+<h4 id="orgd8d0b90"><span class="section-number-4">4.2.3</span> 常用操作</h4>
 <div class="outline-text-4" id="text-4-2-3">
 <div class="org-src-container">
-
 <pre class="src src-elisp"><span style="color: #c5c8c6;">(</span>global-set-key <span style="color: #8abeb7;">"</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">C</span><span style="color: #8abeb7;">-cl"</span> <span style="color: #b5bd68;">'</span><span style="color: #81a2be;">org-store-link</span><span style="color: #c5c8c6;">)</span>
 <span style="color: #c5c8c6;">(</span>global-set-key <span style="color: #8abeb7;">"</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">C</span><span style="color: #8abeb7;">-ca"</span> <span style="color: #b5bd68;">'</span><span style="color: #81a2be;">org-agenda</span><span style="color: #c5c8c6;">)</span>
 <span style="color: #c5c8c6;">(</span>global-set-key <span style="color: #8abeb7;">"</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">C</span><span style="color: #8abeb7;">-cg"</span> <span style="color: #b5bd68;">'</span><span style="color: #81a2be;">gtd</span><span style="color: #c5c8c6;">)</span>
@@ -225,8 +222,8 @@ David Allen的第二部著作Ready for Anything 中文翻译本《结果第一�
 </div>
 </div>
 
-<div id="outline-container-orgheadline9" class="outline-3">
-<h3 id="orgheadline9"><span class="section-number-3">4.3</span> 操作流</h3>
+<div id="outline-container-orgb338520" class="outline-3">
+<h3 id="orgb338520"><span class="section-number-3">4.3</span> 操作流</h3>
 <div class="outline-text-3" id="text-4-3">
 <img src="https://docs.google.com/drawings/d/1RgIgUqMHdnEHPQp4WQ_qY0H7AVZeGt9pyD31oADmBDA/pub?w=371&amp;h=340" alt="GTD-任务类型" title="GTD-任务类型"/>
 
@@ -265,7 +262,6 @@ David Allen的第二部著作Ready for Anything 中文翻译本《结果第一�
 完整配置
 </p>
 <div class="org-src-container">
-
 <pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;; </span><span style="color: #969896; font-style: italic;">dto-org-gtd.el --- dto's org-mode configuration for GTD</span>
 
 <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Copyright (C) 2007  David O'Toole</span>
@@ -357,8 +353,8 @@ David Allen的第二部著作Ready for Anything 中文翻译本《结果第一�
 <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">The lisp version is:</span>
 
 <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">(setq org-todo-keywords '((sequence "TODO" | "DONE")</span>
-<span style="color: #969896; font-style: italic;">;;                        </span><span style="color: #969896; font-style: italic;">(sequence "REPORT" "BUG" "KNOWNCAUSE" | "FIXED")</span>
-<span style="color: #969896; font-style: italic;">;;                        </span><span style="color: #969896; font-style: italic;">(sequence | "CANCELLED")))</span>
+<span style="color: #969896; font-style: italic;">;;   </span><span style="color: #969896; font-style: italic;">                     (sequence "REPORT" "BUG" "KNOWNCAUSE" | "FIXED")</span>
+<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">                       (sequence | "CANCELLED")))</span>
 
 <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Easy basic searches. Get a quick view of nextactions, etc</span>
 
@@ -480,8 +476,8 @@ David Allen的第二部著作Ready for Anything 中文翻译本《结果第一�
 </div>
 </div>
 
-<div id="outline-container-orgheadline11" class="outline-2">
-<h2 id="orgheadline11"><span class="section-number-2">5</span> 其他工具</h2>
+<div id="outline-container-org4050b0d" class="outline-2">
+<h2 id="org4050b0d"><span class="section-number-2">5</span> 其他工具</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 其实，是有“专业”的GTD工具存在的，Google搜索 <a href="https://www.google.com/search?hl=en&amp;q=best+gtd+tools">Best GTD Tools</a> 可以出现很多的结果。
@@ -494,8 +490,8 @@ David Allen的第二部著作Ready for Anything 中文翻译本《结果第一�
 </div>
 </div>
 
-<div id="outline-container-orgheadline12" class="outline-2">
-<h2 id="orgheadline12"><span class="section-number-2">6</span> 尾声</h2>
+<div id="outline-container-org986d51a" class="outline-2">
+<h2 id="org986d51a"><span class="section-number-2">6</span> 尾声</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 时间管理，对于我来说就是循环执行决策原则，而我又不是太会做决策，真是搞笑呢！
@@ -521,8 +517,8 @@ David Allen的第二部著作Ready for Anything 中文翻译本《结果第一�
 </div>
 </div>
 
-<div id="outline-container-orgheadline13" class="outline-2">
-<h2 id="orgheadline13"><span class="section-number-2">7</span> Reference</h2>
+<div id="outline-container-org807140e" class="outline-2">
+<h2 id="org807140e"><span class="section-number-2">7</span> Reference</h2>
 <div class="outline-text-2" id="text-7">
 <ul class="org-ul">
 <li><a href="http://www.yifeiyang.net/emacs/use-emacs-org-mode.html">GTD实践&#x2014;使用Emacs和Org-mode</a></li>
@@ -543,10 +539,10 @@ David Allen的第二部著作Ready for Anything 中文翻译本《结果第一�
 <div id="meta-article"><p class="author">Junjia Ni</p>
 <p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
 <p class="date">2015-11-18</p>
-<p class="export-date">2016-11-07 Mon 15:59</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="export-date">2016-11-10 Thu 13:03</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.0)</p>
 <p class="validation"></p>
-<p class="last-modification-time">2016-10-23 Sun 23:09</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
+<p class="last-modification-time">2016-11-10 Thu 12:43</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

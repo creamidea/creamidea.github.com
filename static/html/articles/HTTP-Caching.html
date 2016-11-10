@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<!-- 2016-11-07 Mon 15:59 -->
-<meta  charset="utf-8">
-<meta  name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2016-11-10 Thu 13:03 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HTTP Caching</title>
-<meta  name="generator" content="Org-mode">
-<meta  name="author" content="冰糖火箭筒(Junjia Ni)">
-<meta  name="description" content="HTTP Caching"
+<meta name="generator" content="Org mode">
+<meta name="author" content="冰糖火箭筒(Junjia Ni)">
+<meta name="description" content="HTTP Caching"
 >
-<meta  name="keywords" content="http,cache,cache-control,etag">
+<meta name="keywords" content="http,cache,cache-control,etag">
 <link rel="stylesheet" type="text/css" href="/static/article.css"><!--[if lt IE 9]>
 <script src="/static/libs/html5shiv.min.js"></script>
 <![endif]-->
@@ -22,22 +22,22 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. 前言</a></li>
-<li><a href="#orgheadline2">2. 一图胜千言(Cache-Control)</a></li>
-<li><a href="#orgheadline5">3. 其他头部字段</a>
+<li><a href="#org5afa7fd">1. 前言</a></li>
+<li><a href="#org22212d1">2. 一图胜千言(Cache-Control)</a></li>
+<li><a href="#orgd7d38ba">3. 其他头部字段</a>
 <ul>
-<li><a href="#orgheadline3">3.1. Last-Modified &amp; If-Modified-Since</a></li>
-<li><a href="#orgheadline4">3.2. ETag &amp; If-None-Match</a></li>
+<li><a href="#org226c221">3.1. Last-Modified &amp; If-Modified-Since</a></li>
+<li><a href="#org83105f5">3.2. ETag &amp; If-None-Match</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline7">4. 尾声</a></li>
-<li><a href="#orgheadline6">5. Reference</a></li>
+<li><a href="#orgfbd2f61">4. 尾声</a></li>
+<li><a href="#org26c0f36">5. Reference</a></li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
+<div id="outline-container-org5afa7fd" class="outline-2">
+<h2 id="org5afa7fd"><span class="section-number-2">1</span> 前言</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 最近重新设计和实现了个人站点的博客，主要侧重提升舒适度上（加载速度，渲染速度，文字排版等）。
@@ -51,14 +51,14 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2"><span class="section-number-2">2</span> 一图胜千言(Cache-Control)</h2>
+<div id="outline-container-org22212d1" class="outline-2">
+<h2 id="org22212d1"><span class="section-number-2">2</span> 一图胜千言(Cache-Control)</h2>
 <div class="outline-text-2" id="text-2">
 
 <figure>
 <p class="lazy-load-img-wrapper"><noscript><img src="https://media.githubusercontent.com/media/creamidea/creamidea.github.com/master/static/img/http-cache-decision-tree-cn.png" alt="http-cache-decision-tree(translation from google)" title="原图片来自 Google Developers 网站"></noscript><img lazy-load data-src="https://media.githubusercontent.com/media/creamidea/creamidea.github.com/master/static/img/http-cache-decision-tree-cn.png" alt="http-cache-decision-tree(translation from google)" title="原图片来自 Google Developers 网站">
 </p>
-<figcaption><span class="figure-number">Figure 1:</span> http-cache-decision-tree-cn</figcaption>
+<figcaption><span class="figure-number">Figure 1: </span>http-cache-decision-tree-cn</figcaption>
 </figure>
 
 <p>
@@ -86,11 +86,11 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5"><span class="section-number-2">3</span> 其他头部字段</h2>
+<div id="outline-container-orgd7d38ba" class="outline-2">
+<h2 id="orgd7d38ba"><span class="section-number-2">3</span> 其他头部字段</h2>
 <div class="outline-text-2" id="text-3">
-</div><div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3"><span class="section-number-3">3.1</span> Last-Modified &amp; If-Modified-Since</h3>
+</div><div id="outline-container-org226c221" class="outline-3">
+<h3 id="org226c221"><span class="section-number-3">3.1</span> Last-Modified &amp; If-Modified-Since</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 <code>Last-Modified</code> 标示资源的最后修改时间。 <code>If-Modified-Since</code> 这个字段是相对 <code>Last-Modified</code> 来说的，
@@ -99,8 +99,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4"><span class="section-number-3">3.2</span> ETag &amp; If-None-Match</h3>
+<div id="outline-container-org83105f5" class="outline-3">
+<h3 id="org83105f5"><span class="section-number-3">3.2</span> ETag &amp; If-None-Match</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 <code>ETag</code> 是 <b>服务器</b> 生成的资源唯一标识符（浏览器不需要关心起生成算法）。 <code>If-None-Match</code> 这个字段则是相对 <code>ETag</code> 来说的，
@@ -110,8 +110,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline7" class="outline-2">
-<h2 id="orgheadline7"><span class="section-number-2">4</span> 尾声</h2>
+<div id="outline-container-orgfbd2f61" class="outline-2">
+<h2 id="orgfbd2f61"><span class="section-number-2">4</span> 尾声</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 HTTP 头部字段 <code>Expires</code> 是 HTTP/1.0 中的定义。
@@ -120,13 +120,13 @@ HTTP 头部字段 <code>Expires</code> 是 HTTP/1.0 中的定义。
 </p>
 
 <p>
-如果读完此文，觉得还不爽的话，可以看看 <a href="#orgheadline6">Reference</a> 中的三篇文章以及 <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching">HTTP Caching</a> 。
+如果读完此文，觉得还不爽的话，可以看看 <a href="#org26c0f36">Reference</a> 中的三篇文章以及 <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching">HTTP Caching</a> 。
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-2">
-<h2 id="orgheadline6"><span class="section-number-2">5</span> Reference</h2>
+<div id="outline-container-org26c0f36" class="outline-2">
+<h2 id="org26c0f36"><span class="section-number-2">5</span> Reference</h2>
 <div class="outline-text-2" id="text-5">
 <ul class="org-ul">
 <li><a href="http://www.cnblogs.com/skynet/archive/2012/11/28/2792503.html">浏览器缓存机制（吴秦 Tyler）</a></li>
@@ -140,8 +140,8 @@ HTTP 头部字段 <code>Expires</code> 是 HTTP/1.0 中的定义。
 <div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
 <p class="date">2016-10-23</p>
-<p class="export-date">2016-11-07 Mon 15:59</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="export-date">2016-11-10 Thu 13:03</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.0)</p>
 <p class="validation"></p>
 <p class="last-modification-time">2016-11-03 Thu 14:37</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
 </div>

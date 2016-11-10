@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<!-- 2016-11-07 Mon 15:59 -->
-<meta  charset="utf-8">
-<meta  name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2016-11-10 Thu 13:03 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Programming With ZooKeeper</title>
-<meta  name="generator" content="Org-mode">
-<meta  name="author" content="蜂蜜甜甜圈(Yi Ou)">
-<meta  name="description" content="Programming with ZooKeeper(A quick tutorial)"
+<meta name="generator" content="Org mode">
+<meta name="author" content="蜂蜜甜甜圈(Yi Ou)">
+<meta name="description" content="Programming with ZooKeeper(A quick tutorial)"
 >
-<meta  name="keywords" content="zookeeper,java,tutorial">
+<meta name="keywords" content="zookeeper,java,tutorial">
 <link rel="stylesheet" type="text/css" href="/static/article.css"><!--[if lt IE 9]>
 <script src="/static/libs/html5shiv.min.js"></script>
 <![endif]-->
@@ -22,11 +22,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. 序</a></li>
-<li><a href="#orgheadline2">2. 前言</a></li>
-<li><a href="#orgheadline3">3. 正文</a></li>
-<li><a href="#orgheadline4">4. 屏障（Barriers）</a></li>
-<li><a href="#orgheadline5">5. 生产者-消费者队列（Producer-Consumer Queues）</a></li>
+<li><a href="#org0cd906c">1. 序</a></li>
+<li><a href="#org71d3448">2. 前言</a></li>
+<li><a href="#orgbbadc6f">3. 正文</a></li>
+<li><a href="#orgcee7cd2">4. 屏障（Barriers）</a></li>
+<li><a href="#org266d52d">5. 生产者-消费者队列（Producer-Consumer Queues）</a></li>
 </ul>
 </div>
 </nav>
@@ -41,8 +41,8 @@
 </div>
 
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> 序</h2>
+<div id="outline-container-org0cd906c" class="outline-2">
+<h2 id="org0cd906c"><span class="section-number-2">1</span> 序</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 这是一篇关于快速入门ZooKeeper开发的翻译文章。 <br >
@@ -51,8 +51,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2"><span class="section-number-2">2</span> 前言</h2>
+<div id="outline-container-org71d3448" class="outline-2">
+<h2 id="org71d3448"><span class="section-number-2">2</span> 前言</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 <code>ZooKeeper</code> 翻译成中文是“动物园管理员”，很有趣是不是，物如其名，它就是来协调管理分布式系统的。
@@ -66,8 +66,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3"><span class="section-number-2">3</span> 正文</h2>
+<div id="outline-container-orgbbadc6f" class="outline-2">
+<h2 id="orgbbadc6f"><span class="section-number-2">3</span> 正文</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 在本教程中，我们会展示如何利用 <code>ZooKeeper</code> 实现简单的“屏障”和“生产者消费者队列”。我们称这两个类为 <code>Barrier</code> 和 <code>Queue</code> 。
@@ -78,7 +78,6 @@
 这两个原语都用到了下面这段代码 <code>SyncPrimitivep</code> ：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-java"><span style="color: #b5bd68;">static</span> <span style="color: #81a2be;">ZooKeeper</span> <span style="color: #f0c674;">zk</span> = <span style="color: #81a2be;">null</span>;
 <span style="color: #b5bd68;">static</span> <span style="color: #b5bd68;">final</span> <span style="color: #81a2be;">Object</span> <span style="color: #f0c674;">mutex</span> = <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">Object</span><span style="color: #c5c8c6;">()</span>;
 <span style="color: #81a2be;">String</span> <span style="color: #f0c674;">root</span>;
@@ -109,8 +108,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-2">
-<h2 id="orgheadline4"><span class="section-number-2">4</span> 屏障（Barriers）</h2>
+<div id="outline-container-orgcee7cd2" class="outline-2">
+<h2 id="orgcee7cd2"><span class="section-number-2">4</span> 屏障（Barriers）</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 屏障原语是阻塞一组进程节点，直到满足特定的条件，该组进程节点才能正常向前推进（开始一次计算or结束一次计算）。
@@ -128,7 +127,6 @@
 然后 <code>Barrier</code> 构造函数会在 <code>ZooKeeper</code> 对象上创建一个 <code>Barrier</code> 节点，它是所有进程的父节点，我们称之为根节点（注意，并非 <code>ZooKeeper</code> 的根节点）。
 </p>
 <div class="org-src-container">
-
 <pre class="src src-java"><span style="color: #b294bb;">/**</span>
 <span style="color: #b294bb;">******* Barrier constructor</span>
 <span style="color: #b294bb;">*******</span>
@@ -164,7 +162,6 @@
 第一个是被监听的根节点，第二个参数是允许进程设置 <code>watch</code> 的标识.
 </p>
 <div class="org-src-container">
-
 <pre class="src src-java"><span style="color: #b294bb;">/**</span>
 <span style="color: #b294bb;">******* Join barrier</span>
 <span style="color: #b294bb;">*******</span>
@@ -197,7 +194,6 @@
 当收到 <code>notification</code> 后，还会在检查一次根节点是否还有子节点。）
 </p>
 <div class="org-src-container">
-
 <pre class="src src-java"><span style="color: #b294bb;">/**</span>
 <span style="color: #b294bb;">******* Wait until all reach barrier</span>
 <span style="color: #b294bb;">*******</span>
@@ -223,8 +219,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5"><span class="section-number-2">5</span> 生产者-消费者队列（Producer-Consumer Queues）</h2>
+<div id="outline-container-org266d52d" class="outline-2">
+<h2 id="org266d52d"><span class="section-number-2">5</span> 生产者-消费者队列（Producer-Consumer Queues）</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 生产者-消费者队列是一种分布式的数据结构，被一组进程用来生产物品和消费物品。生产者进程创造新元素，加入队列。消费者进程移除元素，拿去执行。
@@ -233,7 +229,6 @@
 然后检查 <code>Queue</code> 的根节点是否存在，如果没有就创建一个。
 </p>
 <div class="org-src-container">
-
 <pre class="src src-java"><span style="color: #b294bb;">/**</span>
 <span style="color: #b294bb;">******* Constructor of producer-consumer queue</span>
 <span style="color: #b294bb;">*******</span>
@@ -261,7 +256,6 @@
 如此一来，我们在队列的元素上强制维持了一个总顺序，这样就确保了最早加入队列的元素最先被消费（先进先出）。
 </p>
 <div class="org-src-container">
-
 <pre class="src src-java"><span style="color: #b294bb;">/**</span>
 <span style="color: #b294bb;">******* Add element to the queue.</span>
 <span style="color: #b294bb;">*******</span>
@@ -290,7 +284,6 @@
 为了决定出拥有最小计数器值的子节点，我们遍历列表，并删除每个节点的前缀 <code>element</code> 。
 </p>
 <div class="org-src-container">
-
 <pre class="src src-java"><span style="color: #b294bb;">/**</span>
 <span style="color: #b294bb;">******* Remove first element from the queue.</span>
 <span style="color: #b294bb;">*******</span>
@@ -335,10 +328,10 @@
 <div id="meta-article"><p class="author">蜂蜜甜甜圈(Yi Ou)</p>
 <p class="email"><a href="mailto:718413182(AT)qq.com">718413182(AT)qq.com</a></p>
 <p class="date">2016-02-05</p>
-<p class="export-date">2016-11-07 Mon 15:59</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="export-date">2016-11-10 Thu 13:03</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.0)</p>
 <p class="validation"></p>
-<p class="last-modification-time">2016-11-03 Thu 14:37</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
+<p class="last-modification-time">2016-11-10 Thu 12:43</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

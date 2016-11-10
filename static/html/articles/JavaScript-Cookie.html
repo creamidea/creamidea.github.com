@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<!-- 2016-11-07 Mon 15:59 -->
-<meta  charset="utf-8">
-<meta  name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2016-11-10 Thu 13:03 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>JavaScript Cookie</title>
-<meta  name="generator" content="Org-mode">
-<meta  name="author" content="冰糖火箭筒(Junjia Ni)">
-<meta  name="description" content="Learn JavaScript"
+<meta name="generator" content="Org mode">
+<meta name="author" content="冰糖火箭筒(Junjia Ni)">
+<meta name="description" content="Learn JavaScript"
 >
-<meta  name="keywords" content="javascript,generate-function,yield,yield*">
+<meta name="keywords" content="javascript,generate-function,yield,yield*">
 <link rel="stylesheet" type="text/css" href="/static/article.css"><!--[if lt IE 9]>
 <script src="/static/libs/html5shiv.min.js"></script>
 <![endif]-->
@@ -22,15 +22,15 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. 前言</a></li>
-<li><a href="#orgheadline2">2. for&#x2026;in &amp;&amp; for&#x2026;of</a></li>
-<li><a href="#orgheadline5">3. Generate Function</a>
+<li><a href="#orgdd57658">1. 前言</a></li>
+<li><a href="#org47e6f03">2. for&#x2026;in &amp;&amp; for&#x2026;of</a></li>
+<li><a href="#orgbc2d557">3. Generate Function</a>
 <ul>
-<li><a href="#orgheadline3">3.1. co repository</a></li>
-<li><a href="#orgheadline4">3.2. koa</a></li>
+<li><a href="#org57d00f1">3.1. co repository</a></li>
+<li><a href="#orgeb26527">3.2. koa</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline6">4. 尾声</a></li>
+<li><a href="#orgeeafeb5">4. 尾声</a></li>
 </ul>
 </div>
 </nav>
@@ -45,8 +45,8 @@ lazy-load alt="Javascript" title="Javascript"/>
 </div>
 
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
+<div id="outline-container-orgdd57658" class="outline-2">
+<h2 id="orgdd57658"><span class="section-number-2">1</span> 前言</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 记录一些关于JavaScript有趣的，迷惑的，让人惊叹的功能和陷阱。(⌒▽⌒)
@@ -54,8 +54,8 @@ lazy-load alt="Javascript" title="Javascript"/>
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2"><span class="section-number-2">2</span> for&#x2026;in &amp;&amp; for&#x2026;of</h2>
+<div id="outline-container-org47e6f03" class="outline-2">
+<h2 id="org47e6f03"><span class="section-number-2">2</span> for&#x2026;in &amp;&amp; for&#x2026;of</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 这个是最近遇到的一个有趣的问题，问: <code>for...in</code> 和 <code>for...of</code> 有什么区别呢？当时有点凌乱。 &gt;_&lt;
@@ -65,7 +65,6 @@ lazy-load alt="Javascript" title="Javascript"/>
 试试下面的代码
 </p>
 <div class="org-src-container">
-
 <pre class="src src-js"><span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">Some code in your deep Library</span>
 Array.<span style="color: #81a2be;">prototype</span>.foo = <span style="color: #8abeb7;">'S'</span>
 
@@ -81,8 +80,8 @@ Array.<span style="color: #81a2be;">prototype</span>.foo = <span style="color: #
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5"><span class="section-number-2">3</span> Generate Function</h2>
+<div id="outline-container-orgbc2d557" class="outline-2">
+<h2 id="orgbc2d557"><span class="section-number-2">3</span> Generate Function</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 <code>yield</code>
@@ -97,7 +96,6 @@ yield* is an expression, not a statement, so it evaluates to a value. <br >
 我的快速理解：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-js"><span style="color: #b5bd68;">function</span> * <span style="color: #de935f;">A</span> <span style="color: #c5c8c6;">()</span> <span style="color: #c5c8c6;">{</span>
   console.log<span style="color: #8abeb7;">(</span>1<span style="color: #8abeb7;">)</span>
   <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">a1</span> = <span style="color: #b5bd68;">yield</span> 1
@@ -127,11 +125,10 @@ Generator Function 起码需要2次 <code>next()</code> 才能执行完。
 </p>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3"><span class="section-number-3">3.1</span> co repository</h3>
+<div id="outline-container-org57d00f1" class="outline-3">
+<h3 id="org57d00f1"><span class="section-number-3">3.1</span> co repository</h3>
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
-
 <pre class="src src-js"><span style="color: #b5bd68;">function</span> <span style="color: #de935f;">co</span> <span style="color: #c5c8c6;">(</span><span style="color: #f0c674;">genFun</span><span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
   <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">gen</span> = genFun<span style="color: #8abeb7;">()</span>
   <span style="color: #b5bd68;">function</span> <span style="color: #de935f;">_next</span> <span style="color: #8abeb7;">(</span><span style="color: #f0c674;">err</span>, <span style="color: #f0c674;">res</span><span style="color: #8abeb7;">)</span> <span style="color: #8abeb7;">{</span>
@@ -148,7 +145,6 @@ Generator Function 起码需要2次 <code>next()</code> 才能执行完。
 不理解？我们看一个有趣的例子，延迟函数的实现。问题如下
 </p>
 <div class="org-src-container">
-
 <pre class="src src-js"><span style="color: #b5bd68;">function</span> * <span style="color: #de935f;">A</span> <span style="color: #c5c8c6;">()</span> <span style="color: #c5c8c6;">{</span>
   console.log<span style="color: #8abeb7;">(</span>1<span style="color: #8abeb7;">)</span>
   <span style="color: #b5bd68;">yield</span> wait<span style="color: #8abeb7;">(</span>1000<span style="color: #8abeb7;">)</span>
@@ -161,7 +157,6 @@ Generator Function 起码需要2次 <code>next()</code> 才能执行完。
 需要实现这个 <code>wait</code> 。其实很简单啦，用我们上面自己写的 <code>co</code> ，实现如下
 </p>
 <div class="org-src-container">
-
 <pre class="src src-js"><span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#23454;&#29616;</span>
 <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#21253;&#35013;&#25104;thunk&#20989;&#25968;</span>
 <span style="color: #b5bd68;">function</span> <span style="color: #de935f;">wait</span><span style="color: #c5c8c6;">(</span><span style="color: #f0c674;">timeout</span><span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
@@ -202,7 +197,6 @@ co<span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">function</
 你以为这样子就完了吗？图样，TJ大神还有一个 <code>koa</code> ，我们也拿来看看。我们现在有一个新的问题，将下面2个函数以 <code>3,5,6,4</code> 的形式输出。
 </p>
 <div class="org-src-container">
-
 <pre class="src src-js"><span style="color: #b5bd68;">function</span> * <span style="color: #de935f;">B</span> <span style="color: #c5c8c6;">(</span>next<span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
   console.log<span style="color: #8abeb7;">(</span>3<span style="color: #8abeb7;">)</span>;
   <span style="color: #b5bd68;">yield</span> next;
@@ -222,7 +216,6 @@ co<span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">function</
 不过在这之前，我们需要稍微改造一下我们写的 <code>co</code> 库，让她能够支持 <code>yield [GeneratorFunction&amp;Generator]</code> 。主要增加 <b>一些判断</b> 和 <b>一个thunk函数转换器</b> 。
 </p>
 <div class="org-src-container">
-
 <pre class="src src-js"><span style="color: #b5bd68;">function</span> <span style="color: #de935f;">co</span> <span style="color: #c5c8c6;">(</span><span style="color: #f0c674;">genFun</span><span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
   <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">gen</span>
   <span style="color: #b5bd68;">if</span> <span style="color: #8abeb7;">(</span>isGeneratorFunction<span style="color: #f0c674;">(</span>genFun<span style="color: #f0c674;">)</span><span style="color: #8abeb7;">)</span> gen = genFun<span style="color: #8abeb7;">()</span>
@@ -262,11 +255,10 @@ co<span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">function</
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4"><span class="section-number-3">3.2</span> koa</h3>
+<div id="outline-container-orgeb26527" class="outline-3">
+<h3 id="orgeb26527"><span class="section-number-3">3.2</span> koa</h3>
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
-
 <pre class="src src-js"><span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#23454;&#29616;</span>
 <span style="color: #b5bd68;">function</span> <span style="color: #de935f;">Koa</span> <span style="color: #c5c8c6;">()</span> <span style="color: #c5c8c6;">{</span>
   <span style="color: #81a2be;">this</span>.middleware = <span style="color: #8abeb7;">[]</span>
@@ -309,8 +301,8 @@ koa.listen<span style="color: #c5c8c6;">()</span>
 </div>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-2">
-<h2 id="orgheadline6"><span class="section-number-2">4</span> 尾声</h2>
+<div id="outline-container-orgeeafeb5" class="outline-2">
+<h2 id="orgeeafeb5"><span class="section-number-2">4</span> 尾声</h2>
 </div>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
@@ -327,10 +319,10 @@ Thunk: <a href="https://en.wikipedia.org/wiki/Thunk">https://en.wikipedia.org/wi
 <div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
 <p class="date">2016-01-30</p>
-<p class="export-date">2016-11-07 Mon 15:59</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="export-date">2016-11-10 Thu 13:03</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.0)</p>
 <p class="validation"></p>
-<p class="last-modification-time">2016-11-03 Thu 14:37</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
+<p class="last-modification-time">2016-11-10 Thu 12:43</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

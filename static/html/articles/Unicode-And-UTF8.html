@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<!-- 2016-11-07 Mon 15:59 -->
-<meta  charset="utf-8">
-<meta  name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2016-11-10 Thu 13:03 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Unicode and UTF8</title>
-<meta  name="generator" content="Org-mode">
-<meta  name="author" content="冰糖火箭筒(Junjia Ni)">
-<meta  name="description" content="Unicode and UTF8 的一些学习笔记"
+<meta name="generator" content="Org mode">
+<meta name="author" content="冰糖火箭筒(Junjia Ni)">
+<meta name="description" content="Unicode and UTF8 的一些学习笔记"
 >
-<meta  name="keywords" content="unicode,utf8,encoding,编码">
+<meta name="keywords" content="unicode,utf8,encoding,编码">
 <link rel="stylesheet" type="text/css" href="/static/article.css"><!--[if lt IE 9]>
 <script src="/static/libs/html5shiv.min.js"></script>
 <![endif]-->
@@ -22,21 +22,21 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline2">1. 前言</a></li>
-<li><a href="#orgheadline3">2. Unicode</a></li>
-<li><a href="#orgheadline4">3. UTF8</a></li>
-<li><a href="#orgheadline5">4. Python</a></li>
-<li><a href="#orgheadline6">5. 正则表达式匹配中文区间</a></li>
-<li><a href="#orgheadline7">6. locale</a></li>
-<li><a href="#orgheadline8">7. 尾声</a></li>
-<li><a href="#orgheadline1">8. Reference</a></li>
+<li><a href="#orgb4babb7">1. 前言</a></li>
+<li><a href="#orgf827882">2. Unicode</a></li>
+<li><a href="#orgf6203a2">3. UTF8</a></li>
+<li><a href="#orge58f58c">4. Python</a></li>
+<li><a href="#orgdf527cc">5. 正则表达式匹配中文区间</a></li>
+<li><a href="#orgb7eb3f9">6. locale</a></li>
+<li><a href="#org5b2e199">7. 尾声</a></li>
+<li><a href="#orgd418ba3">8. Reference</a></li>
 </ul>
 </div>
 </nav>
 
 
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2"><span class="section-number-2">1</span> 前言</h2>
+<div id="outline-container-orgb4babb7" class="outline-2">
+<h2 id="orgb4babb7"><span class="section-number-2">1</span> 前言</h2>
 <div class="outline-text-2" id="text-1">
 <blockquote>
 <p>
@@ -47,13 +47,13 @@
 <p>
 最近明明事情很多，但是就是什么事情都不想干，这个是为什么呢？
 没事干，就去折腾一些并没有什么用的东西。这不，花了一个周末，看了一些关于编码方面的文章。
-下面就是我的一些理解和笔记。很肤浅，只是一个很简单的介绍文章，详细的你可以阅读 <a href="#orgheadline1">8</a> 中前几篇文章。
+下面就是我的一些理解和笔记。很肤浅，只是一个很简单的介绍文章，详细的你可以阅读 <a href="#orgd418ba3">8</a> 中前几篇文章。
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3"><span class="section-number-2">2</span> Unicode</h2>
+<div id="outline-container-orgf827882" class="outline-2">
+<h2 id="orgf827882"><span class="section-number-2">2</span> Unicode</h2>
 <div class="outline-text-2" id="text-2">
 <blockquote>
 <p>
@@ -71,7 +71,6 @@ no matter what the language.
 举一个例子:
 </p>
 <div class="org-src-container">
-
 <pre class="src src-python"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">ord&#26159;unicode ordinal&#30340;&#32553;&#20889;,&#21363;&#32534;&#21495;</span>
 <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">chr&#26159;character&#30340;&#32553;&#20889;,&#21363;&#23383;&#31526;</span>
 <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">ord&#21644;chr&#26159;&#20114;&#30456;&#23545;&#24212;&#36716;&#25442;&#30340;.</span>
@@ -94,7 +93,6 @@ u<span style="color: #8abeb7;">'\u6633'</span>
 用ASCII码表来解释是这个样子的，你要显示字符 <b>a</b> 。
 </p>
 <div class="org-src-container">
-
 <pre class="src src-python">&gt;&gt;&gt; <span style="color: #f0c674;">d</span> = u<span style="color: #8abeb7;">'a'</span>
 &gt;&gt;&gt; d
 u<span style="color: #8abeb7;">'a'</span>
@@ -126,8 +124,8 @@ no matter what the language.
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-2">
-<h2 id="orgheadline4"><span class="section-number-2">3</span> UTF8</h2>
+<div id="outline-container-orgf6203a2" class="outline-2">
+<h2 id="orgf6203a2"><span class="section-number-2">3</span> UTF8</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 好了，在理解了Unicode之后，再来看UTF-8，这个又是什么东东呢？ <br >
@@ -160,7 +158,6 @@ E6 98 B3 按字节重新转换成16进制
 结果
 </p>
 <div class="org-src-container">
-
 <pre class="src src-python">&gt;&gt;&gt; c
 u<span style="color: #b294bb;">'\u6633'</span>
 &gt;&gt;&gt; c.encode<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">'utf-8'</span><span style="color: #c5c8c6;">)</span>
@@ -176,8 +173,8 @@ u<span style="color: #b294bb;">'\u6633'</span>
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5"><span class="section-number-2">4</span> Python</h2>
+<div id="outline-container-orge58f58c" class="outline-2">
+<h2 id="orge58f58c"><span class="section-number-2">4</span> Python</h2>
 <div class="outline-text-2" id="text-4">
 <pre class="example">
 编码：unicode--&gt;str
@@ -191,8 +188,8 @@ u<span style="color: #b294bb;">'\u6633'</span>
 </div>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-2">
-<h2 id="orgheadline6"><span class="section-number-2">5</span> 正则表达式匹配中文区间</h2>
+<div id="outline-container-orgdf527cc" class="outline-2">
+<h2 id="orgdf527cc"><span class="section-number-2">5</span> 正则表达式匹配中文区间</h2>
 <div class="outline-text-2" id="text-5">
 <pre class="example">
 \u4E00-\u9FA5 （2万个左右）
@@ -200,8 +197,8 @@ u<span style="color: #b294bb;">'\u6633'</span>
 </div>
 </div>
 
-<div id="outline-container-orgheadline7" class="outline-2">
-<h2 id="orgheadline7"><span class="section-number-2">6</span> locale</h2>
+<div id="outline-container-orgb7eb3f9" class="outline-2">
+<h2 id="orgb7eb3f9"><span class="section-number-2">6</span> locale</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 系统字符编码控制优先级 <code>LC_ALL&gt;LC_*&gt;LANG</code>
@@ -209,8 +206,8 @@ u<span style="color: #b294bb;">'\u6633'</span>
 </div>
 </div>
 
-<div id="outline-container-orgheadline8" class="outline-2">
-<h2 id="orgheadline8"><span class="section-number-2">7</span> 尾声</h2>
+<div id="outline-container-org5b2e199" class="outline-2">
+<h2 id="org5b2e199"><span class="section-number-2">7</span> 尾声</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 基本上，我所理解的Unicode和UTF8就是这个样子了，在Python上面做了很多的实验，希望以后不要再犯一些低级错误。
@@ -218,7 +215,6 @@ u<span style="color: #b294bb;">'\u6633'</span>
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-python">Traceback <span style="color: #c5c8c6;">(</span>most recent call last<span style="color: #c5c8c6;">)</span>:
   File <span style="color: #8abeb7;">"&lt;stdin&gt;"</span>, line 1, <span style="color: #b5bd68;">in</span> &lt;module&gt;
 <span style="color: #81a2be;">UnicodeEncodeError</span>: <span style="color: #8abeb7;">'ascii'</span> codec can<span style="color: #8abeb7;">'t encode character u'</span>\u6633<span style="color: #8abeb7;">' in position 0: ordinal not in range(128)</span>
@@ -226,8 +222,8 @@ u<span style="color: #b294bb;">'\u6633'</span>
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">8</span> Reference</h2>
+<div id="outline-container-orgd418ba3" class="outline-2">
+<h2 id="orgd418ba3"><span class="section-number-2">8</span> Reference</h2>
 <div class="outline-text-2" id="text-8">
 <ol class="org-ol">
 <li><a href="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html">字符编码笔记：ASCII，Unicode和UTF-8</a></li>
@@ -254,10 +250,10 @@ u<span style="color: #b294bb;">'\u6633'</span>
 <div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
 <p class="date">2015-12-05</p>
-<p class="export-date">2016-11-07 Mon 15:59</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="export-date">2016-11-10 Thu 13:03</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.0)</p>
 <p class="validation"></p>
-<p class="last-modification-time">2016-10-23 Sun 23:09</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
+<p class="last-modification-time">2016-11-10 Thu 12:43</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

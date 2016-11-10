@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<!-- 2016-11-07 Mon 15:59 -->
-<meta  charset="utf-8">
-<meta  name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2016-11-10 Thu 13:03 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>C And C++ Cookie</title>
-<meta  name="generator" content="Org-mode">
-<meta  name="author" content="Junjia Ni">
-<meta  name="description" content="学习C/C++基础笔记"
+<meta name="generator" content="Org mode">
+<meta name="author" content="Junjia Ni">
+<meta name="description" content="学习C/C++基础笔记"
 >
-<meta  name="keywords" content="c,CPlusPlus,cpp,learning">
+<meta name="keywords" content="c,CPlusPlus,cpp,learning">
 <link rel="stylesheet" type="text/css" href="/static/article.css"><!--[if lt IE 9]>
 <script src="/static/libs/html5shiv.min.js"></script>
 <![endif]-->
@@ -22,74 +22,74 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. 前言</a></li>
-<li><a href="#orgheadline4">2. 模版</a>
+<li><a href="#org0fb91ed">1. 前言</a></li>
+<li><a href="#orgc22c205">2. 模版</a>
 <ul>
-<li><a href="#orgheadline2">2.1. 函数模版</a></li>
-<li><a href="#orgheadline3">2.2. 类模版</a></li>
+<li><a href="#org170c718">2.1. 函数模版</a></li>
+<li><a href="#org6771e00">2.2. 类模版</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline5">3. 重载操作符</a></li>
-<li><a href="#orgheadline6">4. 副本构造器(copy construct)</a></li>
-<li><a href="#orgheadline11">5. 类型高级转化(Advanced Class Type-casting)</a>
+<li><a href="#org130006b">3. 重载操作符</a></li>
+<li><a href="#orgdfddd8c">4. 副本构造器(copy construct)</a></li>
+<li><a href="#orgae44a66">5. 类型高级转化(Advanced Class Type-casting)</a>
 <ul>
-<li><a href="#orgheadline7">5.1. reinterpert_cast</a></li>
-<li><a href="#orgheadline8">5.2. static_cast</a></li>
-<li><a href="#orgheadline9">5.3. dynamtic_cast</a></li>
-<li><a href="#orgheadline10">5.4. const_cast</a></li>
+<li><a href="#org7cab0ab">5.1. reinterpert_cast</a></li>
+<li><a href="#orgb7c1868">5.2. static_cast</a></li>
+<li><a href="#orgd5d9c50">5.3. dynamtic_cast</a></li>
+<li><a href="#orga09ff22">5.4. const_cast</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline12">6. 避免内存泄漏</a></li>
-<li><a href="#orgheadline21">7. 库</a>
+<li><a href="#org4f897b7">6. 避免内存泄漏</a></li>
+<li><a href="#orgc11f3a7">7. 库</a>
 <ul>
-<li><a href="#orgheadline15">7.1. 动态链接库</a>
+<li><a href="#orgd0db88a">7.1. 动态链接库</a>
 <ul>
-<li><a href="#orgheadline13">7.1.1. 编译</a></li>
-<li><a href="#orgheadline14">7.1.2. 链接</a></li>
+<li><a href="#orga32fd26">7.1.1. 编译</a></li>
+<li><a href="#org89a7ae0">7.1.2. 链接</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline19">7.2. 静态库</a>
+<li><a href="#org5127f40">7.2. 静态库</a>
 <ul>
-<li><a href="#orgheadline16">7.2.1. 编译</a></li>
-<li><a href="#orgheadline17">7.2.2. 归档</a></li>
-<li><a href="#orgheadline18">7.2.3. 链接</a></li>
+<li><a href="#orgd9fcee4">7.2.1. 编译</a></li>
+<li><a href="#org815d32e">7.2.2. 归档</a></li>
+<li><a href="#org84cae46">7.2.3. 链接</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline20">7.3. ldd</a></li>
+<li><a href="#orgb710433">7.3. ldd</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline22">8. 第一课</a></li>
-<li><a href="#orgheadline27">9. 第二课</a>
+<li><a href="#org2f0af10">8. 第一课</a></li>
+<li><a href="#org12090e7">9. 第二课</a>
 <ul>
-<li><a href="#orgheadline23">9.1. 内联函数和重载函数inline</a></li>
-<li><a href="#orgheadline24">9.2. 函数重载</a></li>
-<li><a href="#orgheadline26">9.3. 多态</a>
+<li><a href="#orge29682d">9.1. 内联函数和重载函数inline</a></li>
+<li><a href="#orgf634418">9.2. 函数重载</a></li>
+<li><a href="#org50ac627">9.3. 多态</a>
 <ul>
-<li><a href="#orgheadline25">9.3.1. 静态多态：</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#orgheadline31">10. 第三课</a>
-<ul>
-<li><a href="#orgheadline30">10.1. 动态内存分配</a>
-<ul>
-<li><a href="#orgheadline28">10.1.1. 堆空间：</a></li>
-<li><a href="#orgheadline29">10.1.2. &amp;: 取地址/引用</a></li>
+<li><a href="#org9db02b1">9.3.1. 静态多态：</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgheadline32">11. 第四课</a></li>
-<li><a href="#orgheadline33">12. 第五课</a></li>
-<li><a href="#orgheadline34">13. 写在最后</a></li>
+<li><a href="#org44e8175">10. 第三课</a>
+<ul>
+<li><a href="#orgccbdbce">10.1. 动态内存分配</a>
+<ul>
+<li><a href="#orge7e3497">10.1.1. 堆空间：</a></li>
+<li><a href="#org32fc4c3">10.1.2. &amp;: 取地址/引用</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org0134818">11. 第四课</a></li>
+<li><a href="#org1068bf2">12. 第五课</a></li>
+<li><a href="#org47b091a">13. 写在最后</a></li>
 </ul>
 </div>
 </nav>
 
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
+<div id="outline-container-org0fb91ed" class="outline-2">
+<h2 id="org0fb91ed"><span class="section-number-2">1</span> 前言</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 好的，匆忙地学习完ARM之后，立即转战C++学习。真是有意思的安排啊。おもしろい。 <br >
@@ -99,18 +99,17 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-2">
-<h2 id="orgheadline4"><span class="section-number-2">2</span> 模版</h2>
+<div id="outline-container-orgc22c205" class="outline-2">
+<h2 id="orgc22c205"><span class="section-number-2">2</span> 模版</h2>
 <div class="outline-text-2" id="text-2">
-</div><div id="outline-container-orgheadline2" class="outline-3">
-<h3 id="orgheadline2"><span class="section-number-3">2.1</span> 函数模版</h3>
+</div><div id="outline-container-org170c718" class="outline-3">
+<h3 id="org170c718"><span class="section-number-3">2.1</span> 函数模版</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 <b>template &lt;typename T&gt;</b>
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-c++"><span style="color: #b5bd68;">template</span> <span style="color: #c5c8c6;">&lt;</span><span style="color: #b5bd68;">class</span> <span style="color: #81a2be;">T</span><span style="color: #c5c8c6;">&gt;</span>
 <span style="color: #81a2be;">void</span> <span style="color: #de935f;">foo</span><span style="color: #c5c8c6;">(</span><span style="color: #81a2be;">T</span> <span style="color: #f0c674;">param</span><span style="color: #c5c8c6;">)</span>
 <span style="color: #c5c8c6;">{</span>
@@ -121,11 +120,10 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3"><span class="section-number-3">2.2</span> 类模版</h3>
+<div id="outline-container-org6771e00" class="outline-3">
+<h3 id="org6771e00"><span class="section-number-3">2.2</span> 类模版</h3>
 <div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
-
 <pre class="src src-c++"><span style="color: #b5bd68;">template</span> <span style="color: #c5c8c6;">&lt;</span><span style="color: #b5bd68;">class</span> <span style="color: #81a2be;">T</span><span style="color: #c5c8c6;">&gt;</span>
 <span style="color: #b5bd68;">class</span> <span style="color: #81a2be;">MyClass</span>
 <span style="color: #c5c8c6;">{</span>
@@ -144,11 +142,10 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5"><span class="section-number-2">3</span> 重载操作符</h2>
+<div id="outline-container-org130006b" class="outline-2">
+<h2 id="org130006b"><span class="section-number-2">3</span> 重载操作符</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
-
 <pre class="src src-c++"><span style="color: #81a2be;">type</span> <span style="color: #b5bd68;">operator</span> <span style="color: #81a2be;">sign</span> <span style="color: #c5c8c6;">(</span>parameters<span style="color: #c5c8c6;">)</span>;
 </pre>
 </div>
@@ -221,11 +218,10 @@ Reference: <a href="http://www.prglab.com/cms/pages/c-tutorial/oo-programming/ov
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline6" class="outline-2">
-<h2 id="orgheadline6"><span class="section-number-2">4</span> 副本构造器(copy construct)</h2>
+<div id="outline-container-orgdfddd8c" class="outline-2">
+<h2 id="orgdfddd8c"><span class="section-number-2">4</span> 副本构造器(copy construct)</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
-
 <pre class="src src-c++">ClassName<span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">const</span> <span style="color: #81a2be;">ClassName</span> &amp;<span style="color: #f0c674;">cn</span><span style="color: #c5c8c6;">)</span>;
 </pre>
 </div>
@@ -239,11 +235,11 @@ Reference: <a href="http://www.cnblogs.com/li-peng/p/3776384.html">http://www.cn
 </div>
 </div>
 
-<div id="outline-container-orgheadline11" class="outline-2">
-<h2 id="orgheadline11"><span class="section-number-2">5</span> 类型高级转化(Advanced Class Type-casting)</h2>
+<div id="outline-container-orgae44a66" class="outline-2">
+<h2 id="orgae44a66"><span class="section-number-2">5</span> 类型高级转化(Advanced Class Type-casting)</h2>
 <div class="outline-text-2" id="text-5">
-</div><div id="outline-container-orgheadline7" class="outline-3">
-<h3 id="orgheadline7"><span class="section-number-3">5.1</span> reinterpert_cast</h3>
+</div><div id="outline-container-org7cab0ab" class="outline-3">
+<h3 id="org7cab0ab"><span class="section-number-3">5.1</span> reinterpert_cast</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 reinterpret_cast 可以将一个指针转换为任意其它类型的指针。它也可以用来将一个指针转换为一个整型，或反之亦然。 <br >
@@ -251,8 +247,8 @@ reinterpret_cast 可以将一个指针转换为任意其它类型的指针。它
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline8" class="outline-3">
-<h3 id="orgheadline8"><span class="section-number-3">5.2</span> static_cast</h3>
+<div id="outline-container-orgb7c1868" class="outline-3">
+<h3 id="orgb7c1868"><span class="section-number-3">5.2</span> static_cast</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 static_cast 可以执行所有能够隐含执行的类型转换，以及它们的反向操作（即使这种方向操作是不允许隐含执行的）。<br >
@@ -260,8 +256,8 @@ static_cast 可以执行所有能够隐含执行的类型转换，以及它们�
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline9" class="outline-3">
-<h3 id="orgheadline9"><span class="section-number-3">5.3</span> dynamtic_cast</h3>
+<div id="outline-container-orgd5d9c50" class="outline-3">
+<h3 id="orgd5d9c50"><span class="section-number-3">5.3</span> dynamtic_cast</h3>
 <div class="outline-text-3" id="text-5-3">
 <p>
 dynamic_cast 完全被用来进行指针的操作。它可以用来进行任何可以隐含进行的转换操作以及它们被用于多态类情况下的方向操作。
@@ -269,8 +265,8 @@ dynamic_cast 完全被用来进行指针的操作。它可以用来进行任何�
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline10" class="outline-3">
-<h3 id="orgheadline10"><span class="section-number-3">5.4</span> const_cast</h3>
+<div id="outline-container-orga09ff22" class="outline-3">
+<h3 id="orga09ff22"><span class="section-number-3">5.4</span> const_cast</h3>
 <div class="outline-text-3" id="text-5-4">
 <p>
 这种类型转换对常量const 进行设置或取消操作
@@ -288,8 +284,8 @@ Reference:
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline12" class="outline-2">
-<h2 id="orgheadline12"><span class="section-number-2">6</span> 避免内存泄漏</h2>
+<div id="outline-container-org4f897b7" class="outline-2">
+<h2 id="org4f897b7"><span class="section-number-2">6</span> 避免内存泄漏</h2>
 <div class="outline-text-2" id="text-6">
 <ol class="org-ol">
 <li>在 <code>return</code> 前 <code>delete</code></li>
@@ -298,20 +294,19 @@ Reference:
 </div>
 </div>
 
-<div id="outline-container-orgheadline21" class="outline-2">
-<h2 id="orgheadline21"><span class="section-number-2">7</span> 库</h2>
+<div id="outline-container-orgc11f3a7" class="outline-2">
+<h2 id="orgc11f3a7"><span class="section-number-2">7</span> 库</h2>
 <div class="outline-text-2" id="text-7">
-</div><div id="outline-container-orgheadline15" class="outline-3">
-<h3 id="orgheadline15"><span class="section-number-3">7.1</span> 动态链接库</h3>
+</div><div id="outline-container-orgd0db88a" class="outline-3">
+<h3 id="orgd0db88a"><span class="section-number-3">7.1</span> 动态链接库</h3>
 <div class="outline-text-3" id="text-7-1">
-</div><div id="outline-container-orgheadline13" class="outline-4">
-<h4 id="orgheadline13"><span class="section-number-4">7.1.1</span> 编译</h4>
+</div><div id="outline-container-orga32fd26" class="outline-4">
+<h4 id="orga32fd26"><span class="section-number-4">7.1.1</span> 编译</h4>
 <div class="outline-text-4" id="text-7-1-1">
 <p>
 在使用GCC编译程序时，只需加上-shared选项即可，这样生成的执行程序即为动态链接库。例如
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc hello.c -fPIC -o libhello.so
 </pre>
 </div>
@@ -321,11 +316,10 @@ Reference:
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline14" class="outline-4">
-<h4 id="orgheadline14"><span class="section-number-4">7.1.2</span> 链接</h4>
+<div id="outline-container-org89a7ae0" class="outline-4">
+<h4 id="org89a7ae0"><span class="section-number-4">7.1.2</span> 链接</h4>
 <div class="outline-text-4" id="text-7-1-2">
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc main.c -L. -lhello -o main
 </pre>
 </div>
@@ -333,24 +327,22 @@ Reference:
 </div>
 </div>
 
-<div id="outline-container-orgheadline19" class="outline-3">
-<h3 id="orgheadline19"><span class="section-number-3">7.2</span> 静态库</h3>
+<div id="outline-container-org5127f40" class="outline-3">
+<h3 id="org5127f40"><span class="section-number-3">7.2</span> 静态库</h3>
 <div class="outline-text-3" id="text-7-2">
-</div><div id="outline-container-orgheadline16" class="outline-4">
-<h4 id="orgheadline16"><span class="section-number-4">7.2.1</span> 编译</h4>
+</div><div id="outline-container-orgd9fcee4" class="outline-4">
+<h4 id="orgd9fcee4"><span class="section-number-4">7.2.1</span> 编译</h4>
 <div class="outline-text-4" id="text-7-2-1">
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc hello.c -o hello.o  <span style="color: #969896; font-style: italic;">#</span><span style="color: #969896; font-style: italic;">&#36825;&#37324;&#27809;&#26377;&#20351;&#29992;-shared</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline17" class="outline-4">
-<h4 id="orgheadline17"><span class="section-number-4">7.2.2</span> 归档</h4>
+<div id="outline-container-org815d32e" class="outline-4">
+<h4 id="org815d32e"><span class="section-number-4">7.2.2</span> 归档</h4>
 <div class="outline-text-4" id="text-7-2-2">
 <div class="org-src-container">
-
 <pre class="src src-sh">ar -r libhello.a hello.o  <span style="color: #969896; font-style: italic;">#</span><span style="color: #969896; font-style: italic;">&#36825;&#37324;&#30340;ar&#30456;&#24403;&#20110;tar&#30340;&#20316;&#29992;&#65292;&#23558;&#22810;&#20010;&#30446;&#26631;&#25171;&#21253;&#12290;</span>
 </pre>
 </div>
@@ -363,11 +355,10 @@ Reference:
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline18" class="outline-4">
-<h4 id="orgheadline18"><span class="section-number-4">7.2.3</span> 链接</h4>
+<div id="outline-container-org84cae46" class="outline-4">
+<h4 id="org84cae46"><span class="section-number-4">7.2.3</span> 链接</h4>
 <div class="outline-text-4" id="text-7-2-3">
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc main.c -lhello -L. -static -o main
 </pre>
 </div>
@@ -375,21 +366,19 @@ Reference:
 或者
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">gcc main.c libhello.a -L. -o main
 </pre>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline20" class="outline-3">
-<h3 id="orgheadline20"><span class="section-number-3">7.3</span> ldd</h3>
+<div id="outline-container-orgb710433" class="outline-3">
+<h3 id="orgb710433"><span class="section-number-3">7.3</span> ldd</h3>
 <div class="outline-text-3" id="text-7-3">
 <p>
 <b>ldd - print shared library dependencies</b> 
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">$ ldd a.out
 linux-vdso.so.1 =&gt;  <span style="color: #c5c8c6;">(</span>0x00007fff15100000<span style="color: #c5c8c6;">)</span>
 <span style="color: #de935f;">/usr/local/snoopy/lib/snoopy.so</span> <span style="color: #c5c8c6;">(</span>0x00007f436e245000<span style="color: #c5c8c6;">)</span>
@@ -412,15 +401,14 @@ Reference:
 
 
 
-<div id="outline-container-orgheadline22" class="outline-2">
-<h2 id="orgheadline22"><span class="section-number-2">8</span> 第一课</h2>
+<div id="outline-container-org2f0af10" class="outline-2">
+<h2 id="org2f0af10"><span class="section-number-2">8</span> 第一课</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 <span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-22 Mon&gt;</span></span>
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-c++"><span style="color: #b294bb;">#include</span> <span style="color: #c5c8c6;">&lt;</span><span style="color: #8abeb7;">iostream</span><span style="color: #c5c8c6;">&gt;</span>
 
 <span style="color: #b5bd68;">using</span> <span style="color: #b5bd68;">namespace</span> <span style="color: #81a2be;">std</span>;
@@ -433,22 +421,21 @@ Reference:
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline27" class="outline-2">
-<h2 id="orgheadline27"><span class="section-number-2">9</span> 第二课</h2>
+<div id="outline-container-org12090e7" class="outline-2">
+<h2 id="org12090e7"><span class="section-number-2">9</span> 第二课</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 <span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-23 Tue&gt;</span></span>
 </p>
 </div>
 
-<div id="outline-container-orgheadline23" class="outline-3">
-<h3 id="orgheadline23"><span class="section-number-3">9.1</span> 内联函数和重载函数inline</h3>
+<div id="outline-container-orge29682d" class="outline-3">
+<h3 id="orge29682d"><span class="section-number-3">9.1</span> 内联函数和重载函数inline</h3>
 <div class="outline-text-3" id="text-9-1">
 <p>
 C中宏定义注意二义性：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-c"><span style="color: #b294bb;">#define</span> <span style="color: #de935f;">max</span><span style="color: #c5c8c6;">(</span><span style="color: #f0c674;">a</span>, <span style="color: #f0c674;">b</span><span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">(</span>a<span style="color: #c5c8c6;">)</span>&gt;<span style="color: #c5c8c6;">(</span>b<span style="color: #c5c8c6;">)</span>?<span style="color: #c5c8c6;">(</span>a<span style="color: #c5c8c6;">)</span>:<span style="color: #c5c8c6;">(</span>b<span style="color: #c5c8c6;">)</span>
 </pre>
 </div>
@@ -463,8 +450,8 @@ C中宏定义注意二义性：
 </div>
 </div>
 
-<div id="outline-container-orgheadline24" class="outline-3">
-<h3 id="orgheadline24"><span class="section-number-3">9.2</span> 函数重载</h3>
+<div id="outline-container-orgf634418" class="outline-3">
+<h3 id="orgf634418"><span class="section-number-3">9.2</span> 函数重载</h3>
 <div class="outline-text-3" id="text-9-2">
 <ol class="org-ol">
 <li>函数重载与返回值无关。</li>
@@ -476,7 +463,6 @@ C中宏定义注意二义性：
 在参数列表中的某些参数有默认值时，在调用的时候会报错。代码如下：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-c"><span style="color: #81a2be;">int</span> <span style="color: #de935f;">mul</span><span style="color: #c5c8c6;">(</span><span style="color: #81a2be;">int</span> <span style="color: #f0c674;">a</span>, <span style="color: #81a2be;">int</span> <span style="color: #f0c674;">b</span><span style="color: #c5c8c6;">){</span>
   <span style="color: #b5bd68;">return</span> 1;
 <span style="color: #c5c8c6;">}</span>
@@ -494,27 +480,27 @@ C中宏定义注意二义性：
 </div>
 </div>
 
-<div id="outline-container-orgheadline26" class="outline-3">
-<h3 id="orgheadline26"><span class="section-number-3">9.3</span> 多态</h3>
+<div id="outline-container-org50ac627" class="outline-3">
+<h3 id="org50ac627"><span class="section-number-3">9.3</span> 多态</h3>
 <div class="outline-text-3" id="text-9-3">
-</div><div id="outline-container-orgheadline25" class="outline-4">
-<h4 id="orgheadline25"><span class="section-number-4">9.3.1</span> 静态多态：</h4>
+</div><div id="outline-container-org9db02b1" class="outline-4">
+<h4 id="org9db02b1"><span class="section-number-4">9.3.1</span> 静态多态：</h4>
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline31" class="outline-2">
-<h2 id="orgheadline31"><span class="section-number-2">10</span> 第三课</h2>
+<div id="outline-container-org44e8175" class="outline-2">
+<h2 id="org44e8175"><span class="section-number-2">10</span> 第三课</h2>
 <div class="outline-text-2" id="text-10">
 <p>
 <span class="timestamp-wrapper"><span class="timestamp">&lt;2013-04-25 Thu&gt;</span></span>
 </p>
 </div>
 
-<div id="outline-container-orgheadline30" class="outline-3">
-<h3 id="orgheadline30"><span class="section-number-3">10.1</span> 动态内存分配</h3>
+<div id="outline-container-orgccbdbce" class="outline-3">
+<h3 id="orgccbdbce"><span class="section-number-3">10.1</span> 动态内存分配</h3>
 <div class="outline-text-3" id="text-10-1">
-</div><div id="outline-container-orgheadline28" class="outline-4">
-<h4 id="orgheadline28"><span class="section-number-4">10.1.1</span> 堆空间：</h4>
+</div><div id="outline-container-orge7e3497" class="outline-4">
+<h4 id="orge7e3497"><span class="section-number-4">10.1.1</span> 堆空间：</h4>
 <div class="outline-text-4" id="text-10-1-1">
 <p>
 C:
@@ -527,7 +513,6 @@ C++:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-C"><span style="color: #81a2be;">int</span> * <span style="color: #f0c674;">p</span> = new <span style="color: #81a2be;">int</span>;              <span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">&#22312;&#22534;&#19978;&#38754;&#20998;&#37197;&#31354;&#38388;sizeof(int) </span><span style="color: #969896; font-style: italic;">*/</span>
 <span style="color: #81a2be;">int</span> * <span style="color: #f0c674;">p</span> = new <span style="color: #81a2be;">int</span><span style="color: #c5c8c6;">()</span>;            <span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">&#21021;&#22987;&#21270;&#20026;0&#65288;&#21152;&#19978;()&#65289; </span><span style="color: #969896; font-style: italic;">*/</span>
 </pre>
@@ -535,11 +520,10 @@ C++:
 </div>
 </div>
 
-<div id="outline-container-orgheadline29" class="outline-4">
-<h4 id="orgheadline29"><span class="section-number-4">10.1.2</span> &amp;: 取地址/引用</h4>
+<div id="outline-container-org32fc4c3" class="outline-4">
+<h4 id="org32fc4c3"><span class="section-number-4">10.1.2</span> &amp;: 取地址/引用</h4>
 <div class="outline-text-4" id="text-10-1-2">
 <div class="org-src-container">
-
 <pre class="src src-c"><span style="color: #81a2be;">int</span> *<span style="color: #f0c674;">p</span> = &amp;num;                  <span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">&#21462;&#22320;&#22336;&#31526; </span><span style="color: #969896; font-style: italic;">*/</span>
 <span style="color: #81a2be;">int</span> &amp;p1 = num;                  <span style="color: #969896; font-style: italic;">/* </span><span style="color: #969896; font-style: italic;">&#24341;&#29992; </span><span style="color: #969896; font-style: italic;">*/</span>
 </pre>
@@ -548,8 +532,8 @@ C++:
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline32" class="outline-2">
-<h2 id="orgheadline32"><span class="section-number-2">11</span> 第四课</h2>
+<div id="outline-container-org0134818" class="outline-2">
+<h2 id="org0134818"><span class="section-number-2">11</span> 第四课</h2>
 <div class="outline-text-2" id="text-11">
 <ol class="org-ol">
 <li>类的拷贝：
@@ -560,8 +544,8 @@ C++:
 </ol>
 </div>
 </div>
-<div id="outline-container-orgheadline33" class="outline-2">
-<h2 id="orgheadline33"><span class="section-number-2">12</span> 第五课</h2>
+<div id="outline-container-org1068bf2" class="outline-2">
+<h2 id="org1068bf2"><span class="section-number-2">12</span> 第五课</h2>
 <div class="outline-text-2" id="text-12">
 <p>
 <span class="timestamp-wrapper"><span class="timestamp">&lt;2013-05-16 Thu&gt;</span></span>
@@ -589,8 +573,8 @@ class A: virtual public b
 </div>
 </div>
 
-<div id="outline-container-orgheadline34" class="outline-2">
-<h2 id="orgheadline34"><span class="section-number-2">13</span> 写在最后</h2>
+<div id="outline-container-org47b091a" class="outline-2">
+<h2 id="org47b091a"><span class="section-number-2">13</span> 写在最后</h2>
 <div class="outline-text-2" id="text-13">
 <p>
 最后居然还是草草收场，一个没有任何实现的CuteCube!!
@@ -602,10 +586,10 @@ class A: virtual public b
 <div id="meta-article"><p class="author">Junjia Ni</p>
 <p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
 <p class="date">2013-04-22</p>
-<p class="export-date">2016-11-07 Mon 15:59</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="export-date">2016-11-10 Thu 13:03</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.0)</p>
 <p class="validation"></p>
-<p class="last-modification-time">2016-10-23 Sun 23:09</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
+<p class="last-modification-time">2016-11-10 Thu 12:43</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

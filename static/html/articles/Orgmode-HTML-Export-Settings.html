@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2016-11-09 Wed 17:27 -->
+<!-- 2016-11-10 Thu 15:00 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Orgmode HTML-Export Settings</title>
@@ -25,7 +25,8 @@
 <li><a href="#org814be41">1. 前言</a></li>
 <li><a href="#org59ba8f7">2. Lazy Load Image</a></li>
 <li><a href="#org033ba50">3. Mathjax</a></li>
-<li><a href="#org0a28895">4. 尾声</a></li>
+<li><a href="#org8863ffa">4. Update from Version 8.0 to Version 9.0</a></li>
+<li><a href="#org0a28895">5. 尾声</a></li>
 </ul>
 </div>
 </nav>
@@ -44,6 +45,11 @@ lazy-load class="lazy-load-img" alt="orgmode" title=""/>
 <div class="outline-text-2" id="text-1">
 <p>
 配置 org-mode，使其成为静态 HTML 生成工具。实现类似于 <a href="http://jekyllrb.com/">Jekyll</a> 的效果。
+</p>
+
+<p>
+关于基础配置部分，我觉得没有必要赘述，可以直接查看我这个文件 <a href="https://github.com/creamidea/creamidea.github.com/blob/master/org-publish-setting.el">org-publish-setting.el</a> 就好了。
+有什么问题，欢迎随时交流沟通。
 </p>
 </div>
 </div>
@@ -197,9 +203,84 @@ Org-mode 生成 HTML 的代码都在 <a href="http://orgmode.org/w/?p=org-mode.g
 </div>
 </div>
 
-<div id="outline-container-org0a28895" class="outline-2">
-<h2 id="org0a28895"><span class="section-number-2">4</span> 尾声</h2>
+<div id="outline-container-org8863ffa" class="outline-2">
+<h2 id="org8863ffa"><span class="section-number-2">4</span> Update from Version 8.0 to Version 9.0</h2>
 <div class="outline-text-2" id="text-4">
+<p>
+<a href="http://orgmode.org/Changes.html">Changes</a>
+</p>
+
+<p>
+这次升级应该是一个比较大的升级，其中修改了一个声明，将
+</p>
+<div class="org-src-container">
+<pre class="src src-org"><span style="color: #969896; font-style: italic;">#+BEGIN_backend</span>
+...
+<span style="color: #969896; font-style: italic;">#+END_backend</span>
+</pre>
+</div>
+<p>
+替换成了
+</p>
+<div class="org-src-container">
+<pre class="src src-org"><span style="color: #969896; font-style: italic;">#+BEGIN_EXPORT backend</span>
+...
+<span style="color: #969896; font-style: italic;">#+END_EXPORT</span>
+</pre>
+</div>
+<p>
+于是乎，之前如果用到了这些声明，也就意味着你需要更改到新的版本，才能正常导出。
+还好，官方比较良心，给了一段替换之前 BLOCK 声明的代码，
+我在其基础上增加了遍历项目中所有 org 文件并将其修改的功能，
+大致代码如下（如果没有给代码，我准备用 <code>sed</code> 搞一下了）：
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">defun</span> <span style="color: #de935f;">org-repair-export-blocks</span> <span style="color: #8abeb7;">(</span>dirname<span style="color: #8abeb7;">)</span>
+  <span style="color: #b294bb;">"Repair export blocks and INCLUDE keywords in current buffer.</span>
+<span style="color: #b294bb;">DIRNAME."</span>
+  <span style="color: #8abeb7;">(</span><span style="color: #b5bd68;">interactive</span><span style="color: #8abeb7;">)</span>
+  <span style="color: #8abeb7;">(</span><span style="color: #b5bd68;">let</span> <span style="color: #f0c674;">(</span><span style="color: #b5bd68;">(</span>files <span style="color: #81a2be;">(</span>directory-files-recursively dirname <span style="color: #8abeb7;">".org"</span><span style="color: #81a2be;">)</span><span style="color: #b5bd68;">)</span><span style="color: #f0c674;">)</span>
+    <span style="color: #f0c674;">(</span><span style="color: #b5bd68;">dolist</span> <span style="color: #b5bd68;">(</span>file files<span style="color: #b5bd68;">)</span>
+      <span style="color: #b5bd68;">(</span><span style="color: #b5bd68;">progn</span>
+        <span style="color: #81a2be;">(</span>find-file file<span style="color: #81a2be;">)</span>
+        <span style="color: #81a2be;">(</span><span style="color: #b5bd68;">when</span> <span style="color: #c5c8c6;">(</span>eq major-mode <span style="color: #b5bd68;">'</span><span style="color: #81a2be;">org-mode</span><span style="color: #c5c8c6;">)</span>
+          <span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">let</span> <span style="color: #8abeb7;">(</span><span style="color: #f0c674;">(</span>case-fold-search t<span style="color: #f0c674;">)</span>
+                <span style="color: #f0c674;">(</span>back-end-re <span style="color: #b5bd68;">(</span>regexp-opt
+                              <span style="color: #b5bd68;">'</span><span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">"HTML"</span> <span style="color: #8abeb7;">"ASCII"</span> <span style="color: #8abeb7;">"LATEX"</span> <span style="color: #8abeb7;">"ODT"</span> <span style="color: #8abeb7;">"MARKDOWN"</span> <span style="color: #8abeb7;">"MD"</span> <span style="color: #8abeb7;">"ORG"</span>
+                                <span style="color: #8abeb7;">"MAN"</span> <span style="color: #8abeb7;">"BEAMER"</span> <span style="color: #8abeb7;">"TEXINFO"</span> <span style="color: #8abeb7;">"GROFF"</span> <span style="color: #8abeb7;">"KOMA-LETTER"</span><span style="color: #c5c8c6;">)</span>
+                              t<span style="color: #b5bd68;">)</span><span style="color: #f0c674;">)</span><span style="color: #8abeb7;">)</span>
+            <span style="color: #8abeb7;">(</span><span style="color: #b5bd68;">org-with-wide-buffer</span>
+             <span style="color: #f0c674;">(</span>goto-char <span style="color: #b5bd68;">(</span>point-min<span style="color: #b5bd68;">)</span><span style="color: #f0c674;">)</span>
+             <span style="color: #f0c674;">(</span><span style="color: #b5bd68;">let</span> <span style="color: #b5bd68;">(</span><span style="color: #c5c8c6;">(</span>block-re <span style="color: #8abeb7;">(</span>concat <span style="color: #8abeb7;">"^[ </span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">t</span><span style="color: #8abeb7;">]*#</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">\</span><span style="color: #8abeb7;">+BEGIN_"</span> back-end-re<span style="color: #8abeb7;">)</span><span style="color: #c5c8c6;">)</span><span style="color: #b5bd68;">)</span>
+               <span style="color: #b5bd68;">(</span><span style="color: #b5bd68;">save-excursion</span>
+                 <span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">while</span> <span style="color: #8abeb7;">(</span>re-search-forward block-re nil t<span style="color: #8abeb7;">)</span>
+                   <span style="color: #8abeb7;">(</span><span style="color: #b5bd68;">let</span> <span style="color: #f0c674;">(</span><span style="color: #b5bd68;">(</span>element <span style="color: #81a2be;">(</span><span style="color: #b5bd68;">save-match-data</span> <span style="color: #c5c8c6;">(</span>org-element-at-point<span style="color: #c5c8c6;">)</span><span style="color: #81a2be;">)</span><span style="color: #b5bd68;">)</span><span style="color: #f0c674;">)</span>
+                     <span style="color: #f0c674;">(</span><span style="color: #b5bd68;">when</span> <span style="color: #b5bd68;">(</span>eq <span style="color: #81a2be;">(</span>org-element-type element<span style="color: #81a2be;">)</span> <span style="color: #b5bd68;">'</span><span style="color: #81a2be;">special-block</span><span style="color: #b5bd68;">)</span>
+                       <span style="color: #b5bd68;">(</span><span style="color: #b5bd68;">save-excursion</span>
+                         <span style="color: #81a2be;">(</span>goto-char <span style="color: #c5c8c6;">(</span>org-element-property <span style="color: #b294bb;">:end</span> element<span style="color: #c5c8c6;">)</span><span style="color: #81a2be;">)</span>
+                         <span style="color: #81a2be;">(</span><span style="color: #b5bd68;">save-match-data</span> <span style="color: #c5c8c6;">(</span>search-backward <span style="color: #8abeb7;">"_"</span><span style="color: #c5c8c6;">)</span><span style="color: #81a2be;">)</span>
+                         <span style="color: #81a2be;">(</span>forward-char<span style="color: #81a2be;">)</span>
+                         <span style="color: #81a2be;">(</span>insert <span style="color: #8abeb7;">"EXPORT"</span><span style="color: #81a2be;">)</span>
+                         <span style="color: #81a2be;">(</span>delete-region <span style="color: #c5c8c6;">(</span>point<span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">(</span>line-end-position<span style="color: #c5c8c6;">)</span><span style="color: #81a2be;">)</span><span style="color: #b5bd68;">)</span>
+                       <span style="color: #b5bd68;">(</span>replace-match <span style="color: #8abeb7;">"EXPORT </span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">\</span><span style="color: #8abeb7;">1"</span> nil nil nil 1<span style="color: #b5bd68;">)</span><span style="color: #f0c674;">)</span><span style="color: #8abeb7;">)</span><span style="color: #c5c8c6;">)</span><span style="color: #b5bd68;">)</span><span style="color: #f0c674;">)</span>
+             <span style="color: #f0c674;">(</span><span style="color: #b5bd68;">let</span> <span style="color: #b5bd68;">(</span><span style="color: #c5c8c6;">(</span>include-re
+                    <span style="color: #8abeb7;">(</span>format <span style="color: #8abeb7;">"^[ </span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">t</span><span style="color: #8abeb7;">]*#</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">\</span><span style="color: #8abeb7;">+INCLUDE: .*?%s[ </span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">t</span><span style="color: #8abeb7;">]*$"</span> back-end-re<span style="color: #8abeb7;">)</span><span style="color: #c5c8c6;">)</span><span style="color: #b5bd68;">)</span>
+               <span style="color: #b5bd68;">(</span><span style="color: #b5bd68;">while</span> <span style="color: #c5c8c6;">(</span>re-search-forward include-re nil t<span style="color: #c5c8c6;">)</span>
+                 <span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">let</span> <span style="color: #8abeb7;">(</span><span style="color: #f0c674;">(</span>element <span style="color: #b5bd68;">(</span><span style="color: #b5bd68;">save-match-data</span> <span style="color: #81a2be;">(</span>org-element-at-point<span style="color: #81a2be;">)</span><span style="color: #b5bd68;">)</span><span style="color: #f0c674;">)</span><span style="color: #8abeb7;">)</span>
+                   <span style="color: #8abeb7;">(</span><span style="color: #b5bd68;">when</span> <span style="color: #f0c674;">(</span><span style="color: #b5bd68;">and</span> <span style="color: #b5bd68;">(</span>eq <span style="color: #81a2be;">(</span>org-element-type element<span style="color: #81a2be;">)</span> <span style="color: #b5bd68;">'</span><span style="color: #81a2be;">keyword</span><span style="color: #b5bd68;">)</span>
+                              <span style="color: #b5bd68;">(</span>string= <span style="color: #81a2be;">(</span>org-element-property <span style="color: #b294bb;">:key</span> element<span style="color: #81a2be;">)</span> <span style="color: #8abeb7;">"INCLUDE"</span><span style="color: #b5bd68;">)</span><span style="color: #f0c674;">)</span>
+                     <span style="color: #f0c674;">(</span>replace-match <span style="color: #8abeb7;">"EXPORT </span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">\</span><span style="color: #8abeb7;">1"</span> nil nil nil 1<span style="color: #f0c674;">)</span><span style="color: #8abeb7;">)</span><span style="color: #c5c8c6;">)</span><span style="color: #b5bd68;">)</span><span style="color: #f0c674;">)</span><span style="color: #8abeb7;">)</span><span style="color: #c5c8c6;">)</span><span style="color: #81a2be;">)</span>
+        <span style="color: #81a2be;">(</span>save-buffer <span style="color: #c5c8c6;">(</span>buffer-name<span style="color: #c5c8c6;">)</span><span style="color: #81a2be;">)</span>
+        <span style="color: #81a2be;">(</span>kill-buffer <span style="color: #c5c8c6;">(</span>buffer-name<span style="color: #c5c8c6;">)</span><span style="color: #81a2be;">)</span><span style="color: #b5bd68;">)</span><span style="color: #f0c674;">)</span><span style="color: #8abeb7;">)</span><span style="color: #c5c8c6;">)</span>
+<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">(org-repair-export-blocks "_content")</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0a28895" class="outline-2">
+<h2 id="org0a28895"><span class="section-number-2">5</span> 尾声</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 期待更多有意思的“改造”。
 </p>
@@ -210,10 +291,10 @@ Org-mode 生成 HTML 的代码都在 <a href="http://orgmode.org/w/?p=org-mode.g
 <div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
 <p class="date">2016-10-28</p>
-<p class="export-date">2016-11-09 Wed 17:27</p>
+<p class="export-date">2016-11-10 Thu 15:00</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.0)</p>
 <p class="validation"></p>
-<p class="last-modification-time">2016-11-09 Wed 17:27</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
+<p class="last-modification-time">2016-11-10 Thu 15:00</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

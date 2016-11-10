@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<!-- 2016-11-07 Mon 15:59 -->
-<meta  charset="utf-8">
-<meta  name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2016-11-10 Thu 13:03 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Shell Cookies</title>
-<meta  name="generator" content="Org-mode">
-<meta  name="author" content="冰糖火箭筒(Junjia Ni)">
-<meta  name="description" content="记住一些命令"
+<meta name="generator" content="Org mode">
+<meta name="author" content="冰糖火箭筒(Junjia Ni)">
+<meta name="description" content="记住一些命令"
 >
-<meta  name="keywords" content="shell,emacs,etags">
+<meta name="keywords" content="shell,emacs,etags">
 <link rel="stylesheet" type="text/css" href="/static/article.css"><!--[if lt IE 9]>
 <script src="/static/libs/html5shiv.min.js"></script>
 <![endif]-->
@@ -22,36 +22,36 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. 前言</a></li>
-<li><a href="#orgheadline2">2. ffmpeg</a></li>
-<li><a href="#orgheadline3">3. ab</a></li>
-<li><a href="#orgheadline4">4. grep</a></li>
-<li><a href="#orgheadline8">5. Emacs</a>
+<li><a href="#org98f6777">1. 前言</a></li>
+<li><a href="#org0c74c65">2. ffmpeg</a></li>
+<li><a href="#org34976e3">3. ab</a></li>
+<li><a href="#org08a9fbf">4. grep</a></li>
+<li><a href="#orgee68f36">5. Emacs</a>
 <ul>
-<li><a href="#orgheadline5">5.1. 插入当前时间</a></li>
-<li><a href="#orgheadline7">5.2. Org-mode</a>
+<li><a href="#org1c0c29f">5.1. 插入当前时间</a></li>
+<li><a href="#orgfddbd82">5.2. Org-mode</a>
 <ul>
-<li><a href="#orgheadline6">5.2.1. Table Sort</a></li>
+<li><a href="#org9bfd2d7">5.2.1. Table Sort</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgheadline9">6. etags &amp; ctags</a></li>
-<li><a href="#orgheadline13">7. 用户篇</a>
+<li><a href="#org131e867">6. etags &amp; ctags</a></li>
+<li><a href="#orgdf6fe67">7. 用户篇</a>
 <ul>
-<li><a href="#orgheadline10">7.1. 增加用户：</a></li>
-<li><a href="#orgheadline11">7.2. 批量增加用户:</a></li>
-<li><a href="#orgheadline12">7.3. 增加用户到组:</a></li>
+<li><a href="#org845e444">7.1. 增加用户：</a></li>
+<li><a href="#orga0d5413">7.2. 批量增加用户:</a></li>
+<li><a href="#orgd407821">7.3. 增加用户到组:</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline14">8. 尾声</a></li>
+<li><a href="#org145fd98">8. 尾声</a></li>
 </ul>
 </div>
 </nav>
 
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
+<div id="outline-container-org98f6777" class="outline-2">
+<h2 id="org98f6777"><span class="section-number-2">1</span> 前言</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 一些常用的命令，包括使用Emacs的小技巧。
@@ -59,11 +59,10 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2"><span class="section-number-2">2</span> ffmpeg</h2>
+<div id="outline-container-org0c74c65" class="outline-2">
+<h2 id="org0c74c65"><span class="section-number-2">2</span> ffmpeg</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
-
 <pre class="src src-sh"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">-r &#25351;&#23450;&#39057;&#29575;</span>
 $ ffmpeg -i xxx.mp4 -r 25 xxx.%05d.gif
 </pre>
@@ -71,8 +70,8 @@ $ ffmpeg -i xxx.mp4 -r 25 xxx.%05d.gif
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3"><span class="section-number-2">3</span> ab</h2>
+<div id="outline-container-org34976e3" class="outline-2">
+<h2 id="org34976e3"><span class="section-number-2">3</span> ab</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Apache HTTP server benchmarking tool <br >
@@ -135,11 +134,10 @@ Reference:
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-2">
-<h2 id="orgheadline4"><span class="section-number-2">4</span> grep</h2>
+<div id="outline-container-org08a9fbf" class="outline-2">
+<h2 id="org08a9fbf"><span class="section-number-2">4</span> grep</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
-
 <pre class="src src-sh">grep -rnw <span style="color: #8abeb7;">'/path/to/somewhere/'</span> -e <span style="color: #8abeb7;">"pattern"</span>
 </pre>
 </div>
@@ -149,24 +147,23 @@ Reference: <a href="http://stackoverflow.com/a/16957078/1925954">http://stackove
 </div>
 </div>
 
-<div id="outline-container-orgheadline8" class="outline-2">
-<h2 id="orgheadline8"><span class="section-number-2">5</span> Emacs</h2>
+<div id="outline-container-orgee68f36" class="outline-2">
+<h2 id="orgee68f36"><span class="section-number-2">5</span> Emacs</h2>
 <div class="outline-text-2" id="text-5">
-</div><div id="outline-container-orgheadline5" class="outline-3">
-<h3 id="orgheadline5"><span class="section-number-3">5.1</span> 插入当前时间</h3>
+</div><div id="outline-container-org1c0c29f" class="outline-3">
+<h3 id="org1c0c29f"><span class="section-number-3">5.1</span> 插入当前时间</h3>
 <div class="outline-text-3" id="text-5-1">
 <div class="org-src-container">
-
 <pre class="src src-sh">C-u M-! date
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline7" class="outline-3">
-<h3 id="orgheadline7"><span class="section-number-3">5.2</span> Org-mode</h3>
+<div id="outline-container-orgfddbd82" class="outline-3">
+<h3 id="orgfddbd82"><span class="section-number-3">5.2</span> Org-mode</h3>
 <div class="outline-text-3" id="text-5-2">
-</div><div id="outline-container-orgheadline6" class="outline-4">
-<h4 id="orgheadline6"><span class="section-number-4">5.2.1</span> Table Sort</h4>
+</div><div id="outline-container-org9bfd2d7" class="outline-4">
+<h4 id="org9bfd2d7"><span class="section-number-4">5.2.1</span> Table Sort</h4>
 <div class="outline-text-4" id="text-5-2-1">
 <p>
 <code>C-c ^</code>
@@ -176,11 +173,10 @@ Reference: <a href="http://stackoverflow.com/a/16957078/1925954">http://stackove
 </div>
 </div>
 
-<div id="outline-container-orgheadline9" class="outline-2">
-<h2 id="orgheadline9"><span class="section-number-2">6</span> etags &amp; ctags</h2>
+<div id="outline-container-org131e867" class="outline-2">
+<h2 id="org131e867"><span class="section-number-2">6</span> etags &amp; ctags</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
-
 <pre class="src src-sh"><span style="color: #b294bb;">cd</span> /path/to/my/project
 ctags -e -R *.cpp *.hpp *.h
 
@@ -208,14 +204,13 @@ find . -type f -iname <span style="color: #8abeb7;">"*.[ch]"</span> | etags -
 </div>
 </div>
 
-<div id="outline-container-orgheadline13" class="outline-2">
-<h2 id="orgheadline13"><span class="section-number-2">7</span> 用户篇</h2>
+<div id="outline-container-orgdf6fe67" class="outline-2">
+<h2 id="orgdf6fe67"><span class="section-number-2">7</span> 用户篇</h2>
 <div class="outline-text-2" id="text-7">
-</div><div id="outline-container-orgheadline10" class="outline-3">
-<h3 id="orgheadline10"><span class="section-number-3">7.1</span> 增加用户：</h3>
+</div><div id="outline-container-org845e444" class="outline-3">
+<h3 id="org845e444"><span class="section-number-3">7.1</span> 增加用户：</h3>
 <div class="outline-text-3" id="text-7-1">
 <div class="org-src-container">
-
 <pre class="src src-sh"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">-s&#25351;&#23450;shell</span>
 <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">-g&#25351;&#23450;&#32452;&#21517;</span>
 <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">-G&#25351;&#23450;&#21152;&#20837;&#32452;&#65288;&#38468;&#21152;&#32452;&#65289;</span>
@@ -232,11 +227,10 @@ useradd -s /bin/sh -g group &#8211;G adm,root gem
 </div>
 </div>
 
-<div id="outline-container-orgheadline11" class="outline-3">
-<h3 id="orgheadline11"><span class="section-number-3">7.2</span> 批量增加用户:</h3>
+<div id="outline-container-orga0d5413" class="outline-3">
+<h3 id="orga0d5413"><span class="section-number-3">7.2</span> 批量增加用户:</h3>
 <div class="outline-text-3" id="text-7-2">
 <div class="org-src-container">
-
 <pre class="src src-sh"><span style="color: #969896; font-style: italic;">#</span><span style="color: #969896; font-style: italic;">!/bin/</span><span style="color: #b5bd68;">bash/</span>
 <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#21019;&#24314;&#29992;&#25143;</span>
 <span style="color: #b5bd68;">for</span> i<span style="color: #b5bd68;"> in</span> <span style="color: #b294bb;">`cat user.list`</span>
@@ -263,15 +257,14 @@ someone3
 </div>
 </div>
 
-<div id="outline-container-orgheadline12" class="outline-3">
-<h3 id="orgheadline12"><span class="section-number-3">7.3</span> 增加用户到组:</h3>
+<div id="outline-container-orgd407821" class="outline-3">
+<h3 id="orgd407821"><span class="section-number-3">7.3</span> 增加用户到组:</h3>
 <div class="outline-text-3" id="text-7-3">
 <ol class="org-ol">
 <li><p>
 增加一个新用户到主要用户组：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#22686;&#21152;&#29992;&#25143;icecream&#21040;wsng</span>
 <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">-g&#23558;&#26032;&#22686;&#21152;&#30340;&#29992;&#25143;&#21021;&#22987;&#21270;&#20026;&#25351;&#23450;&#30331;&#24405;&#32452;&#65292;&#27492;&#21517;&#24517;&#39035;&#23384;&#22312;</span>
 useradd -g wsng icecream
@@ -281,7 +274,6 @@ useradd -g wsng icecream
 增加一个已有用户到一个已有用户组中
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#29992;&#25143;icecream&#19981;&#24517;&#31163;&#24320;&#21407;&#32452;</span>
 usermod -a -G wsng icecream
 <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#23558;&#29992;&#25143;&#32452;&#25913;&#20026;wsng</span>
@@ -294,16 +286,16 @@ usermod -g wsng icecream
 </div>
 
 
-<div id="outline-container-orgheadline14" class="outline-2">
-<h2 id="orgheadline14"><span class="section-number-2">8</span> 尾声</h2>
+<div id="outline-container-org145fd98" class="outline-2">
+<h2 id="org145fd98"><span class="section-number-2">8</span> 尾声</h2>
 </div>
 </div>
 <div id="postamble" class="status">
 <div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
 <p class="date">2015-12-27</p>
-<p class="export-date">2016-11-07 Mon 15:59</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="export-date">2016-11-10 Thu 13:03</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.0)</p>
 <p class="validation"></p>
 <p class="last-modification-time">2016-10-23 Sun 23:09</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
 </div>

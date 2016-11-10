@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<!-- 2016-11-07 Mon 15:59 -->
-<meta  charset="utf-8">
-<meta  name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2016-11-10 Thu 13:03 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OE And NK</title>
-<meta  name="generator" content="Org-mode">
-<meta  name="author" content="Junjia Ni">
-<meta  name="description" content="静态博客预览编辑发布工具"
+<meta name="generator" content="Org mode">
+<meta name="author" content="Junjia Ni">
+<meta name="description" content="静态博客预览编辑发布工具"
 >
-<meta  name="keywords" content="emacs,orgmode,静态博客,blog,static-blog">
+<meta name="keywords" content="emacs,orgmode,静态博客,blog,static-blog">
 <link rel="stylesheet" type="text/css" href="/static/article.css"><!--[if lt IE 9]>
 <script src="/static/libs/html5shiv.min.js"></script>
 <![endif]-->
@@ -22,24 +22,24 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. 前奏</a></li>
-<li><a href="#orgheadline2">2. 设计要素</a></li>
-<li><a href="#orgheadline6">3. 初始化操作</a>
+<li><a href="#orgb9ca9a0">1. 前奏</a></li>
+<li><a href="#orge7da03e">2. 设计要素</a></li>
+<li><a href="#orgb54c418">3. 初始化操作</a>
 <ul>
-<li><a href="#orgheadline3">3.1. 两个库（两个分支）</a></li>
-<li><a href="#orgheadline4">3.2. articles</a></li>
-<li><a href="#orgheadline5">3.3. public</a></li>
+<li><a href="#org6cfedf5">3.1. 两个库（两个分支）</a></li>
+<li><a href="#org1e1c3ca">3.2. articles</a></li>
+<li><a href="#orgbe01b39">3.3. public</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline7">4. 发布</a></li>
-<li><a href="#orgheadline8">5. 尾声</a></li>
+<li><a href="#org42c0e0e">4. 发布</a></li>
+<li><a href="#org4b99bda">5. 尾声</a></li>
 </ul>
 </div>
 </nav>
 
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> 前奏</h2>
+<div id="outline-container-orgb9ca9a0" class="outline-2">
+<h2 id="orgb9ca9a0"><span class="section-number-2">1</span> 前奏</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 最近闲着无聊，感觉也没有什么特别的事情要干，于是又回到了整博客上了。
@@ -69,8 +69,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2"><span class="section-number-2">2</span> 设计要素</h2>
+<div id="outline-container-orge7da03e" class="outline-2">
+<h2 id="orge7da03e"><span class="section-number-2">2</span> 设计要素</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 <b>OEAndNK</b> 用来预览发布orgmode导出的文章。她不解决git冲突，不做任何和预览发布不相关的事情（暂时）。
@@ -92,18 +92,17 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-2">
-<h2 id="orgheadline6"><span class="section-number-2">3</span> 初始化操作</h2>
+<div id="outline-container-orgb54c418" class="outline-2">
+<h2 id="orgb54c418"><span class="section-number-2">3</span> 初始化操作</h2>
 <div class="outline-text-2" id="text-3">
-</div><div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3"><span class="section-number-3">3.1</span> 两个库（两个分支）</h3>
+</div><div id="outline-container-org6cfedf5" class="outline-3">
+<h3 id="org6cfedf5"><span class="section-number-3">3.1</span> 两个库（两个分支）</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 这里你可以是两个库，也可以是两个分支。我的话是搞成了两个库。
 一个库(creamidea)用于放原始文章，另一个库(creamidea.github.com)用于放导出的文章，也就是最终效果页面的库。
 </p>
 <div class="org-src-container">
-
 <pre class="src src-js"><span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">child1</span> = child_process.fork<span style="color: #c5c8c6;">(</span>__dirname + <span style="color: #8abeb7;">'/deploy.js'</span>, <span style="color: #8abeb7;">[</span><span style="color: #8abeb7;">'articles'</span>, <span style="color: #8abeb7;">'.'</span>, message.argv<span style="color: #f0c674;">[</span>0<span style="color: #f0c674;">]</span><span style="color: #8abeb7;">]</span><span style="color: #c5c8c6;">)</span>
 <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">child2</span> = child_process.fork<span style="color: #c5c8c6;">(</span>__dirname + <span style="color: #8abeb7;">'/deploy.js'</span>, <span style="color: #8abeb7;">[</span><span style="color: #8abeb7;">'master'</span>, <span style="color: #8abeb7;">'.'</span>, message.argv<span style="color: #f0c674;">[</span>0<span style="color: #f0c674;">]</span><span style="color: #8abeb7;">]</span><span style="color: #c5c8c6;">)</span>
 </pre>
@@ -115,15 +114,14 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4"><span class="section-number-3">3.2</span> articles</h3>
+<div id="outline-container-org1e1c3ca" class="outline-3">
+<h3 id="org1e1c3ca"><span class="section-number-3">3.2</span> articles</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 文章库的初始化，将文章库的位置赋值给 <b>deploy.js</b> 中的 <code>articlesDir</code> 。
 然后增加远程库地址并设置&#x2013;set-upstream:
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">$ git remote add origin git@github.com:your-repo-path
 $ git branch --set-upstream my_branch origin/my_branch
 </pre>
@@ -131,15 +129,14 @@ $ git branch --set-upstream my_branch origin/my_branch
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-3">
-<h3 id="orgheadline5"><span class="section-number-3">3.3</span> public</h3>
+<div id="outline-container-orgbe01b39" class="outline-3">
+<h3 id="orgbe01b39"><span class="section-number-3">3.3</span> public</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 文章公共库，用于Github Page引擎渲染的库，赋值 <b>deploy.js</b> 中的 <code>publicDir</code> 。
 然后增加远程库地址并设置&#x2013;set-upstream:
 </p>
 <div class="org-src-container">
-
 <pre class="src src-sh">$ git remote add origin git@github.com:your-page-repo-path
 $ git branch --set-upstream my_branch origin/my_branch
 </pre>
@@ -148,8 +145,8 @@ $ git branch --set-upstream my_branch origin/my_branch
 </div>
 </div>
 
-<div id="outline-container-orgheadline7" class="outline-2">
-<h2 id="orgheadline7"><span class="section-number-2">4</span> 发布</h2>
+<div id="outline-container-org42c0e0e" class="outline-2">
+<h2 id="org42c0e0e"><span class="section-number-2">4</span> 发布</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 初始化动作都完成之后，以后的步骤就非常的简单了，只要点击一次 <b>Publish</b> 按钮就可以了。
@@ -164,7 +161,6 @@ $ git branch --set-upstream my_branch origin/my_branch
 其实很简单，就是本地起的服务器中，在传到浏览器的流中植入了本地的一些js，来动态处理这些。
 </p>
 <div class="org-src-container">
-
 <pre class="src src-js">app.use<span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">function</span>*<span style="color: #8abeb7;">(</span>next<span style="color: #8abeb7;">)</span> <span style="color: #8abeb7;">{</span>
   <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">console.log(this)</span>
   <span style="color: #b5bd68;">yield</span> next
@@ -197,8 +193,8 @@ $ git branch --set-upstream my_branch origin/my_branch
 </div>
 </div>
 
-<div id="outline-container-orgheadline8" class="outline-2">
-<h2 id="orgheadline8"><span class="section-number-2">5</span> 尾声</h2>
+<div id="outline-container-org4b99bda" class="outline-2">
+<h2 id="org4b99bda"><span class="section-number-2">5</span> 尾声</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 完成上述一些环境搭建，初始化步骤之后，以后写完检查无误就可以点击按钮发布了。如丝般顺滑。
@@ -230,8 +226,8 @@ $ git branch --set-upstream my_branch origin/my_branch
 <div id="meta-article"><p class="author">Junjia Ni</p>
 <p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
 <p class="date">2015-12-27</p>
-<p class="export-date">2016-11-07 Mon 15:59</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="export-date">2016-11-10 Thu 13:03</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.0)</p>
 <p class="validation"></p>
 <p class="last-modification-time">2016-10-23 Sun 23:09</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
 </div>

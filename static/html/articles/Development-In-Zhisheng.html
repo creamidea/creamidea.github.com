@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<!-- 2016-11-07 Mon 15:59 -->
-<meta  charset="utf-8">
-<meta  name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2016-11-10 Thu 13:03 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Development In Zhisheng</title>
-<meta  name="generator" content="Org-mode">
-<meta  name="author" content="冰糖火箭筒(Junjia Ni)">
-<meta  name="description" content="大学期间在智胜的实习记录"
+<meta name="generator" content="Org mode">
+<meta name="author" content="冰糖火箭筒(Junjia Ni)">
+<meta name="description" content="大学期间在智胜的实习记录"
 >
-<meta  name="keywords" content="javascript,python,django,css,mysql">
+<meta name="keywords" content="javascript,python,django,css,mysql">
 <link rel="stylesheet" type="text/css" href="/static/article.css"><!--[if lt IE 9]>
 <script src="/static/libs/html5shiv.min.js"></script>
 <![endif]-->
@@ -22,36 +22,36 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. 前言</a></li>
-<li><a href="#orgheadline2">2. 制作登录界面</a></li>
-<li><a href="#orgheadline3">3. 高级视图和URL配置</a></li>
-<li><a href="#orgheadline4">4. 'NoneType' object has no attribute 'has\<sub>header</sub>'</a></li>
-<li><a href="#orgheadline5">5. locals()小技巧</a></li>
-<li><a href="#orgheadline6">6. Cross Site Request Forgery protection</a></li>
-<li><a href="#orgheadline7">7. login\<sub>required</sub> 作下面这些事情：</a></li>
-<li><a href="#orgheadline8">8. django.contrib.auth.views.login 的作用是：</a></li>
-<li><a href="#orgheadline9">9. python Data Structures</a></li>
-<li><a href="#orgheadline10">10. django.core.urlresolvers</a></li>
-<li><a href="#orgheadline11">11. URL dispatcher</a></li>
-<li><a href="#orgheadline15">12. Q&amp;A:</a>
+<li><a href="#org23a3d8c">1. 前言</a></li>
+<li><a href="#orgfe828c9">2. 制作登录界面</a></li>
+<li><a href="#org5771758">3. 高级视图和URL配置</a></li>
+<li><a href="#org6573b85">4. 'NoneType' object has no attribute 'has\<sub>header</sub>'</a></li>
+<li><a href="#org4462559">5. locals()小技巧</a></li>
+<li><a href="#orgbba481e">6. Cross Site Request Forgery protection</a></li>
+<li><a href="#org1ebded3">7. login\<sub>required</sub> 作下面这些事情：</a></li>
+<li><a href="#org08d5abb">8. django.contrib.auth.views.login 的作用是：</a></li>
+<li><a href="#orgf9d692d">9. python Data Structures</a></li>
+<li><a href="#org57fc6c9">10. django.core.urlresolvers</a></li>
+<li><a href="#org0603035">11. URL dispatcher</a></li>
+<li><a href="#orgdb4876b">12. Q&amp;A:</a>
 <ul>
-<li><a href="#orgheadline12">12.1. 如何快速更改项目的名称？</a></li>
-<li><a href="#orgheadline13">12.2. 如何构造优美的URLs？</a></li>
-<li><a href="#orgheadline14">12.3. Django Error u“'polls” is not a registered namespace</a></li>
+<li><a href="#org5db540e">12.1. 如何快速更改项目的名称？</a></li>
+<li><a href="#org5142ca7">12.2. 如何构造优美的URLs？</a></li>
+<li><a href="#org81e7cd3">12.3. Django Error u“'polls” is not a registered namespace</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline17">13. Design:</a>
+<li><a href="#orgf7c6835">13. Design:</a>
 <ul>
-<li><a href="#orgheadline16">13.1. 用户的分类：</a></li>
+<li><a href="#orgc5830aa">13.1. 用户的分类：</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline18">14. Django &amp;&amp; Ajax:</a></li>
+<li><a href="#org0e0a3e2">14. Django &amp;&amp; Ajax:</a></li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
+<div id="outline-container-org23a3d8c" class="outline-2">
+<h2 id="org23a3d8c"><span class="section-number-2">1</span> 前言</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 开发日志
@@ -59,8 +59,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2"><span class="section-number-2">2</span> 制作登录界面</h2>
+<div id="outline-container-orgfe828c9" class="outline-2">
+<h2 id="orgfe828c9"><span class="section-number-2">2</span> 制作登录界面</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 <span class="timestamp-wrapper"><span class="timestamp">&lt;2013-05-09 Thu&gt;</span></span>
@@ -79,7 +79,6 @@
 处理函数:
 </p>
 <div class="org-src-container">
-
 <pre class="src src-javascript">String.<span style="color: #81a2be;">prototype</span>.Trim = <span style="color: #b5bd68;">function</span><span style="color: #c5c8c6;">()</span> <span style="color: #c5c8c6;">{</span> <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#21435;&#25481;&#24038;&#21491;&#31354;&#26684;</span>
     <span style="color: #b5bd68;">return</span> <span style="color: #81a2be;">this</span>.replace<span style="color: #8abeb7;">(</span><span style="color: #8abeb7;">/(^</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">s</span><span style="color: #8abeb7;">*)|(</span><span style="color: #f0c674;">\</span><span style="color: #b294bb;">s</span><span style="color: #8abeb7;">*$)/</span>g, <span style="color: #8abeb7;">""</span><span style="color: #8abeb7;">)</span>;
 <span style="color: #c5c8c6;">}</span>
@@ -96,8 +95,8 @@ String.<span style="color: #81a2be;">prototype</span>.Rtrim = <span style="color
 </div>
 
 
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3"><span class="section-number-2">3</span> 高级视图和URL配置</h2>
+<div id="outline-container-org5771758" class="outline-2">
+<h2 id="org5771758"><span class="section-number-2">3</span> 高级视图和URL配置</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 <span class="timestamp-wrapper"><span class="timestamp">&lt;2013-05-14 Tue&gt;</span></span>
@@ -107,7 +106,6 @@ String.<span style="color: #81a2be;">prototype</span>.Rtrim = <span style="color
 高级视图和URL配置:
 </p>
 <div class="org-src-container">
-
 <pre class="src src-python"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">urls.py</span>
 <span style="color: #b5bd68;">from</span> django.conf.urls.defaults <span style="color: #b5bd68;">import</span> *
 <span style="color: #b5bd68;">from</span> mysite <span style="color: #b5bd68;">import</span> views
@@ -125,8 +123,8 @@ String.<span style="color: #81a2be;">prototype</span>.Rtrim = <span style="color
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline4" class="outline-2">
-<h2 id="orgheadline4"><span class="section-number-2">4</span> 'NoneType' object has no attribute 'has\<sub>header</sub>'</h2>
+<div id="outline-container-org6573b85" class="outline-2">
+<h2 id="org6573b85"><span class="section-number-2">4</span> 'NoneType' object has no attribute 'has\<sub>header</sub>'</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 A:
@@ -139,11 +137,10 @@ I wonder if this is a new error message? I recall a more specific error in my pr
 </pre>
 </div>
 </div>
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5"><span class="section-number-2">5</span> locals()小技巧</h2>
+<div id="outline-container-org4462559" class="outline-2">
+<h2 id="org4462559"><span class="section-number-2">5</span> locals()小技巧</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
-
 <pre class="src src-python"><span style="color: #b5bd68;">def</span> <span style="color: #de935f;">current_datetime</span><span style="color: #c5c8c6;">(</span>request<span style="color: #c5c8c6;">)</span>:
     <span style="color: #f0c674;">now</span> = datetime.datetime.now<span style="color: #c5c8c6;">()</span>
     <span style="color: #b5bd68;">return</span> render_to_response<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">'current_datetime.html'</span>, <span style="color: #8abeb7;">{</span><span style="color: #8abeb7;">'current_date'</span>: now<span style="color: #8abeb7;">}</span><span style="color: #c5c8c6;">)</span>
@@ -153,7 +150,6 @@ I wonder if this is a new error message? I recall a more specific error in my pr
 等价于：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-python"><span style="color: #b5bd68;">def</span> <span style="color: #de935f;">current_datetime</span><span style="color: #c5c8c6;">(</span>request<span style="color: #c5c8c6;">)</span>:
     <span style="color: #f0c674;">current_date</span> = datetime.datetime.now<span style="color: #c5c8c6;">()</span>
     <span style="color: #b5bd68;">return</span> render_to_response<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">'current_datetime.html'</span>, <span style="color: #b294bb;">locals</span><span style="color: #8abeb7;">()</span><span style="color: #c5c8c6;">)</span>
@@ -171,11 +167,10 @@ Reference：
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline6" class="outline-2">
-<h2 id="orgheadline6"><span class="section-number-2">6</span> Cross Site Request Forgery protection</h2>
+<div id="outline-container-orgbba481e" class="outline-2">
+<h2 id="orgbba481e"><span class="section-number-2">6</span> Cross Site Request Forgery protection</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
-
 <pre class="src src-js"><span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">using jQuery</span>
 <span style="color: #b5bd68;">function</span> <span style="color: #de935f;">getCookie</span><span style="color: #c5c8c6;">(</span><span style="color: #f0c674;">name</span><span style="color: #c5c8c6;">)</span> <span style="color: #c5c8c6;">{</span>
     <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">cookieValue</span> = <span style="color: #81a2be;">null</span>;
@@ -197,8 +192,8 @@ Reference：
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline7" class="outline-2">
-<h2 id="orgheadline7"><span class="section-number-2">7</span> login\<sub>required</sub> 作下面这些事情：</h2>
+<div id="outline-container-org1ebded3" class="outline-2">
+<h2 id="org1ebded3"><span class="section-number-2">7</span> login\<sub>required</sub> 作下面这些事情：</h2>
 <div class="outline-text-2" id="text-7">
 <ul class="org-ul">
 <li>如果用户没有登录，那么重定向到／accounts/login/ ，
@@ -212,8 +207,8 @@ Reference：
 </div>
 </div>
 
-<div id="outline-container-orgheadline8" class="outline-2">
-<h2 id="orgheadline8"><span class="section-number-2">8</span> django.contrib.auth.views.login 的作用是：</h2>
+<div id="outline-container-org08d5abb" class="outline-2">
+<h2 id="org08d5abb"><span class="section-number-2">8</span> django.contrib.auth.views.login 的作用是：</h2>
 <div class="outline-text-2" id="text-8">
 <ul class="org-ul">
 <li>如果通过 ``GET`` 方式调用的话，它显示一个登录表单并通过POST的方式登录。</li>
@@ -235,16 +230,16 @@ site_name：当前 Site 的名字。根据 SITE_ID 设置的信息获取。参�
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline9" class="outline-2">
-<h2 id="orgheadline9"><span class="section-number-2">9</span> python Data Structures</h2>
+<div id="outline-container-orgf9d692d" class="outline-2">
+<h2 id="orgf9d692d"><span class="section-number-2">9</span> python Data Structures</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 <a href="http://docs.python.org/2/tutorial/datastructures.html">http://docs.python.org/2/tutorial/datastructures.html</a>
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline10" class="outline-2">
-<h2 id="orgheadline10"><span class="section-number-2">10</span> django.core.urlresolvers</h2>
+<div id="outline-container-org57fc6c9" class="outline-2">
+<h2 id="org57fc6c9"><span class="section-number-2">10</span> django.core.urlresolvers</h2>
 <div class="outline-text-2" id="text-10">
 <p>
 <a href="https://docs.djangoproject.com/en/dev/ref/urlresolvers/">https://docs.djangoproject.com/en/dev/ref/urlresolvers/</a>
@@ -259,8 +254,8 @@ reverse():
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline11" class="outline-2">
-<h2 id="orgheadline11"><span class="section-number-2">11</span> URL dispatcher</h2>
+<div id="outline-container-org0603035" class="outline-2">
+<h2 id="org0603035"><span class="section-number-2">11</span> URL dispatcher</h2>
 <div class="outline-text-2" id="text-11">
 <p>
 <a href="https://docs.djangoproject.com/en/dev/topics/http/urls/#django.core.urlresolvers.reverse">https://docs.djangoproject.com/en/dev/topics/http/urls/#django.core.urlresolvers.reverse</a>
@@ -268,32 +263,32 @@ reverse():
 </div>
 </div>
 
-<div id="outline-container-orgheadline15" class="outline-2">
-<h2 id="orgheadline15"><span class="section-number-2">12</span> Q&amp;A:</h2>
+<div id="outline-container-orgdb4876b" class="outline-2">
+<h2 id="orgdb4876b"><span class="section-number-2">12</span> Q&amp;A:</h2>
 <div class="outline-text-2" id="text-12">
-</div><div id="outline-container-orgheadline12" class="outline-3">
-<h3 id="orgheadline12"><span class="section-number-3">12.1</span> 如何快速更改项目的名称？</h3>
+</div><div id="outline-container-org5db540e" class="outline-3">
+<h3 id="org5db540e"><span class="section-number-3">12.1</span> 如何快速更改项目的名称？</h3>
 </div>
-<div id="outline-container-orgheadline13" class="outline-3">
-<h3 id="orgheadline13"><span class="section-number-3">12.2</span> 如何构造优美的URLs？</h3>
+<div id="outline-container-org5142ca7" class="outline-3">
+<h3 id="org5142ca7"><span class="section-number-3">12.2</span> 如何构造优美的URLs？</h3>
 </div>
-<div id="outline-container-orgheadline14" class="outline-3">
-<h3 id="orgheadline14"><span class="section-number-3">12.3</span> Django Error u“'polls” is not a registered namespace</h3>
+<div id="outline-container-org81e7cd3" class="outline-3">
+<h3 id="org81e7cd3"><span class="section-number-3">12.3</span> Django Error u“'polls” is not a registered namespace</h3>
 <div class="outline-text-3" id="text-12-3">
 <ul class="org-ul">
 <li><a href="http://stackoverflow.com/questions/14892462/django-error-upolls-is-not-a-registered-namespace?answertab=active#tab-top">http://stackoverflow.com/questions/14892462/django-error-upolls-is-not-a-registered-namespace?answertab=active#tab-top</a></li>
 <li><a href="http://djangounchain.wordpress.com/2013/01/05/tutorial-4-writing-first-django-app-part-3/">http://djangounchain.wordpress.com/2013/01/05/tutorial-4-writing-first-django-app-part-3/</a>
-       (Below the 'Namespacing URL names')</li>
+(Below the 'Namespacing URL names')</li>
 </ul>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline17" class="outline-2">
-<h2 id="orgheadline17"><span class="section-number-2">13</span> Design:</h2>
+<div id="outline-container-orgf7c6835" class="outline-2">
+<h2 id="orgf7c6835"><span class="section-number-2">13</span> Design:</h2>
 <div class="outline-text-2" id="text-13">
-</div><div id="outline-container-orgheadline16" class="outline-3">
-<h3 id="orgheadline16"><span class="section-number-3">13.1</span> 用户的分类：</h3>
+</div><div id="outline-container-orgc5830aa" class="outline-3">
+<h3 id="orgc5830aa"><span class="section-number-3">13.1</span> 用户的分类：</h3>
 <div class="outline-text-3" id="text-13-1">
 <ul class="org-ul">
 <li>普通用户</li>
@@ -303,8 +298,8 @@ reverse():
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline18" class="outline-2">
-<h2 id="orgheadline18"><span class="section-number-2">14</span> Django &amp;&amp; Ajax:</h2>
+<div id="outline-container-org0e0a3e2" class="outline-2">
+<h2 id="org0e0a3e2"><span class="section-number-2">14</span> Django &amp;&amp; Ajax:</h2>
 <div class="outline-text-2" id="text-14">
 <p>
 <a href="https://docs.djangoproject.com/en/dev/ref/contrib/csrf/#page-uses-ajax-without-any-html-form">https://docs.djangoproject.com/en/dev/ref/contrib/csrf/#page-uses-ajax-without-any-html-form</a>
@@ -316,8 +311,8 @@ reverse():
 <div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
 <p class="date">2013-05-09</p>
-<p class="export-date">2016-11-07 Mon 15:59</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="export-date">2016-11-10 Thu 13:03</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.0)</p>
 <p class="validation"></p>
 <p class="last-modification-time">2016-10-23 Sun 23:09</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
 </div>

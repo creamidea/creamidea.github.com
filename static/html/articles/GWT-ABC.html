@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<!-- 2016-11-07 Mon 15:59 -->
-<meta  charset="utf-8">
-<meta  name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2016-11-10 Thu 13:03 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GWT ABC</title>
-<meta  name="generator" content="Org-mode">
-<meta  name="author" content="Junjia Ni">
-<meta  name="description" content="Something about gwt"
+<meta name="generator" content="Org mode">
+<meta name="author" content="Junjia Ni">
+<meta name="description" content="Something about gwt"
 >
-<meta  name="keywords" content="google,gwt,java">
+<meta name="keywords" content="google,gwt,java">
 <link rel="stylesheet" type="text/css" href="/static/article.css"><!--[if lt IE 9]>
 <script src="/static/libs/html5shiv.min.js"></script>
 <![endif]-->
@@ -22,23 +22,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. 前言</a></li>
-<li><a href="#orgheadline2">2. 开发环境</a></li>
-<li><a href="#orgheadline3">3. Hello World</a></li>
-<li><a href="#orgheadline10">4. 简单分析</a>
+<li><a href="#orge080145">1. 前言</a></li>
+<li><a href="#org30e23c9">2. 开发环境</a></li>
+<li><a href="#orgcaeb293">3. Hello World</a></li>
+<li><a href="#orgbb6cf02">4. 简单分析</a>
 <ul>
-<li><a href="#orgheadline4">4.1. 路由</a></li>
-<li><a href="#orgheadline7">4.2. 接口</a>
+<li><a href="#org6f736e1">4.1. 路由</a></li>
+<li><a href="#orgefe2db6">4.2. 接口</a>
 <ul>
-<li><a href="#orgheadline5">4.2.1. GreetingService</a></li>
-<li><a href="#orgheadline6">4.2.2. GreetingServiceAsync</a></li>
+<li><a href="#org63163b8">4.2.1. GreetingService</a></li>
+<li><a href="#orgd6f5c3a">4.2.2. GreetingServiceAsync</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline8">4.3. 入口</a></li>
-<li><a href="#orgheadline9">4.4. 其他</a></li>
+<li><a href="#orgc2522f7">4.3. 入口</a></li>
+<li><a href="#org7f2b1eb">4.4. 其他</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline11">5. 尾声</a></li>
+<li><a href="#orge7fb06b">5. 尾声</a></li>
 </ul>
 </div>
 </nav>
@@ -53,8 +53,8 @@ lazy-load alt="google web toolkit" title="google web toolkit"/>
 </div>
 
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
+<div id="outline-container-orge080145" class="outline-2">
+<h2 id="orge080145"><span class="section-number-2">1</span> 前言</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 又这个样子混过去好多天啦。不过挖的坑始终是要来填的。话说不知道为何对GWT有如此的好感。
@@ -73,8 +73,8 @@ lazy-load alt="google web toolkit" title="google web toolkit"/>
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2"><span class="section-number-2">2</span> 开发环境</h2>
+<div id="outline-container-org30e23c9" class="outline-2">
+<h2 id="org30e23c9"><span class="section-number-2">2</span> 开发环境</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 第一步当然是安装开发环境啦。我使用的Java IDE是Eclipse<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>，具体的安装配置过程我在这里就不累述了。
@@ -96,7 +96,7 @@ lazy-load alt="google web toolkit" title="google web toolkit"/>
 <figure>
 <p class="lazy-load-img-wrapper"><noscript><img src="http://farm8.staticflickr.com/7309/12204599783_c368afd41c.jpg" alt="12204599783_c368afd41c.jpg"></noscript><img lazy-load data-src="http://farm8.staticflickr.com/7309/12204599783_c368afd41c.jpg" alt="12204599783_c368afd41c.jpg">
 </p>
-<figcaption><span class="figure-number">Figure 1:</span> Eclipse安装插件出错</figcaption>
+<figcaption><span class="figure-number">Figure 1: </span>Eclipse安装插件出错</figcaption>
 </figure>
 
 <p>
@@ -115,7 +115,7 @@ Ok，接下来就是配置SDK的位置，简单，具体步骤如下： Window &
 <figure>
 <p class="lazy-load-img-wrapper"><noscript><img src="http://farm4.staticflickr.com/3782/12205767695_6b4865d5c4.jpg" alt="12205767695_6b4865d5c4.jpg"></noscript><img lazy-load data-src="http://farm4.staticflickr.com/3782/12205767695_6b4865d5c4.jpg" alt="12205767695_6b4865d5c4.jpg">
 </p>
-<figcaption><span class="figure-number">Figure 2:</span> SDK本地加载</figcaption>
+<figcaption><span class="figure-number">Figure 2: </span>SDK本地加载</figcaption>
 </figure>
 
 <p>
@@ -124,8 +124,8 @@ Ok，接下来就是配置SDK的位置，简单，具体步骤如下： Window &
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3"><span class="section-number-2">3</span> Hello World</h2>
+<div id="outline-container-orgcaeb293" class="outline-2">
+<h2 id="orgcaeb293"><span class="section-number-2">3</span> Hello World</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 我是按照 <a href="http://www.tutorialspoint.com/gwt/gwt_create_application.htm">这个</a> 来做的。这个网站已经写的很详细了，我就不再写了。 <del>截图真的很累啊！</del>
@@ -133,8 +133,8 @@ Ok，接下来就是配置SDK的位置，简单，具体步骤如下： Window &
 </div>
 </div>
 
-<div id="outline-container-orgheadline10" class="outline-2">
-<h2 id="orgheadline10"><span class="section-number-2">4</span> 简单分析</h2>
+<div id="outline-container-orgbb6cf02" class="outline-2">
+<h2 id="orgbb6cf02"><span class="section-number-2">4</span> 简单分析</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 笔者还没有学过Java， <del>才愧啊，</del> 所以分析也不会很深入，只是稍微讲解一下这个的工作原理，
@@ -147,8 +147,8 @@ Ok，接下来就是配置SDK的位置，简单，具体步骤如下： Window &
 </p>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4"><span class="section-number-3">4.1</span> 路由</h3>
+<div id="outline-container-org6f736e1" class="outline-3">
+<h3 id="org6f736e1"><span class="section-number-3">4.1</span> 路由</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 在路由方面（我的意思是找到相应的java代码）和servlet的原理是一样的。
@@ -161,7 +161,6 @@ This application is out of date, please click the refresh button on your browser
 如果你也碰到了这个问题，看看是不是没有修改web.xml。举个例子：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-xml">&lt;<span style="color: #de935f;">servlet</span>&gt;
   &lt;<span style="color: #de935f;">servlet-name</span>&gt;greetServlet&lt;/<span style="color: #de935f;">servlet-name</span>&gt;
   &lt;<span style="color: #de935f;">servlet-class</span>&gt;com.creamidea.helloworld.server.GreetingServiceImpl&lt;/<span style="color: #de935f;">servlet-class</span>&gt;
@@ -176,8 +175,8 @@ This application is out of date, please click the refresh button on your browser
 </div>
 </div>
 
-<div id="outline-container-orgheadline7" class="outline-3">
-<h3 id="orgheadline7"><span class="section-number-3">4.2</span> 接口</h3>
+<div id="outline-container-orgefe2db6" class="outline-3">
+<h3 id="orgefe2db6"><span class="section-number-3">4.2</span> 接口</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 主要是定义了两个接口， <code>GreetingService</code> 和 <code>GreetingServiceAsync</code> ，主要这两个接口的
@@ -189,8 +188,8 @@ This application is out of date, please click the refresh button on your browser
 </p>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-4">
-<h4 id="orgheadline5"><span class="section-number-4">4.2.1</span> GreetingService</h4>
+<div id="outline-container-org63163b8" class="outline-4">
+<h4 id="org63163b8"><span class="section-number-4">4.2.1</span> GreetingService</h4>
 <div class="outline-text-4" id="text-4-2-1">
 <p>
 在开始之前，谁能告诉我这个语法 <code>@RemoteServiceRelativePath("greet")</code> 是什么意思？
@@ -204,7 +203,6 @@ This application is out of date, please click the refresh button on your browser
 继承于 <code>com.google.gwt.user.client.rpc.RemoteService;</code> 
 </p>
 <div class="org-src-container">
-
 <pre class="src src-java"><span style="color: #b5bd68;">package</span> com.creamidea.helloworld.<span style="color: #81a2be;">client</span>;
 
 <span style="color: #b5bd68;">import</span> <span style="color: #81a2be;">com</span>.<span style="color: #81a2be;">google</span>.<span style="color: #81a2be;">gwt</span>.<span style="color: #81a2be;">user</span>.<span style="color: #81a2be;">client</span>.<span style="color: #81a2be;">rpc</span>.<span style="color: #81a2be;">RemoteService</span>;
@@ -230,15 +228,14 @@ This application is out of date, please click the refresh button on your browser
 </div>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-4">
-<h4 id="orgheadline6"><span class="section-number-4">4.2.2</span> GreetingServiceAsync</h4>
+<div id="outline-container-orgd6f5c3a" class="outline-4">
+<h4 id="orgd6f5c3a"><span class="section-number-4">4.2.2</span> GreetingServiceAsync</h4>
 <div class="outline-text-4" id="text-4-2-2">
 <p>
 这个接口是在 <b>客户端</b> 使用的，主要是一种代理机制，用于向远程服务器进行通信的。类似于 <b>js</b> 中的 /ajax/。这个接口
 必须包含和服务器通信的方法。
 </p>
 <div class="org-src-container">
-
 <pre class="src src-java"><span style="color: #b5bd68;">package</span> com.creamidea.helloworld.<span style="color: #81a2be;">client</span>;
 
 <span style="color: #b5bd68;">import</span> <span style="color: #81a2be;">com</span>.<span style="color: #81a2be;">google</span>.<span style="color: #81a2be;">gwt</span>.<span style="color: #81a2be;">user</span>.<span style="color: #81a2be;">client</span>.<span style="color: #81a2be;">rpc</span>.<span style="color: #81a2be;">AsyncCallback</span>;
@@ -260,7 +257,6 @@ This application is out of date, please click the refresh button on your browser
 使用的地方是在 <b>HelloWorld.java</b> （本例中）。
 </p>
 <div class="org-src-container">
-
 <pre class="src src-java"><span style="color: #b294bb;">/**</span>
 <span style="color: #b294bb;"> * &#21019;&#24314;&#19968;&#20010;&#29992;&#20110;&#21644;&#36828;&#31243;&#26381;&#21153;(Greeting Service)&#36827;&#34892;&#36890;&#20449;&#30340;&#20195;&#29702;</span>
 <span style="color: #b294bb;"> * &#23558;&#23458;&#25143;&#31471;&#30340;&#21457;&#36865;&#22120;&#21644;&#26381;&#21153;&#22120;&#31471;&#30340;&#22788;&#29702;&#22120;&#32465;&#23450;</span>
@@ -302,8 +298,8 @@ greetingService.greetServer<span style="color: #c5c8c6;">(</span>
 </div>
 </div>
 
-<div id="outline-container-orgheadline8" class="outline-3">
-<h3 id="orgheadline8"><span class="section-number-3">4.3</span> 入口</h3>
+<div id="outline-container-orgc2522f7" class="outline-3">
+<h3 id="orgc2522f7"><span class="section-number-3">4.3</span> 入口</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 程序的入口是实现 <code>com.google.gwt.core.client.EntryPoint</code> ，
@@ -312,8 +308,8 @@ greetingService.greetServer<span style="color: #c5c8c6;">(</span>
 </div>
 </div>
 
-<div id="outline-container-orgheadline9" class="outline-3">
-<h3 id="orgheadline9"><span class="section-number-3">4.4</span> 其他</h3>
+<div id="outline-container-org7f2b1eb" class="outline-3">
+<h3 id="org7f2b1eb"><span class="section-number-3">4.4</span> 其他</h3>
 <div class="outline-text-3" id="text-4-4">
 <ol class="org-ol">
 <li><code>public void onModuleLoad() {...}</code> 这个是页面加载完毕之后处理的代码。相当于js中的 <code>window.onload()</code></li>
@@ -323,7 +319,6 @@ greetingService.greetServer<span style="color: #c5c8c6;">(</span>
 HelloWorld.html
 </p>
 <div class="org-src-container">
-
 <pre class="src src-html">&lt;<span style="color: #de935f;">td</span> <span style="color: #f0c674;">id</span>=<span style="color: #8abeb7;">"nameFieldContainer"</span>&gt;&lt;/<span style="color: #de935f;">td</span>&gt;
 </pre>
 </div>
@@ -332,7 +327,6 @@ HelloWorld.html
 HelloWorld.java
 </p>
 <div class="org-src-container">
-
 <pre class="src src-java">RootPanel.get<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">"nameFieldContainer"</span><span style="color: #c5c8c6;">)</span>;
 </pre>
 </div></li>
@@ -342,7 +336,6 @@ HelloWorld.java
 HelloWorld.html
 </p>
 <div class="org-src-container">
-
 <pre class="src src-html">&lt;<span style="color: #de935f;">td</span> <span style="color: #f0c674;">id</span>=<span style="color: #8abeb7;">"sendButtonContainer"</span>&gt;&lt;/<span style="color: #de935f;">td</span>&gt;
 </pre>
 </div>
@@ -351,7 +344,6 @@ HelloWorld.html
 HelloWorld.java
 </p>
 <div class="org-src-container">
-
 <pre class="src src-java"><span style="color: #b5bd68;">final</span> <span style="color: #81a2be;">Button</span> <span style="color: #f0c674;">closeButton</span> = <span style="color: #b5bd68;">new</span> <span style="color: #81a2be;">Button</span><span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">"Close"</span><span style="color: #c5c8c6;">)</span>; <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">&#36825;&#37324;&#30340;Close&#23601;&#26159;&#25353;&#38062;&#19978;&#26174;&#31034;&#30340;&#23383;&#31526;</span>
 <span style="color: #969896; font-style: italic;">// </span><span style="color: #969896; font-style: italic;">We can set the id of a widget by accessing its Element</span>
 closeButton.getElement<span style="color: #c5c8c6;">()</span>.setId<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">"closeButton"</span><span style="color: #c5c8c6;">)</span>;
@@ -370,8 +362,8 @@ closeButton.addClickHandler<span style="color: #c5c8c6;">(</span><span style="co
 </div>
 </div>
 
-<div id="outline-container-orgheadline11" class="outline-2">
-<h2 id="orgheadline11"><span class="section-number-2">5</span> 尾声</h2>
+<div id="outline-container-orge7fb06b" class="outline-2">
+<h2 id="orge7fb06b"><span class="section-number-2">5</span> 尾声</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 看到了吧，其实很简单的。整个过程就是这么的简单。接下就是仔细去看文档，熟悉一些常用的类库啦，
@@ -409,10 +401,10 @@ closeButton.addClickHandler<span style="color: #c5c8c6;">(</span><span style="co
 <div id="meta-article"><p class="author">Junjia Ni</p>
 <p class="email"><a href="mailto:creamidea@gmail.com">creamidea@gmail.com</a></p>
 <p class="date">2014-01-29</p>
-<p class="export-date">2016-11-07 Mon 15:59</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="export-date">2016-11-10 Thu 13:03</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.0)</p>
 <p class="validation"></p>
-<p class="last-modification-time">2016-11-03 Thu 14:37</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
+<p class="last-modification-time">2016-11-10 Thu 12:43</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
 </div>
 </body>
 </html>

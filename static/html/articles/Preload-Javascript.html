@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<!-- 2016-11-07 Mon 15:59 -->
-<meta  charset="utf-8">
-<meta  name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2016-11-10 Thu 13:03 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Preload Javascript</title>
-<meta  name="generator" content="Org-mode">
-<meta  name="author" content="冰糖火箭筒(Junjia Ni)">
-<meta  name="description" content="Preload-Javascript"
+<meta name="generator" content="Org mode">
+<meta name="author" content="冰糖火箭筒(Junjia Ni)">
+<meta name="description" content="Preload-Javascript"
 >
-<meta  name="keywords" content="js,javascript,preload,fetch,XMLHttpRequest,defer,prerender,prefetch">
+<meta name="keywords" content="js,javascript,preload,fetch,XMLHttpRequest,defer,prerender,prefetch">
 <link rel="stylesheet" type="text/css" href="/static/article.css"><!--[if lt IE 9]>
 <script src="/static/libs/html5shiv.min.js"></script>
 <![endif]-->
@@ -22,28 +22,28 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. 前言</a></li>
-<li><a href="#orgheadline11">2. 解决</a>
+<li><a href="#orge7e05f6">1. 前言</a></li>
+<li><a href="#org60eb4af">2. 解决</a>
 <ul>
-<li><a href="#orgheadline7">2.1. 下载</a>
+<li><a href="#orgfaeb58c">2.1. 下载</a>
 <ul>
-<li><a href="#orgheadline2">2.1.1. script 标签</a></li>
-<li><a href="#orgheadline3">2.1.2. Ajax 技术</a></li>
-<li><a href="#orgheadline4">2.1.3. jQuery.getScript</a></li>
-<li><a href="#orgheadline5">2.1.4. Prerender and Prefetch</a></li>
-<li><a href="#orgheadline6">2.1.5. 非常规方式</a></li>
+<li><a href="#org1a1c217">2.1.1. script 标签</a></li>
+<li><a href="#org6cf76b9">2.1.2. Ajax 技术</a></li>
+<li><a href="#org4646171">2.1.3. jQuery.getScript</a></li>
+<li><a href="#orgf7cb99a">2.1.4. Prerender and Prefetch</a></li>
+<li><a href="#org8c19e4f">2.1.5. 非常规方式</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline10">2.2. 执行</a>
+<li><a href="#org12f3474">2.2. 执行</a>
 <ul>
-<li><a href="#orgheadline8">2.2.1. eval</a></li>
-<li><a href="#orgheadline9">2.2.2. script 文本</a></li>
+<li><a href="#org6950acb">2.2.1. eval</a></li>
+<li><a href="#org973f5a3">2.2.2. script 文本</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgheadline12">3. 尾声</a></li>
-<li><a href="#orgheadline13">4. Other Reference</a></li>
+<li><a href="#org2807892">3. 尾声</a></li>
+<li><a href="#org56e120d">4. Other Reference</a></li>
 </ul>
 </div>
 </nav>
@@ -58,15 +58,14 @@ lazy-load class="lazy-load-img" alt="Javascript" title="Javascript"/>
 </div>
 
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> 前言</h2>
+<div id="outline-container-orge7e05f6" class="outline-2">
+<h2 id="orge7e05f6"><span class="section-number-2">1</span> 前言</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 主要介绍几种解决预加载 JS 文件的方案：异步请求 JS 文件，顺序执行 JS 代码。
 首先，让我们美好的设想一下：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-js"><span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">script</span> = document.createElement<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">"script"</span><span style="color: #c5c8c6;">)</span>
 script.noexecute = <span style="color: #81a2be;">true</span>
 script.src = <span style="color: #8abeb7;">"xxxx.js"</span>
@@ -91,19 +90,19 @@ script.execute<span style="color: #c5c8c6;">()</span>
 </div>
 </div>
 
-<div id="outline-container-orgheadline11" class="outline-2">
-<h2 id="orgheadline11"><span class="section-number-2">2</span> 解决</h2>
+<div id="outline-container-org60eb4af" class="outline-2">
+<h2 id="org60eb4af"><span class="section-number-2">2</span> 解决</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 整体解决方案的思路大致分成2个部分：下载和执行。
 </p>
 </div>
 
-<div id="outline-container-orgheadline7" class="outline-3">
-<h3 id="orgheadline7"><span class="section-number-3">2.1</span> 下载</h3>
+<div id="outline-container-orgfaeb58c" class="outline-3">
+<h3 id="orgfaeb58c"><span class="section-number-3">2.1</span> 下载</h3>
 <div class="outline-text-3" id="text-2-1">
-</div><div id="outline-container-orgheadline2" class="outline-4">
-<h4 id="orgheadline2"><span class="section-number-4">2.1.1</span> script 标签</h4>
+</div><div id="outline-container-org1a1c217" class="outline-4">
+<h4 id="org1a1c217"><span class="section-number-4">2.1.1</span> script 标签</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <p>
 通过 <code>&lt;script&gt;</code> 标签及其属性 <code>src</code> 引入 JS 文件是常规的做法。无论是“静态”的插入 HTML 中，
@@ -113,8 +112,8 @@ script.execute<span style="color: #c5c8c6;">()</span>
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-4">
-<h4 id="orgheadline3"><span class="section-number-4">2.1.2</span> Ajax 技术</h4>
+<div id="outline-container-org6cf76b9" class="outline-4">
+<h4 id="org6cf76b9"><span class="section-number-4">2.1.2</span> Ajax 技术</h4>
 <div class="outline-text-4" id="text-2-1-2">
 <p>
 使用 Ajax 技术加载 JS 文件。通过发送一个单独的请求获取 JS 文本，
@@ -135,8 +134,8 @@ script.execute<span style="color: #c5c8c6;">()</span>
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-4">
-<h4 id="orgheadline4"><span class="section-number-4">2.1.3</span> jQuery.getScript</h4>
+<div id="outline-container-org4646171" class="outline-4">
+<h4 id="org4646171"><span class="section-number-4">2.1.3</span> jQuery.getScript</h4>
 <div class="outline-text-4" id="text-2-1-3">
 <p>
 最简单方式，使用 <code>jQuery.getScript</code> 函数，可以获取一个 JS 文件。但是这个效果和使用 <code>&lt;script&gt;</code> 标签的效果一致。
@@ -144,8 +143,8 @@ script.execute<span style="color: #c5c8c6;">()</span>
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-4">
-<h4 id="orgheadline5"><span class="section-number-4">2.1.4</span> Prerender and Prefetch</h4>
+<div id="outline-container-orgf7cb99a" class="outline-4">
+<h4 id="orgf7cb99a"><span class="section-number-4">2.1.4</span> Prerender and Prefetch</h4>
 <div class="outline-text-4" id="text-2-1-4">
 <p>
 <code>prefetch</code> 属性是微软针对 IE11 浏览器开发的黑科技，主要用于预先下载部分资源，提升后续操作效率和体验。
@@ -161,8 +160,8 @@ script.execute<span style="color: #c5c8c6;">()</span>
 </div>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-4">
-<h4 id="orgheadline6"><span class="section-number-4">2.1.5</span> 非常规方式</h4>
+<div id="outline-container-org8c19e4f" class="outline-4">
+<h4 id="org8c19e4f"><span class="section-number-4">2.1.5</span> 非常规方式</h4>
 <div class="outline-text-4" id="text-2-1-5">
 <p>
 非常规方式指使用一些比较 Hack 的方式解决问题。比如上面我提到 <code>&lt;script&gt;</code> 标签用来引入 JS 文件，但是我这里偏不，
@@ -177,11 +176,11 @@ script.execute<span style="color: #c5c8c6;">()</span>
 </div>
 </div>
 
-<div id="outline-container-orgheadline10" class="outline-3">
-<h3 id="orgheadline10"><span class="section-number-3">2.2</span> 执行</h3>
+<div id="outline-container-org12f3474" class="outline-3">
+<h3 id="org12f3474"><span class="section-number-3">2.2</span> 执行</h3>
 <div class="outline-text-3" id="text-2-2">
-</div><div id="outline-container-orgheadline8" class="outline-4">
-<h4 id="orgheadline8"><span class="section-number-4">2.2.1</span> eval</h4>
+</div><div id="outline-container-org6950acb" class="outline-4">
+<h4 id="org6950acb"><span class="section-number-4">2.2.1</span> eval</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <p>
 通过 <code>eval</code> 函数运行字符级的 JS 代码，动态添加执行代码。不过使用 <code>eval</code> 函数，我的直觉是存在严重的性能和安全问题。
@@ -196,15 +195,14 @@ script.execute<span style="color: #c5c8c6;">()</span>
 </div>
 </div>
 
-<div id="outline-container-orgheadline9" class="outline-4">
-<h4 id="orgheadline9"><span class="section-number-4">2.2.2</span> script 文本</h4>
+<div id="outline-container-org973f5a3" class="outline-4">
+<h4 id="org973f5a3"><span class="section-number-4">2.2.2</span> script 文本</h4>
 <div class="outline-text-4" id="text-2-2-2">
 <p>
 这种方式是将 JS 代码插入 <code>&lt;script type=text/javascript&gt;&lt;/script&gt;</code> 之间。让浏览器去执行。
 这种方式我推荐如下代码实现：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-js"><span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">script</span> = document.createElement<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">'script'</span><span style="color: #c5c8c6;">)</span>
 <span style="color: #b5bd68;">var</span> <span style="color: #f0c674;">text</span> = document.createTextNode<span style="color: #c5c8c6;">(</span><span style="color: #969896; font-style: italic;">/*</span><span style="color: #969896; font-style: italic;">your code*/</span><span style="color: #c5c8c6;">)</span>
 script.appendChild<span style="color: #c5c8c6;">(</span>text<span style="color: #c5c8c6;">)</span>
@@ -224,8 +222,8 @@ setTimeout<span style="color: #c5c8c6;">(</span><span style="color: #b5bd68;">fu
 </div>
 </div>
 
-<div id="outline-container-orgheadline12" class="outline-2">
-<h2 id="orgheadline12"><span class="section-number-2">3</span> 尾声</h2>
+<div id="outline-container-org2807892" class="outline-2">
+<h2 id="org2807892"><span class="section-number-2">3</span> 尾声</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 通过2天时间不停的查资料，分析，测试，然后否定，重新查资料，分析，测试，然后否定的循环，最终确定了一个折中的方案：
@@ -247,7 +245,6 @@ IE系列浏览器对于 <code>load</code> 事件（资源加载完成之后浏�
 常规的注册方式我在这里就不提了，主要是你发现你注册了回调事件，但是并没有执行时，你可以试试这个样子：
 </p>
 <div class="org-src-container">
-
 <pre class="src src-js">element.setAttribute<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">'load'</span>, your_callback_function_name<span style="color: #c5c8c6;">)</span>
 element.setAttribute<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">'onreadystatechange'</span>, your_callback_function_name<span style="color: #c5c8c6;">)</span>
 </pre>
@@ -255,8 +252,8 @@ element.setAttribute<span style="color: #c5c8c6;">(</span><span style="color: #8
 </div>
 </div>
 
-<div id="outline-container-orgheadline13" class="outline-2">
-<h2 id="orgheadline13"><span class="section-number-2">4</span> Other Reference</h2>
+<div id="outline-container-org56e120d" class="outline-2">
+<h2 id="org56e120d"><span class="section-number-2">4</span> Other Reference</h2>
 <div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li><a href="https://github.com/jquery/jquery/blob/f18ca7bfe0f5e3184bf1ed55daf1668702c5577a/src/ajax.js">jQuery-ajax souce code</a></li>
@@ -284,10 +281,10 @@ element.setAttribute<span style="color: #c5c8c6;">(</span><span style="color: #8
 <div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
 <p class="date">2016-10-29</p>
-<p class="export-date">2016-11-07 Mon 15:59</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.3.6)</p>
+<p class="export-date">2016-11-10 Thu 13:03</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.0)</p>
 <p class="validation"></p>
-<p class="last-modification-time">2016-11-07 Mon 15:57</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
+<p class="last-modification-time">2016-11-10 Thu 12:15</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
 </div>
 </body>
 </html>
