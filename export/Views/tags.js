@@ -17,12 +17,12 @@ function analysisTags(files) {
       if (typeof _c[sym] === 'undefined') {
         _c[sym] = {
           count: 0,
-          filenames: [],
+          // filenames: [],
           name: tag
         }
       }
-      _c[sym].count = _c[sym].count + 1
-      _c[sym].filenames.push(`${file.category}::${file.name}`)
+      _c[sym].count += 1
+      // _c[sym].filenames.push(`${file.category}::${file.name}`)
     })
   })
   return _c
@@ -37,6 +37,7 @@ module.exports = (posts, params) => {
     downs = []
   Object.getOwnPropertySymbols(tagsResults).map(sym => {
     let tag = tagsResults[sym]
+    // console.log(tag.name, ':', tag.count)
     ups.push(
         `<li data-weight=${tag.count} style="display:inline"> ` +
         `<a href="#!/tags?tag=${encodeURIComponent(tag.name)}"` +

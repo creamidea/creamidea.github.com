@@ -682,12 +682,14 @@ function sendAnswer(id, label) {
    * Show posts by tag-name
    */
   function showPostsByTag(tagsElt, tag) {
-    var postListElt = tagsElt.children[1]
+    var postListElt = tagsElt.children[1],
+        _tags
+
     if (tag) {
       postListElt.style.display = 'block'
       __forEach.call(postListElt.children, function (c) {
-        var _tags = c.getAttribute('data-tags')
-        if (_tags.indexOf(decodeURIComponent(tag)) >= 0) {
+        _tags = c.getAttribute('data-tags')
+        if (_tags.split(',').indexOf(decodeURIComponent(tag)) >= 0) {
           c.style.display = ''
         } else {
           c.style.display = 'none'
