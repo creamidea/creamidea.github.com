@@ -4,7 +4,7 @@
 #+DATE:2016-10-14
 #+CATEGORY: translation
 #+DESCRIPTION: Usage with React Router
-#+KEYWORDS: reactjs,js,react-router
+#+KEYWORDS: reactjs,javascript,react-router
 #+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:nil email:t <:t date:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall

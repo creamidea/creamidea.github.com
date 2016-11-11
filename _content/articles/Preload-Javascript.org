@@ -4,7 +4,7 @@
 #+DATE: 2016-10-29
 #+CATEGORY: article
 #+DESCRIPTION: Preload-Javascript
-#+KEYWORDS: js,javascript,preload,fetch,XMLHttpRequest,defer,prerender,prefetch
+#+KEYWORDS: javascript,preload,fetch,XMLHttpRequest,defer,prerender,prefetch
 #+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:nil email:t <:t date:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall

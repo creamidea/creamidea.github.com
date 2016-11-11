@@ -4,7 +4,7 @@
 #+DATE:2016-10-19
 #+CATEGORY: article
 #+DESCRIPTION: HTML5 Video Blob 初探
-#+KEYWORDS: html5,video,blob,js,MediaSource,createObjectURL,mp4,flv
+#+KEYWORDS: html5,video,blob,javascript,MediaSource,createObjectURL,mp4,flv
 #+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:nil email:t <:t date:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
 #+STARTUP: showall
