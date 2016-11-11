@@ -16,9 +16,25 @@ var options = {
 }
 
 function writeToFile(content) {
-  var fullpath = path.resolve(__dirname, 'static', 'octodex-data.js')
-  fs.writeFile(fullpath, content, () => {
-    console.log(`Write to ${fullpath}.`);
+  const newContent = `window.octodex=${content}`
+  const fullpath = path.resolve(__dirname, 'static', 'octodex-data.js')
+
+  fs.readFile(fullpath, (err, oldContent) => {
+    if (err ||
+        Buffer.compare(oldContent,Buffer.from(newContent)) === 0) {
+
+      // different: update the file
+      fs.writeFile(fullpath, newContent, () => {
+        console.log(`[Octodex] Has written to ${fullpath}.`);
+      })
+
+    } else {
+
+      // same: no changes
+      console.log('[Octodex] There is no changes. Dropped.')
+
+    }
+
   })
 }
 
@@ -31,7 +47,7 @@ const req = https.request(options, (res) => {
   })
 
   res.on('end', () => {
-    console.log('HTTP Get over.');
+    console.log('[Octodex] Getting from remote done.');
     let pics = []
     __forEach.call(chunks.match(/<img height="424" width="424".*?>/g), function(i) {
       let img = i.match(/data-src="(.*?)" alt="(.*?)"/)
@@ -44,14 +60,14 @@ const req = https.request(options, (res) => {
       let no = n.match(/(\d+)/)
       pics[index].no = no[1]
     })
-    writeToFile(`window.octodex=${JSON.stringify(pics)}`)
+    writeToFile(JSON.stringify(pics))
   })
 
 })
 
-console.log("Start...");
+console.log("[Octodex] Start...");
 req.end()
 
 req.on('error', (err) => {
-  console.error(err)
+  console.error('[Octodex]', err)
 })
