@@ -12,16 +12,19 @@ function analysisTags(files) {
     const file = files[key],
       tags = file.keywords
     if (!tags) return
-    splitTags(tags).map(tag => {
-      let sym = Symbol.for(tag)
-      if (typeof _c[sym] === 'undefined') {
-        _c[sym] = {
+    splitTags(tags).map(name => {
+      let sym = Symbol.for(name),
+        tag = _c[sym]
+
+      if (typeof tag === 'undefined') {
+        tag = _c[sym] = {
           count: 0,
           // filenames: [],
-          name: tag
+          name: name
         }
       }
-      _c[sym].count += 1
+
+      tag.count += 1
       // _c[sym].filenames.push(`${file.category}::${file.name}`)
     })
   })
@@ -37,7 +40,7 @@ module.exports = (posts, params) => {
     downs = []
   Object.getOwnPropertySymbols(tagsResults).map(sym => {
     let tag = tagsResults[sym]
-    // console.log(tag.name, ':', tag.count)
+      // console.log(tag.name, ':', tag.count)
     ups.push(
         `<li data-weight=${tag.count} style="display:inline"> ` +
         `<a href="#!/tags?tag=${encodeURIComponent(tag.name)}"` +
@@ -53,12 +56,17 @@ module.exports = (posts, params) => {
       // }).join('') + '</ul>')
   })
   downs = Object.keys(posts).map(name => {
-    const {fullpath, keywords, title, error} = posts[name]
+    const {
+      fullpath,
+      keywords,
+      title,
+      error
+    } = posts[name]
     if (error) {
       return ''
     } else {
       const url = convertToURL(fullpath, params.urlprefix)
-      // let url = params.urlprefix + splitBySlash(fullpath).slice(-2).join('/').replace('.org', '.html')
+        // let url = params.urlprefix + splitBySlash(fullpath).slice(-2).join('/').replace('.org', '.html')
       return `<li data-tags="${keywords}">` +
         `<a class="title" href="${url}">${title}</a></li>`
     }
