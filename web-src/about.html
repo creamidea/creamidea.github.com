@@ -184,8 +184,8 @@
                 .replaceChild(genTable(records, col), table$)
         }
 
-        function loadedDoubanXiu() {
-            var douban$ = document.getElementsByClassName('douban')[0],
+        function loadedDoubanXiu(event, type) {
+            var douban$ = event.currentTarget.parentElement,
                 table$ = douban$.getElementsByTagName('table')[0],
                 records = parseTable(table$)
             display(records, douban$)
@@ -219,7 +219,12 @@
     </section>
 
     <section class="douban">
-        <script onload="loadedDoubanXiu()" src="https://www.douban.com/service/badge/creamidea/?selection=random&amp;picsize=medium&amp;hideself=on&amp;show=collection&amp;n=16&amp;hidelogo=on&amp;cat=drama%7Cmovie%7Cbook%7Cmusic&amp;columns=1"></script>
+        <h3><span style="border-left: 3px solid #4285f4;padding-left: 12px;">Reading/Listening</span></h3>
+        <script onload="loadedDoubanXiu(event, 'dolist')" src="http://www.douban.com/service/badge/creamidea/?selection=latest&amp;picsize=medium&amp;hideself=on&amp;show=dolist&amp;n=4&amp;hidelogo=on&amp;cat=drama%7Cmovie%7Cbook%7Cmusic&amp;columns=2"></script>
+    </section>
+    <section class="douban">
+        <h3><span style="border-left: 3px solid #ea4335;padding-left: 12px;">Read/Listened</span></h3>
+        <script onload="loadedDoubanXiu(event, 'collection')" src="https://www.douban.com/service/badge/creamidea/?selection=random&amp;picsize=medium&amp;hideself=on&amp;show=collection&amp;n=16&amp;hidelogo=on&amp;cat=drama%7Cmovie%7Cbook%7Cmusic&amp;columns=2"></script>
     </section>
 
     <section class="story">
