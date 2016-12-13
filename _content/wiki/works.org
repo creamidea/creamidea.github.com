@@ -5,11 +5,27 @@
 #+KEYWORDS: emacs,orgmode
 #+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:nil f:t tex:nil email:t <:t date:t timestamp:t
 #+LINK_HOME: https://creamidea.github.io
-#+STARTUP: showall
 
 
 * 前言
   业余前端开发，干过一段时间监控。学艺不精，目前待业在家。
+
+* 基于 WordPress 的内容分享站点
+** 项目地址
+   - Private
+** 项目成员
+   + Junjia Ni
+   + Allen Zhong
+** 项目描述
+   项目旨在为天文爱好者提供一个网上活动的平台。可以进行内容分享，活动报名，问卷调查等各项社团活动适宜。
+   整个站点基于 WordPress 进行开发，以插件的形式注入相应的功能。全站主要分为管理员，团长和成员等角色。目前还在开发中。
+** 难点和收获
+   因为还在开发中，还没有完全做完。所以只谈部分感受。 +PHP是世界第一语言（这个真是太可怕了）+ 。
+   Wordpress 整个站点的设计还是很不错的，很值得去研究一下。当然我目前也只懂皮毛，只能写出可以跑的 PHP 的代码，不敢妄自菲薄。
+   Wordpress 的扩展功能十分强大，其自定义部分设计的还是很有意思的。基于其自定义功能可以做出类似于 CRM 之类的内容管理平台，
+   或者是后台管理平台。
+   最后说一个令我兴喜的事，Wordpress 官方团队开始了迁移到 Node 的实验，这是项目地址 [[https://github.com/Automattic/wp-calypso][Automattic/wp-calypso]] ，
+   有兴趣还可以看一下这篇文章 [[https://developer.wordpress.com/2015/11/23/the-story-behind-the-new-wordpress-com/][the-story-behind-the-new-wordpress-com]]。
 
 * Keyboard-js
 ** 项目地址
