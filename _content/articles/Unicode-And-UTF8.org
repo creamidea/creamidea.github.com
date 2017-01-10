@@ -20,16 +20,40 @@
 没事干，就去折腾一些并没有什么用的东西。这不，花了一个周末，看了一些关于编码方面的文章。
 下面就是我的一些理解和笔记。很肤浅，只是一个很简单的介绍文章，详细的你可以阅读 [[Reference]] 中前几篇文章。
 
+* 形象化理解
+我们先举个栗子。你看到下面这张图中的形状会用什么方式记录下来然后传递给其他人，让他们知道是什么形状？
+#+CAPTION: circle
+[[http://iconshow.me/media/images/ui/ios7-icons/png/512/circle-outline.png]]
+
+你或许会通过以下几种方式记录信息:
++ 直接画一个圆记录下来
++ 写成英文: circle
++ 写成中文: 圆
++ ...
+
+好，看懂栗子之后，我们再来看看什么是 Unicode 和 UTF8。
+
+Uniocde 就是上面图片中的那个圆，而 UTF8 就是你的一种记录方式。
+
+到这里，我想你应该对于 Unicode 和 UTF8 有了一个大致印象了吧。让我们再继续往下深入一下。
+
 * Unicode
+首先，我们先看一下 Unicode 的定义:
 #+BEGIN_QUOTE
 Unicode provides a unique number for every character,
 no matter what the platform,
 no matter what the program,
 no matter what the language.
 #+END_QUOTE
-想象一下这是一个扩展的ASCII码的表，当你迷糊的时候，想想这句话。什么是Unicode。
 
-举一个例子:
+哦，原来 Unicode 是一张表，表里面存放的是每一个对应的字符，并为其编了号码。这张表在哪里都可以用。
++想象一下这是一个扩展的ASCII码的表。当你迷糊的时候，想想这句话。什么是Unicode。+
+那我们可以想象一下这是一个扩展的 ASCII 码的表，只不过 ASCII 只为字母、数字和一些特殊字符编了号码。
+而 Unicode 为所有的字符编了号码，无论是你中文字符，还是什么乱七八糟的字符，甚至是表情都被编了号放入表里面。
+哇，这个真是太强大了，那我以后要表示什么字符只要查表就可以啦。太棒了！
+
++下面我举一个例子:+
+好的，让我们赶紧做几个试验看一下：
 #+BEGIN_SRC python
   # ord是unicode ordinal的缩写,即编号
   # chr是character的缩写,即字符
@@ -42,11 +66,13 @@ no matter what the language.
   >>> ord(u'\u6633')
   26163
 #+END_SRC
++这里的中文字符 *昳* Unicode 编码是 =6633(U+6633)= ， =6633(U+6633)= 这个字面量来表示字符 *昳* 。+然后他的编号（数字） =26163= 来指代这个 =6633(U+6633)= 。+
+这里的中文字符 *昳* Unicode 编号是 =6633(U+6633)= 。
+注意，这里的 6636 是 16 进制，其 10 进制是 26163，也就是上面 ord 函数输出的值。
+你可以看到 \u6633 和 26163 是指向同一个东西。都是 昳 的编号而已，只是表达方式不同。
 
-这里的中文字符 *昳* Unicode编码是 =6633(U+6633)= ， =6633(U+6633)= 这个字面量来表示字符 *昳* 。
-然后他的编号（数字） =26163= 来指代这个 =6633(U+6633)= 。
-
-用ASCII码表来解释是这个样子的，你要显示字符 *a* 。
++用ASCII码表来解释是这个样子的，你要显示字符 *a* 。+
+我们再来看看字符 a:
 #+BEGIN_SRC python
   >>> d = u'a'
   >>> d
@@ -54,27 +80,36 @@ no matter what the language.
   >>> ord(d)
   97
 #+END_SRC
-然后你这里的字符 *a* Unicode编码是 =a(U+0097)=, =a(U+0097)= 这个字面量来表示字符 *a* （这里有点绕，希望你能跨过去）。
-然后他的编号（数字） =97= 来指代这个 =a(U+0097)= 。
+然后你可以看到这里的字符 a 的 Unicode 编号是 97，对应的十六进制是 61，这个 61(16) 在 ASCII 表中就是表示 a。
++=a(U+0097)= 这个字面量来表示字符 *a* （这里有点绕，希望你能跨过去）。+
+这里 Unicode 编号和 ASCII 表中的编号一样诶。（哇，那 Unicode 真的只是一张超大的 ASCII 表而已，有什么可以了不起的，哼！）
++然后他的编号（数字） =97= 来指代这个 =a(U+0097)= 。+
 
-现在在会过来看这句话
+现在再回过来看这句话
 #+BEGIN_QUOTE
 Unicode provides a unique number for every character,
 no matter what the platform,
 no matter what the program,
 no matter what the language.
 #+END_QUOTE
-希望你已经明白什么是"真"Unicode。为每一个字符提供唯一的数字。
+嗯，Unicode 真的只是一张表，表里面为每一个字符编了号码。只要知道这个编号，我们就能知道这个是什么字符。开心。
++希望你已经明白什么是"真"Unicode。为每一个字符提供唯一的数字。+
 
+一图以蔽之：
 #+BEGIN_EXPORT HTML
 <img src="https://docs.google.com/drawings/d/1ZI9lDMtH1I9i4_vm-aEffr37Q09cBd4Kzl3jpA6yMSQ/pub?w=750&h=390" alt="字符－编号－编码" title="字符－编号－编码"/>
 #+END_EXPORT
 
-* UTF8
-好了，在理解了Unicode之后，再来看UTF-8，这个又是什么东东呢？ \\
-UTF-8是Unicode的具体存储方式。怎么说？就是上面提及的那个编码，如：U+6633，怎么存储呢？
-然后UTF-8跳出来说，用我来存，用我的格式来存。nuo，就是这个样子啦。
+嗯，Unicode 我知道了，那 UTF8 又是什么？别急，我们再往下继续看。
 
+* UTF8
+好了，在理解了Unicode之后，再来看UTF8，这个又是什么东东呢？ \\
+UTF8 是 Unicode 的具体存储方式之一。怎么说？就是上面提及的那个编码，如：U+6633，怎么存储呢？
+你当然可以说，这有什么难的？我直接存储 \x6633 ，转成二进制也就是 0110 0110 0011 0011。我直接这样子存放不就可以了？
+你还别说，一开始还真是这个样子存放的。这个也就是“著名的” UTF16 编码方案。但是，你有没有发现，这样子存放的话，你产生了 2 个字节。
+美国人说：我原先按照 ASCII 只要 1 个字节就能搞定了，你现在给我搞了 2 个字节，我这个样子不是亏了吗？
+于是，他们为了在存储上扳回一成，设计了 UTF8 编码方案，也就是下面的转换过程：
++然后UTF-8跳出来说，用我来存，用我的格式来存。nuo，就是这个样子啦。+
 #+BEGIN_EXAMPLE
 0XXXXXXX                              (U+0000~U+007F 0~127)
 110XXXXX 10XXXXXX                     (U+0080~U+07FF 128~2047)
@@ -85,7 +120,7 @@ XXX就是对应的Unicode编码啦。
 
 举个栗子
 #+BEGIN_EXAMPLE
-U+6633
+U+6633 (U+0800~U+FFFF 2048~65535)
 0110 0110 0011 0011  16位二进制形式
 0110 011000 110011   4+6+6位分组
 1110XXXX 10XXXXXX 10XXXXXX UTF-8三字节模版
@@ -102,17 +137,52 @@ E6 98 B3 按字节重新转换成16进制
   昳
 #+END_SRC
 
-如果平常看到类似这样每3个字节出现一个E，你应该可以反应过来应该是中文的UTF-8编码了吧。
+如果平常看到类似这样每3个字节出现一个 E，你应该可以反应过来应该是中文的 UTF-8 编码了吧。
+
+你看，经过 UTF8 这么一转换，我们美国人存放只要花 1 个字节(编号0~127)，爽。你们非英语国家继续用多个字节吧。（开玩笑的啦。）
+这样即提高了存储效率，又能愉快的和 Unicode 继续玩耍了。
+
+* GBK（选读）
+好的，下面我们再来看看 GBK 中文编码，GBK 其实也是和 Unicode 一样的一张表。也是一个编号对应一个中文字符。
+（其他的中文编码也和此类似，只是表不一样。在这里就不多说）。
+完整的 GBK 编码表可以在 [[http://doc.chacuo.net/gbk][这里]] 找到。具体的从 Unicode 转到 GBK 是这个一样的过程，我们来举一个栗子。我们选择字符 亼。
+这个字符在表编号为 81 的第 9 行，第 1 列。我们把这些数字按照规则组合起来变成 =\x81\x91= 。
+嗯，这个是字符 亼 在 GBK 编码规范下的 16 进制表示就是 =\x81\x91= 。
+
+我们在 python 上试验一下：
+#+BEGIN_SRC python
+>>> z = '\x81\x91'
+>>> print z.decode('gbk').encode('utf8')
+# 亼
+#+END_SRC
+Yeah，结果正确。上述就是从 GBK 到 Unicode 到 UTF8 的全过程了。
+当然，在实际的解码，编码过程中还会遇到其他的问题，比如大端小端问题（世界就是这么乱）、性能问题等。
 
 * Python
+是时候，谈一下 Python 在处理编解码上的问题了。
 
 #+BEGIN_EXAMPLE
 编码：unicode-->str
 解码：str-->unicode.
 #+END_EXAMPLE
+从 Unicode 到 str 叫做编码，从 str 到 Unicode 叫做解码。
+在你 Python 中处理字符串的时候，请环顾一下四周，你的变量中存放的是 *str* 还是 *Unicode* ？
 
-=str.encode()= 实际上就等价于 =str.decode(sys.defaultencoding).encode()= 。
-而 =sys.defaultencoding= 一般是 =ascii= 。
+=str.encode()= 在实际运行中，python将其等价于 =str.decode(sys.defaultencoding).encode()= ，
+而 =sys.defaultencoding= 默认是 =ascii= 。所以你看上去字符串被进行了编码操作，实际上进行了一次隐含解码操作。
+
+也就是在这里，你将看到 Python2.7 中有名的那句话：
+#+BEGIN_SRC python
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+UnicodeEncodeError: 'ascii' codec can't encode character u'\u6633' in position 0: ordinal not in range(128)
+#+END_SRC
+
+对了，这里再多啰嗦一句。当你在使用 Python 的字符串模版时，如果你是这么写的 ="我是%s"%(name)= ，就要注意了，
+如果这里的 =name= 是一个 Unicode，这句话都会被当作 Unicode。于是如果中间有中文字符，就会出现隐式转换，是用 =sys.defaultencoding=
+进行解码，于是这里就会出现上述著名的语句。详细的解读可以看这篇文章：[[http://jerrypeng.me/2012/03/python-unicode-format-pitfall/][Python Unicode字符串格式化中的一个陷阱]]
+
+所以我推荐这么拼接字符: ="我是{name}".format(name=name)=
 
 * 正则表达式匹配中文区间
 
@@ -124,14 +194,8 @@ E6 98 B3 按字节重新转换成16进制
 系统字符编码控制优先级 =LC_ALL>LC_*>LANG=
 
 * 尾声
-基本上，我所理解的Unicode和UTF8就是这个样子了，在Python上面做了很多的实验，希望以后不要再犯一些低级错误。
+基本上，我所理解的 Unicode 和 UTF8 就是这个样子了，在 Python 上面做了很多的实验，希望以后不要再犯一些低级错误。
 希望不会因为我的无知，再痛恨 *Python2.X*
-
-#+BEGIN_SRC python
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-UnicodeEncodeError: 'ascii' codec can't encode character u'\u6633' in position 0: ordinal not in range(128)
-#+END_SRC
 
 #+NAME: Reference
 * Reference

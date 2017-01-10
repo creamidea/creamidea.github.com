@@ -1,0 +1,19 @@
+#    -*- mode: org -*-
+
+
+Archived entries from file /Users/creamidea/Repository/creamidea.github.io/_content/articles/Unicode-And-UTF8.org
+
+
+* Archive
+
+** 正则表达式匹配中文区间
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2017-01-10 Tue 12:24
+   :ARCHIVE_FILE: ~/Repository/creamidea.github.io/_content/articles/Unicode-And-UTF8.org
+   :ARCHIVE_CATEGORY: article
+   :END:
+
+ #+BEGIN_EXAMPLE
+ \u4E00-\u9FA5 （2万个左右）
+ #+END_EXAMPLE
+
