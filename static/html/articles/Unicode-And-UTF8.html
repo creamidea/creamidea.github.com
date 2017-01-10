@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2016-11-10 Thu 13:03 -->
+<!-- 2017-01-10 Tue 12:43 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Unicode and UTF8</title>
@@ -22,21 +22,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgb4babb7">1. 前言</a></li>
-<li><a href="#orgf827882">2. Unicode</a></li>
-<li><a href="#orgf6203a2">3. UTF8</a></li>
-<li><a href="#orge58f58c">4. Python</a></li>
-<li><a href="#orgdf527cc">5. 正则表达式匹配中文区间</a></li>
-<li><a href="#orgb7eb3f9">6. locale</a></li>
-<li><a href="#org5b2e199">7. 尾声</a></li>
-<li><a href="#orgd418ba3">8. Reference</a></li>
+<li><a href="#orgae42015">1. 前言</a></li>
+<li><a href="#org05d91bf">2. 形象化理解</a></li>
+<li><a href="#orgca8f63c">3. Unicode</a></li>
+<li><a href="#org5ae6e83">4. UTF8</a></li>
+<li><a href="#org6a335bc">5. GBK（选读）</a></li>
+<li><a href="#orgbaa3f68">6. Python</a></li>
+<li><a href="#orgc3ddad3">7. 正则表达式匹配中文区间</a></li>
+<li><a href="#orga851f2a">8. locale</a></li>
+<li><a href="#org21f18fc">9. 尾声</a></li>
+<li><a href="#orgbd210c5">10. Reference</a></li>
 </ul>
 </div>
 </nav>
 
 
-<div id="outline-container-orgb4babb7" class="outline-2">
-<h2 id="orgb4babb7"><span class="section-number-2">1</span> 前言</h2>
+<div id="outline-container-orgae42015" class="outline-2">
+<h2 id="orgae42015"><span class="section-number-2">1</span> 前言</h2>
 <div class="outline-text-2" id="text-1">
 <blockquote>
 <p>
@@ -47,14 +49,54 @@
 <p>
 最近明明事情很多，但是就是什么事情都不想干，这个是为什么呢？
 没事干，就去折腾一些并没有什么用的东西。这不，花了一个周末，看了一些关于编码方面的文章。
-下面就是我的一些理解和笔记。很肤浅，只是一个很简单的介绍文章，详细的你可以阅读 <a href="#orgd418ba3">8</a> 中前几篇文章。
+下面就是我的一些理解和笔记。很肤浅，只是一个很简单的介绍文章，详细的你可以阅读 <a href="#orgbd210c5">10</a> 中前几篇文章。
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgf827882" class="outline-2">
-<h2 id="orgf827882"><span class="section-number-2">2</span> Unicode</h2>
+<div id="outline-container-org05d91bf" class="outline-2">
+<h2 id="org05d91bf"><span class="section-number-2">2</span> 形象化理解</h2>
 <div class="outline-text-2" id="text-2">
+<p>
+我们先举个栗子。你看到下面这张图中的形状会用什么方式记录下来然后传递给其他人，让他们知道是什么形状？
+</p>
+
+<figure>
+<p class="lazy-load-img-wrapper"><noscript><img src="http://iconshow.me/media/images/ui/ios7-icons/png/512/circle-outline.png" alt="circle-outline.png"></noscript><img lazy-load data-src="http://iconshow.me/media/images/ui/ios7-icons/png/512/circle-outline.png" alt="circle-outline.png">
+</p>
+<figcaption><span class="figure-number">Figure 1: </span>circle</figcaption>
+</figure>
+
+<p>
+你或许会通过以下几种方式记录信息:
+</p>
+<ul class="org-ul">
+<li>直接画一个圆记录下来</li>
+<li>写成英文: circle</li>
+<li>写成中文: 圆</li>
+<li>&#x2026;</li>
+</ul>
+
+<p>
+好，看懂栗子之后，我们再来看看什么是 Unicode 和 UTF8。
+</p>
+
+<p>
+Uniocde 就是上面图片中的那个圆，而 UTF8 就是你的一种记录方式。
+</p>
+
+<p>
+到这里，我想你应该对于 Unicode 和 UTF8 有了一个大致印象了吧。让我们再继续往下深入一下。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgca8f63c" class="outline-2">
+<h2 id="orgca8f63c"><span class="section-number-2">3</span> Unicode</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+首先，我们先看一下 Unicode 的定义:
+</p>
 <blockquote>
 <p>
 Unicode provides a unique number for every character,
@@ -63,50 +105,60 @@ no matter what the program,
 no matter what the language.
 </p>
 </blockquote>
+
 <p>
-想象一下这是一个扩展的ASCII码的表，当你迷糊的时候，想想这句话。什么是Unicode。
+哦，原来 Unicode 是一张表，表里面存放的是每一个对应的字符，并为其编了号码。这张表在哪里都可以用。
+<del>想象一下这是一个扩展的ASCII码的表。当你迷糊的时候，想想这句话。什么是Unicode。</del>
+那我们可以想象一下这是一个扩展的 ASCII 码的表，只不过 ASCII 只为字母、数字和一些特殊字符编了号码。
+而 Unicode 为所有的字符编了号码，无论是你中文字符，还是什么乱七八糟的字符，甚至是表情都被编了号放入表里面。
+哇，这个真是太强大了，那我以后要表示什么字符只要查表就可以啦。太棒了！
 </p>
 
 <p>
-举一个例子:
+<del>下面我举一个例子:</del>
+好的，让我们赶紧做几个试验看一下：
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">ord&#26159;unicode ordinal&#30340;&#32553;&#20889;,&#21363;&#32534;&#21495;</span>
-<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">chr&#26159;character&#30340;&#32553;&#20889;,&#21363;&#23383;&#31526;</span>
-<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">ord&#21644;chr&#26159;&#20114;&#30456;&#23545;&#24212;&#36716;&#25442;&#30340;.</span>
-<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#20294;&#26159;&#30001;&#20110;chr&#23616;&#38480;&#20110;ascii,&#38271;&#24230;&#21482;&#26377;256.</span>
-<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">&#20110;&#26159;&#21448;&#22810;&#20102;&#20010;unichr.</span>
-&gt;&gt;&gt; <span style="color: #f0c674;">c</span> = u<span style="color: #8abeb7;">'&#26163;'</span>
+<pre class="src src-python"><span style="color: #383838;"># </span><span style="color: #585858;">ord&#26159;unicode ordinal&#30340;&#32553;&#20889;,&#21363;&#32534;&#21495;</span>
+<span style="color: #383838;"># </span><span style="color: #585858;">chr&#26159;character&#30340;&#32553;&#20889;,&#21363;&#23383;&#31526;</span>
+<span style="color: #383838;"># </span><span style="color: #585858;">ord&#21644;chr&#26159;&#20114;&#30456;&#23545;&#24212;&#36716;&#25442;&#30340;.</span>
+<span style="color: #383838;"># </span><span style="color: #585858;">&#20294;&#26159;&#30001;&#20110;chr&#23616;&#38480;&#20110;ascii,&#38271;&#24230;&#21482;&#26377;256.</span>
+<span style="color: #383838;"># </span><span style="color: #585858;">&#20110;&#26159;&#21448;&#22810;&#20102;&#20010;unichr.</span>
+&gt;&gt;&gt; <span style="color: #ab4642;">c</span> = u<span style="color: #a1b56c;">'&#26163;'</span>
 &gt;&gt;&gt; c
-u<span style="color: #8abeb7;">'\u6633'</span>
-&gt;&gt;&gt; <span style="color: #b294bb;">ord</span><span style="color: #c5c8c6;">(</span>u<span style="color: #8abeb7;">'\u6633'</span><span style="color: #c5c8c6;">)</span>
+u<span style="color: #a1b56c;">'\u6633'</span>
+&gt;&gt;&gt; <span style="color: #86c1b9;">ord</span><span style="color: #ba8baf;">(</span>u<span style="color: #a1b56c;">'\u6633'</span><span style="color: #ba8baf;">)</span>
 26163
 </pre>
 </div>
-
 <p>
-这里的中文字符 <b>昳</b> Unicode编码是 <code>6633(U+6633)</code> ， <code>6633(U+6633)</code> 这个字面量来表示字符 <b>昳</b> 。
-然后他的编号（数字） <code>26163</code> 来指代这个 <code>6633(U+6633)</code> 。
+<del>这里的中文字符 <b>昳</b> Unicode 编码是 <code>6633(U+6633)</code> ， <code>6633(U+6633)</code> 这个字面量来表示字符 <b>昳</b> 。+然后他的编号（数字） <code>26163</code> 来指代这个 <code>6633(U+6633)</code> 。</del>
+这里的中文字符 <b>昳</b> Unicode 编号是 <code>6633(U+6633)</code> 。
+注意，这里的 6636 是 16 进制，其 10 进制是 26163，也就是上面 ord 函数输出的值。
+你可以看到 6633 和 26163 是指向同一个东西。都是 昳 的编号而已，只是表达方式不同。
 </p>
 
 <p>
-用ASCII码表来解释是这个样子的，你要显示字符 <b>a</b> 。
+<del>用ASCII码表来解释是这个样子的，你要显示字符 <b>a</b> 。</del>
+我们再来看看字符 a:
 </p>
 <div class="org-src-container">
-<pre class="src src-python">&gt;&gt;&gt; <span style="color: #f0c674;">d</span> = u<span style="color: #8abeb7;">'a'</span>
+<pre class="src src-python">&gt;&gt;&gt; <span style="color: #ab4642;">d</span> = u<span style="color: #a1b56c;">'a'</span>
 &gt;&gt;&gt; d
-u<span style="color: #8abeb7;">'a'</span>
-&gt;&gt;&gt; <span style="color: #b294bb;">ord</span><span style="color: #c5c8c6;">(</span>d<span style="color: #c5c8c6;">)</span>
+u<span style="color: #a1b56c;">'a'</span>
+&gt;&gt;&gt; <span style="color: #86c1b9;">ord</span><span style="color: #ba8baf;">(</span>d<span style="color: #ba8baf;">)</span>
 97
 </pre>
 </div>
 <p>
-然后你这里的字符 <b>a</b> Unicode编码是 <code>a(U+0097)</code>, <code>a(U+0097)</code> 这个字面量来表示字符 <b>a</b> （这里有点绕，希望你能跨过去）。
-然后他的编号（数字） <code>97</code> 来指代这个 <code>a(U+0097)</code> 。
+然后你可以看到这里的字符 a 的 Unicode 编号是 97，对应的十六进制是 61，这个 61(16) 在 ASCII 表中就是表示 a。
+<del><code>a(U+0097)</code> 这个字面量来表示字符 <b>a</b> （这里有点绕，希望你能跨过去）。</del>
+这里 Unicode 编号和 ASCII 表中的编号一样诶。（哇，那 Unicode 真的只是一张超大的 ASCII 表而已，有什么可以了不起的，哼！）
+<del>然后他的编号（数字） <code>97</code> 来指代这个 <code>a(U+0097)</code> 。</del>
 </p>
 
 <p>
-现在在会过来看这句话
+现在再回过来看这句话
 </p>
 <blockquote>
 <p>
@@ -117,22 +169,33 @@ no matter what the language.
 </p>
 </blockquote>
 <p>
-希望你已经明白什么是"真"Unicode。为每一个字符提供唯一的数字。
+嗯，Unicode 真的只是一张表，表里面为每一个字符编了号码。只要知道这个编号，我们就能知道这个是什么字符。开心。
+<del>希望你已经明白什么是"真"Unicode。为每一个字符提供唯一的数字。</del>
 </p>
 
-<img src="https://docs.google.com/drawings/d/1ZI9lDMtH1I9i4_vm-aEffr37Q09cBd4Kzl3jpA6yMSQ/pub?w=750&h=390" alt="字符－编号－编码" title="字符－编号－编码"/>
-</div>
-</div>
-
-<div id="outline-container-orgf6203a2" class="outline-2">
-<h2 id="orgf6203a2"><span class="section-number-2">3</span> UTF8</h2>
-<div class="outline-text-2" id="text-3">
 <p>
-好了，在理解了Unicode之后，再来看UTF-8，这个又是什么东东呢？ <br >
-UTF-8是Unicode的具体存储方式。怎么说？就是上面提及的那个编码，如：U+6633，怎么存储呢？
-然后UTF-8跳出来说，用我来存，用我的格式来存。nuo，就是这个样子啦。
+一图以蔽之：
 </p>
+<img src="https://docs.google.com/drawings/d/1ZI9lDMtH1I9i4_vm-aEffr37Q09cBd4Kzl3jpA6yMSQ/pub?w=750&h=390" alt="字符－编号－编码" title="字符－编号－编码"/>
 
+<p>
+嗯，Unicode 我知道了，那 UTF8 又是什么？别急，我们再往下继续看。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5ae6e83" class="outline-2">
+<h2 id="org5ae6e83"><span class="section-number-2">4</span> UTF8</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+好了，在理解了Unicode之后，再来看UTF8，这个又是什么东东呢？ <br >
+UTF8 是 Unicode 的具体存储方式之一。怎么说？就是上面提及的那个编码，如：U+6633，怎么存储呢？
+你当然可以说，这有什么难的？我直接存储 6633 ，转成二进制也就是 0110 0110 0011 0011。我直接这样子存放不就可以了？
+你还别说，一开始还真是这个样子存放的。这个也就是“著名的” UTF16 编码方案。但是，你有没有发现，这样子存放的话，你产生了 2 个字节。
+美国人说：我原先按照 ASCII 只要 1 个字节就能搞定了，你现在给我搞了 2 个字节，我这个样子不是亏了吗？
+于是，他们为了在存储上扳回一成，设计了 UTF8 编码方案，也就是下面的转换过程：
+<del>然后UTF-8跳出来说，用我来存，用我的格式来存。nuo，就是这个样子啦。</del>
+</p>
 <pre class="example">
 0XXXXXXX                              (U+0000~U+007F 0~127)
 110XXXXX 10XXXXXX                     (U+0080~U+07FF 128~2047)
@@ -147,7 +210,7 @@ XXX就是对应的Unicode编码啦。
 举个栗子
 </p>
 <pre class="example">
-U+6633
+U+6633 (U+0800~U+FFFF 2048~65535)
 0110 0110 0011 0011  16位二进制形式
 0110 011000 110011   4+6+6位分组
 1110XXXX 10XXXXXX 10XXXXXX UTF-8三字节模版
@@ -159,72 +222,125 @@ E6 98 B3 按字节重新转换成16进制
 </p>
 <div class="org-src-container">
 <pre class="src src-python">&gt;&gt;&gt; c
-u<span style="color: #b294bb;">'\u6633'</span>
-&gt;&gt;&gt; c.encode<span style="color: #c5c8c6;">(</span><span style="color: #8abeb7;">'utf-8'</span><span style="color: #c5c8c6;">)</span>
-<span style="color: #8abeb7;">'\xe6\x98\xb3'</span>
-&gt;&gt;&gt; <span style="color: #b5bd68;">print</span> c
+u<span style="color: #b8b8b8;">'\u6633'</span>
+&gt;&gt;&gt; c.encode<span style="color: #ba8baf;">(</span><span style="color: #a1b56c;">'utf-8'</span><span style="color: #ba8baf;">)</span>
+<span style="color: #a1b56c;">'\xe6\x98\xb3'</span>
+&gt;&gt;&gt; <span style="color: #ba8baf;">print</span> c
 &#26163;
 </pre>
 </div>
 
 <p>
-如果平常看到类似这样每3个字节出现一个E，你应该可以反应过来应该是中文的UTF-8编码了吧。
+如果平常看到类似这样每3个字节出现一个 E，你应该可以反应过来应该是中文的 UTF-8 编码了吧。
+</p>
+
+<p>
+你看，经过 UTF8 这么一转换，我们美国人存放只要花 1 个字节(编号0~127)，爽。你们非英语国家继续用多个字节吧。（开玩笑的啦。）
+这样即提高了存储效率，又能愉快的和 Unicode 继续玩耍了。
 </p>
 </div>
 </div>
 
-<div id="outline-container-orge58f58c" class="outline-2">
-<h2 id="orge58f58c"><span class="section-number-2">4</span> Python</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org6a335bc" class="outline-2">
+<h2 id="org6a335bc"><span class="section-number-2">5</span> GBK（选读）</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+好的，下面我们再来看看 GBK 中文编码，GBK 其实也是和 Unicode 一样的一张表。也是一个编号对应一个中文字符。
+（其他的中文编码也和此类似，只是表不一样。在这里就不多说）。
+完整的 GBK 编码表可以在 <a href="http://doc.chacuo.net/gbk">这里</a> 找到。具体的从 Unicode 转到 GBK 是这个一样的过程，我们来举一个栗子。我们选择字符 亼。
+这个字符在表编号为 81 的第 9 行，第 1 列。我们把这些数字按照规则组合起来变成 <code>\x81\x91</code> 。
+嗯，这个是字符 亼 在 GBK 编码规范下的 16 进制表示就是 <code>\x81\x91</code> 。
+</p>
+
+<p>
+我们在 python 上试验一下：
+</p>
+<div class="org-src-container">
+<pre class="src src-python">&gt;&gt;&gt; <span style="color: #ab4642;">z</span> = <span style="color: #a1b56c;">'\x81\x91'</span>
+&gt;&gt;&gt; <span style="color: #ba8baf;">print</span> z.decode<span style="color: #ba8baf;">(</span><span style="color: #a1b56c;">'gbk'</span><span style="color: #ba8baf;">)</span>.encode<span style="color: #ba8baf;">(</span><span style="color: #a1b56c;">'utf8'</span><span style="color: #ba8baf;">)</span>
+<span style="color: #383838;"># </span><span style="color: #585858;">&#20156;</span>
+</pre>
+</div>
+<p>
+Yeah，结果正确。上述就是从 GBK 到 Unicode 到 UTF8 的全过程了。
+当然，在实际的解码，编码过程中还会遇到其他的问题，比如大端小端问题（世界就是这么乱）、性能问题等。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbaa3f68" class="outline-2">
+<h2 id="orgbaa3f68"><span class="section-number-2">6</span> Python</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+是时候，谈一下 Python 在处理编解码上的问题了。
+</p>
+
 <pre class="example">
 编码：unicode--&gt;str
 解码：str--&gt;unicode.
 </pre>
+<p>
+从 Unicode 到 str 叫做编码，从 str 到 Unicode 叫做解码。
+在你 Python 中处理字符串的时候，请环顾一下四周，你的变量中存放的是 <b>str</b> 还是 <b>Unicode</b> ？
+</p>
 
 <p>
-<code>str.encode()</code> 实际上就等价于 <code>str.decode(sys.defaultencoding).encode()</code> 。
-而 <code>sys.defaultencoding</code> 一般是 <code>ascii</code> 。
+<code>str.encode()</code> 在实际运行中，python将其等价于 <code>str.decode(sys.defaultencoding).encode()</code> ，
+而 <code>sys.defaultencoding</code> 默认是 <code>ascii</code> 。所以你看上去字符串被进行了编码操作，实际上进行了一次隐含解码操作。
+</p>
+
+<p>
+也就是在这里，你将看到 Python2.7 中有名的那句话：
+</p>
+<div class="org-src-container">
+<pre class="src src-python">Traceback <span style="color: #ba8baf;">(</span>most recent call last<span style="color: #ba8baf;">)</span>:
+  File <span style="color: #a1b56c;">"&lt;stdin&gt;"</span>, line 1, <span style="color: #ba8baf;">in</span> &lt;module&gt;
+<span style="color: #f7ca88;">UnicodeEncodeError</span>: <span style="color: #a1b56c;">'ascii'</span> codec can<span style="color: #a1b56c;">'t encode character u'</span>\u6633<span style="color: #a1b56c;">' in position 0: ordinal not in range(128)</span>
+</pre>
+</div>
+
+<p>
+对了，这里再多啰嗦一句。当你在使用 Python 的字符串模版时，如果你是这么写的 <code>"我是%s"%(name)</code> ，就要注意了，
+如果这里的 <code>name</code> 是一个 Unicode，这句话都会被当作 Unicode。于是如果中间有中文字符，就会出现隐式转换，是用 <code>sys.defaultencoding</code>
+进行解码，于是这里就会出现上述著名的语句。详细的解读可以看这篇文章：<a href="http://jerrypeng.me/2012/03/python-unicode-format-pitfall/">Python Unicode字符串格式化中的一个陷阱</a>
+</p>
+
+<p>
+所以我推荐这么拼接字符: <code>"我是{name}".format(name=name)</code>
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgdf527cc" class="outline-2">
-<h2 id="orgdf527cc"><span class="section-number-2">5</span> 正则表达式匹配中文区间</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-orgc3ddad3" class="outline-2">
+<h2 id="orgc3ddad3"><span class="section-number-2">7</span> 正则表达式匹配中文区间</h2>
+<div class="outline-text-2" id="text-7">
 <pre class="example">
 \u4E00-\u9FA5 （2万个左右）
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgb7eb3f9" class="outline-2">
-<h2 id="orgb7eb3f9"><span class="section-number-2">6</span> locale</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-orga851f2a" class="outline-2">
+<h2 id="orga851f2a"><span class="section-number-2">8</span> locale</h2>
+<div class="outline-text-2" id="text-8">
 <p>
 系统字符编码控制优先级 <code>LC_ALL&gt;LC_*&gt;LANG</code>
 </p>
 </div>
 </div>
 
-<div id="outline-container-org5b2e199" class="outline-2">
-<h2 id="org5b2e199"><span class="section-number-2">7</span> 尾声</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-org21f18fc" class="outline-2">
+<h2 id="org21f18fc"><span class="section-number-2">9</span> 尾声</h2>
+<div class="outline-text-2" id="text-9">
 <p>
-基本上，我所理解的Unicode和UTF8就是这个样子了，在Python上面做了很多的实验，希望以后不要再犯一些低级错误。
+基本上，我所理解的 Unicode 和 UTF8 就是这个样子了，在 Python 上面做了很多的实验，希望以后不要再犯一些低级错误。
 希望不会因为我的无知，再痛恨 <b>Python2.X</b>
 </p>
-
-<div class="org-src-container">
-<pre class="src src-python">Traceback <span style="color: #c5c8c6;">(</span>most recent call last<span style="color: #c5c8c6;">)</span>:
-  File <span style="color: #8abeb7;">"&lt;stdin&gt;"</span>, line 1, <span style="color: #b5bd68;">in</span> &lt;module&gt;
-<span style="color: #81a2be;">UnicodeEncodeError</span>: <span style="color: #8abeb7;">'ascii'</span> codec can<span style="color: #8abeb7;">'t encode character u'</span>\u6633<span style="color: #8abeb7;">' in position 0: ordinal not in range(128)</span>
-</pre>
 </div>
 </div>
-</div>
-<div id="outline-container-orgd418ba3" class="outline-2">
-<h2 id="orgd418ba3"><span class="section-number-2">8</span> Reference</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-orgbd210c5" class="outline-2">
+<h2 id="orgbd210c5"><span class="section-number-2">10</span> Reference</h2>
+<div class="outline-text-2" id="text-10">
 <ol class="org-ol">
 <li><a href="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html">字符编码笔记：ASCII，Unicode和UTF-8</a></li>
 <li><a href="http://my.oschina.net/goldenshaw/blog/470946">文本在内存中的编码(1)——乱码探源(4)</a></li>
@@ -250,10 +366,10 @@ u<span style="color: #b294bb;">'\u6633'</span>
 <div id="meta-article"><p class="author">冰糖火箭筒(Junjia Ni)</p>
 <p class="email"><a href="mailto:creamidea(AT)gmail.com">creamidea(AT)gmail.com</a></p>
 <p class="date">2015-12-05</p>
-<p class="export-date">2016-11-10 Thu 13:03</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.0)</p>
+<p class="export-date">2017-01-10 Tue 12:43</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode )</p>
 <p class="validation"></p>
-<p class="last-modification-time">2016-11-10 Thu 12:43</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
+<p class="last-modification-time">2017-01-10 Tue 12:43</p></div><script src="/static/article.js"></script><!-- Google Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38213594-1', 'auto');ga('send', 'pageview');</script><!-- End Google Analytics -->
 </div>
 </body>
 </html>
